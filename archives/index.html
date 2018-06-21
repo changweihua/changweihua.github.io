@@ -1,0 +1,27 @@
+extends ./_partial/layout.pug
+block content
+  include ./_partial/page_header.pug
+  ul.post-list(style='max-width:'+ theme.content_width +'px')
+    each post in page.posts.data
+      li 
+        p.date #{time(post.date, 'LL')}
+        if post.title
+          h4.title
+            a(href=url_for(post.path)) #{post.title}
+          .excerpt !{post.excerpt}
+        else
+          .no-title !{post.content}
+        if post.photos && post.photos.length
+          a(href=url_for(post.path))
+            img.photo(src=post.photos[0])
+        ul.meta
+          li
+            i.icon.icon-author
+            | #{config.author}
+          li
+            i.icon.icon-clock
+            | #{parseInt(post.content ? post.content.length/900 : 0)} Minutes
+          li
+            i.icon.icon-category
+            | !{list_categories(post.categories)}
+  include ./_partial/pagination.pug
