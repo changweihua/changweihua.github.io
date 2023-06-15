@@ -83,3 +83,11 @@ This is a details block.
 ## More
 
 Check out the documentation for the [full list of markdown extensions](https://vitepress.dev/guide/markdown).
+
+<preview path="./components/test.vue" title="title" description="component description content"></preview>
+
+:::preview title || component description content
+
+demo-preview=./components/test.vue
+
+:::

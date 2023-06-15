@@ -2,10 +2,16 @@
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview",
+    "register:components": "vitepress-rc"
   },
   "devDependencies": {
     "vitepress": "^1.0.0-beta.2",
     "vue": "^3.3.4"
+  },
+  "dependencies": {
+    "@vitepress-demo-preview/component": "^2.3.0",
+    "@vitepress-demo-preview/plugin": "^1.1.11",
+    "ant-design-vue": "^3.2.20"
   }
 }

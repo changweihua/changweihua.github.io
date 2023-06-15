@@ -1,8 +1,11 @@
 import { defineConfig } from "vitepress";
+import navConfig from "./configs/nav";
+
+import { containerPreview, componentPreview } from '@vitepress-demo-preview/plugin'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "常伟华",
+  title: "CMONO.NET",
   // 国际化相关
   // locales:{
   //   '/zh-CN/': {
@@ -20,10 +23,7 @@ export default defineConfig({
   themeConfig: {
     logo: "/logo.png",
     // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: "首页", link: "/" },
-      { text: "案例", link: "/markdown-examples" },
-    ],
+    nav: navConfig,
 
     sidebar: [
       {
@@ -35,12 +35,10 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [
-      { icon: "github", link: "https://github.com/changweihua" },
-    ],
+    socialLinks: [{ icon: "github", link: "https://github.com/changweihua" }],
 
     footer: {
-      message: "CMONO.ENT",
+      message: "MIT Licensed",
       copyright: "Copyright © 2009-2023 CMONO.NET",
     },
 
@@ -96,26 +94,57 @@ export default defineConfig({
 
   locales: {
     root: {
-      label: '中文',
-      lang: 'zh-CN',
-      themeConfig:{
-      }
+      label: "中文",
+      lang: "zh-CN",
+      themeConfig: {},
     },
     en: {
-      label: '英文',
-      lang: 'en-US', // optional, will be added  as `lang` attribute on `html` tag
-      link: '/en/', // default /fr/ -- shows on navbar translations menu, can be external
-      themeConfig:{
-        siteTitle:'Lance Chang',
+      label: "英文",
+      lang: "en-US", // optional, will be added  as `lang` attribute on `html` tag
+      link: "/en/", // default /fr/ -- shows on navbar translations menu, can be external
+      themeConfig: {
+        siteTitle: "Lance Chang",
         nav: [
           { text: "Home", link: "/" },
           { text: "Gallary", link: "/markdown-examples" },
         ],
-      }
+      },
 
       // other locale specific properties...
+    },
+  },
+
+  head: [
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
+  ],
+
+  markdown: {
+    config: (md) => {
+      md.use(containerPreview)
+      md.use(componentPreview)
+
+      // md.use(demoBlockPlugin, {
+      //   cssPreprocessor: 'less',
+      //   customStyleTagName: 'style lang="less"', // style标签会解析为<style lang="less"><style>
+      //   scriptImports: ["import * as Antd from 'ant-design-vue'"],
+      //   scriptReplaces: [
+      //     { searchValue: /const ({ defineComponent as _defineComponent }) = Vue/g,
+      //       replaceValue: 'const { defineComponent: _defineComponent } = Vue'
+      //     },
+      //     { searchValue: /import ({.*}) from 'ant-design-vue'/g,
+      //       replaceValue: (s, s1) => `const ${s1} = Antd`
+      //     }
+      //   ]
+      // })
     }
   },
 
-  head: [["link", { rel: "icon", href: "/favicon.svg" }]],
+  // markdown: {
+  //   anchor: { permalink: false },
+  //   toc: { includeLevel: [1, 2] },
+  //   config: (md) => {
+  //     const { demoBlockPlugin } = require('vitepress-theme-demoblock')
+  //     md.use(demoBlockPlugin);
+  //   }
+  // }
 });
