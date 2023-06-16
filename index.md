@@ -63,7 +63,7 @@ const members = [
   }
 ]
 </script>
-
+<!-- 
 <VPTeamPage>
   <VPTeamPageTitle>
     <template #title>
@@ -77,4 +77,4 @@ const members = [
     size="small"
     :members="members"
   />
-</VPTeamPage>
+</VPTeamPage> -->
