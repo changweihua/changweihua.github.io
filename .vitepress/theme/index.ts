@@ -3,7 +3,8 @@ import { inBrowser, useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, watchEffect } from "vue";
 
-import "./index.css";
+import './styles/global.less'
+import './styles/vars.less'
 
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "@vitepress-demo-preview/component/dist/style.css";
@@ -37,6 +38,8 @@ export default {
     DefaultTheme.enhanceApp(ctx);
     app.use(Antd);
     app.component("demo-preview", AntDesignContainer);
+    // 用于过滤一些组件，不重要
+    // app.config.compilerOptions.isCustomElement = (tag) => tag.includes("r-");
   },
   setup() {
     const { lang } = useData();

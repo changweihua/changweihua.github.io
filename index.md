@@ -52,7 +52,16 @@ features:
     details: Flexible programmatic APIs with full TypeScript typing.
 ---
 
-<script setup>
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { fetchVersion } from './.vitepress/utils/fetchVersion'
+
+onMounted(() => {
+  fetchVersion()
+})
+</script>
+
+<!-- <script setup>
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 
 const members = [
@@ -62,7 +71,7 @@ const members = [
     title: '负责人'
   }
 ]
-</script>
+</script> -->
 <!-- 
 <VPTeamPage>
   <VPTeamPageTitle>

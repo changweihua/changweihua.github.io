@@ -1,7 +1,10 @@
 import { defineConfig } from "vitepress";
 import navConfig from "./configs/nav";
 
-import { containerPreview, componentPreview } from '@vitepress-demo-preview/plugin'
+import {
+  containerPreview,
+  componentPreview,
+} from "@vitepress-demo-preview/plugin";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -35,7 +38,26 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [{ icon: "github", link: "https://github.com/changweihua" }],
+    socialLinks: [
+      { icon: "github", link: "https://github.com/changweihua" },
+      {
+        icon: {
+          svg: '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1686883985076" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1904" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128"><path d="M853.333333 128a42.666667 42.666667 0 0 1 42.666667 42.666667v682.666666a42.666667 42.666667 0 0 1-42.666667 42.666667H170.666667a42.666667 42.666667 0 0 1-42.666667-42.666667V170.666667a42.666667 42.666667 0 0 1 42.666667-42.666667h682.666666z m-42.666666 85.333333H213.333333v597.333334h597.333334V213.333333z m-85.333334 85.333334v426.666666h-106.666666V405.333333H512V725.333333H298.666667V298.666667h426.666666z" p-id="1905"></path></svg>',
+        },
+        link: "https://www.npmjs.com/~changweihua",
+      },
+    ],
+
+    search: {
+      // vitepress 内置 search
+      provider: "local",
+    },
+
+    // algolia: { // algolia 搜索服务 与 内置 search 可二选一
+    //   appId: 'LPTNA0E8HM',
+    //   apiKey: '8f1b68dfab6b0320adef728a1c3a77cc',
+    //   indexName: 'themusecatcher_front-end'
+    // },
 
     footer: {
       message: "MIT Licensed",
@@ -120,8 +142,8 @@ export default defineConfig({
 
   markdown: {
     config: (md) => {
-      md.use(containerPreview)
-      md.use(componentPreview)
+      md.use(containerPreview);
+      md.use(componentPreview);
 
       // md.use(demoBlockPlugin, {
       //   cssPreprocessor: 'less',
@@ -136,7 +158,7 @@ export default defineConfig({
       //     }
       //   ]
       // })
-    }
+    },
   },
 
   // markdown: {
