@@ -23,6 +23,7 @@ export default defineConfig({
   //   }
   // },
   description: "个人在线",
+  appearance: true, // 默认 true，设为 false 则无法切换dark/light主题，可选 'dark' true false
   themeConfig: {
     logo: "/logo.png",
     // https://vitepress.dev/reference/default-theme-config
@@ -138,6 +139,7 @@ export default defineConfig({
 
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   ],
 
   markdown: {

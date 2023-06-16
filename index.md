@@ -2,6 +2,9 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
+title: CMONO.NET
+titleTemplate: 首页
+
 hero:
   name: "常伟华"
   text: "DOTNET Developer"

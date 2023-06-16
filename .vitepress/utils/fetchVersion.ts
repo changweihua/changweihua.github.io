@@ -14,23 +14,30 @@
   读取规则：https://raw.githubusercontent.com/<username>/<repo>/<branch>/<file>
   return fetch('https://raw.githubusercontent.com/themusecatcher/front-end-notes/master/package.json')
 */
-export function fetchVersion () {
-    return fetch('https://api.github.com/repos/changweihua/changweihua.github.io/contents/package.json?ref=master', {
+export function fetchVersion() {
+  return fetch(
+    "https://api.github.com/repos/changweihua/changweihua.github.io/contents/package.json?ref=master",
+    {
       headers: {
         // See https://docs.github.com/en/rest/overview/media-types
-        Accept: 'application/vnd.github.v3.raw',
+        Accept: "application/vnd.github.v3.raw",
         // See https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api#authentication
         // Authorization: 'token ${GITHUB_TOKEN}',
+      },
+    }
+  )
+    .then((res) => res.json())
+    .then((json) => json.version ?? "")
+    .then((version) => {
+      if (!version) {
+        version = '1.0.0'
       }
-    }).then(res => res.json())
-      .then(json => json.version ?? '')
-      .then(version => {
-        if (!version) return
-        const tagLineParagragh = document.querySelector('div.VPHero.has-image.VPHomeHero > div > div.main > p.tagline')
-        const docsVersionSpan = document.createElement('samp')
-        docsVersionSpan.classList.add('version-tag')
-        docsVersionSpan.innerText = version
-        tagLineParagragh?.appendChild(docsVersionSpan)
-      })
-  }
-  
+      const tagLineParagragh = document.querySelector(
+        "div.VPHero.has-image.VPHomeHero > div > div.main > p.tagline"
+      );
+      const docsVersionSpan = document.createElement("samp");
+      docsVersionSpan.classList.add("version-tag");
+      docsVersionSpan.innerText = version;
+      tagLineParagragh?.appendChild(docsVersionSpan);
+    });
+}
