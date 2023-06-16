@@ -3,11 +3,14 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "register:components": "vitepress-rc"
+    "register:components": "vitepress-rc",
+    "postinstall": "patch-package",
+    "deploy:win": "powershell bin/autoDeploy.bat"
   },
   "devDependencies": {
     "vitepress": "^1.0.0-beta.2",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "patch-package": "^7.0.0"
   },
   "dependencies": {
     "@vitepress-demo-preview/component": "^2.3.0",
