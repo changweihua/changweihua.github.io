@@ -23,21 +23,47 @@ export default defineConfig({
   //   }
   // },
   description: "个人在线",
-  appearance: true, // 默认 true，设为 false 则无法切换dark/light主题，可选 'dark' true false
+  appearance: false, // 默认 true，设为 false 则无法切换dark/light主题，可选 'dark' true false
   themeConfig: {
     logo: "/logo.png",
     // https://vitepress.dev/reference/default-theme-config
     nav: navConfig,
 
-    sidebar: [
-      {
-        text: "Examples",
-        items: [
-          { text: "Markdown Examples", link: "/markdown-examples" },
-          { text: "Runtime API Examples", link: "/api-examples" },
-        ],
-      },
-    ],
+    lastUpdatedText: "更新时间",
+    siteTitle: "CMONO.NET",
+    outline: "deep",
+    outlineTitle: "大纲",
+
+    sidebar: {
+      articles: [
+        {
+          text: "Examples",
+          items: [
+            { text: "Markdown Examples", link: "/markdown-examples" },
+            { text: "Runtime API Examples", link: "/api-examples" },
+          ],
+        },
+      ],
+      cases: [
+        {
+          text: "项目案例",
+          items: [
+            { text: "苏南硕放国际机场阳光服务平台", link: "/cases/sunny-land" },
+            { text: "扬泰机场智慧出行微信小程序", link: "/api-examples" },
+            {
+              text: "上海民航华东凯亚江苏分公司疫情防控平台",
+              link: "/api-examples",
+            },
+            { text: "苏南硕放国际机场安检效能分析系统", link: "/api-examples" },
+            {
+              text: "苏南硕放国际机场进出港/无纸化系统",
+              link: "/api-examples",
+            },
+            { text: "扬泰机场客源地分析系统", link: "/api-examples" },
+          ],
+        },
+      ],
+    },
 
     socialLinks: [
       { icon: "github", link: "https://github.com/changweihua" },
@@ -48,6 +74,11 @@ export default defineConfig({
         link: "https://www.npmjs.com/~changweihua",
       },
     ],
+
+    docFooter: {
+      prev: "上一页",
+      next: "下一页",
+    },
 
     search: {
       // vitepress 内置 search
@@ -139,7 +170,20 @@ export default defineConfig({
 
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
-    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    // 设置 描述 和 关键词
+    [
+      "meta",
+      { name: "keywords", content: "react react-admin ant 后台管理系统" },
+    ],
+    [
+      "meta",
+      {
+        name: "description",
+        content:
+          "此框架使用与二次开发，前端框架使用react，UI框架使用ant-design，全局数据状态管理使用redux，ajax使用库为axios。用于快速搭建中后台页面。",
+      },
+    ],
   ],
 
   markdown: {

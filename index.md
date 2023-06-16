@@ -27,7 +27,7 @@ features:
       src: /air_wux.png
       alt: 网页的logo图标
     details: 依托微信小程序，为苏南硕放国际机场量身打造阳光服务平台
-    link: /sunny-land
+    link: /cases/sunny-land
     linkText: 更多详情
   - title: 扬泰机场智慧出行小程序
     icon:

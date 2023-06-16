@@ -1,0 +1,40 @@
+@import "./fonts/index.less";
+@import "./vars.less";
+@import "./global.less";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f0f2f5;
+}
+
+#app {
+  font-family: @app-font-family;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: @app-font-weight;
+  font-size-adjust: @app-font-size-adjust;
+  font-display: optional;
+
+  :deep(*) {
+    font-family: @app-font-family;
+    font-weight: @app-font-weight;
+    font-size-adjust: @app-font-size-adjust;
+  }
+
+  .version-tag {
+    font-size: 14px;
+    line-height: 1.571;
+    font-weight: bold;
+    padding: 4px 6px;
+    margin-left: 6px;
+    background: #bd34fe;
+    color: #fff;
+    border-radius: 10px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 4px;
+  }
+}

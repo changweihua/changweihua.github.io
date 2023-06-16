@@ -1,0 +1,10 @@
+{
+  "markdown.copyFiles.overwriteBehavior": "overwrite",
+  "markdown.copyFiles.destination": {
+    "**/*": "/${documentWorkspaceFolder}/public/images/cmono-${fileName}"
+  },
+//   // 拖拽行为
+//   "markdown.editor.drop.copyIntoWorkspace": "never",
+//   // 粘贴行为
+//   "markdown.editor.filePaste.copyIntoWorkspace": "never"
+}

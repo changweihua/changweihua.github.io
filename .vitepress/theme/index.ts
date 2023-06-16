@@ -3,15 +3,14 @@ import { inBrowser, useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, watchEffect } from "vue";
 
-import './styles/global.less'
-import './styles/vars.less'
-
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "@vitepress-demo-preview/component/dist/style.css";
 
 import Antd from "ant-design-vue";
-
+import 'ant-design-vue/dist/antd.css';
 import AnimationTitle from "../components/AnimationTitle.vue";
+
+import "./styles/index.less";
 
 export default {
   ...DefaultTheme,
@@ -33,13 +32,24 @@ export default {
         }),
     });
   },
-  enhanceApp(ctx) {
-    const { app } = ctx;
+  // enhanceApp(ctx) {
+  //   const { app } = ctx;
+  //   DefaultTheme.enhanceApp(ctx);
+  //   app.use(Antd);
+  //   app.component("demo-preview", AntDesignContainer);
+  //   // 用于过滤一些组件，不重要
+  //   // app.config.compilerOptions.isCustomElement = (tag) => tag.includes("r-");
+  // },
+  enhanceApp: async (ctx) => {
+    // app is the Vue 3 app instance from `createApp()`. router is VitePress'
+    // custom router. `siteData`` is a `ref`` of current site-level metadata.
+    const { app, router, siteData, isServer } = ctx;
     DefaultTheme.enhanceApp(ctx);
     app.use(Antd);
     app.component("demo-preview", AntDesignContainer);
-    // 用于过滤一些组件，不重要
-    // app.config.compilerOptions.isCustomElement = (tag) => tag.includes("r-");
+    import("ant-design-vue").then((module) => {
+      app.use(module);
+    });
   },
   setup() {
     const { lang } = useData();
