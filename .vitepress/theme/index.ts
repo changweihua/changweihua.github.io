@@ -8,6 +8,8 @@ import "@vitepress-demo-preview/component/dist/style.css";
 
 import Antd from "ant-design-vue";
 import 'ant-design-vue/dist/antd.css';
+
+// @ts-ignore
 import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";

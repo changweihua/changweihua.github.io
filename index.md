@@ -58,28 +58,24 @@ features:
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { fetchVersion } from './.vitepress/utils/fetchVersion'
+import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 
 onMounted(() => {
   fetchVersion()
 })
-</script>
-
-<!-- <script setup>
-import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 
 const members = [
   {
     avatar: '/logo.png',
     name: '常伟华',
-    title: '负责人'
+    title: 'SA'
   }
 ]
-</script> -->
-<!-- 
+</script>
 <VPTeamPage>
   <VPTeamPageTitle>
     <template #title>
-      开发人员
+      Team members
     </template>
     <template #lead>
       Github
@@ -89,4 +85,4 @@ const members = [
     size="small"
     :members="members"
   />
-</VPTeamPage> -->
+</VPTeamPage>

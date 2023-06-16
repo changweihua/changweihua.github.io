@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress";
 import navConfig from "./configs/nav";
+import { getSideBar } from 'vitepress-plugin-autobar';
 
 import {
   containerPreview,
@@ -60,6 +61,22 @@ export default defineConfig({
               link: "/api-examples",
             },
             { text: "扬泰机场客源地分析系统", link: "/api-examples" },
+          ],
+        },
+      ],
+      // blog: getSideBar("./blog"),
+      blog: [
+        {
+          text: "2023-06",
+          items: [
+            { text: "VitePress & Github 个人主页", link: "/blog/2023-06/16" },
+            { text: "VitePress & Github 个人主页3", link: "/blog/2023-06/16" },
+          ],
+        },
+        {
+          text: "2023-05",
+          items: [
+            { text: "VitePress & Github 个人主页2", link: "/blog/2023-06/16" },
           ],
         },
       ],
@@ -145,6 +162,13 @@ export default defineConfig({
     //   }
     // }
   },
+
+  // plugins: [
+  //   "@vuepress/active-header-links", // 页面滚动时自动激活侧边栏链接的插件
+  //   "@vuepress/back-to-top", // 返回顶部插件
+  //   "@vuepress/medium-zoom", // 图片预览插件
+  //   "@vuepress/nprogress", //页面顶部进度条
+  // ],
 
   locales: {
     root: {

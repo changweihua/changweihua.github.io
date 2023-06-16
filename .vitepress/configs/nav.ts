@@ -3,9 +3,9 @@ import { DefaultTheme } from "vitepress";
 const navConfig: DefaultTheme.NavItem[] | undefined = [
   { text: "首页", link: "/", activeMatch: "^/$|^/index/" },
   {
-    text: "案例",
-    link: "/markdown-examples",
-    activeMatch: "^/markdown-examples/",
+    text: "博客",
+    link: "/blog/",
+    activeMatch: "^/blog/",
   },
   {
     text: "Drop Menu",
