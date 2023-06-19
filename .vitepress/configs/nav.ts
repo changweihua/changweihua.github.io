@@ -8,12 +8,12 @@ const navConfig: DefaultTheme.NavItem[] | undefined = [
     activeMatch: "^/blog/",
   },
   {
-    text: "Drop Menu",
+    text: "历史归档",
     items: [
       {
         items: [
-          { text: "Item A1", link: "/item-A1" },
-          { text: "Item A2", link: "/item-A2" },
+          { text: "从 Docker 安装 Gitea", link: "/blog/2022/从 Docker 安装 Gitea.md" },
+          { text: "敏捷开发学习笔记", link: "/blog/2022/敏捷开发学习笔记.md" },
         ],
       },
       {

@@ -79,6 +79,19 @@ export default defineConfig({
             { text: "VitePress & Github 个人主页2", link: "/blog/2023-06/16" },
           ],
         },
+        {
+          text: "2022",
+          items: [
+            { text: "从 Docker 安装 Gitea", link: "/blog/2022/从 Docker 安装 Gitea.md" },
+            { text: "敏捷开发学习笔记", link: "/blog/2022/敏捷开发学习笔记.md" },
+            { text: "私有nuget服务器部署", link: "/blog/2022/私有nuget服务器部署.md" },
+
+            { text: "为docker配置HTTP代理服务器", link: "/blog/2022/为docker配置HTTP代理服务器.md" },
+            { text: "私有nuget服务器部署", link: "/blog/2022/私有nuget服务器部署.md" },
+            { text: "正向代理和反向代理", link: "/blog/2022/正向代理和反向代理.md" },
+            { text: "正向代理和反向代理详解", link: "/blog/2022/正向代理和反向代理详解.md" },
+          ],
+        },
       ],
     },
 
