@@ -20,5 +20,6 @@
     "@vitepress-demo-preview/plugin": "^1.1.12",
     "ant-design-vue": "^3.2.20",
     "markdown-it-custom-attrs": "^1.0.2"
-  }
+  },
+  "type": "module"
 }
