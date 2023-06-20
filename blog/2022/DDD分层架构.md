@@ -7,11 +7,11 @@
 
 ## 三层模型与DDD对比 ##
 
-<img src="Files/4933701-a765829a0d2b784b.png" />
+![Docker Container](/images/4933701-a765829a0d2b784b.png)
 
 ## 设计方案1 ##
 
-<img src="Files/4933701-f81ebbfaafda0c6e.png" />
+![Docker Container](/images/4933701-f81ebbfaafda0c6e.png)
 
 ### 搭建解决方案 ###
 
@@ -22,7 +22,7 @@
 - DDD.Repository 仓储类库项目
 - DDD分层架构
 
-<img src="Files/4933701-e67babb267007bdc.png" />
+![Docker Container](/images/4933701-e67babb267007bdc.png)
 
 ### 项目间引用 ###
 
@@ -31,7 +31,7 @@
 - DDD.Domain 添加 DDD.Infrastructure 的引用
 - DDD.Repository 添加 DDD.Domain、DDD.Infrastructure 引用
 
-<img src="Files/4933701-90df754b4701e927.png" />
+![Docker Container](/images/4933701-90df754b4701e927.png)
 
 ### 依赖注入 ###
 
@@ -41,7 +41,7 @@
 - 在使用时展示通过直接注入和通过反射两种方式
 - 通过反射可将IoC的实现依赖通过配置文件管理
 
-<img src="Files/4933701-c19c0c0043b0c4d1.png" />
+![Docker Container](/images/4933701-c19c0c0043b0c4d1.png)
 
 	using System;
 	
@@ -82,7 +82,7 @@
 	    }
 	}
 
-<img src="Files/4933701-87c615bc16ade73b.png" />
+![Docker Container](/images/4933701-87c615bc16ade73b.png)
 
 ### 问题 ###
 
@@ -93,7 +93,7 @@
 
 ## 设计方案2 ##
 
-<img src="Files/4933701-9429c04233611647.png" />
+![Docker Container](/images/4933701-9429c04233611647.png)
 
 ### 项目间引用 ###
 
@@ -115,7 +115,7 @@
 
 ## 设计方案3 ##
 
-<img src="Files/4933701-cb1bed7a4b9dd856.png" />
+![Docker Container](/images/4933701-cb1bed7a4b9dd856.png)
 
 ### 项目间引用关系 ###
 

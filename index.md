@@ -53,6 +53,14 @@ features:
     details: Rollup-superset plugin interface shared between dev and build.
   - title: 🔑 Fully Typed APIs
     details: Flexible programmatic APIs with full TypeScript typing.
+
+head:
+  - - meta
+    - name: description
+      content: hello
+  - - meta
+    - name: keywords
+      content: super duper SEO
 ---
 
 <script setup lang="ts">

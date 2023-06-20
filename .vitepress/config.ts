@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import navConfig from "./configs/nav";
-import { getSideBar } from 'vitepress-plugin-autobar';
+import { getSideBar } from "vitepress-plugin-autobar";
+import mdItCustomAttrs from "markdown-it-custom-attrs";
 
 import {
   containerPreview,
@@ -69,27 +70,51 @@ export default defineConfig({
         {
           text: "2023-06",
           items: [
-            { text: "VitePress & Github 个人主页", link: "/blog/2023-06/16" },
-            { text: "VitePress & Github 个人主页3", link: "/blog/2023-06/16" },
+            {
+              text: "P-Touch P900 打印机使用",
+              link: "/blog/2023-06/P-Touch P900 打印机使用",
+            },
+            { text: "VitePress & Github 个人主页3", link: "/blog/2023-06/15" },
           ],
         },
         {
           text: "2023-05",
           items: [
-            { text: "VitePress & Github 个人主页2", link: "/blog/2023-06/16" },
+            { text: "VitePress & Github 个人主页2", link: "/blog/2023-05/15" },
           ],
         },
         {
           text: "2022",
           items: [
-            { text: "从 Docker 安装 Gitea", link: "/blog/2022/从 Docker 安装 Gitea.md" },
-            { text: "敏捷开发学习笔记", link: "/blog/2022/敏捷开发学习笔记.md" },
-            { text: "私有nuget服务器部署", link: "/blog/2022/私有nuget服务器部署.md" },
+            {
+              text: "从 Docker 安装 Gitea",
+              link: "/blog/2022/从 Docker 安装 Gitea.md",
+            },
+            {
+              text: "敏捷开发学习笔记",
+              link: "/blog/2022/敏捷开发学习笔记.md",
+            },
+            {
+              text: "私有nuget服务器部署",
+              link: "/blog/2022/私有nuget服务器部署.md",
+            },
 
-            { text: "为docker配置HTTP代理服务器", link: "/blog/2022/为docker配置HTTP代理服务器.md" },
-            { text: "私有nuget服务器部署", link: "/blog/2022/私有nuget服务器部署.md" },
-            { text: "正向代理和反向代理", link: "/blog/2022/正向代理和反向代理.md" },
-            { text: "正向代理和反向代理详解", link: "/blog/2022/正向代理和反向代理详解.md" },
+            {
+              text: "为docker配置HTTP代理服务器",
+              link: "/blog/2022/为docker配置HTTP代理服务器.md",
+            },
+            {
+              text: "私有nuget服务器部署",
+              link: "/blog/2022/私有nuget服务器部署.md",
+            },
+            {
+              text: "正向代理和反向代理",
+              link: "/blog/2022/正向代理和反向代理.md",
+            },
+            {
+              text: "正向代理和反向代理详解",
+              link: "/blog/2022/正向代理和反向代理详解.md",
+            },
           ],
         },
       ],
@@ -208,6 +233,19 @@ export default defineConfig({
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
     ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css",
+      },
+    ],
+    [
+      "script",
+      {
+        src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js",
+      },
+    ],
     // 设置 描述 和 关键词
     [
       "meta",
@@ -227,6 +265,10 @@ export default defineConfig({
     config: (md) => {
       md.use(containerPreview);
       md.use(componentPreview);
+      // use more markdown-it plugins!
+      md.use(mdItCustomAttrs, "image", {
+        "data-fancybox": "gallery",
+      });
 
       // md.use(demoBlockPlugin, {
       //   cssPreprocessor: 'less',
@@ -243,6 +285,19 @@ export default defineConfig({
       // })
     },
   },
+
+  ignoreDeadLinks: [
+    // ignore exact url "/playground"
+    "/playground",
+    // ignore all localhost links
+    /^https?:\/\/localhost/,
+    // ignore all links include "/repl/""
+    /\/repl\//,
+    // custom function, ignore all links include "ignore"
+    (url) => {
+      return url.toLowerCase().includes("ignore");
+    },
+  ],
 
   // markdown: {
   //   anchor: { permalink: false },
