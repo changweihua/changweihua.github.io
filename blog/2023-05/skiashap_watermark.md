@@ -4,6 +4,7 @@
 
 - `Microsoft.Maui.Graphics.Skia`
 - `SkiaSharp.NativeAssets.Linux.NoDependencies`
+- `SkiaTextRenderer`
 
 ## 完整代码 ##
 
