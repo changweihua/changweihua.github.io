@@ -15,7 +15,7 @@ hero:
   actions:
     - theme: brand
       text: 我的简历
-      link: /resume
+      link: /about/resume
     - theme: alt
       text: 项目案例
       link: /api-examples

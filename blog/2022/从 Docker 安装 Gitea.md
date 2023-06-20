@@ -34,7 +34,7 @@ docker run --privileged=true -d --restart=always --name=gitea -p 3022:22 -p 3000
 
 在浏览器中访问 http://localhost:3000 就可以看到界面了。
 
-![Docker Container](/public/images/20201126111149.png)
+![Docker Container](/images/20201126111149.png)
 
 你可以尝试在上面创建项目，clone操作 
 

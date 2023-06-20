@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand
       text: Resume
-      link: /resume
+      link: /about/resume
     - theme: alt
       text: Showcases
       link: /api-examples

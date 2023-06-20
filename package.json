@@ -8,6 +8,7 @@
     "deploy:win": "powershell bin/autoDeploy.bat"
   },
   "devDependencies": {
+    "@types/node": "^20.3.1",
     "less": "^4.1.3",
     "patch-package": "^7.0.0",
     "vitepress": "^1.0.0-beta.2",

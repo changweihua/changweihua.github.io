@@ -13,6 +13,8 @@ import 'ant-design-vue/dist/antd.css';
 import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";
+import './styles/tailwind.css'
+// import 'virtual:windi.css'
 
 export default {
   ...DefaultTheme,

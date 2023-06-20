@@ -8,18 +8,19 @@ const navConfig: DefaultTheme.NavItem[] | undefined = [
     activeMatch: "^/blog/",
   },
   {
-    text: "历史归档",
+    text: "文章分类",
     items: [
       {
         items: [
-          { text: "从 Docker 安装 Gitea", link: "/blog/2022/从 Docker 安装 Gitea.md" },
-          { text: "敏捷开发学习笔记", link: "/blog/2022/敏捷开发学习笔记.md" },
+          { text: "Flutter", link: "/category/flutter.md" },
+          { text: "微信小程序", link: "/category/wechat.md" },
+          { text: "DotNET", link: "/category/dotnet.md" },
         ],
       },
       {
         items: [
-          { text: "Item B1", link: "/item-B1" },
-          { text: "Item B2", link: "/item-B2" },
+          { text: "VueJS", link: "/category/vue.md" },
+          { text: "TypeScript", link: "/category/typescript.md" },
         ],
       },
     ],
