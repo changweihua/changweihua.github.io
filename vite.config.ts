@@ -21,9 +21,6 @@ export default defineConfig({
   }),
   Components({
     resolvers: [
-      AntDesignVueResolver({
-        resolveIcons: true
-      }),
       IconsResolver({
         enabledCollections: [
           'ep',
