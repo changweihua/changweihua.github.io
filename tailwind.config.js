@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './**/*.{html,js,md}',
+    './**/*.{html,js,md,vue}',
   ],
   presets: [],
   darkMode: 'media', // or 'class'

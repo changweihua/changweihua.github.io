@@ -33,7 +33,7 @@ features:
     icon:
       src: /yty_logo.png
       alt: 网页的logo图标
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: 为扬泰机场旅客提供航班动态查询、在线值机、停车场收费标准等自助服务
     link: /api-examples
   - title: 疫情防控平台
     icon:
@@ -61,22 +61,24 @@ head:
   - - meta
     - name: keywords
       content: super duper SEO
+
+footer: MIT Licensed | Copyright © 2019-present Evan You
 ---
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { fetchVersion } from './.vitepress/utils/fetchVersion'
+// import { fetchVersion } from './.vitepress/utils/fetchVersion'
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 
-onMounted(() => {
-  fetchVersion()
-})
+// onMounted(() => {
+//   fetchVersion()
+// })
 
 const members = [
   {
     avatar: '/logo.png',
     name: '常伟华',
-    title: 'SA'
+    title: 'Owner'
   }
 ]
 </script>

@@ -33,6 +33,8 @@ import 'vitepress-plugin-nprogress/lib/css/index.css'
 
 import 'animate.css';
 
+import Iconify from '@iconify/iconify';
+
 // import Layout from './Layout.vue';
 
 export default {

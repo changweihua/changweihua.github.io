@@ -66,10 +66,10 @@ export default defineConfig({
     //   indexName: 'themusecatcher_front-end'
     // },
 
-    footer: {
-      message: "MIT Licensed",
-      copyright: "Copyright © 2009-2023 CMONO.NET",
-    },
+    // footer: {
+    //   message: "MIT Licensed",
+    //   copyright: "Copyright © 2009-2023 CMONO.NET",
+    // },
 
     // lastUpdated: 'Last Updated', // string | boolean
 
