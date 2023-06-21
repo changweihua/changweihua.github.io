@@ -4,20 +4,40 @@ import DefaultTheme from "vitepress/theme";
 import { h, watchEffect } from "vue";
 
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
-import "@vitepress-demo-preview/component/dist/style.css";
+// import "@vitepress-demo-preview/component/dist/style.css";
 
 import Antd from "ant-design-vue";
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/antd.variable.min.css';
+
+import { ConfigProvider } from 'ant-design-vue';
+
+ConfigProvider.config({
+  theme: {
+    primaryColor: '#646cff',
+  },
+});
+
+import "vitepress-markdown-timeline/dist/theme/index.css";
+import "./styles/timeline.fix.less";
 
 // @ts-ignore
 import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";
-import './styles/tailwind.css'
+import "../../src/tailwind/index.css";
+// import './styles/tailwind.css';
 // import 'virtual:windi.css'
+
+import vitepressNprogress from 'vitepress-plugin-nprogress'
+import 'vitepress-plugin-nprogress/lib/css/index.css'
+
+import 'animate.css';
+
+// import Layout from './Layout.vue';
 
 export default {
   ...DefaultTheme,
+  NotFound: () => 'custom 404', // <- this is a Vue 3 functional component
   Layout() {
     return h(DefaultTheme.Layout, null, {
       // "home-hero-before": () => h(AnimationTitle),
@@ -51,9 +71,10 @@ export default {
     DefaultTheme.enhanceApp(ctx);
     app.use(Antd);
     app.component("demo-preview", AntDesignContainer);
-    import("ant-design-vue").then((module) => {
-      app.use(module);
-    });
+    // import("ant-design-vue").then((module) => {
+    //   app.use(module);
+    // });
+    vitepressNprogress(ctx)
   },
   setup() {
     const { lang } = useData();

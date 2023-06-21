@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 import navConfig from "./configs/nav";
 import { getSideBar } from "vitepress-plugin-autobar";
 import mdItCustomAttrs from "markdown-it-custom-attrs";
+import timeline from "vitepress-markdown-timeline";
 
 import {
   containerPreview,
@@ -165,12 +166,12 @@ export default defineConfig({
         src: "/fancybox.umd.js",
       },
     ],
-    [
-      "script",
-      {
-        src: "/tailwindcss.js",
-      },
-    ],
+    // [
+    //   "script",
+    //   {
+    //     src: "/tailwindcss.js",
+    //   },
+    // ],
     // 设置 描述 和 关键词
     [
       "meta",
@@ -194,6 +195,7 @@ export default defineConfig({
       md.use(mdItCustomAttrs, "image", {
         "data-fancybox": "gallery",
       });
+      md.use(timeline);
 
       // md.use(demoBlockPlugin, {
       //   cssPreprocessor: 'less',

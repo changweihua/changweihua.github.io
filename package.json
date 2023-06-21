@@ -18,8 +18,14 @@
   "dependencies": {
     "@vitepress-demo-preview/component": "^2.3.0",
     "@vitepress-demo-preview/plugin": "^1.1.12",
+    "animate.css": "^4.1.1",
     "ant-design-vue": "^3.2.20",
-    "markdown-it-custom-attrs": "^1.0.2"
+    "autoprefixer": "^10.4.14",
+    "markdown-it-custom-attrs": "^1.0.2",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "vitepress-markdown-timeline": "^1.2.1",
+    "vitepress-plugin-nprogress": "^0.0.4"
   },
   "type": "module"
 }

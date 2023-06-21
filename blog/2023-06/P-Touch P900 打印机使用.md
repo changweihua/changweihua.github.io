@@ -24,18 +24,24 @@ Windows 11, Windows 10 (32-bit), Windows 10 (64-bit), Windows 8.1 (32-bit), Wind
 
 [b-PAC SDK Ver.3.1](https://support.brother.com/g/s/es/dev/en/bpac/download/index.html?c=eu_ot&lang=zh-cn&navi=offall&comple=on&redirect=on)
 
-![SDK 列表](/public/images/cmono-20230620090715.png)
+![SDK 列表](/images/cmono-20230620090715.png)
 
 <!-- ![](图片地址) -->
-<!-- <img src="/public/images/cmono-20230620090715.png" data-fancybox="gallery"/> -->
+<!-- <img src="/images/cmono-20230620090715.png" data-fancybox="gallery"/> -->
 
 **模板编辑器**
 
 [官方下载](https://mksoftcdnhp.yesky.com/648fbc3e/65f2fe1f7889a07d90bdb09f031dac49/uploadsoft/PT_EDITOR_51012_CH.exe)
 
+[示例二维码模板下载](/files/QR.lbx)
+
 ## 与 Vue 集成 ##
 
-因为考虑到后端程序运行的环境是 CentOS，为保证后续的兼容性，考虑采取浏览器连接打印机的方式进行打印。
+因为考虑到后端程序运行的环境是 CentOS，为保证后续的兼容性，最终选择浏览器直连打印机的方式进行打印。
+
+支持Chrome、Edge、Firefox 浏览器。
+
+本文代码运行在 Edge 浏览器下。
 
 **思路**
 
