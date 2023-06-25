@@ -24,9 +24,7 @@ import "./styles/timeline.fix.less";
 import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";
-import "../../src/tailwind/index.css";
-// import './styles/tailwind.css';
-// import 'virtual:windi.css'
+import 'virtual:uno.css';
 
 import vitepressNprogress from 'vitepress-plugin-nprogress'
 import 'vitepress-plugin-nprogress/lib/css/index.css'

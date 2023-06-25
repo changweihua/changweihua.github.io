@@ -3,6 +3,7 @@
   "markdown.copyFiles.destination": {
     "**/*": "/${documentWorkspaceFolder}/public/images/cmono-${fileName}"
   },
+  "unocss.root": "packages/client"
 //   // 拖拽行为
 //   "markdown.editor.drop.copyIntoWorkspace": "never",
 //   // 粘贴行为
