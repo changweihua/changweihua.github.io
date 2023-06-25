@@ -74,7 +74,6 @@
     "@vitepress-demo-preview/plugin": "^1.1.12",
     "animate.css": "^4.1.1",
     "ant-design-vue": "^3.2.20",
-    "autoprefixer": "^10.4.14",
     "markdown-it-custom-attrs": "^1.0.2",
     "unplugin-vue-components": "^0.25.1",
     "vitepress-markdown-timeline": "^1.2.1",
