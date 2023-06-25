@@ -3,9 +3,14 @@
   "markdown.copyFiles.destination": {
     "**/*": "/${documentWorkspaceFolder}/public/images/cmono-${fileName}"
   },
-  "unocss.root": "packages/client"
-//   // 拖拽行为
-//   "markdown.editor.drop.copyIntoWorkspace": "never",
-//   // 粘贴行为
-//   "markdown.editor.filePaste.copyIntoWorkspace": "never"
+  "unocss.root": "packages/client",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": "tsconfig.*.json,README.md,*.js,*.json,*.config.ts,.preettierrc,.eslintrc.cjs,.eslintrc",
+    "index.html": "index.html,*.css"
+  }
+  //   // 拖拽行为
+  //   "markdown.editor.drop.copyIntoWorkspace": "never",
+  //   // 粘贴行为
+  //   "markdown.editor.filePaste.copyIntoWorkspace": "never"
 }
