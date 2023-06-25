@@ -14,6 +14,7 @@ module.exports = {
     { value: "chore", name: "chore:    构建过程或辅助工具的变动" },
     { value: "revert", name: "revert:   回退" },
     { value: "build", name: "build:    打包" },
+    { value: "release", name: "release:    发布" },
   ],
   // 消息步骤
   messages: {
