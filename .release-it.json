@@ -1,0 +1,14 @@
+{
+  "github": {
+    "release": false
+  },
+  "git": {
+    "commitMessage": "release: v${version}"
+  },
+  "npm": {
+    "publish": false
+  },
+  "hooks": {
+    "after:bump": "echo 更新版本成功"
+  }
+}

@@ -15,6 +15,7 @@ const types = [
   "chore", // 构建过程或辅助工具的变动
   "revert", // 回退
   "build", // 打包
+  "release", //发布版本
 ];
 
 const commitTypeRules = [2, "always", types];
