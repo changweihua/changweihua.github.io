@@ -166,12 +166,6 @@ export default defineConfig({
         src: "/fancybox.umd.js",
       },
     ],
-    // [
-    //   "script",
-    //   {
-    //     src: "/tailwindcss.js",
-    //   },
-    // ],
     // 设置 描述 和 关键词
     [
       "meta",

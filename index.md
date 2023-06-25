@@ -21,7 +21,6 @@ hero:
       link: /api-examples
 
 features:
-
   - title: 阳光服务平台解决方案
     icon:
       src: /air_wux.png
@@ -67,12 +66,17 @@ footer: MIT Licensed | Copyright © 2019-present Evan You
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-// import { fetchVersion } from './.vitepress/utils/fetchVersion'
+import { fetchVersion } from './.vitepress/utils/fetchVersion'
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 
-// onMounted(() => {
-//   fetchVersion()
-// })
+onMounted(() => {
+  const docsVersionSpan = document.querySelector(
+    "div.VPHero.has-image.VPHomeHero > div > div.main > p.tagline > samp.version-tag"
+  );
+  if(!docsVersionSpan){
+    fetchVersion()
+  }
+})
 
 const members = [
   {

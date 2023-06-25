@@ -30,7 +30,7 @@ export function fetchVersion() {
     .then((json) => json.version ?? "")
     .then((version) => {
       if (!version) {
-        version = '1.0.0'
+        version = "N/A";
       }
       const tagLineParagragh = document.querySelector(
         "div.VPHero.has-image.VPHomeHero > div > div.main > p.tagline"

@@ -6,7 +6,7 @@
     "register:components": "vitepress-rc",
     "postinstall": "patch-package",
     "deploy:win": "powershell bin/autoDeploy.bat",
-    "commit": "cz",
+    "commit": "git add . && cz",
     "release": "release-it"
   },
   "config": {
