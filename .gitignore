@@ -1,7 +1,8 @@
-'node_modules' 
-'.temp' 
-'.cache' 
+node_modules
+.temp
+.cache
 .vitepress/dist
+.vitepress/.temp
 .vitepress/cache
 node_modules
 package-lock.json
