@@ -14,6 +14,8 @@ prev: 'P-Touch P900 打印机使用 | Markdown'
 
 Windows 11, Windows 10 (32-bit), Windows 10 (64-bit), Windows 8.1 (32-bit), Windows 8.1 (64-bit)
 
+> 基于使用情况、Windows 7 (32-bit/64-bit) 可正常运行。
+
 **适用机型**
 
 <p class="text-size-[32px] font-bold font-bebas">PT-P900/P900c, PT-P900W/P900Wc, PT-P950NW</p>
@@ -26,6 +28,8 @@ Windows 11, Windows 10 (32-bit), Windows 10 (64-bit), Windows 8.1 (32-bit), Wind
 
 ![SDK 列表](/images/cmono-20230620090715.png)
 
+> 需根据机器操作系统内容，下载对应位数的SDK安装程序，否则会提示版本不兼容。
+
 <!-- ![](图片地址) -->
 <!-- <img src="/images/cmono-20230620090715.png" data-fancybox="gallery"/> -->
 
@@ -35,6 +39,10 @@ Windows 11, Windows 10 (32-bit), Windows 10 (64-bit), Windows 8.1 (32-bit), Wind
 
 [示例二维码模板下载](/files/QR.lbx)
 
+> 打印机支持多尺寸打印纸，更换不同尺寸打印纸时，需调整模板内容。
+>
+> 尺寸不匹配时，打印时会给出相应错误提示。
+
 ## 与 Vue 集成 ##
 
 因为考虑到后端程序运行的环境是 CentOS，为保证后续的兼容性，最终选择浏览器直连打印机的方式进行打印。
@@ -42,6 +50,8 @@ Windows 11, Windows 10 (32-bit), Windows 10 (64-bit), Windows 8.1 (32-bit), Wind
 支持Chrome、Edge、Firefox 浏览器。
 
 本文代码运行在 Edge 浏览器下。
+
+> 如果需断网部署，推荐使用 Firefox 浏览器。
 
 **思路**
 

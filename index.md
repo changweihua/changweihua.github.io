@@ -64,6 +64,8 @@ head:
 footer: MIT Licensed | Copyright © 2019-present Evan You
 ---
 
+<!-- <img :src="$withBase('/logo.png')" alt="logo" /> -->
+
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { fetchVersion } from './.vitepress/utils/fetchVersion'
@@ -77,6 +79,8 @@ onMounted(() => {
     fetchVersion()
   }
 })
+
+
 
 const members = [
   {
