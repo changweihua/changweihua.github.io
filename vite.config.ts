@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [
     // UnoCSS(
     //   {
-    //     presets: [presetAttributify(), presetIcons(), presetUno()],
+    //     // presets: [presetAttributify(), presetIcons(), presetUno()],
     //   }
     // ),
     // AutoImport({
