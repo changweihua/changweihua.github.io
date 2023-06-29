@@ -1,6 +1,6 @@
 ---
 layout: page
-footer: ''
+footer: false
 ---
 
 <about />

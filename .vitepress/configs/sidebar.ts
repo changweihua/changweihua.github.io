@@ -10,25 +10,25 @@ const sidebarConfig: DefaultTheme.Sidebar | undefined = {
       ],
     },
   ],
-  cases: [
-    {
-      text: "项目案例",
-      items: [
-        { text: "苏南硕放国际机场阳光服务平台", link: "/cases/sunny-land" },
-        { text: "扬泰机场智慧出行微信小程序", link: "/api-examples" },
-        {
-          text: "上海民航华东凯亚江苏分公司疫情防控平台",
-          link: "/api-examples",
-        },
-        { text: "苏南硕放国际机场安检效能分析系统", link: "/api-examples" },
-        {
-          text: "苏南硕放国际机场进出港/无纸化系统",
-          link: "/api-examples",
-        },
-        { text: "扬泰机场客源地分析系统", link: "/api-examples" },
-      ],
-    },
-  ],
+  // gallery: [
+  //   {
+  //     text: "项目案例",
+  //     items: [
+  //       { text: "苏南硕放国际机场阳光服务平台", link: "/gallery/sunny-land" },
+  //       { text: "扬泰机场智慧出行微信小程序", link: "/api-examples" },
+  //       {
+  //         text: "上海民航华东凯亚江苏分公司疫情防控平台",
+  //         link: "/api-examples",
+  //       },
+  //       { text: "苏南硕放国际机场安检效能分析系统", link: "/api-examples" },
+  //       {
+  //         text: "苏南硕放国际机场进出港/无纸化系统",
+  //         link: "/api-examples",
+  //       },
+  //       { text: "扬泰机场客源地分析系统", link: "/api-examples" },
+  //     ],
+  //   },
+  // ],
   blog: [
     {
       text: "2023-06",

@@ -54,8 +54,8 @@ export default {
       "home-hero-info": () =>
         h(AnimationTitle, {
           name: "常伟华",
-          text: "DOTNET Developer",
-          tagline: "Sometimes it occurred, sometimes all world in peace !",
+          text: "Designer & Programmer",
+          tagline: "Full Stacked on Multi-Platform",
         }),
     });
   },
