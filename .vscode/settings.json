@@ -1,7 +1,7 @@
 {
   "markdown.copyFiles.overwriteBehavior": "overwrite",
   "markdown.copyFiles.destination": {
-    "**/*": "/${documentWorkspaceFolder}/public/images/cmono-${fileName}"
+    "/**/*": "/public/images/cmono-${fileName}"
   },
   "unocss.root": "packages/client",
   "explorer.fileNesting.enabled": true,

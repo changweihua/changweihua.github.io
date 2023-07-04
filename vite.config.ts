@@ -1,5 +1,9 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
+// vite.config.ts
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Components from 'unplugin-vue-components/vite'
 // import UnoCSS from 'unocss/vite';
 
 // // 引入 图标预设 和 工具类预设
@@ -12,6 +16,12 @@ function pathResolve(dir: string) {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    Components({
+      resolvers: [
+        IconsResolver(),
+      ]
+    }),
+    Icons({ autoInstall: true }),
     // UnoCSS(
     //   {
     //     // presets: [presetAttributify(), presetIcons(), presetUno()],

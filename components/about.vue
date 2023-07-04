@@ -1,12 +1,13 @@
 <template>
-  <div class="h-screen bg-zinc-800 pt-24">
-    <div class="mx-auto flex w-[1000px]">
-      <div class="flex w-40 shrink-0 flex-col gap-8">
+  <div class="bg-zinc-800 pt-24 pb-12">
+    <div class="mx-auto flex flex-wrap self-center w-4/5">
+      <div class="flex w-full md:w-1/5 shrink-0 flex-col gap-8 ">
         <div class="flex items-center">
-          <img :src="`/logo.png`" class="w-16 rounded-full border-2 border-gray-600" />
-          <h1 class="grow text-center text-2xl font-bold text-white">
-            常伟华
-          </h1>
+          <img
+            :src="`/logo.png`"
+            class="w-16 rounded-full border-2 border-gray-600"
+          />
+          <h1 class="grow text-center text-2xl font-bold text-white">常伟华</h1>
         </div>
         <div class="flex justify-between text-slate-200">
           <span class="flex items-center gap-2">
@@ -15,6 +16,7 @@
           </span>
           <span class="flex items-center gap-2">
             <Icon icon="ps:work-case" />
+            <!-- <i-carbon-accessibility /> -->
             <span>全栈开发</span>
           </span>
         </div>
@@ -25,15 +27,16 @@
           <Icon icon="codicon:twitter" />
         </div>
         <div class="text-xs leading-5 text-gray-300">
-          .NET · Vue · Tailwind CSS · AntDesign Vue · TDesign MiniProgram · Visual Studio · VS Code · 微信开发者工具
-          · Postman · MySQL · Wechat · Edge
+          .NET · Vue · Tailwind CSS · AntDesign Vue · TDesign MiniProgram ·
+          Visual Studio · VS Code · 微信开发者工具 · Postman · MySQL · Wechat ·
+          Edge
         </div>
         <div class="text-xs text-gray-400">
           <div>Copyright © 2023 CMONO.NET</div>
           <div class="mt-2">1-5</div>
         </div>
       </div>
-      <div class="ml-24 flex flex-col gap-4">
+      <div class="ml-24 w-full flex flex-col gap-4 md:w-3/5">
         <template v-for="item in posts" :key="item.year">
           <section>
             <h3 class="text-xl font-bold text-slate-200">{{ item.year }}</h3>

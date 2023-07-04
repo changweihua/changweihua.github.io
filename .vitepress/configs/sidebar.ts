@@ -29,62 +29,62 @@ const sidebarConfig: DefaultTheme.Sidebar | undefined = {
   //     ],
   //   },
   // ],
-  blog: [
-    {
-      text: "2023-06",
-      items: [
-        {
-          text: "P-Touch P900 打印机使用",
-          link: "/blog/2023-06/P-Touch P900 打印机使用",
-        },
-        { text: "Vitest 使用", link: "/blog/2023-06/15" },
-      ],
-    },
-    {
-      text: "2023-05",
-      items: [
-        { text: "搭建 Github 个人主页", link: "/blog/2023-05/15" },
-        {
-          text: "使用 SkiaSharp 实现图片水印",
-          link: "/blog/2023-05/skiashap_watermark.md",
-        },
-      ],
-    },
-    {
-      text: "2022",
-      items: [
-        {
-          text: "从 Docker 安装 Gitea",
-          link: "/blog/2022/从 Docker 安装 Gitea.md",
-        },
-        {
-          text: "敏捷开发学习笔记",
-          link: "/blog/2022/敏捷开发学习笔记.md",
-        },
-        {
-          text: "私有nuget服务器部署",
-          link: "/blog/2022/私有nuget服务器部署.md",
-        },
+  // blog: [
+  //   {
+  //     text: "2023-06",
+  //     items: [
+  //       {
+  //         text: "P-Touch P900 打印机使用",
+  //         link: "/blog/2023-06/P-Touch P900 打印机使用",
+  //       },
+  //       { text: "Vitest 使用", link: "/blog/2023-06/15" },
+  //     ],
+  //   },
+  //   {
+  //     text: "2023-05",
+  //     items: [
+  //       { text: "搭建 Github 个人主页", link: "/blog/2023-05/15" },
+  //       {
+  //         text: "使用 SkiaSharp 实现图片水印",
+  //         link: "/blog/2023-05/skiashap_watermark.md",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     text: "2022",
+  //     items: [
+  //       {
+  //         text: "从 Docker 安装 Gitea",
+  //         link: "/blog/2022/从 Docker 安装 Gitea.md",
+  //       },
+  //       {
+  //         text: "敏捷开发学习笔记",
+  //         link: "/blog/2022/敏捷开发学习笔记.md",
+  //       },
+  //       {
+  //         text: "私有nuget服务器部署",
+  //         link: "/blog/2022/私有nuget服务器部署.md",
+  //       },
 
-        {
-          text: "为docker配置HTTP代理服务器",
-          link: "/blog/2022/为docker配置HTTP代理服务器.md",
-        },
-        {
-          text: "私有nuget服务器部署",
-          link: "/blog/2022/私有nuget服务器部署.md",
-        },
-        {
-          text: "正向代理和反向代理",
-          link: "/blog/2022/正向代理和反向代理.md",
-        },
-        {
-          text: "正向代理和反向代理详解",
-          link: "/blog/2022/正向代理和反向代理详解.md",
-        },
-      ],
-    },
-  ],
+  //       {
+  //         text: "为docker配置HTTP代理服务器",
+  //         link: "/blog/2022/为docker配置HTTP代理服务器.md",
+  //       },
+  //       {
+  //         text: "私有nuget服务器部署",
+  //         link: "/blog/2022/私有nuget服务器部署.md",
+  //       },
+  //       {
+  //         text: "正向代理和反向代理",
+  //         link: "/blog/2022/正向代理和反向代理.md",
+  //       },
+  //       {
+  //         text: "正向代理和反向代理详解",
+  //         link: "/blog/2022/正向代理和反向代理详解.md",
+  //       },
+  //     ],
+  //   },
+  // ],
 };
 
 export default sidebarConfig;

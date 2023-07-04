@@ -18,8 +18,8 @@ const categories: Array<{
     cover?: string
     coverAlt?: string
   }> = [{
-	  title: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
-    link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
+	  title: '快速搭建微信小程序原生开发框架',
+    link: '/blog/2023-07/wechat_quickstart.html',
     icon: 'VueJS'
   },{
 	  title: '搭建基于 VitePress 个人网站',

@@ -11,10 +11,11 @@
         <div class="md:flex">
           <div class="md:flex-shrink-0">
             <img
-              class="h-40 w-full object-cover md:h-full md:w-40"
-              src="/images/cover.png"
+              class="h-full w-full object-cover md:w-40"
+              src="/logos/logo_wechat.png"
               alt="Man looking at item at a store"
             />
+            <Icon icon="logos:active-campaign" />
           </div>
           <div class="p-8">
             <div
