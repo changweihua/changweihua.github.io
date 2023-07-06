@@ -20,13 +20,13 @@ const categories: Array<{
   }> = [{
 	  title: '快速搭建微信小程序原生开发框架',
     link: '/blog/2023-07/wechat_quickstart.html',
-    icon: 'VueJS'
+    cover: '/logos/logo_wechat.png'
   },{
-	  title: '搭建基于 VitePress 个人网站',
-    link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
-    icon: 'VueJS'
+	  title: '如何为小程序配置不同的运行环境',
+    link: '/blog/2023-07/wechat_multienv.html',
+    cover: '/logos/logo_wechat.png'
   },{
-	  title: 'Vite 打包优化教程',
+	  title: '我常用的 Visual Code 插件，助力开发起飞',
     link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
     icon: 'VueJS'
   },{
@@ -41,7 +41,7 @@ const categories: Array<{
     description: '使用 SkiaSharp 实现图片水印',
     icon: 'VueJS'
   },{
-	  title: 'Vite 打包优化教程',
+	  title: 'MiniataD，站在 Ant Design Vue的小矮子',
     link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
     icon: 'VueJS'
   },{
@@ -53,7 +53,7 @@ const categories: Array<{
     link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
     icon: 'VueJS'
   },{
-	  title: 'Vite 打包优化教程',
+	  title: '.NET 7 洋葱架构模型，通用标准后台',
     link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
     icon: 'VueJS'
   }];

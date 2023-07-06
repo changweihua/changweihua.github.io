@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-zinc-800 pt-24 pb-12">
-    <div class="mx-auto flex flex-wrap self-center w-4/5">
-      <div class="flex w-full md:w-1/5 shrink-0 flex-col gap-8 ">
+  <div class="bg-zinc-800 md:pt-24 p-6 pb-12">
+    <div class="mx-auto flex flex-wrap self-center w-full md:w-4/5">
+      <div class="flex w-full md:w-1/5 shrink-0 flex-col md:gap-8 gap-4">
         <div class="flex items-center">
           <img
             :src="`/logo.png`"
@@ -36,7 +36,7 @@
           <div class="mt-2">1-5</div>
         </div>
       </div>
-      <div class="ml-24 w-full flex flex-col gap-4 md:w-3/5">
+      <div class="md:ml-24 mt-12 w-full flex shrink-0 flex-col gap-4 md:w-3/5">
         <template v-for="item in posts" :key="item.year">
           <section>
             <h3 class="text-xl font-bold text-slate-200">{{ item.year }}</h3>
