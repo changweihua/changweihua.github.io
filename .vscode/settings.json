@@ -6,8 +6,9 @@
   "unocss.root": "packages/client",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "package.json": "tsconfig.*.json,README.md,*.js,*.json,*.config.ts,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig",
-    "index.html": "index.html,*.css"
+    "package.json": "tsconfig.*.json,README.md,*.js,*.json,*.config.ts,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig,CHANGELOG.md",
+    "index.html": "index.html,*.css",
+    "auto-imports.d.ts":"auto-imports.d.ts,components.d.ts"
   }
   //   // 拖拽行为
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
