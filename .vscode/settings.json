@@ -6,7 +6,7 @@
   "unocss.root": "packages/client",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "package.json": "tsconfig.*.json,README.md,*.js,*.json,*.config.ts,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore",
+    "package.json": "tsconfig.*.json,README.md,*.js,*.json,*.config.ts,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig",
     "index.html": "index.html,*.css"
   }
   //   // 拖拽行为

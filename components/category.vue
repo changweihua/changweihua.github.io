@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 gap-4 px-8 py-8 md:grid-cols-3">
+  <div class="grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-3">
     <div
       v-for="item in props.categories"
       class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:ring-2 hover:ring-opacity-50 hover:ring-indigo-300"
