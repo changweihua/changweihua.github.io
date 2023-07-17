@@ -4,7 +4,7 @@ layout: doc
 
 ## 项目简介 ##
 
-无锡机场旅客服务平台。
+无锡机场旅客服务平台(第一版)。
 
 ## 工作职责 ##
 
@@ -13,15 +13,3 @@ layout: doc
 
 ## 体验地址 ##
 
-<div style="display: flex;gap: 5%;">
-<div style="width: 45%;">
-
-![Alt text](/images/cmono-%E9%98%B3%E5%85%89%E6%9C%8D%E5%8A%A1%E5%9C%B0%E9%9D%A2%E6%9C%8D%E5%8A%A1%E5%AE%A3%E4%BC%A0%E5%9B%BE1.png)
-
-</div>
-<div style="width: 45%;">
-
-![Alt text](/images/cmono-%E9%98%B3%E5%85%89%E6%9C%8D%E5%8A%A1%E6%97%85%E5%AE%A2%E5%87%BA%E8%A1%8C%E5%AE%A3%E4%BC%A0%E5%9B%BE1.png)
-
-</div>
-</div>
