@@ -11,7 +11,7 @@
 
 ## WXML ##
 
-```wxml
+```xml
 <view class="canvas-container" bindtap="clickCanvas">
   <canvas canvas-id="radarcanvas1" type="2d" id="radarcanvas1" class="poster-canvas" style="width:100%; height:100%;"
     disable-scroll="{{ true }}" />

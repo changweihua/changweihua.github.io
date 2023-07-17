@@ -7,6 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    ICarbonAccessibility: typeof import('~icons/carbon/accessibility')['default']
+    AButton: typeof import('ant-design-vue/es')['Button']
   }
 }

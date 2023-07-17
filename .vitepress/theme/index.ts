@@ -8,17 +8,11 @@ import { AntDesignContainer } from "@vitepress-demo-preview/component";
 
 import Antd from "ant-design-vue";
 import 'ant-design-vue/dist/antd.variable.min.css';
+// import 'ant-design-vue/dist/reset.css';
 
-import { ConfigProvider } from 'ant-design-vue';
 
-ConfigProvider.config({
-  theme: {
-    primaryColor: '#646cff',
-  },
-});
-
-import 'uno.css'
-import 'virtual:unocss-devtools'
+// import 'uno.css'
+// import 'virtual:unocss-devtools'
 
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
@@ -27,6 +21,7 @@ import "./styles/timeline.fix.less";
 import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";
+import "./styles/tailwind.css";
 
 import vitepressNprogress from 'vitepress-plugin-nprogress'
 import 'vitepress-plugin-nprogress/lib/css/index.css'
