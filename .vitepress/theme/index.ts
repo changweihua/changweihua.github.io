@@ -7,7 +7,7 @@ import { AntDesignContainer } from "@vitepress-demo-preview/component";
 // import "@vitepress-demo-preview/component/dist/style.css";
 
 import Antd from "ant-design-vue";
-import 'ant-design-vue/dist/antd.variable.min.css';
+// import 'ant-design-vue/dist/antd.variable.min.css';
 // import 'ant-design-vue/dist/reset.css';
 
 

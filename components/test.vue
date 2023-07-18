@@ -1,11 +1,10 @@
 <template>
-    <a-button>Default</a-button>
+  <Button>Default</Button>
 </template>
 
 <script setup lang="ts">
+import { Button } from "ant-design-vue";
 // import 'ant-design-vue/dist/antd.css';
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

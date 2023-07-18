@@ -4,7 +4,7 @@
       <div class="flex w-full md:w-1/5 shrink-0 flex-col md:gap-8 gap-4">
         <div class="flex items-center">
           <img
-            :src="`/logo.png`"
+            :src="`/author.jpg`"
             class="w-16 rounded-full border-2 border-gray-600"
           />
           <h1 class="grow text-center text-2xl font-bold text-white">常伟华</h1>

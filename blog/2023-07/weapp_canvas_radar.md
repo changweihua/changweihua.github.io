@@ -455,3 +455,15 @@ Page({
 })
 ```
 
+<script setup lang="ts">
+import { onMounted } from 'vue'
+
+import WaterMark from "l-watermark";
+
+onMounted(() => {
+  document.querySelectorAll('.vp-doc img').forEach((element) => {
+    console.log(element)
+    element.setAttribute("data-fancybox", "gallery")
+  })
+})
+</script>
