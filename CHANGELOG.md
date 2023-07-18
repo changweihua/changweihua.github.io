@@ -1,3 +1,9 @@
+## <small>0.0.6 (2023-07-18)</small>
+
+* fix(custom): 优化文章链接 ([6361698](https://github.com/changweihua/changweihua.github.io/commit/6361698))
+
+
+
 ## <small>0.0.5 (2023-07-17)</small>
 
 * feat(custom): 完善博客页面和关于页面 ([fdd5054](https://github.com/changweihua/changweihua.github.io/commit/fdd5054))
