@@ -3,7 +3,7 @@ import { resolve } from "path";
 // vite.config.ts
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
-// import AntdvResolver from "antdv-component-resolver";
+import AntdvResolver from "antdv-component-resolver";
 import Components from "unplugin-vue-components/vite";
 
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
@@ -34,7 +34,8 @@ export default defineConfig({
         AntDesignVueResolver({
           importStyle: false, // css in js
         }),
-      ], //, AntdvResolver()
+        AntdvResolver()
+      ],
     }),
     // Unocss(),
     Icons({ autoInstall: true }),

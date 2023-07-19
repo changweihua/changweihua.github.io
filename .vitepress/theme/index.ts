@@ -6,9 +6,9 @@ import { h, watchEffect } from "vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 // import "@vitepress-demo-preview/component/dist/style.css";
 
-import Antd from "ant-design-vue";
+// import Antd from "ant-design-vue";
 // import 'ant-design-vue/dist/antd.variable.min.css';
-// import 'ant-design-vue/dist/reset.css';
+import 'ant-design-vue/dist/reset.css';
 
 
 // import 'uno.css'
@@ -49,7 +49,7 @@ export default {
         h(AnimationTitle, {
           name: "常伟华",
           text: "Designer & Programmer",
-          tagline: "Full Stacked on Multi-Platform",
+          tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
     });
   },
@@ -66,7 +66,7 @@ export default {
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     const { app, router, siteData, isServer } = ctx;
     DefaultTheme.enhanceApp(ctx);
-    app.use(Antd);
+    // app.use(Antd);
     app.component("demo-preview", AntDesignContainer);
     // import("ant-design-vue").then((module) => {
     //   app.use(module);

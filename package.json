@@ -94,7 +94,7 @@
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.1",
     "animate.css": "^4.1.1",
-    "ant-design-vue": "4.0.0",
+    "ant-design-vue": "^4.0.0",
     "crypto": "^1.0.1",
     "l-watermark": "^2.1.2",
     "markdown-it-custom-attrs": "^1.0.2",
