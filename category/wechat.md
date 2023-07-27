@@ -11,3 +11,4 @@ outline: page
 - [基于 Flutter 和 Blazor 实现 Web 扫一扫](/blog/2023-07/flutter_blazor_web_qr_login.html)
 - [给小程序添加一个评分分值分布雷达图，完善评价体系](/blog/2023-07/weapp_canvas_radar.html)
 - [过于单调的小程序页面，靠 Lottie 动画拯救](/blog/2023-07/lottie_in_weapp.html)
+- [如何为小程序添加一个启动页](/blog/2023-07/weapp_splash.html)

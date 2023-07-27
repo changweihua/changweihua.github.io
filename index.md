@@ -5,6 +5,8 @@ layout: home
 title: CMONO.NET
 titleTemplate: 首页
 
+description: My awesome page description
+
 hero:
   name: "常伟华"
   text: "DOTNET Developer"

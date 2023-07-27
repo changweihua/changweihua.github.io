@@ -37,6 +37,8 @@ export function fetchVersion() {
       );
       const docsVersionSpan = document.createElement("samp");
       docsVersionSpan.classList.add("version-tag");
+      docsVersionSpan.classList.add("hidden");
+      docsVersionSpan.classList.add("md:visible");
       docsVersionSpan.innerText = version;
       tagLineParagragh?.appendChild(docsVersionSpan);
     });

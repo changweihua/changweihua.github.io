@@ -41,16 +41,18 @@ const categories: Array<{
     description: '使用 SkiaSharp 实现图片水印',
     icon: 'VueJS'
   },{
-	  title: 'MiniataD，站在 Ant Design Vue的小矮子',
-    link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
-    icon: 'VueJS'
+	  title: '给小程序添加一个评分分值分布雷达图，完善评价体系',
+    link: '/blog/2023-07/weapp_canvas_radar.html',
+    icon: 'VueJS',
+    cover: '/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230717155014.jpg'
   },{
-	  title: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
-    link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
-    icon: 'VueJS'
+	  title: '过于单调的小程序页面，靠 Lottie 动画拯救',
+    link: '/blog/2023-07/lottie_in_weapp.html',
+    icon: 'VueJS',
+    cover: '/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230719092233.jpg'
   },{
-	  title: '搭建基于 VitePress 个人网站',
-    link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
+	  title: '如何为小程序添加一个启动页',
+    link: '/blog/2023-07/weapp_splash.html',
     icon: 'VueJS'
   },{
 	  title: '.NET 7 洋葱架构模型，通用标准后台',
