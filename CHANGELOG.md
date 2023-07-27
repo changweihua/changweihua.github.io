@@ -1,3 +1,9 @@
+## <small>0.0.7 (2023-07-27)</small>
+
+* fix(custom): 优化文章链接 ([6361698](https://github.com/changweihua/changweihua.github.io/commit/6361698))
+
+
+
 ## <small>0.0.6 (2023-07-18)</small>
 
 * fix(custom): 优化文章链接 ([6361698](https://github.com/changweihua/changweihua.github.io/commit/6361698))
