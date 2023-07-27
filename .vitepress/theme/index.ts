@@ -10,6 +10,9 @@ import { AntDesignContainer } from "@vitepress-demo-preview/component";
 // import 'ant-design-vue/dist/antd.variable.min.css';
 import 'ant-design-vue/dist/reset.css';
 
+import comment from "../components/Comment.vue";
+import copyright from "../components/CopyRight.vue"
+
 const hostname: string = 'https://changweihua.github.io'
 
 // import 'uno.css'
@@ -36,6 +39,7 @@ import path from "path";
 import { SitemapStream } from 'sitemap'
 import { createWriteStream } from 'node:fs'
 import { resolve } from 'node:path'
+import { createRssFile } from "../utils/rss";
 
 // import Layout from './Layout.vue';
 
@@ -58,6 +62,9 @@ export default {
           text: "Designer & Programmer",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
+        // https://vitepress.dev/guide/extending-default-theme#layout-slots
+			"doc-after": () => h(comment),
+			"doc-footer-before": () => h(copyright),
     });
   },
   // enhanceApp(ctx) {
@@ -96,14 +103,15 @@ export default {
     return head
   },
   lastUpdated: true,
+  // buildEnd: createRssFile,
   // buildEnd: async (config: SiteConfig) => {
   //   const feed = new Feed({
-  //     title: 'Paul Laros',
-  //     description: 'My personal blog',
+  //     title: '常伟华',
+  //     description: '伪前端+伪后端+伪需求=真全栈',
   //     id: hostname,
   //     link: hostname,
   //     language: 'en',
-  //     image: 'https://laros.io/images/paul-laros.jpg',
+  //     image: '${hostname}.jpg',
   //     favicon: `${hostname}/favicon.ico`,
   //     copyright:
   //       'Copyright (c) 2023-present, Paul Laros'
@@ -131,9 +139,9 @@ export default {
   //       content: html,
   //       author: [
   //         {
-  //           name: 'Paul Laros',
-  //           email: 'hey@laros.io',
-  //           link: 'https://laros.io/authors/paul'
+  //           name: '常伟华',
+  //           email: 'changweihua@outlook.com',
+  //           link: 'https://changweihua.github.io'
   //         }
   //       ],
   //       date: frontmatter.date
@@ -144,7 +152,7 @@ export default {
 
   //   const { outDir } = config
 
-  //   const sitemap = new SitemapStream({ hostname: 'https://laros.io/' })
+  //   const sitemap = new SitemapStream({ hostname: hostname})
   //   const pages = await createContentLoader('../../blog/*.md').load()
   //   const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
 
