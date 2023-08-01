@@ -54,6 +54,7 @@ import { createRssFile } from "../utils/rss";
 import { useCodeGroups } from "./composables/codeGroups";
 
 import NotFound from "../components/NotFound.vue"
+import CodeGroup from '../components/CodeGroup.vue'
 
 export default {
   ...DefaultTheme,
@@ -97,6 +98,8 @@ export default {
     app.component("demo-preview", AntDesignContainer);
     app.component("header-profile", HeaderProfile);
     app.component("lottie-panel", LottiePanel);
+    app.component('code-group', CodeGroup)
+
     // import("ant-design-vue").then((module) => {
     //   app.use(module);
     // });
