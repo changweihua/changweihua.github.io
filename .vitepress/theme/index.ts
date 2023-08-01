@@ -1,19 +1,27 @@
 // .vitepress/theme/index.ts
-import { HeadConfig, SiteConfig, createContentLoader, inBrowser, useData } from "vitepress";
+import {
+  HeadConfig,
+  SiteConfig,
+  createContentLoader,
+  inBrowser,
+  useData,
+} from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, watchEffect } from "vue";
-import { Feed } from 'feed'
+import { Feed } from "feed";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 // import "@vitepress-demo-preview/component/dist/style.css";
 
 // import Antd from "ant-design-vue";
 // import 'ant-design-vue/dist/antd.variable.min.css';
-import 'ant-design-vue/dist/reset.css';
+import "ant-design-vue/dist/reset.css";
 
 import comment from "../components/Comment.vue";
-import copyright from "../components/CopyRight.vue"
+import copyright from "../components/CopyRight.vue";
+import HeaderProfile from "../components/HeaderProfile.vue";
+import LottiePanel from "../components/LottiePanel.vue";
 
-const hostname: string = 'https://changweihua.github.io'
+const hostname: string = "https://changweihua.github.io";
 
 // import 'uno.css'
 // import 'virtual:unocss-devtools'
@@ -27,25 +35,30 @@ import AnimationTitle from "../components/AnimationTitle.vue";
 import "./styles/index.less";
 import "./styles/tailwind.css";
 
-import vitepressNprogress from 'vitepress-plugin-nprogress'
-import 'vitepress-plugin-nprogress/lib/css/index.css'
+import vitepressNprogress from "vitepress-plugin-nprogress";
+import "vitepress-plugin-nprogress/lib/css/index.css";
 
-import 'animate.css';
+import "animate.css";
 
-import '@iconify/iconify';
+import "@iconify/iconify";
 import { writeFileSync } from "fs";
 import path from "path";
 
-import { SitemapStream } from 'sitemap'
-import { createWriteStream } from 'node:fs'
-import { resolve } from 'node:path'
+import { SitemapStream } from "sitemap";
+import { createWriteStream } from "node:fs";
+import { resolve } from "node:path";
 import { createRssFile } from "../utils/rss";
 
 // import Layout from './Layout.vue';
 
+import { useCodeGroups } from "./composables/codeGroups";
+
+import NotFound from "../components/NotFound.vue"
+
 export default {
   ...DefaultTheme,
-  NotFound: () => 'custom 404', // <- this is a Vue 3 functional component
+  // NotFound: () => 'custom 404',
+  NotFound: NotFound, // <- this is a Vue 3 functional component
   Layout() {
     return h(DefaultTheme.Layout, null, {
       // "home-hero-before": () => h(AnimationTitle),
@@ -62,9 +75,9 @@ export default {
           text: "Designer & Programmer",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
-        // https://vitepress.dev/guide/extending-default-theme#layout-slots
-			"doc-after": () => h(comment),
-			"doc-footer-before": () => h(copyright),
+      // https://vitepress.dev/guide/extending-default-theme#layout-slots
+      "doc-after": () => h(comment),
+      "doc-footer-before": () => h(copyright),
     });
   },
   // enhanceApp(ctx) {
@@ -82,10 +95,14 @@ export default {
     DefaultTheme.enhanceApp(ctx);
     // app.use(Antd);
     app.component("demo-preview", AntDesignContainer);
+    app.component("header-profile", HeaderProfile);
+    app.component("lottie-panel", LottiePanel);
     // import("ant-design-vue").then((module) => {
     //   app.use(module);
     // });
-    vitepressNprogress(ctx)
+    vitepressNprogress(ctx);
+
+    useCodeGroups();
   },
   setup() {
     const { lang } = useData();
@@ -96,11 +113,17 @@ export default {
     });
   },
   transformHead: ({ pageData }) => {
-    const head: HeadConfig[] = []
-    head.push(['meta', { property: 'og:title', content: pageData.frontmatter.title }])
-    head.push(['meta', { property: 'og:description', content: pageData.frontmatter.description }])
+    const head: HeadConfig[] = [];
+    head.push([
+      "meta",
+      { property: "og:title", content: pageData.frontmatter.title },
+    ]);
+    head.push([
+      "meta",
+      { property: "og:description", content: pageData.frontmatter.description },
+    ]);
 
-    return head
+    return head;
   },
   lastUpdated: true,
   // buildEnd: createRssFile,

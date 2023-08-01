@@ -8,6 +8,8 @@ import Components from "unplugin-vue-components/vite";
 
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import { fileURLToPath } from "node:url";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+
 // 引入Unocss
 // import Unocss from "unocss/vite";
 
@@ -28,6 +30,7 @@ function pathResolve(dir: string) {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    vueJsx(),
     Components({
       resolvers: [
         IconsResolver(),
