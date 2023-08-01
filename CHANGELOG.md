@@ -1,3 +1,9 @@
+## <small>0.0.9 (2023-08-01)</small>
+
+* feat(custom): 优化个人关于页，调整基础架构 ([ec5a39a](https://github.com/changweihua/changweihua.github.io/commit/ec5a39a))
+
+
+
 ## <small>0.0.8 (2023-07-27)</small>
 
 
