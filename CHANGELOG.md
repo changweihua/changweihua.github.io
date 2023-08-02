@@ -1,3 +1,9 @@
+## <small>0.0.10 (2023-08-02)</small>
+
+* feat(custom): 全新Logo ([c5b053f](https://github.com/changweihua/changweihua.github.io/commit/c5b053f))
+
+
+
 ## <small>0.0.9 (2023-08-01)</small>
 
 * feat(custom): 优化个人关于页，调整基础架构 ([ec5a39a](https://github.com/changweihua/changweihua.github.io/commit/ec5a39a))
