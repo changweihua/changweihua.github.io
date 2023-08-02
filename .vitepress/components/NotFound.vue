@@ -1,6 +1,16 @@
 <template>
-  <div style="width: 600px; height: 300px;margin: 0 auto;" class="justify-center items-center flex">
-    <lottie-panel :animation-data="notfound"></lottie-panel>
+  <div
+    style="
+      width: 600px;
+      height: 300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    "
+    class="w-3/5 h-1 justify-center items-center flex"
+  >
+    <lottie-panel class="" :animation-data="notfound"></lottie-panel>
   </div>
 </template>
 
@@ -8,5 +18,4 @@
 import notfound from "../../public/lotties/notfound.json";
 </script>
 
-<style lang="less">
-</style>
+<style lang="less"></style>

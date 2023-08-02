@@ -53,8 +53,9 @@ import { createRssFile } from "../utils/rss";
 
 import { useCodeGroups } from "./composables/codeGroups";
 
-import NotFound from "../components/NotFound.vue"
-import CodeGroup from '../components/CodeGroup.vue'
+import NotFound from "../components/NotFound.vue";
+import CodeGroup from "../components/CodeGroup.vue";
+import PlaceHolder from "../components/PlaceHolder.vue";
 
 export default {
   ...DefaultTheme,
@@ -70,15 +71,132 @@ export default {
       //     text: "DOTNET Developer",
       //     tagline: "阳光大男孩",
       //   }),
+      // layout: 'home'
+      // // "home-hero-before": () =>
+      // //   h(PlaceHolder, {
+      // //     name: "home-hero-before",
+      // //   }),
       "home-hero-info": () =>
         h(AnimationTitle, {
           name: "常伟华",
           text: "Designer & Programmer",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
+      // "home-hero-image": () =>
+      //   h(PlaceHolder, {
+      //     name: "home-hero-image",
+      //   }),
+      // "home-hero-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "home-hero-after",
+      //   }),
+      // "home-features-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "home-features-before",
+      //   }),
+      // "home-features-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "home-features-after",
+      //   }),
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      "doc-after": () => h(comment),
-      "doc-footer-before": () => h(copyright),
+
+      // layout: 'doc'
+      // "doc-top": () =>
+      //   h(PlaceHolder, {
+      //     name: "doc-top",
+      //   }),
+      // "doc-bottom": () =>
+      //   h(PlaceHolder, {
+      //     name: "doc-bottom",
+      //   }),
+      // "doc-footer-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "doc-footer-before",
+      //   }),
+      // "doc-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "doc-before",
+      //   }),
+      "doc-after": () =>
+        h(comment),
+      // "sidebar-nav-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "sidebar-nav-before",
+      //   }),
+      // "sidebar-nav-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "sidebar-nav-after",
+      //   }),
+      // "aside-top": () =>
+      //   h(PlaceHolder, {
+      //     name: "aside-top",
+      //   }),
+      // "aside-bottom": () =>
+      //   h(PlaceHolder, {
+      //     name: "aside-bottom",
+      //   }),
+      // "aside-outline-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "aside-outline-before",
+      //   }),
+      // "aside-outline-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "aside-outline-after",
+      //   }),
+      // "aside-ads-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "aside-ads-before",
+      //   }),
+      // "aside-ads-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "aside-ads-after",
+      //   }),
+
+      // layout: 'page'
+      // "page-top": () =>
+      //   h(PlaceHolder, {
+      //     name: "page-top",
+      //   }),
+      // "page-bottom": () =>
+      //   h(PlaceHolder, {
+      //     name: "page-bottom",
+      //   }),
+
+      "not-found": () => h(NotFound),
+
+      //  Always
+      // "layout-top": () =>
+      //   h(PlaceHolder, {
+      //     name: "layout-top",
+      //   }),
+      // "layout-bottom": () =>
+      //   h(PlaceHolder, {
+      //     name: "layout-bottom",
+      //   }),
+      // "nav-bar-title-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-bar-title-before",
+      //   }),
+      // "nav-bar-title-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-bar-title-after",
+      //   }),
+      // "nav-bar-content-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-bar-content-before",
+      //   }),
+      // "nav-bar-content-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-bar-content-after",
+      //   }),
+      // "nav-screen-content-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-screen-content-before",
+      //   }),
+      // "nav-screen-content-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-screen-content-after",
+      //   }),
     });
   },
   // enhanceApp(ctx) {
@@ -98,7 +216,7 @@ export default {
     app.component("demo-preview", AntDesignContainer);
     app.component("header-profile", HeaderProfile);
     app.component("lottie-panel", LottiePanel);
-    app.component('code-group', CodeGroup)
+    app.component("code-group", CodeGroup);
 
     // import("ant-design-vue").then((module) => {
     //   app.use(module);

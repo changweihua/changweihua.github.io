@@ -12,7 +12,7 @@ hero:
   text: "DOTNET Developer"
   tagline: 阳光大男孩
   image:
-    src: /logo.png
+    src: /small_logo.png
     alt: 网页的logo图标
   actions:
     - theme: brand
@@ -131,6 +131,11 @@ const members = [
     avatar: '/author.jpg',
     name: '常伟华',
     title: 'Designer & Programmer'
+  },
+  {
+    avatar: '/unfix.png',
+    name: '@un-fix',
+    title: '共同改善中文世界的企业组织文化'
   }
 ]
 </script>
@@ -140,10 +145,7 @@ const members = [
 <VPTeamPage>
   <VPTeamPageTitle>
     <template #title>
-      Team members
-    </template>
-    <template #lead>
-      Github
+      Members
     </template>
   </VPTeamPageTitle>
   <VPTeamMembers
