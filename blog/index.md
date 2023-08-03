@@ -18,6 +18,11 @@ const categories: Array<{
     cover?: string
     coverAlt?: string
   }> = [{
+	  title: '参与 Github 开源项目，提交 PR',
+    link: '/blog/2023-08/cooperation_with_repository.html',
+    decription: '学习如何为开源项目贡献自己的力量',
+    icon: 'VueJS'
+  },{
 	  title: '快速搭建微信小程序原生开发框架',
     link: '/blog/2023-07/wechat_quickstart.html',
     cover: '/logos/logo_wechat.png'
@@ -53,10 +58,6 @@ const categories: Array<{
   },{
 	  title: '如何为小程序添加一个启动页',
     link: '/blog/2023-07/weapp_splash.html',
-    icon: 'VueJS'
-  },{
-	  title: '.NET 7 洋葱架构模型，通用标准后台',
-    link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
     icon: 'VueJS'
   }];
 

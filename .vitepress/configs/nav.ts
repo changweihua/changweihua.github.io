@@ -1,5 +1,5 @@
 import { DefaultTheme } from "vitepress";
-// activeMatch: "^/guide/", 
+// activeMatch: "^/guide/",
 const navConfig: DefaultTheme.NavItem[] | undefined = [
   { text: "首页", link: "/", activeMatch: "^/$|^/index/" },
   {
@@ -15,6 +15,11 @@ const navConfig: DefaultTheme.NavItem[] | undefined = [
   {
     text: "文章分类",
     items: [
+      {
+        items: [
+          { text: "工具&平台", link: "/category/tool.md" },
+        ],
+      },
       {
         items: [
           { text: "Flutter", link: "/category/flutter.md" },
