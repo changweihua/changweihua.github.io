@@ -42,21 +42,30 @@ features:
       alt: 苏南硕放国际机场微信小程序
     details: 苏南硕放国际机场旅客服务平台前端载体。
     link: /gallery/airwux
-  - title: 疫情防控平台
-    details: 疫情期间，为满足公司疫情防控需求，应运而生。
-    link: /gallery/epcp
-  - title: 基于K8S平台的持续交付平台
-    details: 研发技改产物，促进开发流程规范化及自动化运维。
-    link: /gallery/giteaops
-  - title: 苏南硕放国际机场安检效能分析系统
-    details: 助力安检效能分析
-    link: /gallery/SCPEA
-  - title: 进出港旅客查询和无纸化系统项目
-    details: 为安检部门提供今日的所有起降航班乘机人数.
-  - title: 扬州泰州国际机场客源地分析系统
-    details: 统计所有从扬泰机场出发或到达的所有旅客的城市来源分布.
-  - title: 苏南硕放国际机场生产统计系统
-    details: 整个生产统计数据，与民航局交互.
+  - title: wx-lifecycle-interceptor
+    details: 小程序生命周期方法拦截器NPM包。
+    link: https://www.npmjs.com/package/wx-lifecycle-interceptor
+  - title: antdv-plus-table
+    details: Ant Design Vue Table 扩展NPM包。
+    link: https://www.npmjs.com/package/@changweihua/antdv-plus-table
+  - title: Nobilis.Epps
+    details: 基于 Epplus 实现 Excel 的快速导入导出 NUGET包。
+    link: https://www.nuget.org/packages/Nobilis.Epps
+  # - title: 疫情防控平台
+  #   details: 疫情期间，为满足公司疫情防控需求，应运而生。
+  #   link: /gallery/epcp
+  # - title: 基于K8S平台的持续交付平台
+  #   details: 研发技改产物，促进开发流程规范化及自动化运维。
+  #   link: /gallery/giteaops
+  # - title: 苏南硕放国际机场安检效能分析系统
+  #   details: 助力安检效能分析
+  #   link: /gallery/SCPEA
+  # - title: 进出港旅客查询和无纸化系统项目
+  #   details: 为安检部门提供今日的所有起降航班乘机人数.
+  # - title: 扬州泰州国际机场客源地分析系统
+  #   details: 统计所有从扬泰机场出发或到达的所有旅客的城市来源分布.
+  # - title: 苏南硕放国际机场生产统计系统
+  #   details: 整个生产统计数据，与民航局交互.
 
 head:
   - - meta

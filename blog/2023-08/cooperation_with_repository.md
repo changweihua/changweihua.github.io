@@ -89,7 +89,7 @@ git rebase --continue
 
 ## 创建 PR ##
 
-我们回到自己仓库的项目主页，比如 ![https://github.com/changweihua/un-fix.github.io.git](https://github.com/changweihua/un-fix.github.io.git)，可以看到刚才提交的记录，则表示之前的操作都已成功。接下来，点击箭头所指的Pull Requests选项。
+我们回到自己仓库的项目主页，比如 [https://github.com/changweihua/un-fix.github.io.git](https://github.com/changweihua/un-fix.github.io.git)，可以看到刚才提交的记录，则表示之前的操作都已成功。接下来，点击箭头所指的Pull Requests选项。
 
 点击 New pull request 按钮
 
@@ -103,4 +103,4 @@ git rebase --continue
 
 一个审查通过的大概例子： https://github.com/changweihua/un-fix.github.io/pull/1
 
-![审查通过示例](../../public/images/cmono-image-pr_merged.png)
+![审查通过示例](../../public/images/cmono-4c0cf778e497ab206289099ce51db5f.png)
