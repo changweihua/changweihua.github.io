@@ -1,4 +1,6 @@
 ---
+commentabled: true
+recommended: false 
 ---
 
 # 如何为小程序配置不同的运行环境 #

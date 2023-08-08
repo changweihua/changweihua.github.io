@@ -1,3 +1,8 @@
+---
+commentabled: true
+recommended: false 
+---
+
 # 使用 SkiaSharp 实现图片水印 #
 
 ## 项目依赖 ##

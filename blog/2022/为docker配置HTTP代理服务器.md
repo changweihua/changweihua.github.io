@@ -1,3 +1,8 @@
+---
+commentabled: true
+recommended: false 
+---
+
 # 为docker配置HTTP代理服务器 #
 
 > 背景： node1不能访问外网， node2可以访问外网，node1通过node2的代理服务来访问外网。

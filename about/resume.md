@@ -1,5 +1,9 @@
 ---
 outline: page
+# 开启评论
+commentabled: false
+# 开启推荐
+recommended: false 
 ---
 
 ## 个人简介 ##

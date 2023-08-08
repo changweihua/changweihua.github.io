@@ -1,3 +1,8 @@
+---
+commentabled: true
+recommended: false 
+---
+
 # 私有nuget服务器部署 #
 
 我们采用BaGet进行Nuget私有服务器的搭建，支持容器化，可跨平台进行部署。

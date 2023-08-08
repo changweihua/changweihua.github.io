@@ -1,4 +1,6 @@
 ---
+commentabled: true
+recommended: false 
 ---
 
 # 过于单调的小程序页面，靠 Lottie 动画拯救 #

@@ -1,3 +1,8 @@
+---
+commentabled: true
+recommended: false 
+---
+
 # CodeGroup 自定义全局组件
 
 ## 测试 JS + TS

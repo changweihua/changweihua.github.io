@@ -1,3 +1,8 @@
+---
+commentabled: true
+recommended: false 
+---
+
 # 从 Docker 安装 Gitea #
 
 ## Gitea安装 ##

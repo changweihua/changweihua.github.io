@@ -1,4 +1,6 @@
 ---
+commentabled: true
+recommended: true
 ---
 
 # 参与 Github 开源项目，提交 PR #
@@ -75,17 +77,26 @@ module.exports = {
 
 为什么要这么做？因为当你在开发的时候，可能其他人也在开发，很有可能你fork的代码已经不是最新的了，这时你就需要不断更新你的代码，至少保证在push前要更新一次，这样才能确保不会发生代码冲突。
 
-git rebase 和git merge的区别是 git rebase 形成的是一条线，会把你当前的几个commit，放到最新commit的后面。git merge 会把公共分支和你当前的commit 按照提交时间合并在一起，形成一个新的 commit 提交，注意不要在公共分支使用rebase
+git rebase 和git merge的区别是 git rebase 形成的是一条线，会把你当前的几个commit，放到最新commit的后面。
+
+git merge 会把公共分支和你当前的commit 按照提交时间合并在一起，形成一个新的 commit 提交，注意不要在公共分支使用rebase
 
 //先设置 upstream 为开源项目地址，目的是为了把开源项目的更新 同步到自己fork的项目中
-git remote add upstream https://github.com/kubesphere/website.git
+```bash
+git remote add upstream https://github.com/changweihua/un-fix.github.io.git
+```
 //获取更新
+```bash
 git fetch upstream
+```
 //合并更新
-git rebase upstream/master
+```bash
+git rebase upstream/main
+```
 //如果有冲突呢 修改文件冲突 修改后git add 冲突文件名 commit提交
+```bash
 git rebase --continue
-
+```
 
 ## 创建 PR ##
 

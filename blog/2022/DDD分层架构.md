@@ -1,3 +1,8 @@
+---
+commentabled: true
+recommended: false 
+---
+
 # DDD分层架构 #
 
 ---

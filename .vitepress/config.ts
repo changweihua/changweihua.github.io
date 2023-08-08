@@ -3,7 +3,12 @@ import navConfig from "./configs/nav";
 import { getSideBar } from "vitepress-plugin-autobar";
 import mdItCustomAttrs from "markdown-it-custom-attrs";
 import timeline from "vitepress-markdown-timeline";
+import Icons from "unplugin-icons/vite";
+import IconsResolver from "unplugin-icons/resolver";
+import AntdvResolver from "antdv-component-resolver";
+import Components from "unplugin-vue-components/vite";
 
+import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import AutoSidebar from "@iminu/vitepress-plugin-auto-sidebar";
 
 // npx pagefind --source .vitepress/dist
@@ -21,6 +26,16 @@ export default defineConfig({
   vite: {
     plugins: [
       vueJsx(),
+      Components({
+        resolvers: [
+          IconsResolver(),
+          AntDesignVueResolver({
+            importStyle: false, // css in js
+          }),
+          AntdvResolver()
+        ],
+      }),
+      Icons({ autoInstall: true }),
       // pagefindPlugin(),
       // AutoSidebar({
       //   /**

@@ -1,5 +1,6 @@
 ---
 layout: doc
+recommended: true
 ---
 
 ## 项目简介 ##

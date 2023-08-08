@@ -1,4 +1,6 @@
 ---
+commentabled: true
+recommended: false 
 ---
 
 # 如何为小程序添加一个启动页 #

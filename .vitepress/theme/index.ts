@@ -1,6 +1,7 @@
 // .vitepress/theme/index.ts
 import {
   HeadConfig,
+  PageData,
   SiteConfig,
   createContentLoader,
   inBrowser,
@@ -17,6 +18,7 @@ import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "ant-design-vue/dist/reset.css";
 
 import comment from "../components/Comment.vue";
+import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
@@ -50,6 +52,8 @@ import { resolve } from "node:path";
 import { createRssFile } from "../utils/rss";
 
 // import Layout from './Layout.vue';
+
+const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 
 import { useCodeGroups } from "./composables/codeGroups";
 
@@ -105,10 +109,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "doc-top",
       //   }),
-      // "doc-bottom": () =>
-      //   h(PlaceHolder, {
-      //     name: "doc-bottom",
-      //   }),
+      "doc-bottom": () => h(recommend),
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
       //     name: "doc-footer-before",
@@ -117,8 +118,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "doc-before",
       //   }),
-      "doc-after": () =>
-        h(comment),
+      "doc-after": () => h(comment),
       // "sidebar-nav-before": () =>
       //   h(PlaceHolder, {
       //     name: "sidebar-nav-before",
@@ -218,9 +218,9 @@ export default {
     app.component("lottie-panel", LottiePanel);
     app.component("code-group", CodeGroup);
 
-    // import("ant-design-vue").then((module) => {
-    //   app.use(module);
-    // });
+    import("ant-design-vue").then((module) => {
+      app.use(module);
+    });
     vitepressNprogress(ctx);
 
     useCodeGroups();
@@ -247,6 +247,23 @@ export default {
     return head;
   },
   lastUpdated: true,
+  /* 站点地图 */
+  transformHtml: (_, id, { pageData }) => {
+    if (!/[\\/]404\.html$/.test(id))
+      links.push({
+        url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, "$2"),
+        lastmod: pageData.lastUpdated,
+      });
+  },
+  // buildEnd: async ({ outDir }) => {
+  //   // hostname 为线上域名
+  //   const sitemap = new SitemapStream({ hostname: 'https://notes.fe-mm.com/' })
+  //   const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
+  //   sitemap.pipe(writeStream)
+  //   links.forEach((link) => sitemap.write(link))
+  //   sitemap.end()
+  //   await new Promise((r) => writeStream.on('finish', r))
+  // }
   // buildEnd: createRssFile,
   // buildEnd: async (config: SiteConfig) => {
   //   const feed = new Feed({

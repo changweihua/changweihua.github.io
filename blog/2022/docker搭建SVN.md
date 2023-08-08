@@ -1,3 +1,8 @@
+---
+commentabled: true
+recommended: false 
+---
+
 # docker搭建SVN #
 
 > 容器 github目录 [https://github.com/elleFlorio/svn-docker](https://github.com/elleFlorio/svn-docker)
