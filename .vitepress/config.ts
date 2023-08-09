@@ -1,80 +1,36 @@
 import { defineConfig } from "vitepress";
 import navConfig from "./configs/nav";
-import { getSideBar } from "vitepress-plugin-autobar";
 import mdItCustomAttrs from "markdown-it-custom-attrs";
 import timeline from "vitepress-markdown-timeline";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
-import AntdvResolver from "antdv-component-resolver";
 import Components from "unplugin-vue-components/vite";
 
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
-import AutoSidebar from "@iminu/vitepress-plugin-auto-sidebar";
 
-// npx pagefind --source .vitepress/dist
-
+import container from 'markdown-it-container';
 import {
   containerPreview,
   componentPreview,
 } from "@vitepress-demo-preview/plugin";
 import sidebarConfig from "./configs/sidebar";
-import path from "path";
-import { pagefindPlugin } from "vitepress-plugin-pagefind";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  vite: {
-    plugins: [
-      vueJsx(),
-      Components({
-        resolvers: [
-          IconsResolver(),
-          AntDesignVueResolver({
-            importStyle: false, // css in js
-          }),
-          AntdvResolver()
-        ],
-      }),
-      Icons({ autoInstall: true }),
-      // pagefindPlugin(),
-      // AutoSidebar({
-      //   /**
-      //    * 当插件将目录结构转换为 sidebar 配置后触发，
-      //    * 方便我们去操作 sidebar，比如将目录排序、修改目录名称等
-      //    */
-      //   sidebarResolved(value) {
-      //     // do sort
-      //     value["/dir2/"][0].items?.sort((a: any, b: any) => a.text - b.text);
-      //     // rename
-      //     value["/dir2/"][0].text = "sorted";
-      //   },
-      //   // 忽略一些文件
-      //   ignores: ["index.md"],
-      //   // 指定我们要自动构建的文档目录，默认是 .vitepress 目录
-      //   docs: path.resolve(process.cwd(), "blogs"),
-      //   /**
-      //    * 指定 .vitepress 目录，默认会通过 glob 匹配到，
-      //    * 如果页面有多个 .vitepress 需要手动配置
-      //    */
-      //   root: path.resolve(process.cwd(), "blogs"),
-      // }),
-    ],
-  },
-
-  title: "CMONO.NET",
-  // 国际化相关
-  // locales:{
-  //   '/zh-CN/': {
-  //     lang: 'zh-CN',
-  //     title: 'Vuetom 主题',
-  //     description: '为 Vitepress 提供的一款主题'
-  //   },
-  //   '/en-US/': {
-  //     lang: 'en-US',
-  //     title: 'Vuetom Theme',
-  //     description: 'Theme For Vitepress'
-  //   }
+  // vite: {
+  //   plugins: [
+  //     Components({
+  //       resolvers: [
+  //         IconsResolver(),
+  //         AntDesignVueResolver({
+  //           importStyle: false, // css in js
+  //         }),
+  //       ],
+  //     }),
+  //     Icons({ autoInstall: true }),
+  //   ],
   // },
+  title: "CMONO.NET",
   description: "个人在线",
   appearance: false, // 默认 true，设为 false 则无法切换dark/light主题，可选 'dark' true false
   themeConfig: {
@@ -113,75 +69,11 @@ export default defineConfig({
       // vitepress 内置 search
       provider: "local",
     },
-
-    // algolia: { // algolia 搜索服务 与 内置 search 可二选一
-    //   appId: 'LPTNA0E8HM',
-    //   apiKey: '8f1b68dfab6b0320adef728a1c3a77cc',
-    //   indexName: 'themusecatcher_front-end'
-    // },
-
     footer: {
       message: "MIT Licensed",
       copyright: "Copyright © 2009-2023 CMONO.NET",
     },
-
-    // lastUpdated: 'Last Updated', // string | boolean
-
-    // locales: {
-    //   '/': {
-    //     selectText: 'Languages',
-    //     label: 'English',
-    //     ariaLabel: 'Languages',
-    //     editLinkText: 'Edit this page on GitHub',
-    //     serviceWorker: {
-    //       updatePopup: {
-    //         message: "New content is available.",
-    //         buttonText: "Refresh"
-    //       }
-    //     },
-    //     algolia: {},
-    //     nav: [
-    //       { text: 'Nested', link: '/nested/', ariaLabel: 'Nested' }
-    //     ],
-    //     sidebar: {
-    //       '/': [/* ... */],
-    //       '/nested/': [/* ... */]
-    //     }
-    //   },
-    //   '/zh/': {
-    //     // 多语言下拉菜单的标题
-    //     selectText: '选择语言',
-    //     // 该语言在下拉菜单中的标签
-    //     label: '简体中文',
-    //     // 编辑链接文字
-    //     editLinkText: '在 GitHub 上编辑此页',
-    //     // Service Worker 的配置
-    //     serviceWorker: {
-    //       updatePopup: {
-    //         message: "发现新内容可用.",
-    //         buttonText: "刷新"
-    //       }
-    //     },
-    //     // 当前 locale 的 algolia docsearch 选项
-    //     algolia: {},
-    //     nav: [
-    //       { text: '嵌套', link: '/zh/nested/' }
-    //     ],
-    //     sidebar: {
-    //       '/zh/': [/* ... */],
-    //       '/zh/nested/': [/* ... */]
-    //     }
-    //   }
-    // }
   },
-
-  // plugins: [
-  //   "@vuepress/active-header-links", // 页面滚动时自动激活侧边栏链接的插件
-  //   "@vuepress/back-to-top", // 返回顶部插件
-  //   "@vuepress/medium-zoom", // 图片预览插件
-  //   "@vuepress/nprogress", //页面顶部进度条
-  // ],
-
   locales: {
     root: {
       label: "中文",
@@ -244,20 +136,13 @@ export default defineConfig({
         "data-fancybox": "gallery",
       });
       md.use(timeline);
-
-      // md.use(demoBlockPlugin, {
-      //   cssPreprocessor: 'less',
-      //   customStyleTagName: 'style lang="less"', // style标签会解析为<style lang="less"><style>
-      //   scriptImports: ["import * as Antd from 'ant-design-vue'"],
-      //   scriptReplaces: [
-      //     { searchValue: /const ({ defineComponent as _defineComponent }) = Vue/g,
-      //       replaceValue: 'const { defineComponent: _defineComponent } = Vue'
+      // md
+      //   // the second parameter is html tag name
+      //   .use(container, 'sandbox', {
+      //     render (tokens, idx) {
+      //       return renderSandbox(tokens, idx, 'sandbox');
       //     },
-      //     { searchValue: /import ({.*}) from 'ant-design-vue'/g,
-      //       replaceValue: (s, s1) => `const ${s1} = Antd`
-      //     }
-      //   ]
-      // })
+      //   });
     },
   },
 
@@ -273,13 +158,4 @@ export default defineConfig({
       return url.toLowerCase().includes("ignore");
     },
   ],
-
-  // markdown: {
-  //   anchor: { permalink: false },
-  //   toc: { includeLevel: [1, 2] },
-  //   config: (md) => {
-  //     const { demoBlockPlugin } = require('vitepress-theme-demoblock')
-  //     md.use(demoBlockPlugin);
-  //   }
-  // }
 });

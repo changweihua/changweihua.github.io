@@ -11,10 +11,6 @@ import DefaultTheme from "vitepress/theme";
 import { h, watchEffect } from "vue";
 import { Feed } from "feed";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
-// import "@vitepress-demo-preview/component/dist/style.css";
-
-// import Antd from "ant-design-vue";
-// import 'ant-design-vue/dist/antd.variable.min.css';
 import "ant-design-vue/dist/reset.css";
 
 import comment from "../components/Comment.vue";
@@ -22,11 +18,7 @@ import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
-
 const hostname: string = "https://changweihua.github.io";
-
-// import 'uno.css'
-// import 'virtual:unocss-devtools'
 
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
@@ -43,15 +35,6 @@ import "vitepress-plugin-nprogress/lib/css/index.css";
 import "animate.css";
 
 import "@iconify/iconify";
-import { writeFileSync } from "fs";
-import path from "path";
-
-import { SitemapStream } from "sitemap";
-import { createWriteStream } from "node:fs";
-import { resolve } from "node:path";
-import { createRssFile } from "../utils/rss";
-
-// import Layout from './Layout.vue';
 
 const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 
@@ -63,7 +46,6 @@ import PlaceHolder from "../components/PlaceHolder.vue";
 
 export default {
   ...DefaultTheme,
-  // NotFound: () => 'custom 404',
   NotFound: NotFound, // <- this is a Vue 3 functional component
   Layout() {
     return h(DefaultTheme.Layout, null, {
@@ -255,78 +237,4 @@ export default {
         lastmod: pageData.lastUpdated,
       });
   },
-  // buildEnd: async ({ outDir }) => {
-  //   // hostname 为线上域名
-  //   const sitemap = new SitemapStream({ hostname: 'https://notes.fe-mm.com/' })
-  //   const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
-  //   sitemap.pipe(writeStream)
-  //   links.forEach((link) => sitemap.write(link))
-  //   sitemap.end()
-  //   await new Promise((r) => writeStream.on('finish', r))
-  // }
-  // buildEnd: createRssFile,
-  // buildEnd: async (config: SiteConfig) => {
-  //   const feed = new Feed({
-  //     title: '常伟华',
-  //     description: '伪前端+伪后端+伪需求=真全栈',
-  //     id: hostname,
-  //     link: hostname,
-  //     language: 'en',
-  //     image: '${hostname}.jpg',
-  //     favicon: `${hostname}/favicon.ico`,
-  //     copyright:
-  //       'Copyright (c) 2023-present, Paul Laros'
-  //   })
-
-  //   // You might need to adjust this if your Markdown files
-  //   // are located in a subfolder
-  //   const posts = await createContentLoader('../../blog/*.md', {
-  //     excerpt: true,
-  //     render: true
-  //   }).load()
-
-  //   posts.sort(
-  //     (a, b) =>
-  //       +new Date(b.frontmatter.date as string) -
-  //       +new Date(a.frontmatter.date as string)
-  //   )
-
-  //   for (const { url, excerpt, frontmatter, html } of posts) {
-  //     feed.addItem({
-  //       title: frontmatter.title,
-  //       id: `${hostname}${url}`,
-  //       link: `${hostname}${url}`,
-  //       description: excerpt,
-  //       content: html,
-  //       author: [
-  //         {
-  //           name: '常伟华',
-  //           email: 'changweihua@outlook.com',
-  //           link: 'https://changweihua.github.io'
-  //         }
-  //       ],
-  //       date: frontmatter.date
-  //     })
-  //   }
-
-  //   writeFileSync(path.join(config.outDir, 'feed.rss'), feed.rss2())
-
-  //   const { outDir } = config
-
-  //   const sitemap = new SitemapStream({ hostname: hostname})
-  //   const pages = await createContentLoader('../../blog/*.md').load()
-  //   const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
-
-  //   sitemap.pipe(writeStream)
-  //   pages.forEach((page) => sitemap.write(
-  //     page.url
-  //       // Strip `index.html` from URL
-  //       .replace(/index.html$/g, '')
-  //       // Optional: if Markdown files are located in a subfolder
-  //       .replace(/^\/docs/, '')
-  //     ))
-  //   sitemap.end()
-
-  //   await new Promise((r) => writeStream.on('finish', r))
-  // }
 };

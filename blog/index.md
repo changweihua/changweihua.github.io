@@ -7,6 +7,27 @@ sidebar: false
 	<category :categories="categories" />
 </div>
 
+::: sandbox
+```vue /src/App.vue [active]
+<template>
+  <div>{{ hello }}</div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const hello = ref('Hello World!');
+</script>
+```
+
+```js /src/main.js
+import App from './App.vue';
+import { createApp } from 'vue';
+
+createApp(App).mount('#app');
+```
+:::
+
 <script setup lang="ts">
 import category from '../components/category.vue';
 
