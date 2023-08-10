@@ -123,5 +123,5 @@
     "vitepress-plugin-nprogress": "^0.0.4",
     "vitepress-plugin-pagefind": "^0.2.6"
   },
-  "version": "0.0.15"
+  "version": "0.0.16"
 }

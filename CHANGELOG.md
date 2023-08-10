@@ -1,3 +1,10 @@
+## <small>0.0.16 (2023-08-10)</small>
+
+* feat(custom): 增加英文模块 ([7708e83](https://github.com/changweihua/changweihua.github.io/commit/7708e83))
+* fix(custom): 移除svg格式favicon ([e363097](https://github.com/changweihua/changweihua.github.io/commit/e363097))
+
+
+
 ## <small>0.0.11 (2023-08-03)</small>
 
 
