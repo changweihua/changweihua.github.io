@@ -1,3 +1,9 @@
+## <small>0.0.17 (2023-08-10)</small>
+
+* fix(custom): 修补打包失败 ([6d592a1](https://github.com/changweihua/changweihua.github.io/commit/6d592a1))
+
+
+
 ## <small>0.0.16 (2023-08-10)</small>
 
 * feat(custom): 增加英文模块 ([7708e83](https://github.com/changweihua/changweihua.github.io/commit/7708e83))
