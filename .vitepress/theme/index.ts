@@ -13,9 +13,6 @@ import { Feed } from "feed";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "ant-design-vue/dist/reset.css";
 
-import vitepressLifeProgress from 'vitepress-plugin-life-progress'
-import 'vitepress-plugin-life-progress/lib/css/index.css'
-
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import 'vitepress-plugin-back-to-top/dist/style.css'
 
@@ -39,8 +36,6 @@ import "./styles/tailwind.css";
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
-
-import MyMarkdownPreview from 'vite-plugin-markdown-preview'
 
 import "animate.css";
 
@@ -191,20 +186,11 @@ export default {
       //   }),
     });
   },
-  // enhanceApp(ctx) {
-  //   const { app } = ctx;
-  //   DefaultTheme.enhanceApp(ctx);
-  //   app.use(Antd);
-  //   app.component("demo-preview", AntDesignContainer);
-  //   // 用于过滤一些组件，不重要
-  //   // app.config.compilerOptions.isCustomElement = (tag) => tag.includes("r-");
-  // },
   enhanceApp: async (ctx) => {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     const { app, router, siteData, isServer } = ctx;
     DefaultTheme.enhanceApp(ctx);
-    // app.use(Antd);
     app.component("demo-preview", AntDesignContainer);
     app.component("header-profile", HeaderProfile);
     app.component("lottie-panel", LottiePanel);
@@ -212,15 +198,11 @@ export default {
 
     app.component('Sandbox', Sandbox);
 
-    app.component('CodePreview', MyMarkdownPreview)
-
     import("ant-design-vue").then((module) => {
       app.use(module);
     });
 
-    vitepressLifeProgress();
     vitepressNprogress(ctx);
-
     vitepressBackToTop({
       // default
       threshold:300

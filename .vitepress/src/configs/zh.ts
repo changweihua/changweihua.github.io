@@ -14,6 +14,10 @@ export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       prev: "上一页",
       next: "下一页",
     },
+    footer: {
+      message: "MIT Licensed",
+      copyright: "Copyright © 2009-2023 CMONO.NET",
+    },
     //   editLink: {
     //     pattern: '路径地址',
     //     text: '对本页提出修改建议',

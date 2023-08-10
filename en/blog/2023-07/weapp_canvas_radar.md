@@ -11,7 +11,7 @@ recommended: false
 
 如何搭建完整的评价体系呢?
 
-![雷达图预览图](../../public/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230717155014.jpg)
+![雷达图预览图](/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230717155014.jpg)
 
 ## WXML ##
 

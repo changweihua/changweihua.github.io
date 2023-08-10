@@ -119,4 +119,4 @@ export {
 
 ## 预览图 ##
 
-![党建 Lottie 动画](../../public/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230719092233.jpg)
+![党建 Lottie 动画](/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230719092233.jpg)

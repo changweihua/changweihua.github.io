@@ -1,18 +1,22 @@
 import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 
 //引入以上配置 是英文界面需要修改zh为en
-import {nav} from "../navs/en";
-import {sidebar} from "../sidebars/en";
+import { nav } from "../navs/en";
+import { sidebar } from "../sidebars/en";
 
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   themeConfig: {
     logo: "/logo.png",
-    lastUpdatedText: "上次更新",
-    returnToTopLabel: "返回顶部",
+    lastUpdatedText: "Last Updated",
+    returnToTopLabel: "TOP",
     // 文档页脚文本配置
     docFooter: {
-      prev: "上一页",
-      next: "下一页",
+      prev: "Prev",
+      next: "Next",
+    },
+    footer: {
+      message: "MIT Licensed",
+      copyright: "Copyright © 2009-2023 CMONO.NET",
     },
     //   editLink: {
     //     pattern: '路径地址',

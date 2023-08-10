@@ -114,4 +114,4 @@ git rebase --continue
 
 一个审查通过的大概例子： https://github.com/changweihua/un-fix.github.io/pull/1
 
-![审查通过示例](../../public/images/cmono-4c0cf778e497ab206289099ce51db5f.png)
+![审查通过示例](/images/cmono-4c0cf778e497ab206289099ce51db5f.png)
