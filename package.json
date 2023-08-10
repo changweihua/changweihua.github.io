@@ -9,9 +9,9 @@
     "commit": "git add . && cz",
     "release": "release-it",
     "lint": "eslint --fix --ext .ts,.js,.vue src test/unit",
-    "version": "conventional-changelog -p custom-config -i CHANGELOG.md -s -n ./changelog-option.js && git add CHANGELOG.md",
+    "version": "conventional-changelog -p custom-config -i CHANGELOG.md -s -n ./changelog-option.cjs && git add CHANGELOG.md",
     "postversion": "git push --tags",
-    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -n ./changelog-option.js && git add CHANGELOG.md",
+    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -n ./changelog-option.cjs && git add CHANGELOG.md",
     "prepare": "husky install"
   },
   "lint-staged": {
@@ -123,5 +123,5 @@
     "vitepress-plugin-nprogress": "^0.0.4",
     "vitepress-plugin-pagefind": "^0.2.6"
   },
-  "version": "0.0.14"
+  "version": "0.0.15"
 }
