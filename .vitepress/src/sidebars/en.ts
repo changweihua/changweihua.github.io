@@ -60,7 +60,7 @@ import { DefaultTheme } from "vitepress";
 // const dynamicSidebarConfig = generateSidebarConfig(docsPath);
 // console.log(docsPath);
 
-const sidebarConfig: DefaultTheme.Sidebar | undefined = {
+const sidebar: DefaultTheme.Sidebar | undefined = {
   articles: [
     {
       text: "Examples",
@@ -147,8 +147,8 @@ const sidebarConfig: DefaultTheme.Sidebar | undefined = {
   // ],
 };
 
-// export {
-//   dynamicSidebarConfig
-// }
+export {
+  sidebar
+}
 
-export default sidebarConfig;
+export default sidebar;

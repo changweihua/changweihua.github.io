@@ -6,7 +6,7 @@ commentabled: false
 recommended: false
 ---
 
-## 个人简介 ##
+## Summary ##
 
 > 现在参加了 unFIX 中文社区官网开发项目组。
 > 公司性质决定了业务范围窄，多为无锡机场定制项目。
@@ -16,6 +16,6 @@ recommended: false
 - Github: https://github.com/changweihua
 - QQ: 1134255297
 
-## 技能标签 ##
+## Skill Tags ##
 
 <a-tag>sssssssss</a-tag>

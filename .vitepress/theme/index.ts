@@ -13,7 +13,13 @@ import { Feed } from "feed";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "ant-design-vue/dist/reset.css";
 
-import comment from "../components/Comment.vue";
+import vitepressLifeProgress from 'vitepress-plugin-life-progress'
+import 'vitepress-plugin-life-progress/lib/css/index.css'
+
+import vitepressBackToTop from 'vitepress-plugin-back-to-top'
+import 'vitepress-plugin-back-to-top/dist/style.css'
+
+import DocAfter from "../components/DocAfter.vue";
 import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
@@ -23,6 +29,8 @@ const hostname: string = "https://changweihua.github.io";
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
+import { Sandbox } from 'vitepress-plugin-sandpack';
+
 // @ts-ignore
 import AnimationTitle from "../components/AnimationTitle.vue";
 
@@ -31,6 +39,8 @@ import "./styles/tailwind.css";
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
+
+import MyMarkdownPreview from 'vite-plugin-markdown-preview'
 
 import "animate.css";
 
@@ -100,7 +110,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "doc-before",
       //   }),
-      "doc-after": () => h(comment),
+      "doc-after": () => h(DocAfter),
       // "sidebar-nav-before": () =>
       //   h(PlaceHolder, {
       //     name: "sidebar-nav-before",
@@ -200,10 +210,21 @@ export default {
     app.component("lottie-panel", LottiePanel);
     app.component("code-group", CodeGroup);
 
+    app.component('Sandbox', Sandbox);
+
+    app.component('CodePreview', MyMarkdownPreview)
+
     import("ant-design-vue").then((module) => {
       app.use(module);
     });
+
+    vitepressLifeProgress();
     vitepressNprogress(ctx);
+
+    vitepressBackToTop({
+      // default
+      threshold:300
+    });
 
     useCodeGroups();
   },

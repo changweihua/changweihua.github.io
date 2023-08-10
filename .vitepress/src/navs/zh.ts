@@ -1,6 +1,6 @@
 import { DefaultTheme } from "vitepress";
 // activeMatch: "^/guide/",
-const navConfig: DefaultTheme.NavItem[] | undefined = [
+const nav: DefaultTheme.NavItem[] | undefined = [
   { text: "首页", link: "/", activeMatch: "^/$|^/index/" },
   {
     text: "博客",
@@ -37,4 +37,8 @@ const navConfig: DefaultTheme.NavItem[] | undefined = [
   },
 ];
 
-export default navConfig;
+export {
+  nav
+}
+
+export default nav;

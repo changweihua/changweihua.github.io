@@ -29,7 +29,7 @@ createApp(App).mount('#app');
 :::
 
 <script setup lang="ts">
-import category from '../components/category.vue';
+import category from '../../components/category.vue';
 
 // const modules = import.meta.glob('./*.md')
 
@@ -45,7 +45,7 @@ const categories: Array<{
     cover?: string
     coverAlt?: string
   }> = [{
-	  title: '参与 Github 开源项目，提交 PR',
+	  title: '11参与 Github 开源项目，提交 PR',
     link: '/blog/2023-08/cooperation_with_repository.html',
     decription: '学习如何为开源项目贡献自己的力量',
     icon: 'VueJS'

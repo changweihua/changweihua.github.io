@@ -18,9 +18,9 @@ hero:
     - theme: brand
       text: 我的简历
       link: /about/resume
-    # - theme: alt
-    #   text: 项目案例
-    #   link: /gallery/
+    - theme: alt
+      text: Github
+      link: https://github.com/changweihua
 
 features:
   - title: 阳光服务平台
