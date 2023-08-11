@@ -65,7 +65,7 @@
     }
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.0",
+    "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@iconify-json/carbon": "^1.1.19",
     "@iconify-json/logos": "^1.1.34",

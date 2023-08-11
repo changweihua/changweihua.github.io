@@ -23,88 +23,104 @@ tags: ["小程序"]
 ## 自定义导航栏 ###
 
 ```html
-<view class="navigation-container" style="{{'height: ' + navigationBarAndStatusBarHeight}}">
-    <!--空白来占位状态栏-->
+<view class="navigation-container" style="height: {{navigationBarAndStatusBarHeight}};--text-color: {{textcolor}};">
     <view style="{{'height: ' + statusBarHeight}}"></view>
-    <!--自定义导航栏-->
     <view class="navigation-bar" style="{{'height:' + navigationBarHeight}}">
-        <view bindtap="GoBack" data-navigationtype="{{navigationtype}}" data-navigationurl="{{navigationurl}}" class="navigation-buttons" style="{{'height:' + menuButtonHeight}}">
-            <t-icon color="#fff" name="chevron-left" size="56rpx" bind:click="handleBackClick" />
+        <view catch:tap="handleBackClick"  data-navigationtype="{{navigationtype}}" data-navigationurl="{{navigationurl}}" class="navigation-buttons" style="{{'height:' + menuButtonHeight}}">
+            <t-icon color="{{textcolor}}" name="chevron-left" size="56rpx" />
+            <!-- <t-divider t-class="icon-seperator" t-class-content="icon-seperator-content" layout="vertical" />
+            <t-icon color="{{textcolor}}" name="home" size="48rpx" /> -->
         </view>
         <view class="navigation-title" style="{{'line-height:' + navigationBarHeight}}">{{title}}</view>
     </view>
 </view>
-<!--空白占位，填充定位造成的空间飘逸-->
 <view style="{{'height: ' + navigationBarAndStatusBarHeight}}"></view>
 ```
 
 ```less
 .navigation-container {
+    --text-color: #fff;
+    --background-color: transparent;
+    --td-divider-content-color: var(--text-color);
     position: fixed;
     width: 100%;
     z-index: 9999999;
     top: 0;
     left: 0;
-    // background-color: #12507b;
-}
 
-.navigation-bar {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
+    .navigation-bar {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
 
-.navigation-buttons {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    box-sizing: border-box;
-    background-color: transparent;
-    width: 68rpx;
-}
+        .navigation-buttons {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            box-sizing: border-box;
+            background-color: transparent;
+            width: 68rpx;
 
-.statusbarClas {
-    background: transparent;
-    color: black;
-}
+            .icon-seperator {
+                height: initial;
+            }
+            .icon-seperator-content {
+                color: var(--text-color) !important;
+            }
+        }
 
-.nav-img {
-    width: 16rpx;
-}
-
-.navigation-title {
-    position: absolute;
-    left: 104px;
-    right: 104px;
-    text-align: center;
-    font-size: 32rpx;
-    color: #fff;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+        .navigation-title {
+            position: absolute;
+            left: 104px;
+            right: 104px;
+            text-align: center;
+            font-size: 32rpx;
+            color: var(--text-color);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
 }
 ```
 ```typescript
-type ICustomNavigationType = "navigateBack" | "navigateTo";
+type ICustomNavigationType = "navigateBack" | "navigateTo" | "switchTab";
+
+interface ICustomNavigationEvent {
+    currentTarget: {
+        dataset: {
+            navigationtype: ICustomNavigationType
+            navigationurl: string
+        }
+    }
+}
 
 Component({
     /**
      * 组件的属性列表
      */
     properties: {
-        title: { //导航栏标题
+        title: {
             type: String,
             value: ""
         },
-        navigationtype: { //跳转方式
+        navigationtype: {
             type: String,
             value: "navigateBack" as ICustomNavigationType
         },
-        navigationurl: { //URL
+        navigationurl: {
             type: String,
             value: "/pages/index/index"
-        }
+        },
+        textcolor: {
+            type: String,
+            value: "#fff"
+        },
+        backgroundcolor: {
+            type: String,
+            value: "transparent"
+        },
     },
 
     /**
@@ -127,7 +143,20 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        handleBackClick() {
+        handleBackClick(evt: ICustomNavigationEvent) {
+            const { navigationtype, navigationurl } = evt.currentTarget.dataset
+            if (navigationtype === "navigateTo") {
+                wx.navigateTo({
+                    url: navigationurl
+                })
+                return
+            }
+            if (navigationtype === "switchTab") {
+                wx.switchTab({
+                    url: navigationurl
+                })
+                return
+            }
             wx.navigateBack()
         }
     },
