@@ -4,6 +4,7 @@ outline: page
 
 # 微信公众平台 #
 
+- [原创小程序默认使用严格模式，导致无法使用caller,callee,arguments相关属性和方法](/blog/2023-08/custom_log_under_strict_mode.md)
 - [小程序文字左右来回滚动效果](/blog/2023-08/marquee_animation_cell.md)
 - [自定义小程序导航栏](/blog/2023-08/custom_miniapp_navigationbar.md)
 - [如何为小程序添加一个启动页](/blog/2023-07/weapp_splash.html)

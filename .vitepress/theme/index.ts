@@ -43,11 +43,11 @@ import "@iconify/iconify";
 
 const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 
-import { useCodeGroups } from "./composables/codeGroups";
-
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import PlaceHolder from "../components/PlaceHolder.vue";
+
+import{ Icon }from'@iconify/vue';
 
 export default {
   ...DefaultTheme,
@@ -195,6 +195,7 @@ export default {
     app.component("header-profile", HeaderProfile);
     app.component("lottie-panel", LottiePanel);
     app.component("code-group", CodeGroup);
+    app.component("my-icon", Icon);
 
     app.component('Sandbox', Sandbox);
 
@@ -207,8 +208,6 @@ export default {
       // default
       threshold:300
     });
-
-    useCodeGroups();
   },
   setup() {
     const { lang } = useData();

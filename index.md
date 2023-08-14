@@ -42,12 +42,15 @@ features:
       alt: 苏南硕放国际机场微信小程序
     details: 苏南硕放国际机场旅客服务平台前端载体。
     link: /gallery/airwux
+  - title: wx-navigation-bar
+    details: 小程序自定义导航栏NPM包。
+    link: https://www.npmjs.com/package/wx-navigation-bar
   - title: wx-lifecycle-interceptor
     details: 小程序生命周期方法拦截器NPM包。
     link: https://www.npmjs.com/package/wx-lifecycle-interceptor
-  - title: antdv-plus-table
-    details: Ant Design Vue Table 扩展NPM包。
-    link: https://www.npmjs.com/package/@changweihua/antdv-plus-table
+  # - title: antdv-plus-table
+  #   details: Ant Design Vue Table 扩展NPM包。
+  #   link: https://www.npmjs.com/package/@changweihua/antdv-plus-table
   - title: Nobilis.Epps
     details: 基于 Epplus 实现 Excel 的快速导入导出 NUGET包。
     link: https://www.nuget.org/packages/Nobilis.Epps

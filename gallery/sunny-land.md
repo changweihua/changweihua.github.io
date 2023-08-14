@@ -30,13 +30,20 @@ recommended: true
 
 ### 旅客端 ###
 
-<div class="w-full flex flex-col gap-8 justify-evenly items-center">
+<div class="w-full flex flex-col gap-8 justify-evenly items-center mb-4">
 
 ![Alt text](/images/cmono-air_passenger1.png)
 
 ![Alt text](/images/cmono-air_passenger2.png)
 
-其余内部系统，不适合展示。
+</div>
+
+<div class="grid grid-cols-2 gap-4">
+
+![Alt text](/images/cmono-d8ada751f7a9aadebbff2557c19cba0.jpg)
+
+![Alt text](/images/cmono-2f3236719cc6fdee8b1ae6f82d880d5.jpg)
 
 </div>
 
+其余内部系统，不适合展示。
