@@ -80,6 +80,8 @@
 
 ![Alt text](/images/cmono-e772a5c1213e4c9de7c8b69e376c980.png)
 
+> 特别说明： @font-face 中的 src 定义的 .ttf 文件必须存在，其余的格式将由工具自动生成。
+
 1. 创建 index.html，引入字体文件 `Alibaba.css`，并且在 `index.html` 中抄录所有文字。
 
 ```html
