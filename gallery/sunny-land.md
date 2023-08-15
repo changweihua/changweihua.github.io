@@ -38,6 +38,8 @@ recommended: true
 
 </div>
 
+### 宣传稿 ###
+
 <div class="grid grid-cols-2 gap-4">
 
 ![Alt text](/images/cmono-d8ada751f7a9aadebbff2557c19cba0.jpg)

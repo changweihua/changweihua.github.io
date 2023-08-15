@@ -16,7 +16,7 @@
 
 以及：
 
-```text
+```txt
 
   alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
   numbers: '0123456789'
@@ -62,7 +62,7 @@
 
 ```
 
-```text
+```txt
 
   -h, --help                    输出帮助信息
   -V, --version                 输出当前版本号

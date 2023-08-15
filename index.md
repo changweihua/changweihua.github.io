@@ -54,21 +54,21 @@ features:
   - title: Nobilis.Epps
     details: 基于 Epplus 实现 Excel 的快速导入导出 NUGET包。
     link: https://www.nuget.org/packages/Nobilis.Epps
-  # - title: 疫情防控平台
-  #   details: 疫情期间，为满足公司疫情防控需求，应运而生。
-  #   link: /gallery/epcp
-  # - title: 基于K8S平台的持续交付平台
-  #   details: 研发技改产物，促进开发流程规范化及自动化运维。
-  #   link: /gallery/giteaops
-  # - title: 苏南硕放国际机场安检效能分析系统
-  #   details: 助力安检效能分析
-  #   link: /gallery/SCPEA
-  # - title: 进出港旅客查询和无纸化系统项目
-  #   details: 为安检部门提供今日的所有起降航班乘机人数.
-  # - title: 扬州泰州国际机场客源地分析系统
-  #   details: 统计所有从扬泰机场出发或到达的所有旅客的城市来源分布.
-  # - title: 苏南硕放国际机场生产统计系统
-  #   details: 整个生产统计数据，与民航局交互.
+  - title: 疫情防控平台
+    details: 疫情期间，为满足公司疫情防控需求，开发上线本系统。
+    link: /gallery/epcp
+  - title: 基于K8S平台的持续交付平台
+    details: 研发技改产物，促进开发流程规范化及自动化运维。
+    link: /gallery/giteaops
+  - title: 苏南硕放国际机场安检效能分析系统
+    details: 助力安检效能分析
+    link: /gallery/SCPEA
+  - title: 进出港旅客查询和无纸化系统项目
+    details: 为安检部门提供今日的所有起降航班乘机人数.
+  - title: 扬州泰州国际机场客源地分析系统
+    details: 统计所有从扬泰机场出发或到达的旅客来源分布.
+  - title: 苏南硕放国际机场生产统计系统
+    details: 整个机场运行生产统计数据.
 
 head:
   - - meta

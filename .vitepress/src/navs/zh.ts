@@ -17,6 +17,7 @@ const nav: DefaultTheme.NavItem[] | undefined = [
     items: [
       {
         items: [
+          { text: "3D 开发", link: "/category/three3d.md" },
           { text: "工具&平台", link: "/category/tool.md" },
         ],
       },
@@ -37,8 +38,6 @@ const nav: DefaultTheme.NavItem[] | undefined = [
   },
 ];
 
-export {
-  nav
-}
+export { nav };
 
 export default nav;
