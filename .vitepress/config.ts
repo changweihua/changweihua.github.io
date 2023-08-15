@@ -20,4 +20,17 @@ export default defineConfig({
     root: { label: "简体中文", lang: "zh-CN", link: "/", ...zhConfig },
     en: { label: "English", lang: "en-US", link: "/en/", ...enConfig },
   },
+  titleTemplate: ':title - Custom Suffix',
+  sitemap: {
+    hostname: 'https://changweihua.github.io',
+    transformItems: (items) => {
+      // add new items or modify/filter existing items
+      items.push({
+        url: '/extra-page',
+        changefreq: 'monthly',
+        priority: 0.8
+      })
+      return items
+    }
+  }
 });

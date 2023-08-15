@@ -9,7 +9,7 @@
     "package.json": "tsconfig.*.json,README.md,*.cjs,*.js,*.json,*.config.ts,*.config.cjs,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig,CHANGELOG.md",
     "index.html": "index.html,*.css",
     "auto-imports.d.ts":"auto-imports.d.ts,components.d.ts",
-    "CONTRIBUTING.md":"*.md"
+    "index.md":"*.md"
   }
   //   // 拖拽行为
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
