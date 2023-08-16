@@ -68,11 +68,8 @@ features:
 
 head:
   - - meta
-    - name: description
-      content: hello
-  - - meta
     - name: keywords
-      content: super duper SEO
+      content: changweihua.github.io Home CMONO.NET
 ---
 
 <script setup lang="ts">

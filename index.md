@@ -72,11 +72,8 @@ features:
 
 head:
   - - meta
-    - name: description
-      content: hello
-  - - meta
     - name: keywords
-      content: super duper SEO
+      content: changweihua.github.io 首页 CMONO.NET
 ---
 
 <!-- <a-button>123</a-button>

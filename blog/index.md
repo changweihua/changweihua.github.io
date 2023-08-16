@@ -4,11 +4,8 @@ sidebar: false
 
 head:
   - - meta
-    - name: description
-      content: hello
-  - - meta
     - name: keywords
-      content: super duper SEO
+      content: changweihua.github.io 最新文章 CMONO.NET
 ---
 
 <div class="flex p-6 justify-center items-center">
