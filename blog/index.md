@@ -1,6 +1,14 @@
 ---
 layout: page
 sidebar: false
+
+head:
+  - - meta
+    - name: description
+      content: hello
+  - - meta
+    - name: keywords
+      content: super duper SEO
 ---
 
 <div class="flex p-6 justify-center items-center">
