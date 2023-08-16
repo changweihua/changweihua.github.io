@@ -1,6 +1,9 @@
 ---
 commentabled: true
-recommended: false 
+recommended: false
+title: 如何为小程序添加一个启动页
+description: 如何为小程序添加一个启动页
+cover: /logos/logo_wechat.png
 ---
 
 # 如何为小程序添加一个启动页 #

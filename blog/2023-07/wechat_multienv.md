@@ -1,6 +1,9 @@
 ---
 commentabled: true
-recommended: false 
+recommended: false
+title: 如何为小程序配置不同的运行环境
+description: 如何为小程序配置不同的运行环境
+cover: /logos/logo_wechat.png
 ---
 
 # 如何为小程序配置不同的运行环境 #

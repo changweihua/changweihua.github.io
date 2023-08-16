@@ -2,6 +2,9 @@
 commentabled: true
 recommended: true
 tags: ["dotnet", "nuget"]
+title: Clean Architecture 架构的洋葱模型
+description: Clean Architecture 架构的洋葱模型
+cover: /images/cmono-Siesta.png
 ---
 
 # 背景 #
@@ -10,9 +13,9 @@ Clean Architecture 架构的洋葱模型，封装了部分的代码，作为 Nug
 
 <div class="grid grid-cols-2 gap-4">
 
-![Lime Nuget](../../public/images/cmono-Lime.png)
+![Lime Nuget](/images/cmono-Lime.png)
 
-![Siesta Nuget](../../public/images/cmono-Siesta.png)
+![Siesta Nuget](/images/cmono-Siesta.png)
 
 </div>
 

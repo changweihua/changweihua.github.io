@@ -1,6 +1,8 @@
 ---
 commentabled: true
-recommended: false 
+recommended: false
+title: ASPNETCORE 程序与 Ant Design Vue 实现表格的 Column 的自动绑定
+description: ASPNETCORE 程序与 Ant Design Vue 实现表格的 Column 的自动绑定
 ---
 
 # ASPNETCORE 程序与 Ant Design Vue 实现表格的 Column 的自动绑定 #

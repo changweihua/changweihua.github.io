@@ -1,6 +1,8 @@
 ---
 commentabled: true
-recommended: false 
+recommended: false
+title: 基于 Flutter 和 Blazor 实现 Web 扫一扫
+description: 基于 Flutter 和 Blazor 实现 Web 扫一扫
 ---
 
 # 基于 Flutter 和 Blazor 实现 Web 扫一扫 #

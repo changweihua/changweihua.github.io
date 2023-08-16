@@ -2,6 +2,9 @@
 commentabled: true
 recommended: true
 tags: ["小程序"]
+title: 自定义小程序导航栏
+description: 自定义小程序导航栏
+cover: /images/cmono-Siesta.png
 ---
 
 # 自定义小程序导航栏 #

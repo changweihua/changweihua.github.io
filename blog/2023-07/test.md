@@ -1,6 +1,8 @@
 ---
 commentabled: true
-recommended: false 
+recommended: false
+title: CodeGroup 自定义全局组件
+description: CodeGroup 自定义全局组件
 ---
 
 # CodeGroup 自定义全局组件

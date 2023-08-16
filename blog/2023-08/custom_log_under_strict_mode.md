@@ -2,6 +2,9 @@
 commentabled: true
 recommended: true
 tags: ["wechat", "npm"]
+title: 严格模式下获取方法调用信息
+description: 严格模式下获取方法调用信息
+cover: /images/cmono-Siesta.png
 ---
 
 # 背景 #
@@ -12,9 +15,9 @@ tags: ["wechat", "npm"]
 
 <div class="grid grid-cols-2 gap-4">
 
-![Lime Nuget](../../public/images/cmono-Lime.png)
+![Lime Nuget](/images/cmono-Lime.png)
 
-![Siesta Nuget](../../public/images/cmono-Siesta.png)
+![Siesta Nuget](/images/cmono-Siesta.png)
 
 </div>
 

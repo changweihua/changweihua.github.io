@@ -20,7 +20,7 @@ export default defineConfig({
     root: { label: "简体中文", lang: "zh-CN", link: "/", ...zhConfig },
     en: { label: "English", lang: "en-US", link: "/en/", ...enConfig },
   },
-  titleTemplate: ':title - Custom Suffix',
+  // titleTemplate: ':title - Custom Suffix',
   sitemap: {
     hostname: 'https://changweihua.github.io',
     transformItems: (items) => {
