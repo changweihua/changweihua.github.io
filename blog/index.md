@@ -9,17 +9,12 @@ head:
       content: changweihua.github.io 最新文章 CMONO.NET
 ---
 
-<smooth-page>
   <div class="flex p-6 justify-center items-center">
     <category :categories="categories" />
   </div>
-</smooth-page>
 
 <script setup lang="ts">
-import { SmoothPage } from 'vue-smoothpage'
-
 import category from '../components/category.vue';
-// import 'vue-smoothpage/styles.css' // styles is required for correct displaying
 
 let categories: Array<{
     title: string;

@@ -119,13 +119,11 @@
     "line-reader": "^0.4.0",
     "lottie-web": "^5.12.2",
     "markdown-it-custom-attrs": "^1.0.2",
-    "pinia": "^2.1.6",
     "simple-icons": "^9.10.0",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-back-to-top": "^1.0.1",
     "vitepress-plugin-image-viewer": "^1.1.2",
-    "vitepress-plugin-nprogress": "^0.0.4",
-    "vue-smoothpage": "^0.0.46"
+    "vitepress-plugin-nprogress": "^0.0.4"
   },
   "version": "0.0.19"
 }

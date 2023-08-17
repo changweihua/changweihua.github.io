@@ -39,8 +39,6 @@ import "vitepress-plugin-nprogress/lib/css/index.css";
 
 import "animate.css";
 
-import { createPinia } from "pinia"; // pinia is required (may be would be deleted in future)
-
 import "@iconify/iconify";
 
 const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
@@ -204,12 +202,6 @@ export default {
     import("ant-design-vue").then((module) => {
       app.use(module);
     });
-
-    const pinia = createPinia();
-
-    app.use(pinia);
-    // import { SmoothPageSettings } from "vue-smoothpage/dist/SmoothPage/interfaces/settings.interface";
-    // app.use(SmoothPage, {});
 
     vitepressNprogress(ctx);
     vitepressBackToTop({
