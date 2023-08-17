@@ -4,11 +4,27 @@ layout: doc
 
 ## 项目简介 ##
 
-自研 CI/DI DEVOPS 平台。
+自研基于 Gitea + K8S 的 CI/DI 平台，以下称为 GiteaOps。
 
-## 工作职责 ##
+![Alt text](/images/cmono-93a13ef7ec982bab46d5792fb65c09c.png)
 
-- 承担项目经理和系统架构师角色，对业务需求进行梳理，编写功能需求说明书，绘制项目原型设计，与用户沟通技术选型和落地，推进项目准时按期交付。
+### 核心开发流程 ###
 
-## 预览图 ##
+![Alt text](/images/cmono-f6ca0d75611796a9288856c9dd1b435.png)
 
+## 主要架构 ##
+
+- Gitea
+- Jenkins
+- K8S
+- Docker
+- Sonar
+- K9S
+
+## 平台目标 ##
+
+![Alt text](/images/cmono-33cce413b8d4f0907bcffd423bc0607.png)
+
+## 平台规划 ##
+
+![Alt text](/images/cmono-ee4c9fdc54f0aa4a2850808ac5548df.png)

@@ -1,4 +1,20 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
+
+import gsap from "gsap";
+
+// get other plugins:
+import ScrollTrigger from "gsap/ScrollTrigger";
+import Flip from "gsap/Flip";
+// import Draggable from "gsap/Draggable";
+
+// or all tools are exported from the "all" file (excluding members-only plugins):
+// import { gsap, ScrollTrigger, Draggable, MotionPathPlugin } from "gsap/all";
+import { Draggable, MotionPathPlugin } from "gsap/all";
+
+// don't forget to register plugins
+gsap.registerPlugin(ScrollTrigger, Draggable, Flip, MotionPathPlugin);
+
 const props = defineProps({
   name: {
     type: String,
@@ -11,6 +27,21 @@ const props = defineProps({
     type: String,
   },
 });
+
+onMounted(() => {
+  const t = gsap.timeline({});
+  t.to(".char", {
+    opacity: 1,
+    delay: 0.1,
+    duration: 0.5,
+    y: 0,
+    ease: "Power4.inOut",
+    stagger: 0.1,
+    repeat: -1,
+    repeatDelay: 3,
+    yoyo: true,
+  });
+});
 </script>
 
 <template>
@@ -18,7 +49,14 @@ const props = defineProps({
     <span class="clip">{{ name }}</span>
   </h1>
   <p v-if="text" class="text">{{ text }}</p>
-  <p v-if="tagline" class="tagline">{{ tagline }}</p>
+  <!-- <p v-if="tagline" class="tagline">
+    {{ tagline }}
+  </p> -->
+  <div class="tagline">
+    <template v-for="tag in tagline">
+      <div class="char">{{ tag }}</div>
+    </template>
+  </div>
 </template>
 
 <style scoped>
@@ -84,6 +122,8 @@ const props = defineProps({
   font-weight: 500;
   white-space: pre-wrap;
   color: var(--vp-c-text-2);
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
 @media (min-width: 640px) {
   .tagline {
@@ -99,5 +139,22 @@ const props = defineProps({
     line-height: 36px;
     font-size: 24px;
   }
+}
+
+.content {
+  font-weight: bold;
+  font-size: 24px;
+  /* font-size: 5rem; */
+  position: relative;
+  /* color: white; */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.char {
+  display: inline-block;
+  margin-right: 6px;
+  opacity: 0.3;
+  transform: translateY(-150px);
+  transition: transform 0.3s ease-in-out;
 }
 </style>
