@@ -127,5 +127,5 @@
     "vitepress-plugin-nprogress": "^0.0.4",
     "vue-smoothpage": "^0.0.46"
   },
-  "version": "0.0.18"
+  "version": "0.0.19"
 }
