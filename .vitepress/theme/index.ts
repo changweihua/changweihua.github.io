@@ -13,8 +13,8 @@ import { Feed } from "feed";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "ant-design-vue/dist/reset.css";
 
-import vitepressBackToTop from 'vitepress-plugin-back-to-top'
-import 'vitepress-plugin-back-to-top/dist/style.css'
+import vitepressBackToTop from "vitepress-plugin-back-to-top";
+import "vitepress-plugin-back-to-top/dist/style.css";
 
 import DocAfter from "../components/DocAfter.vue";
 import recommend from "../components/Recommend.vue";
@@ -26,7 +26,7 @@ const hostname: string = "https://changweihua.github.io";
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
-import { Sandbox } from 'vitepress-plugin-sandpack';
+import { Sandbox } from "vitepress-plugin-sandpack";
 
 // @ts-ignore
 import AnimationTitle from "../components/AnimationTitle.vue";
@@ -39,6 +39,8 @@ import "vitepress-plugin-nprogress/lib/css/index.css";
 
 import "animate.css";
 
+import { createPinia } from "pinia"; // pinia is required (may be would be deleted in future)
+
 import "@iconify/iconify";
 
 const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
@@ -47,7 +49,7 @@ import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import PlaceHolder from "../components/PlaceHolder.vue";
 
-import{ Icon }from'@iconify/vue';
+import { Icon } from "@iconify/vue";
 
 export default {
   ...DefaultTheme,
@@ -197,16 +199,22 @@ export default {
     app.component("code-group", CodeGroup);
     app.component("my-icon", Icon);
 
-    app.component('Sandbox', Sandbox);
+    app.component("Sandbox", Sandbox);
 
     import("ant-design-vue").then((module) => {
       app.use(module);
     });
 
+    const pinia = createPinia();
+
+    app.use(pinia);
+    // import { SmoothPageSettings } from "vue-smoothpage/dist/SmoothPage/interfaces/settings.interface";
+    // app.use(SmoothPage, {});
+
     vitepressNprogress(ctx);
     vitepressBackToTop({
       // default
-      threshold:300
+      threshold: 300,
     });
   },
   setup() {

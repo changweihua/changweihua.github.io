@@ -47,7 +47,7 @@
 }
 
 .card {
-  background-color: var(--clr);
+  background-color: var(--vp-c-bg);
   position: relative;
 
   width: 320px;
@@ -77,7 +77,7 @@
   top: 50%;
   transform: translateY(-50%);
   border-radius: 50%;
-  border: 10px solid var(--clr);
+  border: 10px solid var(--vp-c-bg);
 }
 
 /* 调整img和video共有的父容器样式 */
@@ -138,7 +138,7 @@
   top: 106px;
   left: -1px;
   border-bottom-left-radius: 20px;
-  box-shadow: -6px 6px var(--clr);
+  box-shadow: -6px 6px var(--vp-c-bg);
 }
 
 /* 样式同before类似，注意定位样式 */
@@ -153,7 +153,7 @@
   bottom: -1px;
   left: 105px;
   border-bottom-left-radius: 20px;
-  box-shadow: -6px 6px var(--clr);
+  box-shadow: -6px 6px var(--vp-c-bg);
 }
 
 .card .box:nth-child(2) {
@@ -174,7 +174,7 @@
   bottom: 106px;
   left: -1px;
   border-top-left-radius: 20px;
-  box-shadow: -6px -6px var(--clr);
+  box-shadow: -6px -6px var(--vp-c-bg);
 }
 .card .box:nth-child(2)::after {
   content: "";
@@ -187,7 +187,7 @@
   top: -1px;
   left: 109px;
   border-top-left-radius: 20px;
-  box-shadow: -6px -6px var(--clr);
+  box-shadow: -6px -6px var(--vp-c-bg);
 }
 
 .card .box .content {
@@ -262,7 +262,7 @@
   text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
-  border: 5px solid var(--clr);
+  border: 5px solid var(--vp-c-bg);
   box-shadow: 0 0 0 10px #fff;
   transition: 0.5s;
 }

@@ -1,6 +1,7 @@
 ---
 layout: page
 sidebar: false
+pageClass: blog-index-page
 
 head:
   - - meta
@@ -8,35 +9,17 @@ head:
       content: changweihua.github.io 最新文章 CMONO.NET
 ---
 
-<div class="flex p-6 justify-center items-center">
-	<category :categories="categories" />
-</div>
-
-::: sandbox
-
-```vue /src/App.vue [active]
-<template>
-  <div>{{ hello }}</div>
-</template>
-
-<script setup>
-import { ref } from "vue";
-
-const hello = ref("Hello World!");
-</script>
-```
-
-```js /src/main.js
-import App from "./App.vue";
-import { createApp } from "vue";
-
-createApp(App).mount("#app");
-```
-
-:::
+<smooth-page>
+  <div class="flex p-6 justify-center items-center">
+    <category :categories="categories" />
+  </div>
+</smooth-page>
 
 <script setup lang="ts">
+import { SmoothPage } from 'vue-smoothpage'
+
 import category from '../components/category.vue';
+// import 'vue-smoothpage/styles.css' // styles is required for correct displaying
 
 let categories: Array<{
     title: string;
