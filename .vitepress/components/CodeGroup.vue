@@ -28,62 +28,62 @@
 
 <script>
 export default {
-  name: 'CodeGroup',
+  name: "CodeGroup",
   data() {
     return {
       codeTabs: [],
       activeCodeTabIndex: -1,
-    }
+    };
   },
   watch: {
     activeCodeTabIndex(index) {
-      this.activateCodeTab(index)
+      this.activateCodeTab(index);
     },
   },
   mounted() {
-    this.loadTabs()
+    this.loadTabs();
   },
   methods: {
     changeCodeTab(index) {
-      this.activeCodeTabIndex = index
+      this.activeCodeTabIndex = index;
     },
     async loadTabs() {
-      await this.$nextTick()
+      await this.$nextTick();
       this.codeTabs = (this.$slots.default() || [])
-        .filter(slot => Boolean(slot.props))
+        .filter((slot) => Boolean(slot.props))
         .map((slot, index) => {
-          if (slot.props.active === '') {
-            this.activeCodeTabIndex = index
+          if (slot.props.active === "") {
+            this.activeCodeTabIndex = index;
           }
 
           return {
             title: slot.props.title,
             elm: slot.el,
-          }
-        })
+          };
+        });
 
       if (this.activeCodeTabIndex === -1 && this.codeTabs.length > 0) {
-        this.activeCodeTabIndex = 0
+        this.activeCodeTabIndex = 0;
       }
 
-      this.activateCodeTab(0)
+      this.activateCodeTab(0);
     },
     activateCodeTab(index) {
-      this.codeTabs.forEach(tab => {
+      this.codeTabs.forEach((tab) => {
         if (tab.elm) {
-          tab.elm.style.display = 'none'
+          tab.elm.style.display = "none";
         }
-      })
+      });
 
       if (this.codeTabs[index]?.elm) {
-        this.codeTabs[index].elm.style.display = 'block'
+        this.codeTabs[index].elm.style.display = "block";
       }
     },
   },
-}
+};
 </script>
 
-<style lang="less" >
+<style lang="less" scoped>
 /* .theme-code-group {} */
 .theme-code-group__nav {
   margin-bottom: -35px;

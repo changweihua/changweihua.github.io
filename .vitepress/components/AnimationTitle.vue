@@ -38,7 +38,7 @@ onMounted(() => {
     ease: "Power4.inOut",
     stagger: 0.1,
     repeat: -1,
-    repeatDelay: 3,
+    repeatDelay: 2,
     yoyo: true,
   });
 });

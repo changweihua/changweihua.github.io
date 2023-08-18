@@ -5,7 +5,7 @@
     "docs:preview": "vitepress preview",
     "register:components": "vitepress-rc",
     "pkg:patch": "patch-package",
-    "deploy:win": "powershell bin/autoDeploy.bat",
+    "deploy:win": "powershell scripts/autoDeploy.bat",
     "commit": "git add . && cz",
     "release": "release-it",
     "lint": "eslint --fix --ext .ts,.js,.vue src test/unit",
@@ -100,9 +100,6 @@
     "vitepress-sidebar": "^1.10.1",
     "vue": "^3.3.4"
   },
-  "overrides": {
-    "@vitejs/plugin-vue": "4.2.3"
-  },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
     "@heroicons/vue": "^2.0.18",
@@ -110,7 +107,6 @@
     "@iminu/vitepress-plugin-auto-sidebar": "^1.0.3",
     "@types/bluebird": "^3.5.38",
     "@types/line-reader": "^0.0.34",
-    "@vitejs/plugin-vue": "4.2.3",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.1",
     "animate.css": "^4.1.1",

@@ -9,7 +9,7 @@
     "package.json": "tsconfig.*.json,*.cjs,*.js,*.json,*.config.ts,*.config.cjs,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig",
     "index.html": "index.html,*.css",
     "auto-imports.d.ts":"auto-imports.d.ts,components.d.ts",
-    "index.md":"index.md,CONTRIBUTING.md,CODE_OF_CONDUCT.md,README.md,CHANGELOG.md"
+    "index.md":"index.md,CONTRIBUTING.md,CODE_OF_CONDUCT.md,CONTRIBUTING.zh-CN.md,README.md,CHANGELOG.md,PRIVACY_POLICY.md,TERMS_OF_SERVICE.md"
   }
   //   // 拖拽行为
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
