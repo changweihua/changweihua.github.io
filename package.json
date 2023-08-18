@@ -125,5 +125,5 @@
     "vitepress-plugin-image-viewer": "^1.1.2",
     "vitepress-plugin-nprogress": "^0.0.4"
   },
-  "version": "0.0.19"
+  "version": "0.0.20"
 }
