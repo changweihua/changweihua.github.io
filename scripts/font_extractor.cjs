@@ -1,6 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-console.log(__dirname);
+
+const rootFolder = process.cwd();
+
+console.log(rootFolder);
 console.log("------------------start--------------------");
 let filesList = []; //文件路径列表
 let jsFilesList = []; //文件路径列表
@@ -39,22 +42,22 @@ function readFileList(dir, filesList = []) {
   return filesList;
 }
 
-readFileList(path.resolve(__dirname, "blog"), filesList);
-readFileList(path.resolve(__dirname, "category"), filesList);
-readFileList(path.resolve(__dirname, "gallery"), filesList);
-readFileList(path.resolve(__dirname, ".vitepress/components"), filesList);
-readFileList(path.resolve(__dirname, ".vitepress/src"), filesList);
-readFileList(path.resolve(__dirname, ".vitepress/theme"), filesList);
-readFileList(path.resolve(__dirname, ".vitepress/utils"), filesList);
-readFile(path.resolve(__dirname, "index.md"), filesList);
-readFile(path.resolve(__dirname, "CODE_OF_CONDUCT.md"), filesList);
-readFile(path.resolve(__dirname, "CONTRIBUTING.md"), filesList);
-readFile(path.resolve(__dirname, ".vitepress/config.ts"), filesList);
+readFileList(path.resolve(rootFolder, "blog"), filesList);
+readFileList(path.resolve(rootFolder, "category"), filesList);
+readFileList(path.resolve(rootFolder, "gallery"), filesList);
+readFileList(path.resolve(rootFolder, ".vitepress/components"), filesList);
+readFileList(path.resolve(rootFolder, ".vitepress/src"), filesList);
+readFileList(path.resolve(rootFolder, ".vitepress/theme"), filesList);
+readFileList(path.resolve(rootFolder, ".vitepress/utils"), filesList);
+readFile(path.resolve(rootFolder, "index.md"), filesList);
+readFile(path.resolve(rootFolder, "CODE_OF_CONDUCT.md"), filesList);
+readFile(path.resolve(rootFolder, "CONTRIBUTING.md"), filesList);
+readFile(path.resolve(rootFolder, ".vitepress/config.ts"), filesList);
 
-fs.stat(path.resolve(__dirname, "font/local"), function (err, statObj) {
+fs.stat(path.resolve(rootFolder, "font/local"), function (err, statObj) {
   // 判断local文件是否存在，如果不存在则创建，如果创建则直接处理json文件
   if (!statObj) {
-    fs.mkdir(path.resolve(__dirname, "font/local"), function (err) {
+    fs.mkdir(path.resolve(rootFolder, "font/local"), function (err) {
       writeFile(filesList, "index");
       writeFile(jsFilesList, "jsIndex");
     });
@@ -101,7 +104,7 @@ function writeFile(fileArr, fileName) {
   }, {});
   // 创建json文件
   fs.writeFile(
-    path.resolve(__dirname, `font/local/${fileName}.json`),
+    path.resolve(rootFolder, `font/local/${fileName}.json`),
     JSON.stringify(obj),
     "utf8",
     function (err) {
@@ -109,3 +112,41 @@ function writeFile(fileArr, fileName) {
     }
   );
 }
+
+console.log("提取字符到index.html");
+
+fs.readFile(
+  path.join(rootFolder, "font/index.template.html"),
+  "utf8",
+  function (err, data) {
+    if (err) throw err;
+    console.log(data);
+
+    let result = "";
+
+    const content1 = fs.readFileSync(
+      path.join(rootFolder, "font/local/index.json"),
+      "utf8"
+    );
+
+    result = data.replace(/__CONTENT1__/g, content1);
+
+    const content2 =  fs.readFileSync(
+      path.join(rootFolder, "font/local/jsIndex.json"),
+      "utf8"
+    );
+
+    result = result.replace(/__CONTENT2__/g, content2);
+
+    console.log(result);
+
+    fs.writeFile(
+      path.join(rootFolder, "font/index.html"),
+      result,
+      function (err) {
+        if (err) throw err;
+        console.log("File has been saved!");
+      }
+    );
+  }
+);

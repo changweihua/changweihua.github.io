@@ -3,8 +3,9 @@ const path = require("path");
 const lineReader = require("line-reader"),
   Promise = require("bluebird");
 
-console.log(__dirname);
-console.log(process.cwd());
+const rootFolder = process.cwd();
+console.log(rootFolder);
+
 console.log("------------------start--------------------");
 let fileList = []; //文件路径列表
 
@@ -161,7 +162,7 @@ function writeFile(fileArr, fileName) {
 
     // 创建json文件
     fs.writeFile(
-      path.resolve(process.cwd(), `public/jsons/${fileName}.json`),
+      path.resolve(rootFolder, `public/jsons/${fileName}.json`),
       JSON.stringify(blogs),
       "utf8",
       function (err) {
@@ -222,12 +223,12 @@ function writeFile(fileArr, fileName) {
   // }
 }
 
-readFileList(path.resolve(process.cwd(), "blog"), fileList);
+readFileList(path.resolve(rootFolder, "blog"), fileList);
 
-fs.stat(path.resolve(process.cwd(), "public/jsons"), function (err, statObj) {
+fs.stat(path.resolve(rootFolder, "public/jsons"), function (err, statObj) {
   // 判断local文件是否存在，如果不存在则创建，如果创建则直接处理json文件
   if (!statObj) {
-    fs.mkdir(path.resolve(process.cwd(), "public/jsons"), function (err) {
+    fs.mkdir(path.resolve(rootFolder, "public/jsons"), function (err) {
       writeFile(fileList.slice(0, 9), "lastest_blogs");
     });
   } else {

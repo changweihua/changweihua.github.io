@@ -6,6 +6,8 @@
     "register:components": "vitepress-rc",
     "pkg:patch": "patch-package",
     "deploy:win": "powershell scripts/autoDeploy.bat",
+    "font:prepare": "node scripts/font_extractor.cjs",
+    "font:build": "node scripts/font_reset.cjs && font-spider font/index.html --no-backup && node scripts/font_move.cjs",
     "commit": "git add . && cz",
     "release": "release-it",
     "lint": "eslint --fix --ext .ts,.js,.vue src test/unit",
