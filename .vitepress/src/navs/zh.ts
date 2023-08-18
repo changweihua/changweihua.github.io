@@ -8,6 +8,11 @@ const nav: DefaultTheme.NavItem[] | undefined = [
     activeMatch: "^/blog/",
   },
   {
+    text: "课程",
+    link: "/course/",
+    activeMatch: "^/course/",
+  },
+  {
     text: "关于",
     link: "/about/index.md",
     activeMatch: "^/about/",

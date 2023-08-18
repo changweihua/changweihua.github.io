@@ -8,6 +8,11 @@ const nav: DefaultTheme.NavItem[] | undefined = [
     activeMatch: "^/en/blog/",
   },
   {
+    text: "Courses",
+    link: "/en/course/",
+    activeMatch: "^/en/course/",
+  },
+  {
     text: "About",
     link: "/en/about/index.md",
     activeMatch: "^/en/about/",
