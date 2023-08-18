@@ -49,3 +49,35 @@ body {
     margin-top: 4px;
   }
 }
+
+.index-page-class {
+  body {
+    cursor: none;
+    background-color: #fff;
+  }
+  #g-pointer-1,
+  #g-pointer-2 {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background: #999;
+    border-radius: 50%;
+    background-color: #fff;
+    mix-blend-mode: exclusion;
+    z-index: 1;
+  }
+  #g-pointer-2 {
+    width: 42px;
+    height: 42px;
+    background: #222;
+    transition: 0.2s ease-out;
+  }
+  // background-color: red;
+}
+
+.blog-index-page {
+  background-color: var(--clr);
+}

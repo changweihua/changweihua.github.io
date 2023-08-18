@@ -16,6 +16,12 @@ export const head: HeadConfig[] = [
       src: "/fancybox.umd.js",
     },
   ],
+  [
+    "script",
+    {
+      src: "/cursor.js",
+    },
+  ],
   // 设置 描述 和 关键词
   ["meta", { name: "keywords", content: "changweihua 常伟华 vitepress cmono.net changweihua.github.io 个人网站" }],
   [

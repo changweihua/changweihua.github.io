@@ -1,7 +1,7 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
-pageClass: custom-page-class
+pageClass: index-page-class
 title: CMONO.NET
 titleTemplate: 首页
 
@@ -115,6 +115,9 @@ Technical testing 2015-09-01
 </div>
 </div> -->
 
+<div id="g-pointer-1"></div>
+<div id="g-pointer-2"></div>
+
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { fetchVersion } from './.vitepress/utils/fetchVersion'
@@ -179,3 +182,4 @@ const members = [
 ### Title <Badge type="tip" text="^1.9.0" />
 ### Title <Badge type="warning" text="beta" />
 ### Title <Badge type="danger" text="caution" /> -->
+
