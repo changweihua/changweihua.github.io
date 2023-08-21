@@ -6,9 +6,10 @@ import {
   createContentLoader,
   inBrowser,
   useData,
+  useRoute,
 } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, watchEffect } from "vue";
+import { h, nextTick, onMounted, watch, watchEffect } from "vue";
 import { Feed } from "feed";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "ant-design-vue/dist/reset.css";
@@ -22,6 +23,8 @@ import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 const hostname: string = "https://changweihua.github.io";
+
+import "unocss"
 
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
@@ -48,6 +51,7 @@ import CodeGroup from "../components/CodeGroup.vue";
 import PlaceHolder from "../components/PlaceHolder.vue";
 
 import { Icon } from "@iconify/vue";
+import mediumZoom from "medium-zoom";
 
 export default {
   ...DefaultTheme,
@@ -216,6 +220,18 @@ export default {
         document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2024 00:00:00 UTC; path=/`;
       }
     });
+    const route = useRoute();
+    const initZoom = () => {
+      mediumZoom("[data-zoomable]", { background: "var(--clr)" }); // Should there be a new?
+      // new mediumZoom('.main img', { background: 'var(--vp-c-bg)' });
+    };
+    onMounted(() => {
+      initZoom();
+    });
+    watch(
+      () => route.path,
+      () => nextTick(() => initZoom())
+    );
   },
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];

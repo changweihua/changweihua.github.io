@@ -67,13 +67,14 @@ body {
     border-radius: 50%;
     background-color: #fff;
     mix-blend-mode: exclusion;
-    z-index: 1;
+    z-index: 9999;
   }
   #g-pointer-2 {
     width: 42px;
     height: 42px;
     background: #222;
     transition: 0.2s ease-out;
+    z-index: 9999;
   }
   // background-color: red;
 }
@@ -81,3 +82,18 @@ body {
 .blog-index-page {
   background-color: var(--clr);
 }
+
+
+.medium-zoom-overlay {
+  z-index: 9;
+}
+
+.medium-zoom-image {
+  z-index: 10;
+}
+
+
+// .medium-zoom-overlay,
+// .medium-zoom-image--opened {
+//   z-index: 999;
+// }

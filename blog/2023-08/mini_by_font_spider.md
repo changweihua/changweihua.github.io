@@ -21,7 +21,7 @@ cover: /images/cmono-12587d16b1cbfa8c14815ff017bcefa.png
 
 常用汉字介绍：https://github.com/kaienfr/Font/tree/master/learnfiles
 
-![Alt text](/images/cmono-12587d16b1cbfa8c14815ff017bcefa.png)
+![Alt text](/images/cmono-12587d16b1cbfa8c14815ff017bcefa.png){data-zoomable}
 
 以及：
 
@@ -87,7 +87,7 @@ cover: /images/cmono-12587d16b1cbfa8c14815ff017bcefa.png
 
 ### 检索文字并进行压缩 ###
 
-![Alt text](/images/cmono-e772a5c1213e4c9de7c8b69e376c980.png)
+![Alt text](/images/cmono-e772a5c1213e4c9de7c8b69e376c980.png){data-zoomable}
 
 > 特别说明： @font-face 中的 src 定义的 .ttf 文件必须存在，其余的格式将由工具自动生成。
 
@@ -212,17 +212,17 @@ html,body{
 
 3. 在当前目录运行 `font-spider .\font\index.html` 这时候就会在相应的字体文件中生成压缩后的文件。且源文件(ttf格式)会放到新生成的.font-spider文件夹中，如下图
 
-![Alt text](/images/cmono-c7f2a9136fc9849331ea143e2fe1f38.png)　　
+![Alt text](/images/cmono-c7f2a9136fc9849331ea143e2fe1f38.png){data-zoomable}　
 
 4. 现在可以看见字体大小已经从原来8多M压缩到了200Kb左右。
 
 原：
 
-![Alt text](/images/cmono-b89118bc3d35017751318e8bb06c7c0.png)
+![Alt text](/images/cmono-b89118bc3d35017751318e8bb06c7c0.png){data-zoomable}
 
 压缩后：
 
-![Alt text](../../public/images/cmono-eedba2e720ace149d3c390bda5b301b.png)
+![Alt text](../../public/images/cmono-eedba2e720ace149d3c390bda5b301b.png){data-zoomable}
 　　
 
 到现在字体文件压缩就算已经全部搞定，可以检测一下项目看是否生效。

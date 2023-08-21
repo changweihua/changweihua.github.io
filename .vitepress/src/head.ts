@@ -3,27 +3,37 @@ import type { HeadConfig } from "vitepress";
 export const head: HeadConfig[] = [
   ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
   ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-  [
-    "link",
-    {
-      rel: "stylesheet",
-      href: "/fancybox.css",
-    },
-  ],
-  [
-    "script",
-    {
-      src: "/fancybox.umd.js",
-    },
-  ],
+  // [
+  //   "link",
+  //   {
+  //     rel: "stylesheet",
+  //     href: "/fancybox.css",
+  //   },
+  // ],
+  // [
+  //   "script",
+  //   {
+  //     src: "/fancybox.umd.js",
+  //   },
+  // ],
   [
     "script",
     {
       src: "/cursor.js",
+      "data-site": "https://changweihua.github.io",
+      "data-spa": "auto",
+      defer: "",
     },
   ],
   // 设置 描述 和 关键词
-  ["meta", { name: "keywords", content: "changweihua 常伟华 vitepress cmono.net changweihua.github.io 个人网站" }],
+  [
+    "meta",
+    {
+      name: "keywords",
+      content:
+        "changweihua 常伟华 vitepress cmono.net changweihua.github.io 个人网站",
+    },
+  ],
   [
     "meta",
     {
