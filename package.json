@@ -66,10 +66,13 @@
       }
     }
   },
+  "overrides": {
+
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
-    "@iconify-json/carbon": "^1.1.19",
+    "@iconify-json/carbon": "^1.1.20",
     "@iconify-json/logos": "^1.1.34",
     "@iconify/vue": "^4.1.1",
     "@release-it/conventional-changelog": "^7.0.0",
@@ -106,7 +109,6 @@
     "@faker-js/faker": "^8.0.2",
     "@heroicons/vue": "^2.0.18",
     "@iconify/iconify": "^3.1.1",
-    "@iminu/vitepress-plugin-auto-sidebar": "^1.0.3",
     "@types/bluebird": "^3.5.38",
     "@types/line-reader": "^0.0.34",
     "@vitepress-demo-preview/component": "^2.3.2",
@@ -117,10 +119,10 @@
     "console-ban": "^5.0.0",
     "cp-text": "^1.0.2",
     "crypto": "^1.0.1",
-    "echarts": "^5.4.3",
     "gsap": "^3.12.2",
     "l-watermark": "^2.1.2",
     "line-reader": "^0.4.0",
+    "locate-path": "^7.2.0",
     "lottie-web": "^5.12.2",
     "markdown-it-custom-attrs": "^1.0.2",
     "medium-zoom": "^1.0.8",

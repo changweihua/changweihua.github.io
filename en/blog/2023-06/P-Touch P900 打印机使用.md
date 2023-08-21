@@ -263,8 +263,3 @@ const bodystyle = {
 
 <img class="w-full rounded aspect-radio" src="/images/cmono-20230620144912.png" data-fancybox="gallery" />
 
-<script setup lang="ts">
-import useWatermark from '@/utils/watermark'
-
-useWatermark()
-</script>
