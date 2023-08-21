@@ -6,7 +6,7 @@ layout: doc
 
 无锡机场安检效能分析系统。
 
-![Alt text](/images/cmono-2d88890a1a7de5575e7f37686e24f3f.png)
+![Alt text](/images/cmono-2d88890a1a7de5575e7f37686e24f3f.png){data-zoomable}
 
 ## 工作职责 ##
 

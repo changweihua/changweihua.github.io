@@ -9,7 +9,7 @@ recommended: false
 
 使用微信开发者工具，创建项目，选择 typescript + less 模板。
 
-![项目创建](/images/cmono-20230704135551.png)
+![项目创建](/images/cmono-20230704135551.png){data-zoomable}
 
 ## 引入全局 NPM 包 ##
 

@@ -6,7 +6,7 @@ tags: ["小程序", "轮播"]
 
 # 左右轮播显示文字
 
-![效果图](/images/cmono-GIF-2023-8-10-9-24-24.gif)
+![效果图](/images/cmono-GIF-2023-8-10-9-24-24.gif){data-zoomable}
 
 ## 代码
 

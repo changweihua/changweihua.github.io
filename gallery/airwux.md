@@ -18,11 +18,11 @@ recommended: true
 
 <div class="grid grid-cols-3 gap-4">
 
-![Alt text](../public/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230718132421.jpg)
+![Alt text](../public/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230718132421.jpg){data-zoomable}
 
-![Alt text](../public/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230718132437.jpg)
+![Alt text](../public/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230718132437.jpg){data-zoomable}
 
-![Alt text](../public/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230718132500.jpg)
+![Alt text](../public/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230718132500.jpg){data-zoomable}
 
 </div>
 
@@ -40,6 +40,6 @@ recommended: true
 
 <video src="/videos/0253b0bc6f0b5f543f6f394fbde8e1ef.mp4" muted autoplay loop />
 
-![Alt text](/images/cmono-510f8e701be8ff979daa520e710e30a.jpg)
+![Alt text](/images/cmono-510f8e701be8ff979daa520e710e30a.jpg){data-zoomable}
 
 </div>

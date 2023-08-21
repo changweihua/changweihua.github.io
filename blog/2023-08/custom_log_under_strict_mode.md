@@ -15,9 +15,9 @@ cover: /images/cmono-Siesta.png
 
 <div class="grid grid-cols-2 gap-4">
 
-![Lime Nuget](/images/cmono-Lime.png)
+![Lime Nuget](/images/cmono-Lime.png){data-zoomable}
 
-![Siesta Nuget](/images/cmono-Siesta.png)
+![Siesta Nuget](/images/cmono-Siesta.png){data-zoomable}
 
 </div>
 

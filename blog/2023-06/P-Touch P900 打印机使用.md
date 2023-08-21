@@ -29,7 +29,7 @@ Windows 11, Windows 10 (32-bit), Windows 10 (64-bit), Windows 8.1 (32-bit), Wind
 
 [b-PAC SDK Ver.3.1](https://support.brother.com/g/s/es/dev/en/bpac/download/index.html?c=eu_ot&lang=zh-cn&navi=offall&comple=on&redirect=on)
 
-![SDK 列表](/images/cmono-20230620090715.png)
+![SDK 列表](/images/cmono-20230620090715.png){data-zoomable}
 
 > 需根据机器操作系统内容，下载对应位数的SDK安装程序，否则会提示版本不兼容。
 

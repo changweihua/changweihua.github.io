@@ -64,7 +64,7 @@ docker cp svn-server:/etc/subversion /var/lib/svn
 
 <br />
 
-![Docker Container](/images/20201125145933.png)
+![Docker Container](/images/20201125145933.png){data-zoomable}
 
 ### 停止并移除容器 ###
 
@@ -148,7 +148,7 @@ docker logs svn-server
 
 >
 
-![Docker Container](/images/20201125145921.png)
+![Docker Container](/images/20201125145921.png){data-zoomable}
 
 点击保存后，会默认创建admin/admin用户，进入界面后可修改admin的默认密码。
 
@@ -164,7 +164,7 @@ docker exec -it svn-server sh
 
 **导出原服务器备份**
 
-![Docker Container](/images/20201209163420.png)
+![Docker Container](/images/20201209163420.png){data-zoomable}
 
 ```bash
 
@@ -173,7 +173,7 @@ docker exec -it svn-server sh
 
 ```
 
-![Docker Container](/images/20201127131743.png)
+![Docker Container](/images/20201127131743.png){data-zoomable}
 
 ### 总结 ###
 

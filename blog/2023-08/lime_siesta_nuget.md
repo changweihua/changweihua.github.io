@@ -13,9 +13,9 @@ Clean Architecture 架构的洋葱模型，封装了部分的代码，作为 Nug
 
 <div class="grid grid-cols-2 gap-4">
 
-![Lime Nuget](/images/cmono-Lime.png)
+![Lime Nuget](/images/cmono-Lime.png){data-zoomable}
 
-![Siesta Nuget](/images/cmono-Siesta.png)
+![Siesta Nuget](/images/cmono-Siesta.png){data-zoomable}
 
 </div>
 

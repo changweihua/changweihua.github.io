@@ -13,13 +13,13 @@ recommended: true
 
 >
 
-![服务对象](../public/images/cmono-f6b17711e73e91ff42cbe13b77cfcf7.png)
+![服务对象](../public/images/cmono-f6b17711e73e91ff42cbe13b77cfcf7.png){data-zoomable}
 
 ### 整体流程 ###
 
 >
 
-![整体流程](../public/images/cmono-453d84abb453080a9b5787ecbc50c1d.png)
+![整体流程](../public/images/cmono-453d84abb453080a9b5787ecbc50c1d.png){data-zoomable}
 
 ## 工作职责 ##
 
@@ -32,9 +32,9 @@ recommended: true
 
 <div class="w-full flex flex-col gap-8 justify-evenly items-center mb-4">
 
-![Alt text](/images/cmono-air_passenger1.png)
+![Alt text](/images/cmono-air_passenger1.png){data-zoomable}
 
-![Alt text](/images/cmono-air_passenger2.png)
+![Alt text](/images/cmono-air_passenger2.png){data-zoomable}
 
 </div>
 
@@ -42,9 +42,9 @@ recommended: true
 
 <div class="grid grid-cols-2 gap-4">
 
-![Alt text](/images/cmono-d8ada751f7a9aadebbff2557c19cba0.jpg)
+![Alt text](/images/cmono-d8ada751f7a9aadebbff2557c19cba0.jpg){data-zoomable}
 
-![Alt text](/images/cmono-2f3236719cc6fdee8b1ae6f82d880d5.jpg)
+![Alt text](/images/cmono-2f3236719cc6fdee8b1ae6f82d880d5.jpg){data-zoomable}
 
 </div>
 
