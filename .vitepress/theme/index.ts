@@ -25,7 +25,7 @@ import LottiePanel from "../components/LottiePanel.vue";
 const hostname: string = "https://changweihua.github.io";
 
 import "unocss"
-
+// import ConsoleBan from 'console-ban'
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
@@ -227,6 +227,12 @@ export default {
     };
     onMounted(() => {
       initZoom();
+      // ConsoleBan.init({
+      //   // Redirect to /404 relative url
+      //   redirect: '/404',
+      //   // Redirect to absolute url
+      //   // redirect: 'http://domain.com/path'
+      // })
     });
     watch(
       () => route.path,
