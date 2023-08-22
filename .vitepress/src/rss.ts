@@ -21,7 +21,6 @@ const RSS: RSSOptions = {
       link: 'https://changweihua.github.io'
     }
   ],
-  url: 'https://changweihua.github.io',
   filename: 'feed',
   log: true,
   ignoreHome: true,
