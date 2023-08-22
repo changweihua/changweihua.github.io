@@ -32,6 +32,9 @@ import 'vitepress-plugin-life-progress/lib/css/index.css'
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
+import { VuePreview } from 'vite-plugin-vue-preview'
+import 'vite-plugin-vue-preview/style.css'
+
 import { Sandbox } from "vitepress-plugin-sandpack";
 
 // @ts-ignore
@@ -203,6 +206,8 @@ export default {
     app.component("lottie-panel", LottiePanel);
     app.component("code-group", CodeGroup);
     app.component("my-icon", Icon);
+
+    app.component('VuePreview', VuePreview)
 
     app.component("Sandbox", Sandbox);
 

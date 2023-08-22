@@ -4,7 +4,7 @@ recommended: true
 tags: ["dotnet", "nuget"]
 title: Clean Architecture 架构的洋葱模型
 description: Clean Architecture 架构的洋葱模型
-cover: /images/cmono-Siesta.png
+poster: /images/cmono-Siesta.png
 ---
 
 # 背景 #

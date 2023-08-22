@@ -154,7 +154,7 @@ function writeFile(fileArr, fileName) {
       blogs.push({
         blogName: map["title"] || pathName,
         blogDescription: map["description"] || pathName,
-        blogCover: map["cover"] || pathName,
+        blogPoster: map["poster"] || pathName,
         fileName: pathName,
         filePath: `/${filePath}`,
       });

@@ -3,7 +3,7 @@ commentabled: true
 recommended: false
 title: 给小程序添加一个评分分值分布雷达图，完善评价体系
 description: 给小程序添加一个评分分值分布雷达图，完善评价体系
-cover: /images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230717155014.jpg
+poster: /images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230717155014.jpg
 ---
 
 # 给小程序添加一个评分分值分布雷达图，完善评价体系 #

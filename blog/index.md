@@ -21,8 +21,8 @@ let categories: Array<{
     link: string;
     decription?: string;
     icon: string;
-    cover?: string
-    coverAlt?: string
+    poster?: string
+    posterAlt?: string
   }> = [{
 	  title: '参与 Github 开源项目，提交 PR',
     link: '/blog/2023-08/cooperation_with_repository.html',
@@ -31,11 +31,11 @@ let categories: Array<{
   },{
 	  title: '快速搭建微信小程序原生开发框架',
     link: '/blog/2023-07/wechat_quickstart.html',
-    cover: '/logos/logo_wechat.png'
+    poster: '/logos/logo_wechat.png'
   },{
 	  title: '如何为小程序配置不同的运行环境',
     link: '/blog/2023-07/wechat_multienv.html',
-    cover: '/logos/logo_wechat.png'
+    poster: '/logos/logo_wechat.png'
   },{
 	  title: '我常用的 Visual Code 插件，助力开发起飞',
     link: '搭建基于 Vite4 + Ant Design Vue 3.0 管理系统',
@@ -45,7 +45,7 @@ let categories: Array<{
     link: '/blog/2023-06/P-Touch P900 打印机使用.html',
     decription: '基于 VueJS + .NET + 微信小程序 开发，实现旅客服务二维码打印',
     icon: 'VueJS',
-    cover: '/images/cmono-20230620145254.jpg'
+    poster: '/images/cmono-20230620145254.jpg'
   },{
 	  title: '使用 SkiaSharp 实现图片水印',
     link: '/blog/2023-05/skiashap_watermark.html',
@@ -55,12 +55,12 @@ let categories: Array<{
 	  title: '给小程序添加一个评分分值分布雷达图，完善评价体系',
     link: '/blog/2023-07/weapp_canvas_radar.html',
     icon: 'VueJS',
-    cover: '/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230717155014.jpg'
+    poster: '/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230717155014.jpg'
   },{
 	  title: '过于单调的小程序页面，靠 Lottie 动画拯救',
     link: '/blog/2023-07/lottie_in_weapp.html',
     icon: 'VueJS',
-    cover: '/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230719092233.jpg'
+    poster: '/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230719092233.jpg'
   },{
 	  title: '如何为小程序添加一个启动页',
     link: '/blog/2023-07/weapp_splash.html',

@@ -6,6 +6,7 @@ import Components from "unplugin-vue-components/vite";
 import AntdvResolver from "antdv-component-resolver";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import { fileURLToPath } from "node:url";
+import { vuePreviewPlugin } from "vite-plugin-vue-preview";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,6 +21,26 @@ export default defineConfig({
       ],
     }),
     Icons({ autoInstall: true }),
+    vuePreviewPlugin({
+      props: {
+        previewBodyStyle: {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        },
+        previewAppStyle: {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          fontFamily: 'JetBrainsMono, AlibabaPuHuiTi'
+        },
+        importMap: {
+          "@vue/shared":
+            "https://unpkg.com/@vue/shared@latest/dist/shared.esm-bundler.js",
+        },
+      },
+    }),
   ],
   resolve: {
     alias: {
@@ -27,9 +48,6 @@ export default defineConfig({
     },
   },
   ssr: {
-    noExternal: [
-      "vitepress-plugin-nprogress",
-      "local-pkg"
-    ],
+    noExternal: ["vitepress-plugin-nprogress", "local-pkg"],
   },
 });

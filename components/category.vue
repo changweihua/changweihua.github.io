@@ -13,7 +13,7 @@
           <div class="md:flex-shrink-0 h-48 flex items-center align-middle">
             <img
               class="h-full w-full object-cover md:w-40"
-              :src="`${item.cover || '/logo.png'}`"
+              :src="`${item.poster || '/logo.png'}`"
               alt="Man looking at item at a store"
             />
             <!-- <Icon v-else icon="logos:active-campaign" /> -->
@@ -70,7 +70,7 @@ onMounted(() => {
           title: c["blogName"],
           link: c["filePath"],
           description: c["blogDescription"],
-          cover: c["blogCover"],
+          poster: c["blogPoster"],
           // icon: "VueJS",
         };
       });

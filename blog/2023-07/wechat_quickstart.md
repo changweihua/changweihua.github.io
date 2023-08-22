@@ -3,7 +3,7 @@ commentabled: true
 recommended: false
 title: 快速搭建微信小程序原生开发框架
 description: 快速搭建微信小程序原生开发框架
-cover: /images/cmono-20230704135551.png
+poster: /images/cmono-20230704135551.png
 ---
 
 # 快速搭建微信小程序原生开发框架 #

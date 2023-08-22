@@ -5,7 +5,7 @@ pageClass: blog-page
 tags: []
 title: 使用字蛛font-spider压缩字体文件
 description: 使用字蛛font-spider压缩字体文件
-cover: /images/cmono-12587d16b1cbfa8c14815ff017bcefa.png
+poster: /images/cmono-12587d16b1cbfa8c14815ff017bcefa.png
 ---
 
 # 使用字蛛font-spider压缩字体文件 #

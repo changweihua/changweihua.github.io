@@ -4,7 +4,7 @@ recommended: true
 tags: ["小程序", "轮播"]
 title: 小程序左右轮播显示文字
 description: 小程序左右轮播显示文字
-cover: /images/cmono-GIF-2023-8-10-9-24-24.gif
+poster: /images/cmono-GIF-2023-8-10-9-24-24.gif
 ---
 
 # 左右轮播显示文字 #
@@ -86,8 +86,14 @@ cover: /images/cmono-GIF-2023-8-10-9-24-24.gif
 }
 ```
 
-::: CodeView
+<!-- ::: CodeView
 ```vue
 <template>我是 vue 模板</template>
 ```
-:::
+::: -->
+
+```vue preview
+<template>
+  <h1>Demo: vite-plugin-vue-preview</h1>
+</template>
+```
