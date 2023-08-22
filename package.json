@@ -98,6 +98,7 @@
     "unplugin-icons": "^0.16.5",
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.4.9",
+    "vite-aliases": "^0.11.2",
     "vitepress": "^1.0.0-rc.4",
     "vitepress-plugin-life-progress": "^0.0.3",
     "vitepress-plugin-sandpack": "^1.0.3",

@@ -55,13 +55,13 @@ features:
     details: 基于 Epplus 实现 Excel 的快速导入导出 NUGET包。
     link: https://www.nuget.org/packages/Nobilis.Epps
   - title: 疫情防控平台
-    details: 疫情期间，为满足公司疫情防控需求，开发上线本系统。
+    details: 疫情期间，为满足公司疫情防控需求，开发上线本系统。特色功能包含基于百度Paddle实现健康码和行程码信息自动提取和预警，支持人脸识别登录。
     link: /gallery/epcp
   - title: 基于K8S平台的持续交付平台
-    details: 研发技改产物，促进开发流程规范化及自动化运维。
+    details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
     link: /gallery/giteaops
   - title: 苏南硕放国际机场安检效能分析系统
-    details: 助力安检效能分析
+    details: 通过数字化大屏，助力安检数据展示及效能分析
     link: /gallery/SCPEA
   - title: 进出港旅客查询和无纸化系统项目
     details: 为安检部门提供今日的所有起降航班乘机人数.
