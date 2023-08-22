@@ -24,6 +24,9 @@ import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 const hostname: string = "https://changweihua.github.io";
 
+import vitepressLifeProgress from 'vitepress-plugin-life-progress'
+import 'vitepress-plugin-life-progress/lib/css/index.css'
+
 // import "unocss"
 // import ConsoleBan from 'console-ban'
 import "vitepress-markdown-timeline/dist/theme/index.css";
@@ -238,6 +241,7 @@ export default {
       () => route.path,
       () => nextTick(() => initZoom())
     );
+    vitepressLifeProgress()
   },
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];

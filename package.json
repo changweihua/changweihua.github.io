@@ -66,9 +66,7 @@
       }
     }
   },
-  "overrides": {
-
-  },
+  "overrides": {},
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
@@ -101,6 +99,7 @@
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.4.9",
     "vitepress": "^1.0.0-rc.4",
+    "vitepress-plugin-life-progress": "^0.0.3",
     "vitepress-plugin-sandpack": "^1.0.3",
     "vitepress-sidebar": "^1.10.1",
     "vue": "^3.3.4"
@@ -130,7 +129,8 @@
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-back-to-top": "^1.0.1",
     "vitepress-plugin-image-viewer": "^1.1.2",
-    "vitepress-plugin-nprogress": "^0.0.4"
+    "vitepress-plugin-nprogress": "^0.0.4",
+    "vitepress-plugin-rss": "^0.1.0"
   },
   "version": "0.0.20"
 }

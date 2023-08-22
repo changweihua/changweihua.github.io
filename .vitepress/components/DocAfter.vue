@@ -21,7 +21,6 @@ import { useData } from "vitepress";
 
 // 获取 frontmatter
 const { frontmatter } = useData();
-console.log(frontmatter);
 </script>
 
 <style lang="less">

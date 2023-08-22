@@ -11,10 +11,18 @@ import { zhConfig } from "./src/configs/zh";
 import { SitemapStream } from "sitemap";
 import { createWriteStream } from "node:fs";
 import { resolve } from "node:path";
+import { RssPlugin } from "vitepress-plugin-rss";
+
+import {RSS} from "./src/rss"
 
 const links: any[] = [];
 
 export default defineConfig({
+  vite: {
+    // ↓↓↓↓↓
+    plugins: [RssPlugin(RSS)]
+    // ↑↑↑↑↑
+  },
   ...defaultConfig,
   /* 标头配置 */
   head,
