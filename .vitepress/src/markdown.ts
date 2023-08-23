@@ -7,14 +7,12 @@ import mdItCustomAttrs from "markdown-it-custom-attrs";
 import timeline from "vitepress-markdown-timeline";
 import container from 'markdown-it-container';
 import { renderSandbox } from 'vitepress-plugin-sandpack'
-import mathjax3 from 'markdown-it-mathjax3';
 import footnote from 'markdown-it-footnote';
 
 const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
   theme: { light: 'github-light', dark: 'github-dark' },
   config: (md) => {
-    md.use(mathjax3);
     md.use(footnote);
 
     md.use(containerPreview);
