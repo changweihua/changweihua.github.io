@@ -7,36 +7,129 @@ description: 严格模式下获取方法调用信息
 poster: /images/cmono-Siesta.png
 ---
 
-# 背景 #
+## 背景 ##
 
 原创小程序默认使用严格模式，导致无法使用caller,callee,arguments相关属性和方法。
 
 如何获取调用者信息，成为了头疼大事。
 
-<div class="grid grid-cols-2 gap-4">
+## 示例代码 ##
 
-![Lime Nuget](/images/cmono-Lime.png){data-zoomable}
+```typescript
+//use strict disabled;
+import _ from "underscore"
+import { getEmoji } from "./console-emojis"
+import { appConfig } from "~/utils/app.config";
+import WechatLogger from "./wechat-logger";
 
-![Siesta Nuget](/images/cmono-Siesta.png){data-zoomable}
+console.log = appConfig.mode !== 'production' ? console.log : () => { };
 
-</div>
+const getCall = () => {
+  let callArr = new Error().stack?.split("\n");
+  if (callArr) {
+    callArr.splice(0, 3);
+    const pattern = /at (\w+)/;
+    const result = callArr.map(it => {
+      const res = it.match(pattern)
+      // console.log(res)
+      if (res) {
+        const fileSource = res['input']
+        const leftSource = fileSource?.slice(fileSource.indexOf('/appservice/') + 11)
+        const source = leftSource?.slice(0, leftSource.indexOf(':'))
+        return `Invoked from ${source} at ${res[1]}`
+      }
+      return ''
+    }).join()
+    return result
+  }
+  return '';
+}
 
-## Lime ##
+const labelStyle = `border: 1px solid ${appConfig.brand.color};background: ${appConfig.brand.color};color: #fff;padding: 5px 10px;border-radius: 5px 0 0 5px;`
+const valueStyle = `border: 1px solid ${appConfig.brand.color};color: ${appConfig.brand.color};padding: 5px 10px;border-radius: 0 5px 5px 0;`
 
-- [Lime.Bcl](https://www.nuget.org/packages/Lime.Bcl/)
-- [Lime.DingTalks](https://www.nuget.org/packages/Lime.DingTalks/)
-- [Lime.HealthChecking](https://www.nuget.org/packages/Lime.HealthChecking/)
-- [Lime.Mailer](https://www.nuget.org/packages/Lime.Mailer/)
-- [Lime.MessageCenter](https://www.nuget.org/packages/Lime.MessageCenter/)
-- [Lime.MScheduler](https://www.nuget.org/packages/Lime.MScheduler/)
-- [Lime.Quartzer](https://www.nuget.org/packages/Lime.Quartzer/)
-- [Lime.Rabbits](https://www.nuget.org/packages/Lime.Rabbits/)
-- [Lime.Swaggers](https://www.nuget.org/packages/Lime.Swaggers/)
-- [Lime.WechatIdentity](https://www.nuget.org/packages/Lime.WechatIdentity/)
-- [Lime.WeChats](https://www.nuget.org/packages/Lime.WeChats/)
+export {
+  labelStyle,
+  valueStyle
+}
 
-## Siesta ##
+export default class Logger {
+  private wechatLogger = new WechatLogger()
 
-- [Platter.ApplicationCore](https://www.nuget.org/packages/Platter.ApplicationCore/)
-- [Platter.Domain](https://www.nuget.org/packages/Platter.Domain/)
-- [Platter.DomainCore](https://www.nuget.org/packages/Platter.DomainCore/)
+  // 只允许在内部实例化
+  private constructor() {
+
+  }
+  // 是否实例的标志
+  private static instance: Logger | null = null
+
+  public platform = 'devtools'
+
+  public showRealtime = false
+
+  private makeContent(...args: any[]) {
+    const contents = []
+    contents.push(args[0].map((arg: any) => {
+      if (_.isObject(arg)) {
+        return JSON.stringify(arg)
+      }
+      return arg
+    }))
+    return contents.join(' ')
+  }
+
+  public debug(...args: any[]) {
+    console.log(getCall())
+    // if (arguments.callee) {
+    //   console.log(arguments.callee)
+    // }
+    if (this.platform === "devtools") {
+      console.log(`%c${getEmoji(appConfig.log.debug.emoji)}%c%s`, `border: 1px solid ${appConfig.log.debug.color};background: ${appConfig.log.debug.color};color: #fff;padding: 5px 10px;border-radius: 5px 0 0 5px;`, `border: 1px solid ${appConfig.log.debug.color};color: ${appConfig.log.debug.color};padding: 5px 10px;border-radius: 0 5px 5px 0;`, this.makeContent(args))
+    } else {
+      console.log(`%c${getEmoji(appConfig.log.debug.emoji)} %s`, `color: ${appConfig.log.debug.color}; font-size: 12px`, this.makeContent(args))
+    }
+  }
+
+  public info(...args: any[]) {
+    console.log(getCall())
+    if (this.platform === "devtools") {
+      console.log(`%c${getEmoji(appConfig.log.info.emoji)}%c%s`, `border: 1px solid ${appConfig.log.info.color};background: ${appConfig.log.info.color};color: #fff;padding: 5px 10px;border-radius: 5px 0 0 5px;`, `border: 1px solid ${appConfig.log.info.color};color: ${appConfig.log.info.color};padding: 5px 10px;border-radius: 0 5px 5px 0;`, this.makeContent(args))
+    } else {
+      console.log(`%c${getEmoji(appConfig.log.info.emoji)} %s`, `color: ${appConfig.log.info.color}; font-size: 12px`, this.makeContent(args))
+    }
+  }
+
+  public warn(...args: any[]) {
+    console.log(getCall())
+    if (this.platform === "devtools") {
+      console.log(`%c${getEmoji(appConfig.log.warn.emoji)}%c%s`, `border: 1px solid ${appConfig.log.warn.color};background: ${appConfig.log.warn.color};color: #fff;padding: 5px 10px;border-radius: 5px 0 0 5px;`, `border: 1px solid ${appConfig.log.warn.color};color: ${appConfig.log.warn.color};padding: 5px 10px;border-radius: 0 5px 5px 0;`, this.makeContent(args))
+    } else {
+      console.log(`%c${getEmoji(appConfig.log.warn.emoji)} %s`, `color: ${appConfig.log.warn.color}; font-size: 12px`, this.makeContent(args))
+    }
+    if (this.showRealtime) {
+      this.wechatLogger.warn({ info: this.makeContent(args), date: new Date() })
+    }
+  }
+
+  public error(...args: any[]) {
+    console.log(getCall())
+    if (this.platform === "devtools") {
+      console.log(`%c${getEmoji(appConfig.log.error.emoji)}%c%s`, `border: 1px solid ${appConfig.log.error.color};background: ${appConfig.log.error.color};color: #fff;padding: 5px 10px;border-radius: 5px 0 0 5px;`, `border: 1px solid ${appConfig.log.error.color};color: ${appConfig.log.error.color};padding: 5px 10px;border-radius: 0 5px 5px 0;`, this.makeContent(args))
+    } else {
+      console.log(`%c${getEmoji(appConfig.log.error.emoji)} %s`, `color: ${appConfig.log.error.color}; font-size: 12px`, this.makeContent(args))
+    }
+    if (this.showRealtime) {
+      this.wechatLogger.error({ info: this.makeContent(args), date: new Date() })
+    }
+  }
+
+  // 单例模式
+  static getInstance() {
+    // 判断系统是否已经有单例了
+    if (Logger.instance === null) {
+      Logger.instance = new Logger()
+    }
+    return Logger.instance
+  }
+}
+```

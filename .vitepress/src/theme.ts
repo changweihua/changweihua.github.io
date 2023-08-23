@@ -1,6 +1,10 @@
 import type { DefaultTheme } from "vitepress";
 
 export const themeConfig: DefaultTheme.Config = {
+  // editLink: {
+  //   pattern: 'https://github.com/changweihua/changweihua.github.io/edit/master//:path',
+  //   text: 'Edit this page on GitHub'
+  // },
   logo: "/logo.png",
   socialLinks: [
     {

@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
 // vite.config.ts
+import { defineConfig } from "vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import Components from "unplugin-vue-components/vite";

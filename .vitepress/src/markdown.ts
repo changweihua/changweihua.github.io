@@ -10,6 +10,7 @@ import { renderSandbox } from 'vitepress-plugin-sandpack'
 
 
 const markdown: MarkdownOptions | undefined = {
+  lineNumbers: true,
   theme: { light: 'github-light', dark: 'github-dark' },
   config: (md) => {
     md.use(containerPreview);

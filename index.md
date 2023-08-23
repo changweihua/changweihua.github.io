@@ -43,10 +43,10 @@ features:
     details: 苏南硕放国际机场旅客服务平台前端载体。
     link: /gallery/airwux
   - title: wx-navigation-bar
-    details: 小程序自定义导航栏NPM包。
-    link: https://www.npmjs.com/package/wx-navigation-bar
+    details: 小程序自定义导航栏NPM包。以此实现顶部图片背景效果。
+    link: /gallery/wx-navigation-bar
   - title: wx-lifecycle-interceptor
-    details: 小程序生命周期方法拦截器NPM包。
+    details: 小程序生命周期方法拦截器NPM包。Fork 后适配最新版微信组件生命周期。
     link: https://www.npmjs.com/package/wx-lifecycle-interceptor
   # - title: antdv-plus-table
   #   details: Ant Design Vue Table 扩展NPM包。
@@ -61,14 +61,14 @@ features:
     details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
     link: /gallery/giteaops
   - title: 苏南硕放国际机场安检效能分析系统
-    details: 通过数字化大屏，助力安检数据展示及效能分析
+    details: 通过数字化大屏，图形化报表，动态化效果，助力安检数据展示及效能分析。
     link: /gallery/SCPEA
   - title: 进出港旅客查询和无纸化系统项目
-    details: 为安检部门提供今日的所有起降航班乘机人数.
+    details: 为安检部门提供今日的所有起降航班乘机人数。
   - title: 扬州泰州国际机场客源地分析系统
-    details: 统计所有从扬泰机场出发或到达的旅客来源分布.
+    details: 统计所有从扬泰机场出发或到达的旅客来源分布。
   - title: 苏南硕放国际机场生产统计系统
-    details: 整个机场运行生产统计数据.
+    details: 整个机场运行生产统计数据。
 
 head:
   - - meta
