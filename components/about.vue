@@ -111,7 +111,9 @@
 import { readonly } from "vue";
 import { Icon } from "@iconify/vue";
 import { faker } from "@faker-js/faker";
+//@ts-ignore
 import party from "../public/lotties/starter.json";
+//@ts-ignore
 import world from "../public/lotties/colorfulworld.json";
 
 const posts = readonly<

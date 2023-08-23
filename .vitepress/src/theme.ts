@@ -94,4 +94,16 @@ export const themeConfig: DefaultTheme.Config = {
     //     },
     //   },
   },
+  // // 自定义扩展: 文章版权配置
+  // copyrightConfig: {
+  //   license: '署名-相同方式共享 4.0 国际 (CC BY-SA 4.0)',
+  //   licenseLink: 'http://creativecommons.org/licenses/by-sa/4.0/'
+  // },
+  // // 自定义扩展: 页脚配置
+  // footerConfig: {
+  //   showFooter: true, // 是否显示页脚
+  //   icpRecordCode: '津ICP备2022005864号-2', // ICP备案号
+  //   publicSecurityRecordCode: '津公网安备12011202000677号', // 联网备案号
+  //   copyright: `Copyright © 2019-${new Date().getFullYear()} Charles7c` // 版权信息
+  // }
 };

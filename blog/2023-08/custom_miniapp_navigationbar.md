@@ -5,6 +5,7 @@ tags: ["小程序"]
 title: 自定义小程序导航栏
 description: 自定义小程序导航栏
 poster: /images/cmono-Siesta.png
+date: 2023-08
 ---
 
 # 自定义小程序导航栏 #

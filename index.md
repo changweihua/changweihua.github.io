@@ -36,11 +36,11 @@ features:
       alt: 扬泰机场智慧出行小程序
     details: 为扬泰机场旅客提供航班动态查询、在线值机、停车场收费标准等自助服务
     link: /gallery/airyty
-  - title: 苏南硕放国际机场微信小程序
+  - title: 苏南硕放国际机场旅客服务平台
     icon:
       src: /air_wux.png
-      alt: 苏南硕放国际机场微信小程序
-    details: 苏南硕放国际机场旅客服务平台前端载体。
+      alt: 苏南硕放国际机场旅客服务平台
+    details: 为机场提供了数字化赋能，解决了服务能力与旅客需求难匹配的运营痛点，助力旅客便捷出行。
     link: /gallery/airwux
   - title: wx-navigation-bar
     details: 小程序自定义导航栏NPM包。以此实现顶部图片背景效果。
@@ -94,6 +94,14 @@ Technical testing 2015-09-01
 </a-timeline-item>
 </a-timeline> -->
 
+<!-- <div class="gallery">
+  <img 
+  src="https://pic6.zhuanstatic.com/zhuanzh/fc8b8d24-b55a-4d9b-bcf9-a0bccaea4d80.png"       alt="Purple flowers">
+  <img src="https://pic6.zhuanstatic.com/zhuanzh/fc8b8d24-b55a-4d9b-bcf9-a0bccaea4d80.png" alt="Pink flowers">
+  <img src="https://pic6.zhuanstatic.com/zhuanzh/fc8b8d24-b55a-4d9b-bcf9-a0bccaea4d80.png" alt="Some plants">
+  <img src="https://pic6.zhuanstatic.com/zhuanzh/fc8b8d24-b55a-4d9b-bcf9-a0bccaea4d80.png" alt="A water lily">
+</div> -->
+
 <!-- <div class="grid grid-cols-1 md:grid-cols-3">
 <div >
   <img src="https://github-readme-stats.vercel.app/api?username=Changweihua&show_icons=true&theme=transparent" />
@@ -117,6 +125,9 @@ Technical testing 2015-09-01
 
 <!-- <div id="g-pointer-1"></div>
 <div id="g-pointer-2"></div> -->
+测试脚注 [^1]
+
+[^1]: 脚注出处
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
@@ -142,7 +153,7 @@ const members = [
   {
     avatar: '/author.jpg',
     name: '常伟华',
-    title: 'Programmer',
+    title: 'Owner',
     org: 'CMONO.NET',
     orgLink: 'https://changweihua.github.io',
     desc: '伪前端+伪后端+伪需求=真全栈',

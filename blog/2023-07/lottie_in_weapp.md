@@ -3,6 +3,7 @@ commentabled: true
 recommended: false
 title: 过于单调的小程序页面，靠 Lottie 动画拯救
 description: 过于单调的小程序页面，靠 Lottie 动画拯救
+date: 2023-07
 ---
 
 # 过于单调的小程序页面，靠 Lottie 动画拯救 #

@@ -1,0 +1,110 @@
+.gallery {
+  --s: 200px; /* control the size */
+  --r: 45px; /* control the triangular shape */
+
+  display: grid;
+  gap: 6px;
+  grid: auto-flow var(--s) / repeat(2, var(--s));
+  cursor: pointer;
+}
+.gallery > img {
+  object-fit: cover;
+  transition: 0.5s;
+}
+.gallery > img:is(:nth-child(1), :nth-child(4)) {
+  width: 100%;
+  height: calc(100% + var(--r));
+}
+.gallery > img:is(:nth-child(2), :nth-child(3)) {
+  height: 100%;
+  width: calc(100% + var(--r));
+}
+.gallery > img:nth-child(1) {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    calc(100% - var(--r)) calc(50% - var(--r) / 2),
+    100% calc(100% - var(--r)),
+    50% 100%,
+    0 calc(100% - var(--r))
+  );
+}
+.gallery > img:nth-child(2) {
+  place-self: end;
+  clip-path: polygon(
+    var(--r) 0,
+    100% 0,
+    100% 100%,
+    calc(50% + var(--r) / 2) calc(100% - var(--r)),
+    var(--r) 100%,
+    0 50%
+  );
+}
+.gallery > img:nth-child(3) {
+  clip-path: polygon(
+    0 0,
+    calc(50% - var(--r) / 2) var(--r),
+    calc(100% - var(--r)) 0,
+    100% 50%,
+    calc(100% - var(--r)) 100%,
+    0 100%
+  );
+}
+.gallery > img:nth-child(4) {
+  place-self: end;
+  clip-path: polygon(
+    0 var(--r),
+    50% 0,
+    100% var(--r),
+    100% 100%,
+    0 100%,
+    var(--r) calc(50% + var(--r) / 2)
+  );
+}
+.gallery:hover {
+  --r: 0px;
+}
+
+@property --radius {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: -5%;
+}
+
+@keyframes scene-transition {
+  to {
+    --radius: 105%;
+  }
+}
+
+.VPImage {
+  mask-image: radial-gradient(
+    circle,
+    #fff calc(var(--radius) - 5%),
+    transparent calc(var(--radius) + 5%)
+  );
+}
+
+.VPImage:is(:hover) {
+  animation: scene-transition 2s linear forwards;
+}
+
+.VPHomeFeatures .VPFeature {
+  /* --c: #1095c1;
+  line-height: 1.2em;
+  background: conic-gradient(from -135deg at 100% 50%, var(--c) 90deg, #0000 0)
+      0 var(--p, 0%) / var(--s, 0%) 200% no-repeat,
+    conic-gradient(from -135deg at 1.2em 50%, #0000 90deg, var(--c) 0) 100%
+      var(--p, 0%) / var(--s, 0%) 200% no-repeat;
+  transition: 0.4s, background-position 0s; */
+  --c: no-repeat linear-gradient(var(--vp-c-brand) 0 0);
+  background:
+    var(--c) calc(-100% + var(--i, 0) * 100%) 100% / 50% calc(100% * var(--i, 0) + .08em),
+    var(--c) calc( 200% - var(--i, 0) * 100%) 0 / 50% calc(100% * var(--i, 0) + .08em);
+  transition: .2s calc(var(--i, 0) * .2s), background-position .2s calc(.2s - var(--i, 0) * .2s);
+}
+.VPHomeFeatures .VPFeature:hover {
+  /* --p: 100%;
+  --s: calc(50% + 0.6em); */
+  --i: 1;
+}

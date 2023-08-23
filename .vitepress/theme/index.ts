@@ -55,6 +55,7 @@ const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import PlaceHolder from "../components/PlaceHolder.vue";
+import ArticleMetadata from "../components/ArticleMetadata.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -79,8 +80,8 @@ export default {
       // //   }),
       "home-hero-info": () =>
         h(AnimationTitle, {
-          name: "常伟华",
-          text: "Designer & Programmer",
+          name: "CMONO.NET",
+          text: "知识汪洋仅此一瓢",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
       // "home-hero-image": () =>
@@ -210,6 +211,7 @@ export default {
     app.component('VuePreview', VuePreview)
 
     app.component("Sandbox", Sandbox);
+    app.component("ArticleMetadata", ArticleMetadata);
 
     import("ant-design-vue").then((module) => {
       app.use(module);

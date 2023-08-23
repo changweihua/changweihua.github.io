@@ -4,6 +4,7 @@ recommended: true
 title: 参与 Github 开源项目，提交 PR
 description: 学习如何为开源项目贡献自己的力量
 poster: /images/cmono-4c0cf778e497ab206289099ce51db5f.png
+date: 2023-08
 ---
 
 # 参与 Github 开源项目，提交 PR #

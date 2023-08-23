@@ -4,6 +4,7 @@ recommended: false
 title: 如何为小程序添加一个启动页
 description: 如何为小程序添加一个启动页
 poster: /logos/logo_wechat.png
+date: 2023-07
 ---
 
 # 如何为小程序添加一个启动页 #

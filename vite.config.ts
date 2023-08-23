@@ -118,4 +118,9 @@ export default defineConfig({
   ssr: {
     noExternal: ["vitepress-plugin-nprogress", "local-pkg"],
   },
+  // resolve: {
+  //   alias: {
+  //     'mermaid': 'mermaid/dist/mermaid.esm.mjs',
+  //   },
+  // },
 });

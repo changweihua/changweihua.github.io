@@ -5,6 +5,7 @@ tags: ["wechat", "npm"]
 title: 严格模式下获取方法调用信息
 description: 严格模式下获取方法调用信息
 poster: /images/cmono-Siesta.png
+date: 2023-08
 ---
 
 ## 背景 ##

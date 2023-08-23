@@ -5,6 +5,7 @@ tags: ["小程序", "轮播"]
 title: 小程序左右轮播显示文字
 description: 小程序左右轮播显示文字
 poster: /images/cmono-GIF-2023-8-10-9-24-24.gif
+date: 2023-08
 ---
 
 # 左右轮播显示文字 #

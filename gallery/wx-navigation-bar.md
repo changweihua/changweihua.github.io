@@ -1,33 +1,21 @@
 ---
+title: 小程序自定义导航栏
+author: 常伟华
+date: 2023/08/23
+categories:
+  - 小程序
+tags:
+  - 小程序
+  - 导航栏
 ---
 
-::: info
-This is an info box.
-:::
-::: tip
-This is a tip.
-:::
-::: warning
-This is a warning.
-:::
-::: danger
-This is a dangerous warning.
-:::
-::: details
-This is a details block.
-:::
-::: details 查看源码
-This is a details block.
-:::
-
-
-## 预览图 ##
+## 预览图
 
 ![预览图](../public/images/cmono-ef6623ccf120fad4d01715227a55780.jpg){data-zoomable}
 
-## 使用说明 ##
+## 使用说明
 
-### 引入npm 包 ###
+### 引入 npm 包
 
 ```bash
 
@@ -35,7 +23,7 @@ This is a details block.
 
 ```
 
-### 页面或全局引用 ###
+### 页面或全局引用
 
 ```json
 
@@ -45,20 +33,18 @@ This is a details block.
 
 ```
 
-### 页面使用 ###
+### 页面使用
 
 ```html
-
-    <my-navigation-bar title="{{title}}" backgroundcolor="var(--td-brand-color)">
-        <t-icon slot="arrow-left" color="#fff" name="chevron-left" size="56rpx" />
-    </my-navigation-bar>
-
+<my-navigation-bar title="{{title}}" backgroundcolor="var(--td-brand-color)">
+  <t-icon slot="arrow-left" color="#fff" name="chevron-left" size="56rpx" />
+</my-navigation-bar>
 ```
 
-## 属性配置 ##
+## 属性配置
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
+| Tables        |      Are      |  Cool |
+| ------------- | :-----------: | ----: |
 | col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |

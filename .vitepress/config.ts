@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress";
 import { themeConfig } from "./src/theme";
 import { defaultConfig } from "./src/defaults";
 import { head } from "./src/head";
-
+import { withMermaid } from "vitepress-plugin-mermaid";
 //配置的英文文档设置
 import { enConfig } from "./src/configs/en";
 
@@ -16,12 +16,20 @@ import { RssPlugin } from "vitepress-plugin-rss";
 import {RSS} from "./src/rss"
 
 const links: any[] = [];
+const customElements:string[] = []
 
-export default defineConfig({
+export default withMermaid({
   vite: {
     // ↓↓↓↓↓
-    plugins: [RssPlugin(RSS)]
+    plugins: [RssPlugin(RSS)],
     // ↑↑↑↑↑
+  },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => customElements.includes(tag),
+      },
+    },
   },
   ...defaultConfig,
   /* 标头配置 */
@@ -73,5 +81,13 @@ export default defineConfig({
   //   links.forEach((link) => sitemap.write(link));
   //   sitemap.end();
   //   await new Promise((r) => writeStream.on("finish", r));
+  // },
+  // optionally, you can pass MermaidConfig
+  mermaid: {
+    // refer https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
+  },
+  // optionally set additional config for plugin itself with MermaidPluginConfig
+  // mermaidPlugin: {
+  //   class: "mermaid my-class", // set additional css classes for parent container
   // },
 });
