@@ -18,19 +18,19 @@ import {RSS} from "./src/rss"
 const links: any[] = [];
 const customElements:string[] = []
 
-export default withMermaid({
+export default defineConfig({
   vite: {
     // ↓↓↓↓↓
     plugins: [RssPlugin(RSS)],
     // ↑↑↑↑↑
   },
-  // vue: {
-  //   template: {
-  //     compilerOptions: {
-  //       isCustomElement: (tag) => customElements.includes(tag),
-  //     },
-  //   },
-  // },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => customElements.includes(tag),
+      },
+    },
+  },
   ...defaultConfig,
   /* 标头配置 */
   head,
@@ -83,9 +83,9 @@ export default withMermaid({
   //   await new Promise((r) => writeStream.on("finish", r));
   // },
   // optionally, you can pass MermaidConfig
-  mermaid: {
-    // refer https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
-  },
+  // mermaid: {
+  //   // refer https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
+  // },
   // optionally set additional config for plugin itself with MermaidPluginConfig
   // mermaidPlugin: {
   //   class: "mermaid my-class", // set additional css classes for parent container
