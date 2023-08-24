@@ -1,5 +1,4 @@
 ---
-lastUpdated: false
 # 开启评论
 commentabled: false
 # 开启推荐

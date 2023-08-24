@@ -1,4 +1,5 @@
 ---
+lastUpdated: true
 commentabled: true
 recommended: true
 pageClass: blog-page

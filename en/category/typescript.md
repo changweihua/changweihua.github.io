@@ -1,5 +1,0 @@
----
-outline: page
----
-
-# TypeScript #

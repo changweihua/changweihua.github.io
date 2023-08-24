@@ -8,11 +8,31 @@ import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import { fileURLToPath } from "node:url";
 import { vuePreviewPlugin } from "vite-plugin-vue-preview";
 import { ViteAliases } from "vite-aliases";
+import UnoCSS from 'unocss/vite'
+import { SearchPlugin } from "vitepress-plugin-search";
+import flexSearchIndexOptions from "flexsearch";
+import { resolve } from "node:path";
+
+import { MarkdownTransform } from './.vitepress/plugins/markdownTransform'
+
+//default options
+var options = {
+  ...flexSearchIndexOptions,
+  previewLength: 100, //搜索结果预览长度
+  buttonLabel: "搜索",
+  placeholder: "情输入关键词",
+};
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    // custom
+    // MarkdownTransform(),
     Components({
+      dirs: resolve(__dirname, ".vitepress/components"),
+      include: [/\.vue$/, /\.vue\?vue/],
+      dts: "./.vitepress/components.d.ts",
+      transformer: "vue3",
       resolvers: [
         AntdvResolver(),
         IconsResolver(),
@@ -109,6 +129,8 @@ export default defineConfig({
        */
       root: process.cwd(),
     }),
+    SearchPlugin(options),
+    UnoCSS()
   ],
   // resolve: {
   //   alias: {

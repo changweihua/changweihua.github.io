@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data.showMeta" class="m-6">
+  <div v-if="data.showMeta" class="meta-container m-6">
     <div class="meta-tag">
       <my-icon icon="solar:tag-bold" />
       原创
@@ -53,4 +53,19 @@ const data = reactive({
 const { date, categories, tags } = toRefs(data);
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.meta-container {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  .meta-tag {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    gap: 6px;
+    padding: 2px 8px;
+  }
+}
+</style>

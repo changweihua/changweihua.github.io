@@ -1,4 +1,5 @@
 ---
+lastUpdated: true
 commentabled: true
 recommended: false
 title: 如何为小程序添加一个启动页

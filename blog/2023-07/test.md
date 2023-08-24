@@ -1,4 +1,5 @@
 ---
+lastUpdated: true
 commentabled: true
 recommended: false
 title: CodeGroup 自定义全局组件

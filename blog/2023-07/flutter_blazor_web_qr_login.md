@@ -1,4 +1,5 @@
 ---
+lastUpdated: true
 commentabled: true
 recommended: false
 title: 基于 Flutter 和 Blazor 实现 Web 扫一扫

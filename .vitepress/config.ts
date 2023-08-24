@@ -18,6 +18,8 @@ import {RSS} from "./src/rss"
 const links: any[] = [];
 const customElements:string[] = []
 
+import { MDPreprocessor } from './plugins/MDPreprocessor';
+
 export default defineConfig({
   vite: {
     // ↓↓↓↓↓
@@ -41,7 +43,7 @@ export default defineConfig({
     root: { label: "简体中文", lang: "zh-CN", link: "/", ...zhConfig },
     en: { label: "English", lang: "en-US", link: "/en/", ...enConfig },
   },
-  lastUpdated: true,
+  lastUpdated: false,
   // titleTemplate: ':title - Custom Suffix',
   sitemap: {
     hostname: "https://changweihua.github.io",

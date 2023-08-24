@@ -1,4 +1,5 @@
 ---
+lastUpdated: true
 commentabled: false
 recommended: false
 tags: ["ThreeJS"]

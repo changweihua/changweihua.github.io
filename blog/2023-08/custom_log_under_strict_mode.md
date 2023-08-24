@@ -1,4 +1,5 @@
 ---
+lastUpdated: true
 commentabled: true
 recommended: true
 tags: ["wechat", "npm"]

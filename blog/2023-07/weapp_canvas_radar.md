@@ -1,4 +1,5 @@
 ---
+lastUpdated: true
 commentabled: true
 recommended: false
 title: 给小程序添加一个评分分值分布雷达图，完善评价体系

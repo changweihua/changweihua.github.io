@@ -1,4 +1,5 @@
 ---
+lastUpdated: true
 commentabled: true
 recommended: false
 title: 快速搭建微信小程序原生开发框架

@@ -26,7 +26,7 @@ const hostname: string = "https://changweihua.github.io";
 
 import vitepressLifeProgress from 'vitepress-plugin-life-progress'
 import 'vitepress-plugin-life-progress/lib/css/index.css'
-
+import { registerAnalytics, siteIds, trackPageview } from '../plugins/baidutongji'
 // import "unocss"
 // import ConsoleBan from 'console-ban'
 import "vitepress-markdown-timeline/dist/theme/index.css";
@@ -56,14 +56,16 @@ import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import PlaceHolder from "../components/PlaceHolder.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue"
+import Contributors from "../components/Contributors.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
-
+import 'uno.css'
 export default {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
   Layout() {
+
     return h(DefaultTheme.Layout, null, {
       // "home-hero-before": () => h(AnimationTitle),
       // "home-hero-after": () => h(AnimationTitle),
@@ -203,15 +205,16 @@ export default {
     const { app, router, siteData, isServer } = ctx;
     DefaultTheme.enhanceApp(ctx);
     app.component("demo-preview", AntDesignContainer);
-    app.component("header-profile", HeaderProfile);
-    app.component("lottie-panel", LottiePanel);
-    app.component("code-group", CodeGroup);
     app.component("my-icon", Icon);
 
     app.component('VuePreview', VuePreview)
-
+    app.component("header-profile", HeaderProfile);
+    app.component("lottie-panel", LottiePanel);
+    app.component("code-group", CodeGroup);
     app.component("Sandbox", Sandbox);
     app.component("ArticleMetadata", ArticleMetadata);
+    app.component("Contributors", Contributors);
+    app.component("CopyRight", copyright);
 
     import("ant-design-vue").then((module) => {
       app.use(module);
@@ -222,6 +225,19 @@ export default {
       // default
       threshold: 300,
     });
+
+    if (inBrowser) {
+      // registerAnalytics(siteIds)
+
+      // window.addEventListener('hashchange', () => {
+      //   const { href: url } = window.location
+      //   trackPageview(siteIds, url)
+      // })
+
+      // router.onAfterRouteChanged = (to) => {
+      //   trackPageview(siteIds, to)
+      // }
+    }
   },
   setup() {
     const { lang } = useData();
