@@ -125,9 +125,6 @@ Technical testing 2015-09-01
 
 <!-- <div id="g-pointer-1"></div>
 <div id="g-pointer-2"></div> -->
-测试脚注 [^1]
-
-[^1]: 脚注出处
 
 <script setup lang="ts">
 import { onMounted } from 'vue'

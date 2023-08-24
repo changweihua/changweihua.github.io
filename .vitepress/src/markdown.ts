@@ -8,13 +8,14 @@ import timeline from "vitepress-markdown-timeline";
 import container from 'markdown-it-container';
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import footnote from 'markdown-it-footnote';
+import mathjax3 from 'markdown-it-mathjax3';
 
 const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
   theme: { light: 'github-light', dark: 'github-dark' },
   config: (md) => {
     md.use(footnote);
-
+    md.use(mathjax3);
     md.use(containerPreview);
     md.use(componentPreview);
     // use more markdown-it plugins!
