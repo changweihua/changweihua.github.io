@@ -24,13 +24,13 @@ export default withMermaid({
     plugins: [RssPlugin(RSS)],
     // ↑↑↑↑↑
   },
-  vue: {
-    template: {
-      compilerOptions: {
-        isCustomElement: (tag) => customElements.includes(tag),
-      },
-    },
-  },
+  // vue: {
+  //   template: {
+  //     compilerOptions: {
+  //       isCustomElement: (tag) => customElements.includes(tag),
+  //     },
+  //   },
+  // },
   ...defaultConfig,
   /* 标头配置 */
   head,
