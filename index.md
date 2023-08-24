@@ -186,6 +186,7 @@ const members = [
   />
 </VPTeamPage>
 
+<HomeContributors />
 <!-- <a-tag>sss</a-tag> -->
 
 <!-- ### Title <Badge type="info" text="default" />

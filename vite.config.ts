@@ -25,6 +25,16 @@ var options = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    hmr: {
+      overlay: false,
+    },
+    fs: {
+      allow: [
+        resolve(__dirname, '..'),
+      ],
+    },
+  },
   plugins: [
     // custom
     // MarkdownTransform(),

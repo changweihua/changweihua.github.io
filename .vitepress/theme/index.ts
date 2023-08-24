@@ -57,6 +57,7 @@ import CodeGroup from "../components/CodeGroup.vue";
 import PlaceHolder from "../components/PlaceHolder.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue"
 import Contributors from "../components/Contributors.vue"
+import HomeContributors from "../components/HomeContributors.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -214,6 +215,7 @@ export default {
     app.component("Sandbox", Sandbox);
     app.component("ArticleMetadata", ArticleMetadata);
     app.component("Contributors", Contributors);
+    app.component("HomeContributors", HomeContributors);
     app.component("CopyRight", copyright);
 
     import("ant-design-vue").then((module) => {

@@ -1,5 +1,5 @@
+import { replacer } from "../../scripts/utils";
 import type { Plugin } from "vite";
-import { replacer } from "../utils/utils";
 
 export function MarkdownTransform(): Plugin {
   return {

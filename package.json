@@ -1,6 +1,7 @@
 {
   "scripts": {
     "docs:dev": "vitepress dev",
+    "docs:prepare": "esno scripts/prepare.ts",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
     "register:components": "vitepress-rc",
@@ -103,6 +104,7 @@
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.4.9",
     "vite-aliases": "^0.11.2",
+    "vite-plugin-pwa": "^0.16.4",
     "vitepress": "^1.0.0-rc.4",
     "vitepress-plugin-life-progress": "^0.0.3",
     "vitepress-plugin-mermaid": "^2.0.14",
@@ -128,6 +130,7 @@
     "cross-env": "^7.0.3",
     "crypto": "^1.0.1",
     "dayjs": "^1.11.9",
+    "esno": "^0.17.0",
     "gsap": "^3.12.2",
     "increase-memory-limit": "^1.0.7",
     "l-watermark": "^2.1.2",
@@ -138,6 +141,8 @@
     "markdown-it-footnote": "^3.0.3",
     "markdown-it-mathjax3": "^4.3.2",
     "medium-zoom": "^1.0.8",
+    "ofetch": "^1.3.2",
+    "simple-git": "^3.19.1",
     "simple-icons": "^9.11.0",
     "vite-plugin-vue-preview": "^1.3.0",
     "vitepress-markdown-timeline": "^1.2.1",

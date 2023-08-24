@@ -26,7 +26,7 @@ const markdown: MarkdownOptions | undefined = {
     md
       // the second parameter is html tag name
       .use(container, 'sandbox', {
-        render (tokens, idx) {
+        render (tokens: any, idx: any) {
           return renderSandbox(tokens, idx, 'sandbox');
         },
       });
