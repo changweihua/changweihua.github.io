@@ -1,3 +1,9 @@
+## <small>0.0.22 (2023-08-24)</small>
+
+* fix(custom): 修复缺失的npm包 ([4b6890f](https://github.com/changweihua/changweihua.github.io/commit/4b6890f))
+
+
+
 ## <small>0.0.21 (2023-08-24)</small>
 
 * fix(custom): 修复打包 ([c1dba58](https://github.com/changweihua/changweihua.github.io/commit/c1dba58))
