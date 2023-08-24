@@ -142,5 +142,5 @@
     "vitepress-plugin-nprogress": "^0.0.4",
     "vitepress-plugin-rss": "^0.1.0"
   },
-  "version": "0.0.20"
+  "version": "0.0.21"
 }
