@@ -22,6 +22,7 @@ import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
+import HomeHeroImage from "../components/HomeHeroImage.vue";
 const hostname: string = "https://changweihua.github.io";
 
 import vitepressLifeProgress from 'vitepress-plugin-life-progress'
@@ -88,7 +89,7 @@ export default {
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
       // "home-hero-image": () =>
-      //   h(PlaceHolder, {
+      //   h(HomeHeroImage, {
       //     name: "home-hero-image",
       //   }),
       // "home-hero-after": () =>
@@ -216,6 +217,7 @@ export default {
     app.component("ArticleMetadata", ArticleMetadata);
     app.component("Contributors", Contributors);
     app.component("HomeContributors", HomeContributors);
+    app.component("HomeHeroImage", HomeHeroImage);
     app.component("CopyRight", copyright);
 
     import("ant-design-vue").then((module) => {

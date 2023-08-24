@@ -17,6 +17,7 @@ declare module 'vue' {
     DocAfter: typeof import('./components/DocAfter.vue')['default']
     HeaderProfile: typeof import('./components/HeaderProfile.vue')['default']
     HomeContributors: typeof import('./components/HomeContributors.vue')['default']
+    HomeHeroImage: typeof import('./components/HomeHeroImage.vue')['default']
     LottiePanel: typeof import('./components/LottiePanel.vue')['default']
     NotFound: typeof import('./components/NotFound.vue')['default']
     OnBoard: typeof import('./components/OnBoard.vue')['default']
