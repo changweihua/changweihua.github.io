@@ -25,16 +25,20 @@ import LottiePanel from "../components/LottiePanel.vue";
 import HomeHeroImage from "../components/HomeHeroImage.vue";
 const hostname: string = "https://changweihua.github.io";
 
-import vitepressLifeProgress from 'vitepress-plugin-life-progress'
-import 'vitepress-plugin-life-progress/lib/css/index.css'
-import { registerAnalytics, siteIds, trackPageview } from '../plugins/baidutongji'
+import vitepressLifeProgress from "vitepress-plugin-life-progress";
+import "vitepress-plugin-life-progress/lib/css/index.css";
+import {
+  registerAnalytics,
+  siteIds,
+  trackPageview,
+} from "../plugins/baidutongji";
 // import "unocss"
 // import ConsoleBan from 'console-ban'
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
-import { VuePreview } from 'vite-plugin-vue-preview'
-import 'vite-plugin-vue-preview/style.css'
+import { VuePreview } from "vite-plugin-vue-preview";
+import "vite-plugin-vue-preview/style.css";
 
 import { Sandbox } from "vitepress-plugin-sandpack";
 
@@ -56,18 +60,21 @@ const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import PlaceHolder from "../components/PlaceHolder.vue";
-import ArticleMetadata from "../components/ArticleMetadata.vue"
-import Contributors from "../components/Contributors.vue"
-import HomeContributors from "../components/HomeContributors.vue"
+import ArticleMetadata from "../components/ArticleMetadata.vue";
+import Contributors from "../components/Contributors.vue";
+import HomeContributors from "../components/HomeContributors.vue";
+import HeroLogo from "../components/HeroLogo.vue";
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
-import 'uno.css'
+import "uno.css";
+import useResize from "../src/hooks/useResize";
+import VueResizeObserver from "vue-resize-observer";
+
 export default {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
   Layout() {
-
     return h(DefaultTheme.Layout, null, {
       // "home-hero-before": () => h(AnimationTitle),
       // "home-hero-after": () => h(AnimationTitle),
@@ -88,10 +95,7 @@ export default {
           text: "知识汪洋仅此一瓢",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
-      // "home-hero-image": () =>
-      //   h(HomeHeroImage, {
-      //     name: "home-hero-image",
-      //   }),
+      "home-hero-image": () => h(HeroLogo),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
       //     name: "home-hero-after",
@@ -209,7 +213,7 @@ export default {
     app.component("demo-preview", AntDesignContainer);
     app.component("my-icon", Icon);
 
-    app.component('VuePreview', VuePreview)
+    app.component("VuePreview", VuePreview);
     app.component("header-profile", HeaderProfile);
     app.component("lottie-panel", LottiePanel);
     app.component("code-group", CodeGroup);
@@ -224,6 +228,9 @@ export default {
       app.use(module);
     });
 
+    // app.use(useResize);
+    app.use(VueResizeObserver);
+
     vitepressNprogress(ctx);
     vitepressBackToTop({
       // default
@@ -232,12 +239,10 @@ export default {
 
     if (inBrowser) {
       // registerAnalytics(siteIds)
-
       // window.addEventListener('hashchange', () => {
       //   const { href: url } = window.location
       //   trackPageview(siteIds, url)
       // })
-
       // router.onAfterRouteChanged = (to) => {
       //   trackPageview(siteIds, to)
       // }
@@ -268,7 +273,7 @@ export default {
       () => route.path,
       () => nextTick(() => initZoom())
     );
-    vitepressLifeProgress()
+    vitepressLifeProgress();
   },
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];

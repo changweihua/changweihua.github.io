@@ -16,6 +16,7 @@ declare module 'vue' {
     CopyRight: typeof import('./components/CopyRight.vue')['default']
     DocAfter: typeof import('./components/DocAfter.vue')['default']
     HeaderProfile: typeof import('./components/HeaderProfile.vue')['default']
+    HeroLogo: typeof import('./components/HeroLogo.vue')['default']
     HomeContributors: typeof import('./components/HomeContributors.vue')['default']
     HomeHeroImage: typeof import('./components/HomeHeroImage.vue')['default']
     LottiePanel: typeof import('./components/LottiePanel.vue')['default']

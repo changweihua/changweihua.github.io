@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import * as THREE from "three";
 // 导入轨道控制器
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+// @ts-ignore
+import { OrbitControls } from "../three/jsm/controls/OrbitControls.js";
 import { onMounted } from "vue";
 import { ref } from "vue";
 // 导入动画库
@@ -187,10 +188,10 @@ onMounted(() => {
   // // 使用渲染器，通过相机将场景渲染进来
   // renderer.render(scene, camera);
 
-  // // 创建轨道控制器
-  // const controls = new OrbitControls(camera, renderer.domElement);
-  // // 设置控制器阻尼，让控制器更有真实效果,必须在动画循环里调用.update()。
-  // controls.enableDamping = true;
+  // 创建轨道控制器
+  const controls = new OrbitControls(camera, renderer.domElement);
+  // 设置控制器阻尼，让控制器更有真实效果,必须在动画循环里调用.update()。
+  controls.enableDamping = true;
 
   // // 如果OrbitControls改变了相机参数，重新调用渲染器渲染三维场景
   // controls.addEventListener("change", function () {
@@ -216,7 +217,7 @@ onMounted(() => {
   scene.add(axesHelper);
 
   // 设置时钟
-  const clock = new THREE.Clock();
+  // const clock = new THREE.Clock();
 
   // window.addEventListener("dblclick", () => {
   //   const fullScreenElement = document.fullscreenElement;
@@ -237,8 +238,8 @@ onMounted(() => {
 
   function render() {
     // 获取时钟运行的总时长
-    let time = clock.getElapsedTime();
-    console.log("时钟运行总时长：", time);
+    // let time = clock.getElapsedTime();
+    // console.log("时钟运行总时长：", time);
     //   let deltaTime = clock.getDelta();
     //     console.log("两次获取时间的间隔时间：", deltaTime);
     // let t = time % 5;
@@ -253,7 +254,7 @@ onMounted(() => {
     camera.position.z = R * Math.sin(angle);
     // .position改变，重新执行lookAt(0,0,0)计算相机视线方向
     camera.lookAt(0, 0, 0);
-    // controls.update();
+    controls.update();
     renderer.render(scene, camera);
     //渲染下一帧的时候就会调用render函数
     requestAnimationFrame(render);
