@@ -13,7 +13,6 @@ declare module 'vue' {
     CodeGroup: typeof import('./components/CodeGroup.vue')['default']
     Comment: typeof import('./components/Comment.vue')['default']
     Contributors: typeof import('./components/Contributors.vue')['default']
-    copy: typeof import('./components/HeroLogo copy.vue')['default']
     CopyRight: typeof import('./components/CopyRight.vue')['default']
     DocAfter: typeof import('./components/DocAfter.vue')['default']
     HeaderProfile: typeof import('./components/HeaderProfile.vue')['default']

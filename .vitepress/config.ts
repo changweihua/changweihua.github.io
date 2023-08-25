@@ -2,15 +2,9 @@ import { defineConfig } from "vitepress";
 import { themeConfig } from "./src/theme";
 import { defaultConfig } from "./src/defaults";
 import { head } from "./src/head";
-import { withMermaid } from "vitepress-plugin-mermaid";
-//配置的英文文档设置
-import { enConfig } from "./src/configs/en";
 
 //配置的中文文档设置
 import { zhConfig } from "./src/configs/zh";
-import { SitemapStream } from "sitemap";
-import { createWriteStream } from "node:fs";
-import { resolve } from "node:path";
 import { RssPlugin } from "vitepress-plugin-rss";
 
 import { RSS } from "./src/rss";
@@ -105,8 +99,6 @@ const customElements = [
   "annotation",
   "annotation-xml",
 ];
-
-import { MDPreprocessor } from "./plugins/MDPreprocessor";
 
 export default defineConfig({
   vite: {

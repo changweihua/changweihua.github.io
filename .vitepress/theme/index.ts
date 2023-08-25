@@ -32,8 +32,7 @@ import {
   siteIds,
   trackPageview,
 } from "../plugins/baidutongji";
-// import "unocss"
-// import ConsoleBan from 'console-ban'
+
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
@@ -68,10 +67,7 @@ import HeroLogo from "../components/HeroLogo.vue";
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
 import "uno.css";
-import useResize from "../src/hooks/useResize";
 import VueResizeObserver from "vue-resize-observer";
-
-import "default-passive-events";
 
 export default {
   ...DefaultTheme,

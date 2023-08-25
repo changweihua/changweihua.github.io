@@ -8,6 +8,8 @@ import { GUI } from "../three/jsm/libs/lil-gui.module.min.js";
 import { onMounted, onUnmounted, ref } from "vue";
 // import * as dat from "dat.gui";
 
+import "default-passive-events";
+
 // // 导入动画库
 // import gsap from "gsap";
 // console.log(THREE);
@@ -31,7 +33,7 @@ const home_hero_3d = ref<HTMLDivElement>();
 
 // 1、创建场景
 const scene = new THREE.Scene();
-  const gui = new GUI({ width: 310 });
+const gui = new GUI({ width: 310 });
 
 onMounted(() => {
   if (!home_hero_3d.value) {
@@ -464,7 +466,7 @@ function clearThree(obj: any) {
     });
     obj.material.dispose();
   }
-  gui.destroy()
+  gui.destroy();
 }
 
 clearThree(scene);

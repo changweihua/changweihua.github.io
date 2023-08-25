@@ -148,7 +148,7 @@ export default defineConfig({
   //   },
   // },
   ssr: {
-    noExternal: ["vitepress-plugin-nprogress", "local-pkg"],
+    noExternal: ["vitepress-plugin-nprogress"],
   },
   // resolve: {
   //   alias: {

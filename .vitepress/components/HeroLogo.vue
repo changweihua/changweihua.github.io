@@ -10,6 +10,8 @@ import { FontLoader } from "../three/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "../three/jsm/geometries/TextGeometry.js";
 import { onMounted, ref } from "vue";
 
+import "default-passive-events";
+
 const hero_logo = ref<HTMLDivElement>();
 
 // 1、创建场景
@@ -208,12 +210,14 @@ const handleHeroLogoResize = ({
 </script>
 
 <template>
-  <div
-    v-resize="handleHeroLogoResize"
-    ref="hero_logo"
-    id="hero_logo"
-    class="w-full h-full"
-  ></div>
+  <ClientOnly>
+    <div
+      v-resize="handleHeroLogoResize"
+      ref="hero_logo"
+      id="hero_logo"
+      class="w-full h-full"
+    ></div
+  ></ClientOnly>
 </template>
 
 <style lang="less" scoped></style>

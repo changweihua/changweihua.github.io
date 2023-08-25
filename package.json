@@ -136,7 +136,6 @@
     "dat.gui": "^0.7.9",
     "dayjs": "^1.11.9",
     "default-passive-events": "^2.0.0",
-    "element-resize-detector": "^1.2.4",
     "esno": "^0.17.0",
     "gsap": "^3.12.2",
     "increase-memory-limit": "^1.0.7",
