@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import * as THREE from "three";
+import gsap from "gsap";
 // 导入轨道控制器
 // @ts-ignore
 import { OrbitControls } from "../three/jsm/controls/OrbitControls.js";
 // @ts-ignore
-import { STLLoader } from "../three/jsm/loaders/STLLoader.js";
+import { FontLoader } from "../three/jsm/loaders/FontLoader.js";
+// @ts-ignore
+import { TextGeometry } from "../three/jsm/geometries/TextGeometry.js";
 import { onMounted, ref } from "vue";
-import { onUnmounted } from "vue";
 
 const hero_logo = ref<HTMLDivElement>();
 
@@ -16,6 +18,38 @@ let scene: THREE.Scene | null = null;
 let camera: THREE.OrthographicCamera | null = null;
 // 3、初始化渲染器
 let renderer: THREE.WebGLRenderer | null = null;
+let controls: OrbitControls | null = null;
+
+let materials: Array<THREE.MeshPhongMaterial> = [];
+let textMesh: THREE.Mesh | null = null;
+const cameraTarget = new THREE.Vector3(0, 150, 0);
+let font: any = null;
+
+const size = 80,
+  hover = -30,
+  curveSegments = 8,
+  bevelThickness = 3,
+  bevelSize = 1.5;
+
+const fontMap = {
+  helvetiker: 0,
+  optimer: 1,
+  gentilis: 2,
+  "droid/droid_sans": 3,
+  "droid/droid_serif": 4,
+};
+
+const weightMap = {
+  regular: 0,
+  bold: 1,
+};
+
+const reverseFontMap = [];
+const reverseWeightMap = [];
+// @ts-ignore
+for (const i in fontMap) reverseFontMap[fontMap[i]] = i;
+// @ts-ignore
+for (const i in weightMap) reverseWeightMap[weightMap[i]] = i;
 
 onMounted(() => {
   if (!hero_logo.value) {
@@ -27,131 +61,128 @@ onMounted(() => {
   var width = hero.offsetWidth; //窗口宽度
   var height = hero.offsetHeight; //窗口高度
   var k = width / height; //窗口宽高比
-  var s = 150; //三维场景显示范围控制系数，系数越大，显示的范围越大
+  var s = 220; //三维场景显示范围控制系数，系数越大，显示的范围越大
 
   scene = new THREE.Scene();
   // 2、创建相机
-  camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+  camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1100);
   // 设置相机位置
-  camera!.position.set(200, 300, 200);
+  camera!.position.set(100, 100, 1200);
   scene.add(camera);
 
+  loadFont();
+
   // 初始化渲染器
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ antialias: true });
   // 设置渲染的尺寸大小
   renderer.setSize(hero.offsetWidth, hero.offsetHeight);
   renderer.setClearColor(0xb9d3ff, 0); //设置背景颜色
   renderer.shadowMap.enabled = true;
-
-  // const perspectiveHelper = new THREE.CameraHelper(camera);
-  // scene.add(perspectiveHelper);
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-  directionalLight.position.set(1, 1, 1200);
-  scene.add(directionalLight);
-
-  // const directionalLightHelper = new THREE.DirectionalLightHelper(
-  //   directionalLight,
-  //   5
-  // );
-  // scene.add(directionalLightHelper);
-
-  var loader = new STLLoader();
-
-  let cube: THREE.Mesh | null = null;
-
-  loader.load("/stls/output3.stl", function (geometry: THREE.BufferGeometry) {
-    console.log("Logo 加载成功");
-    var material = new THREE.MeshLambertMaterial({
-      color: 0x747bff,
-    }); //材质对象Material
-    cube = new THREE.Mesh(geometry, material);
-    scene!.add(cube);
-  });
-
-  const planeGeometry = new THREE.PlaneGeometry(10, 10);
-  const planeGeometryTexture = new THREE.TextureLoader().load(
-    "/images/texture.jpg"
-  );
-  const planeMaterial = new THREE.MeshLambertMaterial({
-    map: planeGeometryTexture,
-  });
-  const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  plane.receiveShadow = true;
-  plane.rotation.x = -Math.PI / 2;
-  plane.position.y = -1;
-  scene.add(plane);
-
-  // 创建轨道控制器
-  const controls = new OrbitControls(camera, renderer.domElement);
-  // 设置控制器阻尼，让控制器更有真实效果,必须在动画循环里调用.update()。
-  controls.enableDamping = true;
-  //相关限制方法：
-  controls.enablePan = false; //禁止平移
-  controls.enableZoom = false; //禁止缩放
-  controls.enableRotate = false; //禁止旋转
-  // 缩放范围
-  controls.minZoom = 0.5;
-  controls.maxZoom = 2;
-  // 上下旋转范围
-  controls.minPolarAngle = 0;
-  controls.maxPolarAngle = Math.PI / 2;
-  // 左右旋转范围
-  controls.minAzimuthAngle = -Math.PI / 2;
-  controls.maxAzimuthAngle = Math.PI / 2;
-
-  // console.log(renderer);
   // 将webgl渲染的canvas内容添加到body
   hero.appendChild(renderer.domElement);
 
-  // //环境光
-  // var ambient = new THREE.AmbientLight(0x444444);
-  // scene.add(ambient);
+  controls = new OrbitControls(camera, renderer.domElement);
 
-  // // 添加坐标轴辅助器
-  // // 辅助坐标系  参数250表示坐标系大小，可以根据场景大小去设置
-  // const axesHelper = new THREE.AxesHelper(5);
-  // scene.add(axesHelper);
+  const dirLight = new THREE.DirectionalLight(0xb9d3ff, 0.125);
+  dirLight.position.set(0, 0, 1).normalize();
+  scene.add(dirLight);
 
-  // 设置时钟
-  const clock = new THREE.Clock();
-  // 渲染循环
-  // let angle = 0; //用于圆周运动计算的角度值
-  // const R = 10; //相机圆周运动的半径
+  // scene.background = new THREE.Color().setHex(0xb9d3ff);
 
-  function render() {
-    if (cube) {
-      // 获取时钟运行的总时长
-      let time = clock.getElapsedTime();
-      // console.log("时钟运行总时长：", time);
-      // let deltaTime = clock.getDelta();
-      //   console.log("两次获取时间的间隔时间：", deltaTime);
-      let t = time % 5;
-      cube!.position.x = t * 1;
-      cube!.rotation.y = t * 1;
-      if (cube!.position.x > 5) {
-        cube!.position.x = 0;
-      }
+  const pointLight = new THREE.PointLight(0xb9d3ff, 1.5);
+  pointLight.color.setHex(0xb9d3ff);
+  pointLight.position.set(0, 200, 90);
+  scene.add(pointLight);
+
+  materials = [
+    new THREE.MeshPhongMaterial({ color: 0xb9d3ff, flatShading: true }), // front
+    new THREE.MeshPhongMaterial({ color: 0xb9d3ff }), // side
+  ];
+
+  const group = new THREE.Group();
+  // group.position.y = height * 0.5;
+
+  scene.add(group);
+
+  // animation
+  const animations = () => {
+    if (textMesh) {
+      // 这里将mesh的x坐标，进行从0-》2-》0,实现这样子一个简单的动画效果
+      gsap.to(textMesh!.position, {
+        duration: 1,
+        delay: 1,
+        x: 10,
+      });
+      gsap.to(textMesh!.position, {
+        duration: 1,
+        delay: 2,
+        x: -200,
+      });
     }
+  };
 
-    // angle += 0.01; // 相机y坐标不变，在XOZ平面上做圆周运动
-    // camera!.position.x = R * Math.cos(angle);
-    // camera!.position.z = R * Math.sin(angle);
-    // .position改变，重新执行lookAt(0,0,0)计算相机视线方向
-
-    // camera!.lookAt(0, 0, 0);
-
-    controls.update();
-    renderer!.render(scene!, camera!);
-    //渲染下一帧的时候就会调用render函数
-    requestAnimationFrame(render);
+  function loadFont() {
+    const loader = new FontLoader();
+    loader.load("/fonts/JetBrains_Regular.json", function (response: any) {
+      console.log(response);
+      font = response;
+      refreshText();
+    });
   }
 
-  render();
-});
+  function createText() {
+    console.log(font);
+    console.log(curveSegments);
+    const textGeo = new TextGeometry("CMONO.NET", {
+      font: font,
+      size: size,
+      height: height,
+      curveSegments: curveSegments,
+      bevelThickness: bevelThickness,
+      bevelSize: bevelSize,
+      bevelEnabled: true,
+    });
 
-onUnmounted(() => {
-  console.log("onUnmounted");
+    textGeo.computeBoundingBox();
+
+    const centerOffset =
+      -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
+
+    textMesh = new THREE.Mesh(textGeo, materials);
+
+    textMesh.position.x = centerOffset;
+    textMesh.position.y = hover;
+    textMesh.position.z = 0;
+
+    textMesh.rotation.x = 0;
+    textMesh.rotation.y = Math.PI * 2;
+
+    group.add(textMesh);
+  }
+
+  function refreshText() {
+    if (textMesh) {
+      group.remove(textMesh);
+    }
+    createText();
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    render();
+  }
+
+  function render() {
+    camera!.lookAt(cameraTarget);
+    controls!.update();
+    renderer!.clear();
+    renderer!.render(scene!, camera!);
+    animations();
+  }
+
+  console.log("加载Logo");
+
+  animate();
 });
 
 const handleHeroLogoResize = ({
@@ -163,7 +194,16 @@ const handleHeroLogoResize = ({
 }) => {
   console.log(width, height);
 
-  renderer!.render(scene!, camera!);
+  requestAnimationFrame(function () {
+    // camera!.aspect = width /height;
+    camera!.updateProjectionMatrix();
+    renderer!.setSize(width, height);
+    renderer!.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // camera!.lookAt(cameraTarget);
+    // controls!.update();
+    // renderer!.clear();
+    // renderer!.render(scene!, camera!);
+  });
 };
 </script>
 

@@ -71,6 +71,8 @@ import "uno.css";
 import useResize from "../src/hooks/useResize";
 import VueResizeObserver from "vue-resize-observer";
 
+import "default-passive-events";
+
 export default {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
@@ -228,16 +230,16 @@ export default {
       app.use(module);
     });
 
-    // app.use(useResize);
-    app.use(VueResizeObserver);
-
-    vitepressNprogress(ctx);
-    vitepressBackToTop({
-      // default
-      threshold: 300,
-    });
-
     if (inBrowser) {
+      vitepressLifeProgress();
+      vitepressNprogress(ctx);
+      vitepressBackToTop({
+        // default
+        threshold: 300,
+      });
+
+      // app.use(useResize);
+      app.use(VueResizeObserver);
       // registerAnalytics(siteIds)
       // window.addEventListener('hashchange', () => {
       //   const { href: url } = window.location
@@ -273,7 +275,6 @@ export default {
       () => route.path,
       () => nextTick(() => initZoom())
     );
-    vitepressLifeProgress();
   },
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];

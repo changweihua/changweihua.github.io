@@ -3,9 +3,12 @@ import * as THREE from "three";
 // 导入轨道控制器
 // @ts-ignore
 import { OrbitControls } from "../three/jsm/controls/OrbitControls.js";
-import { onMounted } from "vue";
-import { ref } from "vue";
-// 导入动画库
+// @ts-ignore
+import { GUI } from "../three/jsm/libs/lil-gui.module.min.js";
+import { onMounted, onUnmounted, ref } from "vue";
+// import * as dat from "dat.gui";
+
+// // 导入动画库
 // import gsap from "gsap";
 // console.log(THREE);
 
@@ -26,13 +29,14 @@ defineProps({
 
 const home_hero_3d = ref<HTMLDivElement>();
 
+// 1、创建场景
+const scene = new THREE.Scene();
+  const gui = new GUI({ width: 310 });
+
 onMounted(() => {
   if (!home_hero_3d.value) {
     return;
   }
-
-  // 1、创建场景
-  const scene = new THREE.Scene();
 
   const hero = home_hero_3d.value;
 
@@ -82,11 +86,12 @@ onMounted(() => {
 
   // 添加物体
   // 创建几何体
-  const cubeGeometry = new THREE.CylinderGeometry(1, 1, 1);
+  const cubeGeometry = new THREE.CylinderGeometry(2, 2, 2);
   const material = new THREE.MeshPhongMaterial({
     color: 0xff0000,
     specular: 0xffffff,
-    shininess: 30,
+    shininess: 120,
+    wireframe: true,
   });
   // const material = new THREE.MeshStandardMaterial({ color: 0xff0000, metalness: 0.5, roughness: 0.5 });
   // const material = new THREE.MeshLambertMaterial({ color: 0xffff00 });
@@ -232,6 +237,148 @@ onMounted(() => {
   //   //   console.log(fullScreenElement);
   // });
 
+  // // dat.gui
+
+  // const gui = new dat.GUI();
+  // const options: {
+  //   message: string;
+  //   speed: number;
+  //   number: number;
+  //   displayOutline: boolean;
+  //   fn: () => void;
+  //   color0: string;
+  //   color1: Array<number>;
+  //   color2: Array<number>;
+  //   color3: {
+  //     h: number;
+  //     s: number;
+  //     v: number;
+  //   };
+  // } = {
+  //   message: "dat.gui",
+  //   speed: 0.8,
+  //   number: 1,
+  //   displayOutline: false,
+  //   fn: function () {},
+  //   color0: "#ffae23",
+  //   color1: [0, 128, 255],
+  //   color2: [0, 128, 255, 0.3],
+  //   color3: { h: 350, s: 0.9, v: 0.3 },
+  // };
+  // gui.add(options, "message");
+  // gui.add(options, "speed", -5, 5);
+  // gui.add(options, "displayOutline");
+  // gui.add(options, "fn");
+  // gui
+  //   .add(cube.position, "x")
+  //   .min(0)
+  //   .max(3)
+  //   .step(0.1)
+  //   .name("移动x轴")
+  //   .onChange((value) => {
+  //     console.log("x轴的值:", value);
+  //   });
+  // var controller = gui.add(options, "number").min(0).max(10).step(1);
+  // controller.onChange(function (value) {
+  //   console.log("onChange:" + value);
+  // });
+  // controller.onFinishChange(function (value) {
+  //   console.log("onFinishChange" + value);
+  // });
+  // options.color0 = "#ffae23"; // CSS string
+  // options.color1 = [0, 128, 255]; // RGB array
+  // options.color2 = [0, 128, 255, 0.3]; // RGB with alpha
+  // options.color3 = { h: 350, s: 0.9, v: 0.3 }; // Hue, saturation, value
+
+  // gui
+  //   .addColor(options, "color0")
+  //   .name("立方体颜色")
+  //   .onChange((value) => {
+  //     console.log(value);
+  //     cube.material.color.set(value);
+  //   });
+  // gui.addColor(options, "color1");
+  // gui.addColor(options, "color2");
+  // gui.addColor(options, "color3");
+
+  // gui.add(cube, "visible").name("立方体是否显示");
+  // options.fn = function () {
+  //   gsap.to(cube.position, {
+  //     x: 3,
+  //     duration: 3,
+  //     repeat: -1,
+  //     yoyo: true,
+  //   });
+  // };
+  // gui.add(options, "fn").name("立方体运动");
+
+  // const folder = gui.addFolder("设置立方体");
+  // // 材质的线框属性wireframe,布尔值
+  // folder.add(cube.material, "wireframe");
+
+  // // dat.gui
+
+  // lil.gui
+
+  gui.add(document, "title");
+
+  const controllers = {
+    myBoolean: true,
+    myString: "lil-gui",
+    myNumber: 1,
+    myFunction: function () {
+      alert("hi");
+    },
+    number1: 1,
+    number2: 50,
+  };
+
+  gui.add(controllers, "myBoolean"); // checkbox
+  gui.add(controllers, "myString"); // text field
+  gui.add(controllers, "myNumber"); // number field
+  gui.add(controllers, "myFunction"); // button
+  gui.add(controllers, "number1", 0, 1); // min, max
+  gui.add(controllers, "number2", 0, 100, 10); // min, max, step
+
+  // const controller = {
+  //   idle: () => {
+  //     idleAction.play();
+  //     walkAction.stop();
+  //   },
+  //   walk: () => {
+  //     walkAction.play();
+  //     idleAction.stop();
+  //   },
+  //   scale: 0.4,
+  //   rotateY: Math.PI / 2,
+  // };
+
+  // const createPanel = () => {
+  //   const panel = new GUI({ width: 310 });
+  //   panel.add(document, "title");
+  //   panel.add(controller, "idle");
+  //   panel.add(controller, "walk");
+  //   panel.add(controller, "scale", 0.1, 2, 0.01).onChange((value) => {
+  //     model.scale.set(value, value, value);
+  //   });
+  //   panel
+  //     .add(controller, "rotateY", -Math.PI, Math.PI, 0.1)
+  //     .onChange((value) => {
+  //       model.rotation.set(0, value, 0);
+  //     });
+  //   const colorFormats = {
+  //     string: "#000000",
+  //     int: 0x000000,
+  //     object: { r: 1, g: 1, b: 1 },
+  //     array: [1, 1, 1],
+  //   };
+  //   panel.addColor(colorFormats, "string").onChange((value) => {
+  //     app.scene.background = new THREE.Color(value);
+  //   });
+  // };
+
+  // lil.gui
+
   // 渲染循环
   let angle = 0; //用于圆周运动计算的角度值
   const R = 10; //相机圆周运动的半径
@@ -300,6 +447,29 @@ onMounted(() => {
 
   // render();
 });
+
+function clearThree(obj: any) {
+  while (obj.children.length > 0) {
+    clearThree(obj.children[0]);
+    obj.remove(obj.children[0]);
+  }
+  if (obj.geometry) obj.geometry.dispose();
+
+  if (obj.material) {
+    //in case of map, bumpMap, normalMap, envMap ...
+    Object.keys(obj.material).forEach((prop) => {
+      if (!obj.material[prop]) return;
+      if (typeof obj.material[prop].dispose === "function")
+        obj.material[prop].dispose();
+    });
+    obj.material.dispose();
+  }
+  gui.destroy()
+}
+
+clearThree(scene);
+
+onUnmounted(() => {});
 </script>
 
 <template>
