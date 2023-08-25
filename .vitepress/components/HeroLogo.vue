@@ -46,12 +46,6 @@ const weightMap = {
   bold: 1,
 };
 
-const reverseFontMap = [];
-const reverseWeightMap = [];
-// @ts-ignore
-for (const i in fontMap) reverseFontMap[fontMap[i]] = i;
-// @ts-ignore
-for (const i in weightMap) reverseWeightMap[weightMap[i]] = i;
 
 onMounted(() => {
   if (!hero_logo.value) {
@@ -187,6 +181,14 @@ onMounted(() => {
   animate();
 });
 
+const reverseFontMap = [];
+const reverseWeightMap = [];
+// @ts-ignore
+for (const i in fontMap) reverseFontMap[fontMap[i]] = i;
+// @ts-ignore
+for (const i in weightMap) reverseWeightMap[weightMap[i]] = i;
+
+
 const handleHeroLogoResize = ({
   width,
   height,
@@ -198,9 +200,9 @@ const handleHeroLogoResize = ({
 
   requestAnimationFrame(function () {
     // camera!.aspect = width /height;
-    camera!.updateProjectionMatrix();
-    renderer!.setSize(width, height);
-    renderer!.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // camera!.updateProjectionMatrix();
+    // renderer!.setSize(width, height);
+    // renderer!.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     // camera!.lookAt(cameraTarget);
     // controls!.update();
     // renderer!.clear();
@@ -210,14 +212,13 @@ const handleHeroLogoResize = ({
 </script>
 
 <template>
-  <ClientOnly>
     <div
       v-resize="handleHeroLogoResize"
       ref="hero_logo"
       id="hero_logo"
       class="w-full h-full"
     ></div
-  ></ClientOnly>
+  >
 </template>
 
 <style lang="less" scoped></style>

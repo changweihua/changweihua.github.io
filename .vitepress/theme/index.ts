@@ -9,7 +9,7 @@ import {
   useRoute,
 } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, nextTick, onMounted, watch, watchEffect } from "vue";
+import { Suspense, h, nextTick, onMounted, watch, watchEffect } from "vue";
 import { Feed } from "feed";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "ant-design-vue/dist/reset.css";
@@ -93,6 +93,7 @@ export default {
           text: "知识汪洋仅此一瓢",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
+      // "home-hero-image": () => h(Suspense, HeroLogo),
       "home-hero-image": () => h(HeroLogo),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
@@ -207,6 +208,24 @@ export default {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     const { app, router, siteData, isServer } = ctx;
+
+    if (inBrowser) {
+      vitepressNprogress(ctx);
+      vitepressBackToTop({
+        // default
+        threshold: 300,
+      });
+      // app.use(useResize);
+      // registerAnalytics(siteIds)
+      // window.addEventListener('hashchange', () => {
+      //   const { href: url } = window.location
+      //   trackPageview(siteIds, url)
+      // })
+      // router.onAfterRouteChanged = (to) => {
+      //   trackPageview(siteIds, to)
+      // }
+    }
+
     DefaultTheme.enhanceApp(ctx);
     app.component("demo-preview", AntDesignContainer);
     app.component("my-icon", Icon);
@@ -226,25 +245,9 @@ export default {
       app.use(module);
     });
 
-    if (inBrowser) {
-      vitepressLifeProgress();
-      vitepressNprogress(ctx);
-      vitepressBackToTop({
-        // default
-        threshold: 300,
-      });
+    // vitepressLifeProgress();
 
-      // app.use(useResize);
-      app.use(VueResizeObserver);
-      // registerAnalytics(siteIds)
-      // window.addEventListener('hashchange', () => {
-      //   const { href: url } = window.location
-      //   trackPageview(siteIds, url)
-      // })
-      // router.onAfterRouteChanged = (to) => {
-      //   trackPageview(siteIds, to)
-      // }
-    }
+    app.use(VueResizeObserver);
   },
   setup() {
     const { lang } = useData();
