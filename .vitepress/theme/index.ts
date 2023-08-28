@@ -25,8 +25,6 @@ import LottiePanel from "../components/LottiePanel.vue";
 import HomeHeroImage from "../components/HomeHeroImage.vue";
 const hostname: string = "https://changweihua.github.io";
 
-import vitepressLifeProgress from "vitepress-plugin-life-progress";
-import "vitepress-plugin-life-progress/lib/css/index.css";
 import {
   registerAnalytics,
   siteIds,
@@ -63,6 +61,7 @@ import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import HeroLogo from "../components/HeroLogo.vue";
+import ThreeWithBall from "../components/ThreeWithBall.vue";
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -239,6 +238,7 @@ export default {
     app.component("Contributors", Contributors);
     app.component("HomeContributors", HomeContributors);
     app.component("HomeHeroImage", HomeHeroImage);
+    app.component("ThreeWithBall", ThreeWithBall);
     app.component("CopyRight", copyright);
 
     import("ant-design-vue").then((module) => {

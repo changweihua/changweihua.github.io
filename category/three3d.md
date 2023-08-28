@@ -9,6 +9,7 @@ outline: page
 ## ThreeJS ##
 
 - [ThreeJS 初了解](/blog/2023-08/threejs_first_demo.md)
+- [Threejs与物理引擎](/blog/2023-08/threejs_with_ball.md)
 
 ## WebGL ##
 

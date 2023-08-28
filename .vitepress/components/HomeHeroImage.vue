@@ -35,6 +35,8 @@ const home_hero_3d = ref<HTMLDivElement>();
 const scene = new THREE.Scene();
 const gui = new GUI({ width: 310 });
 
+let animationFrameIndex = 0;
+
 onMounted(() => {
   if (!home_hero_3d.value) {
     return;
@@ -406,7 +408,7 @@ onMounted(() => {
     controls.update();
     renderer.render(scene, camera);
     //渲染下一帧的时候就会调用render函数
-    requestAnimationFrame(render);
+    animationFrameIndex = requestAnimationFrame(render);
   }
 
   render();
@@ -471,7 +473,11 @@ function clearThree(obj: any) {
 
 clearThree(scene);
 
-onUnmounted(() => {});
+onUnmounted(() => {
+  if (animationFrameIndex > 0) {
+    cancelAnimationFrame(animationFrameIndex);
+  }
+});
 </script>
 
 <template>
