@@ -61,6 +61,7 @@ import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import HeroLogo from "../components/HeroLogo.vue";
+import ThreePlane from "../components/ThreePlane.vue";
 import ThreeWithBall from "../components/ThreeWithBall.vue";
 
 import { Icon } from "@iconify/vue";
@@ -239,6 +240,7 @@ export default {
     app.component("HomeContributors", HomeContributors);
     app.component("HomeHeroImage", HomeHeroImage);
     app.component("ThreeWithBall", ThreeWithBall);
+    app.component("ThreePlane", ThreePlane);
     app.component("CopyRight", copyright);
 
     import("ant-design-vue").then((module) => {

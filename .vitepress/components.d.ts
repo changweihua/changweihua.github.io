@@ -26,6 +26,7 @@ declare module 'vue' {
     PlaceHolder: typeof import('./components/PlaceHolder.vue')['default']
     Recommend: typeof import('./components/Recommend.vue')['default']
     Sponsor: typeof import('./components/Sponsor.vue')['default']
+    ThreePlane: typeof import('./components/ThreePlane.vue')['default']
     ThreeWithBall: typeof import('./components/ThreeWithBall.vue')['default']
   }
 }
