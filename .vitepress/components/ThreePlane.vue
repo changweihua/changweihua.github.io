@@ -83,7 +83,7 @@ onMounted(() => {
 
   scene = new THREE.Scene();
 
-  const ambient = new THREE.AmbientLight(0xffffff);
+  const ambient = new THREE.AmbientLight(0xfffddf);
   scene.add(ambient);
 
   const fov = 40; // 视野范围
@@ -116,7 +116,7 @@ onMounted(() => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.4;
+  controls.autoRotateSpeed = 14;
   controls.dampingFactor = 0.1;
 
   // 添加坐标轴辅助器
@@ -126,7 +126,7 @@ onMounted(() => {
   // let light = new THREE.PointLight();
   // camera.add(light);
 
-  const light = new THREE.DirectionalLight(0xffffff); //光源颜色
+  const light = new THREE.DirectionalLight(0xfffddf); //光源颜色
   light.position.set(20, 10, 1305); //光源位置
   scene.add(light); //光源添加到场景中
 
@@ -155,6 +155,19 @@ onMounted(() => {
   // gridHelper.material.opacity = 0.2;
   // // gridHelper.material.transparent = true;
   // scene.add(gridHelper);
+
+  var pointColor = "#ffffff";
+  var spotLight = new THREE.SpotLight(pointColor);
+  spotLight.position.set(-40, 60, -10); //设置光源的位置
+  spotLight.castShadow = true; //开启阴影效果
+  // spotLight.shadowCameraNear = 2; // 投影近点，距离光源多近能产生阴影
+  // spotLight.shadowCameraFar = 200; //投影远点，到哪一点为止不再产生阴影
+  // spotLight.shadowCameraFov = 30; //投影视场，聚光的角度大小
+  // spotLight.target = plane; //光照的方向。 plane： 地面
+  spotLight.distance = 0; //光照距离，默认为0.
+  spotLight.angle = 0.4; //光源发射的宽度（弧度）
+
+  scene.add(spotLight);
 
   let airPlane: any = null;
 
@@ -205,42 +218,74 @@ onMounted(() => {
   // );
 
   // 加载mtl
+  // const mtlLoader = new MTLLoader();
+  // mtlLoader.load(
+  //   "/A320/Airbus A320 Airplane 3D model.mtl",
+  //   function (materials: any) {
+  //     materials.preload();
+  //     objLoader.setMaterials(materials);
+  //     // 加载obj
+  //     objLoader.load(
+  //       "/A320/Airbus A320 Airplane 3D model.obj",
+  //       function (gltf: any) {
+  //         // // 模型文件太大，缩小一下比例，方便显示
+  //         // gltf.scale.set(0.1, 0.1, 0.1);
+  //         // // 设置可以投影
+  //         // gltf.children.forEach((item: any) => {
+  //         //   item.castShadow = true;
+  //         //   item.receiveShadow = true;
+  //         // });
+
+  //         const box3_2 = new THREE.Box3().setFromObject(gltf); //新建一个Box3包裹盒把模型包裹起来
+  //         const boxSize = box3_2.getSize(new THREE.Vector3()).length(); //综合计算出模型的长度值，利用它设置相机位置
+  //         const boxCenter = box3_2.getCenter(new THREE.Vector3());
+  //         const fov = camera.fov * (Math.PI / 180);
+  //         const cameraZ = boxSize / 2 / Math.tan(fov / 2);
+  //         camera.position.z = cameraZ;
+  //         camera.lookAt(boxCenter);
+
+  //         airPlane = gltf;
+  //         // 添加到场景
+  //         scene!.add(gltf);
+  //         // scene!.add(gltf.scene);
+  //         // 模型加载完,进行相机的初始化,传入设置的参数,模型加载为异步
+  //         // cameraReset(cameraPosition, cameraLookat);
+
+  //         // // 设置平面角度和位置
+  //         // gltf.rotation.x = -0.5 * Math.PI;
+  //         // gltf.position.x = 0;
+  //         // gltf.position.y = 0;
+  //         // gltf.position.z = 0;
+  //       }
+  //     );
+  //   }
+  // );
+
   const mtlLoader = new MTLLoader();
-  mtlLoader.load("/objs/SSJ100.mtl", function (materials: any) {
-    materials.preload();
-    objLoader.setMaterials(materials);
-    // 加载obj
-    objLoader.load("/objs/SSJ100.obj", function (gltf: any) {
-      // // 模型文件太大，缩小一下比例，方便显示
-      // gltf.scale.set(0.1, 0.1, 0.1);
-      // // 设置可以投影
-      // gltf.children.forEach((item: any) => {
-      //   item.castShadow = true;
-      //   item.receiveShadow = true;
-      // });
+  mtlLoader.load(
+    "/ssj/SSJ100.mtl",
+    function (materials: any) {
+      materials.preload();
+      objLoader.setMaterials(materials);
+      // 加载obj
+      objLoader.load(
+        "/ssj/SSJ100.obj",
+        function (gltf: any) {
+          const box3_2 = new THREE.Box3().setFromObject(gltf); //新建一个Box3包裹盒把模型包裹起来
+          const boxSize = box3_2.getSize(new THREE.Vector3()).length(); //综合计算出模型的长度值，利用它设置相机位置
+          const boxCenter = box3_2.getCenter(new THREE.Vector3());
+          const fov = camera.fov * (Math.PI / 180);
+          const cameraZ = boxSize / 2 / Math.tan(fov / 2);
+          camera.position.z = cameraZ;
+          camera.lookAt(boxCenter);
 
-      const box3_2 = new THREE.Box3().setFromObject(gltf); //新建一个Box3包裹盒把模型包裹起来
-      const boxSize = box3_2.getSize(new THREE.Vector3()).length(); //综合计算出模型的长度值，利用它设置相机位置
-      const boxCenter = box3_2.getCenter(new THREE.Vector3());
-      const fov = camera.fov * (Math.PI / 180);
-      const cameraZ = boxSize / 2 / Math.tan(fov / 2);
-      camera.position.z = cameraZ;
-      camera.lookAt(boxCenter);
-
-      airPlane = gltf;
-      // 添加到场景
-      scene!.add(gltf);
-      // scene!.add(gltf.scene);
-      // 模型加载完,进行相机的初始化,传入设置的参数,模型加载为异步
-      // cameraReset(cameraPosition, cameraLookat);
-
-      // // 设置平面角度和位置
-      // gltf.rotation.x = -0.5 * Math.PI;
-      // gltf.position.x = 0;
-      // gltf.position.y = 0;
-      // gltf.position.z = 0;
-    });
-  });
+          airPlane = gltf;
+          // 添加到场景
+          scene!.add(gltf);
+        }
+      );
+    }
+  );
 
   // // 渲染循环
   // let angle = 0; //用于圆周运动计算的角度值
