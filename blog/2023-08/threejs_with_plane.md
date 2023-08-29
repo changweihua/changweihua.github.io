@@ -11,8 +11,10 @@ date: 2023-08-28
 
 # {{ $frontmatter.title}} #
 
-22334455
+<script lang="ts" setup>
+import AirStrip from "../../components/AirStrip.vue"
+</script>
 
 <ClientOnly>
-  <ThreePlane />
+  <AirStrip />
 </ClientOnly>

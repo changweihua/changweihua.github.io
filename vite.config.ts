@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import Components from "unplugin-vue-components/vite";
-import AntdvResolver from "antdv-component-resolver";
+// import AntdvResolver from "antdv-component-resolver";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import { fileURLToPath } from "node:url";
 import { vuePreviewPlugin } from "vite-plugin-vue-preview";
@@ -12,8 +12,11 @@ import UnoCSS from 'unocss/vite'
 import { SearchPlugin } from "vitepress-plugin-search";
 import flexSearchIndexOptions from "flexsearch";
 import { resolve } from "node:path";
-
+import AutoImport from 'unplugin-auto-import/vite'
 import { MarkdownTransform } from './.vitepress/plugins/markdownTransform'
+// import styleImport, {
+//   AndDesignVueResolve
+// } from 'vite-plugin-style-import'
 
 //default options
 var options = {
@@ -38,16 +41,46 @@ export default defineConfig({
   plugins: [
     // custom
     // MarkdownTransform(),
+    AutoImport({
+      imports:["vue","vue-router"],
+      dts:'src/auto-import.d.ts',   // 路径下自动生成文件夹存放全局指令
+      // dts: true, // 会在根目录生成auto-imports.d.ts，里面可以看到自动导入的api
+      include: [/\.[tj]sx?$/, /\.vue$/], // 匹配的文件，也就是哪些后缀的文件需要自动引入
+      // 根据项目情况配置eslintrc，默认是不开启的
+      eslintrc: {
+        enabled: true // @default false
+        // 下面两个是其他配置，默认即可
+        // 输出一份json文件，默认输出路径为./.eslintrc-auto-import.json
+        // filepath: './.eslintrc-auto-import.json', // @default './.eslintrc-auto-import.json'
+        // globalsPropValue: true, // @default true 可设置 boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
+      }
+    }),
+    // styleImport({
+    //   resolves: [
+    //     AndDesignVueResolve()
+    //   ],
+    //   // 自定义规则
+    //   libs: [
+    //     {
+    //       libraryName: 'ant-design-vue',
+    //       esModule: true,
+    //       resolveStyle: (name) => {
+    //         return `ant-design-vue/es/${name}/style/index`
+    //       }
+    //     }
+    //   ]
+    // }),
     Components({
-      dirs: resolve(__dirname, ".vitepress/components"),
+      dirs: resolve(__dirname, "./components"),
       include: [/\.vue$/, /\.vue\?vue/],
-      dts: "./.vitepress/components.d.ts",
+      dts: "./components.d.ts",
       transformer: "vue3",
       resolvers: [
-        AntdvResolver(),
+        // AntdvResolver(),
         IconsResolver(),
         AntDesignVueResolver({
           importStyle: false, // css in js
+          resolveIcons: true
         }),
       ],
     }),

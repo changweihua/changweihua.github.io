@@ -2,7 +2,6 @@ import { defineConfig } from "vitepress";
 import { themeConfig } from "./src/theme";
 import { defaultConfig } from "./src/defaults";
 import { head } from "./src/head";
-
 //配置的中文文档设置
 import { zhConfig } from "./src/configs/zh";
 import { RssPlugin } from "vitepress-plugin-rss";
@@ -97,7 +96,7 @@ const customElements = [
   "maction",
   "semantics",
   "annotation",
-  "annotation-xml",
+  "annotation-xml"
 ];
 
 export default defineConfig({

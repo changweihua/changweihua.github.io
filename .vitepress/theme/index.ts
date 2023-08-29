@@ -22,7 +22,6 @@ import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
-import HomeHeroImage from "../components/HomeHeroImage.vue";
 const hostname: string = "https://changweihua.github.io";
 
 import {
@@ -61,8 +60,9 @@ import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import HeroLogo from "../components/HeroLogo.vue";
-import ThreePlane from "../components/ThreePlane.vue";
-import ThreeWithBall from "../components/ThreeWithBall.vue";
+import Sand from "../components/Sand.vue";
+
+// import ThreePlane from "../../components/ThreePlane.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -238,9 +238,8 @@ export default {
     app.component("ArticleMetadata", ArticleMetadata);
     app.component("Contributors", Contributors);
     app.component("HomeContributors", HomeContributors);
-    app.component("HomeHeroImage", HomeHeroImage);
-    app.component("ThreeWithBall", ThreeWithBall);
-    app.component("ThreePlane", ThreePlane);
+    // app.component("ThreePlane", ThreePlane);
+    app.component("Sand", Sand);
     app.component("CopyRight", copyright);
 
     import("ant-design-vue").then((module) => {

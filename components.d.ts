@@ -7,6 +7,16 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    About: typeof import('./components/about.vue')['default']
+    AirStrip: typeof import('./components/AirStrip.vue')['default']
+    AProgress: typeof import('ant-design-vue/es')['Progress']
+    Articles: typeof import('./components/articles.vue')['default']
     ATag: typeof import('ant-design-vue/es')['Tag']
+    Category: typeof import('./components/category.vue')['default']
+    HeroLogo2: typeof import('./components/HeroLogo2.vue')['default']
+    HomeHeroImage: typeof import('./components/HomeHeroImage.vue')['default']
+    Test: typeof import('./components/test.vue')['default']
+    ThreePlane: typeof import('./components/ThreePlane.vue')['default']
+    ThreeWithBall: typeof import('./components/ThreeWithBall.vue')['default']
   }
 }
