@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import * as THREE from "three";
+import gsap from "gsap";
 import { onMounted, onUnmounted, ref } from "vue";
 // @ts-ignore
 import { OBJLoader } from "../three/jsm/loaders/OBJLoader.js";
@@ -13,6 +14,8 @@ const percent = ref(0);
 const loading = ref(true);
 
 let airPlane: any = null;
+let positionAudio: THREE.PositionalAudio | null = null;
+let renderer: ThreeRenderer | null = null;
 
 onMounted(() => {
   if (!containerRef.value) {
@@ -22,7 +25,7 @@ onMounted(() => {
   //地面的长宽
   const laneWidth = 50;
   const laneHeight = 420;
-  const renderer = new ThreeRenderer(containerRef.value, 45, 100, 450);
+  renderer = new ThreeRenderer(containerRef.value, 45, 100, 450);
 
   //创建一个地面的父容器
   const groundGroup = new THREE.Group();
@@ -159,15 +162,34 @@ onMounted(() => {
   //   audio.play(); //play播放、stop停止、pause暂停
   // });
 
-  // const geometry = new THREE.BoxGeometry(10, 10, 10);
-  // const material = new THREE.MeshLambertMaterial({
-  //   color: 0x0000ff,
-  // }); //材质对象Material
-  // // 用来定位音源的网格模型
-  // var audioMesh = new THREE.Mesh(geometry, material);
-  // // 设置网格模型的位置，相当于设置音源的位置
-  // audioMesh.position.set(0, 0, 300);
-  // renderer.addMesh(audioMesh);
+  const geometry = new THREE.BoxGeometry(10, 10, 10);
+  const material = new THREE.MeshLambertMaterial({
+    color: 0x0000ff,
+  }); //材质对象Material
+  // 用来定位音源的网格模型
+  var audioMesh = new THREE.Mesh(geometry, material);
+  // 设置网格模型的位置，相当于设置音源的位置
+  audioMesh.position.set(0, 0, 300);
+  renderer.addMesh(audioMesh);
+
+  // 创建一个虚拟的监听者
+  var listener = new THREE.AudioListener();
+  // 监听者绑定到相机对象
+  renderer.addAudioListener(listener);
+  // 创建一个位置音频对象,监听者作为参数,音频和监听者关联。
+  positionAudio = new THREE.PositionalAudio(listener);
+  //音源绑定到一个网格模型上
+  audioMesh.add(positionAudio);
+  // 创建一个音频加载器
+  var audioLoader = new THREE.AudioLoader();
+  // 加载音频文件，返回一个音频缓冲区对象作为回调函数参数
+  audioLoader.load("/sounds/engine.mp3", function (AudioBuffer) {
+    // console.log(buffer);
+    // 音频缓冲区对象关联到音频对象audio
+    positionAudio.setBuffer(AudioBuffer);
+    positionAudio.setVolume(0.9); //音量
+    positionAudio.setRefDistance(200); //参数值越大,声音越大
+  });
 
   const mtlLoader = new MTLLoader();
   const objLoader = new OBJLoader();
@@ -179,12 +201,13 @@ onMounted(() => {
       function (gltf: any) {
         airPlane = gltf;
         airPlane.rotation.z = 1 * Math.PI;
+        airPlane.position.set(0, -130, 0);
+        // airPlane.rotation.x = -0.25 * Math.PI;
+        // airPlane.setScaleToFitSize(airPlane);
+        airPlane.scale.set(0.01, 0.01, 0.01);
         // airPlane.rotation.z = 0.25 * Math.PI;
         // 添加到场景
         renderer.add(airPlane);
-        airPlane.position.set(0, -130, 0);
-        // airPlane.setScaleToFitSize(airPlane);
-        airPlane.scale.set(0.01, 0.01, 0.01);
         const box = new THREE.Box3().setFromObject(airPlane);
         const box3Helper = new THREE.Box3Helper(box);
         renderer.add(box3Helper);
@@ -217,14 +240,72 @@ onMounted(() => {
     //   }
     // }
   });
-
-  // 页面伸缩
-  resizePage();
 });
 
 onUnmounted(() => {
-  removeResizePage();
+  if (positionAudio) {
+    positionAudio.stop();
+  }
 });
+
+const engineStarted = ref(false);
+const launching = ref(false);
+
+function startEngine() {
+  if (!positionAudio) {
+    return;
+  }
+  positionAudio.setLoop(true); //是否循环
+  positionAudio.play(); //播放
+  engineStarted.value = true;
+}
+
+function launch() {
+  if (!positionAudio) {
+    return;
+  }
+  positionAudio.setLoop(false);
+  const animation = gsap.to(airPlane.position, {
+    y: 200,
+    duration: 20,
+    ease: "steps.inOut",
+    repeat: 0, // -1,
+    yoyo: false,
+    delay: 5,
+    onStart: () => {
+      console.log("动画开始");
+      launching.value = true;
+    },
+    onComplete: () => {
+      console.log("动画完成");
+      launching.value = false;
+      airPlane.position.y = -130;
+      renderer.refresh()
+    },
+  });
+
+  // renderer.move(
+  //   {
+  //     x: airPlane.position.x,
+  //     y: airPlane.position.y,
+  //     z: airPlane.position.z,
+  //   },
+  //   {
+  //     x: airPlane.position.x,
+  //     y: 300,
+  //     z: airPlane.position.z,
+  //   }
+  // );
+  // renderer.render(() => {
+  //   // dashLineGroup.position.y = (-time * 1.5) % 3;
+  //   if (airPlane) {
+  //     airPlane.position.y += 2;
+  //     if (airPlane.position.y >= 300) {
+  //       airPlane.position.y = -150;
+  //     }
+  //   }
+  // });
+}
 </script>
 
 <template>
@@ -243,6 +324,13 @@ onUnmounted(() => {
       />
     </div>
   </div>
+  <a-button :disabled="engineStarted" @click="startEngine"
+    >Start Engine</a-button
+  >
+
+  <a-button :disabled="!engineStarted || launching" @click="launch"
+    >Launch</a-button
+  >
 </template>
 
 <style lang="less" scoped>

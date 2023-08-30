@@ -1,5 +1,6 @@
 import {
   AmbientLight,
+  AudioListener,
   Box3,
   Box3Helper,
   BoxHelper,
@@ -15,8 +16,14 @@ import {
   Vector3,
   WebGLRenderer,
 } from "three";
+import TWEEN from "@tweenjs/tween.js";
 // @ts-ignore
 import { OrbitControls } from "../jsm/controls/OrbitControls.js";
+// @ts-ignore
+import { GUI } from "../jsm/libs/lil-gui.module.min.js";
+// 引入Stats性能监视器
+// @ts-ignore
+import Stats from "../jsm/libs/stats.module";
 import axesHelper from "./axesHelper";
 import orbitControls from "./orbitControls.js";
 
@@ -25,6 +32,10 @@ class ThreeRenderer {
   camera: PerspectiveCamera;
   renderer: WebGLRenderer;
   controls?: OrbitControls;
+
+  gui = new GUI({ width: 310 });
+  // 创建stats对象
+  stats = new Stats();
 
   fov = 45; // 视野范围
   aspect = 2; // 相机默认值 画布的宽高比
@@ -81,11 +92,29 @@ class ThreeRenderer {
     this.renderer.shadowMap.enabled = true;
 
     container.appendChild(this.renderer.domElement);
+    // stats.domElement:web 页面上输出计算结果，一个div元素
+    document.body.appendChild(this.stats.domElement);
 
     this.camera.lookAt(this.scene.position);
+
+    this.gui.add(document, "title");
+
+    // 监听画面变化，更新渲染界面
+    window.addEventListener("resize", () => {
+      // 更新摄像头
+      // this.camera.aspect = window.innerWidth / window.innerHeight
+      // 更新摄像机的投影矩阵
+      this.camera.updateProjectionMatrix();
+      // 更新渲染器
+      // this.renderer.setSize(window.innerWidth,window.innerHeight)
+      // 设置渲染器的像素比
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+    });
   }
 
   render(callback?: () => void) {
+    // TWEEN.update();
+    this.stats.update();
     this.camera.updateProjectionMatrix();
     this.controls?.update();
     this.renderer.render(this.scene, this.camera);
@@ -106,6 +135,10 @@ class ThreeRenderer {
     // this.scene.add(box3Helper);
   }
 
+  addAudioListener(listener: AudioListener) {
+    this.camera.add(listener);
+  }
+
   addMesh(mesh: Mesh) {
     this.scene.add(mesh);
   }
@@ -117,6 +150,39 @@ class ThreeRenderer {
 
   refresh() {
     // this.camera.lookAt(0, 0, 0);
+  }
+
+  /**
+   * 相机移动方法
+   */
+  move(
+    origin: {
+      x: number;
+      y: number;
+      z: number;
+    },
+    target: {
+      x: number;
+      y: number;
+      z: number;
+    },
+    ticks = 10 * 1000
+  ) {
+    // 设定相机初始位置
+    var coords = origin;
+    const tween = new TWEEN.Tween(coords)
+      .to(target, ticks) // 指定目标位置和耗时.
+      .easing(TWEEN.Easing.Quadratic.Out) // 指定动画效果曲线.
+      .onUpdate(() => {
+        console.log("tween onUpdate");
+        // 渲染时每一帧执行：设定相机位置
+        // this.camera.position.set(0,0,0);
+      })
+      .onComplete(() => {
+        // 动画结束后执行
+        console.log("tween onComplete");
+      })
+      .start(); // 即刻开启动画
   }
 
   //适合模型观察的缩放比例
