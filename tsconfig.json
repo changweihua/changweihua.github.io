@@ -4,6 +4,18 @@
         "paths": {
             "~/*": [
                 "src/*"
+            ],
+            "~components/*": [
+                "src/components/*"
+            ],
+            "~three/*": [
+                "src/three/*"
+            ],
+            "~workers/*": [
+                "src/workers/*"
+            ],
+            "~lotties/*": [
+                "src/lotties/*"
             ]
         }
     }

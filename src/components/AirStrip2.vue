@@ -21,8 +21,6 @@ let controls: OrbitControls | null = null;
 const stats = new Stats();
 
 onMounted(() => {
-  console.log(heroRef);
-
   if (!heroRef.value) {
     return;
   }

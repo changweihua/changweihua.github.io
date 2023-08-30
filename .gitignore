@@ -8,3 +8,5 @@ node_modules
 package-lock.json
 ssj
 A320
+src/three/jsm
+src/three/fonts

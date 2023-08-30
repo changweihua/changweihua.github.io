@@ -12,6 +12,7 @@ declare module 'vue' {
     AProgress: typeof import('ant-design-vue/es')['Progress']
     Articles: typeof import('./components/articles.vue')['default']
     ATag: typeof import('ant-design-vue/es')['Tag']
+    BasicCube: typeof import('./components/BasicCube.vue')['default']
     Category: typeof import('./components/category.vue')['default']
     HeroLogo2: typeof import('./components/HeroLogo2.vue')['default']
     HomeHeroImage: typeof import('./components/HomeHeroImage.vue')['default']
