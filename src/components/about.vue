@@ -108,21 +108,18 @@
 </template>
 
 <script setup lang="ts">
-import { readonly } from "vue";
 import { Icon } from "@iconify/vue";
-import { faker } from "@faker-js/faker";
-//@ts-ignore
-import party from "../public/lotties/starter.json";
-//@ts-ignore
-import world from "../public/lotties/colorfulworld.json";
+// import { faker } from "@faker-js/faker";
+import party from "@/lotties/party.json";
+import world from "@/lotties/colorfulworld.json";
 
-const posts = readonly<
-  Array<{
-    year: number;
-    postCount: number;
-  }>
->([
-  { year: 2023, postCount: 4 },
-  { year: 2022, postCount: 6 },
-]);
+// const posts = readonly<
+//   Array<{
+//     year: number;
+//     postCount: number;
+//   }>
+// >([
+//   { year: 2023, postCount: 4 },
+//   { year: 2022, postCount: 6 },
+// ]);
 </script>

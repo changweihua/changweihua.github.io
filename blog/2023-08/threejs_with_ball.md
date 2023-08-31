@@ -12,8 +12,7 @@ date: 2023-08-28
 # {{ $frontmatter.title}} #
 
 <script lang="ts" setup>
-import ThreeWithBall from "../../components/ThreeWithBall.vue"
-console.log(ThreeWithBall)
+import ThreeWithBall from "../../src/components/ThreeWithBall.vue"
 </script>
 
 <ClientOnly>

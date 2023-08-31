@@ -13,7 +13,7 @@ import { Suspense, h, nextTick, onMounted, watch, watchEffect } from "vue";
 import { Feed } from "feed";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "ant-design-vue/dist/reset.css";
-
+import Antd from 'ant-design-vue';
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
 
@@ -60,7 +60,6 @@ import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import HeroLogo from "../components/HeroLogo.vue";
-import Sand from "../components/Sand.vue";
 
 // import ThreePlane from "../../components/ThreePlane.vue"
 
@@ -239,7 +238,6 @@ export default {
     app.component("Contributors", Contributors);
     app.component("HomeContributors", HomeContributors);
     // app.component("ThreePlane", ThreePlane);
-    app.component("Sand", Sand);
     app.component("CopyRight", copyright);
 
     import("ant-design-vue").then((module) => {
@@ -247,7 +245,7 @@ export default {
     });
 
     // vitepressLifeProgress();
-
+    app.use(Antd)
     app.use(VueResizeObserver);
   },
   setup() {

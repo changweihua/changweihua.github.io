@@ -7,18 +7,20 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    About: typeof import('./components/about.vue')['default']
+    About: typeof import('./src/components/about.vue')['default']
     AButton: typeof import('ant-design-vue/es')['Button']
-    AirStrip: typeof import('./components/AirStrip.vue')['default']
+    AirStrip: typeof import('./src/components/AirStrip.vue')['default']
+    AirStrip2: typeof import('./src/components/AirStrip2.vue')['default']
     AProgress: typeof import('ant-design-vue/es')['Progress']
-    Articles: typeof import('./components/articles.vue')['default']
-    ATag: typeof import('ant-design-vue/es')['Tag']
-    BasicCube: typeof import('./components/BasicCube.vue')['default']
-    Category: typeof import('./components/category.vue')['default']
-    HeroLogo2: typeof import('./components/HeroLogo2.vue')['default']
-    HomeHeroImage: typeof import('./components/HomeHeroImage.vue')['default']
-    Test: typeof import('./components/test.vue')['default']
-    ThreePlane: typeof import('./components/ThreePlane.vue')['default']
-    ThreeWithBall: typeof import('./components/ThreeWithBall.vue')['default']
+    Articles: typeof import('./src/components/articles.vue')['default']
+    BasicCube: typeof import('./src/components/BasicCube.vue')['default']
+    Category: typeof import('./src/components/category.vue')['default']
+    HeroLogo2: typeof import('./src/components/HeroLogo2.vue')['default']
+    HomeHeroImage: typeof import('./src/components/HomeHeroImage.vue')['default']
+    Sand: typeof import('./src/components/Sand.vue')['default']
+    Test: typeof import('./src/components/test.vue')['default']
+    ThreePlane: typeof import('./src/components/ThreePlane.vue')['default']
+    ThreePlane2: typeof import('./src/components/ThreePlane2.vue')['default']
+    ThreeWithBall: typeof import('./src/components/ThreeWithBall.vue')['default']
   }
 }

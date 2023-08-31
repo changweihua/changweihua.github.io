@@ -6,16 +6,15 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { OBJLoader } from "../three/jsm/loaders/OBJLoader.js";
 // @ts-ignore
 import { MTLLoader } from "../three/jsm/loaders/MTLLoader.js";
-import ThreeRenderer from "~/three/infras/three_renderer";
-import { removeResizePage, resizePage } from "~/three/infras/resize";
+import Stage from "@/three/infras/stage";
 
-const containerRef = ref<HTMLDivElement>(null);
+const containerRef = ref<HTMLDivElement | null>(null);
 const percent = ref(0);
 const loading = ref(true);
 
 let airPlane: any = null;
 let positionAudio: THREE.PositionalAudio | null = null;
-let renderer: ThreeRenderer | null = null;
+let stage: Stage | null = null;
 
 onMounted(() => {
   if (!containerRef.value) {
@@ -25,7 +24,7 @@ onMounted(() => {
   //地面的长宽
   const laneWidth = 50;
   const laneHeight = 420;
-  renderer = new ThreeRenderer(containerRef.value, 45, 100, 450);
+  stage = new Stage(containerRef.value, 45, 100, 450);
 
   //创建一个地面的父容器
   const groundGroup = new THREE.Group();
@@ -87,9 +86,8 @@ onMounted(() => {
   // groundGroup.add(roadGroup, frontGrass, backGrass);
   // roadGroup.rotation.x = -0.25 * Math.PI;
   // roadGroup.position.z = laneHeight / 2;
-
-  renderer.addGroup(roadGroup);
-  renderer.refresh();
+  groundGroup.add(roadGroup);
+  stage.addGroup(groundGroup);
 
   // const treesGroup = new THREE.Group(); //整体树的集合
   // const leftTreeGroup = new THREE.Group(); //左边树的集合
@@ -170,12 +168,12 @@ onMounted(() => {
   var audioMesh = new THREE.Mesh(geometry, material);
   // 设置网格模型的位置，相当于设置音源的位置
   audioMesh.position.set(0, 0, 300);
-  renderer.addMesh(audioMesh);
+  stage.addMesh(audioMesh);
 
   // 创建一个虚拟的监听者
   var listener = new THREE.AudioListener();
   // 监听者绑定到相机对象
-  renderer.addAudioListener(listener);
+  stage.addAudioListener(listener);
   // 创建一个位置音频对象,监听者作为参数,音频和监听者关联。
   positionAudio = new THREE.PositionalAudio(listener);
   //音源绑定到一个网格模型上
@@ -186,9 +184,9 @@ onMounted(() => {
   audioLoader.load("/sounds/engine.mp3", function (AudioBuffer) {
     // console.log(buffer);
     // 音频缓冲区对象关联到音频对象audio
-    positionAudio.setBuffer(AudioBuffer);
-    positionAudio.setVolume(0.9); //音量
-    positionAudio.setRefDistance(200); //参数值越大,声音越大
+    positionAudio?.setBuffer(AudioBuffer);
+    positionAudio?.setVolume(0.9); //音量
+    positionAudio?.setRefDistance(200); //参数值越大,声音越大
   });
 
   const mtlLoader = new MTLLoader();
@@ -207,10 +205,10 @@ onMounted(() => {
         airPlane.scale.set(0.01, 0.01, 0.01);
         // airPlane.rotation.z = 0.25 * Math.PI;
         // 添加到场景
-        renderer.add(airPlane);
+        stage?.add(airPlane);
         const box = new THREE.Box3().setFromObject(airPlane);
         const box3Helper = new THREE.Box3Helper(box);
-        renderer.add(box3Helper);
+        stage?.add(box3Helper);
       },
       (xhr: any) => {
         console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -225,21 +223,21 @@ onMounted(() => {
     );
   });
 
-  //获取时钟方法
-  const clock = new THREE.Clock();
+  // //获取时钟方法
+  // const clock = new THREE.Clock();
 
-  renderer.render(() => {
-    const time = clock.getElapsedTime();
-    //不停的移动树和虚线的位置，产生一种在行进的感觉，下面计算后会重置位置
-    // dashLineGroup.position.y = (-time * 1.5) % 3;
-    // treesGroup.position.z = (time * 1.5) % 3;
-    // if (airPlane) {
-    //   airPlane.position.x += 2;
-    //   if (airPlane.position.x > 2000) {
-    //     airPlane.position.x = 10;
-    //   }
-    // }
-  });
+  // stage.render(() => {
+  //   const time = clock.getElapsedTime();
+  //   //不停的移动树和虚线的位置，产生一种在行进的感觉，下面计算后会重置位置
+  //   // dashLineGroup.position.y = (-time * 1.5) % 3;
+  //   // treesGroup.position.z = (time * 1.5) % 3;
+  //   // if (airPlane) {
+  //   //   airPlane.position.x += 2;
+  //   //   if (airPlane.position.x > 2000) {
+  //   //     airPlane.position.x = 10;
+  //   //   }
+  //   // }
+  // });
 });
 
 onUnmounted(() => {
@@ -265,7 +263,7 @@ function launch() {
     return;
   }
   positionAudio.setLoop(false);
-  const animation = gsap.to(airPlane.position, {
+  gsap.to(airPlane.position, {
     y: 200,
     duration: 20,
     ease: "steps.inOut",
@@ -280,7 +278,7 @@ function launch() {
       console.log("动画完成");
       launching.value = false;
       airPlane.position.y = -130;
-      renderer.refresh()
+      stage?.refresh();
     },
   });
 

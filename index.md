@@ -130,7 +130,6 @@ Technical testing 2015-09-01
 import { onMounted } from 'vue'
 import { fetchVersion } from './.vitepress/utils/fetchVersion'
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
-
 import { BeakerIcon } from '@heroicons/vue/24/solid'
 // import { siSimpleicons } from 'simple-icons';
 import * as icons from 'simple-icons';
@@ -173,8 +172,6 @@ const members = [
 </script>
 
 <!-- <BeakerIcon class="h-6 w-6 text-blue-500" /> -->
-
-<!-- <Sand /> -->
 
 <VPTeamPage>
   <VPTeamPageTitle>

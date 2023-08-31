@@ -10,7 +10,7 @@ poster: /images/cmono-Siesta.png
 date: 2023-08-28
 ---
 <script lang="ts" setup>
-import AirStrip from "~/components/AirStrip.vue"
+import AirStrip from "@/components/AirStrip.vue"
 </script>
 
 <ClientOnly>

@@ -6,11 +6,13 @@ import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 // import { fileURLToPath } from "node:url";
 import { vuePreviewPlugin } from "vite-plugin-vue-preview";
+import AntdvResolver from "antdv-component-resolver";
 import { ViteAliases } from "vite-aliases";
 import UnoCSS from 'unocss/vite'
 import { SearchPlugin } from "vitepress-plugin-search";
 import flexSearchIndexOptions from "flexsearch";
-import { resolve } from "node:path";
+import path, { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 // import vitePluginMonitor from "vite-plugin-monitor";
 // import AutoImport from 'unplugin-auto-import/vite'
 // import { MarkdownTransform } from './.vitepress/plugins/markdownTransform'
@@ -71,15 +73,15 @@ export default defineConfig({
     //   ]
     // }),
     Components({
-      dirs: resolve(__dirname, "./components"),
+      dirs: resolve(__dirname, "./src/components"),
       include: [/\.vue$/, /\.vue\?vue/],
       dts: "./components.d.ts",
       transformer: "vue3",
       resolvers: [
-        // AntdvResolver(),
+        AntdvResolver(),
         IconsResolver(),
         AntDesignVueResolver({
-          importStyle: false, // css in js
+          importStyle: true, // css in js
           resolveIcons: true
         }),
       ],
@@ -120,81 +122,84 @@ export default defineConfig({
     //     // process.stdout.write(str)
     //   },
     // }),
-    ViteAliases({
-      /**
-       * Relative path to the project directory
-       */
-      dir: "src",
-      /**
-       * Prefix symbol for the aliases
-       */
-      prefix: "~",
-      /**
-       * Allow searching for subdirectories
-       */
-      deep: true,
-      /**
-       * Search depthlevel for subdirectories
-       */
-      depth: 1,
-      /**
-       * Creates a Logfile
-       * use `logPath` to change the location
-       */
-      createLog: false,
-      /**
-       * Path for Logfile
-       */
-      logPath: "src/logs",
-      /**
-       * Create global project directory alias
-       */
-      createGlobalAlias: true,
-      /**
-       * Turns duplicates into camelCased path aliases
-       */
-      adjustDuplicates: false,
-      /**
-       * Used paths in JS/TS configs will now be relative to baseUrl
-       */
-      useAbsolute: false,
-      /**
-       * Adds seperate index paths
-       * approach created by @davidohlin
-       */
-      useIndexes: false,
-      /**
-       * Generates paths in IDE config file
-       * works with JS or TS
-       */
-      useConfig: true,
-      /**
-       * Override config paths
-       */
-      ovrConfig: false,
-      /**
-       * Will generate Paths in tsconfig
-       * used in combination with `useConfig`
-       * Typescript will be auto detected
-       */
-      dts: false,
-      /**
-       * Disables any terminal output
-       */
-      silent: true,
-      /**
-       * Root path of Vite project
-       */
-      root: process.cwd(),
-    }),
+    // ViteAliases({
+    //   /**
+    //    * Relative path to the project directory
+    //    */
+    //   dir: "src",
+    //   /**
+    //    * Prefix symbol for the aliases
+    //    */
+    //   prefix: "~",
+    //   /**
+    //    * Allow searching for subdirectories
+    //    */
+    //   deep: true,
+    //   /**
+    //    * Search depthlevel for subdirectories
+    //    */
+    //   depth: 1,
+    //   /**
+    //    * Creates a Logfile
+    //    * use `logPath` to change the location
+    //    */
+    //   createLog: false,
+    //   /**
+    //    * Path for Logfile
+    //    */
+    //   logPath: "src/logs",
+    //   /**
+    //    * Create global project directory alias
+    //    */
+    //   createGlobalAlias: true,
+    //   /**
+    //    * Turns duplicates into camelCased path aliases
+    //    */
+    //   adjustDuplicates: false,
+    //   /**
+    //    * Used paths in JS/TS configs will now be relative to baseUrl
+    //    */
+    //   useAbsolute: false,
+    //   /**
+    //    * Adds seperate index paths
+    //    * approach created by @davidohlin
+    //    */
+    //   useIndexes: false,
+    //   /**
+    //    * Generates paths in IDE config file
+    //    * works with JS or TS
+    //    */
+    //   useConfig: true,
+    //   /**
+    //    * Override config paths
+    //    */
+    //   ovrConfig: false,
+    //   /**
+    //    * Will generate Paths in tsconfig
+    //    * used in combination with `useConfig`
+    //    * Typescript will be auto detected
+    //    */
+    //   dts: false,
+    //   /**
+    //    * Disables any terminal output
+    //    */
+    //   silent: true,
+    //   /**
+    //    * Root path of Vite project
+    //    */
+    //   root: process.cwd(),
+    // }),
     SearchPlugin(options),
     UnoCSS()
   ],
-  // resolve: {
-  //   alias: {
-  //     "@": fileURLToPath(new URL(".", import.meta.url)),
-  //   },
-  // },
+  resolve: {
+    alias: {
+      // "@": fileURLToPath(new URL(".", import.meta.url)),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      public: fileURLToPath(new URL('./public', import.meta.url)),
+      "~": path.resolve(__dirname, './src/'),
+    },
+  },
   ssr: {
     noExternal: ["vitepress-plugin-nprogress"],
   },

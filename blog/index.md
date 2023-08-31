@@ -14,7 +14,7 @@ head:
   </div>
 
 <script setup lang="ts">
-import category from '../components/category.vue';
+import category from '@/components/category.vue';
 
 let categories: Array<{
     title: string;

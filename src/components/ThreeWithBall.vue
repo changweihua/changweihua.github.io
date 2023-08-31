@@ -20,7 +20,7 @@ let camera: THREE.PerspectiveCamera | null = null;
 let renderer: THREE.WebGLRenderer | null = null;
 let controls: OrbitControls | null = null;
 
-const cameraTarget = new THREE.Vector3(0, 150, 0);
+// const cameraTarget = new THREE.Vector3(0, 150, 0);
 
 onMounted(() => {
   if (!hero_logo.value) {

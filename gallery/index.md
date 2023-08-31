@@ -8,7 +8,7 @@ sidebar: false
 </div>
 
 <script setup lang="ts">
-import category from '../components/category.vue';
+import category from '~/components/category.vue';
 
 const categories: Array<{
     title: string;
