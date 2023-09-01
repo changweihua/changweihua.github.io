@@ -3,18 +3,24 @@ import {
   AudioListener,
   Box3,
   BoxHelper,
+  BufferGeometry,
+  CatmullRomCurve3,
   DirectionalLight,
   Group,
+  Line,
+  LineBasicMaterial,
   MathUtils,
   Mesh,
   Object3D,
   PerspectiveCamera,
   PointLight,
   Scene,
+  SplineCurve,
+  Vector2,
   Vector3,
   WebGLRenderer,
 } from "three";
-// import TWEEN from "@tweenjs/tween.js";
+import TWEEN from "@tweenjs/tween.js";
 // @ts-ignore
 import { OrbitControls } from "../jsm/controls/OrbitControls.js";
 // @ts-ignore
@@ -23,7 +29,6 @@ import { GUI } from "../jsm/libs/lil-gui.module.min.js";
 // @ts-ignore
 import Stats from "../jsm/libs/stats.module";
 import axesHelper from "./axesHelper";
-import orbitControls from "./orbitControls.js";
 
 class Stage implements VueThree.IStage {
   scene: Scene;
@@ -31,30 +36,56 @@ class Stage implements VueThree.IStage {
   renderer: WebGLRenderer;
   controls: OrbitControls;
   objects: Array<Object3D>;
+  container: HTMLDivElement | null;
+  width: number;
+  height: number
 
-  gui = new GUI({ width: 310 });
+  cameraConfig:VueThree.ICameraConfig
+
+  gui = new GUI({ name: "ss", width: 310 });
   // 创建stats对象
   stats = Stats();
 
-  fov = 45; // 视野范围
-  aspect = 2; // 相机默认值 画布的宽高比
-  near = 1; // 近平面
-  far = 100; // 远平面
+  constructor(
+    container: HTMLDivElement | null,
+    fov = 45,
+    near = 1,
+    far = 100
+  ) {
+    this.container = container;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
 
-  constructor(container: HTMLDivElement, fov = 45, near = 1, far = 100) {
-    const width = container.offsetWidth;
-    const height = container.offsetHeight;
-    this.aspect = width / height;
-    this.fov = fov;
-    this.near = near;
-    this.far = far;
+    if (container) {
+      console.log('container is HTMLDivElement')
+      width = container.offsetWidth;
+      height = container.offsetHeight;
+    }
+
+    this.scene = new Scene();
+
+    this.width = width;
+    this.height = height;
+    this.cameraConfig = {
+      aspect: width / height,
+      fov:fov,
+      near: near,
+      far : far,
+viewX:0,
+viewY:0,
+viewZ:far*0.5
+    }
+
     this.camera = new PerspectiveCamera(
-      this.fov,
-      this.aspect,
-      this.near,
-      this.far
+      this.cameraConfig.fov,
+      this.cameraConfig.aspect,
+      this.cameraConfig.near,
+      this.cameraConfig.far
     );
-    this.camera.position.set(0, 0, this.far * 0.8);
+    // .multiplyScalar() 矩阵的每个元素乘以参数。
+    // camera.position.set(-20, 20, 80).multiplyScalar(3);
+    this.camera.position.set(this.cameraConfig.viewX, this.cameraConfig.viewY, this.cameraConfig.viewZ);
+    this.camera.lookAt(this.scene.position);
     //相机拍照你需要控制相机的拍照目标，具体说相机镜头对准哪个物体或说哪个坐标。
     //对于threejs相机而言，就是设置.lookAt()方法的参数，指定一个3D坐标。
 
@@ -62,21 +93,30 @@ class Stage implements VueThree.IStage {
     // camera.lookAt(0, 0, 0); //坐标原点
     // camera.lookAt(mesh.position);//指向mesh对应的位置
     // 注意：如果OrbitControls有target属性，则相机的lookAt属性就失效了
-    // this.camera.lookAt(0, 0, 1);
+    // this.camera.lookAt(0, 0, 0);
     // this.camera.up.set(0, 0, 1);
     // this.camera.position.set(0, 0, 8);
     // // camera.position.set(30, 60, 80);
     // camera.lookAt(new THREE.Vector3(0, 0, 0));
     // // camera.up.set(0, 1, 0);
     this.objects = [];
-    this.scene = new Scene();
+
     // 辅助坐标
-    this.scene.add(axesHelper(this.far));
+    this.scene.add(axesHelper(this.cameraConfig.far));
     // 场景添加摄像机
     this.scene.add(this.camera);
 
+    // 绕Y轴旋转180度
+    // 使用Math.PI
+    // mesh.rotation.set(-Math.PI / 2, 0, Math.PI);
+    // 使用MathUtils.degToRad
+    // mesh.rotation.set(-THREE.MathUtils.degToRad(90), 0 ,THREE.MathUtils.degToRad(180));
+
+    // 绕X轴逆时针旋转90度
+    // this.scene.rotation.set(0,-0.5 * Math.PI,0);
+
     //灯光
-    this.scene.add(new AmbientLight(0xffffff, 0.2)); //环境光
+    this.scene.add(new AmbientLight(0xffffff, 0.6)); //环境光
     const dLight = new DirectionalLight(0xffffff); //平行光
     dLight.position.set(0, 1, 1);
     this.scene.add(dLight);
@@ -84,8 +124,6 @@ class Stage implements VueThree.IStage {
     const light = new PointLight(0xffffff, 0.5); //点光源
     light.position.set(0, 0, 0);
     this.scene.add(light);
-
-    this.controls = orbitControls(this.camera, container);
 
     this.renderer = new WebGLRenderer({
       alpha: true, // true/false 表示是否可以设置背景色透明
@@ -99,20 +137,43 @@ class Stage implements VueThree.IStage {
       // //将Canvas绑定到renderer
       // canvas: document.getElementById('three_canvas')
     });
-    this.renderer.setClearColor(0x95e4e8);
+    // this.renderer.setClearColor(0x95e4e8);
     // this.renderer.setClearColor(0xb9d3ff, 0.4); //设置背景颜色和透明度
     // this.renderer.setClearAlpha(0.0);//完全透明
-    // this.renderer.setClearColor(0xb9d3ff, 0); //设置背景颜色
+    this.renderer.setClearColor(0xb9d3ff, 0); //设置背景颜色
     this.renderer.setSize(width, height);
     this.renderer.shadowMap.enabled = true;
-
-    container.appendChild(this.renderer.domElement);
+    if(!container) {
+      document.body.append(this.renderer.domElement);
+    }else{
+      container.appendChild(this.renderer.domElement);
+    }
     // stats.domElement:web 页面上输出计算结果，一个div元素
     document.body.appendChild(this.stats.domElement);
 
-    this.camera.lookAt(this.scene.position);
+    const cameraConfg = { fov: this.cameraConfig.fov,viewX: this.cameraConfig.viewX,
+      viewY: this.cameraConfig.viewY,
+      viewZ: this.cameraConfig.viewZ }
 
     this.gui.add(document, "title");
+    const cameraFolder = this.gui.addFolder("相机属性设置");
+  cameraFolder.add(cameraConfg, "fov", 0, 100).name("修改相机远近").onChange((num:number) => {
+    this.camera.fov = num;
+    this.camera.updateProjectionMatrix();
+  });
+
+  cameraFolder.add(cameraConfg, "viewX", -180, 180).name("修改视角-x").onChange((num:number) => {
+    cameraConfg.viewX = num;
+    this.camera.position.set(cameraConfg.viewX, cameraConfg.viewY, cameraConfg.viewZ);
+  });
+  cameraFolder.add(cameraConfg, "viewY", -180, 180).name("修改视角-y").onChange((num:number) => {
+    cameraConfg.viewY = num;
+    this.camera.position.set(cameraConfg.viewX, cameraConfg.viewY, cameraConfg.viewZ);
+  });
+  cameraFolder.add(cameraConfg, "viewZ", 0.1, this.cameraConfig.far).name("修改视角-z").onChange((num:number) => {
+    cameraConfg.viewZ = num;
+    this.camera.position.set(cameraConfg.viewX, cameraConfg.viewY, cameraConfg.viewZ);
+  });
 
     // 监听画面变化，更新渲染界面
     window.addEventListener("resize", () => {
@@ -125,17 +186,28 @@ class Stage implements VueThree.IStage {
       // 设置渲染器的像素比
       this.renderer.setPixelRatio(window.devicePixelRatio);
     });
+
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
+    this.controls.update();
+
+    this.init();
   }
 
-  render(callback?: () => void) {
-    // TWEEN.update();
+  private init() {
+    this.scene.rotateY(-0.5 * Math.PI);
+  }
+
+  render(time: number, callback?: (itime: number) => void) {
+    TWEEN.update();
     this.stats.update();
     this.camera.updateProjectionMatrix();
-    this.controls?.update();
+    this.camera.lookAt(this.scene.position);
+    this.controls.update();
     this.renderer.render(this.scene, this.camera);
-    callback && callback();
-    requestAnimationFrame(() => {
-      this.render(callback);
+    callback && callback(time);
+    requestAnimationFrame((rtime) => {
+      this.render(rtime, callback);
     });
   }
 
@@ -253,6 +325,109 @@ class Stage implements VueThree.IStage {
     this.camera.updateProjectionMatrix();
     this.camera.lookAt(boxCenter.x, boxCenter.y, boxCenter.z);
   }
+
+  dispose() {
+    this.scene.traverse((e: any) => {
+      if (e.BufferGeometry) e.BufferGeometry.dispose();
+      if (e.material) {
+        if (Array.isArray(e.material)) {
+          e.material.forEach((m: any) => {
+            m.dispose();
+          });
+        } else {
+          e.material.dispose();
+        }
+      }
+      if (e.isMesh) {
+        e.remove();
+      }
+    });
+    this.scene.remove();
+    this.renderer.dispose();
+    document.body.removeChild(this.stats.domElement);
+    document.body.removeChild(this.gui.domElement);
+    this.gui.destroy();
+  }
+
+  /**
+     * 添加路径，平面
+     */
+  addPath2(points:Array<Vector2>) {
+    // let pointArr = [];
+    // // 随机点
+    // for (let i = 0; i < 10; i++) {
+    //     const point = new Vector2(Math.random() * 20,Math.random() * 20)
+    //     pointArr.push(new Vector2(point[0], point[1]));
+    // }
+    // // 封闭路径
+    // pointArr.push(JSON.parse(JSON.stringify(pointArr[0])));
+    /**
+     * 样条曲线（SplineCurve）
+     * 从一系列的点中，创建一个平滑的二维样条曲线。内部使用Interpolations.CatmullRom来创建曲线。
+     * SplineCurve( points : Array )
+     * points – 定义曲线的Vector2点的数组。
+     *
+     * 方法
+     * .getPoints ( divisions : Integer ) : Array
+     * divisions -- 要将曲线划分为的分段数。默认是 5.
+     * 使用getPoint（t）返回一组divisions+1的点
+     *
+     * .getPointAt ( u : Float, optionalTarget : Vector ) : Vector
+     * u - 根据弧长在曲线上的位置。必须在范围[0，1]内。
+     * optionalTarget — (可选) 如果需要, (可选) 如果需要, 结果将复制到此向量中，否则将创建一个新向量。
+     * 根据弧长返回曲线上给定位置的点。
+     * @type {SplineCurve}
+     */
+    const curve = new SplineCurve(points);
+
+    const curvePoints = curve.getPoints(50);
+    const geometry = new BufferGeometry().setFromPoints(curvePoints);
+    const material = new LineBasicMaterial({ color: 0xffffff });
+    const splineObject = new Line(geometry, material);
+    // splineObject.rotation.x = Math.PI * 0.5;
+    // splineObject.position.y = 0.05;
+    splineObject.position.z = 3
+    this.scene.add(splineObject);
+    return curve;
+}
+
+/**
+     * 添加路径
+     */
+addPath3(points: Array<Vector3>) {
+  // let max = num;
+  // let min = -num;
+  // let pointArr = [];
+  // // 随机点
+  // for (let i = 0; i < 10; i++) {
+  //     let point = Pieces.getRandomNumberByCount(3, max, 0, min);
+  //     pointArr.push(new THREE.Vector3(point[0], point[1], point[2]));
+  // }
+  /**
+   * CatmullRomCurve3
+   * 使用Catmull-Rom算法， 从一系列的点创建一条平滑的三维样条曲线。
+   * CatmullRomCurve3( points : Array, closed : Boolean, curveType : String, tension : Float )
+   * points – Vector3点数组
+   * closed – 该曲线是否闭合，默认值为false。
+   * curveType – 曲线的类型，默认值为centripetal。
+   * tension – 曲线的张力，默认为0.5。
+   * @type {CatmullRomCurve3}
+   */
+  const curve = new CatmullRomCurve3(points, false);
+
+  const curvePoints = curve.getPoints(50);
+  const geometry = new BufferGeometry().setFromPoints(curvePoints);
+  const material = new LineBasicMaterial({ color: 0xffffff });
+  const splineObject = new Line(geometry, material);
+  this.scene.add(splineObject);
+
+  const boxHelper = new BoxHelper(splineObject);
+  this.scene.add(boxHelper);
+
+  return curve;
+}
+
+
 }
 
 export default Stage;

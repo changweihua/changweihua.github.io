@@ -40,7 +40,8 @@
     "src/**/*.vue",
     "src/**/*.json",
     "plugins/**/*.ts",
-    "tests"
+    "tests",
+    "vue-joystick-component/**/*.d.ts"
   ],
   "exclude": ["**/node_modules/**", "**/dist/**", "build", "public"],
   "typedocOptions": {

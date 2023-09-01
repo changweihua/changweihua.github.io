@@ -1,5 +1,6 @@
 ---
 layout: page
+footer: false
 lastUpdated: true
 commentabled: false
 recommended: false
@@ -10,9 +11,9 @@ poster: /images/cmono-Siesta.png
 date: 2023-08-28
 ---
 <script lang="ts" setup>
-import AirStrip from "@/components/AirStrip.vue"
+import Airport from "@/components/Airport.vue"
 </script>
 
 <ClientOnly>
-  <AirStrip />
+  <Airport />
 </ClientOnly>

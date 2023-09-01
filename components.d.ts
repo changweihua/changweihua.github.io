@@ -8,10 +8,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     About: typeof import('./src/components/about.vue')['default']
-    AButton: typeof import('ant-design-vue/es')['Button']
+    Airport: typeof import('./src/components/Airport.vue')['default']
     AirStrip: typeof import('./src/components/AirStrip.vue')['default']
     AirStrip2: typeof import('./src/components/AirStrip2.vue')['default']
-    AProgress: typeof import('ant-design-vue/es')['Progress']
     Articles: typeof import('./src/components/articles.vue')['default']
     BasicCube: typeof import('./src/components/BasicCube.vue')['default']
     Category: typeof import('./src/components/category.vue')['default']

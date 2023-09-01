@@ -11,9 +11,8 @@ import {
 import DefaultTheme from "vitepress/theme";
 import { Suspense, h, nextTick, onMounted, watch, watchEffect } from "vue";
 import { Feed } from "feed";
+import { Button, Progress } from 'ant-design-vue';
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
-import "ant-design-vue/dist/reset.css";
-import Antd from 'ant-design-vue';
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
 
@@ -55,7 +54,6 @@ const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
-import PlaceHolder from "../components/PlaceHolder.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
@@ -240,12 +238,8 @@ export default {
     // app.component("ThreePlane", ThreePlane);
     app.component("CopyRight", copyright);
 
-    import("ant-design-vue").then((module) => {
-      app.use(module);
-    });
+    app.use(Button).use(Progress)
 
-    // vitepressLifeProgress();
-    app.use(Antd)
     app.use(VueResizeObserver);
   },
   setup() {

@@ -78,12 +78,12 @@ export default defineConfig({
       dts: "./components.d.ts",
       transformer: "vue3",
       resolvers: [
-        AntdvResolver(),
+        // AntdvResolver(),
         IconsResolver(),
-        AntDesignVueResolver({
-          importStyle: true, // css in js
-          resolveIcons: true
-        }),
+        // AntDesignVueResolver({
+        //   importStyle: true, // css in js
+        //   resolveIcons: true
+        // }),
       ],
     }),
     Icons({ autoInstall: true }),

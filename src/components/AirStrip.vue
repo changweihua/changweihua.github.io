@@ -7,6 +7,7 @@ import { OBJLoader } from "../three/jsm/loaders/OBJLoader.js";
 // @ts-ignore
 import { MTLLoader } from "../three/jsm/loaders/MTLLoader.js";
 import Stage from "@/three/infras/stage";
+import  building from "~/three/meshs/building"
 
 const containerRef = ref<HTMLDivElement | null>(null);
 const percent = ref(0);
@@ -87,7 +88,8 @@ onMounted(() => {
   // roadGroup.rotation.x = -0.25 * Math.PI;
   // roadGroup.position.z = laneHeight / 2;
   groundGroup.add(roadGroup);
-  stage.addGroup(groundGroup);
+  stage.addGroup(roadGroup);
+  stage.add(building);
 
   // const treesGroup = new THREE.Group(); //整体树的集合
   // const leftTreeGroup = new THREE.Group(); //左边树的集合
@@ -197,6 +199,7 @@ onMounted(() => {
     objLoader.load(
       "/ssj/SSJ100.obj",
       function (gltf: any) {
+        console.log(gltf)
         airPlane = gltf;
         airPlane.rotation.z = 1 * Math.PI;
         airPlane.position.set(0, -130, 0);
@@ -244,6 +247,7 @@ onUnmounted(() => {
   if (positionAudio) {
     positionAudio.stop();
   }
+  stage && stage.dispose()
 });
 
 const engineStarted = ref(false);
