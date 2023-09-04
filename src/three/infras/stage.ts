@@ -14,6 +14,7 @@ import {
   Object3D,
   PerspectiveCamera,
   PointLight,
+  SRGBColorSpace,
   Scene,
   SplineCurve,
   Vector2,
@@ -38,26 +39,21 @@ class Stage implements VueThree.IStage {
   objects: Array<Object3D>;
   container: HTMLDivElement | null;
   width: number;
-  height: number
+  height: number;
 
-  cameraConfig:VueThree.ICameraConfig
+  cameraConfig: VueThree.ICameraConfig;
 
   gui = new GUI({ name: "ss", width: 310 });
   // 创建stats对象
   stats = Stats();
 
-  constructor(
-    container: HTMLDivElement | null,
-    fov = 45,
-    near = 1,
-    far = 100
-  ) {
+  constructor(container: HTMLDivElement | null, fov = 45, near = 1, far = 100) {
     this.container = container;
     let width = window.innerWidth;
     let height = window.innerHeight;
 
     if (container) {
-      console.log('container is HTMLDivElement')
+      console.log("container is HTMLDivElement");
       width = container.offsetWidth;
       height = container.offsetHeight;
     }
@@ -68,13 +64,14 @@ class Stage implements VueThree.IStage {
     this.height = height;
     this.cameraConfig = {
       aspect: width / height,
-      fov:fov,
+      fov: fov,
       near: near,
-      far : far,
-viewX:0,
-viewY:0,
-viewZ:far*0.5
-    }
+      far: far,
+      viewX: 0,
+      viewY: 0,
+      viewZ: far * 0.8,
+      rotationY: 0,
+    };
 
     this.camera = new PerspectiveCamera(
       this.cameraConfig.fov,
@@ -84,8 +81,13 @@ viewZ:far*0.5
     );
     // .multiplyScalar() 矩阵的每个元素乘以参数。
     // camera.position.set(-20, 20, 80).multiplyScalar(3);
-    this.camera.position.set(this.cameraConfig.viewX, this.cameraConfig.viewY, this.cameraConfig.viewZ);
-    this.camera.lookAt(this.scene.position);
+    this.camera.position.set(
+      this.cameraConfig.viewX,
+      this.cameraConfig.viewY,
+      this.cameraConfig.viewZ
+    );
+    // this.camera.lookAt(this.scene.position);
+    this.camera.lookAt(0, 0, 0);
     //相机拍照你需要控制相机的拍照目标，具体说相机镜头对准哪个物体或说哪个坐标。
     //对于threejs相机而言，就是设置.lookAt()方法的参数，指定一个3D坐标。
 
@@ -117,6 +119,7 @@ viewZ:far*0.5
 
     //灯光
     this.scene.add(new AmbientLight(0xffffff, 0.6)); //环境光
+
     const dLight = new DirectionalLight(0xffffff); //平行光
     dLight.position.set(0, 1, 1);
     this.scene.add(dLight);
@@ -126,6 +129,7 @@ viewZ:far*0.5
     this.scene.add(light);
 
     this.renderer = new WebGLRenderer({
+      antialias: true,
       alpha: true, // true/false 表示是否可以设置背景色透明
       precision: "highp", // highp/mediump/lowp 表示着色精度选择
       premultipliedAlpha: false, // true/false 表示是否可以设置像素深度（用来度量图像的分率）
@@ -140,40 +144,83 @@ viewZ:far*0.5
     // this.renderer.setClearColor(0x95e4e8);
     // this.renderer.setClearColor(0xb9d3ff, 0.4); //设置背景颜色和透明度
     // this.renderer.setClearAlpha(0.0);//完全透明
+    //解决加载gltf格式模型纹理贴图和原图不一样问题
+    this.renderer.outputColorSpace = SRGBColorSpace;
     this.renderer.setClearColor(0xb9d3ff, 0); //设置背景颜色
     this.renderer.setSize(width, height);
     this.renderer.shadowMap.enabled = true;
-    if(!container) {
+    if (!container) {
       document.body.append(this.renderer.domElement);
-    }else{
+    } else {
       container.appendChild(this.renderer.domElement);
     }
     // stats.domElement:web 页面上输出计算结果，一个div元素
     document.body.appendChild(this.stats.domElement);
 
-    const cameraConfg = { fov: this.cameraConfig.fov,viewX: this.cameraConfig.viewX,
+    const cameraConfg = {
+      fov: this.cameraConfig.fov,
+      viewX: this.cameraConfig.viewX,
       viewY: this.cameraConfig.viewY,
-      viewZ: this.cameraConfig.viewZ }
+      viewZ: this.cameraConfig.viewZ,
+      rotationY: this.cameraConfig.rotationY,
+    };
 
     this.gui.add(document, "title");
     const cameraFolder = this.gui.addFolder("相机属性设置");
-  cameraFolder.add(cameraConfg, "fov", 0, 100).name("修改相机远近").onChange((num:number) => {
-    this.camera.fov = num;
-    this.camera.updateProjectionMatrix();
-  });
+    cameraFolder
+      .add(cameraConfg, "fov", 0, 100)
+      .name("修改相机远近")
+      .onChange((num: number) => {
+        this.camera.fov = num;
+        this.camera.updateProjectionMatrix();
+      });
 
-  cameraFolder.add(cameraConfg, "viewX", -180, 180).name("修改视角-x").onChange((num:number) => {
-    cameraConfg.viewX = num;
-    this.camera.position.set(cameraConfg.viewX, cameraConfg.viewY, cameraConfg.viewZ);
-  });
-  cameraFolder.add(cameraConfg, "viewY", -180, 180).name("修改视角-y").onChange((num:number) => {
-    cameraConfg.viewY = num;
-    this.camera.position.set(cameraConfg.viewX, cameraConfg.viewY, cameraConfg.viewZ);
-  });
-  cameraFolder.add(cameraConfg, "viewZ", 0.1, this.cameraConfig.far).name("修改视角-z").onChange((num:number) => {
-    cameraConfg.viewZ = num;
-    this.camera.position.set(cameraConfg.viewX, cameraConfg.viewY, cameraConfg.viewZ);
-  });
+    cameraFolder
+      .add(cameraConfg, "viewX", -180, 180)
+      .name("修改视角-x")
+      .onChange((num: number) => {
+        cameraConfg.viewX = num;
+        this.camera.position.set(
+          cameraConfg.viewX,
+          cameraConfg.viewY,
+          cameraConfg.viewZ
+        );
+      });
+    cameraFolder
+      .add(cameraConfg, "viewY", -720, 720)
+      .name("修改视角-y")
+      .onChange((num: number) => {
+        cameraConfg.viewY = num;
+        this.camera.position.set(
+          cameraConfg.viewX,
+          cameraConfg.viewY,
+          cameraConfg.viewZ
+        );
+      });
+    cameraFolder
+      .add(cameraConfg, "viewZ", 0.1, this.cameraConfig.far)
+      .name("修改视角-z")
+      .onChange((num: number) => {
+        cameraConfg.viewZ = num;
+        this.camera.position.set(
+          cameraConfg.viewX,
+          cameraConfg.viewY,
+          cameraConfg.viewZ
+        );
+      });
+
+    const sceneConfig = {
+      rotationY: this.scene.rotation.y,
+    };
+
+    const sceneFolder = this.gui.addFolder("Scene属性设置");
+    sceneFolder
+      .add(sceneConfig, "rotationY", -180, 180)
+      .name("旋转视角-Y")
+      .onChange((num: number) => {
+        sceneConfig.rotationY = num;
+        this.scene.rotateY(MathUtils.degToRad(num));
+      });
 
     // 监听画面变化，更新渲染界面
     window.addEventListener("resize", () => {
@@ -350,9 +397,9 @@ viewZ:far*0.5
   }
 
   /**
-     * 添加路径，平面
-     */
-  addPath2(points:Array<Vector2>) {
+   * 添加路径，平面
+   */
+  addPath2(points: Array<Vector2>) {
     // let pointArr = [];
     // // 随机点
     // for (let i = 0; i < 10; i++) {
@@ -386,48 +433,46 @@ viewZ:far*0.5
     const splineObject = new Line(geometry, material);
     // splineObject.rotation.x = Math.PI * 0.5;
     // splineObject.position.y = 0.05;
-    splineObject.position.z = 3
+    splineObject.position.z = 3;
     this.scene.add(splineObject);
     return curve;
-}
+  }
 
-/**
-     * 添加路径
-     */
-addPath3(points: Array<Vector3>) {
-  // let max = num;
-  // let min = -num;
-  // let pointArr = [];
-  // // 随机点
-  // for (let i = 0; i < 10; i++) {
-  //     let point = Pieces.getRandomNumberByCount(3, max, 0, min);
-  //     pointArr.push(new THREE.Vector3(point[0], point[1], point[2]));
-  // }
   /**
-   * CatmullRomCurve3
-   * 使用Catmull-Rom算法， 从一系列的点创建一条平滑的三维样条曲线。
-   * CatmullRomCurve3( points : Array, closed : Boolean, curveType : String, tension : Float )
-   * points – Vector3点数组
-   * closed – 该曲线是否闭合，默认值为false。
-   * curveType – 曲线的类型，默认值为centripetal。
-   * tension – 曲线的张力，默认为0.5。
-   * @type {CatmullRomCurve3}
+   * 添加路径
    */
-  const curve = new CatmullRomCurve3(points, false);
+  addPath3(points: Array<Vector3>) {
+    // let max = num;
+    // let min = -num;
+    // let pointArr = [];
+    // // 随机点
+    // for (let i = 0; i < 10; i++) {
+    //     let point = Pieces.getRandomNumberByCount(3, max, 0, min);
+    //     pointArr.push(new THREE.Vector3(point[0], point[1], point[2]));
+    // }
+    /**
+     * CatmullRomCurve3
+     * 使用Catmull-Rom算法， 从一系列的点创建一条平滑的三维样条曲线。
+     * CatmullRomCurve3( points : Array, closed : Boolean, curveType : String, tension : Float )
+     * points – Vector3点数组
+     * closed – 该曲线是否闭合，默认值为false。
+     * curveType – 曲线的类型，默认值为centripetal。
+     * tension – 曲线的张力，默认为0.5。
+     * @type {CatmullRomCurve3}
+     */
+    const curve = new CatmullRomCurve3(points, false);
 
-  const curvePoints = curve.getPoints(50);
-  const geometry = new BufferGeometry().setFromPoints(curvePoints);
-  const material = new LineBasicMaterial({ color: 0xffffff });
-  const splineObject = new Line(geometry, material);
-  this.scene.add(splineObject);
+    const curvePoints = curve.getPoints(50);
+    const geometry = new BufferGeometry().setFromPoints(curvePoints);
+    const material = new LineBasicMaterial({ color: 0xffffff });
+    const splineObject = new Line(geometry, material);
+    this.scene.add(splineObject);
 
-  const boxHelper = new BoxHelper(splineObject);
-  this.scene.add(boxHelper);
+    const boxHelper = new BoxHelper(splineObject);
+    this.scene.add(boxHelper);
 
-  return curve;
-}
-
-
+    return curve;
+  }
 }
 
 export default Stage;

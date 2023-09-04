@@ -3,28 +3,24 @@ import * as THREE from "three";
 import gsap from "gsap";
 import { onMounted, onUnmounted, ref } from "vue";
 import Stage from "@/three/infras/stage";
+import LabelUtils from "@/three/utils/LabelUtils";
 import building from "~/three/meshs/building";
 import lane from "~/three/meshs/airport/lane";
 import ground from "~/three/meshs/airport/ground";
-import { loadPlane } from "~/three/meshs/airport/plane";
-import Joystick from "vue-joystick-component";
+import { loadGltfPlane } from "~/three/meshs/airport/plane";
 // @ts-ignore
 import { TextGeometry } from "~/three/jsm/geometries/TextGeometry.js";
 // @ts-ignore
 import { FontLoader } from "~/three/jsm/loaders/FontLoader.js";
 
-const start = () => console.log("start");
-const stop = () => console.log("stop");
-const move = (e: any) => {
-  // const { x, y, direction, distance } = e
-  console.log("move", e);
-};
 const containerRef = ref<HTMLDivElement | null>(null);
 const percent = ref(0);
 const loading = ref(true);
 let textMesh: THREE.Mesh | null = null;
 let stage: Stage | null = null;
-let flyPlane: THREE.Object3D | null = null
+let flyPlane: THREE.Object3D | null = null;
+let arrivalPlane: THREE.Object3D | null = null;
+let nextPlane: THREE.Object3D | null = null;
 
 onMounted(() => {
   if (!containerRef.value) {
@@ -49,7 +45,7 @@ onMounted(() => {
     const font = response;
     console.log(font);
 
-    loadPlane("/ssj/SSJ100.mtl", "/ssj/SSJ100.obj", () => {
+    loadGltfPlane("/ssj/SSJ100.gltf", () => {
       loading.value = false;
     }).then((plane) => {
       // stage && stage.add(plane);
@@ -97,6 +93,7 @@ onMounted(() => {
       planes.forEach((plane, index) => {
         planes[index].position.x = -130 + 50 * index;
         planes[index].position.y = 75;
+        // planes[index].rotation.y = 0.5 * Math.PI;
         stage && stage.add(planes[index]);
       });
       gsap.to(planes[0].position, {
@@ -114,40 +111,55 @@ onMounted(() => {
         },
       });
 
-      // const points = [
-      //   new THREE.Vector2(-80, 130),
-      //   new THREE.Vector2(-150, 100),
-      //   new THREE.Vector2(160, 100),
-      //   new THREE.Vector2(160, -130),
-      // ];
+      nextPlane = planes[1];
 
       const points = [
-        new THREE.Vector3(-80, 75, 4),
-        new THREE.Vector3(-150, 55, 4),
-        new THREE.Vector3(160, 65, 4),
-        new THREE.Vector3(160, -130, 4),
+        new THREE.Vector2(-80, 75),
+        new THREE.Vector2(-150, 55),
+        new THREE.Vector2(160, 65),
+        new THREE.Vector2(160, -130),
       ];
-      // 创建二维样条曲线 start
-      // for (let index = 0; index < 10; index++) {
-      //   points.push(new THREE.Vector2(Math.random() * 20, Math.random() * 20));
-      // }
-      const curve = stage?.addPath3(points);
-      const boatPosition = new THREE.Vector3();
-      const boatTarget = new THREE.Vector3();
+      const curve = stage?.addPath2(points);
+      const boatPosition = new THREE.Vector2();
+      const boatTarget = new THREE.Vector2();
+
+      // const points = [
+      //   new THREE.Vector3(-80, 75, 4),
+      //   new THREE.Vector3(-150, 55, 4),
+      //   new THREE.Vector3(160, 65, 4),
+      //   new THREE.Vector3(160, -130, 4),
+      // ];
+      // const curve = stage?.addPath3(points);
+      // const boatPosition = new THREE.Vector3();
+      // const boatTarget = new THREE.Vector3();
+
+      let lastZ = 0;
       requestAnimationFrame((time) => {
         stage?.render(time, (itime) => {
           itime *= 0.0005;
           const boatTime = itime * 0.05;
           curve?.getPointAt(boatTime % 1, boatPosition);
           // 获取路径前一点坐标，用于头部向前
-          // curve?.getPointAt((boatTime + 0.01) % 1, boatTarget);
+          curve?.getPointAt((boatTime + 0.01) % 1, boatTarget);
+
           // 位移
-          planes[1].position.set(
-            boatPosition.x,
-            boatPosition.y,
-            boatPosition.z
-          );
-          planes[1].lookAt(0, boatTarget.y, 0);
+          nextPlane?.position.set(boatPosition.x, boatPosition.y, 4);
+          if (Math.abs(lastZ - boatTarget.x) > 45) {
+            lastZ = boatTarget.x;
+            nextPlane!.rotation.z = -boatTarget.x;
+          }
+          // nextPlane?.lookAt(boatTarget.y, boatTarget.x, 4);
+
+          // // 位移
+          // planes[1].position.set(
+          //   boatPosition.x,
+          //   boatPosition.y,
+          //   4
+          // );
+          // planes[1].rotation.set(
+          //   -0.5 * Math.PI, 0.5 * Math.PI, Math.PI
+          // );
+          // planes[1].lookAt(0, 0, 0);
 
           if (flyPlane && textMesh) {
             textMesh.position.set(
@@ -159,46 +171,68 @@ onMounted(() => {
         });
       });
 
+      const flyPlaneGroup = new THREE.Group();
+
       flyPlane = plane.clone();
-      flyPlane.position.x = 160;
-      flyPlane.position.y = -130;
-      flyPlane.position.z = 4;
+      flyPlaneGroup.position.x = 160;
+      flyPlaneGroup.position.y = -130;
+      flyPlaneGroup.position.z = 4;
+      flyPlane.position.set(0, 0, 10);
       flyPlane.rotation.z = -0.5 * Math.PI;
 
+      flyPlaneGroup.add(flyPlane);
 
-      let textGeo = new TextGeometry("ZH9008", {
-        font: font,
-        size: 5,
-        height: 0.1,
+      const c = LabelUtils.createLabel("ZH9008");
+
+      const texture = new THREE.CanvasTexture(c.canvas);
+      const spriteMaterial = new THREE.SpriteMaterial({
+        map: texture,
       });
-      let materials = [
-        new THREE.MeshPhongMaterial({ color: 0xff0000, flatShading: true }), // front
-        new THREE.MeshPhongMaterial({ color: 0xffff00 }), // side
+      const sprite = new THREE.Sprite(spriteMaterial);
+      sprite.scale.set(50, 50, 50); //只需要设置x、y两个分量就可以
+      sprite.position.set(0, 0, 10);
 
-        new THREE.MeshPhongMaterial({ color: 0xff0000, flatShading: true }),
-
-        new THREE.MeshPhongMaterial({ color: 0xff0000, flatShading: true }),
-
-        new THREE.MeshPhongMaterial({ color: 0xff0000, flatShading: true }),
-
-        new THREE.MeshPhongMaterial({ color: 0xff0000, flatShading: true }),
-      ];
-      textMesh = new THREE.Mesh(textGeo, materials);
-      textMesh.position.set(
-        flyPlane.position.x,
-        flyPlane.position.y,
-        flyPlane.position.z + 20
+      // 父对象group位置变化,网格模型及其对象的标签同样发生变化
+      flyPlaneGroup.position.set(
+        flyPlaneGroup.position.x,
+        flyPlaneGroup.position.y,
+        flyPlaneGroup.position.z
       );
-      // 跟随物体旋转
-      textMesh.rotation.z = -flyPlane.rotateZ;
-      flyPlane.add(textMesh);
-      stage?.add(textMesh);
+      // 表示标签信息的精灵模型对象相对父对象设置一定的偏移
+      sprite.translateX(0);
 
+      // 把精灵模型插入到模型对象的父对象下面
+      flyPlaneGroup.add(sprite);
 
-      gsap.to(flyPlane.position, {
+      gsap.to(flyPlaneGroup.position, {
         x: -300,
         y: -130,
-        z: 30,
+        z: 60,
+        duration: 20,
+        ease: "steps.inOut",
+        repeat: -1,
+        yoyo: false,
+        delay: 35,
+        onStart: () => {
+          console.log("动画开始");
+        },
+        onComplete: () => {
+          console.log("动画完成");
+        },
+      });
+
+      stage && stage.add(flyPlaneGroup);
+
+      arrivalPlane = plane.clone();
+      arrivalPlane.position.x = 160;
+      arrivalPlane.position.y = -130;
+      arrivalPlane.position.z = 60;
+      arrivalPlane.rotation.z = -0.5 * Math.PI;
+
+      gsap.to(arrivalPlane.position, {
+        x: -300,
+        y: -130,
+        z: 0,
         duration: 20,
         ease: "steps.inOut",
         repeat: -1,
@@ -212,7 +246,7 @@ onMounted(() => {
         },
       });
 
-      stage && stage.add(flyPlane);
+      stage && stage.add(arrivalPlane);
     });
   });
   // // 1. 创建渲染器,指定渲染的分辨率和尺寸,然后添加到body中
@@ -246,7 +280,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  // stage && stage.dispose()
+  stage && stage.dispose()
 });
 </script>
 
@@ -266,16 +300,6 @@ onUnmounted(() => {
       />
     </div>
   </div>
-  <Joystick
-    class="joy-stick"
-    :size="100"
-    base-color="pink"
-    stick-color="purple"
-    :throttle="100"
-    @start="start"
-    @stop="stop"
-    @move="move"
-  />
 </template>
 
 <style lang="less" scoped>

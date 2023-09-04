@@ -6,7 +6,7 @@ node_modules
 .vitepress/cache
 node_modules
 package-lock.json
-ssj
+ssj2
 A320
 src/three/jsm
 src/three/fonts

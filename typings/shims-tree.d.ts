@@ -13,5 +13,6 @@ namespace VueThree {
     viewX: number
     viewY: number
     viewZ:number
+    rotationY:number
   }
 }

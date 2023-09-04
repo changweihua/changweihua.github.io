@@ -1,5 +1,6 @@
 // worker.js 文件
-import { OBJLoader } from "../jsm/loaders/OBJLoader.js";
+// @ts-ignore
+import { OBJLoader } from "~/three/jsm/loaders/OBJLoader.js";
 
 function loadModel(workerCallback, progressCallback, modelUrl) {
   const loader = new OBJLoader();

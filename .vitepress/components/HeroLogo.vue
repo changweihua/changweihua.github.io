@@ -138,8 +138,6 @@ onMounted(() => {
   }
 
   function createText() {
-    console.log(font);
-    console.log(curveSegments);
     const textGeo = new TextGeometry("CMONO.NET", {
       font: font,
       size: size,

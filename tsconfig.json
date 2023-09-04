@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["src/*"]
+      "~/*": ["./src/*"],
+      "public": ["./public/*"],
     },
     // "typeRoots": [
     // ],
@@ -40,8 +41,7 @@
     "src/**/*.vue",
     "src/**/*.json",
     "plugins/**/*.ts",
-    "tests",
-    "vue-joystick-component/**/*.d.ts"
+    "tests"
   ],
   "exclude": ["**/node_modules/**", "**/dist/**", "build", "public"],
   "typedocOptions": {
