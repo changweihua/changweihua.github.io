@@ -1,7 +1,24 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
-import { CanvasTexture, Group, Sprite, SpriteMaterial, Vector2 } from "three";
-import gsap from "gsap"
+import {
+  BufferAttribute,
+  BufferGeometry,
+  CanvasTexture,
+  CatmullRomCurve3,
+  FrontSide,
+  Group,
+  Line,
+  LineBasicMaterial,
+  LineLoop,
+  LineSegments,
+  Mesh,
+  MeshBasicMaterial,
+  Sprite,
+  SpriteMaterial,
+  Vector2,
+  Vector3,
+} from "three";
+import gsap from "gsap";
 import Stage from "@/three/infras/stage";
 import { buildTerminal } from "@/three/meshs/airport/terminal";
 import { buildGround } from "@/three/meshs/airport/ground";
@@ -27,7 +44,7 @@ onMounted(() => {
     containerRef.value.offsetWidth,
     containerRef.value.offsetHeight
   );
-  stage = new Stage(containerRef.value, 45, 0.1, 0.8 * far);
+  stage = new Stage(containerRef.value, 45, 0.1, 0.4 * far);
 
   const ground = buildGround();
   stage.add(ground);
@@ -40,6 +57,106 @@ onMounted(() => {
 
   const lane = buildLane();
   stage.addGroup(lane);
+
+  const curve = new CatmullRomCurve3([
+    new Vector3(-10, 10, 10),
+    new Vector3(-5, 5, 5),
+    new Vector3(0, 0, 0),
+    new Vector3(5, -5, 5),
+    new Vector3(10, 0, 10),
+    new Vector3(10, 90, 10),
+  ]);
+
+  const geometry1 = new BufferGeometry();
+  const vertices1 = new Float32Array(curve.getPoints(50).length * 3);
+  geometry1.setAttribute("position", new BufferAttribute(vertices1, 3));
+  var line = new Line(
+    geometry1.clone(),
+    new LineBasicMaterial({
+      color: 0xff0000,
+      opacity: 0.35,
+      linewidth: 2,
+    })
+  );
+  stage.add(line);
+
+  const geometry = new BufferGeometry();
+  // create a simple square shape. We duplicate the top left and bottom right
+  // vertices because each vertex needs to appear once per triangle.
+  const vertices = new Float32Array([
+    -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0,
+
+    1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0,
+  ]);
+
+  // itemSize = 3 because there are 3 values (components) per vertex
+  geometry.setAttribute("position", new BufferAttribute(vertices, 3));
+  //  geometry.setAttribute( 'color', new THREE.BufferAttribute( vertices, 3 ) );
+  //  geometry.setAttribute( 'normal', new THREE.BufferAttribute( vertices, 3 ) );
+  const material = new MeshBasicMaterial({ color: 0xff0000 });
+  const mesh = new Mesh(geometry, material);
+
+  stage.add(mesh);
+
+  // // 创建一个立方体
+  // var geometry2 = new BoxGeometry(1, 1, 1);
+
+  // // 设置UV属性
+  // geometry2.faceVertexUvs[0][0] = [new Vector2(0,0), new Vector2(0,1), new Vector2(1,1)];
+  // geometry.faceVertexUvs[0][1] = [new Vector2(0,0), new Vector2(1,1), new Vector2(1,0)];
+  // geometry.faceVertexUvs[0][2] = [new Vector2(0,0), new Vector2(1,0), new Vector2(1,1)];
+  // geometry.faceVertexUvs[0][3] = [new Vector2(0,0), new Vector2(0,1), new Vector2(1,1)];
+  // geometry.faceVertexUvs[0][4] = [new Vector2(0,0), new Vector2(1,0), new Vector2(1,1)];
+  // geometry.faceVertexUvs[0][5] = [new Vector2(0,0), new Vector2(0,1), new Vector2(1,1)];
+
+  // // 设置法向属性
+  // geometry.computeVertexNormals();
+
+  // // 创建一个材质和网格
+  // var material = new THREE.MeshPhongMaterial({color: 0xffffff});
+  // var mesh = new THREE.Mesh(geometry, material);
+
+  // // 添加网格到场景中
+  // scene.add(mesh);
+
+  const material2 = new MeshBasicMaterial({
+    color: 0x0000ff,
+    side: FrontSide, //默认只有正面可见
+  });
+  const geometry2 = new BufferGeometry();
+  //创建顶点数据
+  const vertices2 = new Float32Array([
+    0,
+    0,
+    0, //顶点1坐标
+    100,
+    0,
+    0, //顶点2坐标
+    0,
+    100,
+    0, //顶点3坐标
+    0,
+    0,
+    30, //顶点4坐标
+    0,
+    0,
+    100, //顶点5坐标
+    60,
+    0,
+    20, //顶点6坐标
+  ]);
+  const attribute2 = new BufferAttribute(vertices2, 3);
+  geometry2.attributes.position = attribute2;
+
+  // 创建线模型对象
+  const line0 = new Line(geometry2, material2);
+  // 闭合线条
+  const line1 = new LineLoop(geometry2, material2);
+  //非连续的线条
+  const line2 = new LineSegments(geometry2, material2);
+  stage.add(line0);
+  stage.add(line1);
+  stage.add(line2);
 
   const planes: Array<THREE.Object3D> = [];
 
@@ -96,7 +213,7 @@ onMounted(() => {
     // const boatPosition = new THREE.Vector3();
     // const boatTarget = new THREE.Vector3();
 
-    let lastZ = 0;
+    let lastPostion: Vector3 | null = null;
     requestAnimationFrame((time) => {
       stage?.render(time, (itime) => {
         itime *= 0.0005;
@@ -107,11 +224,26 @@ onMounted(() => {
 
         // 位移
         nextPlane?.position.set(boatPosition.x, boatPosition.y, 4);
-        if (Math.abs(lastZ - boatTarget.x) > 45) {
-          lastZ = boatTarget.x;
-          nextPlane!.rotation.z = -boatTarget.x;
+        // // nextPlane!.rotateZ(lastZ - boatTarget.x)
+        // const diff = Math.abs(Math.abs(lastZ) - Math.abs(boatTarget.x));
+        // if (diff > 55) {
+        //   lastZ = boatTarget.x;
+        //   nextPlane!.rotateZ(-diff);
+        //   // nextPlane?.lookAt(boatTarget.y, boatTarget.x, 4);
+        // }
+
+        let v1 = boatPosition;
+        if (lastPostion) {
+          new Vector3(v1.x, v1.y, 4).cross(lastPostion);
+          if (v1.y > 0) {
+            //角度是逆时针方向的
+            nextPlane!.rotateZ(-v1.y);
+          } else {
+            //角度是顺时针方向的
+            nextPlane!.rotateZ(v1.y);
+          }
         }
-        // nextPlane?.lookAt(boatTarget.y, boatTarget.x, 4);
+        lastPostion = new Vector3(v1.x, v1.y, 4);
 
         // // 位移
         // planes[1].position.set(

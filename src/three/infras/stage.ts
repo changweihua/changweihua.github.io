@@ -6,6 +6,7 @@ import {
   BufferGeometry,
   CatmullRomCurve3,
   DirectionalLight,
+  GridHelper,
   Group,
   Line,
   LineBasicMaterial,
@@ -36,6 +37,7 @@ class Stage implements VueThree.IStage {
   camera: PerspectiveCamera;
   renderer: WebGLRenderer;
   controls: OrbitControls;
+  gridHelper: GridHelper;
   objects: Array<Object3D>;
   container: HTMLDivElement | null;
   width: number;
@@ -222,6 +224,9 @@ class Stage implements VueThree.IStage {
         this.scene.rotateY(MathUtils.degToRad(num));
       });
 
+    //调用生成一次图形
+    // this.gui.asGeom();
+
     // 监听画面变化，更新渲染界面
     window.addEventListener("resize", () => {
       // 更新摄像头
@@ -237,6 +242,10 @@ class Stage implements VueThree.IStage {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.update();
+
+    this.gridHelper = new GridHelper(1000, 50, 0x0000ff, 0xff8080);
+    // helper.setCol
+    this.scene.add(this.gridHelper);
 
     this.init();
   }

@@ -76,7 +76,7 @@ const buildFlowerBed = function () {
   shape.lineTo(R, 0);
 
   var extrudeSettings = {
-    depth: 5,
+    depth: 6,
     bevelEnabled: false,
     steps: 1,
   };

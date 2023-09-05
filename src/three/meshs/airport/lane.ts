@@ -11,6 +11,7 @@ const buildLane = function () {
   //跑道的长宽
   const laneWidth = 420;
   const laneHeight = 50;
+  const laneZIndex = -4.9;
 
   //创建一个跑道的父容器
   const groundGroup = new Group();
@@ -24,7 +25,7 @@ const buildLane = function () {
   const roadPlaneM = new MeshStandardMaterial({ color: 0x4c4a4b });
   //创建网格 ，用于组织几何体和材质
   const roadPlane = new Mesh(roadPlaneG, roadPlaneM);
-  roadPlane.position.z = -4;
+  roadPlane.position.z = laneZIndex;
 
   const lineWidth = 1;
   //这里是左侧长实线
@@ -74,7 +75,7 @@ const buildLane = function () {
 
   const roadPlane1G = new BoxGeometry(30, 60, 10);
   const roadPlane1 = new Mesh(roadPlane1G, roadPlaneM);
-  roadPlane1.position.z = -4;
+  roadPlane1.position.z = laneZIndex;
   roadPlane1.position.y = 55;
   roadPlane1.position.x = 195;
 
@@ -119,14 +120,14 @@ const buildLane = function () {
   const waitingRoadPlaneG = new BoxGeometry(laneWidth, waitingLaneHeight, 10);
   const waitingRoadPlaneM = new MeshStandardMaterial({ color: 0x808080 });
   const waitingRoadPlane = new Mesh(waitingRoadPlaneG, waitingRoadPlaneM);
-  waitingRoadPlane.position.z = -4;
+  waitingRoadPlane.position.z = laneZIndex;
   waitingRoadPlane.position.y = 100;
   groundGroup.add(waitingRoadPlane);
 
   groundGroup.add(roadPlane1);
 
-  const flowerbed = buildFlowerBed()
-  flowerbed.position.z = -4;
+  const flowerbed = buildFlowerBed();
+  flowerbed.position.z = laneZIndex;
   flowerbed.position.y = 125;
 
   const flowerbeds = [
