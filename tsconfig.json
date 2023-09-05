@@ -21,7 +21,7 @@
     },
     // "typeRoots": [
     // ],
-    "types": []
+    "types": ["vite/client"]
   },
   "diagnostics": true,
   "include": [

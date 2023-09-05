@@ -30,12 +30,18 @@ features:
     details: 依托微信小程序，为苏南硕放国际机场量身打造阳光服务平台
     link: /gallery/sunny-land
     # linkText: 更多详情
-  - title: 扬泰机场智慧出行小程序
+  # - title: 扬泰机场智慧出行小程序
+  #   icon:
+  #     src: /yty_logo.png
+  #     alt: 扬泰机场智慧出行小程序
+  #   details: 为扬泰机场旅客提供航班动态查询、在线值机、停车场收费标准等自助服务
+  #   link: /gallery/
+  - title: 3D孪生数字机场
     icon:
-      src: /yty_logo.png
-      alt: 扬泰机场智慧出行小程序
-    details: 为扬泰机场旅客提供航班动态查询、在线值机、停车场收费标准等自助服务
-    link: /gallery/airyty
+      src: /digital_airport.png
+      alt: 3D孪生数字机场
+    details: 3D孪生数字机场简易演示版
+    link: /gallery/digital_airport
   - title: 苏南硕放国际机场旅客服务平台
     icon:
       src: /air_wux.png

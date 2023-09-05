@@ -13,6 +13,69 @@ import { SearchPlugin } from "vitepress-plugin-search";
 import flexSearchIndexOptions from "flexsearch";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import htmlConfig from 'vite-plugin-html-config';
+const htmlConfigs = htmlConfig({
+  headScripts: [
+    // {
+    //   src: 'js/cdn.jsdelivr.net_npm_luckysheet@latest_dist_plugins_js_plugin.js'
+    // },
+    // {
+    //   src: 'js/cdn.jsdelivr.net_npm_luckysheet@latest_dist_luckysheet.umd.js'
+    // },
+
+  ],
+  links: [
+    // {
+    //   rel: 'stylesheet',
+    //   href: 'js/cdn.jsdelivr.net_npm_luckysheet@latest_dist_assets_iconfont_iconfont.css'
+    // },
+    // {
+    //   rel: 'stylesheet',
+    //   href: 'js/cdn.jsdelivr.net_npm_luckysheet@latest_dist_css_luckysheet.css'
+    // },
+    // {
+    //   rel: 'stylesheet',
+    //   href: 'js/cdn.jsdelivr.net_npm_luckysheet@latest_dist_plugins_css_pluginsCss.css'
+    // },
+    // {
+    //   rel: 'stylesheet',
+    //   href: 'js/cdn.jsdelivr.net_npm_luckysheet@latest_dist_plugins_plugins.css'
+    // },
+  ],
+  // preHeadScripts: [
+  //   `var msg = 'pre head script'
+  //   console.log(msg);`,
+  //   {
+  //     async: true,
+  //     src: 'https://abc.com/b.js',
+  //     type: 'module',
+  //   },
+  //   { content: `console.log('hello')`, charset: 'utf-8' },
+  // ],
+  // scripts: [
+  //   `var msg = 'body script'
+  //    console.log(msg);`,
+  //   {
+  //     async: true,
+  //     src: 'https://abc.com/b.js',
+  //     type: 'module',
+  //   },
+  // ],
+  metas: [
+    {
+      name: 'keywords',
+      content: 'vite html meta keywords',
+    },
+    {
+      name: 'description',
+      content: 'vite html meta description',
+    },
+    {
+      bar: 'custom meta',
+    },
+  ],
+});
+
 // import vitePluginMonitor from "vite-plugin-monitor";
 // import AutoImport from 'unplugin-auto-import/vite'
 // import { MarkdownTransform } from './.vitepress/plugins/markdownTransform'
@@ -41,6 +104,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    htmlConfigs,
     // custom
     // MarkdownTransform(),
     // AutoImport({

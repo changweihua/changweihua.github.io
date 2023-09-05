@@ -194,7 +194,7 @@ onMounted(() => {
     createBoundary();
   }
 
-  const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
+  const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 2, 5);
   const boxGeometry = new THREE.BoxGeometry(0.6, 0.6, 0.6);
 
   function createBoundary() {
