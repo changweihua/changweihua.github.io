@@ -127,11 +127,12 @@ class Stage implements VueThree.IStage {
     // this.scene.rotation.set(0,-0.5 * Math.PI,0);
 
     //灯光
-    this.scene.add(new AmbientLight(0xffffff, 0.6)); //环境光
+    const ambient = new AmbientLight(0xffffff, 0.6);
+    this.scene.add(ambient); //环境光
 
-    const dLight = new DirectionalLight(0xffffff); //平行光
-    dLight.position.set(0, 1, 1);
-    this.scene.add(dLight);
+    const directionalLight = new DirectionalLight(0xffffff); //平行光
+    directionalLight.position.set(0, 1, 1);
+    this.scene.add(directionalLight);
 
     const light = new PointLight(0xffffff, 0.5); //点光源
     light.position.set(0, 0, 0);
@@ -154,6 +155,8 @@ class Stage implements VueThree.IStage {
     // this.renderer.setClearColor(0xb9d3ff, 0.4); //设置背景颜色和透明度
     // this.renderer.setClearAlpha(0.0);//完全透明
     //解决加载gltf格式模型纹理贴图和原图不一样问题
+    // 获取你屏幕对应的设备像素比.devicePixelRatio告诉threejs,以免渲染模糊问题
+    this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.outputColorSpace = SRGBColorSpace;
     this.renderer.setClearColor(0xb9d3ff, 0); //设置背景颜色
     this.renderer.setSize(width, height);
@@ -224,12 +227,45 @@ class Stage implements VueThree.IStage {
 
     const sceneFolder = this.gui.addFolder("Scene属性设置");
     sceneFolder
-      .add(sceneConfig, "rotationY", -180, 180)
+      .add(this.scene.rotation, "x", -180, 180)
+      .name("旋转视角-X")
+      .onChange((num: number) => {
+        // sceneConfig.rotationY = num;
+        // this.scene.rotateY(MathUtils.degToRad(num));
+      });
+    sceneFolder
+      .add(this.scene.rotation, "y", -180, 180)
       .name("旋转视角-Y")
       .onChange((num: number) => {
-        sceneConfig.rotationY = num;
-        this.scene.rotateY(MathUtils.degToRad(num));
+        // sceneConfig.rotationY = num;
+        // this.scene.rotateY(MathUtils.degToRad(num));
       });
+    sceneFolder
+      .add(this.scene.rotation, "z", -180, 180)
+      .name("旋转视角-Z")
+      .onChange((num: number) => {
+        // sceneConfig.rotationY = num;
+        // this.scene.rotateY(MathUtils.degToRad(num));
+      });
+
+    const lightFolder = this.gui.addFolder("光线属性设置");
+    lightFolder
+      .add(ambient, "intensity", 0, 2.0)
+      .name("环境光强度")
+      .step(0.1)
+      .onChange((num: number) => {
+        // sceneConfig.rotationY = num;
+        // this.scene.rotateY(MathUtils.degToRad(num));
+      });
+
+    lightFolder.add(directionalLight, "intensity", 0, 2.0).name("平行光强度");
+
+    // 平行光位置
+    lightFolder.add(directionalLight.position, "x", -400, 400);
+    lightFolder.add(directionalLight.position, "y", -400, 400);
+    lightFolder.add(directionalLight.position, "z", -400, 400);
+
+    this.gui.close();
 
     //调用生成一次图形
     // this.gui.asGeom();
@@ -255,7 +291,7 @@ class Stage implements VueThree.IStage {
     this.scene.add(this.gridHelper);
 
     this.init();
-    this.rayClick();
+    // this.rayClick();
   }
 
   //光线检测，获取点击物体的坐标值
