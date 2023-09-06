@@ -1,3 +1,8 @@
+## <small>0.0.24 (2023-09-06)</small>
+
+
+
+
 ## <small>0.0.23 (2023-09-05)</small>
 
 * perf(custom): 优化加载熟读 ([3b06ff2](https://github.com/changweihua/changweihua.github.io/commit/3b06ff2))
