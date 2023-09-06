@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "composite": true,
+    "noImplicitAny": false,
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "node",
@@ -16,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["./src/*"],
+      "~/*": ["./*"],
       "public": ["./public/*"],
     },
     // "typeRoots": [

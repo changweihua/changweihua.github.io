@@ -156,7 +156,7 @@
     "oimo-esm": "^1.0.10",
     "simple-git": "^3.19.1",
     "simple-icons": "^9.13.0",
-    "three": "^0.156.0",
+    "three": "^0.156.1",
     "vite-plugin-monitor": "^0.2.1",
     "vite-plugin-vue-preview": "^1.3.0",
     "vitepress-markdown-timeline": "^1.2.1",

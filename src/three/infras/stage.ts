@@ -10,11 +10,13 @@ import {
   Group,
   Line,
   LineBasicMaterial,
+  MOUSE,
   MathUtils,
   Mesh,
   Object3D,
   PerspectiveCamera,
   PointLight,
+  Raycaster,
   SRGBColorSpace,
   Scene,
   SplineCurve,
@@ -23,14 +25,18 @@ import {
   WebGLRenderer,
 } from "three";
 import TWEEN from "@tweenjs/tween.js";
-// @ts-ignore
-import { OrbitControls } from "../jsm/controls/OrbitControls.js";
-// @ts-ignore
-import { GUI } from "../jsm/libs/lil-gui.module.min.js";
+import { OrbitControls } from "../../../threejs/jsm/controls/OrbitControls";
+import { GUI } from "../../../threejs/jsm/libs/lil-gui.module.min";
 // 引入Stats性能监视器
-// @ts-ignore
-import Stats from "../jsm/libs/stats.module";
+import Stats from "../../../threejs/jsm/libs/stats.module";
 import axesHelper from "./axesHelper";
+//导入TweenMax动画控件
+import gsap, { Expo } from "gsap";
+
+const enum StageMode {
+  TWO,
+  THREE,
+}
 
 class Stage implements VueThree.IStage {
   scene: Scene;
@@ -42,12 +48,13 @@ class Stage implements VueThree.IStage {
   container: HTMLDivElement | null;
   width: number;
   height: number;
+  mode: StageMode = StageMode.THREE;
 
   cameraConfig: VueThree.ICameraConfig;
 
-  gui = new GUI({ name: "ss", width: 310 });
+  gui = new GUI({ width: 310 });
   // 创建stats对象
-  stats = Stats();
+  stats = new Stats();
 
   constructor(container: HTMLDivElement | null, fov = 45, near = 1, far = 100) {
     this.container = container;
@@ -157,7 +164,7 @@ class Stage implements VueThree.IStage {
       container.appendChild(this.renderer.domElement);
     }
     // stats.domElement:web 页面上输出计算结果，一个div元素
-    document.body.appendChild(this.stats.domElement);
+    document.body.appendChild(this.stats.dom);
 
     const cameraConfg = {
       fov: this.cameraConfig.fov,
@@ -230,11 +237,11 @@ class Stage implements VueThree.IStage {
     // 监听画面变化，更新渲染界面
     window.addEventListener("resize", () => {
       // 更新摄像头
-      // this.camera.aspect = window.innerWidth / window.innerHeight
+      this.camera.aspect = this.width / this.height;
       // 更新摄像机的投影矩阵
       this.camera.updateProjectionMatrix();
       // 更新渲染器
-      // this.renderer.setSize(window.innerWidth,window.innerHeight)
+      this.renderer.setSize(this.width, this.height);
       // 设置渲染器的像素比
       this.renderer.setPixelRatio(window.devicePixelRatio);
     });
@@ -248,10 +255,122 @@ class Stage implements VueThree.IStage {
     this.scene.add(this.gridHelper);
 
     this.init();
+    this.rayClick();
+  }
+
+  //光线检测，获取点击物体的坐标值
+  rayClick() {
+    const raycaster = new Raycaster();
+    const mouse = new Vector2();
+    const camera = this.camera;
+    const scene = this.scene;
+
+    //对页面进行鼠标点击事件绑定
+    this.renderer.domElement.addEventListener("mouseup", mouseup);
+
+    //添加点击方法
+    function mouseup(e: any) {
+      // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      // 通过摄像机和鼠标位置更新射线
+      //这里的摄像机要将外部定义的摄像机通过新的变量接受到，再次赋值使用，同下方的scene
+      raycaster.setFromCamera(mouse, camera);
+
+      // 计算物体和射线的焦点
+      const intersects = raycaster.intersectObjects(scene.children);
+
+      console.log(intersects);
+      //选中后进行操作
+      if (intersects.length) {
+        var selected = intersects[0];
+
+        //点击世界中的物体，改变摄像机位置到物体前，实现从远景到近景的切换效果
+        gsap.to(camera.position, 2, {
+          x: selected.point.x + 50,
+          y: selected.point.y,
+          z: selected.point.z + 100,
+          ease: Expo.easeInOut,
+          onComplete: function () {},
+        });
+        console.log("x坐标" + selected.point.x);
+        console.log("y坐标" + selected.point.y);
+        console.log("z坐标" + selected.point.z);
+      }
+    }
   }
 
   private init() {
     this.scene.rotateY(-0.5 * Math.PI);
+    // const that = this
+    // this.renderer.domElement.addEventListener('click', function (event) {
+    //   // .offsetY、.offsetX以canvas画布左上角为坐标原点,单位px
+    //   const px = event.offsetX;
+    //   const py = event.offsetY;
+    //   //屏幕坐标px、py转WebGL标准设备坐标x、y
+    //   //width、height表示canvas画布宽高度
+    //   const x = (px / this.width) * 2 - 1;
+    //   const y = -(py / this.height) * 2 + 1;
+    //   //创建一个射线投射器`Raycaster`
+    //   const raycaster = new Raycaster();
+    //   //.setFromCamera()计算射线投射器`Raycaster`的射线属性.ray
+    //   // 形象点说就是在点击位置创建一条射线，射线穿过的模型代表选中
+    //   raycaster.setFromCamera(new Vector2(x, y), that.camera);
+    //   //.intersectObjects([mesh1, mesh2, mesh3])对参数中的网格模型对象进行射线交叉计算
+    //   // 未选中对象返回空数组[],选中一个对象，数组1个元素，选中两个对象，数组两个元素
+    //   const intersects = raycaster.intersectObjects(that.scene.children);//[...that.objects]
+    //   console.log("射线器返回的对象", intersects);
+    //   // intersects.length大于0说明，说明选中了模型
+    //   if (intersects.length > 0) {
+    //       // 选中模型的第一个模型，设置为红色
+    //       intersects[0].object.material.color.set(0xff0000);
+    //   }
+    // })
+  }
+
+  //更新相机位置
+  changeCameraPosition() {
+    console.log(this.camera.position);
+    //解除滑动限制. 如果你在创建模型的时候设置了滑动平移放大缩小等限制在这里需要解除限制，不然达不到你想要的结果。
+    this.controls.minDistance = 0;
+    this.controls.maxPolarAngle = Math.PI / 1;
+    this.controls.enableRotate = false;
+    this.controls.enableZoom = false;
+    this.controls.update();
+    // 相机从当前位置camera.position飞行三维场景中某个世界坐标附近
+    new TWEEN.Tween({
+      // 相机开始坐标
+      x: this.camera.position.x,
+      y: this.camera.position.y,
+      z: this.camera.position.z,
+      // 相机开始指向的目标观察点
+      tx: 0,
+      ty: 0,
+      tz: 0,
+    })
+      .to(
+        {
+          // 相机结束坐标
+          x: 0,
+          y: 0,
+          z: 0,
+          // 相机结束指向的目标观察点
+          tx: 0,
+          ty: 0,
+          tz: 0,
+        },
+        1000
+      )
+      // .onUpdate(function (e) {
+      // 	//小程序中使用e，H5中使用this，获取结束的位置信息
+      // 	// 动态改变相机位置
+      // 	this.camera.position.set(this.x, this.y, this.z);
+      // 	// 模型中心点
+      // 	this.controls.target.set(this.tx, this.ty, this.tz);
+      // 	controls.update();//内部会执行.lookAt()
+      // })
+      .start();
   }
 
   render(time: number, callback?: (itime: number) => void) {
@@ -260,6 +379,20 @@ class Stage implements VueThree.IStage {
     this.camera.updateProjectionMatrix();
     this.camera.lookAt(this.scene.position);
     this.controls.update();
+    if (this.mode === StageMode.TWO) {
+      this.controls.mouseButtons = {
+        //控制器的鼠标事件替换为平移和缩放
+        LEFT: MOUSE.PAN,
+        MIDDLE: MOUSE.DOLLY,
+        RIGHT: MOUSE.PAN,
+      };
+    } else {
+      this.controls.mouseButtons = {
+        LEFT: MOUSE.ROTATE,
+        MIDDLE: MOUSE.MIDDLE,
+        RIGHT: MOUSE.PAN,
+      };
+    }
     this.renderer.render(this.scene, this.camera);
     callback && callback(time);
     requestAnimationFrame((rtime) => {
@@ -267,7 +400,87 @@ class Stage implements VueThree.IStage {
     });
   }
 
+  ChangeControl(mode: StageMode) {
+    this.mode = mode;
+    if (this.mode === StageMode.TWO) {
+      this.tween2D({
+        x: 0,
+        y: 0,
+        z: 0,
+      });
+    } else {
+      this.controls.reset(); //将控制器重置为初始状态，重置平移后的中心点
+      this.tween3D({
+        x: 20,
+        y: 20,
+        z: 20,
+      });
+    }
+  }
+  tween3D(position: { x: number; y: number; z: number }) {
+    //传递任意目标位置，从当前位置运动到目标位置
+    if (this.mode === StageMode.THREE) {
+      let that = this;
+      this.camera.lookAt(new Vector3(0, 0, 0));
+      var p1 = {
+        //定义相机位置是目标位置到中心点距离的2.2倍
+        x: this.camera.position.x / 2.2,
+        y: this.camera.position.y - 15,
+        z: this.camera.position.z / 2.2,
+      };
+      var p2 = {
+        x: position.x,
+        y: position.y,
+        z: position.z,
+      };
+      var tween = new TWEEN.Tween(p1).to(p2, 1200); //第一段动画
+      var update = function (object: { x: number; y: number; z: number }) {
+        that.camera.position.set(object.x * 2.2, object.y + 15, object.z * 2.2);
+        that.camera.lookAt(0, 0, 0); //保证动画执行时，相机焦距在中心点
+        that.controls.enabled = false;
+        that.controls.update();
+      };
+      tween.onUpdate(update);
+      // 动画完成后的执行函数
+      tween.onComplete(() => {
+        that.controls.enabled = true; //执行完成后开启控制
+      });
+      tween.easing(TWEEN.Easing.Quadratic.InOut);
+      tween.start();
+    }
+  }
+  tween2D(position: { x: number; y: number; z: number }) {
+    //传递平面展示的中心位置，x:0,y:0,z:0。将相机视角切换到中心位置的正上方
+    let that = this;
+    this.camera.lookAt(new Vector3(0, 0, 0));
+    var p1 = {
+      x: this.camera.position.x,
+      y: this.camera.position.y - 40,
+      z: this.camera.position.z,
+    };
+    var p2 = {
+      x: position.x,
+      y: position.y,
+      z: position.z,
+    };
+    var tween = new TWEEN.Tween(p1).to(p2, 1200); //第一段动画
+    var update = function (object: { x: number; y: number; z: number }) {
+      that.camera.position.set(object.x, object.y + 40, object.z);
+      that.camera.lookAt(0, 0, 0); //保证动画执行时，相机焦距在中心点
+      that.controls.enabled = false; //执行动画时禁止控制
+      that.controls.update();
+    };
+    tween.onUpdate(update);
+    // 动画完成后的执行函数
+    tween.onComplete(() => {
+      that.controls.enabled = true; //执行完成后开启控制
+    });
+    tween.easing(TWEEN.Easing.Quadratic.InOut);
+    tween.start();
+  }
+
   add(obj: any, centered = true) {
+    this.objects.push(obj);
     if (centered) {
       // this.fitOnScreen(obj, this.camera);
       // obj.applyMatrix( new Matrix4().makeTranslation(0, 0,0) );
@@ -284,11 +497,13 @@ class Stage implements VueThree.IStage {
 
   addMesh(mesh: Mesh) {
     this.scene.add(mesh);
+    this.objects.push(mesh);
   }
 
   addGroup(group: Group) {
     // this.fitOnScreen(group, this.camera);
     this.scene.add(group);
+    this.objects.push(group);
   }
 
   refresh() {
@@ -400,7 +615,7 @@ class Stage implements VueThree.IStage {
     });
     this.scene.remove();
     this.renderer.dispose();
-    document.body.removeChild(this.stats.domElement);
+    document.body.removeChild(this.stats.dom);
     document.body.removeChild(this.gui.domElement);
     this.gui.destroy();
   }
@@ -447,6 +662,22 @@ class Stage implements VueThree.IStage {
     return curve;
   }
 
+  //   //模型对象旋转的函数，每次设置一个坐标轴的变换
+  // function rotateAroundWorldAxis(object, axis, radians) {
+  //   let rotWorldMatrix = new THREE.Matrix4();
+  //   rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
+  //      rotWorldMatrix.multiply(object.matrix);
+  //   object.matrix = rotWorldMatrix;
+  //     object.rotation.setFromRotationMatrix(object.matrix);
+  //      }
+
+  //      //调用方式，设置x、y、z轴的旋转
+  //      let xAxis = new THREE.Vector3(1, 0, 0);
+  //      let yAxis = new THREE.Vector3(0, 1, 0);
+  //      let zAxis = new THREE.Vector3(0, 0, 1);
+  //      //模型、旋转轴和旋转角度（弧度）
+  //      rotateAroundWorldAxis(model, xAxis, Math.PI / 8);
+
   /**
    * 添加路径
    */
@@ -471,7 +702,14 @@ class Stage implements VueThree.IStage {
      */
     const curve = new CatmullRomCurve3(points, false);
 
+    curve.curveType = "catmullrom";
+    // curve.closed = true// 设置是否闭环
+    curve.tension = 1; // 设置线的张力，0为无弧度折线
+
+    // 为曲线添加材质在场景中显示出来，不显示也不会影响运动轨迹，相当于一个helper
+    // 50等分获取曲线点数组
     const curvePoints = curve.getPoints(50);
+    //把顶点坐标赋值给几何体
     const geometry = new BufferGeometry().setFromPoints(curvePoints);
     const material = new LineBasicMaterial({ color: 0xffffff });
     const splineObject = new Line(geometry, material);

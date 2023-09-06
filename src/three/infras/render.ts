@@ -8,6 +8,6 @@ export default function render() {
   window.requestAnimationFrame(render);
 }
 
-class ThreeRender {
-  constructor() {}
-}
+// class ThreeRender {
+//   constructor() {}
+// }

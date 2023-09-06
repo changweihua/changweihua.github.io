@@ -3,10 +3,8 @@ import * as THREE from "three";
 // 导入动画库
 // import gsap from "gsap";
 // 导入轨道控制器
-// @ts-ignore
-import { OrbitControls } from "../three/jsm/controls/OrbitControls.js";
-// @ts-ignore
-import { STLLoader } from "../three/jsm/loaders/STLLoader.js";
+import { OrbitControls } from "~/threejs/jsm/controls/OrbitControls.js";
+import { STLLoader } from "~/threejs/jsm/loaders/STLLoader.js";
 import { onMounted, ref } from "vue";
 import { onUnmounted } from "vue";
 

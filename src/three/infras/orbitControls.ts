@@ -1,6 +1,5 @@
 import { Camera } from "three";
-// @ts-ignore
-import { OrbitControls } from "../jsm/controls/OrbitControls.js";
+import { OrbitControls } from "../../../threejs/jsm/controls/OrbitControls.js";
 
 export default function orbitControls(
   camera: Camera,

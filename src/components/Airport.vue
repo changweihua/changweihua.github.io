@@ -5,17 +5,19 @@ import {
   BufferGeometry,
   CanvasTexture,
   CatmullRomCurve3,
+  Euler,
   FrontSide,
   Group,
   Line,
   LineBasicMaterial,
   LineLoop,
   LineSegments,
+  Matrix4,
   Mesh,
   MeshBasicMaterial,
+  Quaternion,
   Sprite,
   SpriteMaterial,
-  Vector2,
   Vector3,
 } from "three";
 import gsap from "gsap";
@@ -34,6 +36,60 @@ let textMesh: THREE.Mesh | null = null;
 let flyPlane: THREE.Object3D | null = null;
 let arrivalPlane: THREE.Object3D | null = null;
 let nextPlane: THREE.Object3D | null = null;
+
+// 创建运动轨迹
+function makeCurve() {
+  const curve = new CatmullRomCurve3([
+    new Vector3(0, 0, 0),
+    new Vector3(0, 0, 10),
+    new Vector3(10, 0, 0),
+  ]);
+  curve.curveType = "catmullrom";
+  curve.closed = true; // 设置是否闭环
+  curve.tension = 1; // 设置线的张力，0为无弧度折线
+
+  // 为曲线添加材质在场景中显示出来，不显示也不会影响运动轨迹，相当于一个helper
+  const points = curve.getPoints(50); // 50等分获取曲线点数组
+  const geometry = new BufferGeometry().setFromPoints(points); //把顶点坐标赋值给几何体
+  const materail = new LineBasicMaterial({ color: 0x000000 });
+  const curveObject = new Line(geometry, materail);
+  return [curve, curveObject];
+}
+
+// //让模型沿着运动轨迹移动
+// moveOnCurve(curve:CatmullRomCurve3, model: Object3D){
+//      if(this.curve==null || this.model == null){
+//          console.log('loading')
+//      }else{
+//          if(this.progress <= 1-this.velocity){
+//              // 获取样条曲线指定点坐标
+//              const point = this.curve.getPointAt(this.progress)
+//              const pointBox = this.curve.getPointAt(this.progress + this.velocity)
+//              if(point && pointBox){
+//                  this.model.position.set(point.x, point.y, point.z)
+
+//                  // 因为模型加载进来默认面部是正对Z轴负方向的，所以直接lookAt会导致出现倒着跑的现象，这里用重新设置朝向的方法来解决
+//                  // this.model.lookAt(pointBox.x, pointBox.y, pointBox.z)
+
+//                  let targetPos = pointBox//目标位置点
+//                  let offsetAngle = 0//目标移动时的朝向偏移
+//                  //以下代码在多段路径时可重复执行
+//                  let mtx = new THREE.Matrix4()//创建一个4维矩阵
+
+//                  // .lookAt ( eye : Vector3, target : Vector3, up : Vector3 ) : this,构造一个旋转矩阵，从eye 指向 target，由向量 up 定向。
+//                  mtx.lookAt(this.model.position, targetPos, this.model.up)
+//                  // .multiply ( m : Matrix4 ) 将当前矩阵乘以矩阵
+//                  mtx.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, offsetAngle, 0,'ZYX')))
+//                  // Quaternion 四元数在three.js中用于表示 rotation （旋转）
+//                  let toRot = new THREE.Quaternion().setFromRotationMatrix(mtx)//计算出需要进行旋转的四元数值
+//                  this.model.quaternion.slerp(toRot, 0.2)
+//              }
+//              this.progress +=this.velocity
+//          }else{
+//              this.progress = 0
+//          }
+//      }
+//  }
 
 onMounted(() => {
   if (!containerRef.value) {
@@ -97,6 +153,8 @@ onMounted(() => {
   const mesh = new Mesh(geometry, material);
 
   stage.add(mesh);
+
+  stage.add(makeCurve()[1]);
 
   // // 创建一个立方体
   // var geometry2 = new BoxGeometry(1, 1, 1);
@@ -193,37 +251,82 @@ onMounted(() => {
 
     nextPlane = planes[1];
 
-    const points = [
-      new Vector2(-80, 75),
-      new Vector2(-150, 55),
-      new Vector2(160, 65),
-      new Vector2(160, -130),
-    ];
-    const curve = stage?.addPath2(points);
-    const boatPosition = new Vector2();
-    const boatTarget = new Vector2();
-
     // const points = [
-    //   new THREE.Vector3(-80, 75, 4),
-    //   new THREE.Vector3(-150, 55, 4),
-    //   new THREE.Vector3(160, 65, 4),
-    //   new THREE.Vector3(160, -130, 4),
+    //   new Vector2(-80, 75),
+    //   new Vector2(-150, 55),
+    //   new Vector2(160, 65),
+    //   new Vector2(160, -130),
     // ];
-    // const curve = stage?.addPath3(points);
-    // const boatPosition = new THREE.Vector3();
-    // const boatTarget = new THREE.Vector3();
+    // const curve = stage?.addPath2(points);
+    // const boatPosition = new Vector2();
+    // const boatTarget = new Vector2();
 
-    let lastPostion: Vector3 | null = null;
+    const points = [
+      new Vector3(-80, 75, 8),
+      new Vector3(-150, 55, 8),
+      new Vector3(160, 65, 8),
+      new Vector3(160, -130, 8),
+      // new Vector3(0, 0, 0),
+      // new Vector3(0, 0, 10),
+      // new Vector3(10, 0, 0),
+    ];
+    const curve = stage?.addPath3(points);
+    const boatPosition = new Vector3();
+    const boatTarget = new Vector3();
+
+    // let lastPostion: Vector2 | null = null;
     requestAnimationFrame((time) => {
       stage?.render(time, (itime) => {
         itime *= 0.0005;
         const boatTime = itime * 0.05;
-        curve?.getPointAt(boatTime % 1, boatPosition);
+        const p1 = curve?.getPointAt(boatTime % 1, boatPosition);
         // 获取路径前一点坐标，用于头部向前
-        curve?.getPointAt((boatTime + 0.01) % 1, boatTarget);
+        const p2 = curve?.getPointAt((boatTime + 0.01) % 1, boatTarget);
+        console.log(p1, p2);
+        const model = nextPlane!;
+        if (model && p1 && p2) {
+          const angle = boatPosition.angleTo(boatTarget);
+          // 位移
+          model.position.set(p2.x, p2.y, p2.z + 10);
+          // model.rotateZ(Math.PI / 2);
+          // 因为模型加载进来默认面部是正对Z轴负方向的，所以直接lookAt会导致出现倒着跑的现象，这里用重新设置朝向的方法来解决
+          // model.lookAt(p2.x, p2.y, p2.z);
 
-        // 位移
-        nextPlane?.position.set(boatPosition.x, boatPosition.y, 4);
+          let targetPos = p2; //目标位置点
+          let offsetAngle = angle// Math.PI / 2; //目标移动时的朝向偏移
+          //以下代码在多段路径时可重复执行
+          let mtx = new Matrix4(); //创建一个4维矩阵
+
+          // .lookAt ( eye : Vector3, target : Vector3, up : Vector3 ) : this,构造一个旋转矩阵，从eye 指向 target，由向量 up 定向。
+          mtx.lookAt(model.position, targetPos, model.up);
+          // .multiply ( m : Matrix4 ) 将当前矩阵乘以矩阵
+          mtx.multiply(
+            new Matrix4().makeRotationFromEuler(
+              new Euler(0, offsetAngle, 0, "XYZ")
+            )
+          );
+          // Quaternion 四元数在three.js中用于表示 rotation （旋转）
+          let toRot = new Quaternion().setFromRotationMatrix(mtx); //计算出需要进行旋转的四元数值
+          model.quaternion.slerp(toRot, 0.2);
+        }
+
+        // let v1 = boatPosition;
+        // if (lastPostion) {
+        //   // nextPlane!.rotation.z = -Math.PI /2
+        //   const v = new Vector2(v1.x, v1.y);
+        //   const angle = v.cross(lastPostion);
+        //   // console.log(angle, v);
+        //   if (angle > 0) {
+        //     //角度是逆时针方向的
+        //     nextPlane!.rotateZ(angle);
+        //   } else {
+        //     //角度是顺时针方向的
+        //     nextPlane!.rotateZ(angle);
+        //   }
+        //   nextPlane!.rotation.z = MathUtils.degToRad(angle)
+        // }
+        // lastPostion = boatPosition;
+
         // // nextPlane!.rotateZ(lastZ - boatTarget.x)
         // const diff = Math.abs(Math.abs(lastZ) - Math.abs(boatTarget.x));
         // if (diff > 55) {
@@ -232,18 +335,26 @@ onMounted(() => {
         //   // nextPlane?.lookAt(boatTarget.y, boatTarget.x, 4);
         // }
 
-        let v1 = boatPosition;
-        if (lastPostion) {
-          new Vector3(v1.x, v1.y, 4).cross(lastPostion);
-          if (v1.y > 0) {
-            //角度是逆时针方向的
-            nextPlane!.rotateZ(-v1.y);
-          } else {
-            //角度是顺时针方向的
-            nextPlane!.rotateZ(v1.y);
-          }
-        }
-        lastPostion = new Vector3(v1.x, v1.y, 4);
+        // var targetPos = new Vector3(p2?.x, p2?.y, 14); //目标位置点
+        // var offsetAngle = -Math.PI / 2; //目标移动时的朝向偏移
+        // var model = nextPlane!;
+
+        // //以下代码在多段路径时可重复执行
+        // var mtx = new Matrix4(); //创建一个4维矩阵
+        // mtx.lookAt(model.position.clone(), targetPos, model.up); //设置朝向
+        // mtx.multiply(
+        //   new Matrix4().makeRotationFromEuler(new Euler(0, offsetAngle, 0))
+        // );
+        // var toRot = new Quaternion().setFromRotationMatrix(mtx); //计算出需要进行旋转的四元数值
+        // model.quaternion.slerp(toRot, 0.2); //应用旋转。0.2代表插值step。可以做到平滑旋转过渡
+        // // //使用Tween线性改变model的position。此处的action方法Tween官方可能没有，你可以使用Tween的其他方法，只要能线性插值改变position就可以了。
+        // // Tween.Tween.(model.position , 1000 , targetPos ,Tween.Easing.Linear,function(){
+        // // //oncomplete
+        // // },function(){
+        // //    //onupdate
+        // //   model.quaternion.slerp(toRot , 0.2)  //应用旋转。0.2代表插值step。可以做到平滑旋转过渡
+        // // }
+        // // )
 
         // // 位移
         // planes[1].position.set(

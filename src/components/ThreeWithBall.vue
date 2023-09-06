@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import * as THREE from "three";
 // 导入轨道控制器
-// @ts-ignore
-import { OrbitControls } from "../three/jsm/controls/OrbitControls.js";
+import { OrbitControls } from "~/threejs/jsm/controls/OrbitControls.js";
 
 import { onMounted, ref } from "vue";
 // 引入物理引擎

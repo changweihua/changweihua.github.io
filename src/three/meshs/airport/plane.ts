@@ -1,11 +1,7 @@
-// @ts-ignore
-import { OBJLoader } from "../../jsm/loaders/OBJLoader.js";
-// @ts-ignore
-import { MTLLoader } from "../../jsm/loaders/MTLLoader.js";
-// @ts-ignore
-import { GLTFLoader } from "../../jsm/loaders/GLTFLoader.js";
-// @ts-ignore
-import { DRACOLoader } from "../../jsm/loaders/DRACOLoader.js";
+import { OBJLoader } from "../../../../threejs/jsm/loaders/OBJLoader.js";
+import { MTLLoader } from "../../../../threejs/jsm/loaders/MTLLoader.js";
+import { GLTFLoader } from "../../../../threejs/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "../../../../threejs/jsm/loaders/DRACOLoader.js";
 import { LoadingManager, Object3D } from "three";
 
 function loadPlane(

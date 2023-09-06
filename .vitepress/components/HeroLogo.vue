@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import * as THREE from "three";
-import gsap from "gsap";
+// import gsap from "gsap";
 // 导入轨道控制器
-// @ts-ignore
-import { OrbitControls } from "../three/jsm/controls/OrbitControls.js";
-// @ts-ignore
-import { FontLoader } from "../three/jsm/loaders/FontLoader.js";
-// @ts-ignore
-import { TextGeometry } from "../three/jsm/geometries/TextGeometry.js";
+import { OrbitControls } from "../../threejs/jsm/controls/OrbitControls.js";
+import { FontLoader } from "../../threejs/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "../../threejs/jsm/geometries/TextGeometry.js";
 import { onMounted, ref } from "vue";
 
 import "default-passive-events";
@@ -22,7 +19,7 @@ let camera: THREE.OrthographicCamera | null = null;
 let renderer: THREE.WebGLRenderer | null = null;
 let controls: OrbitControls | null = null;
 
-let materials: Array<THREE.MeshPhongMaterial> = [];
+// let materials: Array<THREE.MeshPhongMaterial> = [];
 let textMesh: THREE.Mesh | null = null;
 const cameraTarget = new THREE.Vector3(0, 150, 0);
 let font: any = null;
@@ -100,10 +97,10 @@ onMounted(() => {
   pointLight.position.set(0, 200, 90);
   scene.add(pointLight);
 
-  materials = [
-    new THREE.MeshPhongMaterial({ color: 0xb9d3ff, flatShading: true }), // front
-    new THREE.MeshPhongMaterial({ color: 0xb9d3ff }), // side
-  ];
+  // materials = [
+  //   new THREE.MeshPhongMaterial({ color: 0xb9d3ff, flatShading: true }), // front
+  //   new THREE.MeshPhongMaterial({ color: 0xb9d3ff }), // side
+  // ];
 
   const group = new THREE.Group();
   // group.position.y = height * 0.5;
@@ -112,21 +109,21 @@ onMounted(() => {
   scene.add(boundaryGroup);
 
   // animation
-  const animations = () => {
-    if (textMesh) {
-      // 这里将mesh的x坐标，进行从0-》2-》0,实现这样子一个简单的动画效果
-      gsap.to(textMesh!.position, {
-        duration: 1,
-        delay: 1,
-        x: 10,
-      });
-      gsap.to(textMesh!.position, {
-        duration: 1,
-        delay: 2,
-        x: -200,
-      });
-    }
-  };
+  // const animations = () => {
+  //   if (textMesh) {
+  //     // 这里将mesh的x坐标，进行从0-》2-》0,实现这样子一个简单的动画效果
+  //     gsap.to(textMesh!.position, {
+  //       duration: 1,
+  //       delay: 1,
+  //       x: 10,
+  //     });
+  //     gsap.to(textMesh!.position, {
+  //       duration: 1,
+  //       delay: 2,
+  //       x: -200,
+  //     });
+  //   }
+  // };
 
   function loadFont() {
     const loader = new FontLoader();
@@ -150,6 +147,10 @@ onMounted(() => {
       bevelSegments: 5,
     });
 
+    if (!textGeo) {
+      return;
+    }
+
     const textMaterial = new THREE.MeshBasicMaterial();
     textMaterial.wireframe = true;
 
@@ -170,7 +171,7 @@ onMounted(() => {
     textMesh = new THREE.Mesh(textGeo, boundaryMaterial);
 
     const centerOffset =
-      -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
+      -0.5 * (textGeo.boundingBox!.max.x - textGeo.boundingBox!.min.x);
 
     textMesh.position.x = centerOffset;
     textMesh.position.y = hover;
@@ -217,7 +218,7 @@ onMounted(() => {
           Math.PI * Math.random()
         )
       );
-      const radomeScale = Math.random() * 0.5 + 0.5;
+      const radomeScale = Math.random() * 0.5 + 0.2;
       mesh.scale.set(radomeScale, radomeScale, radomeScale);
       boundaryGroup.add(mesh);
     }

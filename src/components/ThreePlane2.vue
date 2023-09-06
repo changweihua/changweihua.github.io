@@ -3,17 +3,12 @@ import * as THREE from "three";
 import TWEEN from "@tweenjs/tween.js";
 // 导入动画库
 import gsap from "gsap";
-// @ts-ignore
-import Stats from "../three/jsm/libs/stats.module.js";
+import Stats from "~/threejs/jsm/libs/stats.module.js";
 // 导入轨道控制器
-// @ts-ignore
-import { OrbitControls } from "../three/jsm/controls/OrbitControls.js";
-// @ts-ignore
-import { OBJLoader } from "../three/jsm/loaders/OBJLoader.js";
-// @ts-ignore
-import { MTLLoader } from "../three/jsm/loaders/MTLLoader.js";
-// @ts-ignore
-import { FBXLoader } from "../three/jsm/loaders/FBXLoader.js";
+import { OrbitControls } from "~/threejs/jsm/controls/OrbitControls.js";
+import { OBJLoader } from "~/threejs/jsm/loaders/OBJLoader.js";
+import { MTLLoader } from "~/threejs/jsm/loaders/MTLLoader.js";
+import { FBXLoader } from "~/threejs/jsm/loaders/FBXLoader.js";
 import { onMounted, onUnmounted, ref } from "vue";
 
 import "default-passive-events";
