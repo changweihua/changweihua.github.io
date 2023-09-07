@@ -436,6 +436,16 @@ class Stage implements VueThree.IStage {
     });
   }
 
+  export () {
+    this.renderer.clear()
+    this.renderer.render(this.scene, this.camera) // 注意：必须先清除，重新渲染场景
+    var link = document.createElement('a')
+    var canvas = this.renderer.domElement
+    link.href = canvas.toDataURL('image/png')
+    link.download = 'threejs.png'
+    link.click()
+  }
+
   ChangeControl(mode: StageMode) {
     this.mode = mode;
     if (this.mode === StageMode.TWO) {

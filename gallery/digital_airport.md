@@ -7,13 +7,16 @@ recommended: false
 tags: ["数字机场", "3D孪生"]
 title: 3D孪生数字机场
 description: 3D孪生数字机场
-poster: /images/cmono-Siesta.png
-date: 2023-09-01
+poster: /images/airport.png
+date: 2023-09-03
 ---
-<script lang="ts" setup>
+
+![整体预览图](/images/digital_airport.png){data-zoomable}
+
+<!-- <script lang="ts" setup>
 import Airport from "@/components/Airport.vue"
 </script>
 
 <ClientOnly>
   <Airport />
-</ClientOnly>
+</ClientOnly> -->

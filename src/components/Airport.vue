@@ -463,6 +463,11 @@ onMounted(() => {
 onUnmounted(() => {
   stage && stage.dispose();
 });
+
+function handleSave() {
+  stage && stage.export()
+}
+
 </script>
 
 <template>
@@ -481,6 +486,7 @@ onUnmounted(() => {
       />
     </div>
   </div>
+  <a-button @click="handleSave">保存图片</a-button>
 </template>
 
 <style lang="less" scoped>

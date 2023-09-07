@@ -38,7 +38,7 @@ features:
   #   link: /gallery/
   - title: 3D孪生数字机场
     icon:
-      src: /digital_airport.png
+      src: /images/airport.png
       alt: 3D孪生数字机场
     details: 3D孪生数字机场简易演示版
     link: /gallery/digital_airport
