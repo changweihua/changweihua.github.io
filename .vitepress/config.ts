@@ -1,4 +1,3 @@
-import { defineConfig } from "vitepress";
 import { themeConfig } from "./src/theme";
 import { defaultConfig } from "./src/defaults";
 import { head } from "./src/head";

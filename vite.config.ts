@@ -14,6 +14,7 @@ import flexSearchIndexOptions from "flexsearch";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import htmlConfig from 'vite-plugin-html-config';
+import removeConsole from "vite-plugin-remove-console";
 const htmlConfigs = htmlConfig({
   headScripts: [
     // {
@@ -105,6 +106,7 @@ export default defineConfig({
   },
   plugins: [
     htmlConfigs,
+    removeConsole(),
     // custom
     // MarkdownTransform(),
     // AutoImport({

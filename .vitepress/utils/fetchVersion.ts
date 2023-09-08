@@ -32,14 +32,15 @@ export function fetchVersion() {
       if (!version) {
         version = "N/A";
       }
-      const tagLineParagragh = document.querySelector(
-        "div.VPHero.has-image.VPHomeHero > div > div.main > p.tagline"
-      );
-      const docsVersionSpan = document.createElement("samp");
-      docsVersionSpan.classList.add("version-tag");
-      docsVersionSpan.classList.add("hidden");
-      docsVersionSpan.classList.add("md:visible");
-      docsVersionSpan.innerText = version;
-      tagLineParagragh?.appendChild(docsVersionSpan);
+      return Promise.resolve(version)
+      // const tagLineParagragh = document.querySelector(
+      //   "footer.VPFooter > .container"
+      // );
+      // const docsVersionSpan = document.createElement("p");
+      // docsVersionSpan.classList.add("version-tag");
+      // // docsVersionSpan.classList.add("hidden");
+      // // docsVersionSpan.classList.add("md:visible");
+      // docsVersionSpan.innerText = version;
+      // tagLineParagragh?.appendChild(docsVersionSpan);
     });
 }

@@ -134,20 +134,10 @@ Technical testing 2015-09-01
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { fetchVersion } from './.vitepress/utils/fetchVersion'
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 import { BeakerIcon } from '@heroicons/vue/24/solid'
-// import { siSimpleicons } from 'simple-icons';
 import * as icons from 'simple-icons';
 
-onMounted(() => {
-  const docsVersionSpan = document.querySelector(
-    "div.VPHero.has-image.VPHomeHero > div > div.main > p.tagline > samp.version-tag"
-  );
-  if(!docsVersionSpan){
-    fetchVersion()
-  }
-})
 import XmindViewer from './.vitepress/components/XmindViewer.vue'
 
 const members = [

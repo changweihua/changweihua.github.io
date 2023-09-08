@@ -11,7 +11,7 @@ import {
 import DefaultTheme from "vitepress/theme";
 import { Suspense, h, nextTick, onMounted, watch, watchEffect } from "vue";
 import { Feed } from "feed";
-import { Button, Progress } from 'ant-design-vue';
+import { Button, Progress } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
@@ -57,6 +57,7 @@ import HomeContributors from "../components/HomeContributors.vue";
 import HeroLogo from "../components/HeroLogo.vue";
 import WebLogo from "../components/WebLogo.vue";
 import SvgLogo from "../components/SvgLogo.vue";
+import PageFooter from "../components/PageFooter.vue";
 
 // import ThreePlane from "../../components/ThreePlane.vue"
 
@@ -173,10 +174,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "layout-top",
       //   }),
-      // "layout-bottom": () =>
-      //   h(PlaceHolder, {
-      //     name: "layout-bottom",
-      //   }),
+      "layout-bottom": () => h(PageFooter),
       // "nav-bar-title-before": () =>
       //   h(PlaceHolder, {
       //     name: "nav-bar-title-before",
@@ -240,7 +238,7 @@ export default {
     // app.component("ThreePlane", ThreePlane);
     app.component("CopyRight", copyright);
 
-    app.use(Button).use(Progress)
+    app.use(Button).use(Progress);
 
     app.use(VueResizeObserver);
   },
