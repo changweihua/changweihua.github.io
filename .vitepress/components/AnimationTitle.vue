@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-
 import gsap from "gsap";
 
 // get other plugins:

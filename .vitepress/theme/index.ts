@@ -29,9 +29,6 @@ import {
   trackPageview,
 } from "../plugins/baidutongji";
 
-import "vitepress-markdown-timeline/dist/theme/index.css";
-import "./styles/timeline.fix.less";
-
 import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
 
@@ -41,7 +38,7 @@ import { Sandbox } from "vitepress-plugin-sandpack";
 import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";
-import "./styles/tailwind.css";
+// import "./styles/tailwind.css";
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
@@ -58,6 +55,8 @@ import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import HeroLogo from "../components/HeroLogo.vue";
+import WebLogo from "../components/WebLogo.vue";
+import SvgLogo from "../components/SvgLogo.vue";
 
 // import ThreePlane from "../../components/ThreePlane.vue"
 
@@ -65,6 +64,9 @@ import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
 import "uno.css";
 import VueResizeObserver from "vue-resize-observer";
+
+import "vitepress-markdown-timeline/dist/theme/index.css";
+import "./styles/timeline.fix.less";
 
 export default {
   ...DefaultTheme,

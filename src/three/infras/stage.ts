@@ -10,6 +10,7 @@ import {
   Group,
   Line,
   LineBasicMaterial,
+  LoadingManager,
   MOUSE,
   MathUtils,
   Mesh,
@@ -49,6 +50,7 @@ class Stage implements VueThree.IStage {
   width: number;
   height: number;
   mode: StageMode = StageMode.THREE;
+  manager: LoadingManager;
 
   cameraConfig: VueThree.ICameraConfig;
 
@@ -290,6 +292,23 @@ class Stage implements VueThree.IStage {
     // helper.setCol
     this.scene.add(this.gridHelper);
 
+    this.manager = new LoadingManager();
+    this.manager.onStart = () => {
+      console.log("资源开始加载");
+    };
+    this.manager.onProgress = function (url, num, total) {
+      console.log(
+        `加载资源地址: ${url} ,已完成资源数：${num} ,资源完成总数：${total}`
+      );
+    };
+    this.manager.onLoad = function () {
+      console.log("加载完成");
+    };
+    // 导入材质方法
+    // const textureLoader = new THREE.TextureLoader(manager);
+    // const imageTexture = textureLoader.load('xxx你的材质贴图1');
+    // const imageTexture2 = textureLoader.load('xxx你的材质贴图2');
+
     this.init();
     // this.rayClick();
   }
@@ -436,14 +455,14 @@ class Stage implements VueThree.IStage {
     });
   }
 
-  export () {
-    this.renderer.clear()
-    this.renderer.render(this.scene, this.camera) // 注意：必须先清除，重新渲染场景
-    var link = document.createElement('a')
-    var canvas = this.renderer.domElement
-    link.href = canvas.toDataURL('image/png')
-    link.download = 'threejs.png'
-    link.click()
+  export() {
+    this.renderer.clear();
+    this.renderer.render(this.scene, this.camera); // 注意：必须先清除，重新渲染场景
+    var link = document.createElement("a");
+    var canvas = this.renderer.domElement;
+    link.href = canvas.toDataURL("image/png");
+    link.download = "threejs.png";
+    link.click();
   }
 
   ChangeControl(mode: StageMode) {

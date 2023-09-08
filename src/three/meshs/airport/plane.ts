@@ -13,8 +13,8 @@ function loadPlane(
   const objLoader = new OBJLoader();
   return new Promise<Object3D>((resolve) => {
     mtlLoader.load(mtl, function (materials: any) {
-      // materials.preload();
-      // objLoader.setMaterials(materials);
+      materials.preload();
+      objLoader.setMaterials(materials);
       objLoader.load(
         obj,
         function (gltf: any) {
@@ -50,6 +50,12 @@ function loadGltfPlane(gltf: string, report?: (progress: number) => void) {
         scene.rotation.z = 1 * Math.PI;
         scene.position.set(0, -130, 0);
         scene.scale.set(0.01, 0.01, 0.01);
+        scene.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
         resolve(scene);
       },
       (xhr: any) => {

@@ -6,7 +6,10 @@ import { head } from "./src/head";
 import { zhConfig } from "./src/configs/zh";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { RSS } from "./src/rss";
-
+import { withMermaid } from "vitepress-plugin-mermaid";
+import footnote from "markdown-it-footnote";
+import mathjax3 from "markdown-it-mathjax3";
+import timeline from "vitepress-markdown-timeline";
 const links: any[] = [];
 const customElements = [
   "mjx-container",
@@ -98,11 +101,15 @@ const customElements = [
   "annotation-xml",
 ];
 
-export default defineConfig({
+export default withMermaid({
+  mermaid: {
+    //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  },
   vite: {
     // ↓↓↓↓↓
     plugins: [
       RssPlugin(RSS),
+      // require("./plugins/frontmatter")
     ],
     // ↑↑↑↑↑
   },
@@ -147,6 +154,14 @@ export default defineConfig({
         lastmod: pageData.lastUpdated,
       });
     }
+  },
+  markdown: {
+    // ...
+    config: (md) => {
+      md.use(timeline);
+      md.use(footnote);
+      md.use(mathjax3);
+    },
   },
   // transformHtml: (_, id, { pageData }) => {
   //   if (!/[\\/]404\.html$/.test(id))

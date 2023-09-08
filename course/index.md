@@ -9,6 +9,8 @@ head:
       content: changweihua.github.io 最新课程 CMONO.NET
 ---
 
+$\sqrt{3x-1}+(1+x)^2$
+
 测试脚注 [^1]
 
 [^1]: 脚注出处
@@ -23,6 +25,13 @@ $$\begin{array}{c}
 \nabla \cdot \vec{\mathbf{B}} & = 0
 
 \end{array}$$
+
+```mermaid
+pie title Pets adopted by volunteers
+  "Dogs" : 386
+  "Cats" : 85
+  "Rats" : 15
+```
 
 <OnBoard />
 

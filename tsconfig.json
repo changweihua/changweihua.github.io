@@ -22,7 +22,7 @@
     },
     // "typeRoots": [
     // ],
-    "types": ["vite/client"]
+    "types": []
   },
   "diagnostics": true,
   "include": [

@@ -11,12 +11,12 @@ poster: /images/airport.png
 date: 2023-09-03
 ---
 
-![整体预览图](/images/digital_airport.png){data-zoomable}
+<!-- ![整体预览图](/images/digital_airport.png){data-zoomable} -->
 
-<!-- <script lang="ts" setup>
+<script lang="ts" setup>
 import Airport from "@/components/Airport.vue"
 </script>
 
 <ClientOnly>
   <Airport />
-</ClientOnly> -->
+</ClientOnly>

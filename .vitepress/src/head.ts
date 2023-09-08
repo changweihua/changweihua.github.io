@@ -10,6 +10,7 @@ export const head: HeadConfig[] = [
       href: "/font.css",
     },
   ],
+  ["meta", { name: "referrer", content:"no-referrer" }],
   // [
   //   "script",
   //   {
