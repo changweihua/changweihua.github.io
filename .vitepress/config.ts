@@ -106,6 +106,9 @@ export default defineConfig({
   //   //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
   // },
   vite: {
+    build:{
+      minify: "terser", // 使用 terser 进行代码压缩
+    },
     // ↓↓↓↓↓
     plugins: [
       RssPlugin(RSS),

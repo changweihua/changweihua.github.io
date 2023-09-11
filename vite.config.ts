@@ -14,7 +14,6 @@ import flexSearchIndexOptions from "flexsearch";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import htmlConfig from "vite-plugin-html-config";
-import removeConsole from "vite-plugin-remove-console";
 const htmlConfigs = htmlConfig({
   headScripts: [
     // {
@@ -102,10 +101,9 @@ export default defineConfig({
     },
   },
   clearScreen: true, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
-  assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
+  // assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
   build: {
     sourcemap: false,
-    // minify: "terser", // 使用 terser 进行代码压缩
     minify: "terser", // 必须开启：使用terserOptions才有效果
     terserOptions: {
       compress: {
@@ -144,7 +142,7 @@ export default defineConfig({
   },
   plugins: [
     htmlConfigs,
-    removeConsole(),
+    // removeConsole(),
     // custom
     // MarkdownTransform(),
     // AutoImport({
@@ -308,9 +306,9 @@ export default defineConfig({
       // // 配置图片要这样引用
       // "/img": "./src/assets",
     },
-    dedupe: [], // 强制 Vite 始终将列出的依赖项解析为同一副本
-    conditions: [], // 解决程序包中 情景导出 时的其他允许条件
-    mainFields: [], // 解析包入口点尝试的字段列表
+    // dedupe: [], // 强制 Vite 始终将列出的依赖项解析为同一副本
+    // conditions: [], // 解决程序包中 情景导出 时的其他允许条件
+    // mainFields: [], // 解析包入口点尝试的字段列表
     // extensions: ['.js', '.ts', '.json'] // 导入时想要省略的扩展名列表
   },
   ssr: {
