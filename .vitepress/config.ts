@@ -1,3 +1,4 @@
+import { defineConfig } from "vitepress";
 import { themeConfig } from "./src/theme";
 import { defaultConfig } from "./src/defaults";
 import { head } from "./src/head";
@@ -100,10 +101,10 @@ const customElements = [
   "annotation-xml",
 ];
 
-export default withMermaid({
-  mermaid: {
-    //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
-  },
+export default defineConfig({
+  // mermaid: {
+  //   //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  // },
   vite: {
     // ↓↓↓↓↓
     plugins: [
