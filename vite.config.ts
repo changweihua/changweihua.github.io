@@ -8,12 +8,12 @@ import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import { vuePreviewPlugin } from "vite-plugin-vue-preview";
 import AntdvResolver from "antdv-component-resolver";
 import { ViteAliases } from "vite-aliases";
-import UnoCSS from 'unocss/vite'
+import UnoCSS from "unocss/vite";
 import { SearchPlugin } from "vitepress-plugin-search";
 import flexSearchIndexOptions from "flexsearch";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import htmlConfig from 'vite-plugin-html-config';
+import htmlConfig from "vite-plugin-html-config";
 import removeConsole from "vite-plugin-remove-console";
 const htmlConfigs = htmlConfig({
   headScripts: [
@@ -23,7 +23,6 @@ const htmlConfigs = htmlConfig({
     // {
     //   src: 'js/cdn.jsdelivr.net_npm_luckysheet@latest_dist_luckysheet.umd.js'
     // },
-
   ],
   links: [
     // {
@@ -64,15 +63,15 @@ const htmlConfigs = htmlConfig({
   // ],
   metas: [
     {
-      name: 'keywords',
-      content: 'vite html meta keywords',
+      name: "keywords",
+      content: "vite html meta keywords",
     },
     {
-      name: 'description',
-      content: 'vite html meta description',
+      name: "description",
+      content: "vite html meta description",
     },
     {
-      bar: 'custom meta',
+      bar: "custom meta",
     },
   ],
 });
@@ -99,10 +98,49 @@ export default defineConfig({
       overlay: false,
     },
     fs: {
-      allow: [
-        resolve(__dirname, '..'),
-      ],
+      allow: [resolve(__dirname, "..")],
     },
+  },
+  clearScreen: true, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
+  assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
+  build: {
+    sourcemap: false,
+    // minify: "terser", // 使用 terser 进行代码压缩
+    minify: "terser", // 必须开启：使用terserOptions才有效果
+    terserOptions: {
+      compress: {
+        //生产环境时移除console
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
+    // chunkSizeLimit: 5000, // 设置 chunk 大小的限制为 5000 KiB
+    emptyOutDir: true, // 在构建之前清空输出目录
+    // rollupOptions: {
+    //   output: {
+    //     // 在这里修改静态资源路径
+    //     chunkFileNames: "assets/js/[name]-[hash].js",
+    //     entryFileNames: "assets/js/[name]-[hash].js",
+    //     assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
+    //     manualChunks(id) {
+    //       // Vue 及其相关库的 chunk
+    //       if (
+    //         id.includes("vue") ||
+    //         id.includes("core-js") ||
+    //         id.includes("@babel/runtime")
+    //       ) {
+    //         return "vendor";
+    //       }
+    //       // 其他库的 chunk
+    //       if (id.includes("node_modules")) {
+    //         return "dependencies";
+    //       }
+    //       // 默认情况下将模块放入一个单独的 chunk
+    //       return "common";
+    //     },
+    //   },
+    // },
   },
   plugins: [
     htmlConfigs,
@@ -256,15 +294,24 @@ export default defineConfig({
     //   root: process.cwd(),
     // }),
     SearchPlugin(options),
-    UnoCSS()
+    UnoCSS(),
   ],
   resolve: {
     alias: {
       // "@": fileURLToPath(new URL(".", import.meta.url)),
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      public: fileURLToPath(new URL('./public', import.meta.url)),
-      "~": path.resolve(__dirname, './'),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      public: fileURLToPath(new URL("./public", import.meta.url)),
+      "~": path.resolve(__dirname, "./"),
+      // "@": resolve(__dirname, "src"),
+      // // 注意一定不要随意命名，a b c这样的，项目的目录也不能为关键字保留字！！
+      // "comp": resolve(__dirname, "src/components"),
+      // // 配置图片要这样引用
+      // "/img": "./src/assets",
     },
+    dedupe: [], // 强制 Vite 始终将列出的依赖项解析为同一副本
+    conditions: [], // 解决程序包中 情景导出 时的其他允许条件
+    mainFields: [], // 解析包入口点尝试的字段列表
+    // extensions: ['.js', '.ts', '.json'] // 导入时想要省略的扩展名列表
   },
   ssr: {
     noExternal: ["vitepress-plugin-nprogress"],
