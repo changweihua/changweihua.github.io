@@ -14,7 +14,7 @@
     "lint": "eslint --fix --ext .ts,.js,.vue src test/unit",
     "version": "conventional-changelog -p custom-config -i CHANGELOG.md -s -n ./changelog-option.cjs && git add CHANGELOG.md",
     "postversion": "git push --tags",
-    "fix-memory-limit": "cross-env LIMIT=2048 increase-memory-limit",
+    "fix-memory-limit": "cross-env LIMIT=8048 increase-memory-limit",
     "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -n ./changelog-option.cjs && git add CHANGELOG.md",
     "prepare": "husky install"
   },

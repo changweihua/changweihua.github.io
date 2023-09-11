@@ -2,11 +2,6 @@
 layout: page
 sidebar: false
 pageClass: course-index-page
-
-head:
-  - - meta
-    - name: keywords
-      content: changweihua.github.io 最新课程 CMONO.NET
 ---
 
 $\sqrt{3x-1}+(1+x)^2$

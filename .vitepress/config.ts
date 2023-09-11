@@ -6,7 +6,7 @@ import { head } from "./src/head";
 import { zhConfig } from "./src/configs/zh";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { RSS } from "./src/rss";
-import { withMermaid } from "vitepress-plugin-mermaid";
+// import { withMermaid } from "vitepress-plugin-mermaid";
 import footnote from "markdown-it-footnote";
 import mathjax3 from "markdown-it-mathjax3";
 import timeline from "vitepress-markdown-timeline";
