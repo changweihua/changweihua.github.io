@@ -27,10 +27,6 @@ let font: any = null;
 const boundaryGroup = new THREE.Group();
 
 const textureLoader = new THREE.TextureLoader();
-const matcapTexture = textureLoader.load("/textures/1.png");
-
-const boundaryMaterial = new THREE.MeshMatcapMaterial();
-boundaryMaterial.matcap = matcapTexture;
 
 const size = 80,
   hover = -30,
@@ -168,6 +164,11 @@ onMounted(() => {
     //   );
     // }
 
+    const matcapTexture = textureLoader.load("/textures/1.png");
+
+    const boundaryMaterial = new THREE.MeshMatcapMaterial();
+    boundaryMaterial.matcap = matcapTexture;
+
     textMesh = new THREE.Mesh(textGeo, boundaryMaterial);
 
     const centerOffset =
@@ -199,6 +200,11 @@ onMounted(() => {
   const boxGeometry = new THREE.BoxGeometry(0.6, 0.6, 0.6);
 
   function createBoundary() {
+    const matcapTexture = textureLoader.load("/textures/1.png");
+
+    const boundaryMaterial = new THREE.MeshMatcapMaterial();
+    boundaryMaterial.matcap = matcapTexture;
+
     for (let i = 0; i < 100; i += 1) {
       let mesh;
       if (i % 10 <= 2) {

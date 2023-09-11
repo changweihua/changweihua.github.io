@@ -2,15 +2,12 @@
 import {
   HeadConfig,
   PageData,
-  SiteConfig,
-  createContentLoader,
   inBrowser,
   useData,
   useRoute,
 } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { Suspense, h, nextTick, onMounted, watch, watchEffect } from "vue";
-import { Feed } from "feed";
+import { h, nextTick, onMounted, watch, watchEffect } from "vue";
 import { Button, Progress } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
@@ -21,13 +18,6 @@ import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
-const hostname: string = "https://changweihua.github.io";
-
-import {
-  registerAnalytics,
-  siteIds,
-  trackPageview,
-} from "../plugins/baidutongji";
 
 import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
@@ -38,7 +28,6 @@ import { Sandbox } from "vitepress-plugin-sandpack";
 import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";
-// import "./styles/tailwind.css";
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
@@ -55,11 +44,7 @@ import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import HeroLogo from "../components/HeroLogo.vue";
-import WebLogo from "../components/WebLogo.vue";
-import SvgLogo from "../components/SvgLogo.vue";
 import PageFooter from "../components/PageFooter.vue";
-
-// import ThreePlane from "../../components/ThreePlane.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -235,7 +220,6 @@ export default {
     app.component("ArticleMetadata", ArticleMetadata);
     app.component("Contributors", Contributors);
     app.component("HomeContributors", HomeContributors);
-    // app.component("ThreePlane", ThreePlane);
     app.component("CopyRight", copyright);
 
     app.use(Button).use(Progress);

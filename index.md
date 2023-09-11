@@ -138,8 +138,6 @@ import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 import { BeakerIcon } from '@heroicons/vue/24/solid'
 import * as icons from 'simple-icons';
 
-import XmindViewer from './.vitepress/components/XmindViewer.vue'
-
 const members = [
   {
     avatar: '/author.jpg',
