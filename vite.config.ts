@@ -100,7 +100,7 @@ export default defineConfig({
       allow: [resolve(__dirname, "..")],
     },
   },
-  clearScreen: true, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
+  clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
   // assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
   // build: {
   //   sourcemap: false,
@@ -189,26 +189,26 @@ export default defineConfig({
       ],
     }),
     Icons({ autoInstall: true }),
-    vuePreviewPlugin({
-      props: {
-        previewBodyStyle: {
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        },
-        previewAppStyle: {
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          fontFamily: "JetBrainsMono, AlibabaPuHuiTi",
-        },
-        importMap: {
-          "@vue/shared":
-            "https://unpkg.com/@vue/shared@latest/dist/shared.esm-bundler.js",
-        },
-      },
-    }),
+    // vuePreviewPlugin({
+    //   props: {
+    //     previewBodyStyle: {
+    //       display: "flex",
+    //       justifyContent: "center",
+    //       alignItems: "center",
+    //     },
+    //     previewAppStyle: {
+    //       display: "flex",
+    //       justifyContent: "center",
+    //       alignItems: "center",
+    //       flexDirection: "column",
+    //       fontFamily: "JetBrainsMono, AlibabaPuHuiTi",
+    //     },
+    //     importMap: {
+    //       "@vue/shared":
+    //         "https://unpkg.com/@vue/shared@latest/dist/shared.esm-bundler.js",
+    //     },
+    //   },
+    // }),
     // vitePluginMonitor({
     //   // log: false,
     //   monitor(label, time, originData) {

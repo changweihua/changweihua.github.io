@@ -161,7 +161,7 @@ export default defineConfig({
   markdown: {
     // ...
     config: (md) => {
-      // md.use(timeline);
+      md.use(timeline);
       // md.use(footnote);
       // md.use(mathjax3);
     },
