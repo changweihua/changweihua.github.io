@@ -4,9 +4,5 @@ node_modules
 .vitepress/dist
 .vitepress/.temp
 .vitepress/cache
-node_modules
-package-lock.json
 ssj2
 A320
-src/three/jsm
-src/three/fonts
