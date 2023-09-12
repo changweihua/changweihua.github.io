@@ -158,14 +158,14 @@ export default defineConfig({
       });
     }
   },
-  markdown: {
-    // ...
-    config: (md) => {
-      md.use(timeline);
-      // md.use(footnote);
-      // md.use(mathjax3);
-    },
-  },
+  // markdown: {
+  //   // ...
+  //   config: (md) => {
+  //     md.use(timeline);
+  //     // md.use(footnote);
+  //     // md.use(mathjax3);
+  //   },
+  // },
   // transformHtml: (_, id, { pageData }) => {
   //   if (!/[\\/]404\.html$/.test(id))
   //     links.push({

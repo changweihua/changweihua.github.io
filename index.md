@@ -164,8 +164,6 @@ const members = [
 ]
 </script>
 
-<!-- <BeakerIcon class="h-6 w-6 text-blue-500" /> -->
-
 <VPTeamPage>
   <VPTeamPageTitle>
     <template #title>
