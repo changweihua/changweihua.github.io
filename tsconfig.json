@@ -25,25 +25,7 @@
     "types": []
   },
   "diagnostics": true,
-  "include": [
-    ".vitepress/**/*.ts",
-    ".vitepress/**/*.vue",
-    ".vitepress/**/*.json",
-    ".vitepress/**/*",
-    "typings/",
-    // "src/**/*.ts",
-    // "**/*.d.ts",
-    // "src/**/*.tsx",
-    // "src/**/*.vue",
-    // "src/autoImport/*.d.ts",
-    "env.d.ts",
-    "typings/**/*.d.ts",
-    "src/**/*",
-    "src/**/*.vue",
-    "src/**/*.json",
-    "plugins/**/*.ts",
-    "tests"
-  ],
+  "include": [],
   "exclude": ["**/node_modules/**", "**/dist/**", "build", "public"],
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],

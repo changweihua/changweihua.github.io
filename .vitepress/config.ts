@@ -157,6 +157,7 @@ export default withMermaid({
       });
     }
   },
+  ignoreDeadLinks: true,
   markdown: {
     // ...
     config: (md) => {

@@ -115,22 +115,42 @@ export default defineConfig({
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     // chunkSizeLimit: 5000, // 设置 chunk 大小的限制为 5000 KiB
     emptyOutDir: true, // 在构建之前清空输出目录
+    // rollupOptions: {
+    //   cache: false,
+    //   maxParallelFileOps: 2,
+    //   output: {
+    //     // 分包
+    //     manualChunks(id) {
+    //       if (id.includes("node_modules")) {
+    //         return id
+    //           .toString()
+    //           .split("node_modules/")[1]
+    //           .split("/")[0]
+    //           .toString();
+    //       }
+    //     },
+    //   },
+    // },
     rollupOptions: {
-      cache: false,
-      maxParallelFileOps: 2,
       output: {
-        // 分包
         manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return id
-              .toString()
-              .split("node_modules/")[1]
-              .split("/")[0]
-              .toString();
+          if (id.includes('node_modules')) {
+            // 分解块，将大块分解成更小的块,在vite.config.js当中的build下面进行配置
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+            // 但是生成的文件都在dist下面的assets文件下，里面既有js、css等等。
           }
         },
-      },
+        // 可以将不同的文件放在不同的文件下
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : [];
+          const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
+          return `js/${fileName}/[name].[hash].js`;
+        }
+      }
     },
+  },
+  define: {
+    'process.env': {}
   },
   plugins: [
     htmlConfigs,
