@@ -105,13 +105,13 @@ export default defineConfig({
   build: {
     sourcemap: process.env.NODE_ENV !== 'production', // Seems to cause JavaScript heap out of memory errors on build
     minify: false, // 必须开启：使用terserOptions才有效果
-    terserOptions: {
-      compress: {
-        //生产环境时移除console
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    // terserOptions: {
+    //   compress: {
+    //     //生产环境时移除console
+    //     drop_console: true,
+    //     drop_debugger: true,
+    //   },
+    // },
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     // chunkSizeLimit: 5000, // 设置 chunk 大小的限制为 5000 KiB
     emptyOutDir: true, // 在构建之前清空输出目录
