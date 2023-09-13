@@ -43,7 +43,7 @@ import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
-import HeroLogo from "../components/HeroLogo.vue";
+// import HeroLogo from "../components/HeroLogo.vue";
 import PageFooter from "../components/PageFooter.vue";
 
 import { Icon } from "@iconify/vue";
@@ -79,7 +79,7 @@ export default {
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
       // "home-hero-image": () => h(Suspense, HeroLogo),
-      "home-hero-image": () => h(HeroLogo),
+      // "home-hero-image": () => h(HeroLogo),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
       //     name: "home-hero-after",
