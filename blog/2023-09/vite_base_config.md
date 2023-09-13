@@ -1,7 +1,7 @@
 ---
 lastUpdated: true
-commentabled: true
-recommended: true
+commentabled: false
+recommended: false
 title: Vite常用基本配置
 description: Vite常用基本配置
 poster: /images/cmono-4c0cf778e497ab206289099ce51db5f.png
@@ -10,7 +10,7 @@ date: 2023-09-11
 
 # Vite 常用基本配置 #
 
-```js
+```json
 {
   root: process.cwd(), // 项目根目录（index.html 文件所在的位置）,
   base: '/', // 开发或生产环境服务的公共基础路径 配置引入相对路径
