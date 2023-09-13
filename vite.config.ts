@@ -103,8 +103,8 @@ export default defineConfig({
   clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
   // assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
   build: {
-    sourcemap: false,
-    minify: "terser", // 必须开启：使用terserOptions才有效果
+    sourcemap: process.env.NODE_ENV !== 'production', // Seems to cause JavaScript heap out of memory errors on build
+    minify: false, // 必须开启：使用terserOptions才有效果
     terserOptions: {
       compress: {
         //生产环境时移除console
@@ -115,30 +115,22 @@ export default defineConfig({
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     // chunkSizeLimit: 5000, // 设置 chunk 大小的限制为 5000 KiB
     emptyOutDir: true, // 在构建之前清空输出目录
-    // rollupOptions: {
-    //   output: {
-    //     // 在这里修改静态资源路径
-    //     chunkFileNames: "assets/js/[name]-[hash].js",
-    //     entryFileNames: "assets/js/[name]-[hash].js",
-    //     assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
-    //     manualChunks(id) {
-    //       // Vue 及其相关库的 chunk
-    //       if (
-    //         id.includes("vue") ||
-    //         id.includes("core-js") ||
-    //         id.includes("@babel/runtime")
-    //       ) {
-    //         return "vendor";
-    //       }
-    //       // 其他库的 chunk
-    //       if (id.includes("node_modules")) {
-    //         return "dependencies";
-    //       }
-    //       // 默认情况下将模块放入一个单独的 chunk
-    //       return "common";
-    //     },
-    //   },
-    // },
+    rollupOptions: {
+      cache: false,
+      maxParallelFileOps: 2,
+      output: {
+        // 分包
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            return id
+              .toString()
+              .split("node_modules/")[1]
+              .split("/")[0]
+              .toString();
+          }
+        },
+      },
+    },
   },
   plugins: [
     htmlConfigs,
