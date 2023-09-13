@@ -5,10 +5,8 @@ import { head } from "./src/head";
 import { zhConfig } from "./src/configs/zh";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { RSS } from "./src/rss";
-import { withMermaid } from "vitepress-plugin-mermaid";
-import footnote from "markdown-it-footnote";
-import mathjax3 from "markdown-it-mathjax3";
-import timeline from "vitepress-markdown-timeline";
+import { markdown } from "./src/markdown";
+import { defineConfig } from "vitepress";
 const links: any[] = [];
 const customElements = [
   "mjx-container",
@@ -100,14 +98,11 @@ const customElements = [
   "annotation-xml",
 ];
 
-export default withMermaid({
-  mermaid: {
-    //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
-  },
+export default defineConfig({
+  // mermaid: {
+  //   //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  // },
   vite: {
-    build:{
-      minify: "terser", // 使用 terser 进行代码压缩
-    },
     // ↓↓↓↓↓
     plugins: [
       RssPlugin(RSS),
@@ -158,14 +153,15 @@ export default withMermaid({
     }
   },
   ignoreDeadLinks: true,
-  markdown: {
-    // ...
-    config: (md) => {
-      md.use(timeline);
-      md.use(footnote);
-      md.use(mathjax3);
-    },
-  },
+  markdown,
+  // markdown: {
+  //   // ...
+  //   config: (md) => {
+  //     md.use(timeline);
+  //     md.use(footnote);
+  //     md.use(mathjax3);
+  //   },
+  // },
   // transformHtml: (_, id, { pageData }) => {
   //   if (!/[\\/]404\.html$/.test(id))
   //     links.push({

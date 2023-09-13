@@ -25,7 +25,7 @@
     "types": []
   },
   "diagnostics": true,
-  "include": [],
+  // "include": [],
   "exclude": ["**/node_modules/**", "**/dist/**", "build", "public"],
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],

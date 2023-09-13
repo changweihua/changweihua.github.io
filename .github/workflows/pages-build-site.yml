@@ -49,14 +49,14 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Increase Memory
-        run: npm run fix-memory-limit
+      # - name: Increase Memory
+      #   run: npm run fix-memory-limit
 
-      - name: Set Swap Space
-        if: matrix.os == 'ubuntu-latest'
-        uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 10
+      # - name: Set Swap Space
+      #   if: matrix.os == 'ubuntu-latest'
+      #   uses: pierotofy/set-swap-space@master
+      #   with:
+      #     swap-size-gb: 10
 
       - name: Build docs
         run: npm run docs:build
