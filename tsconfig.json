@@ -18,7 +18,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "~/*": ["./*"],
-      "public": ["./public/*"],
+      "public": ["./public/*"]
     },
     // "typeRoots": [
     // ],
@@ -26,7 +26,30 @@
   },
   "diagnostics": true,
   // "include": [],
-  "exclude": ["**/node_modules/**", "**/dist/**", "build", "public"],
+  "include": [
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.vue",
+    ".vitepress/**/*.json",
+    ".vitepress/**/*",
+    "typings/",
+    "env.d.ts",
+    "typings/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/**/*.json",
+    "src/**/*.md",
+    "plugins/**/*.ts",
+    "tests"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "build",
+    "public",
+    "threejs",
+    "font",
+    "scripts"
+  ],
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],
     "out": "docs"
