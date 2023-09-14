@@ -49,8 +49,8 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      # - name: Increase Memory
-      #   run: npm run fix-memory-limit
+      - name: Increase Memory
+        run: npm run fix-memory-limit
 
       # - name: Set Swap Space
       #   if: matrix.os == 'ubuntu-latest'
