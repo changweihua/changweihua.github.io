@@ -3,7 +3,7 @@
     <div class="shaming-container">
       <div class="box"></div>
     </div>
-    <img class="shaming-logo" src="/logo.png" />
+    <img class="shaming-logo VPImage image-src" src="/logo.png" />
   </div>
 </template>
 
