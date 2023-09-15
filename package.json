@@ -73,7 +73,7 @@
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@iconify-json/carbon": "^1.1.21",
-    "@iconify-json/logos": "^1.1.36",
+    "@iconify-json/logos": "^1.1.37",
     "@iconify/vue": "^4.1.1",
     "@release-it/conventional-changelog": "^7.0.1",
     "@types/bluebird": "^3.5.38",

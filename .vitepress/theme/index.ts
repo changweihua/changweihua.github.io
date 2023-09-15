@@ -7,7 +7,7 @@ import {
   useRoute,
 } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, nextTick, onMounted, watch, watchEffect } from "vue";
+import { h, nextTick, onMounted, Suspense, watch, watchEffect } from "vue";
 import { Button, Progress } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
@@ -43,7 +43,7 @@ import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
-import HeroLogo from "../components/HeroLogo.vue";
+import ShamingLogo from "../components/ShamingLogo.vue";
 import PageFooter from "../components/PageFooter.vue";
 
 import { Icon } from "@iconify/vue";
@@ -78,8 +78,8 @@ export default {
           text: "知识汪洋仅此一瓢",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
-      // "home-hero-image": () => h(Suspense, HeroLogo),
-      "home-hero-image": () => h(HeroLogo),
+      // "home-hero-image": () => h(Suspense, ShamingLogo),
+      "home-hero-image": () => h(ShamingLogo),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
       //     name: "home-hero-after",
