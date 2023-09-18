@@ -4,11 +4,11 @@ sidebar: false
 ---
 
 <div class="flex p-6 justify-center items-center">
-	<category :categories="categories" />
+	<ListView :categories="categories" />
 </div>
 
 <script setup lang="ts">
-import category from '@/components/category.vue';
+import ListView from '@/components/ListView.vue';
 
 const categories: Array<{
     title: string;

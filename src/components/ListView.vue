@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-3">
     <div
-      v-for="item in categories"
+      v-for="item in props.categories"
       class="waving-border p-2 max-w-md mx-auto w-full bg-gray-100 rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:ring-2 hover:ring-opacity-50 hover:ring-indigo-300"
     >
       <a
@@ -13,8 +13,8 @@
           <div class="md:flex-shrink-0 h-48 flex items-center align-middle">
             <img
               class="h-full w-full object-cover md:w-40"
-              :src="`${item.poster || '/logo.png'}`"
-              alt="Man looking at item at a store"
+              :src="`${item.cover || '/logo.png'}`"
+              :alt="item.cover"
             />
             <!-- <Icon v-else icon="logos:active-campaign" /> -->
           </div>
@@ -35,60 +35,37 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from "@iconify/vue";
-import { onMounted, ref, watch } from "vue";
+// import { ref, watch } from "vue";
+
+interface CategoryItem {
+  title: string;
+  link: string;
+  icon: string;
+  decription?: string;
+  cover?: string;
+  coverAlt?: string;
+}
 
 const props = defineProps({
-  categories: Array<{
-    title: string;
-    link: string;
-    icon: string;
-    decription?: string;
-    cover?: string;
-    coverAlt?: string;
-  }>,
+  categories: Array<CategoryItem>,
 });
 
-const categories = ref<
-  Array<{
-    title: string;
-    link: string;
-    icon: string;
-    decription?: string;
-    cover?: string;
-    coverAlt?: string;
-  }>
->([]);
+// const categories = ref<Array<CategoryItem>>([]);
 
-onMounted(() => {
-  fetch(`/jsons/lastest_blogs.json`)
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-      categories.value = json.map((c) => {
-        return {
-          title: c["blogName"],
-          link: c["filePath"],
-          description: c["blogDescription"],
-          poster: c["blogPoster"],
-          // icon: "VueJS",
-        };
-      });
-    });
-});
-
-watch(
-  () => props.categories,
-  (oldVal, newVal) => {
-    console.log(oldVal, newVal);
-    // if (newVal) {
-    //   categories.value = newVal;
-    // }
-  },
-  {
-    immediate: true,
-  }
-);
+// watch(
+//   () => props.categories,
+//   (oldVal, newVal) => {
+//     if (newVal) {
+//       categories.value = newVal;
+//     }else{
+//       categories.value = oldVal!;
+//     }
+//   },
+//   {
+//     immediate: true,
+//     deep: true,
+//   }
+// );
 </script>
 
 <style lang="less">

@@ -9,21 +9,40 @@ head:
       content: changweihua.github.io 最新文章 CMONO.NET
 ---
 
-  <div class="flex p-6 justify-center items-center">
-    <category :categories="categories" />
-  </div>
+<div class="flex p-6 justify-center items-center">
+  <ListView :categories="categories" />
+</div>
 
 <script setup lang="ts">
-import category from '@/components/category.vue';
+import { onMounted, ref } from "vue";
+import ListView from '@/components/ListView.vue';
 
-let categories: Array<{
+let categories: ref<Array<{
     title: string;
     link: string;
     decription?: string;
     icon: string;
     poster?: string
     posterAlt?: string
-  }> = [];
+  }>> = ref([]);
+
+
+onMounted(() => {
+  fetch(`/jsons/lastest_blogs.json`)
+    .then((res) => res.json())
+    .then((json) => {
+      categories.value = json.map((c) => {
+        return {
+          title: c["blogName"],
+          link: c["filePath"],
+          description: c["blogDescription"],
+          poster: c["blogPoster"],
+          // icon: "VueJS",
+        };
+      });
+    });
+});
+
 
 </script>
 

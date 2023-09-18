@@ -70,6 +70,15 @@ const sidebar: DefaultTheme.Sidebar | undefined = {
       ],
     },
   ],
+  courses: [
+    {
+      text: "预定义类型",
+      items: [
+        { text: "Markdown Examples", link: "/course/typescript/preset_type" },
+        { text: "Runtime API Examples", link: "/course/typescript/extension_type" },
+      ],
+    },
+  ],
   // gallery: [
   //   {
   //     text: "项目案例",

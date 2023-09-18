@@ -1,65 +1,5 @@
 import { DefaultTheme } from "vitepress";
 
-// const fs = require("fs");
-// const path = require("path");
-
-// function generateSidebarConfig(docsPath, link = "", index = 0) {
-//   const sidebarConfig: DefaultTheme.Sidebar = {};
-//   const files = fs.readdirSync(docsPath);
-
-//   files.forEach((filename) => {
-//     if (filename.startsWith(".")) return;
-//     const filepath = path.join(docsPath, filename);
-//     const stat = fs.statSync(filepath);
-//     // 如果是文件夹，则递归生成子级 sidebar 配置
-//     if (stat.isDirectory()) {
-//       if (index === 0) {
-//         const config = generateSidebarConfig(
-//           filepath,
-//           `/${filename}/`,
-//           index + 1
-//         );
-//         if (!sidebarConfig[`/${filename}/`]) {
-//           sidebarConfig[`/${filename}/`] = [config];
-//         }
-//       } else {
-//         if (!sidebarConfig.items) {
-//           sidebarConfig.items = [];
-//         }
-//         sidebarConfig.items.push(
-//           generateSidebarConfig(filepath, `${link}${filename}/`, index + 1)
-//         );
-//       }
-//     } else {
-//       const extname = path.extname(filepath);
-//       const basename = path.basename(filepath, extname);
-//       if (filename === "index.md" && index > 0) {
-//         const menuPath = path.dirname(filepath);
-//         const menuName = path.basename(menuPath);
-//         sidebarConfig.text = menuName;
-//         sidebarConfig.link = [{
-//           link: link
-//         }];
-//       }
-//       if (extname === ".md" && filename !== "index.md") {
-//         if (!sidebarConfig.items) {
-//           sidebarConfig.items = [];
-//         }
-//         sidebarConfig.items.push({
-//           text: basename,
-//           link: `${link}${basename}`,
-//         });
-//       }
-//     }
-//   });
-
-//   return sidebarConfig;
-// }
-
-// const docsPath = path.dirname(__dirname); // docs 目录路径
-// const dynamicSidebarConfig = generateSidebarConfig(docsPath);
-// console.log(docsPath);
-
 const sidebar: DefaultTheme.Sidebar | undefined = {
   articles: [
     {
@@ -67,6 +7,23 @@ const sidebar: DefaultTheme.Sidebar | undefined = {
       items: [
         { text: "Markdown Examples", link: "/markdown-examples" },
         { text: "Runtime API Examples", link: "/api-examples" },
+      ],
+    },
+  ],
+  '/course/typescript/': [
+    {
+      text: "TypeScript",
+      items: [
+        { text: "TypeScript内置类型", link: "/course/typescript/preset_type" },
+        { text: "TypeScript拓展", link: "/course/typescript/extension_type" },
+        { text: "默认 tsconfig.json", link: "/course/typescript/default_tsconfig" },
+      ],
+    },
+  ],
+  '/course/algorithm/': [
+    {
+      text: "algorithm",
+      items: [
       ],
     },
   ],
