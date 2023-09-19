@@ -225,7 +225,7 @@ html,body{
 
 压缩后：
 
-![Alt text](../../public/images/cmono-eedba2e720ace149d3c390bda5b301b.png){data-zoomable}
+![Alt text](/images/cmono-eedba2e720ace149d3c390bda5b301b.png){data-zoomable}
 　　
 
 到现在字体文件压缩就算已经全部搞定，可以检测一下项目看是否生效。

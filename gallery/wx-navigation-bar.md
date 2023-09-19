@@ -11,7 +11,7 @@ tags:
 
 ## 预览图
 
-![预览图](../public/images/cmono-ef6623ccf120fad4d01715227a55780.jpg){data-zoomable}
+![预览图](/images/cmono-ef6623ccf120fad4d01715227a55780.jpg){data-zoomable}
 
 ## 使用说明
 

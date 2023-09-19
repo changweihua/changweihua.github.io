@@ -3,13 +3,27 @@ layout: page
 sidebar: false
 pageClass: course-index-page
 ---
-
-<div class="flex p-6 justify-center items-center">
-  <ListView :categories="categories" />
-</div>
+<a-spin :spinning="spinning" size="large" :delay="delayTime">
+  <div class="flex p-6 justify-center items-center">
+    <ListView :categories="categories" />
+  </div>
+</a-spin>
 
 <script setup lang="ts">
+import { h, onMounted, ref } from 'vue';
+import { LoadingOutlined } from '@ant-design/icons-vue';
+import { delay } from "lodash-es";
 import ListView from '@/components/ListView.vue';
+
+const indicator = h(LoadingOutlined, {
+  style: {
+    fontSize: '48px',
+  },
+  spin: true,
+});
+
+const spinning = ref<boolean>(true);
+const delayTime = 200;
 
 const categories: Array<{
     title: string;
@@ -27,5 +41,11 @@ const categories: Array<{
     link: '/course/typescript/preset_type',
     icon: '算法'
   }];
+
+onMounted(() => {
+  delay(() => {
+    spinning.value = false;
+  }, 1500)
+})
 
 </script>

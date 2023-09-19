@@ -5,7 +5,6 @@
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "node",
-    "moduleDetection": "auto",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
@@ -29,6 +28,7 @@
   "diagnostics": true,
   // "include": [],
   "include": [
+    "./.vitepress/**/*",
     ".vitepress/**/*.ts",
     ".vitepress/**/*.vue",
     ".vitepress/**/*.json",
@@ -44,13 +44,15 @@
     "tests"
   ],
   "exclude": [
+    "node_modules",
     "**/node_modules/**",
     "**/dist/**",
     "build",
     "public",
     "threejs",
     "font",
-    "scripts"
+    "scripts",
+    "**/*.spec.ts"
   ],
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],

@@ -6,7 +6,13 @@ import { zhConfig } from "./src/configs/zh";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { RSS } from "./src/rss";
 import { markdown } from "./src/markdown";
-import { defineConfig } from "vitepress";
+import { withMermaid } from "vitepress-plugin-mermaid";
+// import compression from "vitepress-plugin-compression";
+// import AutoIndex from 'vite-plugin-vitepress-auto-index';
+
+// import { createDetypePlugin } from 'vitepress-plugin-detype'
+// const { detypeVitePlugin } = createDetypePlugin()
+
 const links: any[] = [];
 const customElements = [
   "mjx-container",
@@ -98,14 +104,20 @@ const customElements = [
   "annotation-xml",
 ];
 
-export default defineConfig({
-  // mermaid: {
-  //   //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
-  // },
+export default withMermaid({
+  mermaid: {
+    //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  },
   vite: {
     // ↓↓↓↓↓
     plugins: [
       RssPlugin(RSS),
+      // {
+      //   ...AutoIndex({}),
+      //   enforce: 'pre'
+      // },
+      // detypeVitePlugin(),
+      // detypeMarkdownPlugin(),
       // require("./plugins/frontmatter")
     ],
     // ↑↑↑↑↑
@@ -154,6 +166,10 @@ export default defineConfig({
   },
   ignoreDeadLinks: true,
   markdown,
+  async buildEnd() {
+    console.log('buildEnd')
+    // compression();
+  },
   // markdown: {
   //   // ...
   //   config: (md) => {

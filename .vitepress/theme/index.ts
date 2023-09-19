@@ -8,10 +8,8 @@ import {
 } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, nextTick, onMounted, Suspense, watch, watchEffect } from "vue";
-import { Button, Progress } from "ant-design-vue";
+import { Button, Empty, Progress, Spin } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
-import vitepressBackToTop from "vitepress-plugin-back-to-top";
-import "vitepress-plugin-back-to-top/dist/style.css";
 
 import DocAfter from "../components/DocAfter.vue";
 import recommend from "../components/Recommend.vue";
@@ -22,6 +20,8 @@ import LottiePanel from "../components/LottiePanel.vue";
 import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
 
+// import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
+
 import { Sandbox } from "vitepress-plugin-sandpack";
 
 // @ts-ignore
@@ -31,7 +31,8 @@ import "./styles/index.less";
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
-
+import vitepressLifeProgress from 'vitepress-plugin-life-progress'
+import 'vitepress-plugin-life-progress/lib/css/index.css'
 import "animate.css";
 
 import "@iconify/iconify";
@@ -53,6 +54,9 @@ import VueResizeObserver from "vue-resize-observer";
 
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
+
+import vitepressBackToTop from 'vitepress-plugin-back-to-top'
+import 'vitepress-plugin-back-to-top/dist/style.css'
 
 export default {
   ...DefaultTheme,
@@ -190,6 +194,7 @@ export default {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     const { app, router, siteData, isServer } = ctx;
+    DefaultTheme.enhanceApp(ctx);
 
     if (inBrowser) {
       vitepressNprogress(ctx);
@@ -197,6 +202,7 @@ export default {
         // default
         threshold: 300,
       });
+      // enhanceAppWithTabs(app);
       // app.use(useResize);
       // registerAnalytics(siteIds)
       // window.addEventListener('hashchange', () => {
@@ -208,7 +214,6 @@ export default {
       // }
     }
 
-    DefaultTheme.enhanceApp(ctx);
     app.component("demo-preview", AntDesignContainer);
     app.component("my-icon", Icon);
 
@@ -222,7 +227,7 @@ export default {
     app.component("HomeContributors", HomeContributors);
     app.component("CopyRight", copyright);
 
-    app.use(Button).use(Progress);
+    app.use(Button).use(Progress).use(Empty).use(Spin);
 
     app.use(VueResizeObserver);
   },
@@ -251,6 +256,7 @@ export default {
       () => route.path,
       () => nextTick(() => initZoom())
     );
+    vitepressLifeProgress();
   },
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];

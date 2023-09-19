@@ -9,6 +9,10 @@ import container from 'markdown-it-container';
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import footnote from 'markdown-it-footnote';
 import mathjax3 from 'markdown-it-mathjax3';
+// import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+// import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
+// import { createDetypePlugin } from 'vitepress-plugin-detype'
+// const { detypeMarkdownPlugin } = createDetypePlugin()
 
 const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
@@ -18,6 +22,9 @@ const markdown: MarkdownOptions | undefined = {
     md.use(mathjax3);
     md.use(containerPreview);
     md.use(componentPreview);
+    // md.use(tabsMarkdownPlugin);
+    // md.use(npmCommandsMarkdownPlugin);
+    // md.use(detypeMarkdownPlugin);
     // use more markdown-it plugins!
     md.use(mdItCustomAttrs, "image", {
       "data-fancybox": "gallery",
