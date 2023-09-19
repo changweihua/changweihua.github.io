@@ -19,20 +19,23 @@
     "paths": {
       "@/*": ["./src/*"],
       "~/*": ["./*"],
+      "@vp/*": ["./.vitepress/*"],
       "public": ["./public/*"]
     },
     // "typeRoots": [
     // ],
-    "types": []
+    "types": [],
+    "outDir": "dist"
   },
   "diagnostics": true,
   // "include": [],
   "include": [
-    "./.vitepress/**/*",
-    ".vitepress/**/*.ts",
-    ".vitepress/**/*.vue",
-    ".vitepress/**/*.json",
-    ".vitepress/**/*",
+    ".vitepress/src/**/*",
+    ".vitepress/components/**/*",
+    ".vitepress/plugins/**/*",
+    ".vitepress/theme/**/*",
+    ".vitepress/utils/**/*",
+    ".vitepress/*",
     "typings/",
     "env.d.ts",
     "typings/**/*.d.ts",
@@ -47,6 +50,7 @@
     "node_modules",
     "**/node_modules/**",
     "**/dist/**",
+    "**/cache/**",
     "build",
     "public",
     "threejs",

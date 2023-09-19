@@ -7,7 +7,7 @@ import {
   useRoute,
 } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, nextTick, onMounted, Suspense, watch, watchEffect } from "vue";
+import { h, nextTick, onMounted, watch, watchEffect } from "vue";
 import { Button, Empty, Progress, Spin } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 

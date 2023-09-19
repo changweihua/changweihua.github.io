@@ -310,6 +310,7 @@ export default defineConfig({
     alias: {
       // "@": fileURLToPath(new URL(".", import.meta.url)),
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@vp": fileURLToPath(new URL("./.vitepress", import.meta.url)),
       public: fileURLToPath(new URL("./public", import.meta.url)),
       "~": path.resolve(__dirname, "./"),
       // "@": resolve(__dirname, "src"),
