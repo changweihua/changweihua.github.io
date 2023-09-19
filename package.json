@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "build": "node --max-old-space-size=4096 node_modules/vitepress/bin/vitepress.js build",
+    "docs:build": "node --max-old-space-size=4096 node_modules/vitepress/bin/vitepress.js build",
     "docs:dev": "vitepress dev",
     "docs:prepare": "esno scripts/prepare.ts",
-    "docs:build": "vitepress build",
+    "docs:vbuild": "vitepress build",
     "docs:preview": "vitepress preview",
     "register:components": "vitepress-rc",
     "pkg:patch": "patch-package",
