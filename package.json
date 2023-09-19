@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "build": "node --max-old-space-size=4096 node_modules/vitepress/bin/vitepress.js build",
     "docs:dev": "vitepress dev",
     "docs:prepare": "esno scripts/prepare.ts",
     "docs:build": "vitepress build",
@@ -102,7 +103,7 @@
     "markdown-it-mathjax3": "^4.3.2",
     "mermaid": "^10.4.0",
     "patch-package": "^8.0.0",
-    "postcss": "^8.4.29",
+    "postcss": "^8.4.30",
     "release-it": "^16.1.5",
     "sitemap": "^7.1.1",
     "unocss": "^0.55.7",
@@ -119,7 +120,7 @@
     "vitepress-plugin-mermaid": "^2.0.14",
     "vitepress-plugin-sandpack": "^1.1.1",
     "vitepress-plugin-search": "^1.0.4-alpha.20",
-    "vitepress-sidebar": "^1.13.0",
+    "vitepress-sidebar": "^1.14.0",
     "vue": "^3.3.4"
   },
   "dependencies": {
