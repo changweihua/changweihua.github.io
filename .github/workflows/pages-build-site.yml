@@ -58,8 +58,11 @@ jobs:
       #   with:
       #     swap-size-gb: 10
 
+      # - name: Build docs
+      #   run: npm run docs:build
+
       - name: Build docs
-        run: npm run docs:build
+        run: npm run build
 
       - uses: actions/configure-pages@v2
 
