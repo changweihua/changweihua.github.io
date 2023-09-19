@@ -103,11 +103,11 @@
     outline: 2px solid rgb(42, 153, 255);
     outline-offset: 10px;
     background: repeating-radial-gradient(
-        #fff,
+        rgba(42, 153, 255, 0.8),
         #fff 50%,
         transparent 50%,
         transparent 60%,
-        #fff 60%,
+        rgba(42, 153, 255, 0.8) 60%,
         #fff 100%
       ),
       repeating-conic-gradient(
@@ -150,7 +150,15 @@
     height: 300px;
     top: 0px;
     left: 0px;
-    background: #fff;
+    // background: #fff;
+    background: repeating-radial-gradient(#000 0 0.0001%, #747bff 0 0.0002%) 50%
+        0/2500px 2500px,
+      repeating-conic-gradient(#000 0 0.0001%, #747bff 0 0.0002%) 50% 50%/2500px
+        2500px;
+    background-blend-mode: difference;
+    mix-blend-mode: lighten;
+    -webkit-background-clip: text;
+    background-clip: text;
     transform-style: preserve-3d;
     background: repeating-linear-gradient(
       to bottom,
