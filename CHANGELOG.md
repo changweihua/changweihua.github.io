@@ -1,3 +1,9 @@
+## <small>0.0.26 (2023-09-19)</small>
+
+* fix(custom): 修复打包的问题 ([973937c](https://github.com/changweihua/changweihua.github.io/commit/973937c))
+
+
+
 ## <small>0.0.25 (2023-09-08)</small>
 
 
