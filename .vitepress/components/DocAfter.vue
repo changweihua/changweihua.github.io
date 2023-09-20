@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import party from "../../public/lotties/waitingmore.json";
+import party from "@/lotties/waitingmore.json";
 import { useData } from "vitepress";
 
 // 获取 frontmatter

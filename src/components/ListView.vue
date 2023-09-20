@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-3">
+  <div class="w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-3">
     <div
       v-for="item in props.categories"
       class="waving-border p-2 max-w-md mx-auto w-full bg-gray-100 rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:ring-2 hover:ring-opacity-50 hover:ring-indigo-300"
@@ -25,7 +25,7 @@
               {{ item.title }}
             </div>
             <div class="tracking-wide text-sm p-2">
-              {{ item.decription || "" }}
+              {{ item.description || "" }}
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@ interface CategoryItem {
   title: string;
   link: string;
   icon: string;
-  decription?: string;
+  description?: string;
   cover?: string;
   coverAlt?: string;
 }

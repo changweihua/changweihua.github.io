@@ -28,7 +28,7 @@ const delayTime = 200;
 const categories: Array<{
     title: string;
     link: string;
-    decription?: string;
+    description?: string;
     icon: string;
     poster?: string
     posterAlt?: string
@@ -39,6 +39,19 @@ const categories: Array<{
   },{
     title: 'TypeScript',
     link: '/course/typescript/preset_type',
+    icon: '算法'
+  },{
+    title: '.NET',
+    link: '/course/dotnet/index',
+    icon: '算法',
+    description: 'Microsoft .NET'
+  },{
+    title: '.NET',
+    link: '/course/dotnet/index',
+    icon: '算法'
+  },{
+    title: '.NET',
+    link: '/course/dotnet/index',
     icon: '算法'
   }];
 

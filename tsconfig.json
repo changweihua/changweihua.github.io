@@ -25,6 +25,7 @@
     // "typeRoots": [
     // ],
     "types": [],
+    //提示无法覆盖文件时，需要考虑设置此项
     "outDir": "dist"
   },
   "diagnostics": true,

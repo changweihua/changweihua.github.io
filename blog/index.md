@@ -25,7 +25,7 @@ const delayTime = 200;
 let categories: ref<Array<{
     title: string;
     link: string;
-    decription?: string;
+    description?: string;
     icon: string;
     poster?: string
     posterAlt?: string

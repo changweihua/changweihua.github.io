@@ -5,12 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import party from "/public/lotties/tuijian.json";
+import party from "@/lotties/tuijian.json";
 import { useData } from 'vitepress'
 
  // 获取 frontmatter
  const { frontmatter } = useData()
- console.log(frontmatter)
 
 </script>
 

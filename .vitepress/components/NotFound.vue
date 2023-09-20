@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import notfound from "../../public/lotties/notfound.json";
+import notfound from "@/lotties/notfound.json";
 </script>
 
 <style lang="less"></style>
