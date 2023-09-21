@@ -16,6 +16,7 @@ declare module 'vue' {
     HeroLogo2: typeof import('./src/components/HeroLogo2.vue')['default']
     HomeHeroImage: typeof import('./src/components/HomeHeroImage.vue')['default']
     ListView: typeof import('./src/components/ListView.vue')['default']
+    LunarCalendar: typeof import('./src/components/LunarCalendar.vue')['default']
     Sand: typeof import('./src/components/Sand.vue')['default']
     Test: typeof import('./src/components/test.vue')['default']
     ThreePlane: typeof import('./src/components/ThreePlane.vue')['default']

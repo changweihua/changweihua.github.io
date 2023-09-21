@@ -52,3 +52,7 @@ recommended: true
 ![Alt text](/images/cmono-510f8e701be8ff979daa520e710e30a.jpg){data-zoomable}
 
 </div>
+
+## 未来计划 ##
+
+通过 Uni-App 实现多端开发

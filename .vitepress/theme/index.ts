@@ -1,14 +1,15 @@
 // .vitepress/theme/index.ts
-import {
-  HeadConfig,
-  PageData,
-  inBrowser,
-  useData,
-  useRoute,
-} from "vitepress";
+import { HeadConfig, PageData, inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, nextTick, onMounted, watch, watchEffect } from "vue";
-import { Button, Empty, Progress, Spin } from "ant-design-vue";
+import {
+  Button,
+  Empty,
+  Progress,
+  Radio,
+  Spin,
+  Tabs,
+} from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 
 import DocAfter from "../components/DocAfter.vue";
@@ -31,8 +32,8 @@ import "./styles/index.less";
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
-import vitepressLifeProgress from 'vitepress-plugin-life-progress'
-import 'vitepress-plugin-life-progress/lib/css/index.css'
+import vitepressLifeProgress from "vitepress-plugin-life-progress";
+import "vitepress-plugin-life-progress/lib/css/index.css";
 import "animate.css";
 
 import "@iconify/iconify";
@@ -55,8 +56,8 @@ import VueResizeObserver from "vue-resize-observer";
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
-import vitepressBackToTop from 'vitepress-plugin-back-to-top'
-import 'vitepress-plugin-back-to-top/dist/style.css'
+import vitepressBackToTop from "vitepress-plugin-back-to-top";
+import "vitepress-plugin-back-to-top/dist/style.css";
 
 export default {
   ...DefaultTheme,
@@ -212,6 +213,14 @@ export default {
       // router.onAfterRouteChanged = (to) => {
       //   trackPageview(siteIds, to)
       // }
+
+      app
+        .use(Button)
+        .use(Progress)
+        .use(Empty)
+        .use(Spin)
+        .use(Tabs)
+        .use(Radio);
     }
 
     app.component("demo-preview", AntDesignContainer);
@@ -226,8 +235,6 @@ export default {
     app.component("Contributors", Contributors);
     app.component("HomeContributors", HomeContributors);
     app.component("CopyRight", copyright);
-
-    app.use(Button).use(Progress).use(Empty).use(Spin);
 
     app.use(VueResizeObserver);
   },

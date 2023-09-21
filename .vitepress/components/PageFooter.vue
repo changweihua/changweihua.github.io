@@ -11,13 +11,23 @@
       {{ version }}
     </p> -->
   </div>
+  <!-- - package name: {{ params?.pkg }} - version: {{ params?.version }} -->
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { fetchVersion } from "../utils/fetchVersion";
-import { AntdesignIcon, GithubIcon, GitIcon, MarkdownIcon, LatexIcon, ViteIcon } from "vue3-simple-icons";
+import {
+  AntdesignIcon,
+  GithubIcon,
+  GitIcon,
+  MarkdownIcon,
+  LatexIcon,
+  ViteIcon,
+} from "vue3-simple-icons";
 const version = ref("N/A");
-
+import { useData } from "vitepress";
+const { params } = useData();
+console.log(params.value);
 onMounted(() => {
   const docsVersionSpan = document.querySelector(
     "footer.VPFooter > .container > p.version-tag"

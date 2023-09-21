@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import onboard from "../../public/lotties/onboard.json";
+import onboard from "@/lotties/onboard.json";
 </script>
 
 <style lang="less"></style>

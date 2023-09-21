@@ -16,7 +16,7 @@ hero:
     alt: 网页的logo图标
   actions:
     - theme: brand
-      text: 我的简历
+      text: 作者简历
       link: /about/resume
     - theme: alt
       text: Github
