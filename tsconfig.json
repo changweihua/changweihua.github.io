@@ -35,6 +35,7 @@
   "diagnostics": true,
   // "include": [],
   "include": [
+    "./.vitepress/**/*",
     ".vitepress/src/**/*",
     ".vitepress/components/**/*",
     ".vitepress/plugins/**/*",

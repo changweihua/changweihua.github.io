@@ -37,6 +37,8 @@ import "vitepress-plugin-life-progress/lib/css/index.css";
 import "animate.css";
 
 import "@iconify/iconify";
+import FloatingVue from 'floating-vue'
+import 'floating-vue/dist/style.css';
 
 const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 
@@ -237,6 +239,7 @@ export default {
     app.component("CopyRight", copyright);
 
     app.use(VueResizeObserver);
+    app.use(FloatingVue);
   },
   setup() {
     const { lang } = useData();

@@ -7,6 +7,8 @@ import { RssPlugin } from "vitepress-plugin-rss";
 import { RSS } from "./src/rss";
 import { markdown } from "./src/markdown";
 import { withMermaid } from "vitepress-plugin-mermaid";
+import { HeadConfig } from "vitepress";
+import { genDescription } from "./utils/genDescription";
 // import compression from "vitepress-plugin-compression";
 // import AutoIndex from 'vite-plugin-vitepress-auto-index';
 
@@ -170,6 +172,44 @@ export default withMermaid({
     console.log('buildEnd')
     // compression();
   },
+  async transformHead(context): Promise<HeadConfig[]> {
+    // add <meta>s
+    const description = genDescription(context.page)
+    const title = context.pageData.title
+    // const url = `https://jiongks.name/${getIdFromFilePath(context.page)}`
+    const published = context.pageData.frontmatter.date
+    const updated = context.pageData.frontmatter.updated
+    const ogImage = context.pageData.frontmatter.manual_og_image
+    const tags = context.pageData.frontmatter.tags || []
+    const type = context.page.startsWith('blog/') ? 'article' : 'website'
+
+    const head: HeadConfig[] = [
+      // // Basic
+      // description ? genMeta('description', description) : undefined,
+
+      // // Open Graph
+      // description ? genMeta('og:description', description) : undefined,
+      // genMeta('og:title', title),
+      // genMeta('og:url', url),
+      // genMeta('og:type', type),
+      // ogImage ? genMeta('og:image', `https://jiongks.name/${ogImage}`): undefined,
+
+      // // Twitter
+      // description ? genMeta('twitter:description', description) : undefined,
+      // genMeta('twitter:title', title),
+      // genMeta('twitter:url', url),
+      // ogImage ? genMeta('twitter:image', `https://jiongks.name/${ogImage}`): undefined,
+      // genMeta('twitter:card', ogImage ? 'summary_large_image' : 'summary'),
+
+      // // Article
+      // published ? genMeta('article:published_time', published) : undefined,
+      // updated ? genMeta('article:modified_time', updated) : undefined,
+      // ...tags.map((tag: string) => genMeta('article:tag', tag)),
+    ].filter(Boolean)
+
+    return head
+  },
+  // buildEnd: genFeed
   // markdown: {
   //   // ...
   //   config: (md) => {

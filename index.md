@@ -137,6 +137,7 @@ import { onMounted } from 'vue'
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 import { BeakerIcon } from '@heroicons/vue/24/solid'
 import * as icons from 'simple-icons';
+import HomeIndex from "@vp/components/HomeIndex.vue"
 
 const members = [
   {
@@ -165,7 +166,7 @@ const members = [
 </script>
 
 <VPTeamPage>
-  <VPTeamPageTitle>
+  <VPTeamPageTitle v-tooltip="'You have new messages.'">
     <template #title>
       Members
     </template>
@@ -177,8 +178,9 @@ const members = [
 </VPTeamPage>
 
 <!-- <XmindViewer url="https://mp-cb2e47ef-a802-469a-a81c-2b6efa9f8b60.cdn.bspapp.com/xmind/browser-rendering-flow.xmind"/> -->
-
+<!-- <HomeIndex /> -->
 <HomeContributors />
+
 <!-- <a-tag>sss</a-tag> -->
 
 <!-- ### Title <Badge type="info" text="default" />

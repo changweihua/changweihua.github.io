@@ -8,6 +8,7 @@ head:
     - name: keywords
       content: changweihua.github.io 最新文章 CMONO.NET
 ---
+<!-- <BlogIndex /> -->
 <a-spin :spinning="spinning" size="large" :delay="delayTime">
   <div class="flex p-6 justify-center items-center">
     <ListView :categories="categories" />
@@ -18,6 +19,7 @@ head:
 import { onMounted, ref } from "vue";
 import { delay } from "lodash-es";
 import ListView from '@/components/ListView.vue';
+import BlogIndex from "@vp/components/BlogIndex.vue"
 
 const spinning = ref<boolean>(true);
 const delayTime = 200;
