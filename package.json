@@ -21,7 +21,7 @@
   },
   "imports": {
     "#*": "./*",
-    "$*":"./.vitepress/*"
+    "$*": "./.vitepress/*"
   },
   "lint-staged": {
     "*": "npm run lint"
@@ -185,5 +185,5 @@
     "vue3-simple-icons": "^9.10.0",
     "xmind-embed-viewer": "^1.2.0"
   },
-  "version": "0.0.26"
+  "version": "0.0.27"
 }
