@@ -1,6 +1,7 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+layoutClass: m-nav-layout
 pageClass: index-page-class
 title: CMONO.NET
 titleTemplate: 首页
@@ -138,6 +139,7 @@ import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 import { BeakerIcon } from '@heroicons/vue/24/solid'
 import * as icons from 'simple-icons';
 import HomeIndex from "@vp/components/HomeIndex.vue"
+import MNavLinks  from "@vp/components/nav/MNavLinks.vue"
 
 const members = [
   {
@@ -163,6 +165,15 @@ const members = [
     sponsor: 'sponsor',
   }
 ]
+
+const navis = [{
+  title: 'Nav',
+  items:[{
+    title: 'NavItem1',
+    link: '/blog/index'
+  }]
+}]
+
 </script>
 
 <VPTeamPage>
@@ -181,6 +192,8 @@ const members = [
 <!-- <HomeIndex /> -->
 <HomeContributors />
 
+<!-- <style src="./nav/index.scss"></style> -->
+<MNavLinks v-for="{title, items} in navis" :title="title" :items="items"/>
 <!-- <a-tag>sss</a-tag> -->
 
 <!-- ### Title <Badge type="info" text="default" />

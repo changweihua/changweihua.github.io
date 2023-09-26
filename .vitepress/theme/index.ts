@@ -65,6 +65,16 @@ export default {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
   Layout() {
+
+    const props: Record<string, any> = {}
+    // 获取 frontmatter
+    const { frontmatter } = useData()
+
+    /* 添加自定义 class */
+    if (frontmatter.value?.layoutClass) {
+      props.class = frontmatter.value.layoutClass
+    }
+
     return h(DefaultTheme.Layout, null, {
       // "home-hero-before": () => h(AnimationTitle),
       // "home-hero-after": () => h(AnimationTitle),
