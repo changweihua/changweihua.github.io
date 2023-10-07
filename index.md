@@ -174,6 +174,29 @@ const navis = [{
   }]
 }]
 
+import localforage from "localforage";
+
+localforage.config({
+    driver      : localforage.WEBSQL, // Force WebSQL; same as using setDriver()
+    name        : 'myApp',
+    version     : 1.0,
+    size        : 4980736, // Size of database, in bytes. WebSQL-only for now.
+    storeName   : 'keyvaluepairs', // Should be alphanumeric, with underscores.
+    description : 'some description'
+});
+
+var store = localforage.createInstance({
+  name: "nameHere"
+});
+
+var otherStore = localforage.createInstance({
+  name: "otherName"
+});
+
+// Setting the key on one of these doesn't affect the other.
+store.setItem("key", "value");
+otherStore.setItem("key", "value2");
+
 </script>
 
 <VPTeamPage>
