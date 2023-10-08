@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { nextTick, onMounted } from "vue";
 import gsap from "gsap";
+import { delay } from "lodash";
 
 // get other plugins:
 // import ScrollTrigger from "gsap/ScrollTrigger";
@@ -14,7 +15,7 @@ import gsap from "gsap";
 // don't forget to register plugins
 // gsap.registerPlugin(ScrollTrigger, Draggable, Flip, MotionPathPlugin);
 
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     value: "Animation Title",
@@ -28,17 +29,21 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  const t = gsap.timeline({});
-  t.to(".char", {
-    opacity: 1,
-    delay: 0.1,
-    duration: 0.5,
-    y: 0,
-    ease: "Power4.inOut",
-    stagger: 0.1,
-    repeat: -1,
-    repeatDelay: 2,
-    yoyo: true,
+  nextTick(() => {
+    delay(() => {
+      const t = gsap.timeline({});
+      t.to(".char", {
+        opacity: 1,
+        delay: 0.1,
+        duration: 0.5,
+        y: 0,
+        ease: "Power4.inOut",
+        stagger: 0.1,
+        repeat: -1,
+        repeatDelay: 2,
+        yoyo: true,
+      });
+    }, 3 * 1000);
   });
 });
 </script>
