@@ -119,6 +119,7 @@
     "vfonts": "^0.0.3",
     "vite": "^4.4.11",
     "vite-aliases": "^0.11.3",
+    "vite-plugin-git-revision-info": "^1.1.0",
     "vite-plugin-html-config": "^1.0.11",
     "vite-plugin-pwa": "^0.16.5",
     "vite-plugin-remove-console": "^2.1.1",

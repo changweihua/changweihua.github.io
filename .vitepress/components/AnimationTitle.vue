@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { nextTick, onMounted } from "vue";
 import gsap from "gsap";
-import { delay } from "lodash";
+import _ from "lodash";
 
 // get other plugins:
 // import ScrollTrigger from "gsap/ScrollTrigger";
@@ -30,7 +30,7 @@ defineProps({
 
 onMounted(() => {
   nextTick(() => {
-    delay(() => {
+    _.delay(() => {
       const t = gsap.timeline({});
       t.to(".char", {
         opacity: 1,
