@@ -23,5 +23,6 @@ declare module 'vue' {
     ThreePlane: typeof import('./src/components/ThreePlane.vue')['default']
     ThreePlane2: typeof import('./src/components/ThreePlane2.vue')['default']
     ThreeWithBall: typeof import('./src/components/ThreeWithBall.vue')['default']
+    WavingBorder: typeof import('./src/components/WavingBorder.vue')['default']
   }
 }
