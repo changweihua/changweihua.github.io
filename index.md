@@ -215,13 +215,13 @@ if(inBrowser) {
     :members="members"
   />
 </VPTeamPage>
-<WavingBorder />
+<!-- <WavingBorder /> -->
 <!-- <XmindViewer url="https://mp-cb2e47ef-a802-469a-a81c-2b6efa9f8b60.cdn.bspapp.com/xmind/browser-rendering-flow.xmind"/> -->
 <!-- <HomeIndex /> -->
-<HomeContributors />
+<!-- <HomeContributors /> -->
 
 <!-- <style src="./nav/index.scss"></style> -->
-<MNavLinks v-for="{title, items} in navis" :title="title" :items="items"/>
+<!-- <MNavLinks v-for="{title, items} in navis" :title="title" :items="items"/> -->
 <!-- <a-tag>sss</a-tag> -->
 
 <!-- ### Title <Badge type="info" text="default" />
