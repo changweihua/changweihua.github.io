@@ -10,13 +10,13 @@ export const head: HeadConfig[] = [
       href: "/font.css",
     },
   ],
-  ["meta", { name: "referrer", content:"no-referrer" }],
-  // [
-  //   "script",
-  //   {
-  //     src: "/fancybox.umd.js",
-  //   },
-  // ],
+  ["meta", { name: "referrer", content: "no-referrer" }],
+  [
+    "script",
+    {
+      src: "/clarity.js",
+    },
+  ],
   [
     "script",
     {
