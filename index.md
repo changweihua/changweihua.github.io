@@ -28,7 +28,7 @@ features:
     icon:
       src: /sunnyland.svg
       alt: 阳光服务平台
-    details: 依托微信小程序，为苏南硕放国际机场量身打造阳光服务平台
+    details: 依托微信小程序，为无锡硕放机场量身打造阳光服务平台
     link: /gallery/sunny-land
     # linkText: 更多详情
   # - title: 扬泰机场智慧出行小程序
@@ -43,10 +43,10 @@ features:
       alt: 3D孪生数字机场
     details: 3D孪生数字机场简易演示版
     link: /gallery/digital_airport
-  - title: 苏南硕放国际机场旅客服务平台
+  - title: 无锡硕放机场旅客服务平台
     icon:
       src: /air_wux.png
-      alt: 苏南硕放国际机场旅客服务平台
+      alt: 无锡硕放机场旅客服务平台
     details: 为机场提供了数字化赋能，解决了服务能力与旅客需求难匹配的运营痛点，助力旅客便捷出行。
     link: /gallery/airwux
   - title: wx-navigation-bar
@@ -67,14 +67,14 @@ features:
   - title: 基于K8S平台的持续交付平台
     details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
     link: /gallery/giteaops
-  - title: 苏南硕放国际机场安检效能分析系统
+  - title: 无锡硕放机场安检效能分析系统
     details: 通过数字化大屏，图形化报表，动态化效果，助力安检数据展示及效能分析。
     link: /gallery/SCPEA
   - title: 进出港旅客查询和无纸化系统项目
     details: 为安检部门提供今日的所有起降航班乘机人数。
   - title: 扬州泰州国际机场客源地分析系统
     details: 统计所有从扬泰机场出发或到达的旅客来源分布。
-  - title: 苏南硕放国际机场生产统计系统
+  - title: 无锡硕放机场生产统计系统
     details: 整个机场运行生产统计数据。
 
 head:
