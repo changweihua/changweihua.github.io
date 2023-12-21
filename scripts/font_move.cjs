@@ -13,15 +13,15 @@ console.log('myArgs: ', myArgs);
 let fontName = 'JetBrains'
 
 switch (myArgs[0]) {
-case '--font':
+  case '--font':
     console.log(myArgs[1]);
     fontName = myArgs[1]
     break;
-case 'compliment':
+  case 'compliment':
     console.log(myArgs[1], 'is really cool.');
     break;
-default:
-  console.log('使用默认字体设置');
+  default:
+    console.log('使用默认字体设置');
 }
 
 // 删除指定文件夹下面的所有文件或文件夹

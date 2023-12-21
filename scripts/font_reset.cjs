@@ -12,14 +12,14 @@ console.log('myArgs: ', myArgs);
 let fontName = 'JetBrains'
 
 switch (myArgs[0]) {
-case '--font':
+  case '--font':
     console.log(myArgs[1]);
     fontName = myArgs[1]
     break;
-case 'compliment':
+  case 'compliment':
     console.log(myArgs[1], 'is really cool.');
     break;
-default:
+  default:
     console.log('使用默认字体设置');
 }
 console.log("清空字体缓存");
