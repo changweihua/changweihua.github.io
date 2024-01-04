@@ -31,18 +31,12 @@ features:
     details: 依托微信小程序，为无锡硕放机场量身打造阳光服务平台
     link: /gallery/sunny-land
     # linkText: 更多详情
-  # - title: 扬泰机场智慧出行小程序
-  #   icon:
-  #     src: /yty_logo.png
-  #     alt: 扬泰机场智慧出行小程序
-  #   details: 为扬泰机场旅客提供航班动态查询、在线值机、停车场收费标准等自助服务
-  #   link: /gallery/
-  - title: 3D孪生数字机场
+  - title: Yuppie 平台
     icon:
-      src: /images/airport.png
-      alt: 3D孪生数字机场
-    details: 3D孪生数字机场简易演示版
-    link: /gallery/digital_airport
+      src: /yty_logo.png
+      alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
+    details: 项目积累，实现即开箱即投产的标准化平台
+    link: /gallery/
   - title: 无锡硕放机场旅客服务平台
     icon:
       src: /air_wux.png
@@ -58,9 +52,12 @@ features:
   # - title: antdv-plus-table
   #   details: Ant Design Vue Table 扩展NPM包。
   #   link: https://www.npmjs.com/package/@changweihua/antdv-plus-table
-  - title: Nobilis.Epps
-    details: 基于 Epplus 实现 Excel 的快速导入导出 NUGET包。
-    link: https://www.nuget.org/packages/Nobilis.Epps
+  - title: 3D孪生数字机场
+    icon:
+      src: /images/airport.png
+      alt: 3D孪生数字机场
+    details: 3D孪生数字机场简易演示版
+    link: /gallery/digital_airport
   - title: 疫情防控平台
     details: 疫情期间，为满足公司疫情防控需求，开发上线本系统。特色功能包含基于百度Paddle实现健康码和行程码信息自动提取和预警，支持人脸识别登录。
     link: /gallery/epcp

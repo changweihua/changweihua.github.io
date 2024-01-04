@@ -28,6 +28,8 @@ recommended: true
 
 ## 预览图 ##
 
+**本平台在无锡硕放机场服务“微改善”项目中，摘得《三星项目》荣誉称号。**
+
 ### 旅客端 ###
 
 <div class="w-full flex flex-col gap-8 justify-evenly items-center mb-4">
@@ -40,7 +42,9 @@ recommended: true
 
 ### 宣传稿 ###
 
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-3 gap-4">
+
+![Alt text](/images/cmono-20240104150934.png){data-zoomable}
 
 ![Alt text](/images/cmono-d8ada751f7a9aadebbff2557c19cba0.jpg){data-zoomable}
 
