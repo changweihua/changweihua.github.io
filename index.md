@@ -33,10 +33,10 @@ features:
     # linkText: 更多详情
   - title: Yuppie 平台
     icon:
-      src: /yty_logo.png
+      src: /yuppie.svg
       alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
     details: 项目积累，实现即开箱即投产的标准化平台
-    link: /gallery/
+    link: /gallery/yuppie
   - title: 无锡硕放机场旅客服务平台
     icon:
       src: /air_wux.png
