@@ -217,7 +217,8 @@ body {
 }
 
 .VPNavBar {
-  background-color: var(--vp-nav-bg-color);
+  // background-color: var(--vp-nav-bg-color);
+  background-color: var(--vp-c-bg);
 }
 
 mjx-container {
@@ -228,4 +229,38 @@ mjx-container {
 mjx-container > svg {
   margin: auto;
   display: inline-block;
+}
+
+html[data-theme="dark"] {
+  .VPNavBar:not(.top) {
+    // background-color: var(--vp-nav-bg-color);
+    background-color: var(--vp-c-bg) !important;
+  }
+}
+
+:root {
+  --vp-nav-bg-color: transparent;
+}
+
+.VPNav,
+.VPLocalNav {
+  position: relative;
+  background: var(--vp-nav-bg-color) !important;
+}
+
+.VPNav::after,
+.VPLocalNav.reached-top::after {
+  position: absolute;
+  content: "";
+  top: -1px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: saturate(180%) blur(12px);
+  z-index: -1;
+}
+
+.VPNavBar,
+.VPLocalNav.reached-top {
+  border-bottom: none;
 }

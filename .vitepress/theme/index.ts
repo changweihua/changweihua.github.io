@@ -3,11 +3,13 @@ import { HeadConfig, PageData, inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, nextTick, onMounted, watch, watchEffect } from "vue";
 import {
+  Tag,
   Button,
   Empty,
   Progress,
   Radio,
   Spin,
+  Space,
   Tabs,
 } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
@@ -227,6 +229,8 @@ export default {
       // }
 
       app
+        .use(Space)
+        .use(Tag)
         .use(Button)
         .use(Progress)
         .use(Empty)

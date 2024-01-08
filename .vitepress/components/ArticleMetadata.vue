@@ -1,15 +1,21 @@
 <template>
-  <div v-if="data.showMeta" class="meta-container m-6">
-    <div class="meta-tag">
-      <my-icon icon="solar:tag-bold" />
+  <a-space v-if="data.showMeta" :size="[0, 'small']" wrap>
+    <a-tag :bordered="false" color="processing">
+      <template #icon>
+        <my-icon icon="solar:tag-bold" />
+      </template>
       原创
-    </div>
-    <div class="meta-tag">
-      <my-icon icon="basil:user-solid" />
+    </a-tag>
+    <a-tag :bordered="false" color="processing">
+      <template #icon>
+        <my-icon icon="basil:user-solid" />
+      </template>
       常伟华
-    </div>
-    <div class="meta-tag">
-      <my-icon icon="tabler:clock-filled" />
+    </a-tag>
+    <a-tag :bordered="false" color="processing">
+      <template #icon>
+        <my-icon icon="tabler:clock-filled" />
+      </template>
       {{
         date.toLocaleString("zh", {
           year: "numeric",
@@ -19,8 +25,8 @@
           minute: "numeric",
         })
       }}
-    </div>
-  </div>
+    </a-tag>
+  </a-space>
 </template>
 
 <script lang="ts" setup>
@@ -59,6 +65,7 @@ const { date, categories, tags } = toRefs(data);
   display: flex;
   align-items: center;
   gap: 20px;
+
   .meta-tag {
     display: flex;
     align-items: center;
@@ -66,6 +73,14 @@ const { date, categories, tags } = toRefs(data);
     background-color: antiquewhite;
     gap: 6px;
     padding: 2px 8px;
+  }
+}
+
+html[data-theme="dark"] {
+  .meta-container {
+    .meta-tag {
+      background-color: rgb(183, 142, 230);
+    }
   }
 }
 </style>

@@ -3,9 +3,9 @@
     V{{ version }} |
     <GitIcon />
     <ViteIcon />
-    <GithubIcon />
-    <AntdesignIcon />
-    <LatexIcon />
+    <GitHubIcon />
+    <AntDesignIcon />
+    <LaTeXIcon />
     <MarkdownIcon />
     <!-- <p class="version-tag w-20 text-center flex flex-row">
       {{ version }}
@@ -17,17 +17,17 @@
 import { onMounted, ref } from "vue";
 import { fetchVersion } from "../utils/fetchVersion";
 import {
-  AntdesignIcon,
-  GithubIcon,
+  AntDesignIcon,
+  GitHubIcon,
   GitIcon,
   MarkdownIcon,
-  LatexIcon,
+  LaTeXIcon,
   ViteIcon,
 } from "vue3-simple-icons";
 const version = ref("N/A");
-import { useData } from "vitepress";
-const { params } = useData();
-console.log(params.value);
+// import { useData } from "vitepress";
+// const { params } = useData();
+
 onMounted(() => {
   const docsVersionSpan = document.querySelector(
     "footer.VPFooter > .container > p.version-tag"

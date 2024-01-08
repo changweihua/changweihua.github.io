@@ -75,19 +75,39 @@ const htmlConfigs = htmlConfig({
   ],
 });
 
-// import vitePluginMonitor from "vite-plugin-monitor";
-// import AutoImport from 'unplugin-auto-import/vite'
-// import { MarkdownTransform } from './.vitepress/plugins/markdownTransform'
-// import styleImport, {
-//   AndDesignVueResolve
-// } from 'vite-plugin-style-import'
+// 分词器来源
+// https://wenjiangs.com/article/segment.html
+// https://github.com/leizongmin/node-segment
+// 安装：
+// yarn add segment -D
+// 以下为样例
+
+// 载入模块
+import Segment from 'segment';
+// 创建实例
+const segment = new Segment();
+// 使用默认的识别模块及字典，载入字典文件需要1秒，仅初始化时执行一次即可
+segment.useDefault();
+// 开始分词
+// console.log(segment.doSegment('这是一个基于Node.js的中文分词模块。'));
 
 //default options
-var options = {
+const options = {
   ...flexSearchIndexOptions,
-  previewLength: 100, //搜索结果预览长度
+  // 采用分词器优化，
+  encode: function (str) {
+    return segment.doSegment(str, { simple: true });
+  },
+  tokenize: "forward", // 解决汉字搜索问题。来源：https://github.com/emersonbottero/vitepress-plugin-search/issues/11
+
+  // 以下代码返回完美的结果，但内存与空间消耗巨大，索引文件达到80M+
+  // encode: false,
+  // tokenize: "full",
+  previewLength: 50, //搜索结果预览长度
   buttonLabel: "搜索",
   placeholder: "情输入关键词",
+  allow: [],
+  ignore: [],
 };
 
 // https://vitejs.dev/config/

@@ -4,7 +4,7 @@ import { markdown } from "./markdown";
 const defaultConfig: UserConfig<DefaultTheme.Config> = {
   title: "CMONO.NET",
   description: "个人在线",
-  appearance: false,
+  appearance: true,
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
     ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
