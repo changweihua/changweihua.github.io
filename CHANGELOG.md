@@ -1,3 +1,11 @@
+## <small>0.0.28 (2024-01-09)</small>
+
+* fix(custom): 降低Vitepress版本 ([20356d9](https://github.com/changweihua/changweihua.github.io/commit/20356d9))
+* fix(custom): 修复打包问题 ([76a19ab](https://github.com/changweihua/changweihua.github.io/commit/76a19ab))
+* fix(custom): 优化打包 ([02bc448](https://github.com/changweihua/changweihua.github.io/commit/02bc448))
+
+
+
 ## <small>0.0.27 (2023-09-25)</small>
 
 
