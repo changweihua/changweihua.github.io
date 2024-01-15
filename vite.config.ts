@@ -84,6 +84,7 @@ const htmlConfigs = htmlConfig({
 
 // 载入模块
 import Segment from 'segment';
+import { truncateSync } from "node:fs";
 // 创建实例
 const segment = new Segment();
 // 使用默认的识别模块及字典，载入字典文件需要1秒，仅初始化时执行一次即可
@@ -124,7 +125,7 @@ export default defineConfig({
   // assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
   build: {
     sourcemap: process.env.NODE_ENV !== 'production', // Seems to cause JavaScript heap out of memory errors on build
-    minify: false, // 必须开启：使用terserOptions才有效果
+    minify: true, // 必须开启：使用terserOptions才有效果
     // terserOptions: {
     //   compress: {
     //     //生产环境时移除console
@@ -151,23 +152,23 @@ export default defineConfig({
     //     },
     //   },
     // },
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            // 分解块，将大块分解成更小的块,在vite.config.js当中的build下面进行配置
-            return id.toString().split('node_modules/')[1].split('/')[0].toString();
-            // 但是生成的文件都在dist下面的assets文件下，里面既有js、css等等。
-          }
-        },
-        // 可以将不同的文件放在不同的文件下
-        chunkFileNames: (chunkInfo) => {
-          const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : [];
-          const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
-          return `js/${fileName}/[name].[hash].js`;
-        }
-      }
-    },
+    // rollupOptions: {
+    //   output: {
+    //     manualChunks(id) {
+    //       if (id.includes('node_modules')) {
+    //         // 分解块，将大块分解成更小的块,在vite.config.js当中的build下面进行配置
+    //         return id.toString().split('node_modules/')[1].split('/')[0].toString();
+    //         // 但是生成的文件都在dist下面的assets文件下，里面既有js、css等等。
+    //       }
+    //     },
+    //     // 可以将不同的文件放在不同的文件下
+    //     chunkFileNames: (chunkInfo) => {
+    //       const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : [];
+    //       const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
+    //       return `js/${fileName}/[name].[hash].js`;
+    //     }
+    //   }
+    // },
   },
   define: {
     'process.env': {}
