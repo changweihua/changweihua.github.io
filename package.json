@@ -1,10 +1,10 @@
 {
   "name": "changweihua.github.io",
   "scripts": {
-    "docs:build": "node --max-old-space-size=4096 node_modules/vitepress/bin/vitepress.js build",
+    "docs:vbuild": "node --max-old-space-size=4096 node_modules/vitepress/bin/vitepress.js build",
     "docs:dev": "vitepress dev",
     "docs:prepare": "esno scripts/prepare.ts",
-    "docs:vbuild": "vitepress build",
+    "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
     "register:components": "vitepress-rc",
     "pkg:patch": "patch-package",
