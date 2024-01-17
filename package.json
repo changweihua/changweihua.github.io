@@ -3,7 +3,7 @@
   "scripts": {
     "docs:github_build": "node --max-old-space-size=4096 node_modules/vitepress/bin/vitepress.js build --mode github",
     "docs:build": "node --max-old-space-size=4096 node_modules/vitepress/bin/vitepress.js build",
-    "docs:dev": "vitepress dev --mode development",
+    "docs:dev": "vitepress --mode development",
     "docs:prepare": "esno scripts/prepare.ts",
     "docs:vbuild": "vitepress build",
     "docs:preview": "vitepress preview",
