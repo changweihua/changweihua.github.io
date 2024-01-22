@@ -1,8 +1,10 @@
 ---
 outline: page
+# layout: page
+# footer: false
 ---
 
-# DotNet #
+<hover-grid />
 
 - [关于 JWT、JWS、JWE](/blog/2024-01/about_jwt_jws_jwe.md)
 - [Onion Clean Architecture](/blog/2023-08/lime_siesta_nuget.md)

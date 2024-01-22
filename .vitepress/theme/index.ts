@@ -51,6 +51,7 @@ import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import ShamingLogo from "../components/ShamingLogo.vue";
 import PageFooter from "../components/PageFooter.vue";
+import HoverGrid from "../components/HoverGrid.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -62,6 +63,22 @@ import "./styles/timeline.fix.less";
 
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
+
+import { defaultVTheme } from '../hooks/useVChart';
+import VChart from '@visactor/vchart';
+import { allThemeMap } from '@visactor/vchart-theme';
+
+// register themes
+allThemeMap.forEach((theme, name) => {
+  console.log('theme', name)
+  theme.fontFamily = defaultVTheme.fontFamily
+  theme.backround = defaultVTheme.background
+  VChart.ThemeManager.registerTheme(name, theme);
+});
+
+// apply a theme
+VChart.ThemeManager.setCurrentTheme('legacyLight');
+
 
 export default {
   ...DefaultTheme,
@@ -251,6 +268,7 @@ export default {
     app.component("Contributors", Contributors);
     app.component("HomeContributors", HomeContributors);
     app.component("CopyRight", copyright);
+    app.component("HoverGrid", HoverGrid);
 
     app.use(VueResizeObserver);
     app.use(FloatingVue);

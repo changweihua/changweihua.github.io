@@ -131,7 +131,7 @@ Technical testing 2015-09-01
 <div id="g-pointer-2"></div> -->
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 import { BeakerIcon } from '@heroicons/vue/24/solid'
 import * as icons from 'simple-icons';
@@ -139,6 +139,7 @@ import HomeIndex from "@vp/components/HomeIndex.vue"
 import MNavLinks  from "@vp/components/nav/MNavLinks.vue"
 import WavingBorder from "@/components/WavingBorder.vue"
 import { inBrowser } from 'vitepress'
+import useVChart, { vChartColors } from '@vp/hooks/useVChart';
 
 const members = [
   {
@@ -174,32 +175,38 @@ const navis = [{
 }]
 
 
-import localforage from "localforage";
+// import localforage from "localforage";
 
-if(inBrowser) {
+// if(inBrowser) {
 
-  localforage.config({
-      driver      : localforage.WEBSQL, // Force WebSQL; same as using setDriver()
-      name        : 'myApp',
-      version     : 1.0,
-      size        : 4980736, // Size of database, in bytes. WebSQL-only for now.
-      storeName   : 'keyvaluepairs', // Should be alphanumeric, with underscores.
-      description : 'some description'
-  });
+//   localforage.config({
+//       driver      : localforage.WEBSQL, // Force WebSQL; same as using setDriver()
+//       name        : 'myApp',
+//       version     : 1.0,
+//       size        : 4980736, // Size of database, in bytes. WebSQL-only for now.
+//       storeName   : 'keyvaluepairs', // Should be alphanumeric, with underscores.
+//       description : 'some description'
+//   });
 
-  var store = localforage.createInstance({
-    name: "nameHere"
-  });
+//   var store = localforage.createInstance({
+//     name: "nameHere"
+//   });
 
-  var otherStore = localforage.createInstance({
-    name: "otherName"
-  });
+//   var otherStore = localforage.createInstance({
+//     name: "otherName"
+//   });
 
-  // Setting the key on one of these doesn't affect the other.
-  store.setItem("key", "value");
-  otherStore.setItem("key", "value2");
-}
+//   // Setting the key on one of these doesn't affect the other.
+//   store.setItem("key", "value");
+//   otherStore.setItem("key", "value2");
+// }
+
+const vChartRef = ref()
+const { chart: vChart } = useVChart(vChartRef)
+
 </script>
+
+<div ref="vChartRef" style="width: 100%; height: 500px"></div>
 
 <VPTeamPage>
   <VPTeamPageTitle v-tooltip="'You have new messages.'">

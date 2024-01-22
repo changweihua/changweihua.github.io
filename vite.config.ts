@@ -219,7 +219,7 @@ export default defineConfig({
     Components({
       dirs: resolve(__dirname, "./src/components"),
       include: [/\.vue$/, /\.vue\?vue/],
-      dts: "./components.d.ts",
+      dts: "./typings/components.d.ts",
       transformer: "vue3",
       resolvers: [
         // AntdvResolver(),
