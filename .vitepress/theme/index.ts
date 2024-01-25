@@ -111,7 +111,7 @@ export default {
       "home-hero-info": () =>
         h(AnimationTitle, {
           name: "CMONO.NET",
-          text: "知识汪洋仅此一瓢",
+          text: "知识汪洋只此一瓢",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
       // "home-hero-image": () => h(Suspense, ShamingLogo),

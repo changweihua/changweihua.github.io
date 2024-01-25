@@ -204,9 +204,35 @@ const navis = [{
 const vChartRef = ref()
 const { chart: vChart } = useVChart(vChartRef)
 
+// 引入对应的 worker 文件
+import Worker from "@/workers/gif-worker.ts?worker"
+
+const workerRef = ref<Worker>()
+
+const initWorker = () => {
+  const canvasBitmap = document.getElementById('canvas') as HTMLCanvasElement;
+  const offscreen = canvasBitmap.transferControlToOffscreen();
+  workerRef.value = new Worker()
+  // 该vue文件（主线程）往 worker (另外的线程) 传递数据
+  workerRef.value.postMessage({ init: true, canvas: offscreen }, [offscreen]);
+  // worker(另外的线程) 往 该vue文件（主线程）传递数据
+  workerRef.value.onmessage = e => {
+    console.log(e.data)
+  }
+}
+
+onMounted(() => {
+  initWorker()
+})
+
 </script>
 
-<div ref="vChartRef" style="width: 100%; height: 500px"></div>
+<div class="grid grid-cols-1 md:grid-cols-2">
+  <div ref="vChartRef" style="width: 100%; height: 500px"></div>
+  <div class='worker'>
+    <canvas id="canvas" width="1000" height="450" :style="{border: '1px solid #fff'}"></canvas>
+  </div>
+</div>
 
 <VPTeamPage>
   <VPTeamPageTitle v-tooltip="'You have new messages.'">
