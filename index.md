@@ -131,7 +131,7 @@ Technical testing 2015-09-01
 <div id="g-pointer-2"></div> -->
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 import { BeakerIcon } from '@heroicons/vue/24/solid'
 import * as icons from 'simple-icons';
@@ -214,24 +214,27 @@ const initWorker = () => {
   const offscreen = canvasBitmap.transferControlToOffscreen();
   workerRef.value = new Worker()
   // 该vue文件（主线程）往 worker (另外的线程) 传递数据
-  workerRef.value.postMessage({ init: true, canvas: offscreen }, [offscreen]);
+  workerRef.value.postMessage({ init: true, canvas: offscreen, dpr: window.devicePixelRatio }, [offscreen]);
   // worker(另外的线程) 往 该vue文件（主线程）传递数据
   workerRef.value.onmessage = e => {
-    console.log(e.data)
+    console.log('onmessage', e.data)
   }
 }
 
+
 onMounted(() => {
   console.log('initWorker')
-  initWorker()
+  nextTick(()=>{
+    initWorker()
+  })
 })
 
 </script>
 
-<div class="grid grid-cols-1 md:grid-cols-2">
-  <div ref="vChartRef" style="width: 100%; height: 500px"></div>
+<div class="grid m-20 grid-cols-1 md:grid-cols-2">
+  <div ref="vChartRef" style="width: 100%; height: 350px"></div>
   <div class='worker'>
-    <canvas id="canvas" width="1000" height="450" :style="{border: '1px solid #fff'}"></canvas>
+    <canvas id="canvas" :style="{ width: '100%',height: '350px', border: '1px solid #fff'}"></canvas>
   </div>
 </div>
 
