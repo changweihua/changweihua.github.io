@@ -1,4 +1,4 @@
-import { VChart, type ISpec, type ITheme, type IVChart } from "@visactor/vchart";
+import VChart, { type ISpec, type ITheme, type IVChart } from "@visactor/vchart";
 import { useData } from "vitepress";
 import { nextTick, onBeforeUnmount, onMounted, shallowRef, unref, watch, type Ref } from "vue";
 

@@ -222,6 +222,7 @@ const initWorker = () => {
 }
 
 onMounted(() => {
+  console.log('initWorker')
   initWorker()
 })
 
