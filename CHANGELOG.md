@@ -1,3 +1,14 @@
+## <small>0.0.30 (2024-03-06)</small>
+
+* feat(custom): 增加图表功能 ([da6479e](https://github.com/commit/da6479e))
+* feat(custom): 支持Gif图片动态渲染 ([da1081e](https://github.com/commit/da1081e))
+* fix(custom): 更新npm包 ([9af4edd](https://github.com/commit/9af4edd))
+* fix(custom): 继续使用淘宝源测试 ([bb6c322](https://github.com/commit/bb6c322))
+* fix(custom): 优化打包 ([4aa25f3](https://github.com/commit/4aa25f3))
+* fix(custom): 优化RSS BaseUrl ([01f19d3](https://github.com/commit/01f19d3))
+
+
+
 ## <small>0.0.29 (2024-01-15)</small>
 
 
