@@ -127,6 +127,9 @@ Technical testing 2015-09-01
 </div>
 </div> -->
 
+<!-- <a-date-picker v-model:value="value1" :bordered="false" /> -->
+<a-range-picker v-model:value="value1" />
+
 <!-- <div id="g-pointer-1"></div>
 <div id="g-pointer-2"></div> -->
 
@@ -140,6 +143,10 @@ import MNavLinks  from "@vp/components/nav/MNavLinks.vue"
 import WavingBorder from "@/components/WavingBorder.vue"
 import { inBrowser } from 'vitepress'
 import useVChart, { vChartColors } from '@vp/hooks/useVChart';
+
+import type { Dayjs } from 'dayjs';
+type RangeValue = [Dayjs, Dayjs];
+const value1 = ref<RangeValue>();
 
 const members = [
   {

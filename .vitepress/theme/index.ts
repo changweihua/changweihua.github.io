@@ -11,6 +11,8 @@ import {
   Spin,
   Space,
   Tabs,
+  RangePicker,
+  DatePicker
 } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 
@@ -253,7 +255,9 @@ export default {
         .use(Empty)
         .use(Spin)
         .use(Tabs)
-        .use(Radio);
+        .use(Radio)
+        .use(RangePicker)
+        .use(DatePicker);
     }
 
     app.component("demo-preview", AntDesignContainer);
