@@ -72,7 +72,7 @@ jobs:
 
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v3
 
         #   - name: Deploy
     #     uses: peaceiris/actions-gh-pages@v3
