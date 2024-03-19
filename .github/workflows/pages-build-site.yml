@@ -84,7 +84,8 @@ jobs:
       - name: Setup Pages
       - uses: actions/configure-pages@v4
 
-      - uses: actions/upload-pages-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
           path: .vitepress/dist
 
