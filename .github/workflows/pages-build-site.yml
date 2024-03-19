@@ -1,10 +1,27 @@
-name: pages-build-site
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
 on:
   push:
     branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+env:
+  # Hosted GitHub runners have 7 GB of memory available, let's use 6 GB
+  NODE_OPTIONS: --max-old-space-size=6144
 
 jobs:
   deploy:
@@ -17,10 +34,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
           # cache: npm
@@ -47,7 +64,7 @@ jobs:
       #         ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       # - name: Increase Memory
       #   run: npm run fix-memory-limit
@@ -64,13 +81,14 @@ jobs:
       - name: Build docs
         run: npm run docs:github_build
 
-      - uses: actions/configure-pages@v3
+      - name: Setup Pages
+      - uses: actions/configure-pages@v4
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v2
         with:
           path: .vitepress/dist
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
 
