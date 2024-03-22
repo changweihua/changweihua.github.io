@@ -230,6 +230,13 @@ export default {
     const { app, router, siteData, isServer } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
+    router.onBeforeRouteChange = (to) => {
+      console.log('路由将改变为: ', to);
+      if (typeof window._hmt !== 'undefined') {
+        window._hmt.push(['_trackPageview', to]);
+      }
+    };
+
     if (inBrowser) {
       vitepressNprogress(ctx);
       vitepressBackToTop({

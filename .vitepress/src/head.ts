@@ -26,6 +26,19 @@ export const head: HeadConfig[] = [
       defer: "",
     },
   ],
+  [
+    'script',
+    {},
+    `
+      window._hmt = window._hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?9bdcf6f2112634d13223ef73de6fe9fa";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+      `,
+  ],
   // 设置 描述 和 关键词
   [
     "meta",
