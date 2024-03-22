@@ -206,5 +206,5 @@
   "overrides": {
     "vite-plugin-html": "^3.2.2"
   },
-  "version": "0.0.30"
+  "version": "0.0.31"
 }

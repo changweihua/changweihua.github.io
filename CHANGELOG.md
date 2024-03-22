@@ -1,3 +1,9 @@
+## <small>0.0.31 (2024-03-22)</small>
+
+* feat(custom): 增加百度统计代码 ([4b259d5](https://github.com/commit/4b259d5))
+
+
+
 ## <small>0.0.30 (2024-03-06)</small>
 
 * feat(custom): 增加图表功能 ([da6479e](https://github.com/commit/da6479e))
