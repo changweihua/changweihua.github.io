@@ -1,13 +1,20 @@
-// import glob from 'fast-glob';
+// VitePress 提供了数据加载的功能，它允许加载任意数据并从页面或组件中导入它。数据加载只在构建时执行：最终的数据将被序列化为 JavaScript 包中的 JSON。
+// 数据加载可以被用于获取远程数据，也可以基于本地文件生成元数据。例如，可以使用数据加载来解析所有本地 API 页面并自动生成所有 API 入口的索引。
 
-// // config 即 SiteConfig
-// const srcDir =
-//     config.srcDir.replace(config.root, '').replace(/^\//, '') ||
-//     process.argv.slice(2)?.[1] ||
-//     '.'
+// 一个用于数据加载的文件必须以.data.js 或.data.ts 结尾。该文件应该提供一个默认导出的对象，该对象具有 load() 方法：
 
-const files = ['']// glob.sync(`/blog/**/*.md`, { ignore: ['node_modules'] });
-console.log(files)
-export {
-  files
+// blog.data.ts
+export default {
+  load() {
+    return {
+      hello: 'world'
+    }
+  }
 }
+
+// export default {
+//   async load() {
+//     // 获取远程数据
+//     return (await fetch('...')).json()
+//   }
+// }

@@ -1,13 +1,30 @@
 <template>
-  <div class="shaming-area">
+  <div class="shaming-area" ref="containerRef" @click="handleClick">
     <div class="shaming-container">
       <div class="box"></div>
     </div>
-    <img class="shaming-logo VPImage image-src" src="/logo.png" />
+    <img v-show="isShow" class="shaming-logo VPImage image-src" src="/logo.png" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue'
+import html2particle from 'html2particle'
+
+const containerRef = ref<HTMLElement>()
+
+let handleClick = () => { }
+const isShow = ref(true)
+onMounted(() => {
+  const { startAnimation } = html2particle(containerRef.value!, {
+    type: "ExplodingParticle"
+  })
+  handleClick = () => {
+    isShow.value = false
+    startAnimation()
+    isShow.value = true
+  }
+})
 // import { onMounted } from "vue";
 
 // onMounted(() => {
@@ -102,20 +119,16 @@
     border-right-color: transparent;
     outline: 2px solid rgb(42, 153, 255);
     outline-offset: 10px;
-    background: repeating-radial-gradient(
-        rgba(42, 153, 255, 0.8),
+    background: repeating-radial-gradient(rgba(42, 153, 255, 0.8),
         #fff 50%,
         transparent 50%,
         transparent 60%,
         rgba(42, 153, 255, 0.8) 60%,
-        #fff 100%
-      ),
-      repeating-conic-gradient(
-        rgb(42, 153, 255) 0,
+        #fff 100%),
+      repeating-conic-gradient(rgb(42, 153, 255) 0,
         rgb(42, 153, 255) 4%,
         transparent 4%,
-        transparent 5%
-      );
+        transparent 5%);
     animation: rotate2 2s linear infinite;
   }
 
@@ -151,29 +164,23 @@
     top: 0px;
     left: 0px;
     // background: #fff;
-    background: repeating-radial-gradient(#000 0 0.0001%, #747bff 0 0.0002%) 50%
-        0/2500px 2500px,
-      repeating-conic-gradient(#000 0 0.0001%, #747bff 0 0.0002%) 50% 50%/2500px
-        2500px;
+    background: repeating-radial-gradient(#000 0 0.0001%, #747bff 0 0.0002%) 50% 0/2500px 2500px,
+      repeating-conic-gradient(#000 0 0.0001%, #747bff 0 0.0002%) 50% 50%/2500px 2500px;
     background-blend-mode: difference;
     mix-blend-mode: lighten;
     -webkit-background-clip: text;
     background-clip: text;
     transform-style: preserve-3d;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 80px,
-      rgba(42, 153, 255, 0.1) 80px,
-      rgb(42, 153, 255) 130px
-    );
-    mask: repeating-linear-gradient(
-      to right,
-      transparent 0px,
-      transparent 80px,
-      #000 80px,
-      #000 82px
-    );
+    background: repeating-linear-gradient(to bottom,
+        transparent 0,
+        transparent 80px,
+        rgba(42, 153, 255, 0.1) 80px,
+        rgb(42, 153, 255) 130px);
+    mask: repeating-linear-gradient(to right,
+        transparent 0px,
+        transparent 80px,
+        #000 80px,
+        #000 82px);
     transform: rotateX(90deg);
     animation: line 2s linear infinite;
   }
@@ -183,6 +190,7 @@
   0% {
     transform: translateZ(-50px) rotateX(90deg) rotateY(0deg);
   }
+
   100% {
     transform: translateZ(200px) rotateX(90deg) rotateY(-360deg);
   }
@@ -192,14 +200,17 @@
   0% {
     transform: translateZ(200px) rotateZ(0deg);
   }
+
   100% {
     transform: translateZ(200px) rotateZ(-720deg);
   }
 }
+
 @keyframes rotate2 {
   0% {
     transform: rotateZ(0deg);
   }
+
   100% {
     transform: rotateZ(360deg);
   }

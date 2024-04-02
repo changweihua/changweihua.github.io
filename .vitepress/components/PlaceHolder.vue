@@ -21,12 +21,10 @@ const props = defineProps({
 
 <style scoped>
 .name {
-  background: -webkit-linear-gradient(
-    315deg,
-    rgb(210, 86, 53) 10%,
-    #647eff 50%,
-    rgb(238, 224, 112) 90%
-  );
+  background: -webkit-linear-gradient(315deg,
+      rgb(210, 86, 53) 10%,
+      #647eff 50%,
+      rgb(238, 224, 112) 90%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -58,7 +56,9 @@ const props = defineProps({
   font-weight: 700;
   white-space: pre-wrap;
 }
+
 @media (min-width: 640px) {
+
   .name,
   .text {
     max-width: 576px;
@@ -66,7 +66,9 @@ const props = defineProps({
     font-size: 48px;
   }
 }
+
 @media (min-width: 960px) {
+
   .name,
   .text {
     line-height: 64px;
@@ -83,6 +85,7 @@ const props = defineProps({
   white-space: pre-wrap;
   color: var(--vp-c-text-2);
 }
+
 @media (min-width: 640px) {
   .tagline {
     padding-top: 12px;

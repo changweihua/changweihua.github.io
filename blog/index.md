@@ -21,8 +21,9 @@ import { onMounted, ref } from "vue";
 import { delay } from "lodash-es";
 import ListView from '@/components/ListView.vue';
 import BlogIndex from "@vp/components/BlogIndex.vue"
+import { data as posts } from '@vp/posts.data.ts'
 
-const spinning = ref<boolean>(true);
+const spinning = ref<boolean>(false);
 const delayTime = 200;
 
 let categories: ref<Array<{
@@ -34,25 +35,33 @@ let categories: ref<Array<{
     posterAlt?: string
   }>> = ref([]);
 
-
 onMounted(() => {
-  fetch(`/jsons/lastest_blogs.json`)
-    .then((res) => res.json())
-    .then((json) => {
-      categories.value = json.map((c) => {
-        return {
-          title: c["blogName"],
-          link: c["filePath"],
-          description: c["blogDescription"],
-          poster: c["blogPoster"],
-          // icon: "VueJS",
-        };
-      });
-    }).finally(() => {
-      delay(() => {
-        spinning.value = false;
-      }, 1500)
-    });
+  categories.value = posts.map((p) => {
+    return {
+      link: p.url,
+      title: p.title ,
+      description: p.date.string,// p.excerpt,
+      poster: '/images/cmono-4c0cf778e497ab206289099ce51db5f.png"',
+      // icon: "VueJS",
+    };
+  });
+  // fetch(`/jsons/lastest_blogs.json`)
+  //   .then((res) => res.json())
+  //   .then((json) => {
+  //     categories.value = json.map((c) => {
+  //       return {
+  //         title: c["blogName"],
+  //         link: c["filePath"],
+  //         description: c["blogDescription"],
+  //         poster: c["blogPoster"],
+  //         // icon: "VueJS",
+  //       };
+  //     });
+  //   }).finally(() => {
+  //     delay(() => {
+  //       spinning.value = false;
+  //     }, 1500)
+  //   });
 });
 
 

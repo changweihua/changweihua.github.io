@@ -76,7 +76,7 @@
     --radius: 105%;
   }
 }
-
+/*
 .VPImage {
   mask-image: radial-gradient(
     circle,
@@ -87,7 +87,7 @@
 
 .VPImage:is(:hover) {
   animation: scene-transition 2s linear forwards;
-}
+} */
 
 .VPHomeFeatures .VPFeature {
   /* --c: #1095c1;
@@ -98,13 +98,34 @@
       var(--p, 0%) / var(--s, 0%) 200% no-repeat;
   transition: 0.4s, background-position 0s; */
   --c: no-repeat linear-gradient(var(--vp-c-brand) 0 0);
-  background:
-    var(--c) calc(-100% + var(--i, 0) * 100%) 100% / 50% calc(100% * var(--i, 0) + .08em),
-    var(--c) calc( 200% - var(--i, 0) * 100%) 0 / 50% calc(100% * var(--i, 0) + .08em);
-  transition: .2s calc(var(--i, 0) * .2s), background-position .2s calc(.2s - var(--i, 0) * .2s);
+  background: var(--c) calc(-100% + var(--i, 0) * 100%) 100% / 50%
+      calc(100% * var(--i, 0) + 0.08em),
+    var(--c) calc(200% - var(--i, 0) * 100%) 0 / 50%
+      calc(100% * var(--i, 0) + 0.08em);
+  transition: 0.2s calc(var(--i, 0) * 0.2s),
+    background-position 0.2s calc(0.2s - var(--i, 0) * 0.2s);
 }
 .VPHomeFeatures .VPFeature:hover {
   /* --p: 100%;
   --s: calc(50% + 0.6em); */
   --i: 1;
+}
+
+.resume-title::before {
+  content: attr(data-title);
+  position: absolute;
+  background-image: linear-gradient(#ffcf02, #ff7352);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0;
+}
+
+.resume-title {
+  font-size: 38px;
+  background-image: linear-gradient(#ffcf02, #ff7352);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /*需要文字透明*/
+  -webkit-text-stroke: 2px #333;
 }

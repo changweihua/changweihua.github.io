@@ -5,6 +5,13 @@ commentabled: false
 recommended: false
 ---
 
+<script lang="ts" setup>
+import ShadowLogo from '@vp/components/ShadowLogo.vue'
+</script>
+
+<ShadowLogo />
+<!-- <text class="resume-title">为你定制 发现精彩</text> -->
+
 ## 简介 ##
 
 > 目前就职于 *`上海民航华东凯亚江苏分公司`* ，担任 **[高级开发经理]** 职务，主要面向 `无锡硕放机场` 提供民航体系应用服务保障及项目开发和管理工作。
@@ -28,7 +35,7 @@ recommended: false
 - [敏捷开发-实战](/pdfs/敏捷开发-实战.pdf)
 - [AgileConfig](/pdfs/AgileConfig.pdf)
 
-## 履历 ##
+## 个人履历 ##
 
 ::: timeline 2019-09 ~ Now
 - **上海民航华东凯亚系统集成有限公式江苏分公司**

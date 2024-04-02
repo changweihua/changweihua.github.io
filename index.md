@@ -128,7 +128,7 @@ Technical testing 2015-09-01
 </div> -->
 
 <!-- <a-date-picker v-model:value="value1" :bordered="false" /> -->
-<a-range-picker v-model:value="value1" />
+<!-- <a-range-picker v-model:value="value1" /> -->
 
 <!-- <div id="g-pointer-1"></div>
 <div id="g-pointer-2"></div> -->
@@ -237,16 +237,16 @@ onMounted(() => {
 })
 
 </script>
-
+<!-- 
 <div class="grid m-20 grid-cols-1 md:grid-cols-2">
   <div ref="vChartRef" style="width: 100%; height: 350px"></div>
   <div class='worker'>
     <canvas id="canvas" :style="{ width: '100%',height: '350px', border: '1px solid #fff'}"></canvas>
   </div>
-</div>
+</div> -->
 
 <VPTeamPage>
-  <VPTeamPageTitle v-tooltip="'You have new messages.'">
+  <VPTeamPageTitle v-tooltip="'You have new members.'">
     <template #title>
       Members
     </template>
