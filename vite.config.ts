@@ -70,11 +70,11 @@ const htmlConfigs = htmlConfig({
   metas: [
     {
       name: "keywords",
-      content: "vite html meta keywords",
+      content: "CMONO.NET,changweihua,常伟华,Lance,changweihua.github.io,Vite,VitePress,AntDesign",
     },
     {
       name: "description",
-      content: "vite html meta description",
+      content: "CMONO.NET 官方站点，主要记录平时工作总结及项目经历",
     },
     {
       bar: "custom meta",
