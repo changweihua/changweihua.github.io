@@ -1,3 +1,9 @@
+## <small>0.0.32 (2024-04-02)</small>
+
+* feat(custom): 增加评论功能 ([75c3176](https://github.com/commit/75c3176))
+
+
+
 ## <small>0.0.31 (2024-03-22)</small>
 
 * feat(custom): 增加百度统计代码 ([4b259d5](https://github.com/commit/4b259d5))
