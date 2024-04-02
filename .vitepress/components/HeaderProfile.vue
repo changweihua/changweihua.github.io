@@ -35,7 +35,8 @@
 
     <div class="circle">
       <div class="img_box">
-        <img src="/author.jpg" alt="" />
+        <!-- <img src="/author.jpg" alt="" /> -->
+        <div class="avatar"></div>
       </div>
     </div>
   </div>
@@ -89,6 +90,7 @@
   /* img的圆角 */
   border-radius: 50%;
 }
+
 .card .box .img_box {
   /* video的圆角 */
   border-radius: 15px;
@@ -176,6 +178,7 @@
   border-top-left-radius: 20px;
   box-shadow: -6px -6px var(--vp-c-bg);
 }
+
 .card .box:nth-child(2)::after {
   content: "";
   width: 20px;
@@ -211,6 +214,7 @@
   font-weight: 600;
   color: #333;
 }
+
 .card .box .content h2 span {
   letter-spacing: 0.05em;
   font-size: 0.75em;
@@ -229,6 +233,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
 .card .box .content ul li {
   list-style: none;
   display: flex;
@@ -239,9 +244,11 @@
   font-weight: 500;
   color: #999;
 }
+
 .card .box .content ul li:not(:last-child) {
   border-right: 1px solid #ccc;
 }
+
 .card .box .content ul li span {
   font-size: 1.65em;
   color: #333;
@@ -266,8 +273,47 @@
   box-shadow: 0 0 0 10px #fff;
   transition: 0.5s;
 }
+
 .card .box .content button:hover {
   letter-spacing: 0.5em;
   background-color: #ff3d7f;
+}
+
+.avatar {
+  background-image: url(/author.jpg);
+  background-size: 110%, 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+  border-radius: 50%;
+  // border: 2px solid #000;
+}
+
+.avatar::before,
+.avatar::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: all 0.3s;
+  left: 0;
+  top: 0;
+}
+
+.avatar::before {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.avatar::after {
+  background: inherit;
+  clip-path: circle(0% at 50% 50%);
+}
+
+.avatar:hover::after {
+  clip-path: circle(50% at 50% 50%);
 }
 </style>
