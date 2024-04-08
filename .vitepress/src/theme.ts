@@ -1,6 +1,7 @@
 import type { DefaultTheme } from "vitepress";
-import nav from "./navs/zh";
+// import nav from "./navs/zh";
 import sidebar from "./sidebars/zh";
+
 
 export const themeConfig: DefaultTheme.Config = {
   // editLink: {

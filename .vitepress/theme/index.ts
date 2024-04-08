@@ -1,5 +1,5 @@
 // .vitepress/theme/index.ts
-import { HeadConfig, PageData, inBrowser, useData, useRoute } from "vitepress";
+import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, nextTick, onMounted, watch, watchEffect } from "vue";
 import {
@@ -11,7 +11,6 @@ import {
   Spin,
   Space,
   Tabs,
-  RangePicker,
   DatePicker
 } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
@@ -44,7 +43,7 @@ import "@iconify/iconify";
 import FloatingVue from 'floating-vue'
 import 'floating-vue/dist/style.css';
 
-const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
+// const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
@@ -66,6 +65,24 @@ import "./styles/timeline.fix.less";
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
 
+import Changelog from 'vitepress-plugin-changelog/Changelog.vue'
+import 'vitepress-plugin-changelog/changelog.css'
+
+import type { Theme as ThemeConfig } from 'vitepress'
+import {
+  NolebaseEnhancedReadabilitiesMenu,
+  NolebaseEnhancedReadabilitiesScreenMenu,
+} from '@nolebase/vitepress-plugin-enhanced-readabilities'
+import '@nolebase/vitepress-plugin-enhanced-readabilities/dist/style.css'
+import type { Options } from '@nolebase/vitepress-plugin-enhanced-readabilities'
+import { InjectionKey } from '@nolebase/vitepress-plugin-enhanced-readabilities'
+
+import {
+  NolebaseHighlightTargetedHeading,
+} from '@nolebase/vitepress-plugin-highlight-targeted-heading'
+
+import '@nolebase/vitepress-plugin-highlight-targeted-heading/dist/style.css';
+
 import { defaultVTheme } from '../hooks/useVChart';
 import VChart from '@visactor/vchart';
 import { allThemeMap } from '@visactor/vchart-theme';
@@ -81,8 +98,7 @@ allThemeMap.forEach((theme, name) => {
 // apply a theme
 VChart.ThemeManager.setCurrentTheme('legacyLight');
 
-
-export default {
+export const Theme: ThemeConfig = {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
   Layout() {
@@ -138,6 +154,7 @@ export default {
       //     name: "doc-top",
       //   }),
       "doc-bottom": () => h(recommend),
+      "doc-footer-before": () => h(Changelog),
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
       //     name: "doc-footer-before",
@@ -222,12 +239,33 @@ export default {
       //   h(PlaceHolder, {
       //     name: "nav-screen-content-after",
       //   }),
+
+      // 为较宽的屏幕的导航栏添加阅读增强菜单
+      'nav-bar-content-after': () => h(NolebaseEnhancedReadabilitiesMenu),
+      // 为较窄的屏幕（通常是小于 iPad Mini）添加阅读增强菜单
+      'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
+
+      'layout-top': () => [
+        h(NolebaseHighlightTargetedHeading),
+      ],
+
+      // 'nav-bar-content-after': () => h(OtherComponent), // 你的其他导航栏组件
+      // 'nav-bar-content-after': () => [
+      //   h(OtherComponent), // 你的其他导航栏组件
+      //   h(NolebaseEnhancedReadabilitiesMenu), // 阅读增强菜单
+      // ],
+      // 'nav-screen-content-after': () => h(OtherComponent), // 你的其他导航栏组件
+      // 'nav-screen-content-after': () => [
+      //   h(OtherComponent), // 你的其他导航栏组件
+      //   h(NolebaseEnhancedReadabilitiesScreenMenu), // 阅读增强移动端菜单
+      // ],
+
     });
   },
   enhanceApp: async (ctx) => {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
-    const { app, router, siteData, isServer } = ctx;
+    const { app, router, siteData } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
     router.onBeforeRouteChange = (to) => {
@@ -263,7 +301,6 @@ export default {
         .use(Spin)
         .use(Tabs)
         .use(Radio)
-        .use(RangePicker)
         .use(DatePicker);
     }
 
@@ -283,6 +320,15 @@ export default {
 
     app.use(VueResizeObserver);
     app.use(FloatingVue);
+
+    app.provide(InjectionKey, {
+      // 配置...
+      layoutSwitch: {
+        spotlight: {
+          defaultToggle: true
+        }
+      }
+    } as Options)
   },
   setup() {
     const { lang } = useData();
@@ -311,26 +357,29 @@ export default {
     );
     vitepressLifeProgress();
   },
-  transformHead: ({ pageData }) => {
-    const head: HeadConfig[] = [];
-    head.push([
-      "meta",
-      { property: "og:title", content: pageData.frontmatter.title },
-    ]);
-    head.push([
-      "meta",
-      { property: "og:description", content: pageData.frontmatter.description },
-    ]);
+  // transformHead: ({ pageData }) => {
+  //   const head: HeadConfig[] = [];
+  //   head.push([
+  //     "meta",
+  //     { property: "og:title", content: pageData.frontmatter.title },
+  //   ]);
+  //   head.push([
+  //     "meta",
+  //     { property: "og:description", content: pageData.frontmatter.description },
+  //   ]);
 
-    return head;
-  },
-  lastUpdated: true,
-  /* 站点地图 */
-  transformHtml: (_, id, { pageData }) => {
-    if (!/[\\/]404\.html$/.test(id))
-      links.push({
-        url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, "$2"),
-        lastmod: pageData.lastUpdated,
-      });
-  },
+  //   return head;
+  // },
+  // lastUpdated: true,
+  // /* 站点地图 */
+  // transformHtml: (_, id, { pageData }) => {
+  //   if (!/[\\/]404\.html$/.test(id))
+  //     links.push({
+  //       url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, "$2"),
+  //       lastmod: pageData.lastUpdated,
+  //     });
+  // },
 };
+
+
+export default Theme;

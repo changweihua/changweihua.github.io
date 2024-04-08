@@ -14,7 +14,6 @@ import flexSearchIndexOptions from "flexsearch";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import htmlConfig from "vite-plugin-html-config";
-
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, path.join(process.cwd(), 'env'))[target]
   console.log(value)
@@ -356,7 +355,18 @@ export default defineConfig({
     // extensions: ['.js', '.ts', '.json'] // 导入时想要省略的扩展名列表
   },
   ssr: {
-    noExternal: ["vitepress-plugin-nprogress"],
+    noExternal: [
+      // 如果还有别的依赖需要添加的话，并排填写和配置到这里即可
+      '@nolebase/vitepress-plugin-enhanced-readabilities',
+    ],
+  },
+  optimizeDeps: {
+    include: [
+      "vitepress-plugin-nprogress",
+      '@nolebase/vitepress-plugin-enhanced-readabilities > @nolebase/ui > @rive-app/canvas',
+      '@nolebase/vitepress-plugin-highlight-targeted-heading',
+    ],
+    exclude: ['vitepress'],
   },
   // resolve: {
   //   alias: {

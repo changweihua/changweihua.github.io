@@ -10,6 +10,7 @@ import { withMermaid } from "vitepress-plugin-mermaid";
 import { HeadConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
+import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
 
 // import compression from "vitepress-plugin-compression";
 // import AutoIndex from 'vite-plugin-vitepress-auto-index';
@@ -216,4 +217,33 @@ export default withMermaid({
   // mermaidPlugin: {
   //   class: "mermaid my-class", // set additional css classes for parent container
   // },
+  // async transformPageData({ relativePath }) {
+  //   const { contributors, changelog } = await getChangelogAndContributors(relativePath)
+  //   return {
+  //     CommitData: {
+  //       contributors,
+  //       changelog,
+  //       commitURL: 'https://github.com/changweihua/changweihua.github.io/commit/',
+  //       title: 'Changelog'
+  //     }
+  //   }
+  // }
+  async transformPageData({ relativePath }) {
+    const { contributors, changelog } = await getChangelogAndContributors(relativePath)
+    const CustomAvatars = {
+      'changweihua': '2877201'
+    }
+    const CustomContributors = contributors.map(contributor => {
+      contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`
+      return contributor
+    })
+    return {
+      CommitData: {
+        contributors: CustomContributors,
+        changelog,
+        commitURL: 'https://github.com/changweihua/changweihua.github.io/commit/',
+        title: 'Changelog'
+      }
+    }
+  }
 });

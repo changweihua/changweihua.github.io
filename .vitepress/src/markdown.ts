@@ -2,6 +2,7 @@ import {
   containerPreview,
   componentPreview,
 } from "@vitepress-demo-preview/plugin";
+import { cwd } from 'node:process'
 import { MarkdownOptions } from "vitepress";
 import mdItCustomAttrs from "markdown-it-custom-attrs";
 import timeline from "vitepress-markdown-timeline";
@@ -9,6 +10,7 @@ import container from 'markdown-it-container';
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import footnote from 'markdown-it-footnote';
 import mathjax3 from 'markdown-it-mathjax3';
+import { BiDirectionalLinks } from '@nolebase/markdown-it-bi-directional-links'
 // import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 // import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
@@ -33,10 +35,14 @@ const markdown: MarkdownOptions | undefined = {
     md
       // the second parameter is html tag name
       .use(container, 'sandbox', {
-        render (tokens: any, idx: any) {
+        render(tokens: any, idx: any) {
           return renderSandbox(tokens, idx, 'sandbox');
         },
       });
+
+    md.use(BiDirectionalLinks({
+      dir: cwd(), // 注意这行不要漏掉了哦
+    }))
 
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {

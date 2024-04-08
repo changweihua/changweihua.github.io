@@ -4,13 +4,16 @@ layout: doc
 recommended: true
 ---
 
-# 项目简介 #
+::: info 项目简介
+- 包含智能网关的统一平台
+- 支持多端融合
+:::
 
-基于 Ant Design Vue 的标准化前端项目。
+## 项目架构 ##
 
-<a-typography>
-  <a-typography-title>Introduction</a-typography-title>
-</a-typography>
+![Yuppie平台网络架构图](/images/yuppie_network_arch.png){data-zoomable}
+
+## 项目预览 ##
 
 <div style="width: 100%;height:50%;" class="grid grid-cols-1 gap-4">
   <video controls muted autoplay loop width="100%" height="100%" >
