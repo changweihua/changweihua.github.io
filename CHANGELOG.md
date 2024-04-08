@@ -1,3 +1,9 @@
+## <small>0.0.33 (2024-04-08)</small>
+
+* feat(custom): 优化整体功能及样式 ([70870bb](https://github.com/commit/70870bb))
+
+
+
 ## <small>0.0.32 (2024-04-02)</small>
 
 * feat(custom): 增加评论功能 ([75c3176](https://github.com/commit/75c3176))
