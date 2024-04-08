@@ -80,7 +80,6 @@ import { InjectionKey } from '@nolebase/vitepress-plugin-enhanced-readabilities'
 import {
   NolebaseHighlightTargetedHeading,
 } from '@nolebase/vitepress-plugin-highlight-targeted-heading'
-
 import '@nolebase/vitepress-plugin-highlight-targeted-heading/dist/style.css';
 
 import { defaultVTheme } from '../hooks/useVChart';
