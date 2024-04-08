@@ -4,6 +4,8 @@ layout: doc
 recommended: true
 ---
 
+![服务对象](/yuppie.svg){data-zoomable}
+
 ::: info 项目简介
 - 包含智能网关的统一平台
 - 支持多端融合

@@ -3,6 +3,9 @@ layout: doc
 recommended: true
 ---
 
+
+![服务对象](/sunnyland.svg){data-zoomable}
+
 ## 项目简介 ##
 
 在四型机场建设大背景下，无锡硕放机场围绕人文机场、绿色机场理念，提出搭建阳光服务平台构想，为从无锡机场出发的特殊旅客提供更优质的服务。
