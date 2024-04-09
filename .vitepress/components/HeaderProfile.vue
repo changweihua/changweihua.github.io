@@ -36,7 +36,7 @@
     <div class="circle">
       <div class="img_box">
         <!-- <img src="/author.jpg" alt="" /> -->
-        <div class="avatar"></div>
+        <div class="animated-avatar"></div>
       </div>
     </div>
   </div>
@@ -279,7 +279,7 @@
   background-color: #ff3d7f;
 }
 
-.avatar {
+.animated-avatar {
   background-image: url(/author.jpg);
   background-size: 110%, 110%;
   background-position: center;
@@ -292,8 +292,8 @@
   // border: 2px solid #000;
 }
 
-.avatar::before,
-.avatar::after {
+.animated-avatar::before,
+.animated-avatar::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -304,16 +304,16 @@
   top: 0;
 }
 
-.avatar::before {
+.animated-avatar::before {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.avatar::after {
+.animated-avatar::after {
   background: inherit;
   clip-path: circle(0% at 50% 50%);
 }
 
-.avatar:hover::after {
+.animated-avatar:hover::after {
   clip-path: circle(50% at 50% 50%);
 }
 </style>

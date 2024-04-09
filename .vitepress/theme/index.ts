@@ -132,7 +132,16 @@ export const Theme: ThemeConfig = {
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
       // "home-hero-image": () => h(Suspense, ShamingLogo),
-      "home-hero-image": () => h(ShamingLogo),
+      // "home-hero-image": () => h(ShamingLogo),
+      "home-hero-image": () => h('div', {
+        style: "position: relative;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;"
+      }, [
+        h('img', {
+          src: '/cwh.svg',
+          class: 'VPImage image-src',
+          // style: "width: 125%;height: 75%;"
+        })
+      ]),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
       //     name: "home-hero-after",

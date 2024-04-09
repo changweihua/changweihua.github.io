@@ -13,7 +13,7 @@ hero:
   text: "DOTNET Developer"
   tagline: 阳光大男孩
   image:
-    src: /small_logo.png
+    src: /cwh.svg
     alt: 网页的logo图标
   actions:
     - theme: brand
@@ -218,13 +218,15 @@ const workerRef = ref<Worker>()
 
 const initWorker = () => {
   const canvasBitmap = document.getElementById('canvas') as HTMLCanvasElement;
-  const offscreen = canvasBitmap.transferControlToOffscreen();
-  workerRef.value = new Worker()
-  // 该vue文件（主线程）往 worker (另外的线程) 传递数据
-  workerRef.value.postMessage({ init: true, canvas: offscreen, dpr: window.devicePixelRatio }, [offscreen]);
-  // worker(另外的线程) 往 该vue文件（主线程）传递数据
-  workerRef.value.onmessage = e => {
-    console.log('onmessage', e.data)
+  if(canvasBitmap){
+    const offscreen = canvasBitmap.transferControlToOffscreen();
+    workerRef.value = new Worker()
+    // 该vue文件（主线程）往 worker (另外的线程) 传递数据
+    workerRef.value.postMessage({ init: true, canvas: offscreen, dpr: window.devicePixelRatio }, [offscreen]);
+    // worker(另外的线程) 往 该vue文件（主线程）传递数据
+    workerRef.value.onmessage = e => {
+      console.log('onmessage', e.data)
+    }
   }
 }
 
