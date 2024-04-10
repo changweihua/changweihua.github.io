@@ -14,7 +14,7 @@ import {
   DatePicker
 } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
-
+import { LiteTree } from '@lite-tree/vue'
 import DocAfter from "../components/DocAfter.vue";
 import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
@@ -328,6 +328,8 @@ export const Theme: ThemeConfig = {
 
     app.use(VueResizeObserver);
     app.use(FloatingVue);
+
+    app.component('LiteTree', LiteTree)
 
     app.provide(InjectionKey, {
       // 配置...
