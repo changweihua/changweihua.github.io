@@ -183,7 +183,7 @@ export default defineConfig({
     'process.env.RSS_BASE': JSON.stringify(`${getEnvValue(process.env.NODE_ENV || 'github', 'VITE_APP_RSS_BASE_URL')}`),
   },
   plugins: [
-    htmlConfigs,
+    // htmlConfigs,
     // removeConsole(),
     // custom
     // MarkdownTransform(),

@@ -13,8 +13,10 @@ recommended: true
 
 ## 项目架构 ##
 
-<div class="grid grid-cols-1 md:grid-cols-3">
-  ![Yuppie平台网络架构图](/images/yuppie_network_arch.png){data-zoomable}
+<div class="grid grid-cols-1 md:grid-cols-1">
+
+![Yuppie平台网络架构图](/images/yuppie_network_arch.png){data-zoomable}
+
 </div>
 
 ## 平台结构 ##
