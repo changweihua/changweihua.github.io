@@ -3,8 +3,11 @@ layout: doc
 recommended: true
 ---
 
+<div class="flex items-center justify-center">
 
 ![服务对象](/sunnyland.svg){data-zoomable}
+
+</div>
 
 ## 项目简介 ##
 

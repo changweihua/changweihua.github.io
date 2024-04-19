@@ -2,11 +2,11 @@ import { DefaultTheme } from "vitepress";
 // activeMatch: "^/guide/",
 const nav: DefaultTheme.NavItem[] | undefined = [
   { text: "首页", link: "/", activeMatch: "^/$|^/index/" },
-  {
-    text: "博客",
-    link: "/blog/",
-    activeMatch: "^/blog/",
-  },
+  // {
+  //   text: "博客",
+  //   link: "/blog/",
+  //   activeMatch: "^/blog/",
+  // },
   {
     text: "归档",
     link: "/archives.md",

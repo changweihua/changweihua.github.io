@@ -4,7 +4,11 @@ layout: doc
 recommended: true
 ---
 
+<div class="flex items-center justify-center">
+
 ![服务对象](/yuppie.svg){data-zoomable}
+
+</div>
 
 ::: info 项目简介
 - 包含智能网关的统一平台

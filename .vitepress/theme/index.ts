@@ -162,7 +162,7 @@ export const Theme: ThemeConfig = {
       //     name: "doc-top",
       //   }),
       "doc-bottom": () => h(recommend),
-      "doc-footer-before": () => h(Changelog),
+      // "doc-footer-before": () => h(Changelog),
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
       //     name: "doc-footer-before",
