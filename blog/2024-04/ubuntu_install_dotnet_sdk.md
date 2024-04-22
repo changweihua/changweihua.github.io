@@ -5,6 +5,7 @@ recommended: true
 title: Ubuntu 系统上离线手动安装.NET SDK
 description: Ubuntu 系统上离线手动安装.NET SDK
 date: 2024-04-03
+pageClass: blog-page-class
 ---
 
 

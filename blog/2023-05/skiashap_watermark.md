@@ -3,6 +3,7 @@ lastUpdated: true
 commentabled: true
 recommended: false
 date: 2023-05
+pageClass: blog-page-class
 ---
 
 # 使用 SkiaSharp 实现图片水印 #

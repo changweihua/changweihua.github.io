@@ -5,6 +5,7 @@ recommended: true
 title: netcore项目在Linux部署:nohup和supervisor方式
 description: netcore项目在Linux部署:nohup和supervisor方式
 date: 2024-04-07
+pageClass: blog-page-class
 ---
 
 # netcore项目在Ubuntu部署:nohup和supervisor方式 #
