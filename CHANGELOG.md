@@ -1,3 +1,14 @@
+## <small>0.0.34 (2024-04-23)</small>
+
+* feat(custom): 优化整体功能 ([4ffca20](https://github.com/commit/4ffca20))
+* feat(custom): 优化整体样式 ([bf4b3df](https://github.com/commit/bf4b3df))
+* feat(custom): 优化Logo ([9b2cdce](https://github.com/commit/9b2cdce))
+* feat(custom): 增加博文归档 ([36ff5ab](https://github.com/commit/36ff5ab))
+* feat(custom): 增加项目动态Logo ([32bf779](https://github.com/commit/32bf779))
+* fix(custom): 修复打包失败问题 ([5d173ce](https://github.com/commit/5d173ce))
+
+
+
 ## <small>0.0.33 (2024-04-08)</small>
 
 * feat(custom): 优化整体功能及样式 ([70870bb](https://github.com/commit/70870bb))
