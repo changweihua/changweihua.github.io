@@ -88,7 +88,6 @@ import { allThemeMap } from '@visactor/vchart-theme';
 
 // register themes
 allThemeMap.forEach((theme, name) => {
-  console.log('theme', name)
   theme.fontFamily = defaultVTheme.fontFamily
   theme.backround = defaultVTheme.background
   VChart.ThemeManager.registerTheme(name, theme);
