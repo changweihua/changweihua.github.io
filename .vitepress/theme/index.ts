@@ -20,7 +20,6 @@ import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
-import timeago from 'vue-timeago3'
 import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
 import { zhCN } from "date-fns/locale";
@@ -50,7 +49,6 @@ import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
-import ShamingLogo from "../components/ShamingLogo.vue";
 import PageFooter from "../components/PageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue"
 
@@ -65,7 +63,6 @@ import "./styles/timeline.fix.less";
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
 
-import Changelog from 'vitepress-plugin-changelog/Changelog.vue'
 import 'vitepress-plugin-changelog/changelog.css'
 
 import type { Theme as ThemeConfig } from 'vitepress'
@@ -275,15 +272,15 @@ export const Theme: ThemeConfig = {
     const { app, router, siteData } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
-    // define options
-    const timeagoOptions = {
-      converterOptions: {
-        includeSeconds: false
-      },
-      locale: zhCN
-    }
+    // // define options
+    // const timeagoOptions = {
+    //   converterOptions: {
+    //     includeSeconds: false
+    //   },
+    //   locale: zhCN
+    // }
 
-    app.use(timeago,  timeagoOptions) // register timeago with options
+    // app.use(timeago,  timeagoOptions) // register timeago with options
 
     router.onBeforeRouteChange = (to) => {
       console.log('路由将改变为: ', to);

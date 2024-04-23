@@ -160,6 +160,7 @@
     "@visactor/vchart-theme": "^1.10.4",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
+    "@vuecs/timeago": "^1.1.0",
     "animate.css": "^4.1.1",
     "ant-design-vue": "4.2.0",
     "bluebird": "^3.7.2",

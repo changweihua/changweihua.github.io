@@ -10,12 +10,13 @@
     </span>
     <span class="flex items-center gap-1">
       <my-icon icon="ion:timer" />
-      阅读{{ readCost }}分钟
+      阅读&ensp;{{ readCost }}&ensp;分钟
     </span>
     <span class="flex items-center gap-1">
       <my-icon icon="tabler:clock-filled" />
-      发布
-      <timeago :datetime="date" />
+      发布&ensp;{{ dayjs(date).fromNow() }}
+      <!-- <timeago :datetime="date" /> -->
+      <!-- <VCTimeago :date-time="date" :auto-update="true" /> -->
       <!-- <span>{{
         date.toLocaleString("zh", {
           year: "numeric",
