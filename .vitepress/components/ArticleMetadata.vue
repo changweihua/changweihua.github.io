@@ -1,22 +1,17 @@
 <template>
-  <a-space v-if="data.showMeta" :size="[0, 'small']" wrap>
-    <a-tag :bordered="false" color="processing">
-      <template #icon>
-        <my-icon icon="solar:tag-bold" />
-      </template>
+  <div class="grid grid-cols-3 gap-2 my-5">
+    <span class="flex items-center gap-1">
+      <my-icon icon="solar:tag-bold" />
       原创
-    </a-tag>
-    <a-tag :bordered="false" color="processing">
-      <template #icon>
-        <my-icon icon="basil:user-solid" />
-      </template>
+    </span>
+    <span class="flex items-center gap-1">
+      <my-icon icon="basil:user-solid" />
       常伟华
-    </a-tag>
-    <a-tag :bordered="false" color="processing">
-      <template #icon>
-        <my-icon icon="tabler:clock-filled" />
-      </template>
-      {{
+    </span>
+    <span class="flex items-center gap-1">
+      <my-icon icon="tabler:clock-filled" />
+      <timeago :datetime="date" />
+      <!-- <span>{{
         date.toLocaleString("zh", {
           year: "numeric",
           month: "numeric",
@@ -25,8 +20,9 @@
           minute: "numeric",
         })
       }}
-    </a-tag>
-  </a-space>
+      </span> -->
+    </span>
+  </div>
 </template>
 
 <script lang="ts" setup>

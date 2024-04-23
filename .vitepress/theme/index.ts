@@ -20,10 +20,10 @@ import recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
-
+import timeago from 'vue-timeago3'
 import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
-
+import { zhCN } from "date-fns/locale";
 // import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 import { Sandbox } from "vitepress-plugin-sandpack";
@@ -276,6 +276,16 @@ export const Theme: ThemeConfig = {
     const { app, router, siteData } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
+    // define options
+    const timeagoOptions = {
+      converterOptions: {
+        includeSeconds: false
+      },
+      locale: zhCN
+    }
+
+    app.use(timeago,  timeagoOptions) // register timeago with options
+
     router.onBeforeRouteChange = (to) => {
       console.log('路由将改变为: ', to);
       if (typeof window._hmt !== 'undefined') {
@@ -367,19 +377,19 @@ export const Theme: ThemeConfig = {
     );
     vitepressLifeProgress();
   },
-  // transformHead: ({ pageData }) => {
-  //   const head: HeadConfig[] = [];
-  //   head.push([
-  //     "meta",
-  //     { property: "og:title", content: pageData.frontmatter.title },
-  //   ]);
-  //   head.push([
-  //     "meta",
-  //     { property: "og:description", content: pageData.frontmatter.description },
-  //   ]);
+  transformHead: ({ pageData }) => {
+    const head: HeadConfig[] = [];
+    head.push([
+      "meta",
+      { property: "og:title", content: pageData.frontmatter.title },
+    ]);
+    head.push([
+      "meta",
+      { property: "og:description", content: pageData.frontmatter.description },
+    ]);
 
-  //   return head;
-  // },
+    return head;
+  },
   // lastUpdated: true,
   // /* 站点地图 */
   // transformHtml: (_, id, { pageData }) => {

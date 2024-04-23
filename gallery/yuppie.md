@@ -25,24 +25,6 @@ recommended: true
 
 ## 平台结构 ##
 
-<LiteTree>
-- Yuppie                   //   {color:red}important
-    Guardance 应用网关
-        认证鉴权
-    Yuppie API
-        .NET9
-        MySQL
-        Redis
-        Rabbit
-        SMS
-        QuartZ
-    移动端
-        MiniProgram
-        Flutter
-        Uni-APP
-</LiteTree>
-
-
 ## 项目预览 ##
 
 <div style="width: 100%;height:50%;" class="grid grid-cols-1 gap-4">
