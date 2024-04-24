@@ -26,14 +26,14 @@ pageClass: blog-page-class
 chooseMedia：隐私协议中未声明该api作用域
 
 
-![错误预览图](../../public/images/cmono-QQ截图20240424130333.png){data-zoomable}
+![错误预览图](/images/cmono-QQ截图20240424130333.png){data-zoomable}
 
 [帮助链接](https://blog.csdn.net/weixin_43018356/article/details/134111826)
 
 
 ## 最终效果 ##
 
-![效果预览图](../../public/images/cmono-IMG_0884.png){data-zoomable}
+![效果预览图](/images/cmono-IMG_0884.png){data-zoomable}
 
 > 注意：之前我调低了基础库，并推送到我的手机上测试是可以调起相册的，但是低版本的基础库是无法推送到正式版的！
 > 所以最终的解决方案还是得更新隐私政策而且通过审核才能调起相册。

@@ -12,7 +12,7 @@ pageClass: blog-page-class
 
 > 介绍如何在 Ubuntu 20.04.3 LTS 服务器上设置生产就绪 ASP.NET Core 环境。
 
-![服务器预览图](../../public/images/cmono-IMG_0876.png){data-zoomable}
+![服务器预览图](/images/cmono-IMG_0876.png){data-zoomable}
 
 ## Systemd ##
 
