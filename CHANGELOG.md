@@ -1,3 +1,9 @@
+## <small>0.0.35 (2024-04-24)</small>
+
+* fix(custom): 修复兼容性 ([9e78fc8](https://github.com/commit/9e78fc8))
+
+
+
 ## <small>0.0.34 (2024-04-23)</small>
 
 * feat(custom): 优化整体功能 ([4ffca20](https://github.com/commit/4ffca20))
