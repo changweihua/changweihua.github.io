@@ -11,7 +11,6 @@ import { HeadConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
 import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
-
 // import compression from "vitepress-plugin-compression";
 // import AutoIndex from 'vite-plugin-vitepress-auto-index';
 

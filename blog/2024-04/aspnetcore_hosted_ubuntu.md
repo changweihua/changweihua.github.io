@@ -10,7 +10,9 @@ pageClass: blog-page-class
 
 # ASP.NET Core+Systemd部署至Ubuntu #
 
-> 介绍如何在 Ubuntu 16.04 服务器上设置生产就绪 ASP.NET Core 环境。
+> 介绍如何在 Ubuntu 20.04.3 LTS 服务器上设置生产就绪 ASP.NET Core 环境。
+
+![服务器预览图](../../public/images/cmono-IMG_0876.PNG){data-zoomable}
 
 ## Systemd ##
 

@@ -7,6 +7,12 @@ sidebar: false
 <script setup>
 import { ref, unref, computed, onMounted } from 'vue'
 import  { data }  from '@vp/post.data'
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
+dayjs.locale("zh-cn");
  
 const { tagMap,postMap } = data
 const tags = Object.keys(tagMap)
@@ -40,7 +46,9 @@ onMounted(()=>{
     <div v-for="(article, index) in postList" :key="index" class="flex justify-between items-center py-1 pl-6">
       <a v-text="article.title" :href="article.url" class="post-dot overflow-hidden whitespace-nowrap text-ellipsis">
       </a>
-      <div v-text="article.date.string" class="pl-4 font-serif whitespace-nowrap" >
-      </div>
+      <a-tooltip>
+        <template #title>{{dayjs(article.date.string).format('YYYY-MM-DD')}}</template>
+        <div v-text="dayjs(article.date.string).fromNow()" class="pl-4 whitespace-nowrap"></div>
+      </a-tooltip>
     </div>
 </div>

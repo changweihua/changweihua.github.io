@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-4 gap-2 my-5">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-2 my-5">
     <span class="flex items-center gap-1">
       <my-icon icon="solar:tag-bold" />
       原创

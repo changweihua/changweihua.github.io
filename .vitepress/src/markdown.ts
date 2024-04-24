@@ -10,6 +10,7 @@ import container from 'markdown-it-container';
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import footnote from 'markdown-it-footnote';
 import mathjax3 from 'markdown-it-mathjax3';
+import { ImagePlugin } from '../plugins/markdown/image'
 import { BiDirectionalLinks } from '@nolebase/markdown-it-bi-directional-links'
 // import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 // import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
@@ -39,7 +40,7 @@ const markdown: MarkdownOptions | undefined = {
           return renderSandbox(tokens, idx, 'sandbox');
         },
       });
-
+    md.use(ImagePlugin)
     md.use(BiDirectionalLinks({
       dir: cwd(), // 注意这行不要漏掉了哦
     }))

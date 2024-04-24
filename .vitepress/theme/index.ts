@@ -11,7 +11,8 @@ import {
   Spin,
   Space,
   Tabs,
-  DatePicker
+  DatePicker,
+  Tooltip
 } from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import { LiteTree } from '@lite-tree/vue'
@@ -315,6 +316,7 @@ export const Theme: ThemeConfig = {
         .use(Spin)
         .use(Tabs)
         .use(Radio)
+        .use(Tooltip)
         .use(DatePicker);
     }
 
