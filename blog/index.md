@@ -3,6 +3,7 @@ layout: page
 sidebar: false
 layoutClass: m-nav-layout
 pageClass: blog-index-page
+title: Index
 
 head:
   - - meta

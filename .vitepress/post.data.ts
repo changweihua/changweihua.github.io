@@ -41,19 +41,21 @@ export default createContentLoader('blog/**/*.md', {
       .sort((a, b) => b.date.time - a.date.time)
 
     blogs.forEach((item) => {
-      const year = new Date(item.date.string).getFullYear();
-      if (year) {
-        if (!yearMap[year]) {
-          yearMap[year] = [];
-        }
-        yearMap[year].push(item.url);
-
-        item.tags.forEach((tag) => {
-          if (!tagMap[tag]) {
-            tagMap[tag] = []
+      if (item.title !== 'Index') {
+        const year = new Date(item.date.string).getFullYear();
+        if (year) {
+          if (!yearMap[year]) {
+            yearMap[year] = [];
           }
-          tagMap[tag].push(item.url)
-        })
+          yearMap[year].push(item.url);
+
+          item.tags.forEach((tag) => {
+            if (!tagMap[tag]) {
+              tagMap[tag] = []
+            }
+            tagMap[tag].push(item.url)
+          })
+        }
       }
     });
 
@@ -69,10 +71,8 @@ export default createContentLoader('blog/**/*.md', {
 })
 
 function formatDate(raw: string) {
-  const date = new Date(raw)
-  date.setUTCHours(0)
   return {
-    time: +date,
-    string:dayjs.tz(date).format('YYYY-MM-DD hh:mm')
+    time: dayjs.tz(raw).valueOf(),
+    string: dayjs.tz(raw).format('YYYY-MM-DD hh:mm')
   }
 }
