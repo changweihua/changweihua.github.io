@@ -23,7 +23,7 @@ import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
-import { zhCN } from "date-fns/locale";
+// import { head } from '../src/head'
 // import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 import { Sandbox } from "vitepress-plugin-sandpack";
@@ -83,6 +83,18 @@ import '@nolebase/vitepress-plugin-highlight-targeted-heading/dist/style.css';
 import { defaultVTheme } from '../hooks/useVChart';
 import VChart from '@visactor/vchart';
 import { allThemeMap } from '@visactor/vchart-theme';
+
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+import relativeTime from "dayjs/plugin/relativeTime";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+dayjs.tz.setDefault("Asia/Shanghai")
+dayjs.extend(relativeTime);
+dayjs.locale("zh-cn");
 
 // register themes
 allThemeMap.forEach((theme, name) => {
@@ -375,19 +387,19 @@ export const Theme: ThemeConfig = {
     );
     vitepressLifeProgress();
   },
-  transformHead: ({ pageData }) => {
-    const head: HeadConfig[] = [];
-    head.push([
-      "meta",
-      { property: "og:title", content: pageData.frontmatter.title },
-    ]);
-    head.push([
-      "meta",
-      { property: "og:description", content: pageData.frontmatter.description },
-    ]);
+  // transformHead: ({ pageData }) => {
+  //   const iHead: HeadConfig[] = head;
+  //   iHead.push([
+  //     "meta",
+  //     { property: "og:title", content: pageData.frontmatter.title },
+  //   ]);
+  //   iHead.push([
+  //     "meta",
+  //     { property: "og:description", content: pageData.frontmatter.description },
+  //   ]);
 
-    return head;
-  },
+  //   return iHead;
+  // },
   // lastUpdated: true,
   // /* 站点地图 */
   // transformHtml: (_, id, { pageData }) => {

@@ -36,6 +36,8 @@ recommended: true
 
 **本平台在无锡硕放机场服务“微改善”项目中，摘得《三星项目》荣誉称号。**
 
+**“无陪畅行，可视无忧” 在第七届CAPSE民航创新大赛700多个创新案例中闯入决赛，喜获大赛提名奖。**
+
 ### 旅客端 ###
 
 <div class="w-full flex flex-col gap-8 justify-evenly items-center mb-4">
@@ -48,7 +50,9 @@ recommended: true
 
 ### 宣传稿 ###
 
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+
+![alt text](/images/cmono-IMG_0890(20240425-070743).jpg){data-zoomable}
 
 ![Alt text](/images/cmono-20240104150934.png){data-zoomable}
 

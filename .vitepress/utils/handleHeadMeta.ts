@@ -1,5 +1,7 @@
 import { type HeadConfig, type TransformContext } from "vitepress";
 
+import { head } from '../src/head'
+
 // 处理每个页面的元数据
 export function handleHeadMeta(context: TransformContext) {
   const { description, title, relativePath } = context.pageData;
@@ -17,7 +19,7 @@ export function handleHeadMeta(context: TransformContext) {
     twitterCard, twitterDescription, twitterImage,
   ]
 
-  return twitterHead
+  return [...head, ...twitterHead]
 }
 
 export function addBase(relativePath: string) {

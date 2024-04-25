@@ -1,8 +1,11 @@
 import type { HeadConfig } from "vitepress";
 
 export const head: HeadConfig[] = [
-  ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
-  ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+  ['meta', { name: 'theme-color', content: '#ffffff' }],
+  // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
+  ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: 'any' }],
+  // ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#ffffff' }],
+  // ['link', { rel: 'apple-touch-icon', href: '/favicon.svg', sizes: '180x180' }],
   [
     "link",
     {
@@ -40,6 +43,7 @@ export const head: HeadConfig[] = [
       `,
   ],
   // 设置 描述 和 关键词
+  ['meta', { name: 'author', content: 'Lance Chang' }],
   [
     "meta",
     {

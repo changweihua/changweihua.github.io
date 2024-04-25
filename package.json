@@ -110,7 +110,7 @@
     "autoprefixer": "^10.4.19",
     "commitizen": "^4.3.0",
     "conventional-changelog-cli": "^4.1.0",
-    "cssnano": "^6.1.2",
+    "cssnano": "^7.0.0",
     "cz-customizable": "^7.0.0",
     "feed": "^4.2.2",
     "flexsearch": "^0.7.43",
@@ -146,7 +146,7 @@
     "vitepress-plugin-sandpack": "^1.1.4",
     "vitepress-plugin-search": "^1.0.4-alpha.22",
     "vitepress-sidebar": "^1.22.0",
-    "vue": "^3.4.24"
+    "vue": "^3.4.25"
   },
   "dependencies": {
     "@enra-gmbh/panolens": "^0.0.11",

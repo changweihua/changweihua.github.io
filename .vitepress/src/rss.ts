@@ -1,7 +1,7 @@
 import { RSSOptions } from 'vitepress-plugin-rss'
 
-const rssBaseUrl = process.env.RSS_BASE || 'https://changweihua.github.io' //import.meta.env.VITE_APP_RSS_BASE_URL;
-console.log('rssBaseUrl', rssBaseUrl)
+const rssBaseUrl = process.env.VITE_APP_RSS_BASE_URL || 'https://changweihua.github.io' //import.meta.env.VITE_APP_RSS_BASE_URL;
+
 const RSS: RSSOptions = {
   // necessary（必选参数）
   title: 'CMONO.NET',

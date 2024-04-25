@@ -113,6 +113,7 @@ export default withMermaid({
     //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
   },
   vite: {
+    logLevel: 'info',
     // ↓↓↓↓↓
     plugins: [
       RssPlugin(RSS),
@@ -182,7 +183,6 @@ export default withMermaid({
 
     return head
   },
-  // buildEnd: genFeed
   // markdown: {
   //   // ...
   //   config: (md) => {

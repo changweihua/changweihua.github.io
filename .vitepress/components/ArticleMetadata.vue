@@ -14,7 +14,7 @@
     </span>
     <span class="flex items-center gap-1">
       <my-icon icon="tabler:clock-filled" />
-      发布&ensp;{{ dayjs(date).fromNow() }}
+      发布&ensp;{{ dayjs.tz(date).fromNow() }}
       <!-- <timeago :datetime="date" /> -->
       <!-- <VCTimeago :date-time="date" :auto-update="true" /> -->
       <!-- <span>{{
@@ -36,11 +36,6 @@ import { PropType, reactive, toRefs, ref, onMounted, nextTick } from "vue";
 import { useData } from "vitepress";
 // import md5 from "blueimp-md5";
 import dayjs from "dayjs";
-import "dayjs/locale/zh-cn";
-import relativeTime from "dayjs/plugin/relativeTime";
-
-dayjs.extend(relativeTime);
-dayjs.locale("zh-cn");
 
 // 定义文章属性
 const props = defineProps({
