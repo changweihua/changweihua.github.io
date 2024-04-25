@@ -1,3 +1,14 @@
+## <small>0.0.36 (2024-04-25)</small>
+
+* feat(custom): 优化整体功能 ([b907a1b](https://github.com/commit/b907a1b))
+* feat(custom): 优化Dayjs时区设置 ([ad35af2](https://github.com/commit/ad35af2))
+* feat(custom): 增加新文章，优化整体样式 ([685c2b4](https://github.com/commit/685c2b4))
+* fix(custom): 修复打包失败 ([e0602dc](https://github.com/commit/e0602dc))
+* fix(custom): 优化打包失效 ([a05ecd6](https://github.com/commit/a05ecd6))
+* fix(custom): Rename cmono-IMG_0876.PNG to cmono-IMG_0876.png ([eb43247](https://github.com/commit/eb43247))
+
+
+
 ## <small>0.0.35 (2024-04-24)</small>
 
 * fix(custom): 修复兼容性 ([9e78fc8](https://github.com/commit/9e78fc8))
