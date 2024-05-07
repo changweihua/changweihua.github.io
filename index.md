@@ -37,6 +37,12 @@ features:
       alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
     details: 项目积累，实现即开箱即投产的标准化平台
     link: /gallery/yuppie
+  - title: 行李智能检测
+    icon:
+      src: /images/baggage.png
+      alt: 行李智能检测
+    details: 行李智能检测一体机
+    link: /gallery/baggage_measurer
   - title: 无锡硕放机场旅客服务平台
     icon:
       src: /air_wux.png
@@ -52,12 +58,12 @@ features:
   # - title: antdv-plus-table
   #   details: Ant Design Vue Table 扩展NPM包。
   #   link: https://www.npmjs.com/package/@changweihua/antdv-plus-table
-  - title: 3D孪生数字机场
-    icon:
-      src: /images/airport.png
-      alt: 3D孪生数字机场
-    details: 3D孪生数字机场简易演示版
-    link: /gallery/digital_airport
+  # - title: 3D孪生数字机场
+  #   icon:
+  #     src: /images/airport.png
+  #     alt: 3D孪生数字机场
+  #   details: 3D孪生数字机场简易演示版
+  #   link: /gallery/digital_airport
   - title: 疫情防控平台
     details: 疫情期间，为满足公司疫情防控需求，开发上线本系统。特色功能包含基于百度Paddle实现健康码和行程码信息自动提取和预警，支持人脸识别登录。
     link: /gallery/epcp
