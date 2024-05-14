@@ -14,6 +14,17 @@ recommended: true
 - DOTNET 8 Runntime
 - 人脸识别、证件识别、登机牌识别等相关硬件要求环境依赖
 
+## 业务流程 ##
+
+```mermaid
+graph TB
+  A[开始] --> B[处理]
+  B --> C[判断]
+  C --是--> D[结束]
+  C --否--> E[处理]
+  E --> B
+```
+
 ## 操作流程 ##
 
 ```mermaid
@@ -68,6 +79,29 @@ recommended: true
     end
 ```
 
+## 硬件交互 ##
+
+```mermaid
+graph TD;
+  subgraph 用户界面
+    A[智能手机] -->|MQTT消息| B[消息代理器]
+    B -->|App控制| C[树莓派1]
+    B -->|App控制| D[树莓派2]
+  end
+  subgraph 树莓派设备
+    C -->|设备控制| E[智能灯1]
+    C -->|设备控制| F[智能插座1]
+    D -->|设备控制| G[智能灯2]
+    D -->|设备控制| H[智能插座2]
+    E -->|实时状态| B
+    F -->|实时状态| B
+    G -->|实时状态| B
+    H -->|实时状态| B
+  end
+  subgraph MQTT服务器
+    I[MQTT服务器] -.->|消息传递| B
+  end
+```
 
 ## 功能页面 ##
 
@@ -86,3 +120,15 @@ recommended: true
 ![alt text](/images/cmono-QQ截图20240507130528.png){data-zoomable}
 
 </div>
+
+## 横版设计 ##
+
+![alt text](/images/cmono-QQ截图20240514151035.png){data-zoomable}
+
+![alt text](/images/cmono-QQ截图20240514151042.png){data-zoomable}
+
+![alt text](/images/cmono-QQ截图20240514151050.png){data-zoomable}
+
+![alt text](/images/cmono-QQ截图20240514151054.png){data-zoomable}
+
+![alt text](/images/cmono-QQ截图20240514151106.png){data-zoomable}

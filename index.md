@@ -39,7 +39,7 @@ features:
     link: /gallery/yuppie
   - title: 行李智能检测
     icon:
-      src: /images/baggage.png
+      src: /baggage.svg
       alt: 行李智能检测
     details: 行李智能检测一体机
     link: /gallery/baggage_measurer
