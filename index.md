@@ -37,11 +37,11 @@ features:
       alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
     details: 项目积累，实现即开箱即投产的标准化平台
     link: /gallery/yuppie
-  - title: 行李智能检测
+  - title: 随身携带行李限额自助查询
     icon:
       src: /baggage.svg
-      alt: 行李智能检测
-    details: 行李智能检测一体机
+      alt: 随身携带行李限额自助查询
+    details: 随身携带行李限额自助查询，用于提示是否为三超行李
     link: /gallery/baggage_measurer
   - title: 无锡硕放机场旅客服务平台
     icon:
