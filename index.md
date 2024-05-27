@@ -24,12 +24,12 @@ hero:
       link: https://github.com/changweihua
 
 features:
-  - title: 阳光服务平台
+  - title: 基于Yolo的对象检测、识别与研究
     icon:
-      src: /sunnyland.svg
-      alt: 阳光服务平台
-    details: 依托微信小程序，为无锡硕放机场量身打造阳光服务平台
-    link: /gallery/sunny-land
+      src: /yolo.svg
+      alt: Yolo
+    details: 支持Yolo8、9、10三大版本
+    link: /gallery/yolo_object_dection
     # linkText: 更多详情
   - title: Yuppie 平台
     icon:
@@ -43,6 +43,13 @@ features:
       alt: 随身携带行李限额自助查询
     details: 随身携带行李限额自助查询，用于提示是否为三超行李
     link: /gallery/baggage_measurer
+  - title: 阳光服务平台
+    icon:
+      src: /sunnyland.svg
+      alt: 阳光服务平台
+    details: 依托微信小程序，为无锡硕放机场量身打造阳光服务平台
+    link: /gallery/sunny-land
+    # linkText: 更多详情
   - title: 无锡硕放机场旅客服务平台
     icon:
       src: /air_wux.png

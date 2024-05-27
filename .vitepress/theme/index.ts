@@ -70,15 +70,15 @@ import type { Theme as ThemeConfig } from 'vitepress'
 import {
   NolebaseEnhancedReadabilitiesMenu,
   NolebaseEnhancedReadabilitiesScreenMenu,
-} from '@nolebase/vitepress-plugin-enhanced-readabilities'
-import '@nolebase/vitepress-plugin-enhanced-readabilities/dist/style.css'
+} from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
+import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
 import type { Options } from '@nolebase/vitepress-plugin-enhanced-readabilities'
 import { InjectionKey } from '@nolebase/vitepress-plugin-enhanced-readabilities'
 
 import {
   NolebaseHighlightTargetedHeading,
-} from '@nolebase/vitepress-plugin-highlight-targeted-heading'
-import '@nolebase/vitepress-plugin-highlight-targeted-heading/dist/style.css';
+} from '@nolebase/vitepress-plugin-highlight-targeted-heading/client'
+import '@nolebase/vitepress-plugin-highlight-targeted-heading/client/style.css';
 
 import { defaultVTheme } from '../hooks/useVChart';
 import VChart from '@visactor/vchart';
