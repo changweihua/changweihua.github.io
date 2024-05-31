@@ -357,15 +357,15 @@ export default defineConfig({
   ssr: {
     noExternal: [
       // 如果还有别的依赖需要添加的话，并排填写和配置到这里即可
-      '@nolebase/vitepress-plugin-enhanced-readabilities/client',
-      '@nolebase/vitepress-plugin-highlight-targeted-heading/client',
+      // '@nolebase/vitepress-plugin-enhanced-readabilities/client',
+      // '@nolebase/vitepress-plugin-highlight-targeted-heading/client',
     ],
   },
   optimizeDeps: {
     include: [
       "vitepress-plugin-nprogress",
-      '@nolebase/vitepress-plugin-enhanced-readabilities/client > @nolebase/ui > @rive-app/canvas',
-      '@nolebase/vitepress-plugin-highlight-targeted-heading/client',
+      // '@nolebase/vitepress-plugin-enhanced-readabilities/client > @nolebase/ui > @rive-app/canvas',
+      // '@nolebase/vitepress-plugin-highlight-targeted-heading/client',
     ],
     exclude: ['vitepress'],
   },

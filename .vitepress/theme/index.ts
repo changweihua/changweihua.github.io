@@ -67,18 +67,6 @@ import "vitepress-plugin-back-to-top/dist/style.css";
 import 'vitepress-plugin-changelog/changelog.css'
 
 import type { Theme as ThemeConfig } from 'vitepress'
-import {
-  NolebaseEnhancedReadabilitiesMenu,
-  NolebaseEnhancedReadabilitiesScreenMenu,
-} from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
-import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
-import type { Options } from '@nolebase/vitepress-plugin-enhanced-readabilities'
-import { InjectionKey } from '@nolebase/vitepress-plugin-enhanced-readabilities'
-
-import {
-  NolebaseHighlightTargetedHeading,
-} from '@nolebase/vitepress-plugin-highlight-targeted-heading/client'
-import '@nolebase/vitepress-plugin-highlight-targeted-heading/client/style.css';
 
 import { defaultVTheme } from '../hooks/useVChart';
 import VChart from '@visactor/vchart';
@@ -257,14 +245,14 @@ export const Theme: ThemeConfig = {
       //     name: "nav-screen-content-after",
       //   }),
 
-      // 为较宽的屏幕的导航栏添加阅读增强菜单
-      'nav-bar-content-after': () => h(NolebaseEnhancedReadabilitiesMenu),
-      // 为较窄的屏幕（通常是小于 iPad Mini）添加阅读增强菜单
-      'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
+      // // 为较宽的屏幕的导航栏添加阅读增强菜单
+      // 'nav-bar-content-after': () => h(NolebaseEnhancedReadabilitiesMenu),
+      // // 为较窄的屏幕（通常是小于 iPad Mini）添加阅读增强菜单
+      // 'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
 
-      'layout-top': () => [
-        h(NolebaseHighlightTargetedHeading),
-      ],
+      // 'layout-top': () => [
+      //   h(NolebaseHighlightTargetedHeading),
+      // ],
 
       // 'nav-bar-content-after': () => h(OtherComponent), // 你的其他导航栏组件
       // 'nav-bar-content-after': () => [
@@ -351,14 +339,14 @@ export const Theme: ThemeConfig = {
 
     app.component('LiteTree', LiteTree)
 
-    app.provide(InjectionKey, {
-      // 配置...
-      layoutSwitch: {
-        spotlight: {
-          defaultToggle: true
-        }
-      }
-    } as Options)
+    // app.provide(InjectionKey, {
+    //   // 配置...
+    //   layoutSwitch: {
+    //     spotlight: {
+    //       defaultToggle: true
+    //     }
+    //   }
+    // } as Options)
   },
   setup() {
     const { lang } = useData();

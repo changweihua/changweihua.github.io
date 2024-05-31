@@ -11,7 +11,6 @@ import { renderSandbox } from 'vitepress-plugin-sandpack'
 import footnote from 'markdown-it-footnote';
 import mathjax3 from 'markdown-it-mathjax3';
 import { ImagePlugin } from '../plugins/markdown/image'
-import { BiDirectionalLinks } from '@nolebase/markdown-it-bi-directional-links'
 // import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 // import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
@@ -41,9 +40,6 @@ const markdown: MarkdownOptions | undefined = {
         },
       });
     md.use(ImagePlugin)
-    md.use(BiDirectionalLinks({
-      dir: cwd(), // 注意这行不要漏掉了哦
-    }))
 
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {
