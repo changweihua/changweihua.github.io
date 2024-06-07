@@ -56,6 +56,12 @@ features:
       alt: 无锡硕放机场旅客服务平台
     details: 为机场提供了数字化赋能，解决了服务能力与旅客需求难匹配的运营痛点，助力旅客便捷出行。
     link: /gallery/airwux
+  - title: 基于K8S平台的持续交付平台
+    icon:
+      src: /giteaops.png
+      alt: 基于K8S平台的持续交付平台
+    details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
+    link: /gallery/giteaops
   - title: wx-navigation-bar
     details: 小程序自定义导航栏NPM包。以此实现顶部图片背景效果。
     link: /gallery/wx-navigation-bar
@@ -71,12 +77,9 @@ features:
   #     alt: 3D孪生数字机场
   #   details: 3D孪生数字机场简易演示版
   #   link: /gallery/digital_airport
-  - title: 疫情防控平台
-    details: 疫情期间，为满足公司疫情防控需求，开发上线本系统。特色功能包含基于百度Paddle实现健康码和行程码信息自动提取和预警，支持人脸识别登录。
-    link: /gallery/epcp
-  - title: 基于K8S平台的持续交付平台
-    details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
-    link: /gallery/giteaops
+  # - title: 疫情防控平台
+  #   details: 疫情期间，为满足公司疫情防控需求，开发上线本系统。特色功能包含基于百度Paddle实现健康码和行程码信息自动提取和预警，支持人脸识别登录。
+  #   link: /gallery/epcp
   - title: 无锡硕放机场安检效能分析系统
     details: 通过数字化大屏，图形化报表，动态化效果，助力安检数据展示及效能分析。
     link: /gallery/SCPEA
