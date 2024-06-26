@@ -7,7 +7,7 @@ import { OBJLoader } from "../three/jsm/loaders/OBJLoader.js";
 // @ts-ignore
 import { MTLLoader } from "../three/jsm/loaders/MTLLoader.js";
 import Stage from "@/three/infras/stage";
-import  building from "~/three/meshs/building"
+import building from "@/three/meshs/building"
 
 const containerRef = ref<HTMLDivElement | null>(null);
 const percent = ref(0);
@@ -313,26 +313,15 @@ function launch() {
 <template>
   <div ref="containerRef" id="container">
     <div v-if="loading" class="flex w-full h-full items-center justify-center">
-      <a-progress
-        type="circle"
-        trail-color="#e6f4ff"
-        :stroke-color="{
-          '0%': '#108ee9',
-          '100%': '#87d068',
-        }"
-        :percent="percent"
-        :stroke-width="20"
-        :size="100"
-      />
+      <a-progress type="circle" trail-color="#e6f4ff" :stroke-color="{
+        '0%': '#108ee9',
+        '100%': '#87d068',
+      }" :percent="percent" :stroke-width="20" :size="100" />
     </div>
   </div>
-  <a-button :disabled="engineStarted" @click="startEngine"
-    >Start Engine</a-button
-  >
+  <a-button :disabled="engineStarted" @click="startEngine">Start Engine</a-button>
 
-  <a-button :disabled="!engineStarted || launching" @click="launch"
-    >Launch</a-button
-  >
+  <a-button :disabled="!engineStarted || launching" @click="launch">Launch</a-button>
 </template>
 
 <style lang="less" scoped>

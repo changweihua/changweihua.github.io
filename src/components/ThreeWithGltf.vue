@@ -4,10 +4,9 @@ import * as THREE from "three";
 import { OrbitControls } from "~/threejs/jsm/controls/OrbitControls.js";
 
 import { onMounted, ref } from "vue";
-// 引入物理引擎
-import * as CANNON from "cannon-es";
 
-import "default-passive-events";
+import { loadGltf } from '@/three/infras/loader'
+import { IntervalTime } from '@/three/infras/timer'
 
 const hero_logo = ref<HTMLDivElement>();
 
@@ -20,6 +19,16 @@ let renderer: THREE.WebGLRenderer | null = null;
 let controls: OrbitControls | null = null;
 
 // const cameraTarget = new THREE.Vector3(0, 150, 0);
+
+// const intervalTime = new IntervalTime();
+
+// // 更新时间
+// intervalTime.interval(() => {
+//   console.log('refresh render')
+//   render()
+// }, 1000)
+
+
 
 onMounted(() => {
   if (!hero_logo.value) {
@@ -71,17 +80,9 @@ onMounted(() => {
   //设置光源投射阴影
   directionalLight.castShadow = true;
 
-  // 创建一个小球
-  const sphereGeometry = new THREE.SphereGeometry(1, 20, 20);
+
   //创建一个标准网格材质
   const material = new THREE.MeshStandardMaterial();
-  //创建物体
-  const sphere = new THREE.Mesh(sphereGeometry, material);
-  //物体添加到场景中
-  scene.add(sphere);
-  //开启物体投射阴影
-  sphere.castShadow = true;
-
   // 创建一个平面
   const planeGeometry = new THREE.PlaneGeometry(30, 30);
   const plane = new THREE.Mesh(planeGeometry, material);
@@ -93,72 +94,26 @@ onMounted(() => {
   //接收阴影
   plane.receiveShadow = true;
 
-  // 创建物理世界
-  const world = new CANNON.World();
-  // 设置重力
-  world.gravity.set(0, -9.8, 0);
-  //世界的小球
-  const sphereWorld = new CANNON.Sphere(1);
-  //材质
-  const worldSphereMaterial = new CANNON.Material();
-  const sphereBody = new CANNON.Body({
-    shape: sphereWorld,
-    material: worldSphereMaterial,
-    position: new CANNON.Vec3(0, 0, 0),
-    // 小球的质量
-    mass: 1,
-  });
-  // 添加到世界
-  world.addBody(sphereBody);
+  Promise.all([loadGltf('/three/models/model0.gltf'), loadGltf('/three/models/model1.gltf'), loadGltf('/three/models/model2.gltf'), loadGltf('/three/models/model3.gltf'), loadGltf('/three/models/model4.gltf'), loadGltf('/three/models/model5.gltf'), loadGltf('/three/models/model6.gltf')]).then(gltfs => {
+    gltfs.forEach(gltf => {
+      console.log('控制台查看加载gltf文件返回的对象结构', gltf);
+      console.log('gltf对象场景属性', gltf.scene);
+      // 返回的场景对象gltf.scene插入到threejs场景中
+      scene!.add(gltf.scene)
+    })
+  })
 
-  //物理世界平面
-  const floorShape = new CANNON.Plane();
-  const floorBody = new CANNON.Body();
-  const floorMaterial = new CANNON.Material();
-  floorBody.material = floorMaterial;
-  // 设置质量为0，让地面不动
-  floorBody.mass = 0;
-  floorBody.addShape(floorShape);
-  floorBody.position.set(0, -5, 0);
-  floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
-  world.addBody(floorBody);
+  // loadGltf('/three/models/model2.gltf').then(gltf => {
+  //   console.log('控制台查看加载gltf文件返回的对象结构', gltf);
+  //   console.log('gltf对象场景属性', gltf.scene);
+  //   // 返回的场景对象gltf.scene插入到threejs场景中
+  //   scene!.add(gltf.scene)
+  // })
 
-  //  设置碰撞材质的参数。将两种材质关联
-  const defaultContactMaterial = new CANNON.ContactMaterial(
-    worldSphereMaterial,
-    floorMaterial,
-    {
-      // 摩擦力
-      friction: 0.1,
-      // 弹力
-      restitution: 0.8,
-    }
-  );
-  // 这些API直接看官网就好了，不用都记住
-  world.addContactMaterial(defaultContactMaterial);
-
-  // 添加碰撞音效
-  const listener = new THREE.AudioListener();
-  camera.add(listener);
-  const sound = new THREE.Audio(listener);
-  scene.add(sound);
-  const audioLoader = new THREE.AudioLoader();
-  audioLoader.load("/sounds/3989.mp3", function (buffer) {
-    sound.setBuffer(buffer);
-    sound.play();
-  });
-
-  const clock = new THREE.Clock();
   function render() {
     //阻尼
     controls?.update();
     // 获取每一帧的时间间隔
-    let time = clock.getDelta();
-    // 根据指定的时间步长来更新物体的物体的位置、旋转，同时计算碰撞、应用力和其他物理效果。来推荐物体运动。
-    // 这里的1/120是时间步长，也就是多久更新一次物体的物理状态。time是上次调用step到当前的时间间隔。
-    // 时间步长要根据准确性和性能来设置
-    world.step(1 / 120, time);
-    sphere.position.copy(new THREE.Vector3(sphereBody.position.x, sphereBody.position.y, sphereBody.position.z));
     renderer!.render(scene!, camera!);
     requestAnimationFrame(render);
   }
