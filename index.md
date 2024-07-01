@@ -24,19 +24,6 @@ hero:
       link: https://github.com/changweihua
 
 features:
-  - title: 基于Yolo的对象检测、识别与研究
-    icon:
-      src: /yolo.svg
-      alt: Yolo
-    details: 支持Yolo8、9、10三大版本
-    link: /gallery/yolo_object_dection
-    # linkText: 更多详情
-  - title: Yuppie 平台
-    icon:
-      src: /yuppie.svg
-      alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
-    details: 项目积累，实现即开箱即投产的标准化平台
-    link: /gallery/yuppie
   - title: 随身携带行李限额自助查询
     icon:
       src: /baggage.svg
@@ -56,12 +43,28 @@ features:
       alt: 无锡硕放机场旅客服务平台
     details: 为机场提供了数字化赋能，解决了服务能力与旅客需求难匹配的运营痛点，助力旅客便捷出行。
     link: /gallery/airwux
+  - title: 基于Yolo的对象检测、识别与研究
+    icon:
+      src: /yolo.svg
+      alt: Yolo
+    details: 支持Yolo8、9、10三大版本
+    link: /gallery/yolo_object_dection
+    # linkText: 更多详情
+  - title: Yuppie 平台
+    icon:
+      src: /yuppie.svg
+      alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
+    details: 项目积累，实现即开箱即投产的标准化平台
+    link: /gallery/yuppie
   - title: 基于K8S平台的持续交付平台
     icon:
       src: /giteaops.png
       alt: 基于K8S平台的持续交付平台
     details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
     link: /gallery/giteaops
+  - title: MAUI 跨平台学习笔记
+    details: MAUI 跨平台学习笔记。
+    link: /gallery/maui
   - title: wx-navigation-bar
     details: 小程序自定义导航栏NPM包。以此实现顶部图片背景效果。
     link: /gallery/wx-navigation-bar
@@ -87,8 +90,8 @@ features:
     details: 为安检部门提供今日的所有起降航班乘机人数。
   - title: 扬州泰州国际机场客源地分析系统
     details: 统计所有从扬泰机场出发或到达的旅客来源分布。
-  - title: 无锡硕放机场生产统计系统
-    details: 整个机场运行生产统计数据。
+  # - title: 无锡硕放机场生产统计系统
+  #   details: 整个机场运行生产统计数据。
 
 head:
   - - meta
