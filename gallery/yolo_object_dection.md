@@ -8,6 +8,12 @@ recommended: true
 
 基于Yolo的对象检测、识别与研究。  
 
+
+### Yolo 介绍 ###
+
+![alt text](/images/cmono-QQ图片20240527132356.png){data-zoomable}
+
+
 ### 使用labelimg制作数据集 ###
 
 ```bash
@@ -22,11 +28,4 @@ pip install lxml
 pip install pyqt=5
 ```
 
-
-
-
-
-
-## Yolo ##
-
-![alt text](/images/cmono-QQ图片20240527132356.png){data-zoomable}
+必须增加训练次数
