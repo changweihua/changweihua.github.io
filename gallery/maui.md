@@ -10,11 +10,13 @@ layout: doc
 
 ### 移动端 ###
 
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-3 gap-4">
 
-![alt text](/images/cmono-QQ图片20240702164208.png)
+![alt text](../public/images/cmono-QQ图片20240703163340.png)
 
-![alt text](/images/cmono-QQ图片20240702164215.png)
+![alt text](../public/images/cmono-QQ图片20240703163352.png)
+
+![alt text](../public/images/cmono-QQ图片20240703163357.png)
 
 </div>
 
