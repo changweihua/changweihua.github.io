@@ -8,28 +8,32 @@ layout: doc
 
 目前已完成基于 Prism 和 Shell Route 的空白模板项目。
 
-### 移动端 ###
+### Native端 ###
 
 <div class="grid grid-cols-3 gap-4">
 
-![alt text](../public/images/cmono-QQ图片20240703163340.png)
+![alt text](/images/cmono-QQ图片20240703163340.png){data-zoomable}
 
-![alt text](../public/images/cmono-QQ图片20240703163352.png)
-
-![alt text](../public/images/cmono-QQ图片20240703163357.png)
+![alt text](/images/cmono-QQ图片20240703163352.png){data-zoomable}
 
 </div>
 
-### 移动端 ###
+### Web端 ###
 
 增加基于 Vue3 和 Vant4 的移动端空白项目模板。
 
 <div class="grid grid-cols-2 gap-4">
 
-![alt text](/images/cmono-QQ图片20240702164208.png)
+![alt text](/images/cmono-QQ图片20240702164208.png){data-zoomable}
 
-![alt text](/images/cmono-QQ图片20240702164215.png)
+![alt text](/images/cmono-QQ图片20240702164215.png){data-zoomable}
 
 </div>
 
 ### JSBridge ###
+
+<div class="grid grid-cols-2 gap-4">
+
+![alt text](/images/cmono-QQ图片20240703163357.png){data-zoomable}
+
+</div>
