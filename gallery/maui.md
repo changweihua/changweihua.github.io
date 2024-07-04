@@ -12,15 +12,17 @@ layout: doc
 
 <div class="grid grid-cols-3 gap-4">
 
-![alt text](/images/cmono-QQ图片20240703163340.png){data-zoomable}
+![alt text](/images/cmono-QQ图片20240704154723.png){data-zoomable}
 
-![alt text](/images/cmono-QQ图片20240703163352.png){data-zoomable}
+![alt text](/images/cmono-QQ截图20240704154955.png){data-zoomable}
 
 </div>
 
 ### Web端 ###
 
 增加基于 Vue3 和 Vant4 的移动端空白项目模板。
+
+Rsbuild 打包机制
 
 <div class="grid grid-cols-2 gap-4">
 
@@ -35,5 +37,7 @@ layout: doc
 <div class="grid grid-cols-2 gap-4">
 
 ![alt text](/images/cmono-QQ图片20240703163357.png){data-zoomable}
+
+![alt text](/images/cmono-QQ截图20240704155118.png){data-zoomable}
 
 </div>
