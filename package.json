@@ -120,7 +120,7 @@
     "patch-package": "^8.0.0",
     "postcss": "^8.4.39",
     "release-it": "^17.5.0",
-    "sass": "^1.77.6",
+    "sass": "^1.77.7",
     "sitemap": "^8.0.0",
     "unocss": "^0.61.3",
     "unplugin-auto-import": "^0.17.6",
