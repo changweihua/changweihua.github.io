@@ -41,3 +41,7 @@ Rsbuild 打包机制
 ![alt text](/images/cmono-QQ截图20240704155118.png){data-zoomable}
 
 </div>
+
+### Vue 集成 ###
+
+编写 maui-jsbridge 的 npm 包，用于标准化 JsBridge 调用。
