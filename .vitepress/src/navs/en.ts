@@ -7,11 +7,11 @@ const nav: DefaultTheme.NavItem[] | undefined = [
     link: "/en/blog/",
     activeMatch: "^/en/blog/",
   },
-  {
-    text: "Courses",
-    link: "/en/course/",
-    activeMatch: "^/en/course/",
-  },
+  // {
+  //   text: "Courses",
+  //   link: "/en/course/",
+  //   activeMatch: "^/en/course/",
+  // },
   {
     text: "About",
     link: "/en/about/index.md",

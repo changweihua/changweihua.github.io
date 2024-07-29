@@ -12,16 +12,16 @@ const nav: DefaultTheme.NavItem[] | undefined = [
     link: "/archives.md",
     activeMatch: "^/archives",
   },
-  {
-    text: "分类",
-    link: "/tags.md",
-    activeMatch: "^/tags",
-  },
-  {
-    text: "课程",
-    link: "/course/",
-    activeMatch: "^/course/",
-  },
+  // {
+  //   text: "分类",
+  //   link: "/tags.md",
+  //   activeMatch: "^/tags",
+  // },
+  // {
+  //   text: "课程",
+  //   link: "/course/",
+  //   activeMatch: "^/course/",
+  // },
   {
     text: "关于",
     link: "/about/index.md",

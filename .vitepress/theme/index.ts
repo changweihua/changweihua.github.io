@@ -52,6 +52,7 @@ import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import PageFooter from "../components/PageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue"
+import MagicCard from "../components/MagicCard.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -87,7 +88,7 @@ dayjs.locale("zh-cn");
 // register themes
 allThemeMap.forEach((theme, name) => {
   theme.fontFamily = defaultVTheme.fontFamily
-  theme.backround = defaultVTheme.background
+  theme.background = defaultVTheme.background
   VChart.ThemeManager.registerTheme(name, theme);
 });
 
@@ -333,6 +334,7 @@ export const Theme: ThemeConfig = {
     app.component("HomeContributors", HomeContributors);
     app.component("CopyRight", copyright);
     app.component("HoverGrid", HoverGrid);
+    app.component("MagicCard", MagicCard);
 
     app.use(VueResizeObserver);
     app.use(FloatingVue);
