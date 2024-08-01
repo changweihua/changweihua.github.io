@@ -50,21 +50,27 @@ features:
     details: 支持Yolo8、9、10三大版本
     link: /gallery/yolo_object_dection
     # linkText: 更多详情
+  # - title: 新生产统计APP
+  #   details: H5 微应用平台。
+  #   link: /gallery/maui
   - title: Yuppie 平台
     icon:
       src: /yuppie.svg
       alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
     details: 项目积累，实现即开箱即投产的标准化平台
     link: /gallery/yuppie
-  - title: 基于K8S平台的持续交付平台
-    icon:
-      src: /giteaops.png
-      alt: 基于K8S平台的持续交付平台
-    details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
-    link: /gallery/giteaops
+  # - title: 基于K8S平台的持续交付平台
+  #   icon:
+  #     src: /giteaops.png
+  #     alt: 基于K8S平台的持续交付平台
+  #   details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
+  #   link: /gallery/giteaops
   - title: MAUI 跨平台学习笔记
     details: MAUI 跨平台学习笔记。
     link: /gallery/maui
+  - title: maui-jsbridge
+    details: 页面iFrame嵌套通信。
+    link: https://www.npmjs.com/package/maui-jsbridge
   - title: wx-navigation-bar
     details: 小程序自定义导航栏NPM包。以此实现顶部图片背景效果。
     link: /gallery/wx-navigation-bar
@@ -99,7 +105,9 @@ head:
       content: changweihua.github.io 首页 CMONO.NET
 ---
 
-<MagicCard />
+<!-- <MagicCard />
+
+<div class="card">Test UnoCSS card</div> -->
 
 
 <!-- <a-button>123</a-button>
