@@ -357,3 +357,38 @@ html[data-theme="dark"] {
 .text-emphasis-fire {
   text-emphasis: "🔥";
 }
+
+.VPNavBarMenuLink {
+  display: inline-block;
+  position: relative;
+  padding: 3px 6px;
+  cursor: pointer;
+}
+.VPNavBarMenuLink::before,
+.VPNavBarMenuLink::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+.VPNavBarMenuLink::before {
+  bottom: 25%;
+  left: 10%;
+  transform: translate(100%, -50%);
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+.VPNavBarMenuLink::after {
+  right: 10%;
+  top: 25%;
+  transform: translate(-100%, 50%);
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
+}
+.VPNavBarMenuLink:hover::before,
+.VPNavBarMenuLink:hover::after {
+  transform: translate(0, 0);
+  opacity: 1;
+}

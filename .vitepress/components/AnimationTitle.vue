@@ -49,28 +49,28 @@ onMounted(() => {
 </script>
 
 <template>
-  <h1 v-if="name" class="name title">
-    <span class="clip">{{ name }}</span>
-  </h1>
-  <p v-if="text" class="text">{{ text }}</p>
-  <!-- <p v-if="tagline" class="tagline">
+  <div class="border-around">
+    <h1 v-if="name" class="name title">
+      <span class="clip active-menu ">{{ name }}</span>
+    </h1>
+    <p v-if="text" class="text contrast">{{ text }}</p>
+    <!-- <p v-if="tagline" class="tagline">
     {{ tagline }}
   </p> -->
-  <div class="tagline">
-    <template v-for="tag in tagline">
-      <div class="char">{{ tag }}</div>
-    </template>
+    <div class="tagline">
+      <template v-for="tag in tagline">
+        <div class="char">{{ tag }}</div>
+      </template>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .name {
-  background: -webkit-linear-gradient(
-    315deg,
-    rgb(210, 86, 53) 10%,
-    #647eff 50%,
-    rgb(238, 224, 112) 90%
-  );
+  background: -webkit-linear-gradient(315deg,
+      rgb(210, 86, 53) 10%,
+      #647eff 50%,
+      rgb(238, 224, 112) 90%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -102,7 +102,9 @@ onMounted(() => {
   font-weight: 700;
   white-space: pre-wrap;
 }
+
 @media (min-width: 640px) {
+
   .name,
   .text {
     max-width: 576px;
@@ -110,7 +112,9 @@ onMounted(() => {
     font-size: 48px;
   }
 }
+
 @media (min-width: 960px) {
+
   .name,
   .text {
     line-height: 64px;
@@ -129,6 +133,7 @@ onMounted(() => {
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
+
 @media (min-width: 640px) {
   .tagline {
     padding-top: 12px;
@@ -160,5 +165,81 @@ onMounted(() => {
   opacity: 0.3;
   transform: translateY(-150px);
   transition: transform 0.3s ease-in-out;
+}
+
+.contrast {
+  display: inline-block;
+  position: relative;
+  background: #fff;
+  color: #000;
+  padding: 3px 12px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.contrast::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: #fff;
+  mix-blend-mode: difference;
+  transition: all 1s ease-in-out;
+}
+
+.contrast:hover::after {
+  width: 100%;
+}
+
+.border-around {
+  display: inline-block;
+  position: relative;
+  padding: 6px;
+  border: none;
+}
+
+.border-around:hover {
+  cursor: pointer;
+}
+
+.border-around::before,
+.border-around::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+.border-around::before {
+  top: 0;
+  left: 0;
+}
+
+.border-around::after {
+  bottom: 0;
+  right: 0;
+}
+
+.border-around:hover::before,
+.border-around:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+.border-around:hover::before {
+  border-top: 2px solid blue;
+  border-right: 2px solid blue;
+  transition: width 0.3s ease-out, height 0.3s ease-out 0.3s;
+}
+
+.border-around:hover::after {
+  border-bottom: 2px solid blue;
+  border-left: 2px solid blue;
+  transition: border-color 0s ease-out 0.6s, width 0.3s ease-out 0.6s, height 0.3s ease-out 0.9s;
 }
 </style>
