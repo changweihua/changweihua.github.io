@@ -65,9 +65,12 @@ features:
   #     alt: 基于K8S平台的持续交付平台
   #   details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
   #   link: /gallery/giteaops
-  - title: MAUI 跨平台学习笔记
-    details: MAUI 跨平台学习笔记。
-    link: /gallery/maui
+  - title: Maui Hybird
+    icon:
+      src: /web_app.svg
+      alt: Maui Hybird 架构
+    details: 基于 Maui 的 Hybird 框架。
+    link: /gallery/web_app
   - title: maui-jsbridge
     details: 页面iFrame嵌套通信。
     link: https://www.npmjs.com/package/maui-jsbridge
