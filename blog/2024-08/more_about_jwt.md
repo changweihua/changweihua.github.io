@@ -6,6 +6,7 @@ title: 什么是 JWT？它是如何工作的？
 description: 什么是 JWT？它是如何工作的？
 date: 2024-08-01 10:18:00
 pageClass: blog-page-class
+mermaids: 1
 ---
 
 在 Web 开发中，JWT 已成为一种流行且安全的方法，用于身份验证和信息交换，在这篇文中，我们将深入探讨JWT 的概念、工作流、优势和使用的注意事项。
@@ -75,6 +76,8 @@ HMACSHA256(
 
 整个流程可以表示为下面的流程图：
 
+<RoughMermaid>
+
 ```mermaid
 sequenceDiagram
   actor CLIENT as 客户端
@@ -88,6 +91,8 @@ sequenceDiagram
     SERVER->>SERVER: 验证Token
     SERVER->>CLIENT: 返回请求结果
 ```
+
+</RoughMermaid>
 
 ## JWT的优势 ##
 

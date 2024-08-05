@@ -110,7 +110,23 @@ const customElements = [
 
 export default withMermaid({
   mermaid: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#506bee',
+      // 'primaryTextColor': '#fff',
+      // 'primaryBorderColor': '#7C0000',
+      // 'lineColor': '#F8B229',
+      // 'secondaryColor': '#006100',
+      // 'tertiaryColor': '#fff'
+    },
+    fontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
+    altFontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
+
     //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  },
+  // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
+  mermaidPlugin: {
+    class: "mermaid rough-mermaid" // 为父容器设置额外的CSS类
   },
   vite: {
     logLevel: 'info',

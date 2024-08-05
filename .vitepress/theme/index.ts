@@ -53,6 +53,7 @@ import HomeContributors from "../components/HomeContributors.vue";
 import PageFooter from "../components/PageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue"
 import MagicCard from "../components/MagicCard.vue"
+import RoughMermaid from "../components/RoughMermaid.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -72,7 +73,7 @@ import type { Theme as ThemeConfig } from 'vitepress'
 import { defaultVTheme } from '../hooks/useVChart';
 import VChart from '@visactor/vchart';
 import { allThemeMap } from '@visactor/vchart-theme';
-
+// import MermaidLayout from './MermaidLayout.vue'
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -335,6 +336,7 @@ export const Theme: ThemeConfig = {
     app.component("CopyRight", copyright);
     app.component("HoverGrid", HoverGrid);
     app.component("MagicCard", MagicCard);
+    app.component("RoughMermaid", RoughMermaid);
 
     app.use(VueResizeObserver);
     app.use(FloatingVue);

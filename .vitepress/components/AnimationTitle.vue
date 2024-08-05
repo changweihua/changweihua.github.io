@@ -32,17 +32,17 @@ onMounted(() => {
   nextTick(() => {
     _.delay(() => {
       const t = gsap.timeline({});
-      t.to(".char", {
-        opacity: 1,
-        delay: 0.1,
-        duration: 0.5,
-        y: 0,
-        ease: "Power4.inOut",
-        stagger: 0.1,
-        repeat: -1,
-        repeatDelay: 2,
-        yoyo: true,
-      });
+      // t.to(".char", {
+      //   opacity: 1,
+      //   delay: 0.1,
+      //   duration: 0.5,
+      //   y: 0,
+      //   ease: "Power4.inOut",
+      //   stagger: 0.1,
+      //   repeat: -1,
+      //   repeatDelay: 2,
+      //   yoyo: true,
+      // });
     }, 3 * 1000);
   });
 });

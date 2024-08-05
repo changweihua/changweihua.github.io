@@ -1,6 +1,7 @@
 ---
 layout: page
 sidebar: true
+mermaids: 2
 ---
 
 :::tabs
@@ -34,12 +35,18 @@ $$\begin{array}{c}
 
 \end{array}$$
 
+<div class="graph-div">
+
 ```mermaid
 pie title Pets adopted by volunteers
   "Dogs" : 386
   "Cats" : 85
   "Rats" : 15
 ```
+
+</div>
+
+<div class="graph-div">
 
 ```mermaid
 sequenceDiagram
@@ -52,6 +59,8 @@ John-->>Alice: Great!
 John->>Bob: How about you?
 Bob-->>John: Jolly good!
 ```
+
+</div>
 
 ::: info
 This is an info box.
