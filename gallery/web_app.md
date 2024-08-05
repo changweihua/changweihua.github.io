@@ -51,7 +51,7 @@ sequenceDiagram
 
 
 <script lang="ts" setup>
-import { Svg2Roughjs, OutputType } from 'svg2roughjs'
+import { Svg2Roughjs } from 'svg2roughjs'
 import { onMounted, ref, nextTick } from 'vue'
 
 const targetNode = document.body
@@ -67,9 +67,7 @@ const resultRef = ref()
         console.log(document.querySelector('#graph-div .mermaid svg'))
         // TODO: 此时开始加载第三方脚本
         observer.disconnect(); // 销毁监视者
-        const svg2roughjs = new Svg2Roughjs('#sketch-div', OutputType.SVG, {
-          fontFamily: "AlibabaPuHuiTi"
-        })
+        const svg2roughjs = new Svg2Roughjs('#sketch-div')
         const graphDiv = document.querySelector<SVGSVGElement>('#graph-div');
         svg2roughjs.svg = document.querySelector('#graph-div .mermaid svg')
         svg2roughjs.fontFamily = "AlibabaPuHuiTi"
