@@ -9,7 +9,7 @@
 
 
 <script lang="ts" setup>
-import { Svg2Roughjs, OutputType } from 'svg2roughjs'
+import { Svg2Roughjs } from 'svg2roughjs'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const graphRef = ref()
@@ -17,7 +17,7 @@ const sketchSvgRef = ref()
 
 async function makeRough(svg: SVGSVGElement, div: HTMLElement) {
   console.log(svg, div)
-  const svg2roughjs = new Svg2Roughjs(sketchSvgRef.value, OutputType.SVG)
+  const svg2roughjs = new Svg2Roughjs(sketchSvgRef.value)
   svg2roughjs.svg = svg
   svg2roughjs.fontFamily = "AlibabaPuHuiTi"
   await svg2roughjs.sketch(false)
