@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { Svg2Roughjs, OutputType } from 'svg2roughjs'
+import { Svg2Roughjs } from 'svg2roughjs'
 import { useData } from 'vitepress'
 import { delay } from 'lodash-es'
 import UtterancesComment from "@vp/components/UtterancesComment.vue"
@@ -29,7 +29,7 @@ function makeRough(svg: SVGSVGElement, div: HTMLElement) {
   const sketchContainerId = `sketch-div-${svg.id}`
   sketchContainer.setAttribute("id", sketchContainerId);
   div.appendChild(sketchContainer)
-  const svg2roughjs = new Svg2Roughjs(`#${sketchContainerId}`, OutputType.SVG)
+  const svg2roughjs = new Svg2Roughjs(`#${sketchContainerId}`)
   // const graphDiv = document.querySelector<SVGSVGElement>('#graph-div');
   svg2roughjs.svg = svg!
   svg2roughjs.fontFamily = "AlibabaPuHuiTi"
