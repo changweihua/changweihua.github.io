@@ -39,9 +39,20 @@ sequenceDiagram
             B->>A:程序启动完成
         end
         B->>E:获取用户信息
-	deactivate B
+	  deactivate B
     
     E-->>B:返回用户信息
+      activate B
+        alt 调用硬件
+          B->>E:携带Token请求
+          E-->>B:返回结果
+        end
+
+        opt 调用接口
+          B->>F:JSBridge调用
+          F-->>B:返回结果
+        end
+      deactivate B
 
 	%% left or right
 	note left of A:整体基于<br>iframe架构

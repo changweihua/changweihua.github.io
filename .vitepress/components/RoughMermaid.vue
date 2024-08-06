@@ -61,10 +61,10 @@ const config = {
 };
 
 onBeforeUnmount(() => {
-  observer.disconnect();
+  // observer.disconnect();
 })
 
 onMounted(() => {
-  observer.observe(graphRef.value, config);
+  // observer.observe(graphRef.value, config);
 })
 </script>

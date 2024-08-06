@@ -20,6 +20,19 @@ export const head: HeadConfig[] = [
       src: "/clarity.js",
     },
   ],
+  // [
+  //   "script",
+  //   {
+  //     src: "https://unpkg.com/svg2roughjs/dist/svg2roughjs.umd.min.js",
+  //     type: 'module'
+  //   },
+  // ],
+  // [
+  //   "script",
+  //   {
+  //     src: "/mermaid.ext.js",
+  //   },
+  // ],
   [
     "script",
     {
