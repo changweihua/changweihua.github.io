@@ -43,14 +43,16 @@ sequenceDiagram
     
     E-->>B:返回用户信息
       activate B
-        alt 调用硬件
+        alt 调用接口
           B->>E:携带Token请求
           E-->>B:返回结果
+          B->>F:携带Token请求
+          F-->>B:返回结果
         end
 
-        opt 调用接口
-          B->>F:JSBridge调用
-          F-->>B:返回结果
+        opt 调用硬件
+          B->>D:JSBridge调用
+          D-->>B:返回结果
         end
       deactivate B
 

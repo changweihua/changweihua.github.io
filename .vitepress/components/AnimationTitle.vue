@@ -65,7 +65,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 .name {
   background: -webkit-linear-gradient(315deg,
       rgb(210, 86, 53) 10%,
@@ -170,10 +170,10 @@ onMounted(() => {
 .contrast {
   display: inline-block;
   position: relative;
-  background: #fff;
-  color: #000;
+  background: var(--vp-c-white);
+  color: var(--vp-c-black);
   padding: 3px 12px;
-  border: 1px solid #000;
+  border: 1px solid var(--vp-c-black);
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -185,13 +185,25 @@ onMounted(() => {
   top: 0;
   height: 100%;
   width: 0;
-  background: #fff;
+  background: var(--vp-c-white);
   mix-blend-mode: difference;
   transition: all 1s ease-in-out;
 }
 
 .contrast:hover::after {
   width: 100%;
+}
+
+.dark {
+  .contrast {
+    background: var(--vp-c-bg);
+    color: var(--vp-c-white);
+    border: 1px solid var(--vp-c-white);
+  }
+
+  .contrast::after {
+    background: var(--vp-c-white);
+  }
 }
 
 .border-around {
