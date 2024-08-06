@@ -8,7 +8,7 @@ const { frontmatter } = useData()
 const { Layout } = DefaultTheme
 // const isHome = computed(() => unref(page)?.filePath === 'index.md')
 
-const targetNode = document.body
+// const targetNode = document.body
 const mermaids = new Set<string>()
 
 // 创建MutationObserver实例

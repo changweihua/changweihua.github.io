@@ -13,7 +13,6 @@ declare module 'vue' {
     AirStrip2: typeof import('./../src/components/AirStrip2.vue')['default']
     Articles: typeof import('./../src/components/articles.vue')['default']
     BasicCube: typeof import('./../src/components/BasicCube.vue')['default']
-    copy: typeof import('./../src/components/ThreeWithBall copy.vue')['default']
     FloatingMenu: typeof import('./../src/components/FloatingMenu.vue')['default']
     HeroLogo2: typeof import('./../src/components/HeroLogo2.vue')['default']
     HomeHeroImage: typeof import('./../src/components/HomeHeroImage.vue')['default']

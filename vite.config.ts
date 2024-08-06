@@ -367,7 +367,7 @@ export default defineConfig({
       // '@nolebase/vitepress-plugin-enhanced-readabilities/client > @nolebase/ui > @rive-app/canvas',
       // '@nolebase/vitepress-plugin-highlight-targeted-heading/client',
     ],
-    exclude: ['vitepress'],
+    exclude: ['vitepress', 'svg2roughjs'],
   },
   // resolve: {
   //   alias: {
