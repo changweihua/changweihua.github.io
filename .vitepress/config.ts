@@ -11,6 +11,7 @@ import { HeadConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
 import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
+import vitepressProtectPlugin from "vitepress-protect-plugin"
 // import compression from "vitepress-plugin-compression";
 // import AutoIndex from 'vite-plugin-vitepress-auto-index';
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
@@ -132,6 +133,11 @@ export default withMermaid({
     // ↓↓↓↓↓
     plugins: [
       RssPlugin(RSS),
+      vitepressProtectPlugin({
+        disableF12: true,
+        disableCopy: true,
+        disableSelect: true,
+      }),
       GitRevisionInfoPlugin()
       // {
       //   ...AutoIndex({}),
