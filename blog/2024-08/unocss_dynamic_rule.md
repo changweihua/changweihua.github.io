@@ -8,6 +8,8 @@ date: 2024-08-01 13:18:00
 pageClass: blog-page-class
 ---
 
+# 如何在UnoCSS中使用动态生成的className名称 #
+
 在使用UnoCSS时，如果您有动态生成的类名（例如，通过JavaScript生成的类名），可以通过以下几种方法来处理：
 
 ## 使用安全列表（Safelist） ##

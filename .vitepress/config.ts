@@ -13,7 +13,6 @@ import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
 import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
 // import compression from "vitepress-plugin-compression";
 // import AutoIndex from 'vite-plugin-vitepress-auto-index';
-
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
 // const { detypeVitePlugin } = createDetypePlugin()
 

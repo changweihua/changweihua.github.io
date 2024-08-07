@@ -8,7 +8,10 @@ date: 2024-08-01 14:18:00
 pageClass: blog-page-class
 ---
 
-创建一个Vue应用并将其部署到GitHub Pages的全流程可以分为以下几个步骤：
+# Vue应用创建并将其部署到GitHub Pages的过程 #
+
+> [!IMPORTANT]
+> 创建一个Vue应用并将其部署到GitHub Pages的全流程可以分为以下几个步骤：
 
 ## 创建Vue应用 ##
 

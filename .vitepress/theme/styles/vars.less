@@ -74,3 +74,131 @@
 @app-font-size: 16px;
 @admin-layout-header-height: 46px;
 @dashboard-font-family: AlibabaPuHuiTi, JetBrainsMono, HYCuJianHeiJ;
+
+h1 {
+  background: -webkit-linear-gradient(-45deg, #e43498 5%, #5ad7dd 15%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 提示框背景颜色 */
+:root {
+  --vp-custom-block-tip-bg: var(--vp-c-green-soft);
+}
+
+/* 提示框 */
+.custom-block.tip {
+  border-color: var(--vp-c-green-2);
+}
+
+/* 警告框 */
+.custom-block.warning {
+  /* border-color: #d97706; */
+  border-color: var(--vp-c-yellow-2);
+}
+
+/* 危险框 */
+.custom-block.danger {
+  /* border-color: #f43f5e; */
+  border-color: var(--vp-c-red-2);
+}
+
+/* 引用块 */
+.vp-doc blockquote {
+  border-radius: 5px;
+  padding: 10px 16px;
+  background-color: var(--vp-badge-danger-bg);
+  position: relative;
+  border-left: 4px solid #e95f59;
+}
+
+.vp-doc a[href^="https://www.youtube.com/"]:before,[href^="https://www.bilibili.com/"]:before
+{
+  content: "➹";
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 10px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  color: var(--vp-c-green-1);
+  font-size: 13px;
+  border: 3px solid var(--vp-c-green-1);
+  margin-right: 8px;
+  margin-left: 4px;
+  line-height: 15px;
+  padding-left: 1.5px;
+}
+
+/* 卡片背景 */
+.linkcard {
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  padding: 8px 16px 8px 8px;
+  transition: color 0.5s, background-color 0.5s;
+}
+
+/* 卡片鼠标悬停 */
+.linkcard:hover {
+  background-color: var(--vp-c-yellow-soft);
+}
+
+/* 链接样式 */
+.linkcard a {
+  display: flex;
+  align-items: center;
+}
+
+/* 描述链接文字 */
+.linkcard .description {
+  flex: 1;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--vp-c-text-1);
+  margin: 0 0 0 16px;
+  transition: color 0.5s;
+}
+
+/* 描述链接文字2 */
+.linkcard .description span {
+  font-size: 14px;
+}
+
+/* logo图片 */
+.linkcard .logo img {
+  width: 80px;
+  object-fit: contain;
+}
+
+/* 链接下划线去除 */
+.vp-doc a {
+  text-decoration: none;
+}
+
+/* 代码块tab */
+.vp-code-group .tabs {
+  padding-top: 30px;
+}
+
+/* 代码块tab-顶部小圆点 */
+.vp-code-group .tabs::before {
+  background: #fc625d;
+  border-radius: 50%;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  content: " ";
+  height: 12px;
+  width: 12px;
+  left: 12px;
+  margin-top: -15px;
+  position: absolute;
+}
+
+/* 代码组 */
+.vp-code-group {
+  color: var(--vp-c-black-soft);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px 0 rgb(0 0 0 / 40%);
+}

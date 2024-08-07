@@ -8,9 +8,9 @@ date: 2024-08-06 12:18:00
 pageClass: blog-page-class
 ---
 
-## 动态创建DOM元素（包括动态创建svg元素） ##
+# 动态创建DOM元素（包括动态创建svg元素） #
 
-### 问题由来 ###
+## 问题由来 ##
 
 在某项目中，我需要在svg标签中插入circle元素，最初按照往常使用createElement来创建，结果发现创建成功了，dom中也插入成功了，但就是在页面中不显示。
 
@@ -20,7 +20,7 @@ pageClass: blog-page-class
 
 svg元素一般通过setAttribute方法来设置属性值。
 
-### svg介绍 ###
+## svg介绍 ##
 
 svg全称为：scalable vector graphics，意为可伸缩矢量图形。
 是一种用XML描述图形的标记语言。
@@ -36,7 +36,7 @@ Canvas有一个toDataURL方法，可以将画布中的内容编码成字符串�
 
 动态创建DOM元素方法封装：
 
-```javascript
+```javascript $(1#)
 insertElement(tagName,options,father){
     var svgTags=['svg','g','path','filter','animate','marker','line','polyline','rect','circle','ellipse','polygon'];
     let newElement;

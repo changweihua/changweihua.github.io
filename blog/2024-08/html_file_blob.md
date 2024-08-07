@@ -8,7 +8,9 @@ date: 2024-08-02 10:18:00
 pageClass: blog-page-class
 ---
 
-## Base64、Blob、File 的API ##
+# Base64、Blob、File 的API #
+
+#简介 ##
 
 ### Base64 ###
 

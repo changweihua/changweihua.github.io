@@ -6,6 +6,8 @@
   <div v-if="frontmatter['tags'] && frontmatter['tags'].length > 0" style="width: 200px; height: 100px; margin: 0 auto"
     class="justify-center items-center flex">
   </div>
+  本站总访问量 <span id="busuanzi_value_site_pv" /> 次
+  本站访客数 <span id="busuanzi_value_site_uv" /> 人次
 </template>
 
 <script setup lang="ts">

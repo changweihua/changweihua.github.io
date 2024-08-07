@@ -8,6 +8,8 @@ date: 2024-08-06 10:18:00
 pageClass: blog-page-class
 ---
 
+# MutationObserver与IntersectionObserver #
+
 ## MutationObserver ##
 
 > 出现原因：当我们需要监听元素发生变化时，不借助使元素发生变化的业务动作的情况下，使用无污染方式监听非常困难，为了解决这个问题，MutationObserver诞生！

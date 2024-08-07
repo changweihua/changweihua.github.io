@@ -17,7 +17,7 @@ import {
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import { LiteTree } from '@lite-tree/vue'
 import DocAfter from "../components/DocAfter.vue";
-import recommend from "../components/Recommend.vue";
+import Recommend from "../components/Recommend.vue";
 import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
@@ -27,7 +27,8 @@ import "vite-plugin-vue-preview/style.css";
 // import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 import { Sandbox } from "vitepress-plugin-sandpack";
-
+import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
+import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
 // @ts-ignore
 import AnimationTitle from "../components/AnimationTitle.vue";
 
@@ -67,13 +68,13 @@ import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
 
 import 'vitepress-plugin-changelog/changelog.css'
-
+import busuanzi from 'busuanzi.pure.js'
 import type { Theme as ThemeConfig } from 'vitepress'
 
 import { defaultVTheme } from '../hooks/useVChart';
 import VChart from '@visactor/vchart';
 import { allThemeMap } from '@visactor/vchart-theme';
-// import MermaidLayout from './MermaidLayout.vue'
+import AnimatingLayout from './AnimatingLayout.vue'
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -99,6 +100,7 @@ VChart.ThemeManager.setCurrentTheme('legacyLight');
 export const Theme: ThemeConfig = {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
+  extends: DefaultTheme,
   Layout() {
 
     const props: Record<string, any> = {}
@@ -110,7 +112,7 @@ export const Theme: ThemeConfig = {
       props.class = frontmatter.value.layoutClass
     }
 
-    return h(DefaultTheme.Layout, null, {
+    return h(AnimatingLayout, null, {
       // "home-hero-before": () => h(AnimationTitle),
       // "home-hero-after": () => h(AnimationTitle),
       // "home-features-after": () =>
@@ -160,7 +162,7 @@ export const Theme: ThemeConfig = {
       //   h(PlaceHolder, {
       //     name: "doc-top",
       //   }),
-      "doc-bottom": () => h(recommend),
+      "doc-bottom": () => h(Recommend),
       // "doc-footer-before": () => h(Changelog),
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
@@ -298,6 +300,9 @@ export const Theme: ThemeConfig = {
         // default
         threshold: 300,
       });
+      router.onAfterRouteChanged = () => {
+        busuanzi.fetch()
+      }
       // enhanceAppWithTabs(app);
       // app.use(useResize);
       // registerAnalytics(siteIds)
@@ -353,13 +358,16 @@ export const Theme: ThemeConfig = {
     // } as Options)
   },
   setup() {
-    const { lang } = useData();
+    // get frontmatter and route
+    const { lang, frontmatter } = useData();
+    const route = useRoute();
+    // basic use
+    codeblocksFold({ route, frontmatter }, true, 400);
     watchEffect(() => {
       if (inBrowser) {
         document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2024 00:00:00 UTC; path=/`;
       }
     });
-    const route = useRoute();
     const initZoom = () => {
       mediumZoom("[data-zoomable]", { background: "var(--clr)" }); // Should there be a new?
       // new mediumZoom('.main img', { background: 'var(--vp-c-bg)' });

@@ -11,15 +11,24 @@ import { renderSandbox } from 'vitepress-plugin-sandpack'
 import footnote from 'markdown-it-footnote';
 import mathjax3 from 'markdown-it-mathjax3';
 import { ImagePlugin } from '../plugins/markdown/image'
+import useDefinePlugin from 'vitepress-plugin-markdown-define'
+import { default as replPlugin } from 'vitepress-markdown-it-repl';
 // import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 // import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
 // const { detypeMarkdownPlugin } = createDetypePlugin()
 
+const CONSTS = {
+  __custom_variable__: 'your value'
+}
+
 const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
   theme: { light: 'github-light', dark: 'github-dark' },
   config: (md) => {
+
+    useDefinePlugin(md, CONSTS)
+
     md.use(footnote);
     md.use(mathjax3);
     md.use(containerPreview);
@@ -40,7 +49,9 @@ const markdown: MarkdownOptions | undefined = {
         },
       });
     md.use(ImagePlugin)
-
+    // set globalEnabledLineNumbers's value same as lineNumbers above.
+    //@ts-ignore
+    md.use(replPlugin, { globalEnabledLineNumbers: true })
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {
       let htmlResult = slf.renderToken(tokens, idx, options);

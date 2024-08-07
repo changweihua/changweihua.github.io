@@ -13,6 +13,36 @@ mermaids: 1
 
 ![Maui Hybird](/images/cmono-image.png){data-zoomable}
 
+<div class="linkcard">
+  <a href="https://vitepress.yiov.top/" target="_blank">
+    <p class="description">Vitepress中文搭建教程<br><span>https://vitepress.yiov.top/</span></p>
+    <div class="logo">
+        <img alt="Logo" width="70px" height="70px" src="https://vitepress.yiov.top/logo.png" />
+    </div>
+  </a>
+</div>
+
+> [!NOTE]
+> 强调用户在快速浏览文档时也不应忽略的重要信息。
+
+> [!TIP]
+> 有助于用户更顺利达成目标的建议性信息。
+
+> [!IMPORTANT]
+> 对用户达成目标至关重要的信息。
+
+> [!WARNING]
+> 因为可能存在风险，所以需要用户立即关注的关键内容。
+
+> [!CAUTION]
+> 行为可能带来的负面影响。
+
+![](https://img.shields.io/badge/any_text-you_like-blue)
+
+![](https://img.shields.io/badge/just_do_it-blue?style=for-the-badge&logo=alipay&logoColor=1677FF&label=%E6%94%AF%E4%BB%98%E5%AE%9D&labelColor=lightgrey)
+
+[![](https://img.shields.io/badge/just_do_it-blue?style=for-the-badge&logo=alipay&logoColor=1677FF&label=%E6%94%AF%E4%BB%98%E5%AE%9D&labelColor=lightgrey)](https://shields.io/badges)
+
 <RoughMermaid>
 
 ```mermaid
@@ -61,3 +91,8 @@ sequenceDiagram
 ```
 
 </RoughMermaid>
+
+
+MAUI [^1]
+
+[^1]: .NET MAUI

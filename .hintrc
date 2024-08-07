@@ -1,5 +1,17 @@
 {
   "extends": [
     "development"
-  ]
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "backdrop-filter",
+          "text-emphasis"
+        ]
+      }
+    ],
+    "css-prefix-order": "off"
+  }
 }
