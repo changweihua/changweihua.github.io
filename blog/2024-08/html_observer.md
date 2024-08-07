@@ -12,6 +12,7 @@ pageClass: blog-page-class
 
 ## MutationObserver ##
 
+> [!TIP]
 > 出现原因：当我们需要监听元素发生变化时，不借助使元素发生变化的业务动作的情况下，使用无污染方式监听非常困难，为了解决这个问题，MutationObserver诞生！
 
 ### 概述 ###
@@ -123,6 +124,7 @@ observer.disconnect();
 
 IntersectionObserver 接口提供了一种异步观察目标元素与其祖先元素或顶级文档视口（viewport）交叉状态的方法。其祖先元素或视口被称为根（root)。
 
+> [!IMPORTANT]
 > 当一个IntersectionObserver 对象被创建时，其被配置为监听根中一段给定比例的可见区域。一旦IntersectionObserver 被创建，则无法更改其配置，所以一个给定的观察者对象只能用来监听可见区域。一旦IntersectionObserver 被创建，则无法更改其配置，所以一个给定的观察者对象只能用来监听可见区域的特定变化值；然而，你可以在同一个观察者对象中配置监听多个目标元素。
 
 ### 概述 ###

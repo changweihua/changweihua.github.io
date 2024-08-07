@@ -36,7 +36,9 @@ Canvas有一个toDataURL方法，可以将画布中的内容编码成字符串�
 
 动态创建DOM元素方法封装：
 
-```javascript $(1#)
+::: code-group
+
+```js $(1#) [vue]
 insertElement(tagName,options,father){
     var svgTags=['svg','g','path','filter','animate','marker','line','polyline','rect','circle','ellipse','polygon'];
     let newElement;
@@ -61,3 +63,11 @@ insertElement(tagName,options,father){
     return newElement;
   }
 ```
+
+```js [react]
+#查询yarn版本
+yarn -v
+```
+
+:::
+

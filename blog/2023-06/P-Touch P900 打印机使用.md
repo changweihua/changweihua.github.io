@@ -4,6 +4,8 @@ prev: 'P-Touch P900 打印机使用 | Markdown'
 commentabled: true
 recommended: false
 date: 2023-06
+title: P-Touch P900 打印机使用
+description: P-Touch P900 打印机使用
 pageClass: blog-page-class
 ---
 

@@ -2,11 +2,11 @@ import { DefaultTheme } from "vitepress";
 // activeMatch: "^/guide/",
 const nav: DefaultTheme.NavItem[] | undefined = [
   { text: "首页", link: "/", activeMatch: "^/$|^/index/" },
-  // {
-  //   text: "博客",
-  //   link: "/blog/",
-  //   activeMatch: "^/blog/",
-  // },
+  {
+    text: "博客",
+    link: "/blog/",
+    activeMatch: "^/blog/",
+  },
   {
     text: "归档",
     link: "/archives.md",
@@ -22,11 +22,11 @@ const nav: DefaultTheme.NavItem[] | undefined = [
   //   link: "/course/",
   //   activeMatch: "^/course/",
   // },
-  {
-    text: "关于",
-    link: "/about/index.md",
-    activeMatch: "^/about/",
-  },
+  // {
+  //   text: "关于",
+  //   link: "/about/index.md",
+  //   activeMatch: "^/about/",
+  // },
   // {
   //   text: "文章分类",
   //   items: [
