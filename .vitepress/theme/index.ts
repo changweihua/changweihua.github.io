@@ -275,8 +275,6 @@ export const Theme: ThemeConfig = {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     const { app, router, siteData } = ctx;
-    DefaultTheme.enhanceApp(ctx);
-
     // // define options
     // const timeagoOptions = {
     //   converterOptions: {
@@ -301,7 +299,7 @@ export const Theme: ThemeConfig = {
         threshold: 300,
       });
       router.onAfterRouteChanged = () => {
-        busuanzi.fetch()
+        // busuanzi.fetch()
       }
       // enhanceAppWithTabs(app);
       // app.use(useResize);
@@ -347,6 +345,8 @@ export const Theme: ThemeConfig = {
     app.use(FloatingVue);
 
     app.component('LiteTree', LiteTree)
+
+    DefaultTheme.enhanceApp(ctx);
 
     // app.provide(InjectionKey, {
     //   // 配置...

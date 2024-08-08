@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { nextTick, provide } from 'vue'
-import DocAfter from "../components/DocAfter.vue";
-import AnimationTitle from "../components/AnimationTitle.vue";
-import Recommend from "../components/Recommend.vue";
-import NotFound from "../components/NotFound.vue";
-import PageFooter from "../components/PageFooter.vue";
+import { nextTick, provide, useSlots } from 'vue'
+// import DocAfter from "../components/DocAfter.vue";
+// import AnimationTitle from "../components/AnimationTitle.vue";
+// import Recommend from "../components/Recommend.vue";
+// import NotFound from "../components/NotFound.vue";
+// import PageFooter from "../components/PageFooter.vue";
 
 const { isDark } = useData()
-
+const slots = Object.keys(useSlots())
 const enableTransitions = () =>
   'startViewTransition' in document &&
   window.matchMedia('(prefers-reduced-motion: no-preference)').matches
@@ -42,31 +42,36 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     }
   )
 })
+
+// v-slot:default="slotProps"
 </script>
 
 <template>
   <DefaultTheme.Layout>
-    <template #doc-after>
+    <template v-for="(slotKey, slotIndex) in slots" :key="slotIndex" v-slot:[slotKey]>
+      <slot :name="slotKey"></slot>
+    </template>
+    <!-- <template #doc-after>
       <DocAfter />
     </template>
-    <template #doc-bottom>
+<template #doc-bottom>
       <Recommend />
     </template>
-    <template #not-found>
+<template #not-found>
       <NotFound />
     </template>
-    <template #layout-bottom>
+<template #layout-bottom>
       <PageFooter />
     </template>
-    <template #home-hero-info>
+<template #home-hero-info>
       <AnimationTitle name="CMONO.NET" text="知识汪洋只此一瓢" tagline="伪前端+伪后端+伪需求=真全栈" />
     </template>
-    <template #home-hero-image>
+<template #home-hero-image>
       <div
         style="position: relative;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;">
         <img src="/cwh.svg" class="VPImage image-src">
       </div>
-    </template>
+    </template> -->
   </DefaultTheme.Layout>
 </template>
 
