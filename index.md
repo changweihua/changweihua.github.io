@@ -20,6 +20,9 @@ hero:
       text: 作者简历
       link: /about/resume
     - theme: alt
+      text: 最新动态
+      link: /blog
+    - theme: alt
       text: Github
       link: https://github.com/changweihua
 
