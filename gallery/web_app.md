@@ -38,7 +38,6 @@ mermaids: 1
 <RoughMermaid>
 
 ```mermaid
-%%{init: {'theme':'forest'}}%%
 sequenceDiagram
 	participant A as Host
 	participant B as WebAPP

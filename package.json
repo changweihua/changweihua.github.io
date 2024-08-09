@@ -140,7 +140,7 @@
     "vitepress-plugin-sandpack": "^1.1.4",
     "vitepress-plugin-search": "^1.0.4-alpha.22",
     "vitepress-sidebar": "^1.24.1",
-    "vue": "^3.4.36"
+    "vue": "^3.4.37"
   },
   "dependencies": {
     "@enra-gmbh/panolens": "^0.0.11",
