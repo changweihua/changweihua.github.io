@@ -110,15 +110,15 @@ const customElements = [
 
 export default withMermaid({
   mermaid: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#506bee',
-      // 'primaryTextColor': '#fff',
-      // 'primaryBorderColor': '#7C0000',
-      // 'lineColor': '#F8B229',
-      // 'secondaryColor': '#006100',
-      // 'tertiaryColor': '#fff'
-    },
+    // 'theme': 'base',
+    // 'themeVariables': {
+    //   'primaryColor': '#506bee',
+    //   // 'primaryTextColor': '#fff',
+    //   // 'primaryBorderColor': '#7C0000',
+    //   // 'lineColor': '#F8B229',
+    //   // 'secondaryColor': '#006100',
+    //   // 'tertiaryColor': '#fff'
+    // },
     fontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
     altFontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
 
@@ -199,8 +199,25 @@ export default withMermaid({
     // compression();
   },
   async transformHead(context): Promise<HeadConfig[]> {
-
+    // const { assets }= context
     const head = handleHeadMeta(context)
+
+// 相应地调整正则表达式以匹配字体
+    // const myFontFile = assets.find(file => /font-name\.\w+\.woff2/)
+    // if (myFontFile) {
+    //   return [
+    //     [
+    //       'link',
+    //       {
+    //         rel: 'preload',
+    //         href: myFontFile,
+    //         as: 'font',
+    //         type: 'font/woff2',
+    //         crossorigin: ''
+    //       }
+    //     ]
+    //   ]
+    // }
 
     return head
   },

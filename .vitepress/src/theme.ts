@@ -9,6 +9,12 @@ export const themeConfig: DefaultTheme.Config = {
   //   text: 'Edit this page on GitHub'
   // },
   logo: "/logo.png",
+  darkModeSwitchLabel: '切换主题',
+  lightModeSwitchTitle: '浅色',
+  darkModeSwitchTitle:'深色',
+  returnToTopLabel: '返回顶部',
+  langMenuLabel:'选择语言',
+  externalLinkIcon: true,
   socialLinks: [
     {
       icon: {

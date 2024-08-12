@@ -17,13 +17,11 @@ recommended: true
 
 ### 服务对象 ###
 
->
 
 ![服务对象](/images/cmono-f6b17711e73e91ff42cbe13b77cfcf7.png){data-zoomable}
 
 ### 整体流程 ###
 
->
 
 ![整体流程](/images/cmono-453d84abb453080a9b5787ecbc50c1d.png){data-zoomable}
 

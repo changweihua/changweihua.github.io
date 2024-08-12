@@ -3,7 +3,7 @@ import { onMounted } from 'vue'
 import { Svg2Roughjs, OutputType } from 'svg2roughjs'
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import mermaid from "mermaid";
+// import mermaid from "mermaid";
 
 const { frontmatter } = useData()
 const { Layout } = DefaultTheme
@@ -79,9 +79,6 @@ onMounted(() => {
   if (frontmatter.value['mermaids'] && frontmatter.value['mermaids'] > 0) {
     // observer.observe(targetNode, config);
   }
-  mermaid.initialize({
-    theme: 'dark',
-  });
 })
 
 </script>

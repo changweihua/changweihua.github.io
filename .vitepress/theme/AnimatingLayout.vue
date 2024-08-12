@@ -15,6 +15,9 @@ const enableTransitions = () =>
   window.matchMedia('(prefers-reduced-motion: no-preference)').matches
 
 provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
+
+  console.log(`切换至 ${isDark.value}`);
+
   if (!enableTransitions()) {
     isDark.value = !isDark.value
     return

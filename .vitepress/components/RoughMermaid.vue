@@ -9,8 +9,10 @@
 
 
 <script lang="ts" setup>
+import { useData } from 'vitepress'
 import * as roughjs from 'svg2roughjs'
-import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
+import mermaid from 'mermaid'
 
 const graphRef = ref()
 const sketchSvgRef = ref()
@@ -32,6 +34,27 @@ async function makeRough(svg: SVGSVGElement, div: HTMLElement) {
     sketch.style.maxWidth = '100%';
   }
 }
+
+const { isDark } = useData()
+
+watch(() => isDark.value, (nVal, oVal) => {
+  console.log(`current theme from ${oVal} to ${nVal}`)
+  if (nVal) {
+    mermaid.mermaidAPI.initialize({
+      theme: 'dark',
+    });
+    mermaid.mermaidAPI.setConfig({
+      theme: 'dark',
+    })
+  } else {
+    mermaid.mermaidAPI.initialize({
+      theme: 'default',
+    });
+    mermaid.mermaidAPI.setConfig({
+      theme: 'default',
+    })
+  }
+})
 
 // 创建MutationObserver实例
 const observer = new MutationObserver(function (mutations, instance) {

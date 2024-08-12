@@ -68,7 +68,7 @@ import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
 
 import 'vitepress-plugin-changelog/changelog.css'
-import busuanzi from 'busuanzi.pure.js'
+// import busuanzi from 'busuanzi.pure.js'
 import type { Theme as ThemeConfig } from 'vitepress'
 
 import { defaultVTheme } from '../hooks/useVChart';
@@ -101,6 +101,8 @@ export const Theme: ThemeConfig = {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
   extends: DefaultTheme,
+  // 使用注入插槽的包装组件覆盖 Layout
+  // Layout: MyLayout,
   Layout() {
 
     const props: Record<string, any> = {}
