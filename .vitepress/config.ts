@@ -1,8 +1,6 @@
 import { themeConfig } from "./src/theme";
-import { defaultConfig } from "./src/defaults";
+import { docsConfig } from "./src/docs";
 import { head } from "./src/head";
-//配置的中文文档设置
-import { zhConfig } from "./src/configs/zh";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { RSS } from "./src/rss";
 import { markdown } from "./src/markdown";
@@ -157,16 +155,19 @@ export default withMermaid({
       },
     },
   },
-  ...defaultConfig,
+  /* 文档配置 */
+  ...docsConfig,
   /* 标头配置 */
   head,
   /* 主题配置 */
   themeConfig,
   /* 语言配置 */
-  locales: {
-    root: { label: "简体中文", lang: "zh-CN", link: "/", ...zhConfig },
-    // en: { label: "English", lang: "en-US", link: "/en/", ...enConfig },
-  },
+  // locales: {
+  //   // 若果配置了root，则双击title的时候不会返回/路径下了，只会返回在link路径下
+  //   // root: { label: "简体中文", lang: "zh-CN", link: "/zh-CN",  ...zhConfig },
+  //   'zh-CN': { label: "简体中文", lang: "zh-CN", link: "/zh-CN", ...zhConfig },
+  //   'en-US': { label: "English", lang: "en-US", link: "/en-US/", ...enConfig },
+  // },
   lastUpdated: false,
   // titleTemplate: ':title - Custom Suffix',
   sitemap: {

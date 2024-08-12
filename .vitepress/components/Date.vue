@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Post } from '../posts.data'
+import type { Post } from '../blog.zh-CN.data'
 
 const props = defineProps<{ date: Post['date'] }>()
 

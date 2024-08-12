@@ -1,7 +1,6 @@
 import type { DefaultTheme } from "vitepress";
 // import nav from "./navs/zh";
-import sidebar from "./sidebars/zh";
-
+// import sidebar from "./sidebars/zh-CN.sidebar";
 
 export const themeConfig: DefaultTheme.Config = {
   // editLink: {
@@ -42,8 +41,8 @@ export const themeConfig: DefaultTheme.Config = {
     },
   ],
   // i18n路由
-  i18nRouting: false,
-  sidebar,
+  i18nRouting: true,
+  // sidebar,
   // algolia: {
   //   appId: "II80G4ELTA", // 需要替换
   //   apiKey: "96ae9b68f09fd07cbf58cbdf39b99cba", // 需要替换

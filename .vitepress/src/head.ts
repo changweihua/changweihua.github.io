@@ -20,19 +20,20 @@ export const head: HeadConfig[] = [
       src: "/clarity.js",
     },
   ],
-  // [
-  //   "script",
-  //   {
-  //     src: "https://unpkg.com/svg2roughjs/dist/svg2roughjs.umd.min.js",
-  //     type: 'module'
-  //   },
-  // ],
-  // [
-  //   "script",
-  //   {
-  //     src: "/mermaid.ext.js",
-  //   },
-  // ],
+  [
+    "meta", {
+      name: "keywords",
+      content: "CMONO.NET,changweihua,常伟华,Lance,changweihua.github.io,Vite,VitePress,AntDesign",
+    },],
+  ["meta",
+    {
+      name: "description",
+      content: "CMONO.NET 官方站点，主要记录平时工作总结及项目经历",
+    },],
+    ["meta",
+    {
+      bar: "custom meta",
+    },],
   [
     "script",
     {

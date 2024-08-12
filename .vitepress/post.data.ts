@@ -11,7 +11,7 @@ dayjs.tz.setDefault("Asia/Shanghai")
 dayjs.extend(relativeTime);
 dayjs.locale("zh-cn");
 
-export default createContentLoader('blog/**/*.md', {
+export default createContentLoader('zh-CN/blog/**/*.md', {
   transform(raw) {
 
     const postMap = {};
