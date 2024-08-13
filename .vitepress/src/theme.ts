@@ -7,6 +7,7 @@ export const themeConfig: DefaultTheme.Config = {
   //   pattern: 'https://github.com/changweihua/changweihua.github.io/edit/master//:path',
   //   text: 'Edit this page on GitHub'
   // },
+  // titleTemplate: ':title - Custom Suffix',
   logo: "/logo.png",
   darkModeSwitchLabel: '切换主题',
   lightModeSwitchTitle: '浅色',

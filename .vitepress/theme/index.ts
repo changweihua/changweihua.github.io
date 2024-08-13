@@ -2,18 +2,6 @@
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, nextTick, onMounted, watch, watchEffect } from "vue";
-import {
-  Tag,
-  Button,
-  Empty,
-  Progress,
-  Radio,
-  Spin,
-  Space,
-  Tabs,
-  DatePicker,
-  Tooltip
-} from "ant-design-vue";
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import { LiteTree } from '@lite-tree/vue'
 import DocAfter from "../components/DocAfter.vue";
@@ -44,6 +32,9 @@ import "@iconify/iconify";
 import FloatingVue from 'floating-vue'
 import 'floating-vue/dist/style.css';
 
+// 引入 Ant Design Vue
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/reset.css';
 // const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 
 import NotFound from "../components/NotFound.vue";
@@ -314,17 +305,7 @@ export const Theme: ThemeConfig = {
       //   trackPageview(siteIds, to)
       // }
 
-      app
-        .use(Space)
-        .use(Tag)
-        .use(Button)
-        .use(Progress)
-        .use(Empty)
-        .use(Spin)
-        .use(Tabs)
-        .use(Radio)
-        .use(Tooltip)
-        .use(DatePicker);
+     app.use(Antd);
     }
 
     app.component("demo-preview", AntDesignContainer);

@@ -2,7 +2,7 @@ import { DefaultTheme } from "vitepress";
 // , activeMatch: "^/$|^/index/"
 export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
   return [
-    { text: "首页", link: "/" },
+    { text: "首页", link: "/zh-CN/" },
     {
       text: "博客",
       link: "/zh-CN/blog/"

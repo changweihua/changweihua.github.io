@@ -21,7 +21,7 @@ hero:
       link: /zh-CN/about/resume
     - theme: alt
       text: 最新动态
-      link:  /zh-CN/blog
+      link:  /zh-CN/changelog
     - theme: alt
       text: Github
       link: https://github.com/changweihua
@@ -170,7 +170,7 @@ Technical testing 2015-09-01
 <div id="g-pointer-2"></div> -->
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref, toRaw } from 'vue'
 import { VPTeamPage,  VPTeamPageTitle,  VPTeamMembers } from 'vitepress/theme'
 import { BeakerIcon } from '@heroicons/vue/24/solid'
 import * as icons from 'simple-icons';

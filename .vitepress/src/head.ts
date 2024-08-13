@@ -1,6 +1,32 @@
 import type { HeadConfig } from "vitepress";
 
 export const head: HeadConfig[] = [
+  // [
+  //     'link',
+  //     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }
+  //     // would render:
+  //     //
+  //     // <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  //   ],
+
+  //   [
+  //     'script',
+  //     { id: 'register-sw' },
+  //     `;(() => {
+  //       if ('serviceWorker' in navigator) {
+  //         navigator.serviceWorker.register('/sw.js')
+  //       }
+  //     })()`
+  //     // would render:
+  //     //
+  //     // <script id="register-sw">
+  //     // ;(() => {
+  //     //   if ('serviceWorker' in navigator) {
+  //     //     navigator.serviceWorker.register('/sw.js')
+  //     //   }
+  //     // })()
+  //     // </script>
+  //   ]
   ['meta', { name: 'theme-color', content: '#ffffff' }],
   // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
   ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: 'any' }],
