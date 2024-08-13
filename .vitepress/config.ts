@@ -199,16 +199,16 @@ export default withMermaid({
   ignoreDeadLinks: true,
   markdown,
   // buildEnd是一个构建CLI挂钩，它将在构建（SSG）完成后但在VitePress CLI进程退出之前运行。
-  async buildEnd(siteConfig) {
-    console.log('buildEnd', siteConfig)
-    // compression();
-  },
+  // async buildEnd(siteConfig) {
+  //   console.log('buildEnd', siteConfig)
+  //   // compression();
+  // },
   // postRender是一个构建挂钩，在SSG渲染完成时调用。
   // 它将允许您在SSG期间处理传送的内容。
-  async postRender(context) {
-    console.log('postRender', context)
-    // ...
-  },
+  // async postRender(context) {
+  //   console.log('postRender', context)
+  //   // ...
+  // },
   // transformHead是一个构建钩子，用于在生成每个页面之前转换头。
   // 它将允许您添加无法静态添加到VitePress配置中的头条目。
   // 您只需要返回额外的条目，它们将自动与现有条目合并。

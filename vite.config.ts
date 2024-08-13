@@ -9,7 +9,7 @@ import { vuePreviewPlugin } from "vite-plugin-vue-preview";
 // import AntdvResolver from "antdv-component-resolver";
 // import { ViteAliases } from "vite-aliases";
 import UnoCSS from "unocss/vite";
-import { SearchPlugin } from "vitepress-plugin-search";
+// import { SearchPlugin } from "vitepress-plugin-search";
 import flexSearchIndexOptions from "flexsearch";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -333,7 +333,7 @@ export default defineConfig({
     //    */
     //   root: process.cwd(),
     // }),
-    SearchPlugin(options),
+    // SearchPlugin(options),
     UnoCSS(),
   ],
   resolve: {
