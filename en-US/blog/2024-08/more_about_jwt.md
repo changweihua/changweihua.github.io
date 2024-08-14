@@ -78,8 +78,6 @@ HMACSHA256(
 
 整个流程可以表示为下面的流程图：
 
-<RoughMermaid>
-
 ```mermaid
 sequenceDiagram
   actor CLIENT as 客户端
@@ -93,8 +91,6 @@ sequenceDiagram
     SERVER->>SERVER: 验证Token
     SERVER->>CLIENT: 返回请求结果
 ```
-
-</RoughMermaid>
 
 ## JWT的优势 ##
 

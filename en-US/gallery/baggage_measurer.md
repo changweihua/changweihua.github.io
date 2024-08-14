@@ -21,8 +21,6 @@ mermaids: 3
 
 ## 业务流程 ##
 
-<RoughMermaid>
-
 ```mermaid
 graph TB
   A[开始] --> B[点击查询按钮]
@@ -48,11 +46,7 @@ graph TB
 
 ```
 
-</RoughMermaid>
-
 ## 操作流程 ##
-
-<RoughMermaid>
 
 ```mermaid
   sequenceDiagram
@@ -108,8 +102,6 @@ graph TB
     end
 ```
 
-</RoughMermaid>
-
 ## 功能页面 ##
 
 <div class="grid grid-cols-3 gap-4">
@@ -142,8 +134,6 @@ graph TB
 
 ## 硬件交互 ##
 
-<RoughMermaid>
-
 ```mermaid
 graph TD;
   subgraph 行李检测仪
@@ -165,5 +155,3 @@ graph TD;
     I[后台服务器] -.->|消息传递| B
   end
 ```
-
-</RoughMermaid>

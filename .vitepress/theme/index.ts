@@ -46,6 +46,7 @@ import PageFooter from "../components/PageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue"
 import MagicCard from "../components/MagicCard.vue"
 import RoughMermaid from "../components/RoughMermaid.vue"
+import StyledMermaid from "../components/StyledMermaid.vue"
 
 import { Icon } from "@iconify/vue";
 import mediumZoom from "medium-zoom";
@@ -325,6 +326,7 @@ export const Theme: ThemeConfig = {
     app.component("CopyRight", copyright);
     app.component("HoverGrid", HoverGrid);
     app.component("MagicCard", MagicCard);
+    app.component('StyledMermaid', StyledMermaid)
 
     app.use(VueResizeObserver);
     app.use(FloatingVue);

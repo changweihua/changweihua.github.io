@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { nextTick, provide, useSlots } from 'vue'
+import { nextTick, provide, useSlots, onMounted } from 'vue'
 
 const { isDark } = useData()
 const slots = Object.keys(useSlots())
@@ -10,9 +10,6 @@ const enableTransitions = () =>
   window.matchMedia('(prefers-reduced-motion: no-preference)').matches
 
 provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
-
-  console.log(`切换至 ${isDark.value}`);
-
   if (!enableTransitions()) {
     isDark.value = !isDark.value
     return
@@ -40,6 +37,37 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     }
   )
 })
+
+function query(selector) {
+  return Array.from(document.querySelectorAll(selector));
+}
+
+var observer = new IntersectionObserver(
+  function (changes) {
+    changes.forEach(function (change) {
+      const container = change.target;
+      console.log(container)
+      if (container) {
+        var content = container.querySelector('template')?.content;
+        if (content) {
+          container.appendChild(content);
+        }
+        observer.unobserve(container);
+      }
+    });
+  }
+);
+
+onMounted(() => {
+  // query('.rough-mermaid').forEach(function (item) {
+  //   observer.observe(item);
+  // });
+})
+
+query('.lazy-loaded').forEach(function (item) {
+  observer.observe(item);
+});
+
 
 // v-slot:default="slotProps"
 </script>

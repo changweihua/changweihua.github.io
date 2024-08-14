@@ -11,6 +11,7 @@ import { renderSandbox } from 'vitepress-plugin-sandpack'
 import footnote from 'markdown-it-footnote';
 import mathjax3 from 'markdown-it-mathjax3';
 import { ImagePlugin } from '../plugins/markdown/image'
+import mermaidPlugin from '../plugins/markdown/rough-mermaid'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
 import { default as replPlugin } from 'vitepress-markdown-it-repl';
 // import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
@@ -41,6 +42,7 @@ const markdown: MarkdownOptions | undefined = {
       "data-fancybox": "gallery",
     });
     md.use(timeline);
+    md.use(mermaidPlugin)
     md
       // the second parameter is html tag name
       .use(container, 'sandbox', {

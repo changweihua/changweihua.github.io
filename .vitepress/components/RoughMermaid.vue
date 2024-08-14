@@ -7,7 +7,6 @@
   </div>
 </template>
 
-
 <script lang="ts" setup>
 import { useData } from 'vitepress'
 import * as roughjs from 'svg2roughjs'

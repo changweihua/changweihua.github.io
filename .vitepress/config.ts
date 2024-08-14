@@ -10,6 +10,7 @@ import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
 import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
 import vitepressProtectPlugin from "vitepress-protect-plugin"
+import { defineConfig } from "vite";
 // import compression from "vitepress-plugin-compression";
 // import AutoIndex from 'vite-plugin-vitepress-auto-index';
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
@@ -106,26 +107,26 @@ const customElements = [
   "annotation-xml",
 ];
 
-export default withMermaid({
-  mermaid: {
-    // 'theme': 'base',
-    // 'themeVariables': {
-    //   'primaryColor': '#506bee',
-    //   // 'primaryTextColor': '#fff',
-    //   // 'primaryBorderColor': '#7C0000',
-    //   // 'lineColor': '#F8B229',
-    //   // 'secondaryColor': '#006100',
-    //   // 'tertiaryColor': '#fff'
-    // },
-    fontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
-    altFontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
-
-    //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
-  },
-  // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
-  mermaidPlugin: {
-    class: "mermaid rough-mermaid" // 为父容器设置额外的CSS类
-  },
+export default defineConfig({
+  // mermaid: {
+  //   // 'theme': 'base',
+  //   // 'themeVariables': {
+  //   //   'primaryColor': '#506bee',
+  //   //   // 'primaryTextColor': '#fff',
+  //   //   // 'primaryBorderColor': '#7C0000',
+  //   //   // 'lineColor': '#F8B229',
+  //   //   // 'secondaryColor': '#006100',
+  //   //   // 'tertiaryColor': '#fff'
+  //   // },
+  //   fontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
+  //   altFontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
+  //   startOnLoad: false
+  //   //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  // },
+  // // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
+  // mermaidPlugin: {
+  //   class: "mermaid rough-mermaid" // 为父容器设置额外的CSS类
+  // },
   vite: {
     logLevel: 'info',
     // ↓↓↓↓↓

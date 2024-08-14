@@ -37,8 +37,6 @@ mermaids: 1
 
 ## 流程 ##
 
-<RoughMermaid>
-
 ```mermaid
 sequenceDiagram
 	participant A as Host
@@ -82,9 +80,6 @@ sequenceDiagram
 	%% left or right
 	note left of A:整体基于<br>iframe架构
 ```
-
-</RoughMermaid>
-
 
 MAUI [^1]
 
