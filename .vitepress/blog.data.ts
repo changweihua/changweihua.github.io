@@ -18,3 +18,29 @@ export default {
 //     return (await fetch('...')).json()
 //   }
 // }
+
+
+// Support i18n in contentLoader
+// import { createContentLoader, type ContentData, type SiteConfig } from 'vitepress'
+
+// export type Data = Record<string, ContentData[]>
+// export declare const data: Data
+
+// const config: SiteConfig = (globalThis as any).VITEPRESS_CONFIG
+// const locales = Object.keys(config.userConfig.locales ?? {})
+
+// // or simply - const locales = ['root', 'fr']
+
+// export default createContentLoader('**/posts/**/*.md', {
+//   transform(data) {
+//     const grouped: Data = {}
+
+//     data.forEach((item) => {
+//       let locale = item.url.split('/')[1]
+//       locale = locales.includes(locale) ? locale : 'root'
+//       ;(grouped[locale] ??= []).push(item)
+//     })
+
+//     return grouped
+//   }
+// })

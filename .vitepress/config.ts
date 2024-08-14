@@ -183,6 +183,9 @@ export default withMermaid({
       return items;
     },
   },
+  rewrites: {
+    '/index.md': '/zh-CN/index.md',
+  },
   // transformHtml是一个构建挂钩，用于在保存到磁盘之前转换每个页面的内容。
   // Don't mutate anything inside the ctx.
   // Also, modifying the html content may cause hydration problems in runtime.
