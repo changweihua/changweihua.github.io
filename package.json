@@ -126,6 +126,9 @@
     "vfonts": "^0.0.3",
     "vite": "^5.4.0",
     "vite-aliases": "^0.11.7",
+    "vite-plugin-cdn-import": "^1.0.1",
+    "vite-plugin-external": "^4.3.1",
+    "vite-plugin-externals": "^0.6.2",
     "vite-plugin-git-revision-info": "^1.1.0",
     "vite-plugin-html-config": "^1.0.11",
     "vite-plugin-pwa": "^0.20.1",
@@ -139,7 +142,7 @@
     "vitepress-plugin-mermaid": "^2.0.16",
     "vitepress-plugin-sandpack": "^1.1.4",
     "vitepress-plugin-search": "^1.0.4-alpha.22",
-    "vitepress-sidebar": "^1.24.1",
+    "vitepress-sidebar": "^1.24.2",
     "vue": "^3.4.37"
   },
   "dependencies": {

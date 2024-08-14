@@ -267,7 +267,7 @@ export const Theme: ThemeConfig = {
   enhanceApp: async (ctx) => {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
-    const { app, router, siteData } = ctx;
+    const { app, router } = ctx;
     // // define options
     // const timeagoOptions = {
     //   converterOptions: {
@@ -275,6 +275,8 @@ export const Theme: ThemeConfig = {
     //   },
     //   locale: zhCN
     // }
+
+    DefaultTheme.enhanceApp(ctx);
 
     // app.use(timeago,  timeagoOptions) // register timeago with options
 
@@ -305,7 +307,8 @@ export const Theme: ThemeConfig = {
       //   trackPageview(siteIds, to)
       // }
 
-     app.use(Antd);
+      app.use(Antd);
+      app.component("RoughMermaid", RoughMermaid);
     }
 
     app.component("demo-preview", AntDesignContainer);
@@ -322,14 +325,11 @@ export const Theme: ThemeConfig = {
     app.component("CopyRight", copyright);
     app.component("HoverGrid", HoverGrid);
     app.component("MagicCard", MagicCard);
-    app.component("RoughMermaid", RoughMermaid);
 
     app.use(VueResizeObserver);
     app.use(FloatingVue);
 
     app.component('LiteTree', LiteTree)
-
-    DefaultTheme.enhanceApp(ctx);
 
     // app.provide(InjectionKey, {
     //   // 配置...

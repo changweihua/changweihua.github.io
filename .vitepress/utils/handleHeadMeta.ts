@@ -19,8 +19,8 @@ export function handleHeadMeta(context: TransformContext) {
     twitterCard, twitterDescription, twitterImage,
   ]
 
-  head.push(['meta', { property: 'og:title', content: context.pageData.frontmatter.title }])
-  head.push(['meta', { property: 'og:description', content: context.pageData.frontmatter.description }])
+  // head.push(['meta', { property: 'og:title', content: context.pageData.frontmatter.title }])
+  // head.push(['meta', { property: 'og:description', content: context.pageData.frontmatter.description }])
 
   return [...head, ...twitterHead]
 }

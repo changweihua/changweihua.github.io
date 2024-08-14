@@ -1,7 +1,7 @@
 ---
 lastUpdated: true
-commentabled: true
-recommended: true
+commentabled: false
+recommended: false
 title: 在vue3中如何编写一个标准的hooks
 description: 在vue3中如何编写一个标准的hooks
 date: 2024-08-09 14:18:00
@@ -70,7 +70,7 @@ Vue Composition API 与 React Hooks 都具有逻辑组合能力，但存在一�
 
 记住这些军规后，我们尝试自己写一个自定义hooks函数。下面代码实现了一个自定义的钩子函数，用于处理组件的事件监听和卸载逻辑，以达到组件逻辑的封装和复用目的。
 
-```ts
+```vue
 import { ref, onMounted, onUnmounted } from 'vue';
 
 function useEventListener(eventType, listener, options = false) {
@@ -96,7 +96,7 @@ function useEventListener(eventType, listener, options = false) {
 
 对于简单的数字累加自定义hooks方法，我们可以这样写：
 
-```ts
+```vue
 import { ref } from 'vue';
 
 function useCounter(initialValue = 0) {
@@ -111,7 +111,7 @@ function useCounter(initialValue = 0) {
 
 使用hooks
 
-```ts
+```vue
 <template>
   <div>{{ count }}</div>
 </template>

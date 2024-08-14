@@ -9,10 +9,13 @@ import { vuePreviewPlugin } from "vite-plugin-vue-preview";
 // import AntdvResolver from "antdv-component-resolver";
 // import { ViteAliases } from "vite-aliases";
 import UnoCSS from "unocss/vite";
+import createExternal from 'vite-plugin-external'
+import { viteExternalsPlugin } from 'vite-plugin-externals'
 // import { SearchPlugin } from "vitepress-plugin-search";
 import flexSearchIndexOptions from "flexsearch";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import cdn from 'vite-plugin-cdn-import'
 import htmlConfig from "vite-plugin-html-config";
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, path.join(process.cwd(), 'env'))[target]
@@ -143,6 +146,11 @@ export default defineConfig({
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     // chunkSizeLimit: 5000, // 设置 chunk 大小的限制为 5000 KiB
     emptyOutDir: true, // 在构建之前清空输出目录
+    // rollupOptions: {
+    //   output: {
+    //     format: 'iife'
+    //   }
+    // },
     // rollupOptions: {
     //   cache: false,
     //   maxParallelFileOps: 2,
@@ -335,6 +343,22 @@ export default defineConfig({
     // }),
     // SearchPlugin(options),
     UnoCSS(),
+    // createExternal({
+    //   externals: {
+    //     vue: 'Vue',
+    //   },
+    // }),
+    // cdn({
+    //   modules: ['vue'],
+    //   enableInDevMode: true
+    // }),
+    // viteExternalsPlugin({
+    //   vue: 'Vue',
+    //   // react: 'React',
+    //   // 'react-dom': 'ReactDOM',
+    //   // // value support chain, transform to window['React']['lazy']
+    //   // lazy: ['React', 'lazy']
+    // }, { disableInServe: true }),
   ],
   resolve: {
     alias: {

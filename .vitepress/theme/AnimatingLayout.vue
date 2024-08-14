@@ -2,11 +2,6 @@
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide, useSlots } from 'vue'
-// import DocAfter from "../components/DocAfter.vue";
-// import AnimationTitle from "../components/AnimationTitle.vue";
-// import Recommend from "../components/Recommend.vue";
-// import NotFound from "../components/NotFound.vue";
-// import PageFooter from "../components/PageFooter.vue";
 
 const { isDark } = useData()
 const slots = Object.keys(useSlots())
