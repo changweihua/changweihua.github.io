@@ -1,7 +1,7 @@
 <template>
   <div class="w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-3">
     <div class="linkcard" v-for="category in categories">
-      <a :href="category.link" target="_blank">
+      <a :href="category.link">
         <p class="description">{{ category.title }}<br><span>{{ category.description }}</span></p>
         <div class="logo">
           <img width="70px" height="70px" :src="`${category.cover || '/logo.png'}`" :alt="category.coverAlt" />

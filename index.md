@@ -15,6 +15,8 @@ import { useRouter } from 'vitepress'
 
 const router = useRouter()
 // router.onBeforeRouteChange = (to: string) => false;
-router.go('/zh-CN/')
+router.go('/en-US/')
+
+// window.location.replace(`${window.location.href}zh-CN/`)
 
 </script>

@@ -76,60 +76,51 @@
 @dashboard-font-family: AlibabaPuHuiTi, JetBrainsMono, HYCuJianHeiJ;
 
 h1 {
-  background: -webkit-linear-gradient(-45deg, #506bee 5%, #5ad7dd 15%);
+  background: -webkit-linear-gradient(-45deg, #506bee 5%, #5ad7dd 35%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* 提示框背景颜色 */
-:root {
-  --vp-custom-block-tip-bg: var(--vp-c-green-soft);
-}
+// /* 提示框背景颜色 */
+// :root {
+//   --vp-custom-block-tip-bg: var(--vp-c-green-soft);
+// }
 
-/* 提示框 */
-.custom-block.tip {
-  border-color: var(--vp-c-green-2);
-}
+// /* 提示框 */
+// .custom-block.tip {
+//   border-color: var(--vp-c-green-2);
+// }
 
-/* 警告框 */
-.custom-block.warning {
-  /* border-color: #d97706; */
-  border-color: var(--vp-c-yellow-2);
-}
+// /* 警告框 */
+// .custom-block.warning {
+//   /* border-color: #d97706; */
+//   border-color: var(--vp-c-yellow-2);
+// }
 
-/* 危险框 */
-.custom-block.danger {
-  /* border-color: #f43f5e; */
-  border-color: var(--vp-c-red-2);
-}
+// /* 危险框 */
+// .custom-block.danger {
+//   /* border-color: #f43f5e; */
+//   border-color: var(--vp-c-red-2);
+// }
 
 /* 引用块 */
-.vp-doc blockquote {
-  border-radius: 5px;
-  padding: 10px 16px;
-  background-color: var(--vp-c-brand-lightest);
-  position: relative;
-  border-left: 4px solid var(--vp-c-brand);
-}
+// .vp-doc blockquote {
+//   border-radius: 5px;
+//   padding: 10px 16px;
+//   background-color: var(--vp-c-brand-lightest);
+//   position: relative;
+//   border-left: 4px solid var(--vp-c-brand);
+// }
 
-.vp-doc a[href^="https://www.youtube.com/"]:before,[href^="https://www.bilibili.com/"]:before
-{
-  content: "➹";
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  border-radius: 10px;
-  vertical-align: middle;
-  position: relative;
-  top: -2px;
-  color: var(--vp-c-green-1);
-  font-size: 13px;
-  border: 3px solid var(--vp-c-green-1);
-  margin-right: 8px;
-  margin-left: 4px;
-  line-height: 15px;
-  padding-left: 1.5px;
+
+.vp-doc blockquote::before {
+color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
 }
 
 /* 卡片背景 */

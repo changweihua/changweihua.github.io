@@ -281,11 +281,21 @@ export const Theme: ThemeConfig = {
 
     // app.use(timeago,  timeagoOptions) // register timeago with options
 
-    router.onBeforeRouteChange = (to) => {
+    router.onBeforeRouteChange =  async (to) => {
       console.log('路由将改变为: ', to);
+
+      // Here you can set the routes you want to configure.
+      if (to == '/') {
+        console.log('重定向至默认语言页')
+        await router.go('/zh-CN/')
+        return false
+      }
+
       if (typeof window._hmt !== 'undefined') {
         window._hmt.push(['_trackPageview', to]);
       }
+
+      return true
     };
 
     if (inBrowser) {
