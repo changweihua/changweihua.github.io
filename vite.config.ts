@@ -2,7 +2,8 @@
 import { defineConfig, loadEnv } from "vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
-import Components from "unplugin-vue-components/vite";
+import Components from "unplugin-vue-components/vite";// 自动导入vue中hook reactive ref等
+import AutoImport from "unplugin-auto-import/vite"
 // import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 // import { fileURLToPath } from "node:url";
 import { vuePreviewPlugin } from "vite-plugin-vue-preview";
@@ -15,7 +16,7 @@ import { viteExternalsPlugin } from 'vite-plugin-externals'
 import flexSearchIndexOptions from "flexsearch";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import cdn from 'vite-plugin-cdn-import'
+import { autoComplete, Plugin as importToCDN } from 'vite-plugin-cdn-import'
 import htmlConfig from "vite-plugin-html-config";
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, path.join(process.cwd(), 'env'))[target]
@@ -196,6 +197,11 @@ export default defineConfig({
     // custom
     // MarkdownTransform(),
     // AutoImport({
+    //   //安装两行后，在组件中不用再导入ref，reactive等
+    //   imports: ['vue', 'vue-router'],
+    //   dts: "src/auto-import.d.ts",
+    // }),
+    // AutoImport({
     //   imports:["vue","vue-router"],
     //   dts:'src/auto-import.d.ts',   // 路径下自动生成文件夹存放全局指令
     //   // dts: true, // 会在根目录生成auto-imports.d.ts，里面可以看到自动导入的api
@@ -348,8 +354,22 @@ export default defineConfig({
     //     vue: 'Vue',
     //   },
     // }),
-    // cdn({
-    //   modules: ['vue'],
+    // importToCDN({
+    //   modules: [
+    //     'vue',
+    //     {
+    //       name: 'vue-demi',
+    //       var: 'VueDemi',
+    //       path: `https://unpkg.com/vue-demi@0.14.10`,
+    //     },
+    //     // {
+    //     //   name: 'element-plus',
+    //     //   var: 'ElementPlus', //根据main.js中定义的来
+    //     //   // version: '2.2.17',
+    //     //   path: 'dist/index.full.js',
+    //     //   css: 'dist/index.css'
+    //     // }
+    //   ],
     //   enableInDevMode: true
     // }),
     // viteExternalsPlugin({

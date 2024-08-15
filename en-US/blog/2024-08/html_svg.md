@@ -64,7 +64,7 @@ insertElement(tagName,options,father){
   }
 ```
 
-```js [react]
+```js @/[react]
 #查询yarn版本
 yarn -v
 ```
