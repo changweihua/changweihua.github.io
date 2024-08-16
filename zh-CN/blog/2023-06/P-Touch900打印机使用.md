@@ -14,7 +14,7 @@ pageClass: blog-page-class
 
 >
 
-<img class="w-full shadow-2xl max-h-56 rounded aspect-video" src="/images/cmono-20230620145254.jpg" data-fancybox="gallery" />
+![设备](/images/cmono-20230620145254.jpg){data-zoomable}
 
 ## 驱动安装 ##
 
@@ -66,8 +66,11 @@ Windows 11, Windows 10 (32-bit), Windows 10 (64-bit), Windows 8.1 (32-bit), Wind
 用户点击打印按钮，打开预览弹窗(iframe方式)，在iframe页面内调用官方SDK和提取设计的二维码模板进行二维码图片预览和打印。
 
 <div class="grid grid-cols-2 gap-4">
-  <div><img class="w-full rounded aspect-square" src="/images/cmono-20230620111603.png" data-fancybox="gallery" /></div>
-  <div><img class="w-full rounded aspect-square" src="/images/cmono-20230620111612.png" data-fancybox="gallery" /></div>
+
+![text](/images/cmono-20230620111603.png){data-zoomable}
+
+![text](/images/cmono-20230620111612.png){data-zoomable}
+
 </div>
 
 **代码**
@@ -266,4 +269,4 @@ const bodystyle = {
 
 ```
 
-<img class="w-full rounded aspect-radio" src="/images/cmono-20230620144912.png" data-fancybox="gallery" />
+![text](/images/cmono-20230620144912.png){data-zoomable}

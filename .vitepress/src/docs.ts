@@ -12,19 +12,6 @@ const docsConfig: UserConfig<DefaultTheme.Config> = {
   head: [
     // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
     ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    [
-      "link",
-      {
-        rel: "stylesheet",
-        href: "/fancybox.css",
-      },
-    ],
-    [
-      "script",
-      {
-        src: "/fancybox.umd.js",
-      },
-    ],
     // 设置 描述 和 关键词
     [
       "meta",

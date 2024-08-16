@@ -85,6 +85,15 @@ sequenceDiagram
 
 ### 无锡硕放机场新生产统计系统 ###
 
+<div class="grid grid-cols-3 gap-4">
+
+![alt text](/images/cmono-微信图片_20240816150009.png){data-zoomable}
+
+![alt text](/images/cmono-微信图片_20240816150020.png){data-zoomable}
+
+![alt text](/images/cmono-微信图片_20240816150027.png){data-zoomable}
+
+</div>
 
 MAUI [^1]
 
