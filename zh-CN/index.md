@@ -268,7 +268,6 @@ const initWorker = () => {
 
 
 onMounted(() => {
-  console.log('initWorker')
   nextTick(()=>{
     initWorker()
   })

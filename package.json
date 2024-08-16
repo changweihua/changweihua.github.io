@@ -147,10 +147,12 @@
     "vue": "^3.4.38"
   },
   "dependencies": {
+    "@dash14/svg-pan-zoom": "^3.6.9",
     "@enra-gmbh/panolens": "^0.0.11",
     "@faker-js/faker": "^8.4.1",
     "@heroicons/vue": "^2.1.5",
     "@iconify-json/line-md": "^1.1.39",
+    "@iconify-json/mdi": "^1.1.68",
     "@iconify/iconify": "^3.1.1",
     "@lite-tree/vue": "^1.1.4",
     "@mdit-vue/shared": "^2.1.3",
@@ -195,9 +197,11 @@
     "obj2gltf": "^3.1.6",
     "ofetch": "^1.3.4",
     "oimo-esm": "^1.0.10",
+    "screenfull": "^6.0.2",
     "segment": "^0.1.3",
     "simple-git": "^3.25.0",
     "svg-pan-zoom": "^3.6.1",
+    "svg-zoom-drag-vue-directives": "^1.0.12",
     "svg2roughjs": "^3.2.0",
     "three": "^0.167.1",
     "vite-plugin-monitor": "^0.2.1",
@@ -215,6 +219,7 @@
     "vitepress-plugin-tabs": "^0.5.0",
     "vitepress-protect-plugin": "^1.0.6",
     "vue-resize-observer": "^2.0.16",
+    "vue-svg-pan-zoom": "^2.1.0",
     "vue-timeago3": "^2.3.2",
     "vue3-simple-icons": "^13.2.0",
     "xmind-embed-viewer": "^1.2.0"

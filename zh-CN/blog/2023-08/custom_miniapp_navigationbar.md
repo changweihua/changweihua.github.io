@@ -19,7 +19,7 @@ date: 2023-08
 
 开干！！！
 
-<video src="/videos/f61955f40743bedd5ece3d9f8df6c315.mp4" muted autoplay loop />
+<video src="/videos/f61955f40743bedd5ece3d9f8df6c315.mp4" muted autoplay loop playsinlie />
 
 ## 步骤解析 ##
 

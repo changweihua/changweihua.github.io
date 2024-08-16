@@ -2,7 +2,7 @@
   <div class="card">
     <div class="box">
       <div class="img_box">
-        <video src="/videos/cover.mp4" muted autoplay loop />
+        <video src="/videos/cover.mp4" muted autoplay loop playsinlie />
       </div>
     </div>
 

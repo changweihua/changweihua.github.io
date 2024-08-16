@@ -2,24 +2,44 @@
   <div class="mermaid-graph">
     <div class="graph-div" ref="svgRef"></div>
     <div class="sketch-div cursor-pointer position-relative" ref="sketchRef">
-      <div class="download" @click="downloadData" style="position:absolute;right:6px;top: 6px;cursor:pointer">
-        <!-- <i class="i-line-md:download-loop" /> -->
-        <my-icon icon="line-md:download-loop" :width="24" :height="24" />
+      <div class="download flex flex-row gap-3" style="position:absolute;right:6px;top: 6px;cursor:pointer">
+        <my-icon v-aria-empty
+          :icon="isFullElementTag ? 'icon-park-outline:off-screen-one' : 'icon-park-outline:full-screen-one'"
+          @click="toggleFullscreen()" v-tooltip="'全屏'" :width="24" :height="24" />
+        <my-icon v-aria-empty icon="line-md:download-loop" @click="downloadData" v-tooltip="'下载'" :width="24"
+          :height="24" />
       </div>
       <svg ref="sketchSvgRef"></svg>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { useData } from 'vitepress'
+import { useData, inBrowser } from 'vitepress'
 import { ref, onMounted, watch } from 'vue'
 import * as roughjs from 'svg2roughjs'
 import mermaid from 'mermaid'
-import svgPanZoom from 'svg-pan-zoom'
+import svgPanZoom, { Instance } from '@dash14/svg-pan-zoom'
+import { useScreenfullEffect } from '@vp/utils/useScreenfullEffect'
+import { delay } from 'lodash-es'
 
 const svgRef = ref()
 const sketchRef = ref<HTMLDivElement>()
 const sketchSvgRef = ref<SVGSVGElement>()
+
+let panZoomTiger: Instance;
+
+const { handleFullscreenElement, isFullElementTag } = useScreenfullEffect()
+
+function toggleFullscreen() {
+  handleFullscreenElement(sketchRef.value!)
+  delay(function () {
+    if (panZoomTiger) {
+      panZoomTiger.resize();
+      panZoomTiger.updateBBox();
+      panZoomTiger.center()
+    }
+  }, 500)
+}
 
 async function makeRough(svg: SVGSVGElement, id: string) {
   // const svgEle = document.createElementNS("http://www.w3.org/2000/svg", 'svg')
@@ -44,17 +64,28 @@ async function makeRough(svg: SVGSVGElement, id: string) {
 
 }
 
+
 async function makePanZoom(svg: SVGSVGElement, id: string) {
+
+  // import('svg-pan-zoom').then((module) => {
+  // use code
+  // console.log(module)
+  // const svgPanZoom = module.default
   // let svg = container.getBBox();
-  let height = svg.getBBox().height;
-  let aHeight = height > 800 ? 800 : height;
+  const height = svg.getBBox().height;
+  const aHeight = height > 800 ? 800 : height;
   svg.setAttribute('style', 'height: ' + aHeight + 'px;overflow:scroll;');
-  let panZoomTiger = svgPanZoom('#' + id, {
-    zoomEnabled: true,
-    controlIconsEnabled: false
-  });
+
+  if (!panZoomTiger) {
+    panZoomTiger = svgPanZoom(`#${props.id}r`, {
+      zoomEnabled: true,
+      controlIconsEnabled: false,
+      fit: true
+    });
+  }
   panZoomTiger.resize();
   panZoomTiger.updateBBox();
+  // })
 }
 
 function downloadData() {
@@ -126,11 +157,15 @@ const render = async (id, code) => {
   svgRef.value.innerHTML = svg
   await makeRough(svgRef.value.querySelector('svg'), id)
 
-  await makePanZoom(sketchSvgRef.value!, `${props.id}r`)
+  if (inBrowser) {
+    await makePanZoom(sketchSvgRef.value!, `${props.id}r`)
+  }
+
 }
 // 在组件挂载后进行mermaid渲染
 onMounted(async () => {
   await render(props.id, decodeURIComponent(props.code!))
+
 })
 
 </script>

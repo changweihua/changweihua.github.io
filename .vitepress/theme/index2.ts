@@ -1,33 +1,39 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, nextTick, onMounted, watch } from "vue";
+import { h, nextTick, onMounted, watch, watchEffect } from "vue";
+import { AntDesignContainer } from "@vitepress-demo-preview/component";
+import { LiteTree } from '@lite-tree/vue'
 import DocAfter from "../components/DocAfter.vue";
 import Recommend from "../components/Recommend.vue";
-import CopyRight from "../components/CopyRight.vue";
+import copyright from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
+import { svgWheel, svgDrag } from "svg-zoom-drag-vue-directives";
 
 import { Sandbox } from "vitepress-plugin-sandpack";
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
 import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
 import AnimationTitle from "../components/AnimationTitle.vue";
 
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/reset.css';
-
 import "./styles/index.less";
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
+import vitepressLifeProgress from "vitepress-plugin-life-progress";
+import "vitepress-plugin-life-progress/lib/css/index.css";
 import "animate.css";
 
 import "@iconify/iconify";
 import FloatingVue from 'floating-vue'
 import 'floating-vue/dist/style.css';
 
+// 引入 Ant Design Vue
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/reset.css';
+// const links: { url: string; lastmod: PageData["lastUpdated"] }[] = [];
 
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
@@ -37,6 +43,7 @@ import HomeContributors from "../components/HomeContributors.vue";
 import PageFooter from "../components/PageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue"
 import MagicCard from "../components/MagicCard.vue"
+import RoughMermaid from "../components/RoughMermaid.vue"
 import StyledMermaid from "../components/StyledMermaid.vue"
 
 import { Icon } from "@iconify/vue";
@@ -47,6 +54,10 @@ import VueResizeObserver from "vue-resize-observer";
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
+import vitepressBackToTop from "vitepress-plugin-back-to-top";
+import "vitepress-plugin-back-to-top/dist/style.css";
+
+import 'vitepress-plugin-changelog/changelog.css'
 import type { Theme as ThemeConfig } from 'vitepress'
 
 import { defaultVTheme } from '../hooks/useVChart';
@@ -102,6 +113,10 @@ export const Theme: ThemeConfig = {
       //     tagline: "阳光大男孩",
       //   }),
       // layout: 'home'
+      // // "home-hero-before": () =>
+      // //   h(PlaceHolder, {
+      // //     name: "home-hero-before",
+      // //   }),
       "home-hero-info": () =>
         h(AnimationTitle, {
           name: "CMONO.NET",
@@ -251,22 +266,15 @@ export const Theme: ThemeConfig = {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     const { app, router } = ctx;
+    // // define options
+    // const timeagoOptions = {
+    //   converterOptions: {
+    //     includeSeconds: false
+    //   },
+    //   locale: zhCN
+    // }
 
     DefaultTheme.enhanceApp(ctx);
-
-    app.directive('aria-empty',{
-        //指令绑定到元素时调用
-        mounted(el,binding){
-          el.removeAttribute("aria-hidden");
-          // // 获取节点
-          // let ariaEls = el.querySelectorAll("svg");
-          // ariaEls.forEach((item) => {
-          //   item.removeAttribute("aria-hidden");
-          // });
-        },
-        //指令与元素解绑时调用
-        unmounted(el,binding){}
-    })
 
     // app.mixin({
     //   async mounted() {
@@ -282,10 +290,14 @@ export const Theme: ThemeConfig = {
     //   app.use(plugin.default)
     // }
 
+    // app.use(timeago,  timeagoOptions) // register timeago with options
+
     router.onBeforeRouteChange =  async (to) => {
+      console.log('路由将改变为: ', to);
 
       // Here you can set the routes you want to configure.
       if (to == '/') {
+        console.log('重定向至默认语言页')
         await router.go('/zh-CN/')
         return false
       }
@@ -297,15 +309,33 @@ export const Theme: ThemeConfig = {
       return true
     };
 
-    router.onAfterRouteChanged = () => {
-    }
-
     if (inBrowser) {
       vitepressNprogress(ctx);
+      vitepressBackToTop({
+        // default
+        threshold: 300,
+      });
+      svgWheel(app);
+      svgDrag(app);
+      router.onAfterRouteChanged = () => {
+        // busuanzi.fetch()
+      }
+      // enhanceAppWithTabs(app);
+      // app.use(useResize);
+      // registerAnalytics(siteIds)
+      // window.addEventListener('hashchange', () => {
+      //   const { href: url } = window.location
+      //   trackPageview(siteIds, url)
+      // })
+      // router.onAfterRouteChanged = (to) => {
+      //   trackPageview(siteIds, to)
+      // }
 
       app.use(Antd);
+      app.component("RoughMermaid", RoughMermaid);
       app.component('StyledMermaid', StyledMermaid)
 
+      app.component("demo-preview", AntDesignContainer);
       app.component("my-icon", Icon);
 
       app.component("VuePreview", VuePreview);
@@ -316,13 +346,24 @@ export const Theme: ThemeConfig = {
       app.component("ArticleMetadata", ArticleMetadata);
       app.component("Contributors", Contributors);
       app.component("HomeContributors", HomeContributors);
-      app.component("CopyRight", CopyRight);
+      app.component("CopyRight", copyright);
       app.component("HoverGrid", HoverGrid);
       app.component("MagicCard", MagicCard);
 
       app.use(VueResizeObserver);
       app.use(FloatingVue);
+
+      app.component('LiteTree', LiteTree)
     }
+
+    // app.provide(InjectionKey, {
+    //   // 配置...
+    //   layoutSwitch: {
+    //     spotlight: {
+    //       defaultToggle: true
+    //     }
+    //   }
+    // } as Options)
   },
   setup() {
     // get frontmatter and route
@@ -330,11 +371,11 @@ export const Theme: ThemeConfig = {
     const route = useRoute();
     // basic use
     codeblocksFold({ route, frontmatter }, true, 400);
-    // watchEffect(() => {
-    //   if (inBrowser) {
-    //     document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2024 00:00:00 UTC; path=/`;
-    //   }
-    // });
+    watchEffect(() => {
+      if (inBrowser) {
+        document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2024 00:00:00 UTC; path=/`;
+      }
+    });
     const initZoom = () => {
       mediumZoom("[data-zoomable]", { background: "var(--clr)" }); // Should there be a new?
     };
@@ -345,7 +386,31 @@ export const Theme: ThemeConfig = {
       () => route.path,
       () => nextTick(() => initZoom())
     );
+    vitepressLifeProgress();
   },
+  // transformHead: ({ pageData }) => {
+  //   const iHead: HeadConfig[] = head;
+  //   iHead.push([
+  //     "meta",
+  //     { property: "og:title", content: pageData.frontmatter.title },
+  //   ]);
+  //   iHead.push([
+  //     "meta",
+  //     { property: "og:description", content: pageData.frontmatter.description },
+  //   ]);
+
+  //   return iHead;
+  // },
+  // lastUpdated: true,
+  // /* 站点地图 */
+  // transformHtml: (_, id, { pageData }) => {
+  //   if (!/[\\/]404\.html$/.test(id))
+  //     links.push({
+  //       url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, "$2"),
+  //       lastmod: pageData.lastUpdated,
+  //     });
+  // },
 };
+
 
 export default Theme;

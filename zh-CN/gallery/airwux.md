@@ -56,9 +56,9 @@ recommended: true
 
 <div class="grid grid-cols-3 gap-4">
 
-<video src="/videos/5b50abf7a74f90162fbffffe2d82ad61.mp4" muted autoplay loop />
+<video src="/videos/5b50abf7a74f90162fbffffe2d82ad61.mp4" muted autoplay loop playsinlie />
 
-<video src="/videos/0253b0bc6f0b5f543f6f394fbde8e1ef.mp4" muted autoplay loop />
+<video src="/videos/0253b0bc6f0b5f543f6f394fbde8e1ef.mp4" muted autoplay loop playsinlie />
 
 ![Alt text](/images/cmono-510f8e701be8ff979daa520e710e30a.jpg){data-zoomable}
 

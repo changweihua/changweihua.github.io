@@ -28,8 +28,8 @@ export default defineConfig({
         carbon: () =>
           import('@iconify-json/carbon/icons.json').then(i => i.default),
         'line-md': () => import('@iconify-json/line-md/icons.json').then(i => i.default),
-        // logos: () =>
-        //   import('@iconify-json/logos/icons.json').then(i => i.default)
+        mdi: () =>
+          import('@iconify-json/mdi/icons.json').then(i => i.default),
       }
     }),
   ],

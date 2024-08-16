@@ -4,6 +4,8 @@ import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 import { getZhCNNav } from "../navs";
 import { getZhCNSidebar } from "../sidebars";
 
+import dayjs from 'dayjs'
+
 export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: "CMONO.NET 之家",
   title: "CMONO.NET",
@@ -19,7 +21,7 @@ export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     },
     footer: {
       message: "MIT Licensed",
-      copyright: "Copyright © 2009-2023 CMONO.NET",
+      copyright: `Copyright © 2009-${dayjs().year()} CMONO.NET`,
     },
     //   editLink: {
     //     pattern: '路径地址',
