@@ -24,6 +24,13 @@ export default defineConfig({
     presetIcons({
       scale: 1.2,
       warn: true,
+      collections: {
+        carbon: () =>
+          import('@iconify-json/carbon/icons.json').then(i => i.default),
+        'line-md': () => import('@iconify-json/line-md/icons.json').then(i => i.default),
+        // logos: () =>
+        //   import('@iconify-json/logos/icons.json').then(i => i.default)
+      }
     }),
   ],
   theme: {

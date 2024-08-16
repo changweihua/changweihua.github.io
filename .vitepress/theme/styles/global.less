@@ -149,3 +149,103 @@ svg {
   );
   --vp-home-hero-image-fliter: blur(150px);
 }
+.VPImage.logo {
+  /* 过度时间 */
+  transition-duration:0.8s;
+  /* 过度方式 */
+  animation-timing-function:ease-out;
+  /* 过度延迟 */
+  transition-delay: 300ms;
+  // transition: 0.8s ease-in-out 300ms;
+}
+
+.VPImage.logo:hover{
+  border-radius: 50%;
+  background: var(--vp-c-brand-lightest);
+}
+
+.VPHomeFeatures .VPFeature:hover{
+  .VPImage {
+    /* 动画名称 */
+    animation-name: animateName , opcity;
+    /* 动画时间 */
+    animation-duration: 2s;
+    /* 动画延迟时间 */
+    animation-delay: 50ms;
+    /* 动画执行前后 */
+    animation-fill-mode: both;
+    /* 执行次数 */
+    animation-iteration-count:infinite;
+    /* 是否轮流播放 */
+    animation-direction: alternate;
+
+    // animation: animateName 3s linear 1s infinite alternate;
+  }
+}
+@keyframes animateName{
+  0% {
+    width:48px;
+    height:48px;
+  }
+  30% {
+    width:56px;
+    height:56px;
+    // background:#fcbbb5;
+  }
+  50% {
+    width:64px;
+    height:64px;
+    // background: #fab677;
+  }
+  100% {
+    width:72px;
+    height:72px;
+    // background: #00aaff;
+    // border-radius: 50%;
+  }
+}
+@keyframes opcity {
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.VPTeamMembers{
+  .VPTeamMembersItem  {
+    .avatar{
+        width: 64px;
+        height: 64px;
+        background-size: 110%, 110%;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        position: relative;
+        border-radius: 50%;
+    }
+
+    .avatar::before,
+      .avatar::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        transition: all 0.3s;
+        left: 0;
+        top: 0;
+      }
+      .avatar::before {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .avatar::after {
+        background: inherit;
+        clip-path: circle(0% at 50% 50%);
+      }
+      .avatar:hover::after {
+        clip-path: circle(50% at 50% 50%);
+      }
+  }
+}

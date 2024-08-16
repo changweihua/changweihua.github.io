@@ -27,9 +27,12 @@ export const head: HeadConfig[] = [
   //     // })()
   //     // </script>
   //   ]
-  ['meta', { name: 'theme-color', content: '#ffffff' }],
+  ["meta", { name: "theme-color", content: "#ffffff" }],
   // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
-  ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: 'any' }],
+  [
+    "link",
+    { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: "any" },
+  ],
   // ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#ffffff' }],
   // ['link', { rel: 'apple-touch-icon', href: '/favicon.svg', sizes: '180x180' }],
   [
@@ -40,26 +43,33 @@ export const head: HeadConfig[] = [
     },
   ],
   ["meta", { name: "referrer", content: "no-referrer" }],
+  // [
+  //   "script",
+  //   {
+  //     src: "/clarity.js",
+  //   },
+  // ],
   [
-    "script",
+    "meta",
     {
-      src: "/clarity.js",
+      name: "keywords",
+      content:
+        "CMONO.NET,changweihua,常伟华,Lance,changweihua.github.io,Vite,VitePress,AntDesign",
     },
   ],
   [
-    "meta", {
-      name: "keywords",
-      content: "CMONO.NET,changweihua,常伟华,Lance,changweihua.github.io,Vite,VitePress,AntDesign",
-    },],
-  ["meta",
+    "meta",
     {
       name: "description",
       content: "CMONO.NET 官方站点，主要记录平时工作总结及项目经历",
-    },],
-    ["meta",
+    },
+  ],
+  [
+    "meta",
     {
       bar: "custom meta",
-    },],
+    },
+  ],
   [
     "script",
     {
@@ -95,7 +105,7 @@ export const head: HeadConfig[] = [
   //     `,
   // ],
   // 设置 描述 和 关键词
-  ['meta', { name: 'author', content: 'Lance Chang' }],
+  ["meta", { name: "author", content: "Lance Chang" }],
   [
     "meta",
     {
