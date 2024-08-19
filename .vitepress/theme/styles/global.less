@@ -164,42 +164,76 @@ svg {
   background: var(--vp-c-brand-lightest);
 }
 
+.VPHomeFeatures .VPFeature{
+  h2.title{
+    background-image: linear-gradient(45deg, #ffb3ba, #c49c6e, #bfbf76, #77b084, #ff7e74, #3b82f6, #c084fc, #db2777);
+    color: transparent;
+    -webkit-background-clip: text; /* Edge, Chrome */
+    background-clip: text; /* Safari, FF */
+    background-size: 300% 100%;
+  }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0;
+  }
+  to {
+    background-position: 100%;
+  }
+}
+
 .VPHomeFeatures .VPFeature:hover{
   .VPImage {
     /* 动画名称 */
-    animation-name: animateName , opcity;
+    // animation-name: animateName , opcity;
     /* 动画时间 */
-    animation-duration: 2s;
+    // animation-duration: 1s;
     /* 动画延迟时间 */
     animation-delay: 50ms;
     /* 动画执行前后 */
-    animation-fill-mode: both;
+    // animation-fill-mode: both;
     /* 执行次数 */
-    animation-iteration-count:infinite;
+    // animation-iteration-count:1;
     /* 是否轮流播放 */
-    animation-direction: alternate;
+    // animation-direction: alternate;
 
     // animation: animateName 3s linear 1s infinite alternate;
   }
+
+  h2.title{
+    animation: gradientAnimation 3s linear infinite;
+    animation-direction: alternate;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0;
+    }
+    to {
+      background-position: 100%;
+    }
+  }
 }
+
 @keyframes animateName{
   0% {
     width:48px;
     height:48px;
   }
   30% {
-    width:56px;
-    height:56px;
+    width:50px;
+    height:50px;
     // background:#fcbbb5;
   }
   50% {
-    width:64px;
-    height:64px;
+    width: 52px;
+    height:52px;
     // background: #fab677;
   }
   100% {
-    width:72px;
-    height:72px;
+    width:54px;
+    height:54px;
     // background: #00aaff;
     // border-radius: 50%;
   }

@@ -76,10 +76,23 @@
 @dashboard-font-family: AlibabaPuHuiTi, JetBrainsMono, HYCuJianHeiJ;
 
 h1 {
-  background: -webkit-linear-gradient(-45deg, #506bee 5%, #5ad7dd 35%);
+  // background: -webkit-linear-gradient(-45deg, #506bee 5%, #5ad7dd 35%);
+  background-image: linear-gradient(45deg, #ffb3ba, #c49c6e, #bfbf76, #77b084, #ff7e74, #3b82f6, #c084fc, #db2777);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: linearAnimation 6s linear infinite;
+  animation-direction: alternate;
+  background-size: 300% 100%;
+}
+
+@keyframes linearAnimation {
+  0% {
+    background-position: 0;
+  }
+  to {
+    background-position: 100%;
+  }
 }
 
 // /* 提示框背景颜色 */
