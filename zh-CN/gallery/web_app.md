@@ -9,17 +9,50 @@ mermaids: 1
 
 基于 Maui 实现跨平台的 Hybird 应用平台，通过 `iframe` 和 `jsbridge` 的封装，完成子系统的嵌套及系统通信。
 
+> 所有系统通信均校验内置的Ogirin限制，最大程度保障通信安全。
 
-<i class="i-custom:circle" />
+<!-- <i class="i-custom:circle" /> -->
 
-<i class="i-mono:juejin" />
+<!-- <i class="i-mono:juejin" /> -->
 
-<i class="i-mono:juejin text-#1E80FF" />
+<!-- <i class="i-mono:juejin text-#1E80FF" /> -->
 
 ## 架构 ##
 
-![Maui Hybird](/images/cmono-image.png){data-zoomable}
+```mermaid
+block-beta
+  columns 6
+  block:software:4
+    columns 1
 
+    block:webapps
+      %% columns auto (default)
+      WEBAPP1 space WEBAPP2 space WEBAPP3
+    end
+
+    blockArrowId6<["&nbsp;&nbsp;&nbsp;"]>(down)
+
+    WebView
+
+    blockArrowId7<["&nbsp;&nbsp;&nbsp;"]>(down)
+
+    Maui
+
+    blockArrowId8<["&nbsp;&nbsp;&nbsp;"]>(down)
+
+    block:platforms
+      %% columns auto (default)
+      iOS space Android space HarmonyOS space .etc
+    end
+
+    blockArrowId9<["&nbsp;&nbsp;&nbsp;"]>(down)
+
+    硬件
+  end
+  blockArrowId1<["&nbsp;&nbsp;&nbsp;"]>(left)
+  JsBridge:1
+  
+```
 
 <!-- > [!NOTE]
 > 强调用户在快速浏览文档时也不应忽略的重要信息。

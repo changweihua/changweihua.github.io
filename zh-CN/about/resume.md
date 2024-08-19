@@ -43,7 +43,7 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 ## 📋 主要履历 ##
 
 ::: timeline 2019-09 ~ Now
-- **上海民航华东凯亚系统集成有限公式江苏分公司**
+- **上海民航华东凯亚系统集成有限公司江苏分公司**
 - 高级开发经理
 :::
 
@@ -54,8 +54,10 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 
 ## 🥇 近期作品 ##
 
-- [无锡硕放机场-随身行李限额自助查询](/gallery/baggage_measurer.md)
-- [无锡硕放机场-阳光服务平台](/gallery/sunny-land.md)
+- [基于iFrame的微前端框架](/zh-CN/gallery/web_app.md)
+- [无锡硕放机场-新生产统计系统](/zh-CN/gallery/maui.md)
+- [无锡硕放机场-随身行李限额自助查询](/zh-CN/gallery/baggage_measurer.md)
+- [无锡硕放机场-阳光服务平台](/zh-CN/gallery/sunny-land.md)
 - [华东凯亚江苏分公司-持续开发交付平台](/pdfs/持续开发交付平台.pdf)
 - [敏捷开发-入门](/pdfs/敏捷开发-入门.pdf)
 - [敏捷开发-实战](/pdfs/敏捷开发-实战.pdf)
