@@ -4,15 +4,14 @@ import { head } from "./src/head";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { RSS } from "./src/rss";
 import { markdown } from "./src/markdown";
-import { withMermaid } from "vitepress-plugin-mermaid";
+// import { withMermaid } from "vitepress-plugin-mermaid";
 import { HeadConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
 import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
 import vitepressProtectPlugin from "vitepress-protect-plugin"
-import { defineConfig } from "vite";
+import { defineConfig } from "vitepress";
 // import compression from "vitepress-plugin-compression";
-// import AutoIndex from 'vite-plugin-vitepress-auto-index';
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
 // const { detypeVitePlugin } = createDetypePlugin()
 

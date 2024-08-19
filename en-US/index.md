@@ -111,63 +111,6 @@ head:
       content: changweihua.github.io 首页 CMONO.NET
 ---
 
-<!-- <MagicCard />
-
-<div class="card">Test UnoCSS card</div> -->
-
-
-<!-- <a-button>123</a-button>
-<a-timeline mode="alternate">
-<a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
-<a-timeline-item color="green">Solve initial network problems 2015-09-01</a-timeline-item>
-<a-timeline-item>
-<template #dot><ClockCircleOutlined style="font-size: 16px" /></template>
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-beatae vitae dicta sunt explicabo.
-</a-timeline-item>
-<a-timeline-item color="red">Network problems being solved 2015-09-01</a-timeline-item>
-<a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
-<a-timeline-item>
-<template #dot><ClockCircleOutlined style="font-size: 16px" /></template>
-Technical testing 2015-09-01
-</a-timeline-item>
-</a-timeline> -->
-
-<!-- <div class="gallery">
-  <img 
-  src="https://pic6.zhuanstatic.com/zhuanzh/fc8b8d24-b55a-4d9b-bcf9-a0bccaea4d80.png"       alt="Purple flowers">
-  <img src="https://pic6.zhuanstatic.com/zhuanzh/fc8b8d24-b55a-4d9b-bcf9-a0bccaea4d80.png" alt="Pink flowers">
-  <img src="https://pic6.zhuanstatic.com/zhuanzh/fc8b8d24-b55a-4d9b-bcf9-a0bccaea4d80.png" alt="Some plants">
-  <img src="https://pic6.zhuanstatic.com/zhuanzh/fc8b8d24-b55a-4d9b-bcf9-a0bccaea4d80.png" alt="A water lily">
-</div> -->
-
-<!-- <div class="grid grid-cols-1 md:grid-cols-3">
-<div >
-  <img src="https://github-readme-stats.vercel.app/api?username=Changweihua&show_icons=true&theme=transparent" />
-</div>
-<div >
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Changweihua&layout=compact&langs_count=6&text_color=000&icon_color=fff&theme=graywhite" />
-</div>
-<div >
-  <img alt="Static Badge" src="https://img.shields.io/badge/Vue-%2342b883?style=flat-square&logo=Vue&logoColor=%23fff">
-  <img alt="Static Badge" src="https://img.shields.io/badge/TypeScript-%230072b3?style=flat-square&logo=TypeScript&logoColor=%23fff">
-  <img src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=white" />
-  <img src="https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" />
-  <img src="https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=css3" />
-  <img alt="Static Badge" src="https://img.shields.io/badge/Webpack-%230072b3?style=flat-square&logo=webpack&logoColor=%23fff">
-  <img alt="Static Badge" src="https://img.shields.io/badge/Vite-%239a60fe?style=flat-square&logo=vite&logoColor=%23fff">
-  <img alt="Static Badge" src="https://img.shields.io/badge/Sass-%23c66394?style=flat-square&logo=Sass&logoColor=%23fff">
-  <img alt="Static Badge" src="https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=flat-square&logo=Visual-Studio-Code&logoColor=white">
-  <img alt="Static Badge" src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white">
-</div>
-</div> -->
-
-<!-- <a-date-picker v-model:value="value1" :bordered="false" /> -->
-<!-- <a-range-picker v-model:value="value1" /> -->
-
-<!-- <div id="g-pointer-1"></div>
-<div id="g-pointer-2"></div> -->
 
 <script setup lang="ts">
 import { nextTick, onMounted, ref } from 'vue'
@@ -178,7 +121,6 @@ import HomeIndex from "@vp/components/HomeIndex.vue"
 import MNavLinks  from "@vp/components/nav/MNavLinks.vue"
 import WavingBorder from "@/components/WavingBorder.vue"
 import { inBrowser } from 'vitepress'
-import useVChart, { vChartColors } from '@vp/hooks/useVChart';
 
 import type { Dayjs } from 'dayjs';
 type RangeValue = [Dayjs, Dayjs];
@@ -217,36 +159,6 @@ const navis = [{
   }]
 }]
 
-
-// import localforage from "localforage";
-
-// if(inBrowser) {
-
-//   localforage.config({
-//       driver      : localforage.WEBSQL, // Force WebSQL; same as using setDriver()
-//       name        : 'myApp',
-//       version     : 1.0,
-//       size        : 4980736, // Size of database, in bytes. WebSQL-only for now.
-//       storeName   : 'keyvaluepairs', // Should be alphanumeric, with underscores.
-//       description : 'some description'
-//   });
-
-//   var store = localforage.createInstance({
-//     name: "nameHere"
-//   });
-
-//   var otherStore = localforage.createInstance({
-//     name: "otherName"
-//   });
-
-//   // Setting the key on one of these doesn't affect the other.
-//   store.setItem("key", "value");
-//   otherStore.setItem("key", "value2");
-// }
-
-const vChartRef = ref()
-const { chart: vChart } = useVChart(vChartRef)
-
 // 引入对应的 worker 文件
 import Worker from "@/workers/gif-worker.ts?worker"
 
@@ -266,7 +178,6 @@ const initWorker = () => {
   }
 }
 
-
 onMounted(() => {
   console.log('initWorker')
   nextTick(()=>{
@@ -275,13 +186,6 @@ onMounted(() => {
 })
 
 </script>
-<!-- 
-<div class="grid m-20 grid-cols-1 md:grid-cols-2">
-  <div ref="vChartRef" style="width: 100%; height: 350px"></div>
-  <div class='worker'>
-    <canvas id="canvas" :style="{ width: '100%',height: '350px', border: '1px solid #fff'}"></canvas>
-  </div>
-</div> -->
 
 <VPTeamPage>
   <VPTeamPageTitle v-tooltip="'You have new members.'">
@@ -294,17 +198,3 @@ onMounted(() => {
     :members="members"
   />
 </VPTeamPage>
-<!-- <WavingBorder /> -->
-<!-- <XmindViewer url="https://mp-cb2e47ef-a802-469a-a81c-2b6efa9f8b60.cdn.bspapp.com/xmind/browser-rendering-flow.xmind"/> -->
-<!-- <HomeIndex /> -->
-<!-- <HomeContributors /> -->
-
-<!-- <style src="./nav/index.scss"></style> -->
-<!-- <MNavLinks v-for="{title, items} in navis" :title="title" :items="items"/> -->
-<!-- <a-tag>sss</a-tag> -->
-
-<!-- ### Title <Badge type="info" text="default" />
-### Title <Badge type="tip" text="^1.9.0" />
-### Title <Badge type="warning" text="beta" />
-### Title <Badge type="danger" text="caution" /> -->
-

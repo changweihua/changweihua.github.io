@@ -28,6 +28,10 @@ export const head: HeadConfig[] = [
   //     // </script>
   //   ]
   ["meta", { name: "theme-color", content: "#ffffff" }],
+  ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
+  ["meta", { name: "apple-mobile-web-app-status-bar-style", content: "default" }],
+  ["meta", { name: "application-name", content: "CMONO.NET" }],
+  ["meta", { name: "apple-touch-icon-precomposed", content: "/favicon.svg" }],
   // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
   [
     "link",
@@ -67,7 +71,17 @@ export const head: HeadConfig[] = [
   [
     "meta",
     {
-      bar: "custom meta",
+      name: "theme-color",
+      content: "#1972F8",
+      'media': '(prefers-color-scheme: light)'
+    },
+  ],
+  [
+    "meta",
+    {
+      name: "theme-color",
+      content: "#1C4D98",
+      'media': '(prefers-color-scheme: dark)'
     },
   ],
   [

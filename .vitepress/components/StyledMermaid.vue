@@ -169,3 +169,10 @@ onMounted(async () => {
 })
 
 </script>
+
+<style lang="less" scoped>
+// .mermaid-graph {
+// background-image: url("/images/mermaid-background.svg");
+// background-repeat: no-repeat;
+// background-size: cover;
+// }</style>

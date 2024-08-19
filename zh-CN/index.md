@@ -178,7 +178,7 @@ import HomeIndex from "@vp/components/HomeIndex.vue"
 import MNavLinks  from "@vp/components/nav/MNavLinks.vue"
 import WavingBorder from "@/components/WavingBorder.vue"
 import { inBrowser } from 'vitepress'
-import useVChart, { vChartColors } from '@vp/hooks/useVChart';
+// import useVChart, { vChartColors } from '@vp/hooks/useVChart';
 
 import type { Dayjs } from 'dayjs';
 type RangeValue = [Dayjs, Dayjs];
@@ -244,8 +244,8 @@ const navis = [{
 //   otherStore.setItem("key", "value2");
 // }
 
-const vChartRef = ref()
-const { chart: vChart } = useVChart(vChartRef)
+// const vChartRef = ref()
+// const { chart: vChart } = useVChart(vChartRef)
 
 // 引入对应的 worker 文件
 import Worker from "@/workers/gif-worker.ts?worker"

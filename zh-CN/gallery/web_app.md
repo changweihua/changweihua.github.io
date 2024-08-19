@@ -9,6 +9,13 @@ mermaids: 1
 
 基于 Maui 实现跨平台的 Hybird 应用平台，通过 `iframe` 和 `jsbridge` 的封装，完成子系统的嵌套及系统通信。
 
+
+<i class="i-custom:circle" />
+
+<i class="i-mono:juejin" />
+
+<i class="i-mono:juejin text-#1E80FF" />
+
 ## 架构 ##
 
 ![Maui Hybird](/images/cmono-image.png){data-zoomable}

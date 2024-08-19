@@ -28,7 +28,6 @@ import "@iconify/iconify";
 import FloatingVue from 'floating-vue'
 import 'floating-vue/dist/style.css';
 
-
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
@@ -49,9 +48,9 @@ import "./styles/timeline.fix.less";
 
 import type { Theme as ThemeConfig } from 'vitepress'
 
-import { defaultVTheme } from '../hooks/useVChart';
-import VChart from '@visactor/vchart';
-import { allThemeMap } from '@visactor/vchart-theme';
+// import { defaultVTheme } from '../hooks/useVChart';
+// import VChart from '@visactor/vchart';
+// import { allThemeMap } from '@visactor/vchart-theme';
 import AnimatingLayout from './AnimatingLayout.vue'
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
@@ -65,15 +64,15 @@ dayjs.tz.setDefault("Asia/Shanghai")
 dayjs.extend(relativeTime);
 dayjs.locale("zh-cn");
 
-// register themes
-allThemeMap.forEach((theme, name) => {
-  theme.fontFamily = defaultVTheme.fontFamily
-  theme.background = defaultVTheme.background
-  VChart.ThemeManager.registerTheme(name, theme);
-});
+// // register themes
+// allThemeMap.forEach((theme, name) => {
+//   theme.fontFamily = defaultVTheme.fontFamily
+//   theme.background = defaultVTheme.background
+//   VChart.ThemeManager.registerTheme(name, theme);
+// });
 
-// apply a theme
-VChart.ThemeManager.setCurrentTheme('legacyLight');
+// // apply a theme
+// VChart.ThemeManager.setCurrentTheme('legacyLight');
 
 export const Theme: ThemeConfig = {
   ...DefaultTheme,

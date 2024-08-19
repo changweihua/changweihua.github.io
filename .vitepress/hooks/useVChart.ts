@@ -31,7 +31,7 @@ export default function useVChart(
   let chart: IVChart;
   const chartRef = shallowRef<IVChart>()
   const { isDark } = useData();
-  const cachedSpec = shallowRef<ISpec>();
+  // const cachedSpec = shallowRef<ISpec>();
 
   function parseSpec() {
 

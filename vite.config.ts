@@ -7,7 +7,6 @@ import AutoImport from "unplugin-auto-import/vite"
 // import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 // import { fileURLToPath } from "node:url";
 import { vuePreviewPlugin } from "vite-plugin-vue-preview";
-// import AntdvResolver from "antdv-component-resolver";
 // import { ViteAliases } from "vite-aliases";
 import UnoCSS from "unocss/vite";
 import createExternal from 'vite-plugin-external'

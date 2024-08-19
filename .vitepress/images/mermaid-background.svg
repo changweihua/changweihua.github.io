@@ -1,0 +1,26 @@
+<svg width="100%" height="100%" style="z-index:-10" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="squarePattern" width="100%" height="20" patternUnits="userSpaceOnUse">
+          <line x1="0" x2="100%" y1="0" y2="0" stroke="transparent" strokeWidth="1">
+            <animate dur="6s" values="transparent;orange;transparent" repeatCount="indefinite" attributeName="stroke" />
+          </line>
+        </pattern>
+        <pattern id="squarePattern2" width="20" height="100%" patternUnits="userSpaceOnUse">
+          <line x1="0" x2="0" y1="0" y2="100%" stroke="transparent" strokeWidth="1">
+            <animate dur="6s" values="transparent;orange;transparent" repeatCount="indefinite" attributeName="stroke" />
+          </line>
+        </pattern>
+        <clipPath id="clipPath" clipPathUnits="objectBoundingBox">
+          <polygon id="polygon" points="0 0, 0 1,.3 1, 0 0" />
+        </clipPath>
+        <clipPath id="clipPath2" clipPathUnits="objectBoundingBox">
+          <polygon id="polygon2" points="0 0, 1 0,1 .3, 0 0" />
+        </clipPath>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#squarePattern)" clip-path="url(#clipPath)" />
+      <rect width="100%" height="100%" fill="url(#squarePattern2)" clip-path="url(#clipPath2)" />
+      <animate xlink:href="#polygon" attributeName="points"
+        values="0 0, 0 1,.3 1, 0 0;0 0, 0 1,1 1, 1 0;0 0, 0 1,.3 1, 0 0" dur="6s" repeatCount="indefinite" />
+      <animate xlink:href="#polygon2" attributeName="points"
+        values="0 0, 1 0,1 .3, 0 0;0 0, 1 0,1 1, 0 1;0 0, 1 0,1 .3, 0 0" dur="6s" repeatCount="indefinite" />
+    </svg>
