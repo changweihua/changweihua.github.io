@@ -335,7 +335,12 @@ export const Theme: ThemeConfig = {
     //   }
     // });
     const initZoom = () => {
-      mediumZoom("[data-zoomable]", { background: "var(--clr)" }); // Should there be a new?
+      // mediumZoom("[data-zoomable]", { background: "var(--clr)" });
+      // Should there be a new?
+      mediumZoom("[data-zoomable]", {
+        background: "var(--vp-c-bg)",
+        container: document.body,
+      });
     };
     onMounted(() => {
       initZoom();

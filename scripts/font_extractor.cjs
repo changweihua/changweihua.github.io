@@ -42,9 +42,12 @@ function readFileList(dir, filesList = []) {
   return filesList;
 }
 
-readFileList(path.resolve(rootFolder, "blog"), filesList);
-readFileList(path.resolve(rootFolder, "category"), filesList);
-readFileList(path.resolve(rootFolder, "gallery"), filesList);
+readFileList(path.resolve(rootFolder, "zh-CN/blog"), filesList);
+readFileList(path.resolve(rootFolder, "zh-CN/category"), filesList);
+readFileList(path.resolve(rootFolder, "zh-CN/gallery"), filesList);
+readFileList(path.resolve(rootFolder, "en-US/blog"), filesList);
+readFileList(path.resolve(rootFolder, "en-US/category"), filesList);
+readFileList(path.resolve(rootFolder, "en-US/gallery"), filesList);
 readFileList(path.resolve(rootFolder, ".vitepress/components"), filesList);
 readFileList(path.resolve(rootFolder, ".vitepress/src"), filesList);
 readFileList(path.resolve(rootFolder, ".vitepress/theme"), filesList);
@@ -131,7 +134,7 @@ fs.readFile(
 
     result = data.replace(/__CONTENT1__/g, content1);
 
-    const content2 =  fs.readFileSync(
+    const content2 = fs.readFileSync(
       path.join(rootFolder, "font/local/jsIndex.json"),
       "utf8"
     );

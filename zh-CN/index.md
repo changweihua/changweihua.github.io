@@ -53,27 +53,36 @@ features:
     details: 支持Yolo8、9、10三大版本
     link: /zh-CN/gallery/yolo_object_dection
     # linkText: 更多详情
-  # - title: 新生产统计APP
-  #   details: H5 微应用平台。
-  #   link: /gallery/maui
   - title: Yuppie 平台
     icon:
       src: /yuppie.svg
       alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
     details: 项目积累，实现即开箱即投产的标准化平台
     link: /zh-CN/gallery/yuppie
-  # - title: 基于K8S平台的持续交付平台
-  #   icon:
-  #     src: /giteaops.png
-  #     alt: 基于K8S平台的持续交付平台
-  #   details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
-  #   link: /gallery/giteaops
   - title: Maui Hybird
     icon:
-      src: /web_app.svg
+      src: /microapp.svg
       alt: Maui Hybird 架构
     details: 基于 Maui 的 Hybird 框架。
     link: /zh-CN/gallery/web_app
+  - title: 基于K8S平台的持续交付平台
+    icon:
+      src: /giteaops.png
+      alt: 基于K8S平台的持续交付平台
+    details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
+    link: /zh-CN/gallery/giteaops
+  - title: 新生产统计APP
+    icon:
+      src: /H5.svg
+      alt: H5微应用平台
+    details: H5微应用平台。
+    link: /zh-CN/gallery/maui
+  - title: iframe微前端
+    icon:
+      src: /iframe2.svg
+      alt: iframe微前端
+    details: iframe微前端。
+    link: /zh-CN/gallery/iframe_microapp
   - title: maui-jsbridge
     details: 页面iFrame嵌套通信。
     link: https://www.npmjs.com/package/maui-jsbridge
