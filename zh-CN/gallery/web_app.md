@@ -11,6 +11,38 @@ mermaids: 1
 
 > 所有系统通信均校验内置的Ogirin限制，最大程度保障通信安全。
 
+:::: tabs
+
+::: tab First tab
+
+First tab content
+
+:::
+
+::: tab Second tab
+
+Second tab content
+
+:::
+
+::::
+
+::: code-group
+
+```sh [npm]
+$ npm add -D vitepress. 
+```
+```sh [pnpm]
+$ pnpm add -D vitepress. 
+```
+```sh [yarn]
+$ yarn add -D vitepress vue. 
+```
+```sh [bun]
+$ bun add -D vitepress. 
+```
+:::
+
 <!-- <i class="i-custom:circle" /> -->
 
 <!-- <i class="i-mono:juejin" /> -->

@@ -14,6 +14,7 @@ import { ImagePlugin } from '../plugins/markdown/image'
 import mermaidPlugin from '../plugins/markdown/rough-mermaid'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
 import { default as replPlugin } from 'vitepress-markdown-it-repl';
+import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
 // import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 // import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
@@ -43,6 +44,7 @@ const markdown: MarkdownOptions | undefined = {
     //   "data-fancybox": "gallery",
     // });
     md.use(timeline);
+    tabsPlugin(md)
     md.use(mermaidPlugin)
     md
       // the second parameter is html tag name

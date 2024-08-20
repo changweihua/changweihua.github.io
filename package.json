@@ -90,6 +90,7 @@
     "@iconify-json/logos": "^1.1.44",
     "@iconify/json": "^2.2.238",
     "@iconify/vue": "^4.1.2",
+    "@red-asuka/vitepress-plugin-tabs": "^0.0.4",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/bluebird": "^3.5.42",
     "@types/dat.gui": "^0.7.13",
@@ -144,7 +145,8 @@
     "vitepress-plugin-sandpack": "^1.1.4",
     "vitepress-plugin-search": "^1.0.4-alpha.22",
     "vitepress-sidebar": "^1.24.2",
-    "vue": "^3.4.38"
+    "vue": "^3.4.38",
+    "vue3-tabs-component": "^1.3.7"
   },
   "dependencies": {
     "@dash14/svg-pan-zoom": "^3.6.9",

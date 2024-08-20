@@ -47,6 +47,11 @@ import VueResizeObserver from "vue-resize-observer";
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
+// @ts-ignore
+import { Tab, Tabs } from 'vue3-tabs-component'
+import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
+
+import 'virtual:group-icons.css'
 import "uno.css";
 
 import type { Theme as ThemeConfig } from 'vitepress'
@@ -312,6 +317,9 @@ export const Theme: ThemeConfig = {
 
       app.use(Antd);
       app.component('StyledMermaid', StyledMermaid)
+
+      app.component('Tab', Tab)
+      app.component('Tabs', Tabs)
 
       app.component("my-icon", Icon);
 
