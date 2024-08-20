@@ -1,7 +1,7 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, nextTick, onMounted, watch } from "vue";
+import { h } from "vue";
 import DocAfter from "../components/DocAfter.vue";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
@@ -9,6 +9,9 @@ import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
+
+import vitepressBackToTop from 'vitepress-plugin-back-to-top'
+import 'vitepress-plugin-back-to-top/dist/style.css'
 
 import { Sandbox } from "vitepress-plugin-sandpack";
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
@@ -39,12 +42,12 @@ import MagicCard from "../components/MagicCard.vue"
 import StyledMermaid from "../components/StyledMermaid.vue"
 
 import { Icon } from "@iconify/vue";
-import mediumZoom from "medium-zoom";
-import "uno.css";
 import VueResizeObserver from "vue-resize-observer";
 
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
+
+import "uno.css";
 
 import type { Theme as ThemeConfig } from 'vitepress'
 
@@ -302,6 +305,11 @@ export const Theme: ThemeConfig = {
     if (inBrowser) {
       vitepressNprogress(ctx);
 
+      vitepressBackToTop({
+        // default
+        threshold:300
+      })
+
       app.use(Antd);
       app.component('StyledMermaid', StyledMermaid)
 
@@ -334,21 +342,6 @@ export const Theme: ThemeConfig = {
     //     document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2024 00:00:00 UTC; path=/`;
     //   }
     // });
-    const initZoom = () => {
-      // mediumZoom("[data-zoomable]", { background: "var(--clr)" });
-      // Should there be a new?
-      mediumZoom("[data-zoomable]", {
-        background: "var(--vp-c-bg)",
-        container: document.body,
-      });
-    };
-    onMounted(() => {
-      initZoom();
-    });
-    watch(
-      () => route.path,
-      () => nextTick(() => initZoom())
-    );
   },
 };
 

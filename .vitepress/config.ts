@@ -11,6 +11,8 @@ import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
 import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
 import vitepressProtectPlugin from "vitepress-protect-plugin"
 import { defineConfig } from "vitepress";
+import { groupIconPlugin } from 'vitepress-plugin-group-icons'
+
 // import compression from "vitepress-plugin-compression";
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
 // const { detypeVitePlugin } = createDetypePlugin()
@@ -136,7 +138,16 @@ export default defineConfig({
         disableCopy: true,
         disableSelect: true,
       }),
-      GitRevisionInfoPlugin()
+      GitRevisionInfoPlugin(),
+      groupIconPlugin({
+        customIcon: {
+          ae: 'logos:adobe-after-effects',
+          ai: 'logos:adobe-illustrator',
+          ps: 'logos:adobe-photoshop',
+          // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
+          // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
+        },
+      })
       // {
       //   ...AutoIndex({}),
       //   enforce: 'pre'
@@ -189,7 +200,10 @@ export default defineConfig({
   // transformHtml是一个构建挂钩，用于在保存到磁盘之前转换每个页面的内容。
   // Don't mutate anything inside the ctx.
   // Also, modifying the html content may cause hydration problems in runtime.
-  transformHtml: (_, id, { pageData }) => {
+  transformHtml: (code, id, { pageData }) => {
+    if(id.includes('404')){
+      return code.replace("404","The way back home")
+    }
     if (!/[\\/]404\.html$/.test(id)) {
       links.push({
         url: pageData.relativePath
@@ -296,7 +310,8 @@ export default defineConfig({
   //     contributors: await getPageContributors(pageData.relativePath)
   //   }
   // },
-  async transformPageData({ relativePath }) {
+  async transformPageData(pageData) {
+    const { isNotFound, relativePath } = pageData
     const { contributors, changelog } = await getChangelogAndContributors(relativePath)
     const CustomAvatars = {
       'changweihua': '2877201'
@@ -305,6 +320,11 @@ export default defineConfig({
       contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`
       return contributor
     })
+
+    if (isNotFound) {
+      pageData.title = 'Not Found'
+    }
+
     return {
       CommitData: {
         contributors: CustomContributors,

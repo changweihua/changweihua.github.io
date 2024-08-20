@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useData } from 'vitepress'
+import { useData, useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide, useSlots, onMounted } from 'vue'
+import mediumZoom from "medium-zoom";
 
 const { isDark } = useData()
 const slots = Object.keys(useSlots())
@@ -58,16 +59,25 @@ var observer = new IntersectionObserver(
   }
 );
 
+// Setup medium zoom with the desired options
+const setupMediumZoom = () => {
+  mediumZoom("[data-zoomable]", {
+    background: "transparent",
+    container: document.body
+  });
+};
+
 onMounted(() => {
-  // query('.rough-mermaid').forEach(function (item) {
-  //   observer.observe(item);
-  // });
+  setupMediumZoom()
 })
+
+const router = useRouter();
+// Subscribe to route changes to re-apply medium zoom effect
+router.onAfterRouteChanged = setupMediumZoom;
 
 query('.lazy-loaded').forEach(function (item) {
   observer.observe(item);
 });
-
 
 // v-slot:default="slotProps"
 </script>

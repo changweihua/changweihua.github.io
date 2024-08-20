@@ -106,9 +106,9 @@ graph TB
 
 <div class="grid grid-cols-3 gap-4">
 
-![alt text](/images/cmono-QQ截图20240517084528.png){data-zoomable}
+![alt text](/images/cmono-QQ截图20240517084528.png)
 
-![alt text](/images/cmono-QQ截图20240517084704.png){data-zoomable}
+![alt text](/images/cmono-QQ截图20240517084704.png)
 
 ![alt text](/images/cmono-QQ截图20240517084718.png){data-zoomable}
 

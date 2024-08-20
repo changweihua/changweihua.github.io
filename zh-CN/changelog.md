@@ -12,11 +12,12 @@ title: changweihua.github.io 最新文章 CMONO.NET
   }"
 >
   <a-card title="更新日志" :bordered="true" :hoverable="true">
-    <a-timeline mode="alternate">
+    <!-- <a-timeline mode="alternate">
       <a-timeline-item  :color="index % 2 === 0 ? 'green': 'red'" v-for="(c, index) in changelog">{{dayjs.tz(c.date).format('YYYY-MM-DD HH:mm')}} {{c.message}}</a-timeline-item>
-    </a-timeline>
+    </a-timeline> -->
       <!-- <p>本节主要介绍了如何安装 Ant Design Vue 并且进行暗黑模式适配。</p>
       <p>例如这个卡片就是使用 Ant Card 实现的内容。</p> -->
+    <Changelog />
   </a-card>
 </a-config-provider>
 
@@ -26,8 +27,10 @@ import { ref, unref, toRaw, computed, onMounted } from 'vue'
 import { useData } from 'vitepress'
 import dayjs from 'dayjs'
 
+import Changelog from 'vitepress-plugin-changelog/Changelog.vue'
+import 'vitepress-plugin-changelog/changelog.css'
+
 const { page, isDark } = useData()
-console.log(toRaw(page.value))
 
 const { changelog } = page.value.CommitData
 
