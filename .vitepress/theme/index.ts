@@ -13,13 +13,12 @@ import "vite-plugin-vue-preview/style.css";
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import 'vitepress-plugin-back-to-top/dist/style.css'
 
-import { Sandbox } from "vitepress-plugin-sandpack";
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
 import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
 import AnimationTitle from "../components/AnimationTitle.vue";
 
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/reset.css';
+import { AntDesignContainer } from '@vitepress-demo-preview/component'
+import '@vitepress-demo-preview/component/dist/style.css'
 
 import "./styles/index.less";
 
@@ -29,6 +28,10 @@ import '@vitepress-code-preview/container/dist/style.css'
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
 import "animate.css";
+
+// 引入 Ant Design Vue
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/reset.css';
 
 import "@iconify/iconify";
 import FloatingVue from 'floating-vue'
@@ -59,9 +62,9 @@ import "uno.css";
 
 import type { Theme as ThemeConfig } from 'vitepress'
 
-// import { defaultVTheme } from '../hooks/useVChart';
-// import VChart from '@visactor/vchart';
-// import { allThemeMap } from '@visactor/vchart-theme';
+import { defaultVTheme } from '../hooks/useVChart';
+import VChart from '@visactor/vchart';
+import { allThemeMap } from '@visactor/vchart-theme';
 import AnimatingLayout from './AnimatingLayout.vue'
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
@@ -75,15 +78,15 @@ dayjs.tz.setDefault("Asia/Shanghai")
 dayjs.extend(relativeTime);
 dayjs.locale("zh-cn");
 
-// // register themes
-// allThemeMap.forEach((theme, name) => {
-//   theme.fontFamily = defaultVTheme.fontFamily
-//   theme.background = defaultVTheme.background
-//   VChart.ThemeManager.registerTheme(name, theme);
-// });
+// register themes
+allThemeMap.forEach((theme, name) => {
+  theme.fontFamily = defaultVTheme.fontFamily
+  theme.background = defaultVTheme.background
+  VChart.ThemeManager.registerTheme(name, theme);
+});
 
-// // apply a theme
-// VChart.ThemeManager.setCurrentTheme('legacyLight');
+// apply a theme
+VChart.ThemeManager.setCurrentTheme('legacyLight');
 
 export const Theme: ThemeConfig = {
   ...DefaultTheme,
@@ -278,7 +281,10 @@ export const Theme: ThemeConfig = {
         unmounted(el,binding){}
     })
 
+    app.component('demo-preview', AntDesignContainer)
     useComponents(app, DemoPreview)
+
+    app.use(Antd);
 
     // app.mixin({
     //   async mounted() {
@@ -320,7 +326,6 @@ export const Theme: ThemeConfig = {
         threshold:300
       })
 
-      app.use(Antd);
       app.component('StyledMermaid', StyledMermaid)
 
       app.component('Tab', Tab)
@@ -332,7 +337,6 @@ export const Theme: ThemeConfig = {
       app.component("header-profile", HeaderProfile);
       app.component("lottie-panel", LottiePanel);
       app.component("code-group", CodeGroup);
-      app.component("Sandbox", Sandbox);
       app.component("ArticleMetadata", ArticleMetadata);
       app.component("Contributors", Contributors);
       app.component("HomeContributors", HomeContributors);
@@ -346,7 +350,7 @@ export const Theme: ThemeConfig = {
   },
   setup() {
     // get frontmatter and route
-    const { lang, frontmatter } = useData();
+    const { frontmatter } = useData(); //lang,
     const route = useRoute();
     // basic use
     codeblocksFold({ route, frontmatter }, true, 400);

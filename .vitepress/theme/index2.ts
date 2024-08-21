@@ -2,7 +2,6 @@
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, nextTick, onMounted, watch, watchEffect } from "vue";
-import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import { LiteTree } from '@lite-tree/vue'
 import DocAfter from "../components/DocAfter.vue";
 import Recommend from "../components/Recommend.vue";
@@ -13,7 +12,6 @@ import { VuePreview } from "vite-plugin-vue-preview";
 import "vite-plugin-vue-preview/style.css";
 import { svgWheel, svgDrag } from "svg-zoom-drag-vue-directives";
 
-import { Sandbox } from "vitepress-plugin-sandpack";
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
 import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
 import AnimationTitle from "../components/AnimationTitle.vue";
@@ -335,14 +333,12 @@ export const Theme: ThemeConfig = {
       app.component("RoughMermaid", RoughMermaid);
       app.component('StyledMermaid', StyledMermaid)
 
-      app.component("demo-preview", AntDesignContainer);
       app.component("my-icon", Icon);
 
       app.component("VuePreview", VuePreview);
       app.component("header-profile", HeaderProfile);
       app.component("lottie-panel", LottiePanel);
       app.component("code-group", CodeGroup);
-      app.component("Sandbox", Sandbox);
       app.component("ArticleMetadata", ArticleMetadata);
       app.component("Contributors", Contributors);
       app.component("HomeContributors", HomeContributors);

@@ -1,13 +1,8 @@
-import {
-  containerPreview,
-  componentPreview,
-} from "@vitepress-demo-preview/plugin";
 import lightbox from "vitepress-plugin-lightbox"
 import { MarkdownOptions } from "vitepress";
 // import mdItCustomAttrs from "markdown-it-custom-attrs";
 import timeline from "vitepress-markdown-timeline";
-import container from 'markdown-it-container';
-import { renderSandbox } from 'vitepress-plugin-sandpack'
+// import container from 'markdown-it-container';
 import footnote from 'markdown-it-footnote';
 import mathjax3 from 'markdown-it-mathjax3';
 import { ImagePlugin } from '../plugins/markdown/image'
@@ -22,6 +17,8 @@ import { fileURLToPath, URL } from 'node:url'
 // import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
 // const { detypeMarkdownPlugin } = createDetypePlugin()
+// import { containerPreview, componentPreview } from '@vitepress-demo-preview/plugin'
+
 
 const CONSTS = {
   __custom_variable__: 'your value'
@@ -36,8 +33,6 @@ const markdown: MarkdownOptions | undefined = {
 
     md.use(footnote);
     md.use(mathjax3);
-    md.use(containerPreview);
-    md.use(componentPreview);
     md.use(lightbox, {});
     // md.use(tabsMarkdownPlugin);
     // md.use(npmCommandsMarkdownPlugin);
@@ -51,13 +46,9 @@ const markdown: MarkdownOptions | undefined = {
     // groupIconMdPlugin(md)
     md.use(groupIconMdPlugin)
     md.use(mermaidPlugin)
-    md
-      // the second parameter is html tag name
-      .use(container, 'sandbox', {
-        render(tokens: any, idx: any) {
-          return renderSandbox(tokens, idx, 'sandbox');
-        },
-      });
+
+    // md.use(containerPreview)
+    // md.use(componentPreview)
 
     const docRoot = fileURLToPath(new URL('../../', import.meta.url))
     md.use(demoPreviewPlugin, { docRoot })

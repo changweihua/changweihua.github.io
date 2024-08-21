@@ -12,6 +12,8 @@ import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
 import vitepressProtectPlugin from "vitepress-protect-plugin"
 import { defineConfig } from "vitepress";
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import Markdown from 'vite-plugin-vue-markdown'
+import MarkdownPreview from 'vite-plugin-markdown-preview'
 
 // import compression from "vitepress-plugin-compression";
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
@@ -147,7 +149,9 @@ export default defineConfig({
           // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
           // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
         },
-      })
+      }),
+      // Markdown(),
+      // MarkdownPreview()
       // {
       //   ...AutoIndex({}),
       //   enforce: 'pre'

@@ -120,9 +120,7 @@ img:hover {
 
 上面的例子会将 图片 裁剪成一个圆形，圆心位于元素的中心，半径为元素的宽度或高度的一半。
 
-:::demo
-
-```vue
+```vue preview
 <template>
   <div><img src="/images/wall2.jpg" /></div>
 </template>
@@ -146,8 +144,6 @@ img:hover {
 }
 </style>
 ```
-
-:::
 
 ### 椭圆 (ellipse) ###
 
@@ -265,6 +261,7 @@ img:hover {
 裁剪区域距离图像顶部 10%，右侧 20%，底部 30%，左侧 40%。因此，裁剪区域显示图像的中心部分，四周有一定的内边距。
 
 :::demo
+
 ```vue
 <template>
   <div><img src="/images/wall2.jpg" /></div>
@@ -287,6 +284,7 @@ img:hover {
 }
 </style>
 ```
+
 :::
 
 
@@ -391,11 +389,12 @@ clip-path: polygon(25% 0%, 75% 0%, 50% 100%, 0% 100%);
 }
 ```
 
-**示例代码**
+## 示例代码 ##
 
 
-:::demo src=src/demos/ClipPathDemo.vue
-:::
+
 
 [相应资源网站推荐](https://bennettfeely.com/clippy/)
+<!-- 
+<preview path="../../../src/demos/ClipPathDemo.vue" title="title" description="component description content"></preview> -->
 

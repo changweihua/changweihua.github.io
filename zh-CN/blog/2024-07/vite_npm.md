@@ -96,8 +96,8 @@ npx vite build
 
 执行以上命令后，构建结果会输出到dist目录，默认有两个js文件，它们只是使用的导出规范（语法）不同，具体代码功能是一样的。
 
-- vite-maui.umd.js：umd导出方式，兼容amd commenjs等导出的库实现。
-- vite-maui.mjs：es模块化导出方式的库实现。
+- `vite-maui.umd.js`：umd导出方式，兼容amd commenjs等导出的库实现。
+- `vite-maui.mjs`：es模块化导出方式的库实现。
 
 有了这俩文件，就可以覆盖目前主流的多种前端模块化环境了，在不同的环境，导入对应的js文件即可。
 
@@ -169,14 +169,14 @@ export default defineConfig({
 npx vite build
 ```
 
->
-> 注：
-> 上面两种方式，生成的声明文件，是和src文件夹里的ts文件一一对应的，如src/index.ts => dist/index.d.ts。
-> 
-> vite配置的库输出文件名：build.lib.filename、入口文件名、库名三者最好一致，这样声明文件名的头部名字和库名可以对上。否则可能出现声明文件不生效的问题。
-> 
-> 如果在入口文件里需要导入某个文件夹里的index.ts，务必把路径写全，如：import xx from "tools/index"，如果把index文件名省略，自动生成dts的插件是无法正常找到index文件的。
+::: tip
+注：
+上面两种方式，生成的声明文件，是和src文件夹里的ts文件一一对应的，如src/index.ts => dist/index.d.ts。
+ 
+vite配置的库输出文件名：build.lib.filename、入口文件名、库名三者最好一致，这样声明文件名的头部名字和库名可以对上。否则可能出现声明文件不生效的问题。
 
+如果在入口文件里需要导入某个文件夹里的index.ts，务必把路径写全，如：import xx from "tools/index"，如果把index文件名省略，自动生成dts的插件是无法正常找到index文件的。
+:::
 
 ## 配置package.json指定库信息 ##
 

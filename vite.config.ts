@@ -7,6 +7,7 @@ import AutoImport from "unplugin-auto-import/vite"
 // import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 // import { fileURLToPath } from "node:url";
 import { vuePreviewPlugin } from "vite-plugin-vue-preview";
+import Markdown from 'vite-plugin-vue-markdown'
 // import { ViteAliases } from "vite-aliases";
 import UnoCSS from "unocss/vite";
 import createExternal from 'vite-plugin-external'
@@ -149,11 +150,12 @@ export default defineConfig({
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     // chunkSizeLimit: 5000, // 设置 chunk 大小的限制为 5000 KiB
     emptyOutDir: true, // 在构建之前清空输出目录
-    // rollupOptions: {
-    //   output: {
-    //     format: 'iife'
-    //   }
-    // },
+    rollupOptions: {
+      // output: {
+      //   format: 'iife'
+      // }
+      // external: ['./zh-CN']
+    },
     // rollupOptions: {
     //   cache: false,
     //   maxParallelFileOps: 2,
@@ -194,8 +196,8 @@ export default defineConfig({
     'process.env.RSS_BASE': JSON.stringify(`${getEnvValue(process.env.NODE_ENV || 'github', 'VITE_APP_RSS_BASE_URL')}`),
   },
   plugins: [
-    viteDemoPreviewPlugin(),
-    vueJsx(),
+    // viteDemoPreviewPlugin(),
+    // vueJsx(),
     // htmlConfigs,
     // removeConsole(),
     // custom
@@ -261,7 +263,7 @@ export default defineConfig({
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          fontFamily: "JetBrainsMono, AlibabaPuHuiTi",
+          fontFamily: "AlibabaPuHuiTi",
         },
         importMap: {
           "@vue/shared":
