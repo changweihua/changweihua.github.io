@@ -23,6 +23,9 @@ import 'ant-design-vue/dist/reset.css';
 
 import "./styles/index.less";
 
+import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
+import '@vitepress-code-preview/container/dist/style.css'
+
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
 import "animate.css";
@@ -274,6 +277,8 @@ export const Theme: ThemeConfig = {
         //指令与元素解绑时调用
         unmounted(el,binding){}
     })
+
+    useComponents(app, DemoPreview)
 
     // app.mixin({
     //   async mounted() {

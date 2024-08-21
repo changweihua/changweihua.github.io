@@ -15,6 +15,9 @@ import mermaidPlugin from '../plugins/markdown/rough-mermaid'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
 import { default as replPlugin } from 'vitepress-markdown-it-repl';
 import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
+import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
+import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import { fileURLToPath, URL } from 'node:url'
 // import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 // import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
@@ -45,6 +48,8 @@ const markdown: MarkdownOptions | undefined = {
     // });
     md.use(timeline);
     tabsPlugin(md)
+    // groupIconMdPlugin(md)
+    md.use(groupIconMdPlugin)
     md.use(mermaidPlugin)
     md
       // the second parameter is html tag name
@@ -53,6 +58,10 @@ const markdown: MarkdownOptions | undefined = {
           return renderSandbox(tokens, idx, 'sandbox');
         },
       });
+
+    const docRoot = fileURLToPath(new URL('../../', import.meta.url))
+    md.use(demoPreviewPlugin, { docRoot })
+
     md.use(ImagePlugin)
     // set globalEnabledLineNumbers's value same as lineNumbers above.
     //@ts-ignore

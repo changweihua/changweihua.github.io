@@ -102,48 +102,105 @@ clip-path: none;
 
 ```css
 img {
-            width: 200px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 10px;
-            /* 添加过渡 */
-            transition: 0.5s;
-            /* 初始状态 */
-            clip-path: circle(100%);
-        }
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  /* 添加过渡 */
+  transition: 0.5s;
+  /* 初始状态 */
+  clip-path: circle(100%);
+}
 
-        img:hover {
-            cursor: pointer;
-            clip-path: circle(50%);
-        }
+img:hover {
+  cursor: pointer;
+  clip-path: circle(50%);
+}
 ```
 
 上面的例子会将 图片 裁剪成一个圆形，圆心位于元素的中心，半径为元素的宽度或高度的一半。
 
+:::demo
+
+```vue
+<template>
+  <div><img src="/images/wall2.jpg" /></div>
+</template>
+<script lang="ts" setup>
+</script>
+<style scoped>
+img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  /* 添加过渡 */
+  transition: 0.5s;
+  /* 初始状态 */
+  clip-path: circle(100%);
+}
+
+img:hover {
+  cursor: pointer;
+  clip-path: circle(50%);
+}
+</style>
+```
+
+:::
 
 ### 椭圆 (ellipse) ###
 
 ```css
 img {
-            width: 500px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 10px;
-            /* 添加过渡 */
-            transition: 0.5s;
-            /* 初始状态 */
-            clip-path: ellipse(100% 100% at 50% 50%);
-        }
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  /* 添加过渡 */
+  transition: 0.5s;
+  /* 初始状态 */
+  clip-path: ellipse(75% 50% at 50% 50%);
+}
 
-        img:hover {
-            cursor: pointer;
-            clip-path: ellipse(50% 50% at 50% 50%);
-        }
+img:hover {
+  cursor: pointer;
+  clip-path: ellipse(75% 50% at 50% 50%);
+}
 ```
 
 当鼠标悬停在图像上时，剪切区域变为一个椭圆形，水平和垂直半径变为图像尺寸的 50%
 
 悬浮之后进行裁剪属性值的变化
+
+:::demo
+
+```vue
+<template>
+  <div><img src="/images/wall2.jpg" /></div>
+</template>
+<script lang="ts" setup>
+</script>
+<style scoped>
+img {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  /* 添加过渡 */
+  transition: 0.5s;
+  /* 初始状态 */
+  clip-path: inset(0 0 0 0)
+}
+
+img:hover {
+  cursor: pointer;
+  clip-path: ellipse(50% 50% at 50% 50%);
+}
+</style>
+```
+
+:::
 
 ### 矩形 ###
 
@@ -159,26 +216,26 @@ clip-path: inset(top right bottom left);
 
 ```css
 img {
-            width: 500px;
-            height: auto;
-            object-fit: cover;
-            transition: 0.5s;
-            /* 初始状态 */
-            clip-path: inset(0 0 0 0)
-        }
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  transition: 0.5s;
+  /* 初始状态 */
+  clip-path: inset(0 0 0 0)
+}
 
-        img:hover {
-            cursor: pointer;
-            clip-path: inset(10% 20% 30% 40%);
-        }
-```css
+img:hover {
+  cursor: pointer;
+  clip-path: inset(10% 20% 30% 40%);
+}
+```
 
 **效果**
 
-初始状态(clip-path: inset(0 0 0 0))
+初始状态`(clip-path: inset(0 0 0 0))`
 
 ```diff
-diff 代码解读复制代码+-------------------------+
++-------------------------+
 |                         |
 |                         |
 |                         |
@@ -190,7 +247,7 @@ diff 代码解读复制代码+-------------------------+
 ```
 
 
-悬停状态 (clip-path: inset(10% 20% 30% 40%))
+悬停状态 `(clip-path: inset(10% 20% 30% 40%))`
 
 ```lua
 +-------------------------+
@@ -206,6 +263,32 @@ diff 代码解读复制代码+-------------------------+
 ```
 
 裁剪区域距离图像顶部 10%，右侧 20%，底部 30%，左侧 40%。因此，裁剪区域显示图像的中心部分，四周有一定的内边距。
+
+:::demo
+```vue
+<template>
+  <div><img src="/images/wall2.jpg" /></div>
+</template>
+<script lang="ts" setup>
+</script>
+<style scoped>
+img {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  transition: 0.5s;
+  /* 初始状态 */
+  clip-path: inset(0 0 0 0)
+}
+
+img:hover {
+  cursor: pointer;
+  clip-path: inset(10% 20% 30% 40%);
+}
+</style>
+```
+:::
+
 
 ### 多边形 (polygon) [重要] ###
 
@@ -237,6 +320,7 @@ x 和 y 坐标：可以是百分比或像素值，表示顶点的位置。百分
 clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 ```
 
+
 ### 五边形 ###
 
 ```scss
@@ -251,6 +335,7 @@ clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 ```css
 clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 ```
+
 
 ### 六边形 ###
 
@@ -268,7 +353,6 @@ clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 ```
 
-
 ### 矩形 ###
 
 ```scss
@@ -283,6 +367,7 @@ clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 ```
 
+
 ### 平行四边形 ###
 
 ```scss
@@ -296,49 +381,6 @@ clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 clip-path: polygon(25% 0%, 75% 0%, 50% 100%, 0% 100%);
 ```
 
-**示例代码**
-
-```html
-<style>
-    .shape {
-      width: 300px;
-      height: 300px;
-      background: url('your-image-url.jpg') no-repeat center/cover;
-      margin: 20px;
-    }
-    .triangle {
-      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    }
-    .pentagon {
-      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-    }
-    .hexagon {
-      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    }
-    .rectangle {
-      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    }
-    .parallelogram {
-      clip-path: polygon(25% 0%, 75% 0%, 50% 100%, 0% 100%);
-    }
-</style>
-
-    <div style="display: flex; gap: 1rem;">
-        <div class="shape triangle"></div>
-        <div class="shape pentagon"></div>
-        <div class="shape hexagon"></div>
-        <div class="shape rectangle"></div>
-        <div class="shape parallelogram"></div>
-    </div>
-```
-
-
-### 圆角三角形 ###
-
-```css
-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-```
-
 ### 使用 SVG 路径 ###
 
 你可以使用 path() 函数来定义一个 SVG 路径作为剪裁区域。
@@ -349,7 +391,11 @@ clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 ```
 
-上面的例子会将 `.element` 裁剪成一个使用 SVG 路径定义的形状。
+**示例代码**
+
+
+:::demo src=src/demos/ClipPathDemo.vue
+:::
 
 [相应资源网站推荐](https://bennettfeely.com/clippy/)
 

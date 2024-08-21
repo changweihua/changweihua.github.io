@@ -11,7 +11,7 @@ import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
 import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
 import vitepressProtectPlugin from "vitepress-protect-plugin"
 import { defineConfig } from "vitepress";
-import { groupIconPlugin } from 'vitepress-plugin-group-icons'
+import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 
 // import compression from "vitepress-plugin-compression";
 // import { createDetypePlugin } from 'vitepress-plugin-detype'
@@ -139,7 +139,7 @@ export default defineConfig({
         disableSelect: true,
       }),
       GitRevisionInfoPlugin(),
-      groupIconPlugin({
+      groupIconVitePlugin({
         customIcon: {
           ae: 'logos:adobe-after-effects',
           ai: 'logos:adobe-illustrator',

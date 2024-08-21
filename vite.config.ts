@@ -17,6 +17,9 @@ import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { autoComplete, Plugin as importToCDN } from 'vite-plugin-cdn-import'
 import htmlConfig from "vite-plugin-html-config";
+import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, path.join(process.cwd(), 'env'))[target]
   console.log(value)
@@ -191,6 +194,8 @@ export default defineConfig({
     'process.env.RSS_BASE': JSON.stringify(`${getEnvValue(process.env.NODE_ENV || 'github', 'VITE_APP_RSS_BASE_URL')}`),
   },
   plugins: [
+    viteDemoPreviewPlugin(),
+    vueJsx(),
     // htmlConfigs,
     // removeConsole(),
     // custom
