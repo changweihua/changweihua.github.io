@@ -88,14 +88,3 @@ date: 2023-08-10
 }
 ```
 
-<!-- ::: CodeView
-```vue
-<template>我是 vue 模板</template>
-```
-::: -->
-
-```vue preview
-<template>
-  <h1>Demo: vite-plugin-vue-preview</h1>
-</template>
-```

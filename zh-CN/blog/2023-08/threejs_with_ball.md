@@ -9,9 +9,9 @@ poster: /images/cmono-Siesta.png
 date: 2023-08-28
 ---
 # {{ $frontmatter.title}} #
-<script lang="ts" setup>
+<!-- <script lang="ts" setup>
 import ThreeWithBall from "@/components/ThreeWithBall.vue"
 </script>
 <ClientOnly>
   <ThreeWithBall />
-</ClientOnly>
+</ClientOnly> -->

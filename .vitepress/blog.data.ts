@@ -3,35 +3,68 @@
 
 // 一个用于数据加载的文件必须以.data.js 或.data.ts 结尾。该文件应该提供一个默认导出的对象，该对象具有 load() 方法：
 
-// blog.data.ts
-export default {
-  load() {
-    return {
-      hello: 'world'
-    }
+// Support i18n in contentLoader
+import { createContentLoader, type ContentData, type SiteConfig } from 'vitepress'
+
+export interface Post {
+  title: string
+  url: string
+  date: {
+    time: number
+    string: string
   }
+  excerpt: string | undefined
 }
 
-// export default {
-//   async load() {
-//     // 获取远程数据
-//     return (await fetch('...')).json()
-//   }
-// }
+declare const data: Post[]
 
-
-// Support i18n in contentLoader
-// import { createContentLoader, type ContentData, type SiteConfig } from 'vitepress'
+export {
+  data
+}
 
 // export type Data = Record<string, ContentData[]>
 // export declare const data: Data
 
-// const config: SiteConfig = (globalThis as any).VITEPRESS_CONFIG
-// const locales = Object.keys(config.userConfig.locales ?? {})
+const config: SiteConfig = (globalThis as any).VITEPRESS_CONFIG
+const locales = Object.keys(config.userConfig.locales ?? {})
 
-// // or simply - const locales = ['root', 'fr']
+// or simply - const locales = ['root', 'fr']
 
-// export default createContentLoader('**/posts/**/*.md', {
+
+export default createContentLoader([
+    "**/blog/**/!(index|README).md",
+  ], {
+    excerpt: true,
+  transform(raw): Post[] {
+    return raw
+      .filter(r => r.src !== 'index.md')
+      .map(({ url, frontmatter, excerpt }) => ({
+        title: frontmatter.title,
+        url,
+        excerpt,
+        date: formatDate(frontmatter.date)
+      }))
+      .sort((a, b) => b.date.time - a.date.time)
+      .slice(0, 12)
+  },
+  includeSrc: true// 包含原始 markdown 源?
+})
+
+function formatDate(raw: string): Post['date'] {
+  const date = new Date(raw)
+  date.setUTCHours(12)
+  return {
+    time: +date,
+    string: date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+}
+
+
+// export default createContentLoader('**/blog/**/*.md', {
 //   transform(data) {
 //     const grouped: Data = {}
 

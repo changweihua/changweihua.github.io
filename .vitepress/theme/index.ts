@@ -2,28 +2,21 @@
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h } from "vue";
-import DocAfter from "../components/DocAfter.vue";
+import DocAfter from "@vp/components/DocAfter.vue";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
-import { VuePreview } from "vite-plugin-vue-preview";
-import "vite-plugin-vue-preview/style.css";
-
-import vitepressBackToTop from 'vitepress-plugin-back-to-top'
-import 'vitepress-plugin-back-to-top/dist/style.css'
 
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
 import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
-import AnimationTitle from "../components/AnimationTitle.vue";
 
-import { AntDesignContainer } from '@vitepress-demo-preview/component'
-import '@vitepress-demo-preview/component/dist/style.css'
+import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";
 
-import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
-import '@vitepress-code-preview/container/dist/style.css'
+// import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
+// import '@vitepress-code-preview/container/dist/style.css'
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
@@ -34,8 +27,6 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
 
 import "@iconify/iconify";
-import FloatingVue from 'floating-vue'
-import 'floating-vue/dist/style.css';
 
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
@@ -48,19 +39,17 @@ import MagicCard from "../components/MagicCard.vue"
 import StyledMermaid from "../components/StyledMermaid.vue"
 
 import { Icon } from "@iconify/vue";
-import VueResizeObserver from "vue-resize-observer";
 
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
-// @ts-ignore
 import { Tab, Tabs } from 'vue3-tabs-component'
 import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
 
 import 'virtual:group-icons.css'
 import "uno.css";
 
-import type { Theme as ThemeConfig } from 'vitepress'
+import type { Theme } from 'vitepress'
 
 import { defaultVTheme } from '../hooks/useVChart';
 import VChart from '@visactor/vchart';
@@ -88,10 +77,10 @@ allThemeMap.forEach((theme, name) => {
 // apply a theme
 VChart.ThemeManager.setCurrentTheme('legacyLight');
 
-export const Theme: ThemeConfig = {
+export default {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
-  extends: DefaultTheme,
+  // extends: DefaultTheme,
   // 使用注入插槽的包装组件覆盖 Layout
   // Layout: MyLayout,
   Layout() {
@@ -267,24 +256,19 @@ export const Theme: ThemeConfig = {
 
     DefaultTheme.enhanceApp(ctx);
 
-    app.directive('aria-empty',{
-        //指令绑定到元素时调用
-        mounted(el,binding){
-          el.removeAttribute("aria-hidden");
-          // // 获取节点
-          // let ariaEls = el.querySelectorAll("svg");
-          // ariaEls.forEach((item) => {
-          //   item.removeAttribute("aria-hidden");
-          // });
-        },
-        //指令与元素解绑时调用
-        unmounted(el,binding){}
+    app.directive('aria-empty', {
+      //指令绑定到元素时调用
+      mounted(el, binding) {
+        el.removeAttribute("aria-hidden");
+        // // 获取节点
+        // let ariaEls = el.querySelectorAll("svg");
+        // ariaEls.forEach((item) => {
+        //   item.removeAttribute("aria-hidden");
+        // });
+      },
+      //指令与元素解绑时调用
+      unmounted(el, binding) { }
     })
-
-    app.component('demo-preview', AntDesignContainer)
-    useComponents(app, DemoPreview)
-
-    app.use(Antd);
 
     // app.mixin({
     //   async mounted() {
@@ -300,7 +284,7 @@ export const Theme: ThemeConfig = {
     //   app.use(plugin.default)
     // }
 
-    router.onBeforeRouteChange =  async (to) => {
+    router.onBeforeRouteChange = async (to) => {
 
       // Here you can set the routes you want to configure.
       if (to == '/') {
@@ -308,9 +292,9 @@ export const Theme: ThemeConfig = {
         return false
       }
 
-      if (typeof window._hmt !== 'undefined') {
-        window._hmt.push(['_trackPageview', to]);
-      }
+      // if (typeof window._hmt !== 'undefined') {
+      //   window._hmt.push(['_trackPageview', to]);
+      // }
 
       return true
     };
@@ -321,10 +305,9 @@ export const Theme: ThemeConfig = {
     if (inBrowser) {
       vitepressNprogress(ctx);
 
-      vitepressBackToTop({
-        // default
-        threshold:300
-      })
+      // useComponents(app, DemoPreview)
+
+      app.use(Antd);
 
       app.component('StyledMermaid', StyledMermaid)
 
@@ -333,7 +316,6 @@ export const Theme: ThemeConfig = {
 
       app.component("my-icon", Icon);
 
-      app.component("VuePreview", VuePreview);
       app.component("header-profile", HeaderProfile);
       app.component("lottie-panel", LottiePanel);
       app.component("code-group", CodeGroup);
@@ -343,9 +325,6 @@ export const Theme: ThemeConfig = {
       app.component("CopyRight", CopyRight);
       app.component("HoverGrid", HoverGrid);
       app.component("MagicCard", MagicCard);
-
-      app.use(VueResizeObserver);
-      app.use(FloatingVue);
     }
   },
   setup() {
@@ -360,6 +339,4 @@ export const Theme: ThemeConfig = {
     //   }
     // });
   },
-};
-
-export default Theme;
+} satisfies Theme;

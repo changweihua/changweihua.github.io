@@ -20,7 +20,7 @@
       "ESNext",
       "DOM"
     ],
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "./src/*"
@@ -35,46 +35,16 @@
         "./public/*"
       ]
     },
-    // "typeRoots": [
-    //   "typings"
-    // ],
-    // "types": [
-    // "./node_modules/lunisolar/typings/plugins/theGods.d.ts"
-    // ],
     //提示无法覆盖文件时，需要考虑设置此项
     "outDir": "dist"
   },
+  // "types": [
+  //   "typings"
+  // ],
   "diagnostics": true,
-  // "include": [],
-  "include": [
-    "./.vitepress/**/*",
-    ".vitepress/src/**/*",
-    ".vitepress/components/**/*",
-    ".vitepress/plugins/**/*",
-    ".vitepress/theme/**/*",
-    ".vitepress/utils/**/*",
-    ".vitepress/*",
-    "typings/",
-    "env.d.ts",
-    "typings/**/*.d.ts",
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "src/**/*.json",
-    "src/**/*.md",
-    "plugins/**/*.ts",
-    "tests"
-  ],
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
   "exclude": [
-    "node_modules",
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/cache/**",
-    "build",
-    "public",
-    "threejs",
-    "font",
-    "scripts",
-    "**/*.spec.ts"
+    "node_modules"
   ],
   "typedocOptions": {
     "entryPoints": [

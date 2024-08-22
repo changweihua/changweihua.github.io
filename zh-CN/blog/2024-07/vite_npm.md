@@ -10,7 +10,7 @@ pageClass: blog-page-class
 
 # 如何使用vite开发npm库 #
 
-::: tip
+:::tip
 如何搭建一个vite项目，并配置为库模式，为es模块化、umd打包出对应语法的两套js库文件。
 用typescript开发库时，如何在vite中自动生成声明文件呢。
 开发库时package.json中哪些属性必须设置。e.g：只发布哪些文件到npm上，以及不同导入方式，会返回哪个文件给人家。

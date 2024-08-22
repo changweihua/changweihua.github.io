@@ -22,7 +22,7 @@ import { onMounted, ref } from "vue";
 import { delay } from "lodash-es";
 import LinkListView from '@/components/LinkListView.vue';
 import BlogIndex from "@vp/components/BlogIndex.vue"
-import { data as posts } from '@vp/blog.zh-CN.data'
+import { data as posts } from '@vp/blog.data'
 
 const spinning = ref<boolean>(false);
 const delayTime = 200;

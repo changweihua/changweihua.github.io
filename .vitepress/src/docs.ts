@@ -1,5 +1,4 @@
 import { DefaultTheme, UserConfig } from "vitepress";
-import { markdown } from "./markdown";
 import { enConfig, zhConfig } from "./configs";
 
 const docsConfig: UserConfig<DefaultTheme.Config> = {
@@ -26,7 +25,6 @@ const docsConfig: UserConfig<DefaultTheme.Config> = {
       },
     ],
   ],
-  markdown,
   ignoreDeadLinks: [
     // ignore exact url "/playground"
     "/playground",

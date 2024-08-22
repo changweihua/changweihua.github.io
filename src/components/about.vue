@@ -9,7 +9,7 @@
       <div class="md:ml-24 mt-12 md:mt-0 flex shrink-0 flex-col gap-4  sm:w-full md:w-2/5 justify-around items-stretch">
         <div class="flex justify-between items-center text-slate-600">
           <div style="max-width: 200px;" class="justify-center items-center flex">
-            <lottie-panel :animation-data="party"></lottie-panel>
+            <!-- <lottie-panel :animation-data="party"></lottie-panel> -->
           </div>
         </div>
         <div class="flex justify-between items-center text-slate-600">
@@ -39,7 +39,7 @@
         </div>
         <div class="flex justify-between items-center text-slate-600">
           <div class="justify-center items-center flex">
-            <lottie-panel style="max-width: 200px;" :animation-data="world"></lottie-panel>
+            <!-- <lottie-panel style="max-width: 200px;" :animation-data="world"></lottie-panel> -->
           </div>
         </div>
       </div>
@@ -50,8 +50,8 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 // import { faker } from "@faker-js/faker";
-import party from "@/lotties/party.json";
-import world from "@/lotties/colorfulworld.json";
+// import party from "@/lotties/party.json";
+// import world from "@/lotties/colorfulworld.json";
 
 // const posts = readonly<
 //   Array<{

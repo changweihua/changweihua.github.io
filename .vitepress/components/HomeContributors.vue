@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { contributors } from '../../contributors'
+// import { contributors } from '../../contributors'
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import { contributors } from '../../contributors'
   </div>
   <div text-lg max-w-200 text-center leading-7 p-10 mx-auto>
     <div flex="~ wrap gap-1" justify-center>
-      <a
+      <!-- <a
         v-for="{ name, avatar } of contributors" :key="name" :href="`https://github.com/${name}`" target="_blank" m-0
         rel="noopener noreferrer" :aria-label="`${name} on GitHub`"
       >
@@ -21,7 +21,7 @@ import { contributors } from '../../contributors'
           loading="lazy" :src="avatar" width="40" height="40" rounded-full min-w-10 min-h-10 h-10 w-10
           :alt="`${name}'s avatar`"
         >
-      </a>
+      </a> -->
     </div>
     <br>
   </div>

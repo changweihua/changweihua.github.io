@@ -120,7 +120,9 @@ img:hover {
 
 上面的例子会将 图片 裁剪成一个圆形，圆心位于元素的中心，半径为元素的宽度或高度的一半。
 
-```vue preview
+:::demo
+
+```vue
 <template>
   <div><img src="/images/wall2.jpg" /></div>
 </template>
@@ -145,6 +147,8 @@ img:hover {
 </style>
 ```
 
+:::
+
 ### 椭圆 (ellipse) ###
 
 ```css
@@ -154,7 +158,7 @@ img {
   object-fit: cover;
   border-radius: 10px;
   /* 添加过渡 */
-  transition: 0.5s;
+  transition: 1.5s;
   /* 初始状态 */
   clip-path: ellipse(75% 50% at 50% 50%);
 }
@@ -168,8 +172,6 @@ img:hover {
 当鼠标悬停在图像上时，剪切区域变为一个椭圆形，水平和垂直半径变为图像尺寸的 50%
 
 悬浮之后进行裁剪属性值的变化
-
-:::demo
 
 ```vue
 <template>
@@ -195,8 +197,6 @@ img:hover {
 }
 </style>
 ```
-
-:::
 
 ### 矩形 ###
 
@@ -260,8 +260,6 @@ img:hover {
 
 裁剪区域距离图像顶部 10%，右侧 20%，底部 30%，左侧 40%。因此，裁剪区域显示图像的中心部分，四周有一定的内边距。
 
-:::demo
-
 ```vue
 <template>
   <div><img src="/images/wall2.jpg" /></div>
@@ -284,9 +282,6 @@ img:hover {
 }
 </style>
 ```
-
-:::
-
 
 ### 多边形 (polygon) [重要] ###
 
