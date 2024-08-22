@@ -49,7 +49,7 @@ import "./styles/timeline.fix.less";
 import { Tab, Tabs } from 'vue3-tabs-component'
 import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
 
-// import 'virtual:group-icons.css'
+import 'virtual:group-icons.css'
 import "uno.css";
 
 import type { Theme } from 'vitepress'
@@ -259,57 +259,51 @@ export default {
 
     DefaultTheme.enhanceApp(ctx);
 
-    app.directive('aria-empty', {
-      //指令绑定到元素时调用
-      mounted(el, binding) {
-        el.removeAttribute("aria-hidden");
-        // // 获取节点
-        // let ariaEls = el.querySelectorAll("svg");
-        // ariaEls.forEach((item) => {
-        //   item.removeAttribute("aria-hidden");
-        // });
-      },
-      //指令与元素解绑时调用
-      unmounted(el, binding) { }
-    })
+    if (!import.meta.env.SSR) {
+      // const plugin = await import('@vp/plugins/markdown/rough-mermaid')
+      // app.use(plugin.default)
 
-    // app.mixin({
-    //   async mounted() {
-    //     //你自己的插件地址
-    //     import('svg-pan-zoom').then(module => {
-    //         app.use(module);
-    //     })
-    //   },
-    // });
+      app.directive('aria-empty', {
+        //指令绑定到元素时调用
+        mounted(el, binding) {
+          el.removeAttribute("aria-hidden");
+          // // 获取节点
+          // let ariaEls = el.querySelectorAll("svg");
+          // ariaEls.forEach((item) => {
+          //   item.removeAttribute("aria-hidden");
+          // });
+        },
+        //指令与元素解绑时调用
+        unmounted(el, binding) { }
+      })
 
+      // app.mixin({
+      //   async mounted() {
+      //     //你自己的插件地址
+      //     import('svg-pan-zoom').then(module => {
+      //         app.use(module);
+      //     })
+      //   },
+      // });
 
+      router.onBeforeRouteChange = async (to) => {
 
-    router.onBeforeRouteChange = async (to) => {
+        // Here you can set the routes you want to configure.
+        if (to == '/') {
+          await router.go('/zh-CN/')
+          return false
+        }
 
-      // Here you can set the routes you want to configure.
-      if (to == '/') {
-        await router.go('/zh-CN/')
-        return false
+        // if (typeof window._hmt !== 'undefined') {
+        //   window._hmt.push(['_trackPageview', to]);
+        // }
+
+        return true
+      };
+
+      router.onAfterRouteChanged = () => {
       }
 
-      // if (typeof window._hmt !== 'undefined') {
-      //   window._hmt.push(['_trackPageview', to]);
-      // }
-
-      return true
-    };
-
-    router.onAfterRouteChanged = () => {
-    }
-
-    // if (!import.meta.env.SSR) {
-    //   const plugin = await import('@vp/plugins/markdown/rough-mermaid')
-    //   app.use(plugin.default)
-    // }
-
-    // app.component('VuePreview', VuePreview)
-
-    if (inBrowser) {
       vitepressNprogress(ctx);
 
       useComponents(app, DemoPreview)

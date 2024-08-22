@@ -67,21 +67,21 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // "@": fileURLToPath(new URL(".", import.meta.url)),
-      // "@": fileURLToPath(new URL("./src", import.meta.url)),
-      // "@vp": fileURLToPath(new URL("./.vitepress", import.meta.url)),
-      // public: fileURLToPath(new URL("./public", import.meta.url)),
-      "~": path.resolve(__dirname, "./"),
-      '*': path.resolve(''),
-      "@": path.resolve(__dirname, "src"),
-      "@vp": path.resolve(__dirname, ".vitepress"),
+      "*": fileURLToPath(new URL(".", import.meta.url)),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@vp": fileURLToPath(new URL("./.vitepress", import.meta.url)),
       public: fileURLToPath(new URL("./public", import.meta.url)),
+      // "~": path.resolve(__dirname, "./"),
+      // '*': path.resolve(__dirname),
+      // "@": path.resolve(__dirname, "src"),
+      // "@vp": path.resolve(__dirname, ".vitepress"),
+      // public: fileURLToPath(new URL("./public", import.meta.url)),
       // // 注意一定不要随意命名，a b c这样的，项目的目录也不能为关键字保留字！！
       // "comp": resolve(__dirname, "src/components"),
       // // 配置图片要这样引用
       // "/img": "./src/assets",
     },
-    extensions: ['.js', '.ts', '.json', '.vue']
+    // extensions: ['.js', '.ts', '.json', '.vue']
   },
   ssr: {
     noExternal: [

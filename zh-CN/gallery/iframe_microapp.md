@@ -7,6 +7,22 @@ mermaids: 1
 
 ## 引言 ##
 
+:::demo
+
+```vue
+<script lang="ts" setup>
+import { isSpecialBooleanAttr } from '@vue/shared'
+</script>
+
+<template>
+  <h1>演示： vite-plugin-vue-preview</h1>
+  <span>readonly is special boolean attr: {{ isSpecialBooleanAttr('readonly') }}</span>
+</template>
+```
+
+:::
+
+
 微前端是微服务概念在前端的应用。在微前端架构下，一个大型单一的前端应用被拆分成多个小型、独立的子应用，这些子应用可以独立开发、独立部署、独立运行，从而带来更加灵活高效的项目开发和管理。
 
 作为现代前端开发的趋势，许多企业的技术栈融入了微前端，有些是选择成熟的框架如 Qiankun、Micro-App 或 Single-SPA，有些是自研解决方案。

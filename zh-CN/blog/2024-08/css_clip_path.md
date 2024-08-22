@@ -120,20 +120,6 @@ img:hover {
 
 上面的例子会将 图片 裁剪成一个圆形，圆心位于元素的中心，半径为元素的宽度或高度的一半。
 
-:::demo
-
-```vue
-<script lang="ts" setup>
-import { isSpecialBooleanAttr } from '@vue/shared'
-</script>
-
-<template>
-  <h1>演示： vite-plugin-vue-preview</h1>
-  <span>readonly is special boolean attr: {{ isSpecialBooleanAttr('readonly') }}</span>
-</template>
-```
-
-:::
 
 :::demo
 
@@ -188,6 +174,8 @@ img:hover {
 
 悬浮之后进行裁剪属性值的变化
 
+:::demo
+
 ```vue
 <template>
   <div><img src="/images/wall2.jpg" /></div>
@@ -212,6 +200,8 @@ img:hover {
 }
 </style>
 ```
+
+:::
 
 ### 矩形 ###
 
@@ -275,6 +265,9 @@ img:hover {
 
 裁剪区域距离图像顶部 10%，右侧 20%，底部 30%，左侧 40%。因此，裁剪区域显示图像的中心部分，四周有一定的内边距。
 
+:::demo
+
+
 ```vue
 <template>
   <div><img src="/images/wall2.jpg" /></div>
@@ -297,6 +290,8 @@ img:hover {
 }
 </style>
 ```
+
+:::
 
 ### 多边形 (polygon) [重要] ###
 
@@ -401,7 +396,8 @@ clip-path: polygon(25% 0%, 75% 0%, 50% 100%, 0% 100%);
 
 ## 示例代码 ##
 
-
+:::demo src=src/demos/ClipPathDemo.vue
+:::
 
 
 [相应资源网站推荐](https://bennettfeely.com/clippy/)

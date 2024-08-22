@@ -5,22 +5,23 @@
     "noImplicitAny": false,
     "module": "esnext",
     "target": "esnext",
-    "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "allowJs": true,
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": false,
-    "jsx": "preserve",
     "lib": [
       "ESNext",
       "DOM"
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
@@ -38,14 +39,15 @@
     //提示无法覆盖文件时，需要考虑设置此项
     "outDir": "dist"
   },
-  // "types": [
-  //   "typings",
-  //   "vite/client"
-  // ],
+  "types": [
+    "typings",
+  ],
   "diagnostics": true,
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
+  "include": [".", "src", ".vitepress"],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".vitepress/cache",
+    "dist"
   ],
   "typedocOptions": {
     "entryPoints": [

@@ -124,37 +124,38 @@ export default defineConfig({
   // mermaidPlugin: {
   //   class: "mermaid rough-mermaid" // 为父容器设置额外的CSS类
   // },
+  // srcDir: '.',
   vite: {
     logLevel: 'info',
     plugins: [
-      // GitRevisionInfoPlugin(),
-      // groupIconVitePlugin({
-      //   customIcon: {
-      //     ae: 'logos:adobe-after-effects',
-      //     ai: 'logos:adobe-illustrator',
-      //     ps: 'logos:adobe-photoshop',
-      //     // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
-      //     // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
-      //   },
-      // }),
-      // RssPlugin(RSS),
-      // vitepressProtectPlugin({
-      //   disableF12: true,
-      //   disableCopy: true,
-      //   disableSelect: true,
-      // }),
+      GitRevisionInfoPlugin(),
+      groupIconVitePlugin({
+        customIcon: {
+          ae: 'logos:adobe-after-effects',
+          ai: 'logos:adobe-illustrator',
+          ps: 'logos:adobe-photoshop',
+          // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
+          // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
+        },
+      }),
+      RssPlugin(RSS),
+      vitepressProtectPlugin({
+        disableF12: true,
+        disableCopy: true,
+        disableSelect: true,
+      }),
       viteDemoPreviewPlugin(),
       vueJsx(),
     ],
   },
-  // vue: {
-  //   template: {
-  //     compilerOptions: {
-  //       isCustomElement: (tag) => customElements.includes(tag),
-  //       whitespace: 'preserve'      // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
-  //     },
-  //   },
-  // },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => customElements.includes(tag),
+        whitespace: 'preserve'      // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
+      },
+    },
+  },
   /* 文档配置 */
   ...docsConfig,
   /* 标头配置 */
@@ -177,37 +178,37 @@ export default defineConfig({
   //   },
   // },
   rewrites: {
-    '/index.md': '/zh-CN/index.md',
+    '^/index.md': '/zh-CN/index.md',
   },
   ignoreDeadLinks: true,
-  // async transformHead(context): Promise<HeadConfig[]> {
-  //   // const { assets }= context
-  //   const head = handleHeadMeta(context)
+  async transformHead(context): Promise<HeadConfig[]> {
+    // const { assets }= context
+    const head = handleHeadMeta(context)
 
-  //   return head
-  // },
-  // async transformPageData(pageData) {
-  //   const { isNotFound, relativePath } = pageData
-  //   const { contributors, changelog } = await getChangelogAndContributors(relativePath)
-  //   const CustomAvatars = {
-  //     'changweihua': '2877201'
-  //   }
-  //   const CustomContributors = contributors.map(contributor => {
-  //     contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`
-  //     return contributor
-  //   })
+    return head
+  },
+  async transformPageData(pageData) {
+    const { isNotFound, relativePath } = pageData
+    const { contributors, changelog } = await getChangelogAndContributors(relativePath)
+    const CustomAvatars = {
+      'changweihua': '2877201'
+    }
+    const CustomContributors = contributors.map(contributor => {
+      contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`
+      return contributor
+    })
 
-  //   if (isNotFound) {
-  //     pageData.title = 'Not Found'
-  //   }
+    if (isNotFound) {
+      pageData.title = 'Not Found'
+    }
 
-  //   return {
-  //     CommitData: {
-  //       contributors: CustomContributors,
-  //       changelog,
-  //       commitURL: 'https://github.com/changweihua/changweihua.github.io/commit/',
-  //       title: 'Changelog'
-  //     }
-  //   }
-  // }
+    return {
+      CommitData: {
+        contributors: CustomContributors,
+        changelog,
+        commitURL: 'https://github.com/changweihua/changweihua.github.io/commit/',
+        title: 'Changelog'
+      }
+    }
+  }
 });
