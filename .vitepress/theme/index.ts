@@ -15,8 +15,11 @@ import AnimationTitle from "../components/AnimationTitle.vue";
 
 import "./styles/index.less";
 
-// import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
-// import '@vitepress-code-preview/container/dist/style.css'
+import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
+import '@vitepress-code-preview/container/dist/style.css'
+
+// import { VuePreview } from 'vite-plugin-vue-preview'
+// import 'vite-plugin-vue-preview/style.css'
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
@@ -46,7 +49,7 @@ import "./styles/timeline.fix.less";
 import { Tab, Tabs } from 'vue3-tabs-component'
 import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
 
-import 'virtual:group-icons.css'
+// import 'virtual:group-icons.css'
 import "uno.css";
 
 import type { Theme } from 'vitepress'
@@ -279,10 +282,7 @@ export default {
     //   },
     // });
 
-    // if (!import.meta.env.SSR) {
-    //   const plugin = await import('@vp/plugins/markdown/rough-mermaid')
-    //   app.use(plugin.default)
-    // }
+
 
     router.onBeforeRouteChange = async (to) => {
 
@@ -302,10 +302,17 @@ export default {
     router.onAfterRouteChanged = () => {
     }
 
+    // if (!import.meta.env.SSR) {
+    //   const plugin = await import('@vp/plugins/markdown/rough-mermaid')
+    //   app.use(plugin.default)
+    // }
+
+    // app.component('VuePreview', VuePreview)
+
     if (inBrowser) {
       vitepressNprogress(ctx);
 
-      // useComponents(app, DemoPreview)
+      useComponents(app, DemoPreview)
 
       app.use(Antd);
 

@@ -39,26 +39,6 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   )
 })
 
-function query(selector) {
-  return Array.from(document.querySelectorAll(selector));
-}
-
-var observer = new IntersectionObserver(
-  function (changes) {
-    changes.forEach(function (change) {
-      const container = change.target;
-      console.log(container)
-      if (container) {
-        var content = container.querySelector('template')?.content;
-        if (content) {
-          container.appendChild(content);
-        }
-        observer.unobserve(container);
-      }
-    });
-  }
-);
-
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
   mediumZoom("[data-zoomable]", {
@@ -74,10 +54,6 @@ onMounted(() => {
 const router = useRouter();
 // Subscribe to route changes to re-apply medium zoom effect
 router.onAfterRouteChanged = setupMediumZoom;
-
-query('.lazy-loaded').forEach(function (item) {
-  observer.observe(item);
-});
 
 // v-slot:default="slotProps"
 </script>

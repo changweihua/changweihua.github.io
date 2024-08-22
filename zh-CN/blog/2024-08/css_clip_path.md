@@ -123,6 +123,21 @@ img:hover {
 :::demo
 
 ```vue
+<script lang="ts" setup>
+import { isSpecialBooleanAttr } from '@vue/shared'
+</script>
+
+<template>
+  <h1>演示： vite-plugin-vue-preview</h1>
+  <span>readonly is special boolean attr: {{ isSpecialBooleanAttr('readonly') }}</span>
+</template>
+```
+
+:::
+
+:::demo
+
+```vue
 <template>
   <div><img src="/images/wall2.jpg" /></div>
 </template>

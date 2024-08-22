@@ -64,7 +64,7 @@ export default defineConfig({
 
 如果在React、Vue等框架中，可以使用模板字符串和条件渲染来生成类名：
 
-```react
+```vue
 const color = 'red'
 const size = '500'
 

@@ -22,7 +22,7 @@ pageClass: blog-page-class
 `content-visibility`：属性控制一个元素是否渲染其内容，它允许用户代理（浏览器）潜在地省略大量布局和渲染工作，直到需要它为止。
 利用 `content-visibility` 的特性，我们可以实现如果该元素当前不在屏幕上，则不会渲染其后代元素。
 
-```html
+```html5
 <div v-for="item in items" :key="item">
    <div class="container-box">
       <p>-------------{{ item.id }}-------------</p>   
@@ -119,7 +119,7 @@ HTML5 新增了一个 `loading` 属性。
 
 可以这样使用它
 
-```html
+```html5
 <img :src="item.src" alt="" loading="lazy"/>
 ```
 
@@ -145,7 +145,7 @@ decoding="async
 
 而如果我们不希望图片的渲染解码影响页面的其他内容的展示，可以使用 `decoding=async` 选项，像是这样：
 
-```html
+```html5
 <img :src="item.src" alt="" loading="lazy" decoding="async"/>
 ```
 

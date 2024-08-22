@@ -8,8 +8,8 @@ import mermaidPlugin from '../plugins/markdown/rough-mermaid'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
 import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
-// import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
-// import { fileURLToPath, URL } from 'node:url'
+import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import { fileURLToPath, URL } from 'node:url'
 
 const CONSTS = {
   __custom_variable__: 'your value'
@@ -30,8 +30,10 @@ const markdown: MarkdownOptions | undefined = {
     md.use(groupIconMdPlugin)
     md.use(mermaidPlugin)
 
-    // const docRoot = fileURLToPath(new URL('../../', import.meta.url))
-    // md.use(demoPreviewPlugin, { docRoot })
+    const docRoot = fileURLToPath(new URL('../../', import.meta.url))
+    md.use(demoPreviewPlugin, {
+      docRoot
+    })
 
     md.use(ImagePlugin)
 

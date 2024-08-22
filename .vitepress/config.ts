@@ -11,7 +11,8 @@ import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
 import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
 import vitepressProtectPlugin from "vitepress-protect-plugin"
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
-// import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 const customElements = [
   "mjx-container",
@@ -125,36 +126,35 @@ export default defineConfig({
   // },
   vite: {
     logLevel: 'info',
-    // ↓↓↓↓↓
     plugins: [
-      RssPlugin(RSS),
-      vitepressProtectPlugin({
-        disableF12: true,
-        disableCopy: true,
-        disableSelect: true,
-      }),
-      // viteDemoPreviewPlugin(),
-      GitRevisionInfoPlugin(),
-      groupIconVitePlugin({
-        customIcon: {
-          ae: 'logos:adobe-after-effects',
-          ai: 'logos:adobe-illustrator',
-          ps: 'logos:adobe-photoshop',
-          // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
-          // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
-        },
-      })
+      // GitRevisionInfoPlugin(),
+      // groupIconVitePlugin({
+      //   customIcon: {
+      //     ae: 'logos:adobe-after-effects',
+      //     ai: 'logos:adobe-illustrator',
+      //     ps: 'logos:adobe-photoshop',
+      //     // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
+      //     // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
+      //   },
+      // }),
+      // RssPlugin(RSS),
+      // vitepressProtectPlugin({
+      //   disableF12: true,
+      //   disableCopy: true,
+      //   disableSelect: true,
+      // }),
+      viteDemoPreviewPlugin(),
+      vueJsx(),
     ],
-    // ↑↑↑↑↑
   },
-  vue: {
-    template: {
-      compilerOptions: {
-        isCustomElement: (tag) => customElements.includes(tag),
-        whitespace: 'preserve'      // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
-      },
-    },
-  },
+  // vue: {
+  //   template: {
+  //     compilerOptions: {
+  //       isCustomElement: (tag) => customElements.includes(tag),
+  //       whitespace: 'preserve'      // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
+  //     },
+  //   },
+  // },
   /* 文档配置 */
   ...docsConfig,
   /* 标头配置 */
@@ -180,38 +180,34 @@ export default defineConfig({
     '/index.md': '/zh-CN/index.md',
   },
   ignoreDeadLinks: true,
-  // transformHead是一个构建钩子，用于在生成每个页面之前转换头。
-  // 它将允许您添加无法静态添加到VitePress配置中的头条目。
-  // 您只需要返回额外的条目，它们将自动与现有条目合并。
-  // Don't mutate anything inside the ctx
-  async transformHead(context): Promise<HeadConfig[]> {
-    // const { assets }= context
-    const head = handleHeadMeta(context)
+  // async transformHead(context): Promise<HeadConfig[]> {
+  //   // const { assets }= context
+  //   const head = handleHeadMeta(context)
 
-    return head
-  },
-  async transformPageData(pageData) {
-    const { isNotFound, relativePath } = pageData
-    const { contributors, changelog } = await getChangelogAndContributors(relativePath)
-    const CustomAvatars = {
-      'changweihua': '2877201'
-    }
-    const CustomContributors = contributors.map(contributor => {
-      contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`
-      return contributor
-    })
+  //   return head
+  // },
+  // async transformPageData(pageData) {
+  //   const { isNotFound, relativePath } = pageData
+  //   const { contributors, changelog } = await getChangelogAndContributors(relativePath)
+  //   const CustomAvatars = {
+  //     'changweihua': '2877201'
+  //   }
+  //   const CustomContributors = contributors.map(contributor => {
+  //     contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`
+  //     return contributor
+  //   })
 
-    if (isNotFound) {
-      pageData.title = 'Not Found'
-    }
+  //   if (isNotFound) {
+  //     pageData.title = 'Not Found'
+  //   }
 
-    return {
-      CommitData: {
-        contributors: CustomContributors,
-        changelog,
-        commitURL: 'https://github.com/changweihua/changweihua.github.io/commit/',
-        title: 'Changelog'
-      }
-    }
-  }
+  //   return {
+  //     CommitData: {
+  //       contributors: CustomContributors,
+  //       changelog,
+  //       commitURL: 'https://github.com/changweihua/changweihua.github.io/commit/',
+  //       title: 'Changelog'
+  //     }
+  //   }
+  // }
 });

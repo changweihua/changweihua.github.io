@@ -27,7 +27,7 @@ date: 2023-08
 
 ## 自定义导航栏 ###
 
-```html
+```html5
 <view class="navigation-container" style="height: {{navigationBarAndStatusBarHeight}};--text-color: {{textcolor}};">
     <view style="{{'height: ' + statusBarHeight}}"></view>
     <view class="navigation-bar" style="{{'height:' + navigationBarHeight}}">
@@ -206,7 +206,7 @@ Component({
 
 ## 使用 ##
 
-```html
+```html5
 <t-navigation-bar navigationtype="navigateBack" title="航班详情"></t-navigation-bar>
 <view class="container">
     <view class="header">

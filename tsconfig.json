@@ -20,7 +20,7 @@
       "ESNext",
       "DOM"
     ],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
@@ -39,7 +39,8 @@
     "outDir": "dist"
   },
   // "types": [
-  //   "typings"
+  //   "typings",
+  //   "vite/client"
   // ],
   "diagnostics": true,
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
