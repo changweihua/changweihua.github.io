@@ -14,7 +14,6 @@ const getEnvValue = (mode: string, target: string) => {
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: 5999,
     hmr: {
       overlay: false,
     },
@@ -81,7 +80,7 @@ export default defineConfig({
       // // 配置图片要这样引用
       // "/img": "./src/assets",
     },
-    // extensions: ['.js', '.ts', '.json', '.vue']
+    // extensions: ['.js', '.ts', '.json', '.vue', '.tsx', '.jsx']
   },
   ssr: {
     noExternal: [

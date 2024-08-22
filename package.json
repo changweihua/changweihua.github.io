@@ -134,7 +134,7 @@
     "vitepress-plugin-lightbox": "^1.0.2",
     "vitepress-plugin-markdown-define": "^1.0.2",
     "vitepress-plugin-mermaid": "^2.0.16",
-    "vitepress-sidebar": "^1.24.2",
+    "vitepress-sidebar": "^1.25.0",
     "vue": "^3.4.38",
     "vue3-tabs-component": "^1.3.7"
   },
