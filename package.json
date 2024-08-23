@@ -39,41 +39,6 @@
     },
     "cz-customizable": {
       "config": "./.cz-config.cjs"
-    },
-    "@release-it/conventional-changelog": {
-      "config": "./changelog-option.cjs",
-      "infile": "CHANGELOG.md",
-      "ignoreRecommendedBump": true,
-      "strictSemVer": true,
-      "preset": {
-        "name": "conventionalcommits",
-        "types": [
-          {
-            "type": "feat",
-            "section": "✨新功能"
-          },
-          {
-            "type": "fix",
-            "section": "🐛问题修复"
-          },
-          {
-            "type": "docs",
-            "section": "📚文档"
-          },
-          {
-            "type": "chore",
-            "section": "🔧配置文件"
-          },
-          {
-            "type": "style",
-            "section": "💄修改样式"
-          },
-          {
-            "type": "release",
-            "hidden": "true"
-          }
-        ]
-      }
     }
   },
   "devDependencies": {
@@ -221,5 +186,5 @@
     "vite": "^5.4.2",
     "vite-plugin-html": "^3.2.2"
   },
-  "version": "0.0.39"
+  "version": "0.1.0"
 }

@@ -47,6 +47,10 @@ module.exports = {
     {
       value: ':construction_worker: ci',
       name: '👷 ci:       CI 相关变更'
+    },
+    {
+      value: ':bookmark: release',
+      name: '🔖 release:  发布/版本标签'
     }
   ],
   messages: {
