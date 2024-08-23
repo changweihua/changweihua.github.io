@@ -40,6 +40,8 @@ import PageFooter from "../components/PageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue"
 import MagicCard from "../components/MagicCard.vue"
 import StyledMermaid from "../components/StyledMermaid.vue"
+import MarkupView from "../components/MarkupView.vue"
+import "markmap-toolbar/dist/style.css";
 
 import { Icon } from "@iconify/vue";
 
@@ -51,6 +53,9 @@ import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
 
 import 'virtual:group-icons.css'
 import "uno.css";
+
+import FloatingVue from 'floating-vue'
+import 'floating-vue/dist/style.css';
 
 import type { Theme } from 'vitepress'
 
@@ -311,6 +316,7 @@ export default {
       app.use(Antd);
 
       app.component('StyledMermaid', StyledMermaid)
+      app.component('MarkupView', MarkupView)
 
       app.component('Tab', Tab)
       app.component('Tabs', Tabs)
@@ -326,6 +332,8 @@ export default {
       app.component("CopyRight", CopyRight);
       app.component("HoverGrid", HoverGrid);
       app.component("MagicCard", MagicCard);
+
+      app.use(FloatingVue);
     }
   },
   setup() {

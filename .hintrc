@@ -8,7 +8,8 @@
       {
         "ignore": [
           "backdrop-filter",
-          "text-emphasis"
+          "text-emphasis",
+          "user-select"
         ]
       }
     ],

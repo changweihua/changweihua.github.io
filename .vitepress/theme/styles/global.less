@@ -283,3 +283,79 @@ svg {
       }
   }
 }
+
+
+/* 侧边栏文字超出隐藏 */
+.VPSidebarItem .VPLink p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+/* 翻页按钮标题文字超出隐藏 */
+.VPDocFooter .pager .title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+/* 文字加粗样式修改 */
+.vp-doc strong {
+  font-size: 18px;
+  font-weight: bolder !important;
+  padding: 0 4px;
+}
+
+
+
+/* 夜间模式字体颜色修正 */
+:root {
+  --vp-c-text-dark-1: rgba(255, 255, 197, 0.86);
+  --vp-c-text-dark-2: rgba(207, 216, 231, 0.6);
+  --vp-c-text-dark-3: rgba(207, 216, 231, 0.38);
+}
+
+/* 各级目录文字颜色 */
+.vp-doc .header-anchor:before {
+  color: unset !important;
+  background: linear-gradient(to right, #6fbef7, #ba89ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: max-content;
+}
+
+/* hr 样式的修改 */
+// .vp-doc hr {
+//   margin: 16px 0;
+//   border: none !important;
+// }
+
+// .vp-doc hr::before {
+//   content: '';
+//   display: block;
+//   height: 30px;
+//   // background: url(https://images.bddxg.top/blog/logo.webp) repeat-x;
+//   background-size: contain;
+// }
+
+/* 背景图片随主题变化 */
+/* 应用在首页index.md内和关于页about.md内 */
+.Layout:has(.VPHome) {
+  // background: url('https://images.bddxg.top/blog/202402152108494.webp')
+  //   no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  user-select: none;
+  transition: 0.5s ease-in-out;
+}
+.dark .Layout:has(.VPHome) {
+  // background: url('https://images.bddxg.top/blog/202402152017530.webp')
+  //   no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  user-select: none;
+  transition: 0.5s ease-in-out;
+}

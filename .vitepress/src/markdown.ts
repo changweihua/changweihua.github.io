@@ -2,15 +2,21 @@ import lightbox from "vitepress-plugin-lightbox"
 import { MarkdownOptions } from "vitepress";
 import timeline from "vitepress-markdown-timeline";
 import footnote from 'markdown-it-footnote';
-import mathjax3 from 'markdown-it-mathjax3';
-import taskLists from 'markdown-it-task-checkbox'
+import markdownSup from 'markdown-it-sup'
+import markdownSub from 'markdown-it-sub'
+import frontmatter from 'markdown-it-front-matter'
+import lazy_loading from 'markdown-it-image-lazy-loading';
+import { tasklist } from "@mdit/plugin-tasklist";
+import { ruby } from "@mdit/plugin-ruby";
 import { ImagePlugin } from '../plugins/markdown/image'
 import mermaidPlugin from '../plugins/markdown/rough-mermaid'
+import markupPlugin from '../plugins/markdown/markup'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
 import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
+
 
 const CONSTS = {
   __custom_variable__: 'your value'
@@ -19,19 +25,24 @@ const CONSTS = {
 const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
   linkify: true,
-  theme: { light: 'github-light', dark: 'github-dark' },
+  math: true,
+  theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
   config: (md) => {
     useDefinePlugin(md, CONSTS)
 
     md.use(footnote);
-    md.use(mathjax3);
-    md.use(taskLists);
+    md.use(tasklist);
+    md.use(ruby);
+    md.use(frontmatter);
+    md.use(markdownSup);
+    md.use(markdownSub);
     md.use(lightbox, {});
-
+    md.use(lazy_loading);
     md.use(timeline);
     tabsPlugin(md)
     md.use(groupIconMdPlugin)
     md.use(mermaidPlugin)
+    md.use(markupPlugin)
 
     const docRoot = fileURLToPath(new URL('../../', import.meta.url))
     md.use(demoPreviewPlugin, {

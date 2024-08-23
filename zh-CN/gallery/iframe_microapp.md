@@ -7,6 +7,36 @@ mermaids: 1
 
 ## 引言  {#custom-id} ##
 
+{中国:zhōng|guó}
+
+++inserted++
+
+
+```markup
+
+# 微前端
+
+## 链接
+
+- <https://markmap.js.org/>
+- [GitHub](https://github.com/markmap/markmap)
+
+## 功能
+
+- 链接
+- **强调** ~~删除线~~ *斜体* ==高亮==
+- 多行
+  文字
+- `行内代码`
+-
+    ```js
+    console.log('code block');
+    ```
+- Katex
+  - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
+- 现在我们可以通过 `maxWidth` 选项自动换行非常非常非常非常非常非常非常非常非常非常长的内容
+```
+
 :::demo
 
 ```vue
@@ -34,6 +64,12 @@ import { isSpecialBooleanAttr } from '@vue/shared'
 去露营了！ :tent: 很快回来。
 
 真好笑！ :joy:
+
+I need to highlight these ==very important words==.
+
+H~2~O
+
+X^2^
 
 - [x] Write the press release
 - [ ] Update the website

@@ -14,6 +14,7 @@ const getEnvValue = (mode: string, target: string) => {
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
+    port: 2233,
     hmr: {
       overlay: false,
     },

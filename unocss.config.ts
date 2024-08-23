@@ -38,6 +38,7 @@ export default defineConfig({
     'bg-main': 'bg-gray-400',
     'bg-base': 'bg-white dark:bg-hex-1a1a1a',
     'uno-card': 'border-rd-30 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% mb-4vw p-2rem',
+    'markup-card': 'border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem',
   },
   presets: [
     presetUno(),
