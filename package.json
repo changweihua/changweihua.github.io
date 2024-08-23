@@ -157,6 +157,7 @@
     "markdown-it-task-checkbox": "^1.0.6",
     "markdown-it-task-lists": "^2.1.1",
     "markdown-to-txt": "^2.0.1",
+    "markmap-common": "^0.17.0",
     "markmap-lib": "^0.17.0",
     "markmap-toolbar": "^0.17.0",
     "markmap-view": "^0.17.0",
