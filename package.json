@@ -41,6 +41,7 @@
       "config": "./.cz-config.cjs"
     },
     "@release-it/conventional-changelog": {
+      "config": "./changelog-option.cjs",
       "infile": "CHANGELOG.md",
       "ignoreRecommendedBump": true,
       "strictSemVer": true,
@@ -210,5 +211,5 @@
     "vite": "^5.4.2",
     "vite-plugin-html": "^3.2.2"
   },
-  "version": "0.0.38"
+  "version": "0.0.39"
 }
