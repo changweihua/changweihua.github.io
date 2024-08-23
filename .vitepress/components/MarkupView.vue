@@ -10,6 +10,7 @@ import { ref, onMounted, watch, onBeforeUnmount } from 'vue';
 import { Transformer } from 'markmap-lib';
 import { Markmap, loadCSS, loadJS } from 'markmap-view';
 import { Toolbar } from 'markmap-toolbar';
+import ResizeObserver from 'resize-observer-polyfill';
 import { useScreenfullEffect } from '@vp/utils/useScreenfullEffect'
 import { delay } from 'lodash-es'
 import screenfull from 'screenfull';
@@ -74,6 +75,8 @@ const update = () => {
   renderToolbar(markmapRef.value!, toolbarRef.value!);
 }
 
+let resizeObserver: ResizeObserver;
+
 onMounted(() => {
   // 初始化markmap思维导图
   markmapRef.value = Markmap.create(svgRef.value!);
@@ -92,11 +95,23 @@ onMounted(() => {
 
   // 针对f11全屏无法监听问题
   // window.addEventListener('keydown', KeyDown, true)
+
+  // 创建 ResizeObserver 实例
+  resizeObserver = new ResizeObserver(entries => {
+    for (let entry of entries) {
+      const { width, height } = entry.contentRect;
+      console.log(`Size: ${width}px x ${height}px`);
+    }
+  });
+
+  // 观察 resizeMe 元素
+  resizeObserver.observe(markupCardRef.value!);
 })
 
 // 组件卸载前
 onBeforeUnmount(() => {
   screenfull.off('change', () => { })
+  resizeObserver?.disconnect()
 })
 
 </script>
