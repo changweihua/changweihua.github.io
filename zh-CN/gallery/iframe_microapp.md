@@ -5,7 +5,7 @@ recommended: true
 mermaids: 1
 ---
 
-## 引言 ##
+## 引言  {#custom-id} ##
 
 :::demo
 
@@ -28,6 +28,16 @@ import { isSpecialBooleanAttr } from '@vue/shared'
 作为现代前端开发的趋势，许多企业的技术栈融入了微前端，有些是选择成熟的框架如 Qiankun、Micro-App 或 Single-SPA，有些是自研解决方案。
 
 > 微前端最简单的实现形式是基于Iframe。
+
+~~世界是平坦的。~~ 我们现在知道世界是圆的。
+
+去露营了！ :tent: 很快回来。
+
+真好笑！ :joy:
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
 
 ### 一个完善的微前端框架 ###
 
@@ -62,7 +72,7 @@ import { isSpecialBooleanAttr } from '@vue/shared'
 
 本方案主要是通过PostMessage方法实现的。PostMessage 是一种安全地实现不同浏览器窗口（包括弹出窗口和iframe）间通信的方式。允许不同源（origin）的窗口进行数据交换，从而克服了同源策略的限制。适用于多种场景，如页面与弹出窗口、页面与嵌入的iframe、甚至是不同的web workers之间的通信。
 
-此处引入自己编写的 `maui-jsbridge`[^1] npm包, `H5微应用平台`[^2], `Maui Hybird 架构`[^3]。
+此处引入自己编写的 `maui-jsbridge`[^maui-jsbridge] npm包, `H5微应用平台`[^H5微应用平台], `Maui Hybird 架构`[^MauiHybird], 基本符合功能预期 。
 
 ### 主应用 ###
 
@@ -313,6 +323,8 @@ onBeforeUnmount(() => {
 </div>
 
 
-[^1]: [maui-jsbridge](https://www.npmjs.com/package/maui-jsbridge)
-[^2]: [H5微应用平台](/zh-CN/gallery/maui)
-[^3]: [Maui Hybird 架构](/zh-CN/gallery/web_app)
+[^maui-jsbridge]: *[maui-jsbridge](https://www.npmjs.com/package/maui-jsbridge)*
+
+[^H5微应用平台]: *[H5微应用平台](/zh-CN/gallery/maui.md)*
+
+[^MauiHybird]: *[MauiHybird架构](/zh-CN/gallery/web_app.md)*

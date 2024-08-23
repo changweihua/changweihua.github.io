@@ -35,7 +35,7 @@ tags:
 
 ### 页面使用
 
-```html5
+```html
 <my-navigation-bar title="{{title}}" backgroundcolor="var(--td-brand-color)">
   <t-icon slot="arrow-left" color="#fff" name="chevron-left" size="56rpx" />
 </my-navigation-bar>

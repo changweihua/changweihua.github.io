@@ -15,7 +15,7 @@ date: 2023-08-10
 
 ## 代码
 
-```html5
+```html
 <view
   id="gatenumber_cell"
   style="--gatenumber-width: {{gatenumber_width}}"

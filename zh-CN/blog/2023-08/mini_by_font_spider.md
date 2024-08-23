@@ -96,7 +96,7 @@ date: 2023-08-20
 
 1. 创建 index.html，引入字体文件 `Alibaba.css`，并且在 `index.html` 中抄录所有文字。
 
-```html5
+```html
 
 <!DOCTYPE html>
 <html lang="en">

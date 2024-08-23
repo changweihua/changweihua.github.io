@@ -34,7 +34,7 @@ File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 con
 
 主要应用场景：图片预览
 
-```html5
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,7 +80,7 @@ File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 con
 
 主要应用场景：文件上传
 
-```html5
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +126,7 @@ File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 con
 
 主要应用场景：文件上传
 
-```html5
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,7 +168,7 @@ File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 con
 
 主要应用场景：文件上传
 
-```html5
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -210,7 +210,7 @@ File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 con
 
 主要应用场景：文件上传
 
-```html5
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -264,7 +264,7 @@ File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 con
 
 主要应用场景：图片预览
 
-```html5
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>

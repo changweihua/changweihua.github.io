@@ -43,7 +43,7 @@ customElements.define('my-element', MyElement);
 
 ### 使用Custom Element ###
 
-```html5
+```html
 <my-element></my-element>
 ```
 
@@ -65,7 +65,7 @@ connectedCallback() {
 }
 ```
 
-```html5
+```html
 <my-element><p>Content</p></my-element>
 ```
 
@@ -73,7 +73,7 @@ connectedCallback() {
 
 HTML Templates允许你定义可重用的HTML片段，这些片段不会立即渲染到页面上，而是作为模板存储在内存中，直到需要时才插入DOM。
 
-```html5
+```html
 <template id="my-template">
   <div>
     <h1>Hello</h1>
@@ -94,7 +94,7 @@ this.shadowRoot.appendChild(clone);
 
 ### 使用Polyfills ###
 
-```html5
+```html
 <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.5.0/custom-elements-es5-adapter.js"></script>
 <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.5.0/webcomponents-bundle.js"></script>
 ```

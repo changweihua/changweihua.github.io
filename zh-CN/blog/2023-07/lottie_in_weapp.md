@@ -23,7 +23,7 @@ date: 2023-07
 
 ## WXML ##
 
-```html5
+```html
 <canvas id="lottiejs-canvas" canvas-id="lottiejs-canvas" type="2d"></canvas>
 ```
 

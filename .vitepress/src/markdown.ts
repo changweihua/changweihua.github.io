@@ -3,6 +3,7 @@ import { MarkdownOptions } from "vitepress";
 import timeline from "vitepress-markdown-timeline";
 import footnote from 'markdown-it-footnote';
 import mathjax3 from 'markdown-it-mathjax3';
+import taskLists from 'markdown-it-task-checkbox'
 import { ImagePlugin } from '../plugins/markdown/image'
 import mermaidPlugin from '../plugins/markdown/rough-mermaid'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
@@ -17,12 +18,14 @@ const CONSTS = {
 
 const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
+  linkify: true,
   theme: { light: 'github-light', dark: 'github-dark' },
   config: (md) => {
     useDefinePlugin(md, CONSTS)
 
     md.use(footnote);
     md.use(mathjax3);
+    md.use(taskLists);
     md.use(lightbox, {});
 
     md.use(timeline);

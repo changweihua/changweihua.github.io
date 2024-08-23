@@ -113,7 +113,7 @@ md.use(require('markdown-it-container'), 'spoiler', {
 
 最终渲染的结果为：
 
-```html5
+```html
 <details><summary>click me</summary>
 <p><em>content</em></p>
 </details>
