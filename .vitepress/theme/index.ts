@@ -25,6 +25,8 @@ import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
 import "animate.css";
 
+import busuanzi from "busuanzi.pure.js";
+
 // 引入 Ant Design Vue
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
@@ -41,6 +43,7 @@ import HoverGrid from "../components/HoverGrid.vue"
 import MagicCard from "../components/MagicCard.vue"
 import StyledMermaid from "../components/StyledMermaid.vue"
 import MarkupView from "../components/MarkupView.vue"
+import Confetti from "../components/Confetti.vue";
 import "markmap-toolbar/dist/style.css";
 
 import { Icon } from "@iconify/vue";
@@ -264,6 +267,12 @@ export default {
 
     DefaultTheme.enhanceApp(ctx);
 
+    if (inBrowser) {
+      router.onAfterRouteChanged = () => {
+        busuanzi.fetch();
+      };
+    }
+
     if (!import.meta.env.SSR) {
       // const plugin = await import('@vp/plugins/markdown/rough-mermaid')
       // app.use(plugin.default)
@@ -306,9 +315,6 @@ export default {
         return true
       };
 
-      router.onAfterRouteChanged = () => {
-      }
-
       vitepressNprogress(ctx);
 
       useComponents(app, DemoPreview)
@@ -332,6 +338,7 @@ export default {
       app.component("CopyRight", CopyRight);
       app.component("HoverGrid", HoverGrid);
       app.component("MagicCard", MagicCard);
+      app.component("Confetti", Confetti); //注册全局组件
 
       app.use(FloatingVue);
     }

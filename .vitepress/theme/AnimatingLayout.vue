@@ -53,7 +53,9 @@ onMounted(() => {
 
 const router = useRouter();
 // Subscribe to route changes to re-apply medium zoom effect
-router.onAfterRouteChanged = setupMediumZoom;
+router.onAfterRouteChanged = function () {
+  setupMediumZoom()
+}
 
 // v-slot:default="slotProps"
 </script>

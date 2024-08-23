@@ -3,7 +3,7 @@ layout: page
 sidebar: false
 layoutClass: m-nav-layout
 pageClass: blog-index-page
-title: Index
+title: 最新文章列表
 
 head:
   - - meta

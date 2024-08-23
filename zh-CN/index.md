@@ -119,3 +119,5 @@ head:
     - name: keywords
       content: changweihua.github.io 首页 CMONO.NET
 ---
+
+<Confetti />

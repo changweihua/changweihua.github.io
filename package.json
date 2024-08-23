@@ -58,6 +58,8 @@
     "@types/node": "^22.5.0",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "autoprefixer": "^10.4.20",
+    "busuanzi.pure.js": "^1.0.3",
+    "canvas-confetti": "^1.9.3",
     "commitizen": "^4.3.0",
     "commitlint": "^19.4.0",
     "commitlint-config-cz": "^0.13.3",

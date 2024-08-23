@@ -11,7 +11,7 @@
       {{ version }}
     </p> -->
   </div>
-  <!-- - package name: {{ params?.pkg }} - version: {{ params?.version }} -->
+  <VisitsPanel /> <!-- - package name: {{ params?.pkg }} - version: {{ params?.version }} -->
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
@@ -24,6 +24,8 @@ import {
   LaTeXIcon,
   ViteIcon,
 } from "vue3-simple-icons";
+import VisitsPanel from './VisitsPanel.vue'
+
 const version = ref("N/A");
 // import { useData } from "vitepress";
 // const { params } = useData();
