@@ -51,6 +51,8 @@ import { Icon } from "@iconify/vue";
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
+import 'vitepress-markdown-it-stepper/theme'
+
 import { Tab, Tabs } from 'vue3-tabs-component'
 import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
 
@@ -124,7 +126,8 @@ export default {
       // "home-hero-image": () => h(Suspense, ShamingLogo),
       // "home-hero-image": () => h(ShamingLogo),
       "home-hero-image": () => h('div', {
-        style: "position: relative;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;"
+        class: "w-full h-full flex items-center justify-center",
+        style: "position: relative;"
       }, [
         h('img', {
           src: '/cwh.svg',

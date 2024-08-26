@@ -39,11 +39,8 @@
     //提示无法覆盖文件时，需要考虑设置此项
     "outDir": "dist",
   },
-  "types": [
-    "typings",
-  ],
   "diagnostics": true,
-  "include": [".", "src", ".vitepress"],
+  "include": [".", "src", ".vitepress", "typings", "env.d.ts"],
   "exclude": [
     "node_modules",
     ".vitepress/cache",

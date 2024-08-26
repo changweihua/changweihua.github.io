@@ -11,7 +11,16 @@ export default function roughMermaidPlugin(md: MarkdownIt): void {
 
     if (language.startsWith('mermaid')) {
       // 将代码块渲染成 html，这里替换成我们自己定义的vue组件
-      return `<StyledMermaid id="mermaid-${idx}" code="${encodeURIComponent(token.content)}"></StyledMermaid>`
+      return `
+        <Suspense>
+          <template #default>
+            <StyledMermaid id="mermaid-${idx}" code="${encodeURIComponent(token.content)}"></StyledMermaid>
+          </template>
+          <!-- loading state via #fallback slot -->
+          <template #fallback>
+            Loading...
+          </template>
+        </Suspense>`;
     }
     // 对不是我们需要的代码块的直接调用原有的函数
     return fence!(tokens, idx, options, env, self)

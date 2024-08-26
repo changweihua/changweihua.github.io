@@ -11,6 +11,77 @@ mermaids: 1
 
 ++inserted++
 
+*[HTML]: Hyper Text Markup Language
+*[W3C]:  World Wide Web Consortium
+The HTML specification
+is maintained by the W3C.
+
+## Closed
+++++ Click me!
+Hidden text
++++ Nested
+Inner hidden text
++++
+++++
+
+## Open
++++> Click me!
+Hidden text
++++ Nested
+Inner hidden text
++++
++++>
+
+Test #hahstag @user
+
+--Strikeout--
+
+- [[default]]
+- [[~~custom-class~~default]]
+- [[~~recommended~~]]
+
+- [[ref|https://example.com]]
+- [[ref:Lean more|https://example.com]]
+- [[~~custom-class~~ref|https://example.com]]
+- [[~~custom-class~~ref:Lean more|https://example.com]]
+
+@@你知道的太多了@@
+
+::: stepper
+Paragraph
+
+- List item #1
+- List item #2
+:::
+
+::: stepper This is a title
+Another paragraph
+
+- Another list item #1
+- Another list item #2
+:::
+
+
+:::: stepper This is a title
+Paragraph
+
+- List item #1
+- List item #2
+
+::: stepper This is another title
+Nested paragraph
+
+- Nested list item #1
+- Nested list item #2
+:::
+::::
+
+::: stepper Can have a title
+:::
+
+```js:hello.js
+console.log("Hello World!")
+```
 
 ```markup
 

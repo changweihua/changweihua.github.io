@@ -163,20 +163,19 @@ export default defineConfig({
   /* 主题配置 */
   themeConfig,
   markdown,
-  lastUpdated: false,
-  // sitemap: {
-  //   hostname: "https://changweihua.github.io",
-  //   lastmodDateOnly: false,
-  //   transformItems: (items) => {
-  //     // add new items or modify/filter existing items
-  //     items.push({
-  //       url: "/extra-page",
-  //       changefreq: "monthly",
-  //       priority: 0.8,
-  //     });
-  //     return items;
-  //   },
-  // },
+  sitemap: {
+    hostname: "https://changweihua.github.io",
+    lastmodDateOnly: false,
+    transformItems: (items) => {
+      // add new items or modify/filter existing items
+      items.push({
+        url: "/extra-page",
+        changefreq: "monthly",
+        priority: 0.8,
+      });
+      return items;
+    },
+  },
   rewrites: {
     '^/index.md': '/zh-CN/index.md',
   },

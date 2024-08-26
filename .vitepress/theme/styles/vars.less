@@ -77,7 +77,17 @@
 
 h1 {
   // background: -webkit-linear-gradient(-45deg, #506bee 5%, #5ad7dd 35%);
-  background-image: linear-gradient(45deg, #ffb3ba, #c49c6e, #bfbf76, #77b084, #ff7e74, #3b82f6, #c084fc, #db2777);
+  background-image: linear-gradient(
+    45deg,
+    #ffb3ba,
+    #c49c6e,
+    #bfbf76,
+    #77b084,
+    #ff7e74,
+    #3b82f6,
+    #c084fc,
+    #db2777
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -126,9 +136,8 @@ h1 {
 //   border-left: 4px solid var(--vp-c-brand);
 // }
 
-
 .vp-doc blockquote::before {
-color: #ccc;
+  color: #ccc;
   content: open-quote;
   font-size: 4em;
   line-height: 0.1em;
@@ -177,7 +186,27 @@ color: #ccc;
   object-fit: contain;
 }
 
+// .linkcard::before{
+//   content: "";
+//   height: calc(100% + 4px);
+//   position: absolute;
+//   width: calc(100% + 4px);
+//   display: block;
+//   inset: -2px;
+//   z-index:-1;
+//   background: radial-gradient(
+//       500px circle at var(--x) var(--y),
+//       var(--fl-color),
+//   transparent 40%
+//   );
+//   will-change: background;
+// }
+
 /* 链接下划线去除 */
 .vp-doc a {
   text-decoration: none;
+}
+
+strong {
+  color: var(--vp-c-brand-light);
 }

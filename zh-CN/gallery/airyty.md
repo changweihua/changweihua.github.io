@@ -21,3 +21,11 @@ layout: doc
 微信内搜索：`扬泰机场智慧出行`
 
 ![扬泰机场智慧出行小程序](/images/cmono-%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230718132006.jpg){data-zoomable}
+
+<ClientOnly>
+  <BackgroundCleaner />
+</ClientOnly>
+
+<script lang="ts" setup>
+import BackgroundCleaner from '@/components/BackgroundCleaner.vue'
+</script>

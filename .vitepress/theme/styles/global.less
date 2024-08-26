@@ -359,3 +359,107 @@ svg {
   user-select: none;
   transition: 0.5s ease-in-out;
 }
+
+summary {
+  display: flex;
+  align-items: start;
+  outline: none;
+  list-style: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+summary > h1, summary > h2, summary > h3, summary > h4, summary > h5, summary > h6 {
+  display: inline-block;
+  margin: 0;
+}
+
+details > *:not(summary) {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  margin-left: 1.25rem;
+}
+
+.details-marker::before {
+  content: "▶︎";
+  display: inline-block;
+  margin-right: 0.5ch;
+  flex-shrink: 0;
+  transition: 0.3s;
+}
+
+details[open] > summary .details-marker::before {
+  transform: rotate(90deg);
+  transform-origin: 40% 45% 0;
+}
+
+.named-fence-block {
+  position: relative;
+  padding-top: 2em;
+}
+
+.named-fence-filename {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 4px;
+  font-weight: bold;
+  color: #000000;
+  background: #c0c0c0;
+  opacity: 0.6;
+}
+
+.heimu {
+  position: relative;
+}
+.heimu::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transition: background-color 0.2s;
+}
+
+.heimu:hover::before {
+  background-color: transparent;
+}
+
+h1 {
+  display: inline;
+  background-image: linear-gradient(to right, #ec695c, #61c545);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
+  background-size: 0 2px;
+  line-height: 2;
+  transition: background-size 1.5s;
+}
+h1:hover {
+  background-position-x: left;
+  background-size: 100% 2px;
+}
+
+body::-webkit-scrollbar {
+	width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--custom-thumb-color);
+    border-radius: 16px;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--custom-track-color);
+    border-radius: 16px;
+}
+
+/* 针对不支持::-webkit-scrollbar-*的浏览器的样式调整 */
+@supports not (selector(::-webkit-scrollbar)) {
+    html {
+        scrollbar-width: auto;
+        scrollbar-color: #bbb #bbb;
+    }
+}

@@ -4,3 +4,5 @@ node_modules
 .vitepress/dist
 .vitepress/.temp
 .vitepress/cache
+background-removal
+public/package.tgz

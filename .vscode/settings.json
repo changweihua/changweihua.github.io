@@ -8,7 +8,7 @@
   "explorer.fileNesting.patterns": {
     "index.html": "index.html,*.css",
     "package.json": ".npmrc,tsconfig.*.json,*.cjs,*.js,*.json,*.config.ts,*.config.cjs,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig",
-    ".env": "env.*",
+    ".env": "env.*,.env.*",
     "auto-imports.d.ts": "auto-imports.d.ts,components.d.ts",
     "index.md": "index.md,en-US.md,zh-CN.md,sponsor.md,CONTRIBUTING.md,CODE_OF_CONDUCT.md,CONTRIBUTING.zh-CN.md,README.md,CHANGELOG.md,PRIVACY_POLICY.md,TERMS_OF_SERVICE.md"
   },

@@ -4,10 +4,21 @@ import timeline from "vitepress-markdown-timeline";
 import footnote from 'markdown-it-footnote';
 import markdownSup from 'markdown-it-sup'
 import markdownSub from 'markdown-it-sub'
+import markdownItMark from 'markdown-it-mark'
 import frontmatter from 'markdown-it-front-matter'
+import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless"
+import markdownLinks from 'markdown-it-external-links'
+import MarkdownItCollapsible from "markdown-it-collapsible";
 import lazy_loading from 'markdown-it-image-lazy-loading';
+import MarkdownItVariable from "markdown-it-variable";
+import MarkdownItTodoLists from 'markdown-it-todo-lists'
+import namedCode from 'markdown-it-named-code-blocks'
+import strikethrough from 'markdown-it-strikethrough-alt'
+import hashmention from 'markdown-it-hashmention'
 import { tasklist } from "@mdit/plugin-tasklist";
 import { ruby } from "@mdit/plugin-ruby";
+import markdownCjkBreaks from 'markdown-it-cjk-breaks'
+import { markdownItStepper } from 'vitepress-markdown-it-stepper'
 import { ImagePlugin } from '../plugins/markdown/image'
 import mermaidPlugin from '../plugins/markdown/rough-mermaid'
 import markupPlugin from '../plugins/markdown/markup'
@@ -36,13 +47,36 @@ const markdown: MarkdownOptions | undefined = {
     md.use(frontmatter);
     md.use(markdownSup);
     md.use(markdownSub);
+    md.use(hashmention)
+    md.use(MarkdownItTodoLists, {
+      enabled: true
+    })
+    md.use(MarkdownItVariable)
+    md.use<Options>(wordless, {supportWordless: [chineseAndJapanese]})
+    markdownItMark(md)
+    markdownLinks(md, {
+      externalClassName: "custom-external-link",
+      internalClassName: "custom-internal-link",
+      internalDomains: [ "https://changweihua.github.io" ]
+    })
+    markdownItStepper(md)
+    // md.use(fitmedia, {
+    //   //default options, you can omit these
+    //   imgDir: "",
+    //   imgLazyLoad: true,
+    //   imgDecoding: "auto",
+    //   fitElements: ["iframe", "video"],
+    // })
+    strikethrough(md)
     md.use(lightbox, {});
+    md.use(namedCode, {isEnableInlineCss: true});
     md.use(lazy_loading);
     md.use(timeline);
     tabsPlugin(md)
     md.use(groupIconMdPlugin)
     md.use(mermaidPlugin)
     md.use(markupPlugin)
+    md.use(MarkdownItCollapsible);
 
     const docRoot = fileURLToPath(new URL('../../', import.meta.url))
     md.use(demoPreviewPlugin, {

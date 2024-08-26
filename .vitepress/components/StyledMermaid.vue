@@ -15,17 +15,22 @@
 </template>
 <script setup lang="ts">
 import { useData, inBrowser } from 'vitepress'
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, toRaw } from 'vue'
 import * as roughjs from 'svg2roughjs'
 import mermaid from 'mermaid'
 import svgPanZoom, { Instance } from '@dash14/svg-pan-zoom'
 import { useScreenfullEffect } from '@vp/utils/useScreenfullEffect'
 import { delay } from 'lodash-es'
 
+const { page } = useData();
+const { frontmatter } = toRaw(page.value);
+console.log('mermaid frontmatter', frontmatter)
+
 const svgRef = ref()
 const sketchRef = ref<HTMLDivElement>()
 const sketchSvgRef = ref<SVGSVGElement>()
 
+let mut: MutationObserver;
 let panZoomTiger: Instance;
 
 const { handleFullscreenElement, isFullElementTag } = useScreenfullEffect()
@@ -61,9 +66,7 @@ async function makeRough(svg: SVGSVGElement, id: string) {
     sketch.setAttribute('viewBox', `0 0 ${width} ${height}`);
     sketch.style.maxWidth = '100%';
   }
-
 }
-
 
 async function makePanZoom(svg: SVGSVGElement, id: string) {
 
@@ -131,7 +134,7 @@ watch(() => isDark.value, async (nVal, oVal) => {
   //   theme: nVal ? 'dark' : 'forest',
   // })
 
-  await render(props.id, decodeURIComponent(props.code!))
+  await renderChart(props.id, decodeURIComponent(props.code!))
 })
 
 const props = defineProps({
@@ -139,7 +142,9 @@ const props = defineProps({
   code: String,
 })
 
-const render = async (id, code) => {
+const renderChart = async (id, code) => {
+  const hasDarkClass = document.documentElement.classList.contains("dark");
+
   // mermaid 初始化
   mermaid.initialize({ startOnLoad: false, theme: isDark.value ? 'dark' : 'forest', fontFamily: "AlibabaPuHuiTi" })
 
@@ -160,13 +165,17 @@ const render = async (id, code) => {
   if (inBrowser) {
     await makePanZoom(sketchSvgRef.value!, `${props.id}r`)
   }
-
 }
 // 在组件挂载后进行mermaid渲染
 onMounted(async () => {
-  await render(props.id, decodeURIComponent(props.code!))
+  await renderChart(props.id, decodeURIComponent(props.code!))
 
+  // mut = new MutationObserver(async () => await renderChart(props.id, decodeURIComponent(props.code!)));
+  // mut.observe(document.documentElement, { attributes: true });
 })
+
+
+onUnmounted(() => mut?.disconnect());
 
 </script>
 
