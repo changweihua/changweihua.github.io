@@ -38,8 +38,8 @@ let categories: ref<Array<{
     link: string;
     description?: string;
     icon: string;
-    poster?: string
-    posterAlt?: string
+    cover?: string
+    coverAlt?: string
   }>> = ref([]);
 
 onMounted(() => {
@@ -49,7 +49,8 @@ onMounted(() => {
       link: p.url,
       title: p.title ,
       description: p.date.string,// p.excerpt,
-      poster: '/images/cmono-4c0cf778e497ab206289099ce51db5f.png"',
+      // poster: '/images/cmono-4c0cf778e497ab206289099ce51db5f.png"',
+      cover: p.cover
       // icon: "VueJS",
     };
   });

@@ -3,13 +3,23 @@ import Icons from "unplugin-icons/vite";
 import UnoCSS from "unocss/vite";
 import path, { resolve } from "path";
 import { fileURLToPath } from "url";
+import type {Plugin} from 'vite'
+import { vitePluginVersionMark } from 'vite-plugin-version-mark'
+import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 // import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
 
 const getEnvValue = (mode: string, target: string) => {
-  const value = loadEnv(mode, path.join(process.cwd(), 'env'))[target]
-  console.log(value)
+  const value = loadEnv(mode, process.cwd())[target]
   return value
 }
+
+const yourPlugin: () => Plugin = () => ({
+  name: 'test-plugin',
+  config (config) {
+    // get version in vitePlugin if you open `ifGlobal`
+    console.log(config.define)
+  }
+})
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -26,7 +36,7 @@ export default defineConfig({
   // assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
   build: {
     sourcemap: process.env.NODE_ENV !== 'production', // Seems to cause JavaScript heap out of memory errors on build
-    minify: false, // 必须开启：使用terserOptions才有效果
+    minify: true, // 必须开启：使用terserOptions才有效果
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     emptyOutDir: true,
     rollupOptions: {
@@ -38,6 +48,27 @@ export default defineConfig({
     'process.env.RSS_BASE': JSON.stringify(`${getEnvValue(process.env.NODE_ENV || 'github', 'VITE_APP_RSS_BASE_URL')}`),
   },
   plugins: [
+    vitePluginVersionMark({
+      // name: 'test-app',
+      // version: '0.0.1',
+      // command: 'git describe --tags',
+      // ifGitSHA: true,
+      ifShortSHA: true,
+      ifMeta: true,
+      ifLog: true,
+      ifGlobal: true,
+    }),
+    yourPlugin(),
+    chunkSplitPlugin({
+      strategy: 'default',
+      // // 指定拆包策略
+      // customSplitting: {
+      //   // 1. 支持填包名。`react` 和 `react-dom` 会被打包到一个名为`render-vendor`的 chunk 里面(包括它们的依赖，如 object-assign)
+      //   'react-vendor': ['react', 'react-dom'],
+      //   // 2. 支持填正则表达式。src 中 components 和 utils 下的所有文件被会被打包为`component-util`的 chunk 中
+      //   'components-util': [/src\/components/, /src\/utils/]
+      // }
+    }),
     // vuePreviewPlugin({
     //   props: {
     //       // @ts-ignore

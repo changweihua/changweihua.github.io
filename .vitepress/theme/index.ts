@@ -1,12 +1,13 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h } from "vue";
+import { h, Suspense } from "vue";
 import DocAfter from "@vp/components/DocAfter.vue";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
+import HeroImage from "#.vitepress/components/HeroImage.vue";
 
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
 import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
@@ -126,8 +127,8 @@ export default {
           text: "知识汪洋只此一瓢",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
-      // "home-hero-image": () => h(Suspense, ShamingLogo),
-      // "home-hero-image": () => h(ShamingLogo),
+      // "home-hero-image": () => h(Suspense, HeroImage),
+      // "home-hero-image": () => h(HeroImage),
       "home-hero-image": () => h('div', {
         class: "w-full h-full flex items-center justify-center",
         style: "position: relative;"
@@ -135,7 +136,6 @@ export default {
         h('img', {
           src: '/cwh.svg',
           class: 'VPImage image-src',
-          // style: "width: 125%;height: 75%;"
         })
       ]),
       // "home-hero-after": () =>

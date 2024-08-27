@@ -2,7 +2,7 @@
   <div>
     <div v-if="categories && categories.length > 0"
       class="w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-3">
-      <div class="linkcard" v-for="category in categories">
+      <div class="linkcard flex flex-col justify-center" v-for="category in categories">
         <a :href="category.link">
           <p class="description">{{ category.title }}<br><span>{{ category.description }}</span></p>
           <div class="logo">

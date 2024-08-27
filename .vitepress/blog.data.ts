@@ -14,6 +14,8 @@ export interface Post {
     string: string
   }
   excerpt: string | undefined
+  cover: string
+  coverAlt?: string
 }
 
 export type Data = Record<string, Post[]>
@@ -43,9 +45,23 @@ export default createContentLoader([
   transform(raw) {
 
     const grouped: Data = {}
+    const pattern = /!\[(.*?)\]\((.*?)\)/mg;
 
     raw.forEach((item) => {
-      const { url, frontmatter, excerpt } = item
+      const { url, frontmatter, excerpt, src } = item
+
+      // src?.match(/!\[(.*?)\]\((.*?)\)/)
+
+      let cover = ''
+      let matcher;
+
+      if (src) {
+        while (( matcher = pattern.exec(src)) !== null) {
+          // console.log(matcher);
+          cover = matcher[2]
+          break;
+        }
+      }
 
       let locale = url.split('/')[1];
       locale = locales.includes(locale) ? locale : 'root';
@@ -53,7 +69,8 @@ export default createContentLoader([
           title: frontmatter.title,
           url,
           excerpt,
-          date: formatDate(frontmatter.date)
+          date: formatDate(frontmatter.date),
+          cover
       })
     })
 
