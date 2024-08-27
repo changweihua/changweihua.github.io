@@ -23,7 +23,6 @@ import '@vitepress-code-preview/container/dist/style.css'
 
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
-import "animate.css";
 
 import busuanzi from "busuanzi.pure.js";
 
@@ -58,9 +57,13 @@ import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
 
 import 'virtual:group-icons.css'
 import "uno.css";
+import 'animate.css';
 
 import FloatingVue from 'floating-vue'
 import 'floating-vue/dist/style.css';
+
+import vitepressBackToTop from 'vitepress-plugin-back-to-top'
+import 'vitepress-plugin-back-to-top/dist/style.css'
 
 import type { Theme } from 'vitepress'
 
@@ -279,6 +282,11 @@ export default {
     if (!import.meta.env.SSR) {
       // const plugin = await import('@vp/plugins/markdown/rough-mermaid')
       // app.use(plugin.default)
+
+      vitepressBackToTop({
+        // default
+        threshold:300
+      })
 
       app.directive('aria-empty', {
         //指令绑定到元素时调用

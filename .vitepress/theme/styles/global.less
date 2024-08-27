@@ -1,6 +1,9 @@
 /**
    * Component: Button
    * -------------------------------------------------------------------------- */
+html,body{
+    scroll-behavior: smooth;
+}
 
 :root {
   --vp-button-brand-border: var(--vp-c-brand-light);
@@ -302,12 +305,11 @@ svg {
 
 
 /* 文字加粗样式修改 */
-.vp-doc strong {
-  font-size: 18px;
-  font-weight: bolder !important;
-  padding: 0 4px;
-}
-
+// .vp-doc strong {
+//   font-size: 18px;
+//   font-weight: bolder !important;
+//   padding: 0 4px;
+// }
 
 
 /* 夜间模式字体颜色修正 */
@@ -427,39 +429,39 @@ details[open] > summary .details-marker::before {
   background-color: transparent;
 }
 
-h1 {
-  display: inline;
-  background-image: linear-gradient(to right, #ec695c, #61c545);
-  background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: bottom;
-  background-size: 0 2px;
-  line-height: 2;
-  transition: background-size 1.5s;
-}
-h1:hover {
-  background-position-x: left;
-  background-size: 100% 2px;
-}
+// h1 {
+//   display: inline;
+//   background-image: linear-gradient(to right, #ec695c, #61c545);
+//   background-repeat: no-repeat;
+//   background-position-x: right;
+//   background-position-y: bottom;
+//   background-size: 0 2px;
+//   line-height: 2;
+//   transition: background-size 1.5s;
+// }
+// h1:hover {
+//   background-position-x: left;
+//   background-size: 100% 2px;
+// }
 
-body::-webkit-scrollbar {
-	width: 8px;
-}
+// body::-webkit-scrollbar {
+// 	width: 8px;
+// }
 
-body::-webkit-scrollbar-thumb {
-    background: var(--custom-thumb-color);
-    border-radius: 16px;
-}
+// body::-webkit-scrollbar-thumb {
+//     background: var(--custom-thumb-color);
+//     border-radius: 16px;
+// }
 
-body::-webkit-scrollbar-track {
-    background: var(--custom-track-color);
-    border-radius: 16px;
-}
+// body::-webkit-scrollbar-track {
+//     background: var(--custom-track-color);
+//     border-radius: 16px;
+// }
 
 /* 针对不支持::-webkit-scrollbar-*的浏览器的样式调整 */
-@supports not (selector(::-webkit-scrollbar)) {
-    html {
-        scrollbar-width: auto;
-        scrollbar-color: #bbb #bbb;
-    }
-}
+// @supports not (selector(::-webkit-scrollbar)) {
+//     html {
+//         scrollbar-width: auto;
+//         scrollbar-color: #bbb #bbb;
+//     }
+// }

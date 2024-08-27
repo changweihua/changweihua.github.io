@@ -7,5 +7,9 @@ export const getEnUSNav: () => DefaultTheme.NavItem[] = () => {
       text: "Blog",
       link: "/en-US/blog/"
     },
+    {
+      text: "Archive",
+      link: "/en-US/archives.md"
+    },
   ]
 }

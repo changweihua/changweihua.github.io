@@ -3,7 +3,8 @@
     "composite": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
-    "module": "esnext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "target": "esnext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -13,15 +14,12 @@
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "allowJs": true,
-    "moduleResolution": "bundler",
     "useDefineForClassFields": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": false,
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "dom","DOM", "es5", "es2015.promise" ,"es2015", "es2017","es2018","es2018.promise"],
+    "downlevelIteration": true,
     "paths": {
       "@/*": [
         "./src/*"
@@ -40,6 +38,7 @@
     "outDir": "dist",
   },
   "diagnostics": true,
+  // "typeRoots": ["vite/client", "node_modules", "typings"],
   "include": [".", "src", ".vitepress", "typings", "env.d.ts"],
   "exclude": [
     "node_modules",

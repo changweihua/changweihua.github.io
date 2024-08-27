@@ -16,11 +16,14 @@ export interface Post {
   excerpt: string | undefined
 }
 
-declare const data: Post[]
+export type Data = Record<string, Post[]>
+export declare const data: Data
 
-export {
-  data
-}
+// declare const data: Post[]
+
+// export {
+//   data
+// }
 
 // export type Data = Record<string, ContentData[]>
 // export declare const data: Data
@@ -34,20 +37,28 @@ const locales = Object.keys(config.userConfig.locales ?? {})
 export default createContentLoader([
     "**/blog/**/!(index|README).md",
   ], {
-    excerpt: true,
-  transform(raw): Post[] {
-    return raw
-      .filter(r => r.src !== 'index.md')
-      .map(({ url, frontmatter, excerpt }) => ({
-        title: frontmatter.title,
-        url,
-        excerpt,
-        date: formatDate(frontmatter.date)
-      }))
-      .sort((a, b) => b.date.time - a.date.time)
-      .slice(0, 12)
-  },
-  includeSrc: true// 包含原始 markdown 源?
+    includeSrc: true, // 包含原始 markdown 源?
+    render: true,     // 包含渲染的整页 HTML?
+    excerpt: true,    // 包含摘录?
+  transform(raw) {
+
+    const grouped: Data = {}
+
+    raw.forEach((item) => {
+      const { url, frontmatter, excerpt } = item
+
+      let locale = url.split('/')[1];
+      locale = locales.includes(locale) ? locale : 'root';
+      (grouped[locale] ??= []).push({
+          title: frontmatter.title,
+          url,
+          excerpt,
+          date: formatDate(frontmatter.date)
+      })
+    })
+
+    return grouped
+  }
 })
 
 function formatDate(raw: string): Post['date'] {

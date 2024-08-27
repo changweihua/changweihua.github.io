@@ -21,8 +21,11 @@ head:
 import { onMounted, ref } from "vue";
 import { delay } from "lodash-es";
 import LinkListView from '@/components/LinkListView.vue';
-import BlogIndex from "@vp/components/BlogIndex.vue"
-import { data as posts } from '@vp/blog.data'
+import BlogIndex from "@vp/components/BlogIndex.vue";
+import { useData } from 'vitepress'
+import { data } from '@vp/blog.data'
+console.log('data',data)
+const { lang } = useData()
 
 const spinning = ref<boolean>(false);
 const delayTime = 200;
@@ -37,7 +40,8 @@ let categories: ref<Array<{
   }>> = ref([]);
 
 onMounted(() => {
-  categories.value = posts.map((p) => {
+  categories.value = (data[lang] ?? []).sort((a, b) => b.date.time - a.date.time)
+      .slice(0, 12).map((p) => {
     return {
       link: p.url,
       title: p.title ,

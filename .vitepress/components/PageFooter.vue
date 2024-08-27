@@ -11,6 +11,7 @@
       {{ version }}
     </p> -->
   </div>
+  <!-- <div id="circle" class="circle bg-red-500"></div> -->
   <VisitsPanel /> <!-- - package name: {{ params?.pkg }} - version: {{ params?.version }} -->
 </template>
 <script setup lang="ts">
