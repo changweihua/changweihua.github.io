@@ -102,7 +102,6 @@
     "vitepress-plugin-life-progress": "^0.0.3",
     "vitepress-plugin-lightbox": "^1.0.2",
     "vitepress-plugin-markdown-define": "^1.0.2",
-    "vitepress-plugin-mermaid": "^2.0.16",
     "vitepress-sidebar": "^1.25.0",
     "vue": "^3.4.38",
     "vue3-tabs-component": "^1.3.7"
@@ -177,6 +176,7 @@
     "markmap-toolbar": "^0.17.0",
     "markmap-view": "^0.17.0",
     "medium-zoom": "^1.1.0",
+    "mermaid": "^11.0.2",
     "ofetch": "^1.3.4",
     "oimo-esm": "^1.0.10",
     "randomcolor": "^0.6.2",
@@ -202,7 +202,6 @@
     "xmind-embed-viewer": "^1.2.0"
   },
   "overrides": {
-    "mermaid": "^11.0.2",
     "vite": "^5.4.2",
     "vite-plugin-html": "^3.2.2"
   },
