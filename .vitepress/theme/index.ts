@@ -14,10 +14,11 @@ import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
 
 import AnimationTitle from "../components/AnimationTitle.vue";
 
-import "./styles/index.less";
-
 import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
 import '@vitepress-code-preview/container/dist/style.css'
+
+import yuppie from 'yuppie-ui'
+
 
 // import { VuePreview } from 'vite-plugin-vue-preview'
 // import 'vite-plugin-vue-preview/style.css'
@@ -29,7 +30,8 @@ import busuanzi from "busuanzi.pure.js";
 
 // 引入 Ant Design Vue
 import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/reset.css';
+
+import "./styles/index.less";
 
 import "@iconify/iconify";
 
@@ -288,6 +290,8 @@ export default {
         threshold:300
       })
 
+      app.use(yuppie)
+
       app.directive('aria-empty', {
         //指令绑定到元素时调用
         mounted(el, binding) {
@@ -338,7 +342,7 @@ export default {
       app.component('Tab', Tab)
       app.component('Tabs', Tabs)
 
-      app.component("my-icon", Icon);
+      app.component("i-icon", Icon);
 
       app.component("header-profile", HeaderProfile);
       app.component("lottie-panel", LottiePanel);

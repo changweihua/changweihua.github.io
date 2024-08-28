@@ -18,7 +18,7 @@ hero:
   actions:
     - theme: brand
       text: 作者简历
-      link: /zh-CN/about/resume
+      link: /zh-CN/resume
     - theme: alt
       text: Github
       link: https://github.com/changweihua

@@ -70,7 +70,7 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 
 扩展宽度，挖掘深度，延续长度。
 
-#### 后端技术栈
+<!-- #### 后端技术栈
 
 <p>
   <img src="https://img.shields.io/badge/-Spring-6DB33F?logo=Spring&logoColor=FFF" alt="Spring" style="display: inline-block;" />&nbsp;
@@ -182,30 +182,30 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
   <img src="https://img.shields.io/badge/-GitHub%20Pages-222?logo=GitHub-Pages&logoColor=FFF" alt="GitHub Pages" style="display: inline-block;" />&nbsp;
   <img src="https://img.shields.io/badge/-Adobe%20Photoshop-A9A9A9?logo=Adobe-Photoshop&logoColor=31A8FF" alt="Adobe Photoshop" style="display: inline-block;" />&nbsp;
 </p>
-
+ -->
 
 ### 🧮 工具 ###
 
 <div class="flex flex-wrap gap-2">
 
-<my-icon icon="logos:centos-icon" :width="96" :height="96" />
-<my-icon icon="logos:docker-icon" :width="96" :height="96" />
-<my-icon icon="logos:docker" :width="96" :height="96" />
-<my-icon icon="logos:kubernetes" :width="96" :height="96" />
-<my-icon icon="logos:letsencrypt" :width="96" :height="96" />
-<my-icon icon="logos:microsoft-windows" :width="96" :height="96" />
-<my-icon icon="logos:rabbitmq" :width="96" :height="96" />
-<my-icon icon="logos:stackoverflow" :width="96" :height="96" />
-<my-icon icon="logos:mono" :width="96" :height="96" />
-<my-icon icon="logos:grafana" :width="96" :height="96" />
-<my-icon icon="logos:gravatar" :width="96" :height="96" />
-<my-icon icon="logos:gradle" :width="96" :height="96" />
-<my-icon icon="logos:postman" :width="96" :height="96" />
-<my-icon icon="logos:jenkins" :width="96" :height="96" />
-<my-icon icon="logos:github-octocat" :width="96" :height="96" />
-<my-icon icon="logos:gitlab" :width="96" :height="96" />
-<my-icon icon="logos:git" :width="96" :height="96" />
-<my-icon icon="logos:github-actions" :width="96" :height="96" />
+<i-icon icon="logos:centos-icon" :width="96" :height="96" />
+<i-icon icon="logos:docker-icon" :width="96" :height="96" />
+<i-icon icon="logos:docker" :width="96" :height="96" />
+<i-icon icon="logos:kubernetes" :width="96" :height="96" />
+<i-icon icon="logos:letsencrypt" :width="96" :height="96" />
+<i-icon icon="logos:microsoft-windows" :width="96" :height="96" />
+<i-icon icon="logos:rabbitmq" :width="96" :height="96" />
+<i-icon icon="logos:stackoverflow" :width="96" :height="96" />
+<i-icon icon="logos:mono" :width="96" :height="96" />
+<i-icon icon="logos:grafana" :width="96" :height="96" />
+<i-icon icon="logos:gravatar" :width="96" :height="96" />
+<i-icon icon="logos:gradle" :width="96" :height="96" />
+<i-icon icon="logos:postman" :width="96" :height="96" />
+<i-icon icon="logos:jenkins" :width="96" :height="96" />
+<i-icon icon="logos:github-octocat" :width="96" :height="96" />
+<i-icon icon="logos:gitlab" :width="96" :height="96" />
+<i-icon icon="logos:git" :width="96" :height="96" />
+<i-icon icon="logos:github-actions" :width="96" :height="96" />
 
 </div>
 
@@ -213,28 +213,28 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 
 <div class="flex flex-wrap gap-2">
 
-<my-icon icon="logos:bash" :width="96" :height="96" />
-<my-icon icon="logos:bing" :width="96" :height="96" />
-<my-icon icon="logos:c-sharp" :width="96" :height="96" />
-<my-icon icon="logos:codeigniter-icon" :width="96" :height="96" />
-<my-icon icon="logos:editorconfig" :width="96" :height="96" />
-<my-icon icon="logos:kotlin" :width="96" :height="96" />
-<my-icon icon="logos:markdown" :width="96" :height="96" />
-<my-icon icon="logos:lua" :width="96" :height="96" />
-<my-icon icon="logos:mariadb" :width="96" :height="96" />
-<my-icon icon="logos:microsoft" :width="96" :height="96" />
-<my-icon icon="logos:microsoft-onedrive" :width="96" :height="96" />
-<my-icon icon="logos:mongodb" :width="96" :height="96" />
-<my-icon icon="logos:mysql" :width="96" :height="96" />
-<my-icon icon="logos:nginx" :width="96" :height="96" />
-<my-icon icon="logos:nodejs" :width="96" :height="96" />
-<my-icon icon="logos:npm" :width="96" :height="96" />
-<my-icon icon="logos:oracle" :width="96" :height="96" />
-<my-icon icon="logos:python" :width="96" :height="96" />
-<my-icon icon="logos:redis" :width="96" :height="96" />
-<my-icon icon="logos:sqlite" :width="96" :height="96" />
-<my-icon icon="logos:visual-studio" :width="96" :height="96" />
-<my-icon icon="logos:visual-studio-code" :width="96" :height="96" />
+<i-icon icon="logos:bash" :width="96" :height="96" />
+<i-icon icon="logos:bing" :width="96" :height="96" />
+<i-icon icon="logos:c-sharp" :width="96" :height="96" />
+<i-icon icon="logos:codeigniter-icon" :width="96" :height="96" />
+<i-icon icon="logos:editorconfig" :width="96" :height="96" />
+<i-icon icon="logos:kotlin" :width="96" :height="96" />
+<i-icon icon="logos:markdown" :width="96" :height="96" />
+<i-icon icon="logos:lua" :width="96" :height="96" />
+<i-icon icon="logos:mariadb" :width="96" :height="96" />
+<i-icon icon="logos:microsoft" :width="96" :height="96" />
+<i-icon icon="logos:microsoft-onedrive" :width="96" :height="96" />
+<i-icon icon="logos:mongodb" :width="96" :height="96" />
+<i-icon icon="logos:mysql" :width="96" :height="96" />
+<i-icon icon="logos:nginx" :width="96" :height="96" />
+<i-icon icon="logos:nodejs" :width="96" :height="96" />
+<i-icon icon="logos:npm" :width="96" :height="96" />
+<i-icon icon="logos:oracle" :width="96" :height="96" />
+<i-icon icon="logos:python" :width="96" :height="96" />
+<i-icon icon="logos:redis" :width="96" :height="96" />
+<i-icon icon="logos:sqlite" :width="96" :height="96" />
+<i-icon icon="logos:visual-studio" :width="96" :height="96" />
+<i-icon icon="logos:visual-studio-code" :width="96" :height="96" />
 
 </div>
 
@@ -242,30 +242,30 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 
 <div class="flex flex-wrap gap-2">
 
-<my-icon icon="logos:ant-design" :width="96" :height="96" />
-<my-icon icon="logos:angular-icon" :width="96" :height="96" />
-<my-icon icon="logos:axios" :width="96" :height="96" />
-<my-icon icon="logos:babel" :width="96" :height="96" />
-<my-icon icon="logos:bootstrap" :width="96" :height="96" />
-<my-icon icon="logos:chrome" :width="96" :height="96" />
-<my-icon icon="logos:css-3" :width="96" :height="96" />
-<my-icon icon="logos:dojo-toolkit" :width="96" :height="96" />
-<my-icon icon="logos:element" :width="96" :height="96" />
-<my-icon icon="logos:electron" :width="96" :height="96" />
-<my-icon icon="logos:flutter" :width="96" :height="96" />
-<my-icon icon="logos:html-5" :width="96" :height="96" />
-<my-icon icon="logos:mdn" :width="96" :height="96" />
-<my-icon icon="logos:hugo" :width="96" :height="96" />
-<my-icon icon="logos:ionic" :width="96" :height="96" />
-<my-icon icon="logos:jquery" :width="96" :height="96" />
-<my-icon icon="logos:jquery-mobile" :width="96" :height="96" />
-<my-icon icon="logos:less" :width="96" :height="96" />
-<my-icon icon="logos:pinia" :width="96" :height="96" />
-<my-icon icon="logos:react" :width="96" :height="96" />
-<my-icon icon="logos:tailwindcss" :width="96" :height="96" />
-<my-icon icon="logos:tsnode" :width="96" :height="96" />
-<my-icon icon="logos:typescript" :width="96" :height="96" />
-<my-icon icon="logos:vitejs" :width="96" :height="96" />
-<my-icon icon="logos:vue" :width="96" :height="96" />
+<i-icon icon="logos:ant-design" :width="96" :height="96" />
+<i-icon icon="logos:angular-icon" :width="96" :height="96" />
+<i-icon icon="logos:axios" :width="96" :height="96" />
+<i-icon icon="logos:babel" :width="96" :height="96" />
+<i-icon icon="logos:bootstrap" :width="96" :height="96" />
+<i-icon icon="logos:chrome" :width="96" :height="96" />
+<i-icon icon="logos:css-3" :width="96" :height="96" />
+<i-icon icon="logos:dojo-toolkit" :width="96" :height="96" />
+<i-icon icon="logos:element" :width="96" :height="96" />
+<i-icon icon="logos:electron" :width="96" :height="96" />
+<i-icon icon="logos:flutter" :width="96" :height="96" />
+<i-icon icon="logos:html-5" :width="96" :height="96" />
+<i-icon icon="logos:mdn" :width="96" :height="96" />
+<i-icon icon="logos:hugo" :width="96" :height="96" />
+<i-icon icon="logos:ionic" :width="96" :height="96" />
+<i-icon icon="logos:jquery" :width="96" :height="96" />
+<i-icon icon="logos:jquery-mobile" :width="96" :height="96" />
+<i-icon icon="logos:less" :width="96" :height="96" />
+<i-icon icon="logos:pinia" :width="96" :height="96" />
+<i-icon icon="logos:react" :width="96" :height="96" />
+<i-icon icon="logos:tailwindcss" :width="96" :height="96" />
+<i-icon icon="logos:tsnode" :width="96" :height="96" />
+<i-icon icon="logos:typescript" :width="96" :height="96" />
+<i-icon icon="logos:vitejs" :width="96" :height="96" />
+<i-icon icon="logos:vue" :width="96" :height="96" />
 
 </div>

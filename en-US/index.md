@@ -15,6 +15,9 @@ hero:
     src: /cwh.svg
     alt: 网页的logo图标
   actions:
+    - theme: brand
+      text: 作者简历
+      link: /en-US/resume
     - theme: alt
       text: Github
       link: https://github.com/changweihua

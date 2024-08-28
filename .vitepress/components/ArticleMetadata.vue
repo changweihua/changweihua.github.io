@@ -1,19 +1,19 @@
 <template>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-2 my-5">
     <span class="flex items-center gap-1">
-      <my-icon icon="solar:tag-bold" />
+      <i-icon icon="solar:tag-bold" />
       原创
     </span>
     <span class="flex items-center gap-1">
-      <my-icon icon="basil:user-solid" />
+      <i-icon icon="basil:user-solid" />
       常伟华
     </span>
     <span class="flex items-center gap-1">
-      <my-icon icon="ion:timer" />
+      <i-icon icon="ion:timer" />
       阅读&ensp;{{ readCost }}&ensp;分钟
     </span>
     <span class="flex items-center gap-1">
-      <my-icon icon="tabler:clock-filled" />
+      <i-icon icon="tabler:clock-filled" />
       发布&ensp;{{ dayjs.tz(date).fromNow() }}
       <!-- <timeago :datetime="date" /> -->
       <!-- <VCTimeago :date-time="date" :auto-update="true" /> -->

@@ -169,19 +169,18 @@ export default () => {
 
 ### 组件 ###
 
-**tsx-children.tsx**
-
-```vue
+```vue:tsx-children.tsx
 export default () => {
 	return <div>tsx-children</div>;
 };
 ```
 
-**tsx-father.tsx**
+<br />
+<br />
 
 ::: code-group
 
-```vue [vue]
+```vue:tsx-father.tsx [vue]
 import TsxChildren from "./tsx-children";
 
 export default () => {
@@ -194,7 +193,7 @@ export default () => {
 
 ```
 
-```vue [vue]
+```vue:tsx-father.tsx [vue]
 import TsxChildren from "./tsx-children";
 
 export default {

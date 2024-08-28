@@ -4,6 +4,7 @@ import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide, useSlots, onMounted } from 'vue'
 import mediumZoom from "medium-zoom";
 import randomColor from 'randomcolor'
+import { MyButton, Panel } from 'yuppie-ui'
 // import Kinet from 'kinet';
 
 const { isDark } = useData()
@@ -134,6 +135,8 @@ console.log(randomColor({
       </div>
     </template> -->
       </DefaultTheme.Layout>
+      <!-- <my-button></my-button>
+      <Panel :user="'changeweihua'" :age="10" /> -->
       <!-- <a class="back" href="#"></a> -->
     </div>
   </transition>

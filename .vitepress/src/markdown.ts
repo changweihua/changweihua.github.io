@@ -37,6 +37,9 @@ const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
   linkify: true,
   math: true,
+  // 默认禁用图片懒加载
+  //@ts-ignore
+  lazyLoading: true,
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
   config: (md) => {
     useDefinePlugin(md, CONSTS)
