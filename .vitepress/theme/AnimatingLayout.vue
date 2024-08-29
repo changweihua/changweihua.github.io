@@ -135,8 +135,8 @@ console.log(randomColor({
       </div>
     </template> -->
       </DefaultTheme.Layout>
-      <my-button></my-button>
-      <Panel :user="'changeweihua'" :age="10" />
+      <!-- <my-button></my-button>
+      <Panel :user="'changeweihua'" :age="10" /> -->
       <!-- <a class="back" href="#"></a> -->
     </div>
   </transition>
