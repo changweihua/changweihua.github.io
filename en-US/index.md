@@ -3,7 +3,7 @@ layout: home
 layoutClass: m-nav-layout
 pageClass: index-page-class
 title: CMONO.NET
-titleTemplate: 首页
+titleTemplate: Home Page
 
 description: CMONO.NET Official Page Site
 
@@ -13,10 +13,10 @@ hero:
   tagline: 阳光大男孩
   image:
     src: /cwh.svg
-    alt: 网页的logo图标
+    alt: CMONO.NET
   actions:
     - theme: brand
-      text: 作者简历
+      text: Resume
       link: /en-US/resume
     - theme: alt
       text: Github

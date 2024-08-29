@@ -51,7 +51,7 @@ async function makeRough(svg: SVGSVGElement, id: string) {
   // svgEle.innerHTML = svg
   const svg2roughjs = new roughjs.Svg2Roughjs(sketchSvgRef.value!)
   svg2roughjs.svg = svg
-  svg2roughjs.fontFamily = "AlibabaPuHuiTi"
+  svg2roughjs.fontFamily = "Fangyuan"
   // svg2roughjs.randomize = true
   await svg2roughjs.sketch(false)
 
@@ -146,7 +146,7 @@ const renderChart = async (id, code) => {
   const hasDarkClass = document.documentElement.classList.contains("dark");
 
   // mermaid 初始化
-  mermaid.initialize({ startOnLoad: false, theme: isDark.value ? 'dark' : 'forest', fontFamily: "AlibabaPuHuiTi" })
+  mermaid.initialize({ startOnLoad: false, theme: isDark.value ? 'dark' : 'forest', fontFamily: "Fangyuan" })
 
   mermaid.run({
     querySelector: id,
@@ -175,13 +175,22 @@ onMounted(async () => {
 })
 
 
-onUnmounted(() => mut?.disconnect());
+// onUnmounted(() => mut?.disconnect());
 
 </script>
 
 <style lang="less" scoped>
 // .mermaid-graph {
-// background-image: url("/images/mermaid-background.svg");
-// background-repeat: no-repeat;
-// background-size: cover;
+//   // :deep(.text-container) * {
+//   //   font-family: Fangyuan !important;
+//   // }
+
+//   // background-image: url("/images/mermaid-background.svg");
+//   // background-repeat: no-repeat;
+//   // background-size: cover;
+// }</style>
+
+<style lang="less">
+// tspan {
+//   font-family: Fangyuan;
 // }</style>

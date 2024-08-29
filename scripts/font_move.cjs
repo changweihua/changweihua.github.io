@@ -30,3 +30,6 @@ fs.copySync(path.join(rootFolder, `font/JetBrains`), path.join(rootFolder, `publ
 
 fs.emptyDirSync(path.join(rootFolder, `public/fonts/Alibaba`));
 fs.copySync(path.join(rootFolder, `font/Alibaba`), path.join(rootFolder, `public/fonts/Alibaba`))
+
+fs.emptyDirSync(path.join(rootFolder, `public/fonts/Fangyuan`));
+fs.copySync(path.join(rootFolder, `font/Fangyuan`), path.join(rootFolder, `public/fonts/Fangyuan`))

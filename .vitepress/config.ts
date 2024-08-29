@@ -163,6 +163,7 @@ export default defineConfig({
   /* 主题配置 */
   themeConfig,
   markdown,
+  metaChunk: true,
   sitemap: {
     hostname: "https://changweihua.github.io",
     lastmodDateOnly: false,

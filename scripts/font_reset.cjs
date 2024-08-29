@@ -32,6 +32,9 @@ fs.copySync(path.join(rootFolder, `font/JetBrainsTtf`), path.join(rootFolder, `f
 fs.emptyDirSync(path.join(rootFolder, `font/Alibaba`));
 fs.copySync(path.join(rootFolder, `font/AlibabaTtf`), path.join(rootFolder, `font/Alibaba/ttf`))
 
+fs.emptyDirSync(path.join(rootFolder, `font/Fangyuan`));
+fs.copySync(path.join(rootFolder, `font/FangyuanTtf`), path.join(rootFolder, `font/Fangyuan`))
+
 // 删除指定文件夹下面的所有文件或文件夹
 // rfs.rmdirr(path.join(rootFolder, 'font/Alibaba'), function(err) {
 //   if (err) {

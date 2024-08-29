@@ -8,7 +8,7 @@
           本站总访问量
           <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次
         </span>
-        <img src="/logo.png" alt="heart" class="w-6 h-6" />
+        <i-icon class="item" icon="svg-spinners:wind-toy" :width="24" :height="24" />
         <span class="text">
           本站访客数
           <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
