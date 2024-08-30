@@ -7,7 +7,6 @@ const docsConfig: UserConfig<DefaultTheme.Config> = {
   description: "个人在线",
   appearance: true,
   lang: "zh-CN",
-  lastUpdated: false,
   head: [
     // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
     ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as THREE from "three";
-import { OrbitControls } from "../../threejs/jsm/controls/OrbitControls.js";
-import { SVGLoader } from "../../threejs/jsm/loaders/SVGLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { SVGLoader } from "three/addons/loaders/SVGLoader.js";
 import { onMounted, ref } from "vue";
 
 import "default-passive-events";
@@ -14,17 +14,17 @@ let scene: THREE.Scene | null = null;
 let camera: THREE.PerspectiveCamera | null = null;
 // 3、初始化渲染器
 let renderer: THREE.WebGLRenderer | null = null;
-let container: HTMLDivElement | null = null;
+// let container: HTMLDivElement | null = null;
 
-function init() {
+function init(hero: HTMLDivElement) {
   //创建一个三维场景
   scene = new THREE.Scene();
   scene.background = new THREE.Color("#F7F7F7");
 
   //创建一个透视相机，窗口宽度，窗口高度
   // width和height用来设置Three.js输出的Canvas画布尺寸(像素px)
-  const width = container!.offsetWidth,
-    height = container!.offsetHeight;
+  const width = hero.offsetWidth,
+    height = hero.offsetHeight;
   // 30:视场角度, width / height:Canvas画布宽高比, 1:近裁截面, 3000：远裁截面
   camera = new THREE.PerspectiveCamera(45, width / height, 1, 3000);
   //设置相机位置xyz坐标
@@ -52,7 +52,8 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height); //设置渲染区尺寸
   renderer.render(scene, camera); //执行渲染操作、指定场景、相机作为参数
-  document.body.appendChild(renderer.domElement);
+  // document.body.appendChild(renderer.domElement);
+  hero.appendChild(renderer.domElement);
 
   const controls = new OrbitControls(camera, renderer.domElement); //创建控件对象
   controls.addEventListener("change", () => {
@@ -67,7 +68,7 @@ titleGroup.position.y = 35; // 离中心点的位置
 function setTitleGroup() {
   const loader = new SVGLoader();
   loader.load(
-    "/images/juejin.svg",
+    "/favicon.svg",
     (data) => {
       const paths = data.paths;
       for (let i = 0; i < paths.length; i++) {
@@ -179,8 +180,7 @@ onMounted(() => {
   }
 
   const hero = hero_logo.value;
-  container = hero;
-  init();
+  init(hero);
 });
 
 const handleHeroLogoResize = ({
@@ -195,12 +195,13 @@ const handleHeroLogoResize = ({
 </script>
 
 <template>
-  <div
-    v-resize="handleHeroLogoResize"
-    ref="hero_logo"
-    id="hero_logo"
-    class="w-full h-full"
-  ></div>
+  <div v-resize="handleHeroLogoResize" ref="hero_logo" id="hero_logo" class="w-full h-full"></div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+#hero_logo {
+  width: 300px;
+  height: 300px;
+  background-color: red;
+}
+</style>

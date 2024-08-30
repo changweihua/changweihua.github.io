@@ -2,9 +2,9 @@
 import * as THREE from "three";
 // import gsap from "gsap";
 // 导入轨道控制器
-import { OrbitControls } from "../../threejs/jsm/controls/OrbitControls.js";
-import { FontLoader } from "../../threejs/jsm/loaders/FontLoader.js";
-import { TextGeometry } from "../../threejs/jsm/geometries/TextGeometry.js";
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { FontLoader } from "three/addons/loaders/FontLoader.js";
+import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { onMounted, ref } from "vue";
 
 import "default-passive-events";
@@ -134,7 +134,7 @@ onMounted(() => {
     const textGeo = new TextGeometry("CMONO.NET", {
       font: font,
       size: size,
-      height: height,
+      depth: height,
       curveSegments: curveSegments,
       bevelEnabled: true,
       bevelThickness: bevelThickness,
@@ -278,12 +278,12 @@ const handleHeroLogoResize = ({
 </script>
 
 <template>
-  <div
-    v-resize="handleHeroLogoResize"
-    ref="hero_logo"
-    id="hero_logo"
-    class="w-full h-full"
-  ></div>
+  <div v-resize="handleHeroLogoResize" ref="hero_logo" id="hero_logo" class="w-full h-full"></div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+#hero_logo {
+  width: 300px;
+  height: 300px;
+}
+</style>

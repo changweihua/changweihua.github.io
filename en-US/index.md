@@ -23,3 +23,9 @@ hero:
       link: https://github.com/changweihua
 
 ---
+
+<HeroLogo></HeroLogo>
+
+<script lang="ts" setup>
+import HeroLogo from '@vp/components/SvgLogo.vue'
+</script>

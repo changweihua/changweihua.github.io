@@ -16,7 +16,7 @@ import AnimationTitle from "../components/AnimationTitle.vue";
 
 import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
 import '@vitepress-code-preview/container/dist/style.css'
-
+import { directive } from 'resize-observer-vue'
 import yuppie from 'yuppie-ui'
 
 
@@ -291,6 +291,7 @@ export default {
       })
 
       app.use(yuppie)
+      app.directive('resize', directive)
 
       app.directive('aria-empty', {
         //指令绑定到元素时调用

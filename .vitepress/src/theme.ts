@@ -3,17 +3,25 @@ import type { DefaultTheme } from "vitepress";
 // import sidebar from "./sidebars/zh-CN.sidebar";
 
 export const themeConfig: DefaultTheme.Config = {
-  // editLink: {
-  //   pattern: 'https://github.com/changweihua/changweihua.github.io/edit/master//:path',
-  //   text: 'Edit this page on GitHub'
-  // },
+  editLink: {
+    pattern:
+      "https://github.com/changweihua/changweihua.github.io/edit/master//:path",
+    text: "Edit this page on GitHub",
+  }, // 自定义上次更新的文本和日期格式
+  lastUpdated: {
+    text: "上次更新：",
+    formatOptions: {
+      dateStyle: "full",
+      timeStyle: "medium",
+    },
+  },
   // titleTemplate: ':title - Custom Suffix',
   logo: "/logo.png",
-  darkModeSwitchLabel: '切换主题',
-  lightModeSwitchTitle: '浅色',
-  darkModeSwitchTitle:'深色',
-  returnToTopLabel: '返回顶部',
-  langMenuLabel:'选择语言',
+  darkModeSwitchLabel: "切换主题",
+  lightModeSwitchTitle: "浅色",
+  darkModeSwitchTitle: "深色",
+  returnToTopLabel: "返回顶部",
+  langMenuLabel: "选择语言",
   externalLinkIcon: true,
   socialLinks: [
     {
@@ -44,30 +52,62 @@ export const themeConfig: DefaultTheme.Config = {
   // i18n路由
   i18nRouting: true,
   search: {
-      provider: 'local',
-      options: {
-        locales: {
-          'zh-CN': {
-            translations: {
-              button: {
-                buttonText: '搜索文档',
-                buttonAriaLabel: '搜索文档',
+    provider: "local",
+    options: {
+      locales: {
+        "zh-CN": {
+          translations: {
+            button: {
+              buttonText: "搜索文档",
+              buttonAriaLabel: "搜索文档",
+            },
+            modal: {
+              noResultsText: "无法找到相关结果",
+              displayDetails: "显示详细信息",
+              resetButtonTitle: "清除查询条件",
+              backButtonTitle: "返回",
+              footer: {
+                selectText: "选择",
+                selectKeyAriaLabel: "enter",
+                navigateText: "切换",
+                navigateUpKeyAriaLabel: "up arrow",
+                navigateDownKeyAriaLabel: "down arrow",
+                closeText: "关闭",
+                closeKeyAriaLabel: "escape",
               },
-              modal: {
-                noResultsText: '无法找到相关结果',
-                resetButtonTitle: '清除查询条件',
-                backButtonTitle: '返回',
-                footer: {
-                  selectText: '选择',
-                  navigateText: '切换',
-                  closeText:'关闭'
-                }
-              }
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      },
+      // _render(src, env, md) {
+      //   const html = md.render(src, env);
+      //   if (env.frontmatter?.search === false) return "";
+      //   // 从搜索中排除页面
+      //   if (env.relativePath.startsWith("some/path")) return "";
+      //   // 转换内容——添加锚点
+      //   if (env.frontmatter?.title)
+      //     return md.render(`# ${env.frontmatter.title}`) + html;
+      //   return html;
+      // },
+      // // 搜索配置
+      // miniSearch: {
+      //   /**
+      //    * @type {Pick<import('minisearch').Options, 'extractField' | 'tokenize' | 'processTerm'>}
+      //    */
+      //   options: {
+      //     /* ... */
+      //   },
+      //   /**
+      //    * @type {import('minisearch').SearchOptions}
+      //    * @default
+      //    * { fuzzy: 0.2, prefix: true, boost: { title: 4, text: 2, titles: 1 } }
+      //    */
+      //   searchOptions: {
+      //     /* ... */
+      //   },
+      // },
     },
+  },
   // sidebar,
   // algolia: {
   //   appId: "II80G4ELTA", // 需要替换

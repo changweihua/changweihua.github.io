@@ -27,7 +27,8 @@ import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
-
+import anchor from 'markdown-it-anchor'
+import Expl3 from '../assets/latexs/LaTeX-Expl3.tmLanguage.json';
 
 const CONSTS = {
   __custom_variable__: 'your value'
@@ -37,6 +38,13 @@ const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
   linkify: true,
   math: true,
+  anchor: {
+    // permalink: anchor.permalink.ariaHidden({ // you can use other variants too, refer - https://github.com/valeriangalliat/markdown-it-anchor#permalinks
+    //   symbol: `🔗`
+    // })
+  },
+  // @ts-ignore
+  languages: [Expl3],
   // 默认禁用图片懒加载
   //@ts-ignore
   lazyLoading: true,
@@ -62,6 +70,7 @@ const markdown: MarkdownOptions | undefined = {
       internalClassName: "custom-internal-link",
       internalDomains: [ "https://changweihua.github.io" ]
     })
+    // @ts-ignore
     markdownItStepper(md)
     // md.use(fitmedia, {
     //   //default options, you can omit these
