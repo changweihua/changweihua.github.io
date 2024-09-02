@@ -24,8 +24,10 @@ hero:
 
 ---
 
-<HeroLogo></HeroLogo>
+<ClientOnly>
+  <HeroLogo></HeroLogo>
+</ClientOnly>
 
 <script lang="ts" setup>
-import HeroLogo from '@vp/components/SvgLogo.vue'
+import HeroLogo from '@/components/CubeWorld.vue'
 </script>

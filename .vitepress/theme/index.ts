@@ -1,7 +1,7 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, Suspense } from "vue";
+import { h, Suspense, watchEffect } from "vue";
 import DocAfter from "@vp/components/DocAfter.vue";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
@@ -16,7 +16,7 @@ import AnimationTitle from "../components/AnimationTitle.vue";
 
 import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
 import '@vitepress-code-preview/container/dist/style.css'
-import { directive } from 'resize-observer-vue'
+import VueResizeObserver from "vue-resize-observer";
 import yuppie from 'yuppie-ui'
 
 
@@ -61,9 +61,6 @@ import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
 import 'virtual:group-icons.css'
 import "uno.css";
 import 'animate.css';
-
-import FloatingVue from 'floating-vue'
-import 'floating-vue/dist/style.css';
 
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import 'vitepress-plugin-back-to-top/dist/style.css'
@@ -291,7 +288,7 @@ export default {
       })
 
       app.use(yuppie)
-      app.directive('resize', directive)
+      app.use(VueResizeObserver)
 
       app.directive('aria-empty', {
         //指令绑定到元素时调用
@@ -356,19 +353,21 @@ export default {
       app.component("MagicCard", MagicCard);
       app.component("Confetti", Confetti); //注册全局组件
 
-      app.use(FloatingVue);
+    }
+
+    if (inBrowser) {
     }
   },
   setup() {
     // get frontmatter and route
-    const { frontmatter } = useData(); //lang,
+    const { lang, frontmatter } = useData(); //
     const route = useRoute();
     // basic use
     codeblocksFold({ route, frontmatter }, true, 400);
-    // watchEffect(() => {
-    //   if (inBrowser) {
-    //     document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2024 00:00:00 UTC; path=/`;
-    //   }
-    // });
+    watchEffect(() => {
+      if (inBrowser) {
+        document.cookie = `nf_lang=${lang.value}; expires=${new Date().toUTCString()}; path=/`;
+      }
+    });
   },
 } satisfies Theme;

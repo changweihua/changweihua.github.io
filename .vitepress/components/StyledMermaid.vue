@@ -5,9 +5,8 @@
       <div class="download flex flex-row gap-3" style="position:absolute;right:6px;top: 6px;cursor:pointer">
         <i-icon v-aria-empty
           :icon="isFullElementTag ? 'icon-park-outline:off-screen-one' : 'icon-park-outline:full-screen-one'"
-          @click="toggleFullscreen()" v-tooltip="'全屏'" :width="24" :height="24" />
-        <i-icon v-aria-empty icon="line-md:download-loop" @click="downloadData" v-tooltip="'下载'" :width="24"
-          :height="24" />
+          @click="toggleFullscreen()" :width="24" :height="24" />
+        <i-icon v-aria-empty icon="line-md:download-loop" @click="downloadData" :width="24" :height="24" />
       </div>
       <svg ref="sketchSvgRef"></svg>
     </div>

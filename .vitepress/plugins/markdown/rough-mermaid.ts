@@ -14,7 +14,9 @@ export default function roughMermaidPlugin(md: MarkdownIt): void {
       return `
         <Suspense>
           <template #default>
-            <StyledMermaid id="mermaid-${idx}" code="${encodeURIComponent(token.content)}"></StyledMermaid>
+            <ClientOnly>
+              <StyledMermaid id="mermaid-${idx}" code="${encodeURIComponent(token.content)}"></StyledMermaid>
+            </ClientOnly>
           </template>
           <!-- loading state via #fallback slot -->
           <template #fallback>

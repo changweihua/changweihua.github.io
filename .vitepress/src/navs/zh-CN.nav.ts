@@ -11,6 +11,10 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
       text: "归档",
       link: "/zh-CN/archives.md"
     },
+    {
+      text: "标签",
+      link: "/zh-CN/tags.md"
+    },
     // {
     //   text: "分类",
     //   link: "/tags.md",

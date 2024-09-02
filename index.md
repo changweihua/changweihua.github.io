@@ -7,7 +7,7 @@ title: CMONO.NET
 titleTemplate: 首页
 description: CMONO.NET Official Page Site
 ---
-
+<!-- 
 
 ```sh-vue
 git clone {{ gitUrl }}
@@ -25,7 +25,7 @@ onMounted(() => {
     gitUrl.value = 'https://github.com/username/xxxx.git'
   }
 })
-</script>
+</script> -->
 
 <!-- ---
 {

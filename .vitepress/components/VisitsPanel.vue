@@ -8,7 +8,10 @@
           本站总访问量
           <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次
         </span>
-        <i-icon class="item" icon="svg-spinners:wind-toy" :width="24" :height="24" />
+        <figure>
+          <section class="item-bg"></section>
+          <i-icon class="item" icon="svg-spinners:wind-toy" :width="24" :height="24" />
+        </figure>
         <span class="text">
           本站访客数
           <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
@@ -22,6 +25,21 @@
 .panel {
   margin-top: 12px;
   margin-bottom: 8px;
+}
+
+.item-bg {
+  position: absolute;
+  background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
+  border-radius: 50%;
+  filter: blur(72px);
+  z-index: -1;
+  animation: pulse 4s cubic-bezier(0, 0, 0, 0.5) infinite;
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.5);
+  }
 }
 
 .container {

@@ -51,7 +51,7 @@ onMounted(() => {
 <template>
   <div class="border-around">
     <h1 v-if="name" class="name title">
-      <span class="clip active-menu ">{{ name }}</span>
+      <span class="clip active-menu">{{ name }}</span>
       <svg
         style="color:var(--vp-c-brand);position:absolute;z-index:-1;top:1.2em;left:0.2em;width:calc(100% - 0.7em);height:auto;"
         width="240" height="11" viewBox="0 0 240 11" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
