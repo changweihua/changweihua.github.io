@@ -25,9 +25,9 @@ hero:
 ---
 
 <ClientOnly>
-  <HeroLogo></HeroLogo>
+  <WebLogo></WebLogo>
 </ClientOnly>
 
 <script lang="ts" setup>
-import HeroLogo from '@/components/CubeWorld.vue'
+import WebLogo from '@vp/components/WebLogo.vue'
 </script>

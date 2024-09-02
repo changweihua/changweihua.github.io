@@ -6,8 +6,8 @@ import {
   Scene,
   WebGLRenderer,
 } from "three";
-import { FontLoader } from "../../threejs/jsm/loaders/FontLoader.js";
-import { TextGeometry } from "../../threejs/jsm/geometries/TextGeometry.js";
+import { FontLoader } from "three/addons/loaders/FontLoader.js";
+import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 
 export default class WebLogo {
   scene: Scene | null = null;

@@ -122,6 +122,6 @@ export default defineConfig({
     include: [
       "vitepress-plugin-nprogress"
     ],
-    exclude: ['vitepress', 'svg2roughjs'],
+    exclude: ['vitepress', 'svg2roughjs','echarts', 'echarts-gl'],
   }
 });
