@@ -22,12 +22,26 @@ hero:
       text: Github
       link: https://github.com/changweihua
 
+
+features:
+  - title: Airport
+    icon:
+      src: /baggage.svg
+      alt: 无锡硕放机场
+    details: 无锡硕放机场
+    link: /en-US/gallery/Airport
+  - title: AirStrip
+    icon:
+      src: /baggage.svg
+      alt: 无锡硕放机场
+    details: 无锡硕放机场
+    link: /en-US/gallery/AirStrip
+  - title: ThreePlane
+    icon:
+      src: /baggage.svg
+      alt: 无锡硕放机场
+    details: 无锡硕放机场
+    link: /en-US/gallery/ThreePlane
+
 ---
 
-<ClientOnly>
-  <WebLogo></WebLogo>
-</ClientOnly>
-
-<script lang="ts" setup>
-import WebLogo from '@vp/components/WebLogo.vue'
-</script>
