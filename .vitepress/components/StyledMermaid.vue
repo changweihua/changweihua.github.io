@@ -14,7 +14,7 @@
 </template>
 <script setup lang="ts">
 import { useData, inBrowser } from 'vitepress'
-import { ref, onMounted, onUnmounted, watch, toRaw } from 'vue'
+import { onMounted, watch, toRaw, useTemplateRef } from 'vue'
 import * as roughjs from 'svg2roughjs'
 import mermaid from 'mermaid'
 import svgPanZoom, { Instance } from '@dash14/svg-pan-zoom'
@@ -25,9 +25,9 @@ const { page } = useData();
 const { frontmatter } = toRaw(page.value);
 console.log('mermaid frontmatter', frontmatter)
 
-const svgRef = ref()
-const sketchRef = ref<HTMLDivElement>()
-const sketchSvgRef = ref<SVGSVGElement>()
+const svgRef = useTemplateRef<HTMLDivElement>('svgRef')
+const sketchRef = useTemplateRef<HTMLDivElement>('sketchRef')
+const sketchSvgRef = useTemplateRef<SVGSVGElement>('sketchSvgRef')
 
 let mut: MutationObserver;
 let panZoomTiger: Instance;
@@ -54,7 +54,7 @@ async function makeRough(svg: SVGSVGElement, id: string) {
   // svg2roughjs.randomize = true
   await svg2roughjs.sketch(false)
 
-  svgRef.value.innerHTML = ''
+  svgRef.value!.innerHTML = ''
   const sketch = sketchSvgRef.value;
   if (sketch) {
     const height = sketch.getAttribute('height');
@@ -154,12 +154,14 @@ const renderChart = async (id, code) => {
     }
   });
 
-  svgRef.value.innerHTML = ''
+  if (svgRef.value) {
+    svgRef.value.innerHTML = ''
 
-  const { svg } = await mermaid.render(id, code)
+    const { svg } = await mermaid.render(id, code)
 
-  svgRef.value.innerHTML = svg
-  await makeRough(svgRef.value.querySelector('svg'), id)
+    svgRef.value.innerHTML = svg
+    await makeRough(svgRef.value.querySelector('svg')!, id)
+  }
 
   if (inBrowser) {
     await makePanZoom(sketchSvgRef.value!, `${props.id}r`)

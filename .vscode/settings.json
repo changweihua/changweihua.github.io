@@ -1,4 +1,18 @@
 {
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "expand",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.guides.bracketPairs": true,
+  "editor.bracketPairColorization.enabled": true,
+  // 控制活动代码段是否阻止快速建议
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "window.dialogStyle": "custom",
+  // 除了 `Tab` 键以外， `Enter` 键是否同样可以接受建议
+  // 这能减少“插入新行”和“接受建议”命令之间的歧义
+  "editor.acceptSuggestionOnEnter": "smart",
+  // 代码补全列表中，优先选择最近的建议
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "workbench.list.smoothScrolling": true,
   "markdown.copyFiles.overwriteBehavior": "overwrite",
   "markdown.copyFiles.destination": {
     "/**/*": "/public/images/cmono-${fileName}"
