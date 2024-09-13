@@ -45,3 +45,8 @@ features:
 
 ---
 
+<SkillRadar />
+
+<script lang="ts" setup>
+import SkillRadar from '@/components/SkillRadar.vue';
+</script>
