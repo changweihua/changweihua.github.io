@@ -412,6 +412,37 @@ html[data-theme="dark"] {
   opacity: 1;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+/* 创建自定义动画 */
+@keyframes move-out {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes move-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+/* 给新旧快照应用动画效果 */
+::view-transition-old(root) {
+  animation: 0.4s ease-in both move-out;
+}
+
+::view-transition-new(root) {
+  animation: 0.4s ease-in both move-in;
+}
 /*markdown*/
 // .vp-doc h1,
 // .vp-doc h2,

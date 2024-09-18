@@ -9,7 +9,8 @@
         "ignore": [
           "backdrop-filter",
           "text-emphasis",
-          "user-select"
+          "user-select",
+          "@view-transition"
         ]
       }
     ],
