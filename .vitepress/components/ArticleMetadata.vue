@@ -8,34 +8,22 @@
       <i-icon icon="basil:user-solid" />
       常伟华
     </span>
-    <span class="flex items-center gap-1">
+    <span class="flex items-center gap-1 highlight" :style="{ '--num': readCost }">
       <i-icon icon="ion:timer" />
       阅读&ensp;{{ readCost }}&ensp;分钟
     </span>
     <span class="flex items-center gap-1">
       <i-icon icon="tabler:clock-filled" />
       发布&ensp;{{ dayjs.tz(date).fromNow() }}
-      <!-- <timeago :datetime="date" /> -->
-      <!-- <VCTimeago :date-time="date" :auto-update="true" /> -->
-      <!-- <span>{{
-        date.toLocaleString("zh", {
-          year: "numeric",
-          month: "numeric",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-        })
-      }}
-      </span> -->
     </span>
   </div>
+  <div class="bar" style="--percent: 50;"></div>
 </template>
 
 <script lang="ts" setup>
 import { PropType, reactive, toRefs, ref, onMounted, nextTick } from "vue";
 import { useData } from "vitepress";
-// import md5 from "blueimp-md5";
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 // 定义文章属性
 const props = defineProps({
@@ -83,6 +71,15 @@ onMounted(() => {
 
 </script>
 
+<style lang="css" scoped>
+.highlight {
+  --r: clamp(3, (var(--num) - 99) * 999 + 29, 250);
+  --g: clamp(6, (var(--num) - 100) * -999 + 67, 125);
+  --b: clamp(12, (var(--num) - 100) * -999 + 54, 250);
+  color: rgb(var(--r) var(--g) var(--b));
+}
+</style>
+
 <style lang="less" scoped>
 .meta-container {
   margin: 10px 0;
@@ -97,6 +94,34 @@ onMounted(() => {
     background-color: antiquewhite;
     gap: 6px;
     padding: 2px 8px;
+  }
+
+  .bar {
+    width: 1000px;
+    display: flex;
+    height: 20px;
+    background-color: #f5f5f5;
+  }
+
+  .bar::before {
+    counter-reset: progress var(--percent); // 创建计数器
+    content: counter(progress) '%\2002'; // 显示计数器内容
+    display: flex;
+    justify-content: end;
+    width: calc(var(--percent) * 1%);
+    font-size: 12px;
+    color: #fff;
+    background: #2486ff;
+    white-space: nowrap;
+
+    background-image: linear-gradient(green, green),
+      linear-gradient(#2486ff, #2486ff),
+      linear-gradient(orange, orange),
+      linear-gradient(red, red);
+    background-size: calc((var(--percent) - 90) * 100%) 100%,
+      calc((var(--percent) - 60) * 100%) 100%,
+      calc((var(--percent) - 30) * 100%) 100%,
+      100% 100%;
   }
 }
 

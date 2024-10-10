@@ -328,6 +328,10 @@ export default {
         return true
       };
 
+      router.onAfterPageLoad = async () => {
+        console.log('onAfterPageLoad')
+      };
+
       vitepressNprogress(ctx);
 
       useComponents(app, DemoPreview)

@@ -13,6 +13,7 @@ import vitepressProtectPlugin from "vitepress-protect-plugin"
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 
 const customElements = [
   "mjx-container",
@@ -146,6 +147,23 @@ export default defineConfig({
       }),
       viteDemoPreviewPlugin(),
       vueJsx(),
+      AnnouncementPlugin({
+        title: '欢迎来到CMONO.NET',
+        body: [
+          { type: 'text', content: '👇瞅瞅他👇' },
+          {
+            type: 'image',
+            src: 'https://changweihua.github.io/author.jpg'
+          }
+        ],
+        footer: [
+          {
+            type: 'button',
+            content: '啥都不是呢',
+            link: 'https://changweihua.github.io'
+          },
+        ],
+      })
     ],
   },
   vue: {
