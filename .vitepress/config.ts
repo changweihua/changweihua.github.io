@@ -147,23 +147,23 @@ export default defineConfig({
       }),
       viteDemoPreviewPlugin(),
       vueJsx(),
-      AnnouncementPlugin({
-        title: '欢迎来到CMONO.NET',
-        body: [
-          { type: 'text', content: '👇瞅瞅他👇' },
-          {
-            type: 'image',
-            src: 'https://changweihua.github.io/author.jpg'
-          }
-        ],
-        footer: [
-          {
-            type: 'button',
-            content: '啥都不是呢',
-            link: 'https://changweihua.github.io'
-          },
-        ],
-      })
+      // AnnouncementPlugin({
+      //   title: '欢迎来到CMONO.NET',
+      //   body: [
+      //     { type: 'text', content: '👇瞅瞅他👇' },
+      //     {
+      //       type: 'image',
+      //       src: 'https://changweihua.github.io/author.jpg'
+      //     }
+      //   ],
+      //   footer: [
+      //     {
+      //       type: 'button',
+      //       content: '啥都不是呢',
+      //       link: 'https://changweihua.github.io'
+      //     },
+      //   ],
+      // })
     ],
   },
   vue: {
