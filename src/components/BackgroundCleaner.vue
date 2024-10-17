@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { ref } from 'vue'
 import { UploadOutlined } from '@ant-design/icons-vue';
 import { removeBackground, Config } from "@imgly/background-removal"
@@ -63,4 +63,4 @@ function blobToDataURI(blob: any, callback: any) {
     <img style='width: 400px' :src="beforeSrc">
     <img style='width: 400px' :src="afterSrc">
   </div>
-</template>
+</template> -->

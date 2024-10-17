@@ -16,12 +16,12 @@
 </template>
 
 <script setup lang="ts">
-import { pinyin, addDict } from "pinyin-pro";
+import { pinyin } from "pinyin-pro";
 
-// 引入前需要先通过 `npm install @pinyin-pro/data` 进行安装 使用完整字典 但是体积有点大啊 这里只是测试
-import CompleteDict from "@pinyin-pro/data/complete";
+// // 引入前需要先通过 `npm install @pinyin-pro/data` 进行安装 使用完整字典 但是体积有点大啊 这里只是测试
+// import CompleteDict from "@pinyin-pro/data/complete";
 
-addDict(CompleteDict);
+// addDict(CompleteDict);
 
 // 毛泽东的《沁园春·长沙》
 const poem = `

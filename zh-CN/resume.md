@@ -34,7 +34,7 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 ::: info 📌 🎯
 
 - 业余时间积极参加开源社区，目前加入了 unFIX 中文社区官网开发项目组。
-- 研究机器视觉，自学 YoloV8 目标检测算法，用于行李分类及违禁品分析。
+- 研究机器视觉，自学 Yolo 目标检测算法，用于行李分类及违禁品分析。
 - MAUI 跨平台
 
 :::
