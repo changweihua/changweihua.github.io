@@ -19,6 +19,22 @@ import '@vitepress-code-preview/container/dist/style.css'
 import VueResizeObserver from "vue-resize-observer";
 import yuppie from 'yuppie-ui'
 
+import { pinyin, addDict } from 'pinyin-pro';
+
+pinyin('常伟华');
+
+// import('pinyin-pro').then((exports) => {
+//   exports.pinyin('汉语拼音'); // 'hàn yǔ pīn yīn'
+// });
+
+// 引入前需要先通过 `npm install @pinyin-pro/data` 进行安装
+import CompleteDict from '@pinyin-pro/data/complete';
+
+addDict(CompleteDict);
+
+const result = pinyin('小明硕士毕业于中国科学院计算所，后在日本京都大学深造');
+console.log(result)
+// 结果: 结果: xiǎo míng shuò shì bì yè yú zhōng guó kē xué yuàn jì suàn suǒ ， hòu zài rì běn jīng dū dà xué shēn zào
 
 // import { VuePreview } from 'vite-plugin-vue-preview'
 // import 'vite-plugin-vue-preview/style.css'
