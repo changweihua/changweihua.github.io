@@ -100,8 +100,8 @@ jobs:
       # - name: Build docs
       #   run: npm run docs:build
 
-      - name: Fix Memory
-        run: npm run fix-memory-limit
+      # - name: Fix Memory
+      #   run: npm run fix-memory-limit
 
       - name: Build docs
         run: |
