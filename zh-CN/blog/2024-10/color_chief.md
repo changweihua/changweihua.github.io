@@ -1,3 +1,57 @@
+---
+lastUpdated: true
+commentabled: true
+recommended: true
+title:  ColorThief的介绍与使用
+description: ColorThief的介绍与使用
+date: 2024-10-22 09:18:00
+pageClass: blog-page-class
+---
+
+# ColorThief的介绍与使用 #
+
+## 概述 ##
+
+`colorThief` 是一个 Javascript 插件，支持在浏览器端或 Node 环境中使用。`colorThief` 的作用就是通过算法去获取图片的色源。
+
+`Color Thief` 是一个开源的 JavaScript 库，它可以帮助你从任何图像中轻松提取出主导色彩。简单来说，它就像一个`“色彩窃贼”`，可以盗取图像中最突出的颜色，并将它们以调色板的形式呈现出来。
+
+## 能用来做什么？ ##
+
+有了 Color Thief，你可以：
+
+- 在网页设计中快速地找到匹配的背景色或文字颜色。
+- 根据一张图片生成相应的配色方案，用于制作海报、封面等设计作品。
+- 为摄影博客的文章创建与主题相符的自定义色调。
+- 自动为社交媒体分享的图片选择合适的配色方案，使它们更引人注目。
+
+## Color Thief 的特点 ##
+
+以下是 Color Thief 的几个亮点特性：
+
+- 轻量级：Color Thief 的代码体积非常小，容易集成到你的项目中。
+- 易用性：只需几行代码，即可开始提取图像颜色。
+- 适应性强：Color Thief 可以在各种浏览器环境下运行，包括移动设备。
+- 多种色彩提取方法：提供了两种不同的算法（Quantize 和 Average），可以根据需要选择适合的方法。
+
+## API 介绍 ##
+
+`colorThief` 提供两个方法，`getColor` 和 `getPalette`，这两个方法在 Node 环境中都是返回 `Promise`。
+
+### getColor方法 ###
+
+`getColor` 方法接收两个参数 `img` 和 `quality`。
+
+- img：图像源，在浏览器环境中 img 需要传 HTML 元素节点，而在 Node 中,img是图像路径
+- quality：可选参数，数值类型，1 或者更大的数字。默认是 10，决定采样时跳过多少像素。值越大，返回速度越快。
+
+### getPalette方法 ###
+
+`getPalette` 方法也是接收 3 个参数，通过聚类相似颜色从图像中获取调色板。返回值为一个数组。它比 `getColor` 方法多了第二个参数，其第二个参数是返回多少个颜色。
+
+## 示例代码 ##
+
+```vue
 <template>
   <div class="palette_container" ref="palette">
     <div v-if="categories && categories.length > 0"
@@ -83,3 +137,5 @@ const handleMouseLeave = () => {
   border-radius: 10px;
 }
 </style>
+```
+

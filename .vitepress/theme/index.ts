@@ -41,6 +41,13 @@ pinyin('常伟华');
 // import { VuePreview } from 'vite-plugin-vue-preview'
 // import 'vite-plugin-vue-preview/style.css'
 
+// // getColor 单个颜色
+// // getPalette 多个颜色
+// ColorThief.getColor(ImageRef).then(res=>{
+//   console.log(res)
+// })
+
+
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
 

@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import type {Plugin} from 'vite'
 import { vitePluginVersionMark } from 'vite-plugin-version-mark'
 import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
+import Inspect from 'vite-plugin-inspect'
 // import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
 
 const getEnvValue = (mode: string, target: string) => {
@@ -95,6 +96,7 @@ export default defineConfig({
     //   }),
     Icons({ autoInstall: true }),
     UnoCSS(),
+    Inspect()
   ],
   resolve: {
     alias: {
