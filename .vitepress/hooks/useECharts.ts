@@ -2,7 +2,7 @@
 import * as echarts from "echarts";
 import elementResizeDetectorMaker from 'element-resize-detector'
 import { debounce } from 'lodash-es'
-import { onActivated, onDeactivated, onMounted, onBeforeUnmount, reactive, shallowRef, useTemplateRef, watch } from "vue";
+import { onActivated, onDeactivated, onMounted, onBeforeUnmount, reactive, shallowRef, useTemplateRef, watch, nextTick } from "vue";
 
 export interface ChartStrategy {
   getOptions: () => echarts.EChartsOption;
@@ -31,13 +31,15 @@ export function useECharts(
 
   // 初始化图表实例的函数
   const initChart = () => {
-    // 确保 chartRef 绑定了 DOM 元素且 chartInstance 尚未初始化
-    if (containerRef.value && !chartInstance.value) {
-      // 初始化 ECharts 实例并赋值给 chartInstance
-      chartInstance.value = echarts.init(containerRef.value, theme, opts);
-      // 设置图表的初始选项
-      chartInstance.value.setOption(options);
-    }
+    nextTick(() => {
+      // 确保 chartRef 绑定了 DOM 元素且 chartInstance 尚未初始化
+      if (containerRef.value && !chartInstance.value) {
+        // 初始化 ECharts 实例并赋值给 chartInstance
+        chartInstance.value = echarts.init(containerRef.value, theme, opts);
+        // 设置图表的初始选项
+        chartInstance.value.setOption(options);
+      }
+    })
   };
 
   // 更新图表配置选项的函数
@@ -99,19 +101,19 @@ export function useECharts(
   });
 
   // 下载图表为图片
-    const downloadChartImage = (filename = 'chart.png') => {
-        if (chartInstance.value) {
-            const base64 = chartInstance.value.getDataURL({
-                type: 'png',
-                pixelRatio: 2,
-                backgroundColor: '#fff'
-            });
-            const link = document.createElement('a');
-            link.href = base64;
-            link.download = filename;
-            link.click();
-        }
-    };
+  const downloadChartImage = (filename = 'chart.png') => {
+    if (chartInstance.value) {
+      const base64 = chartInstance.value.getDataURL({
+        type: 'png',
+        pixelRatio: 2,
+        backgroundColor: '#fff'
+      });
+      const link = document.createElement('a');
+      link.href = base64;
+      link.download = filename;
+      link.click();
+    }
+  };
 
 
   // 返回 chartInstance 和相关的控制方法，供外部组件使用

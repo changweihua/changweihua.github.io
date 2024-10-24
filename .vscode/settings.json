@@ -34,6 +34,7 @@
   },
   "javascript.suggest.autoImports": true,
   "typescript.suggest.autoImports": true,
+  "terminal.integrated.shellArgs.windows": [],
   "javascript.updateImportsOnFileMove.enabled": "prompt",
   "typescript.updateImportsOnFileMove.enabled": "prompt"
   //   // 拖拽行为
