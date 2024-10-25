@@ -1,20 +1,32 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import random from "random"
+import { onMounted, ref } from "vue";
+
+const siteVisitCount = ref(0)
+const userVisitCount = ref(0)
+
+onMounted(function () {
+  siteVisitCount.value = random.int(10000, 50000)
+  userVisitCount.value = random.int(5000, 10000)
+})
+
+</script>
 
 <template>
   <div class="panel">
     <div class="container">
       <section class="grid">
         <span class="text">
-          本站总访问量
-          <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次
+          <vue3-autocounter ref="siteVisitCounter" :startAmount="1000" :endAmount="siteVisitCount" :duration="3" prefix="本站总访问量" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />
+          <!-- <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 -->
         </span>
         <figure>
           <section class="item-bg"></section>
           <i-icon class="item" icon="svg-spinners:wind-toy" :width="24" :height="24" />
         </figure>
         <span class="text">
-          本站访客数
-          <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
+          <vue3-autocounter ref="userVisitCounter" :startAmount="500" :endAmount="userVisitCount" :duration="3" prefix="本站访客数" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />
+          <!-- <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次 -->
         </span>
       </section>
     </div>

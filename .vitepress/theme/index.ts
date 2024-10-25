@@ -8,6 +8,7 @@ import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
+import Vue3Autocounter from 'vue3-autocounter';
 import ThreeLogo from "#.vitepress/components/ThreeLogo.vue";
 import CubicLoading from "#.vitepress/components/CubicLoading.vue";
 
@@ -312,7 +313,7 @@ export default {
 
     if (inBrowser) {
       router.onAfterRouteChanged = () => {
-        busuanzi.fetch();
+        // busuanzi.fetch();
       };
     }
 
@@ -375,6 +376,7 @@ export default {
 
       app.use(Antd);
 
+      app.component('vue3-autocounter', Vue3Autocounter)
       app.component("StyledMermaid", StyledMermaid);
       app.component("MarkupView", MarkupView);
 
