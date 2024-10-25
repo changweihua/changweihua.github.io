@@ -9,20 +9,21 @@ import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import ThreeLogo from "#.vitepress/components/ThreeLogo.vue";
+import CubicLoading from "#.vitepress/components/CubicLoading.vue";
 
-import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
-import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
+import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
+import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 
 import AnimationTitle from "../components/AnimationTitle.vue";
 
-import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
-import '@vitepress-code-preview/container/dist/style.css'
+import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
+import "@vitepress-code-preview/container/dist/style.css";
 import VueResizeObserver from "vue-resize-observer";
-import yuppie from 'yuppie-ui'
+import yuppie from "yuppie-ui";
 
-import { pinyin } from 'pinyin-pro';
+import { pinyin } from "pinyin-pro";
 
-pinyin('常伟华');
+pinyin("常伟华");
 
 // // import('pinyin-pro').then((exports) => {
 // //   exports.pinyin('汉语拼音'); // 'hàn yǔ pīn yīn'
@@ -47,14 +48,13 @@ pinyin('常伟华');
 //   console.log(res)
 // })
 
-
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
 
 import busuanzi from "busuanzi.pure.js";
 
 // 引入 Ant Design Vue
-import Antd from 'ant-design-vue';
+import Antd from "ant-design-vue";
 
 import "./styles/index.less";
 
@@ -66,10 +66,10 @@ import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
 import PageFooter from "../components/PageFooter.vue";
-import HoverGrid from "../components/HoverGrid.vue"
-import MagicCard from "../components/MagicCard.vue"
-import StyledMermaid from "../components/StyledMermaid.vue"
-import MarkupView from "../components/MarkupView.vue"
+import HoverGrid from "../components/HoverGrid.vue";
+import MagicCard from "../components/MagicCard.vue";
+import StyledMermaid from "../components/StyledMermaid.vue";
+import MarkupView from "../components/MarkupView.vue";
 import Confetti from "../components/Confetti.vue";
 import "markmap-toolbar/dist/style.css";
 
@@ -78,45 +78,45 @@ import { Icon } from "@iconify/vue";
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "./styles/timeline.fix.less";
 
-import 'vitepress-markdown-it-stepper/theme'
+import "vitepress-markdown-it-stepper/theme";
 
-import { Tab, Tabs } from 'vue3-tabs-component'
-import '@red-asuka/vitepress-plugin-tabs/dist/style.css'
+import { Tab, Tabs } from "vue3-tabs-component";
+import "@red-asuka/vitepress-plugin-tabs/dist/style.css";
 
-import 'virtual:group-icons.css'
+import "virtual:group-icons.css";
 import "uno.css";
-import 'animate.css';
+import "animate.css";
 
-import vitepressBackToTop from 'vitepress-plugin-back-to-top'
-import 'vitepress-plugin-back-to-top/dist/style.css'
+import vitepressBackToTop from "vitepress-plugin-back-to-top";
+import "vitepress-plugin-back-to-top/dist/style.css";
 
-import type { Theme } from 'vitepress'
+import type { Theme } from "vitepress";
 
-import { defaultVTheme } from '../hooks/useVChart';
-import VChart from '@visactor/vchart';
-import { allThemeMap } from '@visactor/vchart-theme';
-import AnimatingLayout from './AnimatingLayout.vue'
+import { defaultVTheme } from "../hooks/useVChart";
+import VChart from "@visactor/vchart";
+import { allThemeMap } from "@visactor/vchart-theme";
+import AnimatingLayout from "./AnimatingLayout.vue";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-dayjs.extend(utc)
-dayjs.extend(timezone)
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
-dayjs.tz.setDefault("Asia/Shanghai")
+dayjs.tz.setDefault("Asia/Shanghai");
 dayjs.extend(relativeTime);
 dayjs.locale("zh-cn");
 
 // register themes
 allThemeMap.forEach((theme, name) => {
-  theme.fontFamily = defaultVTheme.fontFamily
-  theme.background = defaultVTheme.background
+  theme.fontFamily = defaultVTheme.fontFamily;
+  theme.background = defaultVTheme.background;
   VChart.ThemeManager.registerTheme(name, theme);
 });
 
 // apply a theme
-VChart.ThemeManager.setCurrentTheme('legacyLight');
+VChart.ThemeManager.setCurrentTheme("legacyLight");
 
 export default {
   ...DefaultTheme,
@@ -125,14 +125,13 @@ export default {
   // 使用注入插槽的包装组件覆盖 Layout
   // Layout: MyLayout,
   Layout() {
-
-    const props: Record<string, any> = {}
+    const props: Record<string, any> = {};
     // 获取 frontmatter
-    const { frontmatter } = useData()
+    const { frontmatter } = useData();
 
     /* 添加自定义 class */
     if (frontmatter.value?.layoutClass) {
-      props.class = frontmatter.value.layoutClass
+      props.class = frontmatter.value.layoutClass;
     }
 
     return h(AnimatingLayout, null, {
@@ -153,15 +152,30 @@ export default {
         }),
       // "home-hero-image": () => h(Suspense, ThreeLogo),
       // "home-hero-image": () => h(ThreeLogo),
-      "home-hero-image": () => h('div', {
-        class: "w-full h-full flex items-center justify-center",
-        style: "position: relative;"
-      }, [
-        h('img', {
-          src: '/cwh.svg',
-          class: 'VPImage image-src',
-        })
-      ]),
+      // "home-hero-image": () => h('div', {
+      //   class: "w-full h-full flex items-center justify-center",
+      //   style: "position: relative;"
+      // }, [
+      //   h('img', {
+      //     src: '/cwh.svg',
+      //     class: 'VPImage image-src',
+      //   })
+      // ]),
+      "home-hero-image": () =>
+        h(
+          "div",
+          {
+            class: "w-full h-full flex items-center justify-center",
+            style: "position: relative;",
+          },
+          [
+            h(HeroImage),
+            h("img", {
+              src: "/cwh.svg",
+              class: "VPImage image-src",
+            }),
+          ]
+        ),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
       //     name: "home-hero-after",
@@ -287,7 +301,6 @@ export default {
       //   h(OtherComponent), // 你的其他导航栏组件
       //   h(NolebaseEnhancedReadabilitiesScreenMenu), // 阅读增强移动端菜单
       // ],
-
     });
   },
   enhanceApp: async (ctx) => {
@@ -309,13 +322,13 @@ export default {
 
       vitepressBackToTop({
         // default
-        threshold:300
-      })
+        threshold: 300,
+      });
 
-      app.use(yuppie)
-      app.use(VueResizeObserver)
+      app.use(yuppie);
+      app.use(VueResizeObserver);
 
-      app.directive('aria-empty', {
+      app.directive("aria-empty", {
         //指令绑定到元素时调用
         mounted(el, binding) {
           el.removeAttribute("aria-hidden");
@@ -326,8 +339,8 @@ export default {
           // });
         },
         //指令与元素解绑时调用
-        unmounted(el, binding) { }
-      })
+        unmounted(el, binding) {},
+      });
 
       // app.mixin({
       //   async mounted() {
@@ -339,35 +352,34 @@ export default {
       // });
 
       router.onBeforeRouteChange = async (to) => {
-
         // Here you can set the routes you want to configure.
-        if (to == '/') {
-          await router.go('/zh-CN/')
-          return false
+        if (to == "/") {
+          await router.go("/zh-CN/");
+          return false;
         }
 
         // if (typeof window._hmt !== 'undefined') {
         //   window._hmt.push(['_trackPageview', to]);
         // }
 
-        return true
+        return true;
       };
 
       router.onAfterPageLoad = async () => {
-        console.log('onAfterPageLoad')
+        console.log("onAfterPageLoad");
       };
 
       vitepressNprogress(ctx);
 
-      useComponents(app, DemoPreview)
+      useComponents(app, DemoPreview);
 
       app.use(Antd);
 
-      app.component('StyledMermaid', StyledMermaid)
-      app.component('MarkupView', MarkupView)
+      app.component("StyledMermaid", StyledMermaid);
+      app.component("MarkupView", MarkupView);
 
-      app.component('Tab', Tab)
-      app.component('Tabs', Tabs)
+      app.component("Tab", Tab);
+      app.component("Tabs", Tabs);
 
       app.component("i-icon", Icon);
 
@@ -381,7 +393,6 @@ export default {
       app.component("HoverGrid", HoverGrid);
       app.component("MagicCard", MagicCard);
       app.component("Confetti", Confetti); //注册全局组件
-
     }
 
     if (inBrowser) {
@@ -395,7 +406,9 @@ export default {
     codeblocksFold({ route, frontmatter }, true, 400);
     watchEffect(() => {
       if (inBrowser) {
-        document.cookie = `nf_lang=${lang.value}; expires=${new Date().toUTCString()}; path=/`;
+        document.cookie = `nf_lang=${
+          lang.value
+        }; expires=${new Date().toUTCString()}; path=/`;
       }
     });
   },
