@@ -12,6 +12,8 @@ pageClass: blog-page-class
 
 好多开发者希望搞明白OpenCV 和YOLO区别，实际上，二者在计算机视觉领域都有广泛应用，但它们有很大的不同。
 
+![alt text](/images/cmono-20241028135331.png)
+
 ## OpenCV ##
 
 ### 概述 ###

@@ -10,6 +10,8 @@ pageClass: blog-page-class
 
 # Dockerfile最佳实践-如何创建高效的容器 #
 
+![alt text](/images/cmono-es.png)
+
 ## 简介 ##
 
 在微服务和云计算时代，Docker已经成为应用开发和部署不可或缺的工具。容器化允许开发者将应用程序及其依赖打包成一个单一的、可移植的单元，确保了可预测性、可扩展性和快速部署。然而，你的容器的效率很大程度上取决于你的Dockerfile编写得有多优化。
@@ -137,9 +139,9 @@ RUN apt-get install -y --no-install-recommends package
 
 - **.dockerignore**：
 
-```.dockerignore
+```dockerignore
 .git
-node_modules
+node_module
 Dockerfile
 .dockerignore
 ```

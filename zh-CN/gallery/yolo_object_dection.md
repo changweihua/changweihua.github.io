@@ -8,6 +8,7 @@ recommended: true
 
 基于Yolo的对象检测、识别与研究。  
 
+![alt text](/images/cmono-20241028135331.png)
 
 ### Yolo 介绍 ###
 

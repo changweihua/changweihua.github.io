@@ -9,9 +9,9 @@
                 <defs>
                   <path id="circle" d=" M .5,512 a 512,512 0 1,1 1024,0 512,512 0 1,1 -1024,0 " />
                 </defs>
-                <text width="100%" lengthAdjust="spacingAndGlyphs" font-stretch="expanded">
+                <text width="100%" style="letter-spacing:3;" lengthAdjust="spacingAndGlyphs" font-stretch="expanded">
                   <textPath alignment-baseline="baseline" textLength="3216" xlink:href="#circle" class="text">
-                    𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣&nbsp;
+                    𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣
                   </textPath>
                 </text>
               </svg>
