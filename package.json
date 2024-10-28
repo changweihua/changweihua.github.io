@@ -214,6 +214,7 @@
     "vitepress-plugin-nprogress": "^0.0.4",
     "vitepress-plugin-rss": "^0.3.0",
     "vitepress-protect-plugin": "^1.0.6",
+    "vue-draggable-next": "^2.2.1",
     "vue-resize-observer": "^2.0.16",
     "vue-timeago3": "^2.3.2",
     "vue3-autocounter": "^1.0.8",
