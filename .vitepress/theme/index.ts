@@ -26,6 +26,8 @@ import { pinyin } from "pinyin-pro";
 
 pinyin("常伟华");
 
+import directives from "../directives";
+
 // // import('pinyin-pro').then((exports) => {
 // //   exports.pinyin('汉语拼音'); // 'hàn yǔ pīn yīn'
 // // });
@@ -58,8 +60,6 @@ import busuanzi from "busuanzi.pure.js";
 import Antd from "ant-design-vue";
 
 import "./styles/index.less";
-
-import "@iconify/iconify";
 
 import NotFound from "../components/NotFound.vue";
 import CodeGroup from "../components/CodeGroup.vue";
@@ -329,6 +329,8 @@ export default {
       app.use(yuppie);
       app.use(VueResizeObserver);
 
+      app.use(directives);
+
       app.directive("aria-empty", {
         //指令绑定到元素时调用
         mounted(el, binding) {
@@ -383,7 +385,7 @@ export default {
       app.component("Tab", Tab);
       app.component("Tabs", Tabs);
 
-      app.component("i-icon", Icon);
+      app.component("m-icon", Icon);
 
       app.component("header-profile", HeaderProfile);
       app.component("lottie-panel", LottiePanel);

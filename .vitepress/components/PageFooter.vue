@@ -1,14 +1,16 @@
 <template>
   <div class="flex gap-3 flex-row items-center justify-center pb-6">
     V{{ version }} |
-    <!-- <i-icon class="item" icon="logos:git" :width="24" :height="24" />
-    <i-icon class="item" icon="logos:vitejs" :width="24" :height="24" />
-    <i-icon class="item" icon="logos:github-octocat" :width="24" :height="24" />
-    <i-icon class="item" icon="logos:ant-design" :width="24" :height="24" /> -->
-    <i-icon class="item" icon="logos:markdown" :width="24" :height="24" />
-    <!-- <i-icon class="item" icon="simple-icons:mermaid" :width="24" :height="24" />
-    <i-icon class="item" icon="bxl:typescript" :width="24" :height="24" /> -->
-    <i-icon class="item" icon="token-branded:rss3" :width="24" :height="24" />
+    <!-- <m-icon class="item" icon="logos:git" :width="24" :height="24" />
+    <m-icon class="item" icon="logos:vitejs" :width="24" :height="24" />
+    <m-icon class="item" icon="logos:github-octocat" :width="24" :height="24" />
+    <m-icon class="item" icon="logos:ant-design" :width="24" :height="24" /> -->
+    <icon-logos-markdown :width="28" :height="28" />
+    <!-- <m-icon class="item" icon="logos:markdown" :width="24" :height="24" /> -->
+    <!-- <m-icon class="item" icon="simple-icons:mermaid" :width="24" :height="24" />
+    <m-icon class="item" icon="bxl:typescript" :width="24" :height="24" /> -->
+    <m-icon class="item" icon="token-branded:rss3" :width="48" :height="48" />
+
     <!-- <p class="version-tag w-20 text-center flex flex-row">
       {{ version }}
     </p> -->

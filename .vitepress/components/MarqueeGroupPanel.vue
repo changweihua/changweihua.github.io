@@ -4,40 +4,40 @@
       <div class="marquee">
         <div class="marquee__group">
           <template v-for="icon in icons.slice((line - 1) * lineCount, line * lineCount)">
-            <i-icon class="item" :icon="icon" :width="96" :height="96" />
+            <m-icon class="item" :icon="icon" :width="96" :height="96" />
           </template>
         </div>
         <div class="marquee__group">
           <template v-for="icon in icons.slice((line - 1) * lineCount, line * lineCount)">
-            <i-icon class="item" :icon="icon" :width="96" :height="96" />
+            <m-icon class="item" :icon="icon" :width="96" :height="96" />
           </template>
         </div>
       </div>
     </template>
     <!-- <div class="marquee">
       <div class="marquee__group">
-        <i-icon class="item" icon="logos:mono" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:grafana" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:gravatar" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:gradle" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:postman" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:jenkins" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:github-octocat" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:gitlab" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:git" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:github-actions" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:mono" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:grafana" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:gravatar" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:gradle" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:postman" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:jenkins" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:github-octocat" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:gitlab" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:git" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:github-actions" :width="96" :height="96" />
       </div>
       <div class="marquee__group" aria-hidden="true">
-        <i-icon class="item" icon="logos:mono" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:grafana" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:gravatar" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:gradle" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:postman" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:jenkins" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:github-octocat" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:gitlab" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:git" :width="96" :height="96" />
-        <i-icon class="item" icon="logos:github-actions" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:mono" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:grafana" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:gravatar" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:gradle" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:postman" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:jenkins" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:github-octocat" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:gitlab" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:git" :width="96" :height="96" />
+        <m-icon class="item" icon="logos:github-actions" :width="96" :height="96" />
       </div>
     </div> -->
   </div>

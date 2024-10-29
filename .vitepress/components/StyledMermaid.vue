@@ -3,10 +3,10 @@
     <div class="graph-div" ref="svgRef"></div>
     <div class="sketch-div cursor-pointer position-relative" ref="sketchRef">
       <div class="download flex flex-row gap-3" style="position:absolute;right:6px;top: 6px;cursor:pointer">
-        <i-icon v-aria-empty
+        <m-icon v-aria-empty
           :icon="isFullElementTag ? 'icon-park-outline:off-screen-one' : 'icon-park-outline:full-screen-one'"
           @click="toggleFullscreen()" :width="24" :height="24" />
-        <i-icon v-aria-empty icon="line-md:download-loop" @click="downloadData" :width="24" :height="24" />
+        <m-icon v-aria-empty icon="line-md:download-loop" @click="downloadData" :width="24" :height="24" />
       </div>
       <svg ref="sketchSvgRef"></svg>
     </div>

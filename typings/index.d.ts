@@ -4,3 +4,4 @@
 /// <reference types="./components.d.ts" />
 /// <reference types="./shims-module.d.ts" />
 /// <reference types="./shims-tree.d.ts" />
+/// <reference types="./shims-directive.d.ts" />

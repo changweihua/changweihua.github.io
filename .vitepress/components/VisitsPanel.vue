@@ -22,7 +22,7 @@ onMounted(function () {
         </span>
         <figure>
           <section class="item-bg"></section>
-          <i-icon class="item" icon="svg-spinners:wind-toy" :width="24" :height="24" />
+          <m-icon class="item" icon="svg-spinners:wind-toy" :width="32" :height="32" />
         </figure>
         <span class="text">
           <vue3-autocounter ref="userVisitCounter" :startAmount="500" :endAmount="userVisitCount" :duration="3" prefix="本站访客数" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />

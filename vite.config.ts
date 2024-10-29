@@ -1,5 +1,7 @@
 import { defineConfig, loadEnv } from "vite";
 import Icons from "unplugin-icons/vite";
+import IconsResolver from 'unplugin-icons/resolver'
+import Components from 'unplugin-vue-components/vite'
 import UnoCSS from "unocss/vite";
 import path, { resolve } from "path";
 import { fileURLToPath } from "url";
@@ -94,7 +96,25 @@ export default defineConfig({
     //       },
     //     },
     //   }),
-    Icons({ autoInstall: true }),
+    Components({
+      resolvers: [
+        IconsResolver({
+          // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
+          prefix: 'icon',
+          strict: true
+          // 当图标集名字过长时，可使用集合别名
+          // alias: {
+          //   system: 'system-uicons'
+          // },
+          // enabledCollections: ['logos']
+        }),
+      ],
+    }),
+    Icons({
+      compiler: 'vue3',
+      autoInstall: true,
+    }),
+    // Icons({ autoInstall: true }),
     UnoCSS(),
     Inspect()
   ],
