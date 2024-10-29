@@ -164,7 +164,11 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="less" scoped>
-.markup-toolbar * {
-  color: rgb(161 161 170 / var(--un-text-opacity));
+.markup-card {
+  background-color: initial;
+
+  .markup-toolbar * {
+    color: rgb(161 161 170 / var(--un-text-opacity));
+  }
 }
 </style>
