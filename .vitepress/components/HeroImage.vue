@@ -7,11 +7,27 @@
             <div class="hero-image-container">
               <svg class="text-ring" width="100%" height="100%" viewBox="-256 -256 1536 1536">
                 <defs>
-                  <path id="circle" d=" M .5,512 a 512,512 0 1,1 1024,0 512,512 0 1,1 -1024,0 " />
+                  <!-- 网格 -->
+                  <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path fill="none" stroke="#f1f1f1" d="M 0 0 H 20 V 20" />
+                  </pattern>
+                  <path id="circle" d="M .5,512 a 512,512 0 1,1 1024,0 512,512 0 1,1 -1024,0" />
+                  <animateMotion xlink:href="#myText" dur="5s" repeatCount="indefinite" rotate="auto"
+                    path="M .5,512 a 512,512 0 1,1 1024,0 512,512 0 1,1 -1024,0">
+                  </animateMotion>
                 </defs>
+                <!-- 绘制网格 -->
+                <rect width="1000" height="1000" fill="url(#grid)" />
+                <!-- id="myText" -->
                 <text width="100%" style="letter-spacing:3;" lengthAdjust="spacingAndGlyphs" font-stretch="expanded">
-                  <textPath alignment-baseline="baseline" textLength="3216" xlink:href="#circle" class="text">
-                    𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣
+                  <textPath alignment-baseline="baseline" startOffset="0" textLength="3000" xlink:href="#circle"
+                    class="text">
+                    <tspan font-size="30px">𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣</tspan>
+                    <animate attributeName="fill" from="blue" to="red" dur="3s" repeatCount="indefinite"></animate>
+                    <animate attributeName="fill-opacity" from="0.01" to="0.99" dur="3s" repeatCount="indefinite">
+                    </animate>
+                    <!-- <animate attributeName="startOffset" from="0" to="3150" dur="6s" repeatCount="indefinite">
+                    </animate> -->
                   </textPath>
                 </text>
               </svg>
@@ -19,7 +35,9 @@
           </WithSuspense>
         </template>
         <template #fallback>
-          <div><CubicLoading /></div>
+          <div>
+            <CubicLoading />
+          </div>
         </template>
       </Suspense>
     </template>
