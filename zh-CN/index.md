@@ -28,7 +28,7 @@ features:
     icon:
       src: /baggage.svg
       alt: 随身携带行李限额自助查询
-    details: 随身携带行李限额自助查询，用于提示是否为三超行李
+    details: 随身携带行李限额自助查询，用于旅客自助核验随身行李是否为三超行李
     link: /zh-CN/gallery/baggage_measurer
   - title: 阳光服务平台
     icon:

@@ -7,7 +7,10 @@ import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
+import ColorfulWord from "../components/ColorfulWord.vue";
+import DancingLogo from "../components/DancingLogo.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
+import AnimatedLogo from "#.vitepress/components/AnimatedLogo.vue";
 import Vue3Autocounter from 'vue3-autocounter';
 import ThreeLogo from "#.vitepress/components/ThreeLogo.vue";
 import CubicLoading from "#.vitepress/components/CubicLoading.vue";
@@ -171,6 +174,10 @@ export default {
           },
           [
             h(HeroImage),
+            // h(ColorfulWord),
+            // h('div', [
+            //   h(AnimatedLogo),
+            // ])
             h("img", {
               src: "/cwh.svg",
               class: "VPImage image-src",
@@ -342,7 +349,7 @@ export default {
           // });
         },
         //指令与元素解绑时调用
-        unmounted(el, binding) {},
+        unmounted(el, binding) { },
       });
 
       // app.mixin({
@@ -395,6 +402,7 @@ export default {
       app.component("HomeContributors", HomeContributors);
       app.component("CopyRight", CopyRight);
       app.component("HoverGrid", HoverGrid);
+      app.component("DancingLogo", DancingLogo);
       app.component("MagicCard", MagicCard);
       app.component("Confetti", Confetti); //注册全局组件
     }
@@ -410,9 +418,8 @@ export default {
     codeblocksFold({ route, frontmatter }, true, 400);
     watchEffect(() => {
       if (inBrowser) {
-        document.cookie = `nf_lang=${
-          lang.value
-        }; expires=${new Date().toUTCString()}; path=/`;
+        document.cookie = `nf_lang=${lang.value
+          }; expires=${new Date().toUTCString()}; path=/`;
       }
     });
   },

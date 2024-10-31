@@ -139,7 +139,7 @@ RUN apt-get install -y --no-install-recommends package
 
 - **.dockerignore**：
 
-```dockerignore
+```yaml
 .git
 node_module
 Dockerfile

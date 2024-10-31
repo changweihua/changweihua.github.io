@@ -17,15 +17,18 @@ onMounted(function () {
     <div class="container">
       <section class="grid">
         <span class="text">
-          <vue3-autocounter ref="siteVisitCounter" :startAmount="1000" :endAmount="siteVisitCount" :duration="3" prefix="本站总访问量" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />
+          <vue3-autocounter ref="siteVisitCounter" :startAmount="1000" :endAmount="siteVisitCount" :duration="3"
+            prefix="总访问" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />
           <!-- <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 -->
         </span>
         <figure>
-          <section class="item-bg"></section>
-          <m-icon class="item" icon="svg-spinners:wind-toy" :width="32" :height="32" />
+          <!-- <section class="item-bg"></section>
+          <m-icon class="item" icon="svg-spinners:wind-toy" :width="32" :height="32" /> -->
+          <DancingLogo />
         </figure>
         <span class="text">
-          <vue3-autocounter ref="userVisitCounter" :startAmount="500" :endAmount="userVisitCount" :duration="3" prefix="本站访客数" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />
+          <vue3-autocounter ref="userVisitCounter" :startAmount="500" :endAmount="userVisitCount" :duration="3"
+            prefix="总访客" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />
           <!-- <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次 -->
         </span>
       </section>
