@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, useTemplateRef, nextTick } from "vue";
+import { onMounted, useTemplateRef, nextTick, onUnmounted } from "vue";
 
 //x = [20,20,20,...]
 //y = s*sin(w*x+t);
@@ -52,7 +52,6 @@ function arrange(t) {
 }
 //将数组转换成字符串并设置为dx,dy值
 function render() {
-  console.log(dancingText.value)
   dancingText.value?.setAttribute('dx', x.join(' '));
   dancingText.value?.setAttribute('dy', y.join(' '));
 }
@@ -62,14 +61,22 @@ function frame() {
   t += 0.02;
   arrange(t);
   render();
-  window.requestAnimationFrame(frame);//动画效果：递归调用frame方法
+  rafId = window.requestAnimationFrame(frame);//动画效果：递归调用frame方法
 }
+
+let rafId: number | null = null;
 
 onMounted(function () {
   nextTick(function () {
     frame()
   });
 })
+
+onUnmounted(() => {
+  if (rafId) {
+    window.cancelAnimationFrame(rafId);
+  }
+});
 </script>
 
 <style lang="less" scoped>

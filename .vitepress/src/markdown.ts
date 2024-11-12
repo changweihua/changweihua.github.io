@@ -1,5 +1,6 @@
 import lightbox from "vitepress-plugin-lightbox"
 import { MarkdownOptions } from "vitepress";
+import * as cheerio from 'cheerio';
 import timeline from "vitepress-markdown-timeline";
 import footnote from 'markdown-it-footnote';
 import markdownSup from 'markdown-it-sup'
@@ -49,6 +50,13 @@ const markdown: MarkdownOptions | undefined = {
   //@ts-ignore
   lazyLoading: true,
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
+  frontmatter: {
+    grayMatterOptions: {
+      excerpt: true,
+      excerpt_separator: '<!-- more -->',
+    },
+    renderExcerpt: false,
+  },
   config: (md) => {
     useDefinePlugin(md, CONSTS)
 
@@ -63,12 +71,12 @@ const markdown: MarkdownOptions | undefined = {
       enabled: true
     })
     md.use(MarkdownItVariable)
-    md.use<Options>(wordless, {supportWordless: [chineseAndJapanese]})
+    md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] })
     markdownItMark(md)
     markdownLinks(md, {
       externalClassName: "custom-external-link",
       internalClassName: "custom-internal-link",
-      internalDomains: [ "https://changweihua.github.io" ]
+      internalDomains: ["https://changweihua.github.io"]
     })
     // @ts-ignore
     markdownItStepper(md)
@@ -81,7 +89,7 @@ const markdown: MarkdownOptions | undefined = {
     // })
     strikethrough(md)
     md.use(lightbox, {});
-    md.use(namedCode, {isEnableInlineCss: true});
+    md.use(namedCode, { isEnableInlineCss: true });
     md.use(lazy_loading);
     md.use(timeline);
     tabsPlugin(md)
@@ -106,6 +114,17 @@ const markdown: MarkdownOptions | undefined = {
       // if (tokens[idx].tag === 'h1') htmlResult += `\n<ClientOnly><ArticleMetadata v-if="($frontmatter?.aside ?? true) && ($frontmatter?.showArticleMetadata ?? true)" :article="$frontmatter" /></ClientOnly>`;
       return htmlResult;
     }
+
+    // const orig = md.render;
+    // md.render = (src, env) => {
+    //   const res = orig.call(md, src, env);
+    //   if (env.excerpt && !env.frontmatter.description) {
+    //     const $ = cheerio.load(res);
+    //     const p = $('p').first().text().trim().slice(0, 200);
+    //     env.frontmatter.description = p;
+    //   }
+    //   return res;
+    // };
   },
 }
 

@@ -10,7 +10,7 @@
                   <pattern id="grid" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
                     <path d="M0,0H6V6" style="stroke: #f1f1f1;fill: none"></path>
                   </pattern>
-                  <path id="circle" d="
+                  <path id="circle" ref="circlePath" d="
                     M 120, 120
                     m -100, 0
                     a100,100 0 1,0 200,0
@@ -52,10 +52,10 @@
                 </text> -->
                 <!-- <text ref="sinText" x="30" y="240" style="font-size: 16px;">{{ brand }}</text> -->
                 <text width="100%" style="letter-spacing:3;" lengthAdjust="spacingAndGlyphs" font-stretch="expanded">
-                  <textPath alignment-baseline="baseline" startOffset="0" textLength="600" xlink:href="#circle"
+                  <textPath alignment-baseline="baseline" startOffset="0" :textLength="circlePathLength" xlink:href="#circle"
                     class="text">
                     <tspan dx="0" dy="10">𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣</tspan>
-                    <animate attributeName="fill" from="#646cff" to="#bcc0ff" dur="3s" repeatCount="indefinite">
+                    <animate attributeName="fill" from="#646cff" to="#747bff" dur="3s" repeatCount="indefinite">
                     </animate>
                     <!-- <animate attributeName="fill-opacity" from="0.01" to="0.99" dur="3s" repeatCount="indefinite">
                     </animate> -->
@@ -84,9 +84,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, useTemplateRef, nextTick } from "vue";
+import { onMounted, useTemplateRef, nextTick, ref } from "vue";
 import CubicLoading from "./CubicLoading.vue";
 import WithSuspense from "./WithSuspense.vue";
+import { delay } from "lodash-es";
 
 const handleMainContentPending = () => {
   console.log("开始加载主内容...");
@@ -114,6 +115,7 @@ var s = 20;
 var w = 0.02;
 var t = 0;
 
+const circlePath = useTemplateRef<SVGPathElement>('circlePath')
 const sinText = useTemplateRef<SVGTSpanElement>('sinText')
 
 //横向间隔20
@@ -151,11 +153,19 @@ function frame() {
   window.requestAnimationFrame(frame);//动画效果：递归调用frame方法
 }
 
+const circlePathLength = ref(600)
+
 onMounted(function () {
-  console.log('onMounted')
+  console.log('HeroImage onMounted')
   nextTick(function () {
     frame();
   })
+  delay(function () {
+    if (circlePath.value) {
+      console.log('circlePath.value.getTotalLength', circlePath.value.getTotalLength())
+      circlePathLength.value = circlePath.value.getTotalLength()
+    }
+  }, 3500)
 })
 </script>
 

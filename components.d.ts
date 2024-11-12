@@ -15,8 +15,6 @@ declare module 'vue' {
     FireWorks: typeof import('./src/components/FireWorks.vue')['default']
     FloatingMenu: typeof import('./src/components/FloatingMenu.vue')['default']
     IconLogosMarkdown: typeof import('~icons/logos/markdown')['default']
-    IconMdiHome: typeof import('~icons/mdi/home')['default']
-    IIcon: typeof import('~icons/ic/on')['default']
     LinkListView: typeof import('./src/components/LinkListView.vue')['default']
     ListView: typeof import('./src/components/ListView.vue')['default']
     LunarCalendar: typeof import('./src/components/LunarCalendar.vue')['default']

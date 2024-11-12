@@ -68,12 +68,18 @@ features:
   #     alt: 基于K8S平台的持续交付平台
   #   details: 研发技改产物，促进开发流程规范化及自动化运维。通过Docker统一开发、测试和生产的环境，同时完成系统版本自动发布，提升自动化。
   #   link: /zh-CN/gallery/giteaops
-  - title: 新生产统计APP
+  # - title: 新生产统计APP
+  #   icon:
+  #     src: /H5.svg
+  #     alt: H5微应用平台
+  #   details: H5微应用平台。
+  #   link: /zh-CN/gallery/maui
+  - title: Electron 桌面跨平台
     icon:
-      src: /H5.svg
-      alt: H5微应用平台
-    details: H5微应用平台。
-    link: /zh-CN/gallery/maui
+      src: /icon_electron.svg
+      alt: Electron 桌面跨平台
+    details: Electron 桌面跨平台
+    link: /zh-CN/gallery/electron_app
   - title: iframe微前端
     icon:
       src: /iframe2.svg
