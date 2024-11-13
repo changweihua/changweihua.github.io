@@ -162,7 +162,7 @@ onMounted(function () {
   })
   delay(function () {
     if (circlePath.value) {
-      console.log('circlePath.value.getTotalLength', circlePath.value.getTotalLength())
+      console.log('circlePath.value.getTotalLength', circlePath.value.getTotalLength() * window.devicePixelRatio)
       circlePathLength.value = circlePath.value.getTotalLength()
     }
   }, 3500)

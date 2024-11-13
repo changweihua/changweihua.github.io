@@ -10,7 +10,8 @@
           "backdrop-filter",
           "text-emphasis",
           "user-select",
-          "@view-transition"
+          "@view-transition",
+          "font-size-adjust"
         ]
       }
     ],
