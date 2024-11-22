@@ -38,12 +38,23 @@ export default defineConfig({
   clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
   // assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
   build: {
+    minify: 'esbuild', // 使用esbuild进行压缩
     sourcemap: process.env.NODE_ENV !== 'production', // Seems to cause JavaScript heap out of memory errors on build
-    minify: true, // 必须开启：使用terserOptions才有效果
+    // minify: true, // 必须开启：使用terserOptions才有效果
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     emptyOutDir: true,
     rollupOptions: {
-    }
+    },
+    // minify: 'terser', // 使用 Terser 进行压缩
+    // terserOptions: {
+    //   compress: {
+    //     drop_console: true, // 删除 console.log
+    //     drop_debugger: true, // 删除 debugger
+    //   },
+    // },
+  },
+  esbuild: {
+    drop: ['console', 'debugger']
   },
   define: {
     'process.env': {},

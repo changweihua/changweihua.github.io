@@ -3,6 +3,7 @@ import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, Suspense, watchEffect } from "vue";
 import DocAfter from "@vp/components/DocAfter.vue";
+import { UAParser } from 'ua-parser-js';
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
@@ -362,6 +363,15 @@ export default {
       // });
 
       router.onBeforeRouteChange = async (to) => {
+
+        //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
+        const { browser, cpu, device } = UAParser();
+
+        console.log(browser.name);          // Maemo Browser
+        console.log(cpu.is('arm'));         // true
+        console.log(device.is('mobile'));   // true
+        console.log(device.model);          // N900
+
         // Here you can set the routes you want to configure.
         if (to == "/") {
           await router.go("/zh-CN/");
