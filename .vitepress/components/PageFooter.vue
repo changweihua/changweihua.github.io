@@ -10,7 +10,6 @@
     <!-- <m-icon class="item" icon="simple-icons:mermaid" :width="24" :height="24" />
     <m-icon class="item" icon="bxl:typescript" :width="24" :height="24" /> -->
     <m-icon class="item" icon="token-branded:rss3" :width="48" :height="48" />
-
     <!-- <p class="version-tag w-20 text-center flex flex-row">
       {{ version }}
     </p> -->

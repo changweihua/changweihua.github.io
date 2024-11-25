@@ -9,6 +9,7 @@ import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import ColorfulWord from "../components/ColorfulWord.vue";
+import DacingNumber from "../components/DacingNumber.vue";
 import DancingLogo from "../components/DancingLogo.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import AnimatedLogo from "#.vitepress/components/AnimatedLogo.vue";
@@ -398,6 +399,7 @@ export default {
       app.component('vue3-autocounter', Vue3Autocounter)
       app.component("StyledMermaid", StyledMermaid);
       app.component("MarkupView", MarkupView);
+      app.component("DacingNumber", DacingNumber);
 
       app.component("Tab", Tab);
       app.component("Tabs", Tabs);

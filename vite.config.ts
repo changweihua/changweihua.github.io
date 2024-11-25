@@ -1,28 +1,28 @@
 import { defineConfig, loadEnv } from "vite";
 import Icons from "unplugin-icons/vite";
-import IconsResolver from 'unplugin-icons/resolver'
-import Components from 'unplugin-vue-components/vite'
+import IconsResolver from "unplugin-icons/resolver";
+import Components from "unplugin-vue-components/vite";
 import UnoCSS from "unocss/vite";
 import path, { resolve } from "path";
 import { fileURLToPath } from "url";
-import type {Plugin} from 'vite'
-import { vitePluginVersionMark } from 'vite-plugin-version-mark'
-import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
-import Inspect from 'vite-plugin-inspect'
+import type { Plugin } from "vite";
+import { vitePluginVersionMark } from "vite-plugin-version-mark";
+import { chunkSplitPlugin } from "vite-plugin-chunk-split";
+import Inspect from "vite-plugin-inspect";
 // import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
 
 const getEnvValue = (mode: string, target: string) => {
-  const value = loadEnv(mode, process.cwd())[target]
-  return value
-}
+  const value = loadEnv(mode, process.cwd())[target];
+  return value;
+};
 
 const yourPlugin: () => Plugin = () => ({
-  name: 'test-plugin',
-  config (config) {
+  name: "test-plugin",
+  config(config) {
     // get version in vitePlugin if you open `ifGlobal`
-    console.log(config.define)
-  }
-})
+    console.log(config.define);
+  },
+});
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -38,13 +38,12 @@ export default defineConfig({
   clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
   // assetsInclude: ["**/*.gltf"], // 指定额外的 picomatch 模式 作为静态资源处理
   build: {
-    minify: 'esbuild', // 使用esbuild进行压缩
-    sourcemap: process.env.NODE_ENV !== 'production', // Seems to cause JavaScript heap out of memory errors on build
+    minify: "esbuild", // 使用esbuild进行压缩
+    sourcemap: process.env.NODE_ENV !== "production", // Seems to cause JavaScript heap out of memory errors on build
     // minify: true, // 必须开启：使用terserOptions才有效果
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     emptyOutDir: true,
-    rollupOptions: {
-    },
+    rollupOptions: {},
     // minify: 'terser', // 使用 Terser 进行压缩
     // terserOptions: {
     //   compress: {
@@ -54,12 +53,17 @@ export default defineConfig({
     // },
   },
   esbuild: {
-    drop: ['console', 'debugger']
+    drop: ["console", "debugger"],
   },
   define: {
-    'process.env': {},
+    "process.env": {},
     // 注意要用 JSON.stringify
-    'process.env.RSS_BASE': JSON.stringify(`${getEnvValue(process.env.NODE_ENV || 'github', 'VITE_APP_RSS_BASE_URL')}`),
+    "process.env.RSS_BASE": JSON.stringify(
+      `${getEnvValue(
+        process.env.NODE_ENV || "github",
+        "VITE_APP_RSS_BASE_URL"
+      )}`
+    ),
   },
   plugins: [
     vitePluginVersionMark({
@@ -74,7 +78,7 @@ export default defineConfig({
     }),
     yourPlugin(),
     chunkSplitPlugin({
-      strategy: 'default',
+      strategy: "default",
       // // 指定拆包策略
       // customSplitting: {
       //   // 1. 支持填包名。`react` 和 `react-dom` 会被打包到一个名为`render-vendor`的 chunk 里面(包括它们的依赖，如 object-assign)
@@ -111,8 +115,8 @@ export default defineConfig({
       resolvers: [
         IconsResolver({
           // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
-          prefix: 'icon',
-          strict: true
+          prefix: "icon",
+          strict: true,
           // 当图标集名字过长时，可使用集合别名
           // alias: {
           //   system: 'system-uicons'
@@ -122,13 +126,23 @@ export default defineConfig({
       ],
     }),
     Icons({
-      compiler: 'vue3',
+      compiler: "vue3",
       autoInstall: true,
     }),
     // Icons({ autoInstall: true }),
     UnoCSS(),
-    Inspect()
+    Inspect(),
   ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          hack: 'true; @import "@vp/theme/styles/vars.less"',
+        },
+        javascriptEnabled: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       "*": fileURLToPath(new URL(".", import.meta.url)),
@@ -148,13 +162,10 @@ export default defineConfig({
     // extensions: ['.js', '.ts', '.json', '.vue', '.tsx', '.jsx']
   },
   ssr: {
-    noExternal: [
-    ],
+    noExternal: [],
   },
   optimizeDeps: {
-    include: [
-      "vitepress-plugin-nprogress"
-    ],
-    exclude: ['vitepress', 'svg2roughjs','echarts', 'echarts-gl'],
-  }
+    include: ["vitepress-plugin-nprogress"],
+    exclude: ["vitepress", "svg2roughjs", "echarts", "echarts-gl"],
+  },
 });

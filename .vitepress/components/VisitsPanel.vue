@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import random from "random"
+import random from "random";
 import { onMounted, ref } from "vue";
 
-const siteVisitCount = ref(0)
-const userVisitCount = ref(0)
+const siteVisitCount = ref(0);
+const userVisitCount = ref(0);
 
 onMounted(function () {
-  siteVisitCount.value = random.int(10000, 50000)
-  userVisitCount.value = random.int(5000, 10000)
-})
-
+  siteVisitCount.value = random.int(10000, 50000);
+  userVisitCount.value = random.int(5000, 10000);
+});
 </script>
 
 <template>
@@ -17,8 +16,13 @@ onMounted(function () {
     <div class="container">
       <section class="grid">
         <span class="text">
-          <vue3-autocounter ref="siteVisitCounter" :startAmount="1000" :endAmount="siteVisitCount" :duration="3"
-            prefix="总访问" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />
+          <a-space
+            ><span>总访问</span> <DacingNumber :target="siteVisitCount" /><span
+              >次</span
+            >
+          </a-space>
+          <!-- <vue3-autocounter ref="siteVisitCounter" :startAmount="1000" :endAmount="siteVisitCount" :duration="3"
+            prefix="总访问" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" /> -->
           <!-- <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 -->
         </span>
         <figure>
@@ -27,8 +31,13 @@ onMounted(function () {
           <DancingLogo />
         </figure>
         <span class="text">
-          <vue3-autocounter ref="userVisitCounter" :startAmount="500" :endAmount="userVisitCount" :duration="3"
-            prefix="总访客" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" />
+          <a-space
+            ><span>总访客</span> <DacingNumber :target="userVisitCount" /><span
+              >次</span
+            >
+          </a-space>
+          <!-- <vue3-autocounter ref="userVisitCounter" :startAmount="500" :endAmount="userVisitCount" :duration="3"
+            prefix="总访客" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" /> -->
           <!-- <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次 -->
         </span>
       </section>
@@ -36,7 +45,7 @@ onMounted(function () {
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 .panel {
   margin-top: 12px;
   margin-bottom: 8px;
@@ -80,6 +89,9 @@ onMounted(function () {
 }
 
 .text {
+  * {
+    font-family: @font-family;
+  }
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
