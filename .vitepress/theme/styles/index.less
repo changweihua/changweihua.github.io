@@ -8,7 +8,7 @@
 :root {
   --vp-font-family-base: @app-font-family;
   --vp-font-family-mono: @app-font-family;
-  --vp-header-anchor-symbol: '🔗';
+  --vp-header-anchor-symbol: "🔗";
 }
 
 html,
@@ -138,8 +138,10 @@ body {
   background-color: inherit;
 }
 
-.intersection-observer2-style{
-  h2[id='完整示例'] + section, h3[id='无限滚动加载更多内容'] + section,h3[id='元素进入视窗时添加动画'] + section{
+.intersection-observer2-style {
+  h2[id="完整示例"] + section,
+  h3[id="无限滚动加载更多内容"] + section,
+  h3[id="元素进入视窗时添加动画"] + section {
     .container {
       max-height: 150px;
       overflow-y: auto;
@@ -259,7 +261,7 @@ html[data-theme="dark"] {
 .VPNav,
 .VPLocalNav {
   position: relative;
-  background: var(--vp-nav-bg-color) !important;
+  // background: var(--vp-nav-bg-color) !important;
 }
 
 .VPNav::after,
@@ -280,9 +282,9 @@ html[data-theme="dark"] {
   border-bottom: none;
 }
 
-.VPNavBarTitle .title span{
+.VPNavBarTitle .title span {
   margin: 0;
-  -webkit-text-stroke: 3px #9747FF;
+  -webkit-text-stroke: 3px #9747ff;
   paint-order: stroke;
 }
 
@@ -371,6 +373,22 @@ html[data-theme="dark"] {
   }
   .VPDoc .content-container > *:nth-child(20) {
     --stagger: 20;
+  }
+
+  .vp-doc strong {
+    color: var(--vp-c-brand-light);
+    background: initial;
+  }
+  .vp-doc strong:before {
+    content: "「";
+  }
+  .vp-doc strong:after {
+    content: "」";
+  }
+  .text-bold,
+  b,
+  strong {
+    font-weight: 700;
   }
 }
 
@@ -483,7 +501,8 @@ html[data-theme="dark"] {
 // }
 /*markdown*/
 
-:fullscreen, ::backdrop {
+:fullscreen,
+::backdrop {
   background-color: var(--vp-c-bg);
 }
 
@@ -507,10 +526,17 @@ html[data-theme="dark"] {
   background-size: cover;
 }
 
-:root{
-  --vp-code-copy-copied-text-content: "Copied"
+:root {
+  --vp-code-copy-copied-text-content: "Copied";
 }
 
-:lang(zh-CN){
-  --vp-code-copy-copied-text-content: "已复制"
+:lang(zh-CN) {
+  --vp-code-copy-copied-text-content: "已复制";
+}
+
+a.VPSkipLink {
+  content: "转至正文";
+}
+a.VPSkipLink::after {
+  content: "转至正文";
 }

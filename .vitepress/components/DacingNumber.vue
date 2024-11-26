@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, useTemplateRef, nextTick, withDefaults } from "vue";
+import { onMounted, useTemplateRef, nextTick } from "vue";
 
 const numberRef = useTemplateRef<HTMLDivElement>("number");
 const leftRef = useTemplateRef<HTMLDivElement>("left");
@@ -39,10 +39,10 @@ const props = withDefaults(defineProps<{
 
 let current = 0;
 const step = 42;
-let thousends: number[] = []
+let thousends: string[] = []
 
 const start = () => {
-  rightRef.value.classList.add("animate");
+  rightRef.value?.classList.add("animate");
   update();
 };
 
