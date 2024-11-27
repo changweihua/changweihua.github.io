@@ -90,7 +90,7 @@ onMounted(function () {
 
 .text {
   * {
-    font-family: @font-family;
+    font-family: @app-font-family;
   }
   font-size: 0.875rem;
   line-height: 1.25rem;
