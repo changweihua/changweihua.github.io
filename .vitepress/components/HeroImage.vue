@@ -4,7 +4,7 @@
       <Suspense :onPending="handleComponentAPending" :onResolve="handleComponentAResolve">
         <template #default>
           <WithSuspense :time="3000">
-            <div class="hero-image-container">
+            <div class="hero-image-container hidden md:visible">
               <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="240" height="240">
                 <defs>
                   <pattern id="grid" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">

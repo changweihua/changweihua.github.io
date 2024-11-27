@@ -1,5 +1,5 @@
 <template>
-  <div class="dancing-container">
+  <div class="dancing-container hidden md:visible">
     <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="200" height="60">
       <defs>
         <pattern id="grid" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">

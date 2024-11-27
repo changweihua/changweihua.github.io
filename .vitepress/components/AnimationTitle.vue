@@ -49,7 +49,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="border-around">
+  <div class="border-around hidden md:visible">
     <h1 v-if="name" class="name title">
       <span class="clip active-menu">{{ name }}</span>
       <svg
