@@ -25,10 +25,10 @@ onMounted(function () {
             prefix="总访问" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" /> -->
           <!-- <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 -->
         </span>
-        <figure class="sm:hidden md:visible lg:visible xl:visible">
+        <figure class="dacing-figure">
           <!-- <section class="item-bg"></section>
           <m-icon class="item" icon="svg-spinners:wind-toy" :width="32" :height="32" /> -->
-          <DancingLogo class="hidden md:visible"/>
+          <DancingLogo />
         </figure>
         <span class="text">
           <a-space
@@ -95,5 +95,11 @@ onMounted(function () {
   }
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .dacing-figure {
+    display: none;
+  }
 }
 </style>

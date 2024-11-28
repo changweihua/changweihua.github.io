@@ -250,7 +250,7 @@ mjx-container > svg {
 html[data-theme="dark"] {
   .VPNavBar:not(.top) {
     // background-color: var(--vp-nav-bg-color);
-    background-color: var(--vp-c-bg) !important;
+    background-color: var(--vp-c-bg);
   }
 }
 
@@ -280,6 +280,10 @@ html[data-theme="dark"] {
 .VPNavBar,
 .VPLocalNav.reached-top {
   border-bottom: none;
+}
+
+.VPNavBar.screen-open {
+  background: var(--vp-c-bg) !important;
 }
 
 .VPNavBarTitle .title span {
@@ -539,4 +543,10 @@ a.VPSkipLink {
 }
 a.VPSkipLink::after {
   content: "转至正文";
+}
+
+@media (max-width: 640px) {
+  .theme-blog-popover-close {
+    display: none !important;
+  }
 }
