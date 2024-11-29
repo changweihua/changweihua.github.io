@@ -9,6 +9,10 @@ import type { Plugin } from "vite";
 import { vitePluginVersionMark } from "vite-plugin-version-mark";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import Inspect from "vite-plugin-inspect";
+import VueDevTools from "vite-plugin-vue-devtools";
+import mkcert from "vite-plugin-mkcert";
+import fs from "node:fs";
+// import VueDevTools from 'vite-plugin-vue-devtools-cn'
 // import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
 
 const getEnvValue = (mode: string, target: string) => {
@@ -27,6 +31,12 @@ const yourPlugin: () => Plugin = () => ({
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
+    // https: {
+    //   // key: fs.readFileSync("certs/cert-key.pem"),
+    //   // cert: fs.readFileSync("certs/cert.pem"),
+    //   cert: './certs/cert.pem',
+    //   key: './certs/dev.pem'
+    // },
     port: 2233,
     hmr: {
       overlay: false,
@@ -56,6 +66,7 @@ export default defineConfig({
     drop: ["console", "debugger"],
   },
   define: {
+    __VUE_PROD_DEVTOOLS__: false,
     "process.env": {},
     // 注意要用 JSON.stringify
     "process.env.RSS_BASE": JSON.stringify(
@@ -129,9 +140,14 @@ export default defineConfig({
       compiler: "vue3",
       autoInstall: true,
     }),
+    VueDevTools(),
     // Icons({ autoInstall: true }),
     UnoCSS(),
     Inspect(),
+    // mkcert({
+    //   savePath: "./certs", // save the generated certificate into certs directory
+    //   force: true, // force generation of certs even without setting https property in the vite config
+    // }),
   ],
   css: {
     preprocessorOptions: {
@@ -144,7 +160,7 @@ export default defineConfig({
     },
   },
   json: {
-    stringify: 'auto'
+    stringify: "auto",
   },
   resolve: {
     // conditions: [],
