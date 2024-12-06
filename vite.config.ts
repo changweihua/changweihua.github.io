@@ -9,6 +9,7 @@ import type { Plugin } from "vite";
 import { vitePluginVersionMark } from "vite-plugin-version-mark";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import Inspect from "vite-plugin-inspect";
+import ViteCompressionPlugin from 'vite-plugin-compression'
 import VueDevTools from "vite-plugin-vue-devtools";
 import mkcert from "vite-plugin-mkcert";
 import fs from "node:fs";
@@ -88,6 +89,11 @@ export default defineConfig({
       ifGlobal: true,
     }),
     yourPlugin(),
+    // ViteCompressionPlugin({
+		// 	algorithm: "brotliCompress",
+		// 	ext: ".br",
+		// 	deleteOriginFile: true,
+		// }),
     chunkSplitPlugin({
       strategy: "default",
       // // 指定拆包策略

@@ -47,7 +47,7 @@ Nginx 的反向代理能力，不仅解决了传统架构的瓶颈问题，还�
 
 ## Nginx 的反向代理核心特性 ##
 
-![Alt text](/images/nginx_proxy_1.png "AAA"){class="flex items-center justify-center"}
+![Alt text](/images/nginx_proxy_1.png){class="flex items-center justify-center"}
 
 | 特性      | 描述    |
 | :---:        |    :----:    |
@@ -241,7 +241,7 @@ sudo systemctl reload nginx
 
 ### 性能优化建议 ###
 
-![Alt text](/images/nginx_proxy_3.png "AAA"){class="flex items-center justify-center"}
+![Alt text](/images/nginx_proxy_3.png){class="flex items-center justify-center"}
 
 Nginx 的高性能不仅源自其轻量级架构，还得益于灵活的配置能力。以下是优化 Nginx 性能的具体措施及相关配置示例。
 
@@ -291,7 +291,7 @@ gzip_vary on;                      # 在响应头中添加 "Vary: Accept-Encodin
 
 HTTP/2 是 HTTP 协议的改进版本，支持多路复用、头部压缩等特性，大幅提高传输效率。
 
-![Alt text](/images/nginx_proxy_4.png "AAA"){class="flex items-center justify-center"}
+![Alt text](/images/nginx_proxy_4.png){class="flex items-center justify-center"}
 
 - 原理说明：
   - 多路复用：单个 TCP 连接可同时传输多个请求和响应，减少连接建立的开销。
@@ -325,7 +325,7 @@ server {
 
 ### 启用 Nginx Status 模块 ###
 
-![Alt text](/images/nginx_proxy_5.png "AAA"){class="flex items-center justify-center"}
+![Alt text](/images/nginx_proxy_5.png){class="flex items-center justify-center"}
 
 Nginx 提供了一个内置模块 `ngx_http_stub_status_module`，可以实时监控请求处理状态。
 
@@ -387,7 +387,7 @@ Nginx 的日志数据可以与外部监控工具集成，提供更丰富的可�
 
 **使用 Prometheus 和 Grafana**
 
-![Alt text](/images/nginx_proxy_6.png "AAA"){class="flex items-center justify-center"}
+![Alt text](/images/nginx_proxy_6.png){class="flex items-center justify-center"}
 
 - 安装 nginx-vts-exporter 插件，采集 Nginx 指标：
 
