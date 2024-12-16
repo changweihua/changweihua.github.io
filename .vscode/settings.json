@@ -22,8 +22,14 @@
     "auto-imports.d.ts": "auto-imports.d.ts,components.d.ts",
     "index.md": "index.md,archives.md,tags.md,resume.md,about.md,en-US.md,zh-CN.md,sponsor.md,CONTRIBUTING.md,CODE_OF_CONDUCT.md,CONTRIBUTING.zh-CN.md,README.md,CHANGELOG.md,PRIVACY_POLICY.md,TERMS_OF_SERVICE.md"
   },
+  "workbench.navigationControl.enabled": false,
   // settings.json
   "editor.linkedEditing": true,
+  "git.blame.editorDecoration.enabled": true,
+  "git.blame.statusBarItem.enabled": true,
+  "git.blame.editorDecoration.template": "${subject}, ${authorName} (${authorDateAgo})",
+  "terminal.integrated.fontLigatures": true,
+  "terminal.integrated.fontFamily": "Fira Code",
   "files.trimTrailingWhitespace": true,
   "[markdown]": {
     "files.trimTrailingWhitespace": false

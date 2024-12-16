@@ -13,6 +13,7 @@ import ViteCompressionPlugin from 'vite-plugin-compression'
 import VueDevTools from "vite-plugin-vue-devtools";
 import mkcert from "vite-plugin-mkcert";
 import fs from "node:fs";
+import { preloadImages } from "./plugins/vitePreloadImage.ts";
 // import VueDevTools from 'vite-plugin-vue-devtools-cn'
 // import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
 
@@ -150,6 +151,12 @@ export default defineConfig({
     // Icons({ autoInstall: true }),
     UnoCSS(),
     Inspect(),
+    preloadImages({
+      dir: "**.{jpg,png,svg,jpeg}",
+      attrs: {
+        rel: "preload",
+      }
+    })
     // mkcert({
     //   savePath: "./certs", // save the generated certificate into certs directory
     //   force: true, // force generation of certs even without setting https property in the vite config
