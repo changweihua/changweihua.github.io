@@ -97,7 +97,7 @@
     conic-gradient(from -135deg at 1.2em 50%, #0000 90deg, var(--c) 0) 100%
       var(--p, 0%) / var(--s, 0%) 200% no-repeat;
   transition: 0.4s, background-position 0s; */
-  --c: no-repeat linear-gradient(var(--vp-c-brand) 0 0);
+  --c: no-repeat linear-gradient(var(--vp-c-brand-lightest) 0 0);
   background: var(--c) calc(-100% + var(--i, 0) * 100%) 100% / 50%
       calc(100% * var(--i, 0) + 0.08em),
     var(--c) calc(200% - var(--i, 0) * 100%) 0 / 50%

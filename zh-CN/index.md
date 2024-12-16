@@ -24,6 +24,12 @@ hero:
       link: https://github.com/changweihua
 
 features:
+  - title: 扬泰机场智能机器人
+    icon:
+      src: /ai_robot.svg
+      alt: 扬泰机场智能机器人
+    details: 扬泰机场智能机器人，用于旅客自助查询航班等相关出现信息
+    link: /zh-CN/gallery/robot
   - title: 随身携带行李限额自助查询
     icon:
       src: /baggage.svg
@@ -80,12 +86,12 @@ features:
       alt: Electron 桌面跨平台
     details: Electron 桌面跨平台
     link: /zh-CN/gallery/electron_app
-  - title: iframe微前端
-    icon:
-      src: /iframe2.svg
-      alt: iframe微前端
-    details: iframe微前端。
-    link: /zh-CN/gallery/iframe_microapp
+  # - title: iframe微前端
+  #   icon:
+  #     src: /iframe2.svg
+  #     alt: iframe微前端
+  #   details: iframe微前端。
+  #   link: /zh-CN/gallery/iframe_microapp
   - title: maui-jsbridge
     details: 页面iFrame嵌套通信。
     link: https://www.npmjs.com/package/maui-jsbridge
