@@ -17,3 +17,18 @@ recommended: true
 - C# DLL 调用
 - 多主题
 - 自动打包
+
+:::demo
+
+```vue
+<script lang="ts" setup>
+import { isSpecialBooleanAttr } from '@vue/shared'
+</script>
+
+<template>
+  <h1>演示： vite-plugin-vue-preview</h1>
+  <span>readonly is special boolean attr: {{ isSpecialBooleanAttr('readonly') }}</span>
+</template>
+```
+
+:::
