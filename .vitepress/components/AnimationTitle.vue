@@ -60,7 +60,7 @@ onMounted(() => {
         </path>
       </svg>
     </h1>
-    <p v-if="text" class="text contrast">{{ text }}</p>
+    <p v-if="text" class="text contrast wave-title">{{ text }}</p>
     <!-- <p v-if="tagline" class="tagline">
     {{ tagline }}
   </p> -->
@@ -180,7 +180,7 @@ onMounted(() => {
   background: var(--vp-c-white);
   color: var(--vp-c-black);
   padding: 3px 12px;
-  border: 1px solid var(--vp-c-black);
+  // border: 1px solid var(--vp-c-black);
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -205,7 +205,7 @@ onMounted(() => {
   .contrast {
     background: var(--vp-c-bg);
     color: var(--vp-c-white);
-    border: 1px solid var(--vp-c-white);
+    // border: 1px solid var(--vp-c-white);
   }
 
   .contrast::after {
@@ -255,14 +255,49 @@ onMounted(() => {
 }
 
 .border-around:hover::before {
-  border-top: 2px solid blue;
-  border-right: 2px solid blue;
+  border-top: 2px solid var(--vp-c-brand-light);
+  border-right: 2px solid var(--vp-c-brand-light);
   transition: width 0.3s ease-out, height 0.3s ease-out 0.3s;
 }
 
 .border-around:hover::after {
-  border-bottom: 2px solid blue;
-  border-left: 2px solid blue;
+  border-bottom: 2px solid var(--vp-c-brand-light);
+  border-left: 2px solid var(--vp-c-brand-light);
   transition: border-color 0s ease-out 0.6s, width 0.3s ease-out 0.6s, height 0.3s ease-out 0.9s;
 }
+
+
+  .wave-title {
+    padding: 5px 10px;
+    background: radial-gradient(
+          circle at 10px -7px,
+          transparent 8px,
+          var(--vp-c-brand-light) 8px,
+          var(--vp-c-brand-light) 9px,
+          transparent 9px
+        )
+        repeat-x,
+      radial-gradient(
+          circle at 10px 27px,
+          transparent 8px,
+          var(--vp-c-brand-light) 8px,
+          var(--vp-c-brand-light) 9px,
+          transparent 9px
+        )
+        repeat-x;
+    background-size: 20px 20px;
+    background-position: -10px calc(100% + 16px), 0 calc(100% - 4px);
+    -webkit-animation: waveFlow 1s infinite linear;
+    animation: waveFlow 1s infinite linear;
+  }
+
+  @keyframes waveFlow {
+    from {
+      background-position-x: -10px, 0;
+    }
+    to {
+      background-position-x: -30px, -20px;
+    }
+  }
+
 </style>

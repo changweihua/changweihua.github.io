@@ -12,6 +12,8 @@ pageClass: blog-page-class
 
 在 React Native 中，PixelRatio 是一个用于获取设备像素比（Pixel Ratio）的实用工具。像素比（或称为设备像素密度、DPI 密度等）是物理像素和设备独立像素（DIPs 或 DPs）之间的比率。设备独立像素是一种抽象的度量单位，使得开发者可以编写不依赖于特定屏幕分辨率的代码。
 
+![预览图](/images/20241217093046.jpg){class="flex items-center justify-center"}
+
 ## 根据像素密度获取指定大小的图片 ##
 
 ```ts
