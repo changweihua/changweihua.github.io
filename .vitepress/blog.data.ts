@@ -59,6 +59,7 @@ export default createContentLoader([
         while (( matcher = pattern.exec(src)) !== null) {
           // console.log(matcher);
           cover = matcher[2]
+          console.log('cover', cover)
           break;
         }
       }

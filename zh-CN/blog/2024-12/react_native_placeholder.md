@@ -15,6 +15,8 @@ pageClass: blog-page-class
 - 包裹Image，但是该方法在新版本已无法使用
 - 使用ImageBackground包裹Image，如果图片有透明度，背景图和网络加载的图片就叠加在一起了
 
+![预览图](/images/rn_phones.png)
+
 所以可以自定义一个组件实现网络加载图片失败后的占位图：
 
 ```react

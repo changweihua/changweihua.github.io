@@ -1,9 +1,9 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, Suspense, watchEffect } from "vue";
+import { h, Suspense, watchEffect, watch, ref } from "vue";
 import DocAfter from "@vp/components/DocAfter.vue";
-import { UAParser } from 'ua-parser-js';
+import { UAParser } from "ua-parser-js";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
@@ -13,7 +13,7 @@ import DacingNumber from "../components/DacingNumber.vue";
 import DancingLogo from "../components/DancingLogo.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import AnimatedLogo from "#.vitepress/components/AnimatedLogo.vue";
-import Vue3Autocounter from 'vue3-autocounter';
+import Vue3Autocounter from "vue3-autocounter";
 import ThreeLogo from "#.vitepress/components/ThreeLogo.vue";
 import CubicLoading from "#.vitepress/components/CubicLoading.vue";
 
@@ -139,6 +139,16 @@ export default {
     if (frontmatter.value?.layoutClass) {
       props.class = frontmatter.value.layoutClass;
     }
+
+    const route = useRoute();
+    const isTransitioning = ref(false);
+
+    watch(
+      () => route.path,
+      () => {
+        console.log("页面动画");
+      }
+    );
 
     return h(AnimatingLayout, null, {
       // "home-hero-before": () => h(AnimationTitle),
@@ -351,7 +361,7 @@ export default {
           // });
         },
         //指令与元素解绑时调用
-        unmounted(el, binding) { },
+        unmounted(el, binding) {},
       });
 
       // app.mixin({
@@ -364,14 +374,14 @@ export default {
       // });
 
       router.onBeforeRouteChange = async (to) => {
-
+        console.log("onBeforeRouteChange");
         //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
         const { browser, cpu, device } = UAParser();
 
-        console.log(browser.name);          // Maemo Browser
-        console.log(cpu.is('arm'));         // true
-        console.log(device.is('mobile'));   // true
-        console.log(device.model);          // N900
+        console.log(browser.name); // Maemo Browser
+        console.log(cpu.is("arm")); // true
+        console.log(device.is("mobile")); // true
+        console.log(device.model); // N900
 
         // Here you can set the routes you want to configure.
         if (to == "/") {
@@ -396,7 +406,7 @@ export default {
 
       app.use(Antd);
 
-      app.component('vue3-autocounter', Vue3Autocounter)
+      app.component("vue3-autocounter", Vue3Autocounter);
       app.component("StyledMermaid", StyledMermaid);
       app.component("MarkupView", MarkupView);
       app.component("DacingNumber", DacingNumber);
@@ -430,8 +440,9 @@ export default {
     codeblocksFold({ route, frontmatter }, true, 400);
     watchEffect(() => {
       if (inBrowser) {
-        document.cookie = `nf_lang=${lang.value
-          }; expires=${new Date().toUTCString()}; path=/`;
+        document.cookie = `nf_lang=${
+          lang.value
+        }; expires=${new Date().toUTCString()}; path=/`;
       }
     });
   },

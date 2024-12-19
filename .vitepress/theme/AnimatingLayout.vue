@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import { useData, useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide, useSlots, onMounted } from 'vue'
 import mediumZoom from "medium-zoom";
 import randomColor from 'randomcolor'
-import { MyButton, Panel } from 'yuppie-ui'
+// import { MyButton, Panel } from 'yuppie-ui'
 // import Kinet from 'kinet';
 
 const { isDark } = useData()
@@ -41,6 +42,21 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     }
   )
 })
+
+const { route } = useRouter();
+const isTransitioning = ref(false);
+
+watch(
+  () => route.path,
+  () => {
+    console.log('页面动画')
+    isTransitioning.value = true;
+    // 动画结束后重置状态
+    setTimeout(() => {
+      isTransitioning.value = false;
+    }, 1500); // 500ms 要和 CSS 动画时间匹配
+  }
+);
 
 // const kinet = new Kinet({
 //   acceleration: 0.02,
@@ -110,6 +126,11 @@ console.log(randomColor({
     leave-active-class="animate__animated animate__bounce">
     <div>
       <DefaultTheme.Layout>
+        <template #doc-top>
+          <div class="shade" :class="{ 'shade-active': isTransitioning }">
+            &nbsp;
+          </div>
+        </template>
         <template v-for="(slotKey, slotIndex) in slots" :key="slotIndex" v-slot:[slotKey]>
           <slot :name="slotKey"></slot>
         </template>
@@ -480,5 +501,35 @@ body {
   /* animation: back-progress 1s linear forwards;
     animation-timeline: scroll();
     animation-range:entry 0 100px; */
+}
+
+.shade {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 1.5s ease-in-out;
+}
+
+.shade-active {
+  opacity: 0;
+  animation: shadeAnimation 1.5s ease-in-out;
+}
+
+@keyframes shadeAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh);
+  }
 }
 </style>

@@ -16,8 +16,7 @@ export const preloadImages = (optons: PreloadImagesOptions): Plugin => {
       }); // 拿到目录下所有的图片路径
       images = images.map((file) => ctx.server?.config.base + file);
       return images.map((href) => {
-        console.log(href);
-        return {
+return {
           tag: "link",
           attrs: {
             rel: "prefetch",
