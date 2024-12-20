@@ -29,7 +29,7 @@ export const head: HeadConfig[] = [
   //   ]
   ["meta", { name: "theme-color", content: "#ffffff" }],
   ["meta", { name: "mobile-web-app-capable", content: "yes" }],
-  ["meta", { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" }],
+  // ["meta", { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" }],
   ["meta", { name: "application-name", content: "CMONO.NET" }],
   ["meta", { name: "apple-touch-icon-precomposed", content: "/favicon.svg" }],
   // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
@@ -81,6 +81,22 @@ export const head: HeadConfig[] = [
     {
       name: "theme-color",
       content: "#1C4D98",
+      'media': '(prefers-color-scheme: dark)'
+    },
+  ],
+  [
+    "meta",
+    {
+      name: "apple-mobile-web-app-status-bar-style",
+      content: "default",
+      'media': '(prefers-color-scheme: light)'
+    },
+  ],
+  [
+    "meta",
+    {
+      name: "apple-mobile-web-app-status-bar-style",
+      content: "black",
       'media': '(prefers-color-scheme: dark)'
     },
   ],
