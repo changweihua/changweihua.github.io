@@ -1,5 +1,6 @@
 ---
 layout: doc
+pageClass: gallery-page-class
 ---
 
 ::: info

@@ -1,6 +1,7 @@
 ---
 layout: doc
 recommended: true
+pageClass: gallery-page-class
 ---
 
 <div class="flex items-center justify-center">

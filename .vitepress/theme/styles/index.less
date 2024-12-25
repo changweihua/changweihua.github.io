@@ -55,6 +55,7 @@ body {
   }
 }
 
+
 .index-page-class {
   body {
     cursor: none;
@@ -137,6 +138,10 @@ body {
 .blog-index-page {
   // background-color: var(--clr);
   background-color: inherit;
+
+  .vp-doc {
+    background: red;
+  }
 }
 
 .intersection-observer2-style {
@@ -297,7 +302,8 @@ html[data-theme="dark"] {
   margin-right: 0;
 }
 
-.blog-page-class {
+.gallery-page-class, .blog-page-class {
+
   [data-animate] {
     --stagger: 0;
     --delay: 120ms;
@@ -311,7 +317,20 @@ html[data-theme="dark"] {
     }
   }
 
-  .vp-doc > * {
+  @keyframes slide-enter {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+
+  .vp-doc > div > * {
     --stagger: 0;
     --delay: 150ms;
     --start: 0ms;
@@ -319,64 +338,64 @@ html[data-theme="dark"] {
     animation-delay: calc(var(--start) + var(--stagger) * var(--delay));
   }
 
-  .vp-doc > *:nth-child(1) {
+  .vp-doc > div > *:nth-child(1) {
     --stagger: 1;
   }
-  .vp-doc > *:nth-child(2) {
+  .vp-doc > div > *:nth-child(2) {
     --stagger: 2;
   }
-  .vp-doc > *:nth-child(3) {
+  .vp-doc > div > *:nth-child(3) {
     --stagger: 3;
   }
-  .VPDoc .content-container > *:nth-child(4) {
+  .vp-doc > div > *:nth-child(4) {
     --stagger: 4;
   }
-  .VPDoc .content-container > *:nth-child(5) {
+  .vp-doc > div > *:nth-child(5) {
     --stagger: 5;
   }
-  .VPDoc .content-container > *:nth-child(6) {
+  .vp-doc > div > *:nth-child(6) {
     --stagger: 6;
   }
-  .VPDoc .content-container > *:nth-child(7) {
+  .vp-doc > div > *:nth-child(7) {
     --stagger: 7;
   }
-  .VPDoc .content-container > *:nth-child(8) {
+  .vp-doc > div > *:nth-child(8) {
     --stagger: 8;
   }
-  .VPDoc .content-container > *:nth-child(9) {
+  .vp-doc > div > *:nth-child(9) {
     --stagger: 9;
   }
-  .VPDoc .content-container > *:nth-child(10) {
+  .vp-doc > div > *:nth-child(10) {
     --stagger: 10;
   }
-  .VPDoc .content-container > *:nth-child(11) {
+  .vp-doc > div > *:nth-child(11) {
     --stagger: 11;
   }
-  .VPDoc .content-container > *:nth-child(12) {
+  .vp-doc > div > *:nth-child(12) {
     --stagger: 12;
   }
-  .VPDoc .content-container > *:nth-child(13) {
+  .vp-doc > div > *:nth-child(13) {
     --stagger: 13;
   }
-  .VPDoc .content-container > *:nth-child(14) {
+  .vp-doc > div > *:nth-child(14) {
     --stagger: 14;
   }
-  .VPDoc .content-container > *:nth-child(15) {
+  .vp-doc > div > *:nth-child(15) {
     --stagger: 15;
   }
-  .VPDoc .content-container > *:nth-child(16) {
+  .vp-doc > div > *:nth-child(16) {
     --stagger: 16;
   }
-  .VPDoc .content-container > *:nth-child(17) {
+  .vp-doc > div > *:nth-child(17) {
     --stagger: 17;
   }
-  .VPDoc .content-container > *:nth-child(18) {
+  .vp-doc > div > *:nth-child(18) {
     --stagger: 18;
   }
-  .VPDoc .content-container > *:nth-child(19) {
+  .vp-doc > div > *:nth-child(19) {
     --stagger: 19;
   }
-  .VPDoc .content-container > *:nth-child(20) {
+  .vp-doc > div > *:nth-child(20) {
     --stagger: 20;
   }
 

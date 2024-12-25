@@ -3,6 +3,7 @@ layout: doc
 # 开启推荐
 recommended: true
 mermaids: 1
+pageClass: gallery-page-class
 ---
 
 ## 微前端简介 ##

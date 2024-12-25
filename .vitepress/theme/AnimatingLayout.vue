@@ -503,7 +503,7 @@ body {
     animation-range:entry 0 100px; */
 }
 
-.shade {
+.shade2s {
   position: fixed;
   width: 100%;
   height: 100vh;
