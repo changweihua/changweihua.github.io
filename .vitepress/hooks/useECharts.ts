@@ -4,6 +4,10 @@ import elementResizeDetectorMaker from 'element-resize-detector'
 import { debounce } from 'lodash-es'
 import { onActivated, onDeactivated, onMounted, onBeforeUnmount, reactive, shallowRef, useTemplateRef, watch, nextTick } from "vue";
 
+/** @type EChartsOption */
+export const defaultOption = {
+}
+
 export interface ChartStrategy {
   getOptions: () => echarts.EChartsOption;
 } // 定义一个策略接口 , 方便具体策略实现使用

@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: RN状态管理MobX使用
 description: RN状态管理MobX使用
-date: 2024-12-25 10:18:00
+date: 2024-12-25 13:18:00
 pageClass: blog-page-class
 ---
 

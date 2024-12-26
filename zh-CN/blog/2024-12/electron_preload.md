@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: Electron开发中，为什么官方建议在预加载脚本中使用 ipcRenderer
 description: Electron开发中，为什么官方建议在预加载脚本中使用 ipcRenderer
-date: 2024-12-25 10:18:00
+date: 2024-12-25 12:18:00
 pageClass: blog-page-class
 ---
 
