@@ -42,9 +42,11 @@ function readFileList(dir, filesList = []) {
   return filesList;
 }
 
+readFileList(path.resolve(rootFolder, "zh-CN"), filesList);
 readFileList(path.resolve(rootFolder, "zh-CN/blog"), filesList);
 readFileList(path.resolve(rootFolder, "zh-CN/category"), filesList);
 readFileList(path.resolve(rootFolder, "zh-CN/gallery"), filesList);
+readFileList(path.resolve(rootFolder, "en-US"), filesList);
 readFileList(path.resolve(rootFolder, "en-US/blog"), filesList);
 readFileList(path.resolve(rootFolder, "en-US/category"), filesList);
 readFileList(path.resolve(rootFolder, "en-US/gallery"), filesList);

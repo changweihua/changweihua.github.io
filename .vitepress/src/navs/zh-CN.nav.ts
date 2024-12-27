@@ -5,15 +5,26 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     { text: "首页", link: "/zh-CN/" },
     {
       text: "博客",
-      link: "/zh-CN/blog/"
+      link: "/zh-CN/blog/",
     },
     {
       text: "归档",
-      link: "/zh-CN/archives.md"
+      link: "/zh-CN/archives.md",
     },
     {
       text: "标签",
-      link: "/zh-CN/tags.md"
+      link: "/zh-CN/tags.md",
+    },
+    {
+      text: "年度总结",
+      items: [
+        { text: "2024", link: "/zh-CN/me.2024.md" },
+        { text: "2023", link: "/zh-CN/me.2023.md" },
+        { text: "2022", link: "/zh-CN/me.2022.md" },
+        { text: "2021", link: "/zh-CN/me.2021.md" },
+        { text: "2020", link: "/zh-CN/me.2020.md" },
+        { text: "2019", link: "/zh-CN/me.2019.md" },
+      ],
     },
     // {
     //   text: "分类",
@@ -54,5 +65,5 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     //     },
     //   ],
     // },
-  ]
-}
+  ];
+};

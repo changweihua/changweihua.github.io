@@ -102,7 +102,7 @@
     "vite-plugin-chunk-split": "^0.5.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-externals-new": "^1.5.5",
-    "vite-plugin-fake-server": "^2.1.4",
+    "vite-plugin-fake-server": "^2.1.5",
     "vite-plugin-git-revision-info": "^1.1.0",
     "vite-plugin-html-config": "^2.0.2",
     "vite-plugin-mkcert": "^1.17.6",
