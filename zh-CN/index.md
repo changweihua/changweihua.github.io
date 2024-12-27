@@ -20,8 +20,11 @@ hero:
       text: 作者简历
       link: /zh-CN/resume
     - theme: alt
-      text: Github
-      link: https://github.com/changweihua
+      text: 我的2024
+      link: /zh-CN/me.2024
+    # - theme: alt
+    #   text: Github
+    #   link: https://github.com/changweihua
 
 features:
   - title: 扬泰机场智能机器人

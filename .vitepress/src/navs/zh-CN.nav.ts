@@ -11,12 +11,12 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
       text: "归档",
       link: "/zh-CN/archives.md",
     },
+    // {
+    //   text: "标签",
+    //   link: "/zh-CN/tags.md",
+    // },
     {
-      text: "标签",
-      link: "/zh-CN/tags.md",
-    },
-    {
-      text: "年度总结",
+      text: "那些年",
       items: [
         { text: "2024", link: "/zh-CN/me.2024.md" },
         { text: "2023", link: "/zh-CN/me.2023.md" },
