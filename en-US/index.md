@@ -43,10 +43,61 @@ features:
     details: 无锡硕放机场
     link: /en-US/gallery/ThreePlane
 
+importMap: {
+  "plotty": "https://esm.sh/plotty",
+  "geotiff": "https://esm.sh/geotiff@2.1.3",
+}
 ---
 
 <SkillRadar />
 
+# Heading
+
+::: stepper
+Paragraph
+
+- List item #1
+- List item #2
+:::
+
+::: stepper This is a title
+Another paragraph
+
+- Another list item #1
+- Another list item #2
+:::
+
+# Heading
+
+:::: stepper This is a title
+Paragraph
+
+- List item #1
+- List item #2
+
+::: stepper This is another title
+Nested paragraph
+
+- Nested list item #1
+- Nested list item #2
+:::
+::::
+
+## 使用 plotty 渲染 tiff 数据
+
+<sfc-playground src="../src/components/FireWorks.vue" language="vue" title="plotty" desc="plotty渲染"></sfc-playground>
+
 <script lang="ts" setup>
 import SkillRadar from '@/components/SkillRadar.vue';
 </script>
+
+<style lang="less" scoped>
+@media only screen and (max-width: 768px) {
+  /** add more styles */
+  .stepper .card,
+  /** default moves left */
+  .stepper-content .vp-code-group {
+    margin-left: -3rem;
+  }
+}
+</style>

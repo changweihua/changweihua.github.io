@@ -13,7 +13,7 @@ import vitepressProtectPlugin from "vitepress-protect-plugin"
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import config from '@sakitam-gis/vitepress-playground/config';
+import VitePressI18n from 'vitepress-i18n';
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 
 const customElements = [
@@ -106,8 +106,7 @@ const customElements = [
   "annotation-xml",
 ];
 
-export default defineConfig({
-  extends: config,
+const vitePressOptions = {
   // mermaid: {
   //   // 'theme': 'base',
   //   // 'themeVariables': {
@@ -239,4 +238,16 @@ export default defineConfig({
       }
     }
   }
-});
+}
+
+const vitePressI18nOptions = {
+  debugPrint: true,
+  locales: [
+    { path: 'en-US', locale: 'en' },
+    { path: 'zh-CN', locale: 'zhHans' }
+  ],
+  rootLocale: 'zhHans'
+};
+
+// @ts-ignore
+export default defineConfig(VitePressI18n.withI18n(vitePressOptions, vitePressI18nOptions));

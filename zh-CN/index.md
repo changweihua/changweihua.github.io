@@ -100,7 +100,7 @@ features:
     link: https://www.npmjs.com/package/maui-jsbridge
   - title: wx-navigation-bar
     details: 小程序自定义导航栏NPM包。以此实现顶部图片背景效果。
-    link: /gallery/wx-navigation-bar
+    link: /zh-CN/gallery/wx-navigation-bar
   - title: wx-lifecycle-interceptor
     details: 小程序生命周期方法拦截器NPM包。Fork 后适配最新版微信组件生命周期。
     link: https://www.npmjs.com/package/wx-lifecycle-interceptor

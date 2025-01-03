@@ -30,6 +30,7 @@ import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
 import anchor from 'markdown-it-anchor'
 import Expl3 from '../assets/latexs/LaTeX-Expl3.tmLanguage.json';
+import { vitepressDemoPlugin } from 'vitepress-demo-plugin';
 
 const CONSTS = {
   __custom_variable__: 'your value'
@@ -60,6 +61,7 @@ const markdown: MarkdownOptions | undefined = {
   config: (md) => {
     useDefinePlugin(md, CONSTS)
 
+    md.use(vitepressDemoPlugin);
     md.use(footnote);
     md.use(tasklist);
     md.use(ruby);

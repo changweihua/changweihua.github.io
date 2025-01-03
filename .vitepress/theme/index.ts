@@ -33,6 +33,9 @@ pinyin("常伟华");
 
 import directives from "../directives";
 
+import { SfcPlayground } from '@sakitam-gis/vitepress-playground';
+import '@sakitam-gis/vitepress-playground/dist/style.css';
+
 // // import('pinyin-pro').then((exports) => {
 // //   exports.pinyin('汉语拼音'); // 'hàn yǔ pīn yīn'
 // // });
@@ -347,6 +350,8 @@ export default {
 
       app.use(yuppie);
       app.use(VueResizeObserver);
+
+      app.component('SfcPlayground', SfcPlayground);
 
       app.use(directives);
 
