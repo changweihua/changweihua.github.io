@@ -13,7 +13,7 @@ import vitepressProtectPlugin from "vitepress-protect-plugin"
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import config from '@sakitam-gis/vitepress-playground/config';
+// import config from '@sakitam-gis/vitepress-playground/config';
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 
 const customElements = [
@@ -107,7 +107,7 @@ const customElements = [
 ];
 
 export default defineConfig({
-  extends: config,
+  // extends: config,
   // mermaid: {
   //   // 'theme': 'base',
   //   // 'themeVariables': {
