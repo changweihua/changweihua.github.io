@@ -1,10 +1,17 @@
 <template>
-  <div class="lottie" ref="dom"></div>
+  <!-- <div ref="dom"></div> -->
+  <!-- <Vue3Lottie :animationData="props.animationData" class="lottie" /> -->
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import lottie from "lottie-web";
+// import lottie from "lottie-web";
+// import { Vue3Lottie } from 'vue3-lottie'
+
+// import Vue3Lottie from 'vue3-lottie'
+
+// app.use(Vue3Lottie)
+// app.use(Vue3Lottie, { name: 'LottieAnimation' }) // use in template <LottieAnimation />
 
 type Segment = [number,number]
 
@@ -47,14 +54,14 @@ const emits = defineEmits<{
 
 // 初始化渲染 lottie动画，并返回 lottie对象
 onMounted(() => {
-  animation.value = lottie.loadAnimation({
-      container: dom.value as Element, // 绑定dom节点
-      renderer: props.renderer, // 渲染方式:svg、canvas、html
-      loop: props.loop, // 是否循环播放，默认：false
-      autoplay: props.autoplay, // 是否自动播放, 默认true
-      animationData: props.animationData // AE动画使用bodymovie导出的json数据
-  })
-  emits('getAnimation', animation.value)
+  // animation.value = lottie.loadAnimation({
+  //     container: dom.value as Element, // 绑定dom节点
+  //     renderer: props.renderer, // 渲染方式:svg、canvas、html
+  //     loop: props.loop, // 是否循环播放，默认：false
+  //     autoplay: props.autoplay, // 是否自动播放, 默认true
+  //     animationData: props.animationData // AE动画使用bodymovie导出的json数据
+  // })
+  // emits('getAnimation', animation.value)
 })
 
 

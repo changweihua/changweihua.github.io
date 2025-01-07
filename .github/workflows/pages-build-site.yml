@@ -38,10 +38,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # node v20 运行
+    # node v22 运行
     strategy:
       matrix:
-        node-version: [20]
+        node-version: [22]
 
     permissions:
       pages: write

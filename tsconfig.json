@@ -20,6 +20,7 @@
     "verbatimModuleSyntax": false,
     "lib": ["ESNext", "ES2015.Promise", "dom","DOM", "es5", "es2015.promise" ,"es2015", "es2017","es2018","es2018.promise"],
     "downlevelIteration": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"

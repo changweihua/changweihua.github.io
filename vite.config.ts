@@ -15,6 +15,7 @@ import mkcert from "vite-plugin-mkcert";
 import fs from "node:fs";
 import { preloadImages } from "./plugins/vitePreloadImage.ts";
 import { vitePluginFakeServer } from 'vite-plugin-fake-server'
+import { updateMetadata } from './plugins/vitePluginUpdateMetadata'
 // import VueDevTools from 'vite-plugin-vue-devtools-cn'
 // import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
 
@@ -90,6 +91,7 @@ export default defineConfig({
       ifLog: true,
       ifGlobal: true,
     }),
+    updateMetadata(),
     yourPlugin(),
     // ViteCompressionPlugin({
 		// 	algorithm: "brotliCompress",
@@ -185,12 +187,12 @@ export default defineConfig({
     alias: {
       "*": fileURLToPath(new URL(".", import.meta.url)),
       "@": fileURLToPath(new URL("./src", import.meta.url)),
-      "@vp": fileURLToPath(new URL("./.vitepress", import.meta.url)),
+      // "@vp": fileURLToPath(new URL("./.vitepress", import.meta.url)),
       public: fileURLToPath(new URL("./public", import.meta.url)),
       // "~": path.resolve(__dirname, "./"),
       // '*': path.resolve(__dirname),
       // "@": path.resolve(__dirname, "src"),
-      // "@vp": path.resolve(__dirname, ".vitepress"),
+      "@vp": path.resolve(__dirname, ".vitepress"),
       // public: fileURLToPath(new URL("./public", import.meta.url)),
       // // 注意一定不要随意命名，a b c这样的，项目的目录也不能为关键字保留字！！
       // "comp": resolve(__dirname, "src/components"),

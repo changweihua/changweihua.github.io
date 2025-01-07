@@ -2,7 +2,7 @@
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { h, Suspense, watchEffect, watch, ref } from "vue";
-import DocAfter from "@vp/components/DocAfter.vue";
+import DocAfter from "../components/DocAfter.vue";
 import { UAParser } from "ua-parser-js";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
@@ -339,6 +339,7 @@ export default {
       };
     }
 
+    // @ts-ignore
     if (!import.meta.env.SSR) {
       // const plugin = await import('@vp/plugins/markdown/rough-mermaid')
       // app.use(plugin.default)
