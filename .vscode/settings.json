@@ -23,6 +23,9 @@
     "index.md": "index.md,archives.md,tags.md,me.*.md,resume.md,about.md,en-US.md,zh-CN.md,sponsor.md,CONTRIBUTING.md,CODE_OF_CONDUCT.md,CONTRIBUTING.zh-CN.md,README.md,CHANGELOG.md,PRIVACY_POLICY.md,TERMS_OF_SERVICE.md"
   },
   "workbench.navigationControl.enabled": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
   // settings.json
   "editor.linkedEditing": true,
   "git.blame.editorDecoration.enabled": true,
@@ -50,6 +53,9 @@
   "terminal.integrated.smoothScrolling": true,
   "workbench.list.smoothScrolling": true,
   "workbench.editor.wrapTabs": true,
+  "iconify.customCollectionJsonPaths": [
+    "node_modules/.unplugin-iconify-generator/cmono.json"
+  ],
   //   // 拖拽行为
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
   //   // 粘贴行为

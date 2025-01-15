@@ -12,6 +12,8 @@ import Inspect from "vite-plugin-inspect";
 import ViteCompressionPlugin from 'vite-plugin-compression'
 import VueDevTools from "vite-plugin-vue-devtools";
 import mkcert from "vite-plugin-mkcert";
+import Iconify from 'unplugin-iconify-generator/vite'
+import { envParse } from 'vite-plugin-env-parse'
 import fs from "node:fs";
 import { preloadImages } from "./plugins/vitePreloadImage.ts";
 import { vitePluginFakeServer } from 'vite-plugin-fake-server'
@@ -81,6 +83,7 @@ export default defineConfig({
     ),
   },
   plugins: [
+    envParse(),
     vitePluginVersionMark({
       // name: 'test-app',
       // version: '0.0.1',
@@ -107,6 +110,11 @@ export default defineConfig({
       //   // 2. 支持填正则表达式。src 中 components 和 utils 下的所有文件被会被打包为`component-util`的 chunk 中
       //   'components-util': [/src\/components/, /src\/utils/]
       // }
+    }),
+    Iconify({
+      collections: {
+        cmono: './src/assets/icons/mono'
+      }
     }),
     // vuePreviewPlugin({
     //   props: {
