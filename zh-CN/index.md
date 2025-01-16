@@ -134,3 +134,4 @@ head:
 ---
 
 <Confetti />
+<!-- <Guidance :steps="[{element: '.VPHomeHero'}]" /> -->

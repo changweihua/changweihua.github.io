@@ -80,6 +80,7 @@ import MagicCard from "../components/MagicCard.vue";
 import StyledMermaid from "../components/StyledMermaid.vue";
 import MarkupView from "../components/MarkupView.vue";
 import Confetti from "../components/Confetti.vue";
+import Guidance from "../components/Guidance.vue";
 import "markmap-toolbar/dist/style.css";
 
 import { Icon } from "@iconify/vue";
@@ -432,7 +433,8 @@ export default {
       app.component("HoverGrid", HoverGrid);
       app.component("DancingLogo", DancingLogo);
       app.component("MagicCard", MagicCard);
-      app.component("Confetti", Confetti); //注册全局组件
+      app.component("Confetti", Confetti);
+      app.component("Guidance", Guidance); //注册全局组件
     }
 
     if (inBrowser) {
