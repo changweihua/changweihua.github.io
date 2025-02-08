@@ -5,7 +5,7 @@
     "noImplicitAny": false,
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "target": "esnext",
+    "target": "ESNext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

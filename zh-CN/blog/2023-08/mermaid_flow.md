@@ -51,7 +51,7 @@ graph TD;
         Bob-->>John: Jolly good!
 ``` 
 
- ``` mermaid
+``` mermaid
         sequenceDiagram
         participant Alice
         participant Bob

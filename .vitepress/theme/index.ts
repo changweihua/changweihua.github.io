@@ -437,7 +437,18 @@ export default {
       app.component("Guidance", Guidance); //注册全局组件
     }
 
+
+
     if (inBrowser) {
+      // const { promise, resolve, reject } = Promise.withResolvers();
+      //   // 一些异步操作
+      // setTimeout(() => {
+      //     if (/* 条件满足 */) {
+      //         resolve('成功');
+      //     } else {
+      //         reject('失败');
+      //     }
+      // }, 1000);
     }
   },
   setup() {
