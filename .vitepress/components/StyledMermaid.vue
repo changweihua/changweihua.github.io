@@ -14,11 +14,11 @@
 </template>
 <script setup lang="ts">
 import { useData, inBrowser } from 'vitepress'
-import { onMounted, watch, toRaw, useTemplateRef } from 'vue'
+import { onMounted, watch, toRaw, useTemplateRef, onUnmounted, ref } from 'vue'
 import * as roughjs from 'svg2roughjs'
-import mermaid from 'mermaid'
+import mermaid, { MermaidConfig } from 'mermaid'
 import svgPanZoom, { Instance } from '@dash14/svg-pan-zoom'
-import { useScreenfullEffect } from '@vp/utils/useScreenfullEffect'
+import { useScreenfullEffect } from '../utils/useScreenfullEffect'
 import { delay } from 'lodash-es'
 
 const { page } = useData();
@@ -124,51 +124,76 @@ function downloadData() {
   }
 }
 
-const { isDark } = useData()
+// const { isDark } = useData()
 
-watch(() => isDark.value, async (nVal, oVal) => {
-  console.log(`current theme from ${oVal} to ${nVal}`)
+// watch(() => isDark.value, async (nVal, oVal) => {
+//   console.log(`current theme from ${oVal} to ${nVal}`)
 
-  // mermaid.mermaidAPI.setConfig({
-  //   theme: nVal ? 'dark' : 'forest',
-  // })
+//   // mermaid.mermaidAPI.setConfig({
+//   //   theme: nVal ? 'dark' : 'forest',
+//   // })
 
-  await renderChart(props.id, decodeURIComponent(props.code!))
-})
+//   await renderChart(props.id, decodeURIComponent(props.code!))
+// })
 
 const props = defineProps({
   id: String,
   code: String,
 })
 
+const pluginSettings = ref<MermaidConfig>({
+  securityLevel: "loose",
+  startOnLoad: false,
+  fontFamily: "Fangyuan, AlibabaPuHuiTi, 阿里巴巴普惠体 3.0"
+});
+
 const renderChart = async (id, code) => {
   const hasDarkClass = document.documentElement.classList.contains("dark");
 
-  // mermaid 初始化
-  mermaid.initialize({ startOnLoad: false, theme: isDark.value ? 'dark' : 'forest', fontFamily: "Fangyuan" })
+  let mermaidConfig: MermaidConfig = {
+    ...pluginSettings.value,
+  };
 
-  mermaid.run({
-    querySelector: id,
-    postRenderCallback: (id) => {
-      console.log(id);
-    }
-  });
+  if (hasDarkClass) mermaidConfig.theme = "dark";
+  // mermaid 初始化
+  mermaid.initialize(mermaidConfig)
+
+  // mermaid.run({
+  //   querySelector: id,
+  //   postRenderCallback: (id) => {
+  //     console.log(id);
+  //   }
+  // });
 
   if (svgRef.value) {
     svgRef.value.innerHTML = ''
 
     const { svg } = await mermaid.render(id, code)
+    // const svgCode = await mermaid.render(id, code)
 
     svgRef.value.innerHTML = svg
     await makeRough(svgRef.value.querySelector('svg')!, id)
-  }
 
-  if (inBrowser) {
-    await makePanZoom(sketchSvgRef.value!, `${props.id}r`)
+    if (inBrowser) {
+      await makePanZoom(sketchSvgRef.value!, `${props.id}r`)
+    }
+
+    // // This is a hack to force v-html to re-render, otherwise the diagram disappears
+    // // when **switching themes** or **reloading the page**.
+    // // The cause is that the diagram is deleted during rendering (out of Vue's knowledge).
+    // // Because svgCode does NOT change, v-html does not re-render.
+    // // This is not required for all diagrams, but it is required for c4c, mindmap and zenuml.
+    // const salt = Math.random().toString(36).substring(7);
+    // svgRef.value.innerHTML = `<span style="display: none">${salt}</span>`;
   }
 }
 // 在组件挂载后进行mermaid渲染
 onMounted(async () => {
+  // let settings = await import("virtual:mermaid-config");
+  // if (settings?.default) pluginSettings.value = settings.default;
+
+  mut = new MutationObserver(async () => await renderChart(props.id, decodeURIComponent(props.code!)));
+  mut.observe(document.documentElement, { attributes: true });
   await renderChart(props.id, decodeURIComponent(props.code!))
 
   // mut = new MutationObserver(async () => await renderChart(props.id, decodeURIComponent(props.code!)));
@@ -176,7 +201,7 @@ onMounted(async () => {
 })
 
 
-// onUnmounted(() => mut?.disconnect());
+onUnmounted(() => mut?.disconnect());
 
 </script>
 

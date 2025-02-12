@@ -107,8 +107,10 @@ const customElements = [
 ];
 
 export default defineConfig({
-  // extends: config,
+  // // extends: config,
   // mermaid: {
+  //   look: "handDrawn",
+  //   handDrawnSeed: 2,
   //   // 'theme': 'base',
   //   // 'themeVariables': {
   //   //   'primaryColor': '#506bee',

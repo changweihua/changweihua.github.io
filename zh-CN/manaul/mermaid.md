@@ -8,7 +8,7 @@ footer: false
 ```mermaid
 journey
     title My working day
-    section Go to work
+    section 工作
       Make tea: 5: Me
       Go upstairs: 3: Me
       Do work: 1: Me, Cat
@@ -31,6 +31,37 @@ architecture-beta
     disk2:T -- B:db
 ```
 
+```mermaid
+architecture-beta
+    service left_disk(disk)[Disk]
+    service top_disk(disk)[Disk]
+    service bottom_disk(disk)[Disk]
+    service top_gateway(internet)[Gateway]
+    service bottom_gateway(internet)[Gateway]
+    junction junctionCenter
+    junction junctionRight
+
+    left_disk:R -- L:junctionCenter
+    top_disk:B -- T:junctionCenter
+    bottom_disk:T -- B:junctionCenter
+    junctionCenter:R -- L:junctionRight
+    top_gateway:B -- T:junctionRight
+    bottom_gateway:T -- B:junctionRight
+```
+
+```mermaid
+architecture-beta
+    group api(logos:aws-lambda)[API]
+
+    service db(logos:aws-aurora)[Database] in api
+    service disk1(logos:aws-glacier)[Storage] in api
+    service disk2(logos:aws-s3)[Storage] in api
+    service server(logos:aws-ec2)[Server] in api
+
+    db:L -- R:server
+    disk1:T -- B:server
+    disk2:T -- B:db
+```
 
 ```mermaid
 ---
@@ -187,28 +218,6 @@ Wave,Electricity grid,19.013
 Wind,Electricity grid,289.366
 ```
 
-
-```mermaid
-zenuml
-    title Reply message
-    Client->A.method() {
-      B.method() {
-        if(condition) {
-          return x1
-          // return early
-          @return
-          A->Client: x11
-        }
-      }
-      return x2
-    }
-```
-
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  import zenuml from 'https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml@0.1.0/dist/mermaid-zenuml.esm.min.mjs';
-  await mermaid.registerExternalDiagrams([zenuml]);
-</script>
 
 ```mermaid
 timeline

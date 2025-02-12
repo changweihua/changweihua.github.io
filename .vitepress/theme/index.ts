@@ -32,7 +32,14 @@ import { pinyin } from "pinyin-pro";
 pinyin("常伟华");
 
 import directives from "../directives";
-
+import mermaid from 'mermaid';
+import { icons } from '@iconify-json/logos';
+mermaid.registerIconPacks([
+  {
+    name: icons.prefix, // To use the prefix defined in the icon pack
+    icons,
+  },
+]);
 // import { SfcPlayground } from '@sakitam-gis/vitepress-playground';
 // import '@sakitam-gis/vitepress-playground/dist/style.css';
 
