@@ -4,6 +4,12 @@ layout: home
 # footer: false
 
 features:
+  - title: 凯亚通
+    icon:
+      src: /mermaid-logo.svg
+      alt: Mermaid 图表工具
+    details: 基于 JavaScript 的图表工具，可渲染 Markdown 启发的文本定义以动态创建和修改图表。
+    link: /zh-CN/manaul/kyt
   - title: Mermaid
     icon:
       src: /mermaid-logo.svg

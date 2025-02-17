@@ -11,7 +11,9 @@
           "text-emphasis",
           "user-select",
           "@view-transition",
-          "font-size-adjust"
+          "font-size-adjust",
+          "overscroll-behavior",
+          "overscroll-behavior: none"
         ]
       }
     ],

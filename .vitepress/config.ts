@@ -4,17 +4,17 @@ import { head } from "./src/head";
 import { markdown } from "./src/markdown";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { RSS } from "./src/rss";
-// import { withMermaid } from "vitepress-plugin-mermaid";
+import { withMermaid } from "vitepress-plugin-panzoom-mermaid";
 import { defineConfig, HeadConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
-import GitRevisionInfoPlugin from 'vite-plugin-git-revision-info';
-import { getChangelogAndContributors } from 'vitepress-plugin-changelog'
-import vitepressProtectPlugin from "vitepress-protect-plugin"
-import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
-import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
-import vueJsx from '@vitejs/plugin-vue-jsx'
+import GitRevisionInfoPlugin from "vite-plugin-git-revision-info";
+import { getChangelogAndContributors } from "vitepress-plugin-changelog";
+import vitepressProtectPlugin from "vitepress-protect-plugin";
+import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
+import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 // import config from '@sakitam-gis/vitepress-playground/config';
-import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
+import { AnnouncementPlugin } from "vitepress-plugin-announcement";
 
 const customElements = [
   "mjx-container",
@@ -106,39 +106,45 @@ const customElements = [
   "annotation-xml",
 ];
 
-export default defineConfig({
-  // // extends: config,
-  // mermaid: {
-  //   look: "handDrawn",
-  //   handDrawnSeed: 2,
-  //   // 'theme': 'base',
-  //   // 'themeVariables': {
-  //   //   'primaryColor': '#506bee',
-  //   //   // 'primaryTextColor': '#fff',
-  //   //   // 'primaryBorderColor': '#7C0000',
-  //   //   // 'lineColor': '#F8B229',
-  //   //   // 'secondaryColor': '#006100',
-  //   //   // 'tertiaryColor': '#fff'
-  //   // },
-  //   fontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
-  //   altFontFamily: "AlibabaPuHuiTi, 阿里巴巴普惠体 3.0",
-  //   startOnLoad: false
-  //   //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
-  // },
-  // // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
-  // mermaidPlugin: {
-  //   class: "mermaid rough-mermaid" // 为父容器设置额外的CSS类
-  // },
+export default withMermaid({
+  // extends: config,
+  mermaid: {
+    look: "handDrawn",
+    handDrawnSeed: 2,
+    // 'theme': 'base',
+    // 'themeVariables': {
+    //   'primaryColor': '#506bee',
+    //   // 'primaryTextColor': '#fff',
+    //   // 'primaryBorderColor': '#7C0000',
+    //   // 'lineColor': '#F8B229',
+    //   // 'secondaryColor': '#006100',
+    //   // 'tertiaryColor': '#fff'
+    // },
+    fontFamily: "Fangyuan, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    altFontFamily: "Fangyuan, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    startOnLoad: false,
+    //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  },
+  // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
+  mermaidPlugin: {
+    class: "mermaid rough-mermaid" // 为父容器设置额外的CSS类
+  },
   // srcDir: '.',
   vite: {
-    logLevel: 'info',
+    logLevel: "info",
+    optimizeDeps: { include: ["@braintree/sanitize-url"] },
+    resolve: {
+      alias: {
+        dayjs: "dayjs/",
+      },
+    },
     plugins: [
       GitRevisionInfoPlugin(),
       groupIconVitePlugin({
         customIcon: {
-          ae: 'logos:adobe-after-effects',
-          ai: 'logos:adobe-illustrator',
-          ps: 'logos:adobe-photoshop',
+          ae: "logos:adobe-after-effects",
+          ai: "logos:adobe-illustrator",
+          ps: "logos:adobe-photoshop",
           // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
           // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
         },
@@ -182,7 +188,7 @@ export default defineConfig({
     template: {
       compilerOptions: {
         isCustomElement: (tag) => customElements.includes(tag),
-        whitespace: 'preserve'      // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
+        whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
       },
     },
   },
@@ -208,37 +214,39 @@ export default defineConfig({
     },
   },
   rewrites: {
-    '^/index.md': '/zh-CN/index.md',
+    "^/index.md": "/zh-CN/index.md",
   },
   ignoreDeadLinks: true,
   async transformHead(context): Promise<HeadConfig[]> {
     // const { assets }= context
-    const head = handleHeadMeta(context)
+    const head = handleHeadMeta(context);
 
-    return head
+    return head;
   },
   async transformPageData(pageData) {
-    const { isNotFound, relativePath } = pageData
-    const { contributors, changelog } = await getChangelogAndContributors(relativePath)
+    const { isNotFound, relativePath } = pageData;
+    const { contributors, changelog } =
+      await getChangelogAndContributors(relativePath);
     const CustomAvatars = {
-      'changweihua': '2877201'
-    }
-    const CustomContributors = contributors.map(contributor => {
-      contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`
-      return contributor
-    })
+      changweihua: "2877201",
+    };
+    const CustomContributors = contributors.map((contributor) => {
+      contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`;
+      return contributor;
+    });
 
     if (isNotFound) {
-      pageData.title = 'Not Found'
+      pageData.title = "Not Found";
     }
 
     return {
       CommitData: {
         contributors: CustomContributors,
         changelog,
-        commitURL: 'https://github.com/changweihua/changweihua.github.io/commit/',
-        title: 'Changelog'
-      }
-    }
-  }
+        commitURL:
+          "https://github.com/changweihua/changweihua.github.io/commit/",
+        title: "Changelog",
+      },
+    };
+  },
 });

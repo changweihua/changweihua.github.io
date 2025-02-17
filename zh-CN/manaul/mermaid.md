@@ -50,6 +50,15 @@ architecture-beta
 ```
 
 ```mermaid
+zenuml
+    title Annotators
+    @Actor Alice
+    @Database Bob
+    Alice->Bob: Hi Bob
+    Bob->Alice: Hi Alice
+```
+
+```mermaid
 architecture-beta
     group api(logos:aws-lambda)[API]
 

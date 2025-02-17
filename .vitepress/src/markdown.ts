@@ -21,7 +21,7 @@ import { ruby } from "@mdit/plugin-ruby";
 import markdownCjkBreaks from 'markdown-it-cjk-breaks'
 import { markdownItStepper } from 'vitepress-markdown-it-stepper'
 import { ImagePlugin } from '../plugins/markdown/image'
-import mermaidPlugin from '../plugins/markdown/rough-mermaid'
+// import mermaidPlugin from '../plugins/markdown/rough-mermaid'
 import markupPlugin from '../plugins/markdown/markup'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
 import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
@@ -96,7 +96,7 @@ const markdown: MarkdownOptions | undefined = {
     md.use(timeline);
     tabsPlugin(md)
     md.use(groupIconMdPlugin)
-    md.use(mermaidPlugin)
+    // md.use(mermaidPlugin)
     md.use(markupPlugin)
     md.use(MarkdownItCollapsible);
 

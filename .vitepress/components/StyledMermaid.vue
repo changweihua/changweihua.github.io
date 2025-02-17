@@ -144,7 +144,7 @@ const props = defineProps({
 const pluginSettings = ref<MermaidConfig>({
   securityLevel: "loose",
   startOnLoad: false,
-  fontFamily: "Fangyuan, AlibabaPuHuiTi, 阿里巴巴普惠体 3.0"
+  fontFamily: "Fangyuan, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'"
 });
 
 const renderChart = async (id, code) => {
