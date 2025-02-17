@@ -37,31 +37,31 @@ pinyin("常伟华");
 import directives from "../directives";
 import mermaid from 'mermaid';
 import { icons } from '@iconify-json/logos';
-import { icons as skillIcons } from '@iconify-json/skill-icons';
-import { icons as devIcons } from '@iconify-json/devicon';
-import { icons as vscodeIcons } from '@iconify-json/vscode-icons';
+// import { icons as skillIcons } from '@iconify-json/skill-icons';
+// import { icons as devIcons } from '@iconify-json/devicon';
+// import { icons as vscodeIcons } from '@iconify-json/vscode-icons';
 mermaid.registerIconPacks([
   {
     name: icons.prefix, // To use the prefix defined in the icon pack
     icons,
   },
   {
-    name: skillIcons.prefix, // To use the prefix defined in the icon pack
-    icons: skillIcons,
+    name: 'devicon',
+    loader: () => import('@iconify-json/devicon').then((module) => module.icons),
   },
-  {
-    name: devIcons.prefix, // To use the prefix defined in the icon pack
-    icons: devIcons,
-  },
-  {
-    name: vscodeIcons.prefix, // To use the prefix defined in the icon pack
-    icons: vscodeIcons,
-  },
+  // {
+  //   name: skillIcons.prefix, // To use the prefix defined in the icon pack
+  //   icons: skillIcons,
+  // },
+  // {
+  //   name: devIcons.prefix, // To use the prefix defined in the icon pack
+  //   icons: devIcons,
+  // },
 ]);
 
 import zenuml from '@mermaid-js/mermaid-zenuml';
 import mindmap from '@mermaid-js/mermaid-mindmap';
-await mermaid.registerExternalDiagrams([zenuml, mindmap]);
+mermaid.registerExternalDiagrams([zenuml, mindmap]);
 
 // import { SfcPlayground } from '@sakitam-gis/vitepress-playground';
 // import '@sakitam-gis/vitepress-playground/dist/style.css';

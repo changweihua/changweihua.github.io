@@ -132,12 +132,12 @@ export default withMermaid({
   // srcDir: '.',
   vite: {
     logLevel: "info",
-    optimizeDeps: { include: ["@braintree/sanitize-url"] },
-    resolve: {
-      alias: {
-        dayjs: "dayjs/",
-      },
-    },
+    // optimizeDeps: { include: ["@braintree/sanitize-url"] },
+    // resolve: {
+    //   alias: {
+    //     dayjs: "dayjs/",
+    //   },
+    // },
     plugins: [
       GitRevisionInfoPlugin(),
       groupIconVitePlugin({
