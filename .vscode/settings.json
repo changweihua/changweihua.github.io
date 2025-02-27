@@ -56,6 +56,9 @@
   "iconify.customCollectionJsonPaths": [
     "node_modules/.unplugin-iconify-generator/cmono.json"
   ],
+  "vue.server.maxOldSpaceSize": 4096,
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.tsserver.nodePath": "node",
   //   // 拖拽行为
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
   //   // 粘贴行为
