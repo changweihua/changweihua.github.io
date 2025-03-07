@@ -171,7 +171,7 @@ export default defineConfig({
     vitePluginFakeServer({
       include: 'mock', // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: true // 是否在生产环境下设置mock
-    })
+    }),
     // mkcert({
     //   savePath: "./certs", // save the generated certificate into certs directory
     //   force: true, // force generation of certs even without setting https property in the vite config
