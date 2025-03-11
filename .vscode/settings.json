@@ -13,6 +13,7 @@
   "markdown.copyFiles.destination": {
     "/**/*": "/public/images/cmono-${fileName}"
   },
+  "editor.fontFamily": "'JetBrains Maple Mono', 'Fria Code Retina'",
   "unocss.root": "packages/client",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {

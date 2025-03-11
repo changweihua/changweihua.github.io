@@ -16,7 +16,7 @@ import AnimatedLogo from "#.vitepress/components/AnimatedLogo.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import ThreeLogo from "#.vitepress/components/ThreeLogo.vue";
 import CubicLoading from "#.vitepress/components/CubicLoading.vue";
-
+import { getDeviceFingerprint } from "../utils/fingerprint"
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 
@@ -364,12 +364,6 @@ export default {
 
     DefaultTheme.enhanceApp(ctx);
 
-    if (inBrowser) {
-      router.onAfterRouteChanged = () => {
-        // busuanzi.fetch();
-      };
-    }
-
     // @ts-ignore
     if (!import.meta.env.SSR) {
       // const plugin = await import('@vp/plugins/markdown/rough-mermaid')
@@ -381,6 +375,7 @@ export default {
       });
 
       app.use(yuppie);
+      // @ts-ignore
       app.use(VueResizeObserver);
 
       // app.component('SfcPlayground', SfcPlayground);
@@ -419,6 +414,9 @@ export default {
         console.log(cpu.is("arm")); // true
         console.log(device.is("mobile")); // true
         console.log(device.model); // N900
+
+        console.log(await getDeviceFingerprint(true));
+
 
         // Here you can set the routes you want to configure.
         if (to == "/") {
