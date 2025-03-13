@@ -9,7 +9,7 @@ console.log(rootFolder);
 var myArgs = process.argv.slice(2);
 console.log('myArgs: ', myArgs);
 
-let fontName = 'JetBrains'
+let fontName = 'JetBrainsMapleMono'
 
 switch (myArgs[0]) {
   case '--font':
@@ -24,7 +24,6 @@ switch (myArgs[0]) {
 }
 console.log("清空字体缓存");
 
-
 // 删除指定文件夹下面的所有文件或文件夹
 fs.emptyDirSync(path.join(rootFolder, `font/JetBrains`));
 fs.copySync(path.join(rootFolder, `font/JetBrainsTtf`), path.join(rootFolder, `font/JetBrains/ttf`))
@@ -32,9 +31,10 @@ fs.copySync(path.join(rootFolder, `font/JetBrainsTtf`), path.join(rootFolder, `f
 fs.emptyDirSync(path.join(rootFolder, `font/Alibaba`));
 fs.copySync(path.join(rootFolder, `font/AlibabaTtf`), path.join(rootFolder, `font/Alibaba/ttf`))
 
-fs.emptyDirSync(path.join(rootFolder, `font/Fangyuan`));
-fs.copySync(path.join(rootFolder, `font/FangyuanTtf`), path.join(rootFolder, `font/Fangyuan`))
+fs.emptyDirSync(path.join(rootFolder, `font/JetBrainsMapleMono`));
+fs.copySync(path.join(rootFolder, `font/JetBrainsMapleMonoTtf`), path.join(rootFolder, `font/JetBrainsMapleMono/ttf`))
 
+console.log("字体缓存已清空");
 // 删除指定文件夹下面的所有文件或文件夹
 // rfs.rmdirr(path.join(rootFolder, 'font/Alibaba'), function(err) {
 //   if (err) {

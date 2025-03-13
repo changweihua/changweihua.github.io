@@ -3,7 +3,7 @@ import { useData } from "vitepress";
 import { nextTick, onBeforeUnmount, onMounted, shallowRef, unref, watch, type Ref } from "vue";
 
 const defaultVTheme: ITheme = {
-  fontFamily: 'AlibabaPuHuiTi, JetBrainsMono, HYCuJianHeiJ',
+  fontFamily: "'JetBrains Maple Mono', JetBrainsMapleMono, AlibabaPuHuiTi, JetBrainsMono, HYCuJianHeiJ",
   background: 'transparent'
 }
 

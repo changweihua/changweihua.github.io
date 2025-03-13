@@ -10,7 +10,7 @@ console.log("移动生成好的字体");
 var myArgs = process.argv.slice(2);
 console.log('myArgs: ', myArgs);
 
-let fontName = 'JetBrains'
+let fontName = 'JetBrainsMapleMono'
 
 switch (myArgs[0]) {
   case '--font':
@@ -31,5 +31,7 @@ fs.copySync(path.join(rootFolder, `font/JetBrains`), path.join(rootFolder, `publ
 fs.emptyDirSync(path.join(rootFolder, `public/fonts/Alibaba`));
 fs.copySync(path.join(rootFolder, `font/Alibaba`), path.join(rootFolder, `public/fonts/Alibaba`))
 
-fs.emptyDirSync(path.join(rootFolder, `public/fonts/Fangyuan`));
-fs.copySync(path.join(rootFolder, `font/Fangyuan`), path.join(rootFolder, `public/fonts/Fangyuan`))
+fs.emptyDirSync(path.join(rootFolder, `public/fonts/JetBrainsMapleMono`));
+fs.copySync(path.join(rootFolder, `font/JetBrainsMapleMono`), path.join(rootFolder, `public/fonts/JetBrainsMapleMono`))
+
+console.log("生成好的字体已完成移动");

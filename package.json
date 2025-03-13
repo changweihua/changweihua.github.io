@@ -240,7 +240,7 @@
     "vitepress-plugin-back-to-top": "^1.0.1",
     "vitepress-plugin-codeblocks-fold": "^1.2.35",
     "vitepress-plugin-detype": "^0.7.0",
-    "vitepress-plugin-group-icons": "^1.3.6",
+    "vitepress-plugin-group-icons": "^1.3.7",
     "vitepress-plugin-image-viewer": "^1.1.6",
     "vitepress-plugin-nprogress": "^0.0.4",
     "vitepress-plugin-panzoom-mermaid": "^2.0.21",

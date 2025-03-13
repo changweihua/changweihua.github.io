@@ -120,8 +120,8 @@ export default withMermaid({
     //   // 'secondaryColor': '#006100',
     //   // 'tertiaryColor': '#fff'
     // },
-    fontFamily: "Fangyuan, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-    altFontFamily: "Fangyuan, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    fontFamily: "'JetBrains Maple Mono', , AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    altFontFamily: "'JetBrains Maple Mono', JetBrainsMapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
     startOnLoad: false,
     //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
   },
