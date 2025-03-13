@@ -433,6 +433,8 @@ export default {
 
       router.onAfterPageLoad = async () => {
         console.log("onAfterPageLoad");
+
+        // 图片添加边缘透明效果
       };
 
       vitepressNprogress(ctx);

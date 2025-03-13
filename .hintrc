@@ -3,20 +3,7 @@
     "development"
   ],
   "hints": {
-    "compat-api/css": [
-      "default",
-      {
-        "ignore": [
-          "backdrop-filter",
-          "text-emphasis",
-          "user-select",
-          "@view-transition",
-          "font-size-adjust",
-          "overscroll-behavior",
-          "overscroll-behavior: none"
-        ]
-      }
-    ],
+    "compat-api/css": "off",
     "css-prefix-order": "off"
   }
 }

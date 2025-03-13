@@ -459,9 +459,9 @@ html[data-theme="dark"] {
   opacity: 1;
 }
 
-@view-transition {
-  navigation: auto;
-}
+// @view-transition {
+//   navigation: auto;
+// }
 
 /* 创建自定义动画 */
 @keyframes move-out {
@@ -577,4 +577,14 @@ a.VPSkipLink::after {
 
 .vp-doc .header-anchor::before {
   display: none;
+}
+
+.filled-svg {
+  max-width: 95%;
+  max-height: 95%;
+
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
 }

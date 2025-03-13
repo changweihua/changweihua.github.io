@@ -88,11 +88,11 @@ architecture-beta
 
 ```
 
-## WEB/H5 独立新生产统计系统访问 ##
+## WEB/H5 独立雀巢平台访问 ##
 
 ```mermaid
 zenuml
-  title WEB/H5 独立新生产统计系统访问
+  title WEB/H5 独立雀巢平台访问
 
   @Actor User
   @AzureCDN SP as BusinessApp
@@ -126,17 +126,20 @@ zenuml
   }
 
   SP->Gateway: 获取应用资源
-  Gateway->Gateway: 身份判定
+  Gateway->IDP: 认证
   if(Unauthenticated) {
+      IDP->Gateway: 401
       Gateway->SP: 401
       SP->IDP: 跳转至IdentityProvider
   } else {
-    Gateway->RO: 转发请求
-    RO->RO: 权限判定
+    Gateway->IDP: 鉴权
     if(Unauthorized) {
-      RO->SP: 403
+      IDP->Gateway: 403
+      Gateway->SP: 403
       SP->SP: 自定义处理
     } else {
+      IDP->Gateway: 200
+      Gateway->RO: 转发请求
       RO->SP: 返回资源
       SP->SP: 资源展示
     }
@@ -146,11 +149,11 @@ zenuml
 
 
 
-## WEB/H5 内嵌新生产统计系统访问 ##
+## WEB/H5 内嵌雀巢访问 ##
 
 ```mermaid
 zenuml
-  title WEB/H5 内嵌新生产统计系统(用户已登录新生产统计系统)
+  title WEB/H5 内嵌雀巢访问(用户已登录)
 
   @Actor User
   @CloudFront Cares as NewLife
@@ -170,7 +173,7 @@ zenuml
   // **获取资源**
   par {
     SP->Gateway: 获取应用资源
-    Gateway->Gateway: 验证Token合法性
+    Gateway->Gateway: 认证
     // Gateway Token Invalid
     opt {
       Gateway->SP: 401
@@ -180,12 +183,14 @@ zenuml
 
     // Gateway Token Valid
     opt {
-      Gateway->RO: 转发请求
-      RO->RO: 权限判定
+      Gateway->IDP: 鉴权
       if(Unauthorized) {
-        RO->SP: 403
+        IDP->Gateway: 403
+        Gateway->SP: 403
         SP->SP: 自定义处理
       } else {
+        IDP->Gateway: 200
+        Gateway->RO: 转发请求
         RO->SP: 返回资源
         SP->SP: 资源展示
       }

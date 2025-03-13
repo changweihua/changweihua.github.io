@@ -29,17 +29,20 @@ const rightRef = useTemplateRef<HTMLDivElement>("right");
 const separatorRef = useTemplateRef<HTMLDivElement>("separator");
 
 // 使用 withDefaults 来为 props 设置默认值
-const props = withDefaults(defineProps<{
-  message?: string;
-  target?: number;
-}>(), {
-  message: 'Hello, DacingNumber!',
-  target: 1000000
-});
+const props = withDefaults(
+  defineProps<{
+    message?: string;
+    target?: number;
+  }>(),
+  {
+    message: "Hello, DacingNumber!",
+    target: 1000000,
+  },
+);
 
 let current = 0;
 const step = 42;
-let thousends: string[] = []
+let thousends: string[] = [];
 
 const start = () => {
   rightRef.value?.classList.add("animate");
@@ -51,13 +54,15 @@ const updateValues = () => {
   thousends = rest.reverse();
 
   const thousendsString = thousends.join("");
-  if (+leftRef.value.innerText != thousendsString) {
-    leftRef.value.classList.add("animate");
-  } else {
-    leftRef.value.classList.remove("animate");
+  if (leftRef.value && rightRef.value) {
+    if (+leftRef.value.innerText != thousendsString) {
+      leftRef.value.classList.add("animate");
+    } else {
+      leftRef.value.classList.remove("animate");
+    }
+    leftRef.value.innerText = thousendsString;
+    rightRef.value.innerText = first;
   }
-  leftRef.value.innerText = thousendsString;
-  rightRef.value.innerText = first;
 };
 
 const update = () => {
@@ -67,9 +72,9 @@ const update = () => {
     current -= step;
   }
   if (current >= 1000) {
-    separatorRef.value.classList.add("show");
+    separatorRef.value && separatorRef.value.classList.add("show");
   } else {
-    separatorRef.value.classList.remove("show");
+    separatorRef.value && separatorRef.value.classList.remove("show");
   }
   updateValues();
   if (Math.abs(props.target - current) > step) {
@@ -78,8 +83,8 @@ const update = () => {
     requestAnimationFrame(() => {
       current = props.target;
       updateValues();
-      leftRef.value.classList.remove("animate");
-      rightRef.value.classList.remove("animate");
+      leftRef.value && leftRef.value.classList.remove("animate");
+      rightRef.value && rightRef.value.classList.remove("animate");
     });
   }
 };

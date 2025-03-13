@@ -1,47 +1,51 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useData, useRouter } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
-import { nextTick, provide, useSlots, onMounted } from 'vue'
+import { ref, watch, onUnmounted } from "vue";
+import { useData, useRouter } from "vitepress";
+import DefaultTheme from "vitepress/theme";
+import { nextTick, provide, useSlots, onMounted } from "vue";
 import mediumZoom from "medium-zoom";
-import randomColor from 'randomcolor'
+import randomColor from "randomcolor";
+import {
+  styleImage,
+  styleImageContainer,
+} from "#.vitepress/utils/fillImage.ts";
 // import { MyButton, Panel } from 'yuppie-ui'
 // import Kinet from 'kinet';
 
-const { isDark } = useData()
-const slots = Object.keys(useSlots())
+const { isDark } = useData();
+const slots = Object.keys(useSlots());
 const enableTransitions = () =>
-  'startViewTransition' in document &&
-  window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  "startViewTransition" in document &&
+  window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
 
-provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
+provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
   if (!enableTransitions()) {
-    isDark.value = !isDark.value
-    return
+    isDark.value = !isDark.value;
+    return;
   }
 
   const clipPath = [
     `circle(0px at ${x}px ${y}px)`,
     `circle(${Math.hypot(
       Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y)
-    )}px at ${x}px ${y}px)`
-  ]
+      Math.max(y, innerHeight - y),
+    )}px at ${x}px ${y}px)`,
+  ];
 
   await document.startViewTransition(async () => {
-    isDark.value = !isDark.value
-    await nextTick()
-  }).ready
+    isDark.value = !isDark.value;
+    await nextTick();
+  }).ready;
 
   document.documentElement.animate(
     { clipPath: isDark.value ? clipPath.reverse() : clipPath },
     {
       duration: 300,
-      easing: 'ease-in',
-      pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
-    }
-  )
-})
+      easing: "ease-in",
+      pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`,
+    },
+  );
+});
 
 const { route } = useRouter();
 const isTransitioning = ref(false);
@@ -49,81 +53,72 @@ const isTransitioning = ref(false);
 watch(
   () => route.path,
   () => {
-    console.log('页面动画')
+    console.log("页面动画");
     isTransitioning.value = true;
     // 动画结束后重置状态
     setTimeout(() => {
       isTransitioning.value = false;
     }, 1500); // 500ms 要和 CSS 动画时间匹配
-  }
+  },
 );
-
-// const kinet = new Kinet({
-//   acceleration: 0.02,
-//   friction: 0.25,
-//   names: ["x", "y"],
-// });
-
-// // select circle element
-// let circle: HTMLElement;
-
-// // set handler on kinet tick event
-// kinet.on('tick', function (instances) {
-//   if (circle) {
-//     circle.style.transform = `translate3d(${(instances.x.current)}px, ${(instances.y.current)}px, 0) rotateX(${(instances.x.velocity / 2)}deg) rotateY(${(instances.y.velocity / 2)}deg)`;
-//   }
-// });
-
-// // call kinet animate method on mousemove
-// document.addEventListener('mousemove', function (event) {
-//   kinet.animate('x', event.clientX - window.innerWidth / 2);
-//   kinet.animate('y', event.clientY - window.innerHeight / 2);
-// });
-
-// // log
-// kinet.on('start', function () {
-//   console.log('start');
-// });
-
-// kinet.on('end', function () {
-//   console.log('end');
-// });
 
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
   mediumZoom("[data-zoomable]", {
     background: "transparent",
-    container: document.body
+    container: document.body,
   });
 };
 
+/*
+ * 在我们创建MutationObserver对象的时候可以传入一个函数，
+ *
+ */
+let observer: MutationObserver;
+
 onMounted(() => {
-  setupMediumZoom()
-  // circle = document.getElementById('circle')!;
-})
+  setupMediumZoom();
+  // observer = new MutationObserver((mutations) => {
+  //   console.log(mutations);
+  //   // => 返回一个我们监听到的MutationRecord对象
+  //   // MutationRecord对象 是我们每修改一个就会在数组里面追加一个
+  // });
+  // observer.observe(document.documentElement, { attributes: true });
+});
+
+// onUnmounted(() => observer?.disconnect());
 
 const router = useRouter();
 // Subscribe to route changes to re-apply medium zoom effect
-router.onAfterRouteChanged = function () {
-  setupMediumZoom()
-}
+router.onAfterPageLoad = function () {
+  setupMediumZoom();
 
-console.log(randomColor({
-  hue: "yellow",
-  luminosity: "dark",
-  count: 10,
-  seed: "test", //不传值就是随机
-  format: "hex",
-  alpha: 0.5
-})
-)
+  const images = document.querySelectorAll(".vp-doc img");
+  images.forEach((image) => {
+    image && styleImage(image as HTMLElement);
+  });
+};
+
+console.log(
+  randomColor({
+    hue: "yellow",
+    luminosity: "dark",
+    count: 10,
+    seed: "test", //不传值就是随机
+    format: "hex",
+    alpha: 0.5,
+  }),
+);
 
 // v-slot:default="slotProps"
 </script>
 
 <template>
-  <transition class="animate__tada" enter-active-class="animate__animated animate__tada"
-    leave-active-class="animate__animated animate__bounce">
+  <transition
+    class="animate__tada"
+    enter-active-class="animate__animated animate__tada"
+    leave-active-class="animate__animated animate__bounce"
+  >
     <div>
       <DefaultTheme.Layout>
         <template #doc-top>
@@ -131,7 +126,11 @@ console.log(randomColor({
             &nbsp;
           </div>
         </template>
-        <template v-for="(slotKey, slotIndex) in slots" :key="slotIndex" v-slot:[slotKey]>
+        <template
+          v-for="(slotKey, slotIndex) in slots"
+          :key="slotIndex"
+          v-slot:[slotKey]
+        >
           <slot :name="slotKey"></slot>
         </template>
         <!-- <template #doc-after>
@@ -200,7 +199,10 @@ console.log(randomColor({
   mix-blend-mode: screen;
   z-index: 10;
   background-color: var(--vp-c-brand);
-  box-shadow: 0px 0px 8px 0px #FDFCA9 inset, 0px 0px 24px 0px #FFEB3B, 0px 0px 8px 0px #FFFFFF42;
+  box-shadow:
+    0px 0px 8px 0px #fdfca9 inset,
+    0px 0px 24px 0px #ffeb3b,
+    0px 0px 8px 0px #ffffff42;
 }
 
 .button-wrapper {
@@ -218,7 +220,7 @@ console.log(randomColor({
 
 .button::before {
   content: "";
-  box-shadow: 0px 0px 24px 0px #FFEB3B;
+  box-shadow: 0px 0px 24px 0px #ffeb3b;
   mix-blend-mode: screen;
   transition: opacity 0.3s;
 
@@ -233,7 +235,9 @@ console.log(randomColor({
 
 .button::after {
   content: "";
-  box-shadow: 0px 0px 23px 0px #FDFCA9 inset, 0px 0px 8px 0px #FFFFFF42;
+  box-shadow:
+    0px 0px 23px 0px #fdfca9 inset,
+    0px 0px 8px 0px #ffffff42;
   transition: opacity 0.3s;
 
   position: absolute;
@@ -246,7 +250,6 @@ console.log(randomColor({
 }
 
 .button-wrapper:hover {
-
   .button::before,
   .button::after {
     opacity: 1;
@@ -267,19 +270,25 @@ console.log(randomColor({
   transition: transform calc(var(--speed) / 12) ease;
   width: var(--size);
   height: var(--size);
-  transform: translate(var(--starting-x), var(--starting-y)) rotate(var(--rotatation));
+  transform: translate(var(--starting-x), var(--starting-y))
+    rotate(var(--rotatation));
 }
 
 .dot::after {
   content: "";
-  animation: hoverFirefly var(--speed) infinite, dimFirefly calc(var(--speed) / 2) infinite calc(var(--speed) / 3);
+  animation:
+    hoverFirefly var(--speed) infinite,
+    dimFirefly calc(var(--speed) / 2) infinite calc(var(--speed) / 3);
   animation-play-state: paused;
   display: block;
   border-radius: 100%;
   background: yellow;
   width: 100%;
   height: 100%;
-  box-shadow: 0px 0px 6px 0px #FFEB3B, 0px 0px 4px 0px #FDFCA9 inset, 0px 0px 2px 1px #FFFFFF42;
+  box-shadow:
+    0px 0px 6px 0px #ffeb3b,
+    0px 0px 4px 0px #fdfca9 inset,
+    0px 0px 2px 1px #ffffff42;
 }
 
 .dot-1 {
@@ -484,7 +493,9 @@ body {
 body {
   margin: 0;
   transition: --scroll-position-delayed 0.15s linear;
-  --scroll-velocity: calc(var(--scroll-position) - var(--scroll-position-delayed));
+  --scroll-velocity: calc(
+    var(--scroll-position) - var(--scroll-position-delayed)
+  );
   --scroll-dynamic: calc(var(--scroll-velocity) / var(--scroll-velocity));
 }
 
@@ -493,7 +504,8 @@ body {
   right: 10px;
   bottom: 10px;
   z-index: 999;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E %3Cpath fill='%23fff' d='M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z'%3E%3C/path%3E %3C/svg%3E") center/ 20px no-repeat royalblue;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E %3Cpath fill='%23fff' d='M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z'%3E%3C/path%3E %3C/svg%3E")
+    center/ 20px no-repeat royalblue;
   border-radius: 8px;
   width: 60px;
   height: 60px;
