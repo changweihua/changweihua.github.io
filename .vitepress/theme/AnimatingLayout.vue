@@ -93,10 +93,12 @@ const router = useRouter();
 router.onAfterPageLoad = function () {
   setupMediumZoom();
 
+  /*
   const images = document.querySelectorAll(".vp-doc img");
   images.forEach((image) => {
     image && styleImage(image as HTMLElement);
   });
+  */
 };
 
 console.log(

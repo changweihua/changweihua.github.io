@@ -20,6 +20,7 @@ import { vitePluginFakeServer } from 'vite-plugin-fake-server'
 import { updateMetadata } from './plugins/vitePluginUpdateMetadata'
 // import VueDevTools from 'vite-plugin-vue-devtools-cn'
 // import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
+import versionInjector from 'unplugin-version-injector';
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -94,6 +95,7 @@ export default defineConfig({
       ifLog: true,
       ifGlobal: true,
     }),
+    // versionInjector.vite(),
     updateMetadata(),
     yourPlugin(),
     // ViteCompressionPlugin({

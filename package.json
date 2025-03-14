@@ -88,7 +88,7 @@
     "markdown-it": "^14.1.0",
     "markdown-it-mathjax3": "^4.3.2",
     "md5": "^2.3.0",
-    "mermaid": "^11.4.1",
+    "mermaid": "^11.5.0",
     "mkcert": "^3.2.0",
     "patch-package": "^8.0.0",
     "postcss": "^8.5.3",
@@ -100,6 +100,7 @@
     "unplugin-auto-import": "^19.1.1",
     "unplugin-iconify-generator": "^0.7.3",
     "unplugin-icons": "^22.1.0",
+    "unplugin-version-injector": "^1.0.3",
     "unplugin-vue-components": "^28.4.1",
     "version-mark": "^0.0.5",
     "vfonts": "^0.0.3",
@@ -256,6 +257,7 @@
     "yuppie-ui": "^0.0.11"
   },
   "overrides": {
+    "mermaid": "^11.5.0",
     "release-it": "^18.0.0",
     "vite": "^6.0.0",
     "vite-plugin-html": "^3.2.2",

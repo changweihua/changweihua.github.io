@@ -26,7 +26,7 @@ React 提供了一种方法来引用组件对应的 DOM 元素，这就是 refs�
 
 在类组件中，使用 `React.createRef()` 来创建一个 ref。
 
-```react
+```vue
 import React, { Component } from 'react';
  
 class MyComponent extends Component {
@@ -54,7 +54,7 @@ export default MyComponent;
 
 在函数组件中，可以使用 `useRef` 钩子来创建 refs。useRef 允许我们在函数组件中保持对 DOM 元素的引用。
 
-```react
+```vue
 import React, { useRef, useEffect } from 'react';
  
 const MyComponent = () => {
@@ -80,7 +80,7 @@ export default MyComponent;
 
 回调 refs 是一个函数，该函数接收 DOM 元素作为参数，并可以在组件的生命周期中动态更新。
 
-```react
+```vue
 import React, { Component } from 'react';
  
 class MyComponent extends Component {
@@ -111,7 +111,7 @@ export default MyComponent;
 
 在函数组件中，同样可以使用回调 refs。如下所示：
 
-```react
+```vue
 import React, { useEffect } from 'react';
  
 const MyComponent = () => {
@@ -141,7 +141,7 @@ export default MyComponent;
 
 在类组件中，可以将 refs 存储为数组：
 
-```react
+```vue
 import React, { Component } from 'react';
  
 class MyComponent extends Component {
@@ -182,7 +182,7 @@ export default MyComponent;
 
 在函数组件中，使用 useRef 和 Map 可以实现相同的效果：
 
-```react
+```vue
 import React, { useRef, useEffect } from 'react';
  
 const MyComponent = () => {

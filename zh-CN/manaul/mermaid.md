@@ -18,6 +18,10 @@ journey
 ```
 
 ```mermaid
+---
+config:
+  look: handDrawn
+---
 architecture-beta
     group api(cloud)[API]
 

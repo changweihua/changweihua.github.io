@@ -19,7 +19,7 @@ pageClass: blog-page-class
 
 所以可以自定义一个组件实现网络加载图片失败后的占位图：
 
-```react
+```vue
 import React from 'react';
 import {Image} from 'react-native';
 import PropTypes from 'prop-types';
@@ -63,7 +63,7 @@ export default ImageView;
 
 如果希望Image在未加载网络图片时就有占位图可以用两个Image实现:
 
-```react
+```vue
 import React from 'react';
 import {Image, StyleSheet, View, ViewPropTypes} from 'react-native';
 import PropTypes from 'prop-types';
@@ -106,6 +106,6 @@ export default ImageView;
 
 使用时设置placeHolderSource为占位图资源即可。
 
-```react
+```vue
 <ImageView style={styles.icon} source={{uri: imageUrl}} placeholderSource={require("./img/icon.png")}/>
 ```

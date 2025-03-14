@@ -5,62 +5,6 @@ layout: doc
 pageClass: manual-page-class
 ---
 
-## 开发计划 ##
-
-
-```mermaid
----
-title: Hello Title
-zoomable: true
----
-gantt
-	dateFormat YY-MM-DD
-	axisFormat %y.%m.%d
-	excludes weekends
-	title XXX项目开发计划
-
-	% 定义第一个section
-	section 预研
-	技术预研: done, preface1, 25-01-01, 1w
-	方案预研: done, preface2, 25-01-01, 1w
-	内部讨论: crit, done, preface3, after preface2, 2d
-	
-	section 研发
-	前端: done, dev1, after preface3, 15d
-	后端: done, dev2, after preface3, 30d
-	前后端联调: active, co-dev, after b2, 7d
-	
-	section 测试
-	功能测试: test1, after co-dev, 7d
-	性能测试: test2, after co-dev, 14d
-	打包: test3, after test2, 3d
-	
-	section 发布
-	预发布: release1, after c3, 2025-03-31
-	正式发布: release2, after release1, 2d
-	功能上线: milestone, release3, after release2, 0d
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-
-```
 
 ## 网络拓扑图 ##
 
@@ -88,11 +32,11 @@ architecture-beta
 
 ```
 
-## WEB/H5 独立雀巢平台访问 ##
+## WEB/H5 独立开放平台访问 ##
 
 ```mermaid
 zenuml
-  title WEB/H5 独立雀巢平台访问
+  title WEB/H5 独立开放平台访问
 
   @Actor User
   @AzureCDN SP as BusinessApp
@@ -194,30 +138,6 @@ zenuml
         RO->SP: 返回资源
         SP->SP: 资源展示
       }
-    }
-  }
-```
-
-
-
-```mermaid
-zenuml
-  // **获取资源**
-  par {
-    SP->Gateway: 获取应用资源
-    Gateway->Gateway: 验证Token合法性
-    // Gateway Token Invalid
-    opt {
-      Gateway->SP: 401
-      SP->IDP: 跳转至IdentityProvider
-    }
-
-    // Gateway Token Valid
-    opt {
-      Gateway->RO: 转发请求
-      RO->RO: 权限判定
-      RO->SP: 资源内容
-      SP->SP: 资源展示
     }
   }
 ```

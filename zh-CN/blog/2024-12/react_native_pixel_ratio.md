@@ -26,7 +26,7 @@ const image = getImage({
 <Image source={image} style={{width: 200, height: 100}} />
 ```
 
-```react
+```vue
 import React from 'react';  
 import { View, Text, PixelRatio, StyleSheet } from 'react-native';  
 import { Dimensions } from 'react-native'; //使用了 `Dimensions` API 来获取屏幕宽度
