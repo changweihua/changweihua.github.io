@@ -59,10 +59,10 @@ readFile(path.resolve(rootFolder, "CODE_OF_CONDUCT.md"), filesList);
 readFile(path.resolve(rootFolder, "CONTRIBUTING.md"), filesList);
 readFile(path.resolve(rootFolder, ".vitepress/config.ts"), filesList);
 
-fs.stat(path.resolve(rootFolder, "font/local"), function (err, statObj) {
+fs.stat(path.resolve(rootFolder, "font/temp/local"), function (err, statObj) {
   // 判断local文件是否存在，如果不存在则创建，如果创建则直接处理json文件
   if (!statObj) {
-    fs.mkdir(path.resolve(rootFolder, "font/local"), function (err) {
+    fs.mkdir(path.resolve(rootFolder, "font/temp/local"), function (err) {
       writeFile(filesList, "index");
       writeFile(jsFilesList, "jsIndex");
     });
@@ -109,7 +109,7 @@ function writeFile(fileArr, fileName) {
   }, {});
   // 创建json文件
   fs.writeFile(
-    path.resolve(rootFolder, `font/local/${fileName}.json`),
+    path.resolve(rootFolder, `font/temp/local/${fileName}.json`),
     JSON.stringify(obj),
     "utf8",
     function (err) {
@@ -130,14 +130,14 @@ fs.readFile(
     let result = "";
 
     const content1 = fs.readFileSync(
-      path.join(rootFolder, "font/local/index.json"),
+      path.join(rootFolder, "font/temp/local/index.json"),
       "utf8"
     );
 
     result = data.replace(/__CONTENT1__/g, content1);
 
     const content2 = fs.readFileSync(
-      path.join(rootFolder, "font/local/jsIndex.json"),
+      path.join(rootFolder, "font/temp/local/jsIndex.json"),
       "utf8"
     );
 

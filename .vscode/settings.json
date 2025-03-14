@@ -27,7 +27,7 @@
   "window.fontFamily": "JetBrains Maple Mono, Fria Code Retina",  // 部分测试版本可能支持
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "index.html": "index.html,*.css",
+    "index.html": "index.html,index.*.html,*.css",
     "package.json": ".nvmrc,.npmrc,tsconfig.*.json,*.cjs,*.js,*.json,*.config.ts,*.config.cjs,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig",
     ".env": "env.*,.env.*",
     "auto-imports.d.ts": "auto-imports.d.ts,components.d.ts",

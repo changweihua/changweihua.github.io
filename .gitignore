@@ -6,3 +6,10 @@ node_modules
 .vitepress/cache
 background-removal
 public/package.tgz
+font/Alibaba
+font/AlibabaTtf
+font/JetBrains
+font/JetBrainsTtf
+font/JetBrainsMapleMono
+font/JetBrainsMapleMonoTtf
+font/temp
