@@ -1,6 +1,7 @@
 ---
 outline: page
 layout: home
+pageClass: manuals-page-class
 # footer: false
 
 features:
