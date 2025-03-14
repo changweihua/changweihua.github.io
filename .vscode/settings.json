@@ -13,9 +13,18 @@
   "markdown.copyFiles.destination": {
     "/**/*": "/public/images/cmono-${fileName}"
   },
-  "editor.fontFamily": "'JetBrains Maple Mono', 'Fria Code Retina'",
-  "debug.console.fontFamily": "'JetBrains Maple Mono', 'Fria Code Retina'",
+  "editor.fontFamily": "JetBrains Maple Mono, Fria Code Retina",         // 代码编辑器
+  "terminal.integrated.fontFamily": "JetBrains Maple Mono, Fria Code Retina",  // 终端
+  "debug.console.fontFamily": "JetBrains Maple Mono, Fria Code Retina",       // 调试控制台
+  "markdown.preview.fontFamily": "JetBrains Maple Mono, Fria Code Retina",     // Markdown预览
+  "gitlens.views.fontFamily": "JetBrains Maple Mono, Fria Code Retina",       // GitLens扩展视图（需安装GitLens）
+  "workbench.tips.fontFamily": "JetBrains Maple Mono, Fria Code Retina",        // 提示信息（部分版本无效）
+  "workbench.desktopUI.fontFamily": "JetBrains Maple Mono, Fria Code Retina",
   "unocss.root": "packages/client",
+  "workbench.fontAliasing": "antialiased",  // 字体渲染方式（可选）
+  "window.titleBarStyle": "custom",          // 启用自定义标题栏
+  "workbench.experimental.settingsSandbox": true,
+  "window.fontFamily": "JetBrains Maple Mono, Fria Code Retina",  // 部分测试版本可能支持
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "index.html": "index.html,*.css",
@@ -34,7 +43,6 @@
   "git.blame.statusBarItem.enabled": true,
   "git.blame.editorDecoration.template": "${subject}, ${authorName} (${authorDateAgo})",
   "terminal.integrated.fontLigatures": true,
-  "terminal.integrated.fontFamily": "Fira Code",
   "files.trimTrailingWhitespace": true,
   "[markdown]": {
     "files.trimTrailingWhitespace": false

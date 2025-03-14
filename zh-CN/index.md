@@ -20,8 +20,8 @@ hero:
       text: 作者简历
       link: /zh-CN/resume
     - theme: alt
-      text: 我的2024
-      link: /zh-CN/me.2024
+      text: 我的2025
+      link: /zh-CN/me.2025
     # - theme: alt
     #   text: Github
     #   link: https://github.com/changweihua
