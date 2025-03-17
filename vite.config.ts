@@ -176,7 +176,8 @@ export default defineConfig({
     }),
     mkcert({
       savePath: "./certs", // save the generated certificate into certs directory
-      force: true, // force generation of certs even without setting https property in the vite config
+      autoUpgrade: true,
+      force: false, // force generation of certs even without setting https property in the vite config
     }),
   ],
   css: {

@@ -9,7 +9,17 @@
   --vp-font-family-base: @app-font-family;
   --vp-font-family-mono: @app-font-family;
   --vp-header-anchor-symbol: "🔗";
+  /* 建立CSS变量与Mermaid的映射 */
+  --zenuml-primary: var(--mermaid-zenumlPrimary, #4CAF50);
+  --zenuml-bg: var(--mermaid-zenumlBg, #FAFAFA);
 }
+
+/* 组件样式继承 */
+.zenuml-diagram {
+  background: var(--zenuml-bg);
+  border: 1px solid var(--zenuml-primary);
+}
+
 
 html,
 body {
