@@ -3,6 +3,7 @@ import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 //引入以上配置 是英文界面需要修改zh为en
 import { getZhCNNav } from "../navs";
 import { getZhCNSidebar } from "../sidebars";
+import { getZhCNFooter } from "../footers"
 
 import dayjs from 'dayjs'
 
@@ -11,7 +12,10 @@ export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   title: "CMONO.NET",
   lang: "zh-CN",
   themeConfig: {
+    // 导航上的logo
     logo: "/logo.png",
+    // 隐藏logo右边的标题
+    siteTitle: false,
     lastUpdatedText: "上次更新",
     returnToTopLabel: "返回顶部",
     // 文档页脚文本配置
@@ -19,10 +23,7 @@ export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       prev: "上一页",
       next: "下一页",
     },
-    footer: {
-      message: "MIT Licensed",
-      copyright: `Copyright © 2009-${dayjs().year()} CMONO.NET`,
-    },
+    footer: getZhCNFooter(),
     //   editLink: {
     //     pattern: '路径地址',
     //     text: '对本页提出修改建议',

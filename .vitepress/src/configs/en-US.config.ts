@@ -11,7 +11,10 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   title: "CMONO.NET",
   lang: "en-US",
   themeConfig: {
+    // 导航上的logo
     logo: "/logo.png",
+    // 隐藏logo右边的标题
+    siteTitle: false,
     lastUpdatedText: "Last Updated",
     returnToTopLabel: "TOP",
     // 文档页脚文本配置

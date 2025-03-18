@@ -15,6 +15,7 @@ import HeroImage from "#.vitepress/components/HeroImage.vue";
 import AnimatedLogo from "#.vitepress/components/AnimatedLogo.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import ThreeLogo from "#.vitepress/components/ThreeLogo.vue";
+import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import CubicLoading from "#.vitepress/components/CubicLoading.vue";
 import { getDeviceFingerprint } from "../utils/fingerprint"
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
@@ -378,7 +379,7 @@ export default {
       // @ts-ignore
       app.use(VueResizeObserver);
 
-      // app.component('SfcPlayground', SfcPlayground);
+      app.component("MarkdownEChart", MarkdownEChart);
 
       app.use(directives);
 

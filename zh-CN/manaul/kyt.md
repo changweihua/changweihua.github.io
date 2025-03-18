@@ -8,6 +8,39 @@ pageClass: manual-page-class
 
 ## 网络拓扑图 ##
 
+```echarts
+{
+        "title": {
+            "text": "第一个 ECharts 实例"
+        },
+        "tooltip": {},
+        "legend": {
+            "data":["小红", "小明", "小黑"]
+        },
+        "xAxis": {
+            "data": ["语文","数学","英语"]
+        },
+        "yAxis": {},
+        "series": [
+        {
+            "name": "小红",
+            "type": "bar",
+            "data": [45, 15, 32]
+        },
+        {
+            "name": "小明",
+            "type": "bar",
+            "data": [44, 14, 33]
+        },
+        {
+            "name": "小黑",
+            "type": "bar",
+            "data": [38, 10, 35]
+        }
+        ]
+    }
+```
+
 
 ```mermaid
 architecture-beta
@@ -39,9 +72,9 @@ zenuml
   title WEB/H5 独立开放平台访问
 
   @Actor User
-  @AzureCDN SP as BusinessApp
+  @AzureCDN SP as App
   @PubSub Gateway as Envoy
-  @CosmosDB IDP as IdentityProvider
+  @CosmosDB IDP as IdP
   @Database RO as ResourceOwner
   
   SP->SP: 检测登录状态
@@ -92,7 +125,6 @@ zenuml
 ```
 
 
-
 ## WEB/H5 内嵌雀巢访问 ##
 
 ```mermaid
@@ -101,10 +133,10 @@ zenuml
 
   @Actor User
   @CloudFront Cares as NewLife
-  @AzureCDN SP as BusinessApp
+  @AzureCDN SP as App
   @PubSub Gateway as Envoy
   @Database RO as ResourceOwner
-  @CosmosDB IDP as IdentityProvider
+  @CosmosDB IDP as IdP
   
   Cares->SP: 携带Token打开
   SP->SP: 解析Token

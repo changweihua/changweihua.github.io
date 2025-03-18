@@ -21,7 +21,7 @@ import { ruby } from "@mdit/plugin-ruby";
 import markdownCjkBreaks from 'markdown-it-cjk-breaks'
 import { markdownItStepper } from 'vitepress-markdown-it-stepper'
 import { ImagePlugin } from '../plugins/markdown/image'
-// import mermaidPlugin from '../plugins/markdown/rough-mermaid'
+import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
 import markupPlugin from '../plugins/markdown/markup'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
 import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
@@ -59,7 +59,7 @@ const markdown: MarkdownOptions | undefined = {
     renderExcerpt: false,
   },
   config: (md) => {
-    useDefinePlugin(md, CONSTS)
+    useDefinePlugin(md, CONSTS);
 
     md.use(vitepressDemoPlugin);
     md.use(footnote);
@@ -68,20 +68,20 @@ const markdown: MarkdownOptions | undefined = {
     md.use(frontmatter);
     md.use(markdownSup);
     md.use(markdownSub);
-    md.use(hashmention)
+    md.use(hashmention);
     md.use(MarkdownItTodoLists, {
-      enabled: true
-    })
-    md.use(MarkdownItVariable)
-    md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] })
-    markdownItMark(md)
+      enabled: true,
+    });
+    md.use(MarkdownItVariable);
+    md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
+    markdownItMark(md);
     markdownLinks(md, {
       externalClassName: "custom-external-link",
       internalClassName: "custom-internal-link",
-      internalDomains: ["https://changweihua.github.io"]
-    })
+      internalDomains: ["https://changweihua.github.io"],
+    });
     // @ts-ignore
-    markdownItStepper(md)
+    markdownItStepper(md);
     // md.use(fitmedia, {
     //   //default options, you can omit these
     //   imgDir: "",
@@ -89,33 +89,33 @@ const markdown: MarkdownOptions | undefined = {
     //   imgDecoding: "auto",
     //   fitElements: ["iframe", "video"],
     // })
-    strikethrough(md)
+    strikethrough(md);
     md.use(lightbox, {});
     md.use(namedCode, { isEnableInlineCss: true });
     md.use(lazy_loading);
     md.use(timeline);
-    tabsPlugin(md)
-    md.use(groupIconMdPlugin)
-    // md.use(mermaidPlugin)
-    md.use(markupPlugin)
+    tabsPlugin(md);
+    md.use(groupIconMdPlugin);
+    md.use(echartsMarkdownPlugin)
+    md.use(markupPlugin);
     md.use(MarkdownItCollapsible);
 
-    const docRoot = fileURLToPath(new URL('../../', import.meta.url))
+    const docRoot = fileURLToPath(new URL("../../", import.meta.url));
     md.use(demoPreviewPlugin, {
-      docRoot
-    })
+      docRoot,
+    });
 
-    md.use(ImagePlugin)
+    md.use(ImagePlugin);
 
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {
       let htmlResult = slf.renderToken(tokens, idx, options);
-      if (tokens[idx].tag === 'h1') {
-        htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`
+      if (tokens[idx].tag === "h1") {
+        htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`;
       }
       // if (tokens[idx].tag === 'h1') htmlResult += `\n<ClientOnly><ArticleMetadata v-if="($frontmatter?.aside ?? true) && ($frontmatter?.showArticleMetadata ?? true)" :article="$frontmatter" /></ClientOnly>`;
       return htmlResult;
-    }
+    };
 
     // const orig = md.render;
     // md.render = (src, env) => {

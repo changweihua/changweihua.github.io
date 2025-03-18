@@ -120,14 +120,14 @@ export default withMermaid({
     //   // 'secondaryColor': '#006100',
     //   // 'tertiaryColor': '#fff'
     // },
-    fontFamily: "'JetBrains Maple Mono', , AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-    altFontFamily: "'JetBrains Maple Mono', JetBrainsMapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    fontFamily: "JetBrainsMapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    altFontFamily: "JetBrainsMapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
     startOnLoad: false,
     //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
   },
   // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
   mermaidPlugin: {
-    class: "mermaid rough-mermaid" // 为父容器设置额外的CSS类
+    class: "mermaid rough-mermaid", // 为父容器设置额外的CSS类
   },
   // srcDir: '.',
   vite: {
