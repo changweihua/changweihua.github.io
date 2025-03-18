@@ -12,6 +12,7 @@ declare module 'vue' {
     Airport: typeof import('./src/components/Airport.vue')['default']
     AirStrip: typeof import('./src/components/AirStrip.vue')['default']
     BackgroundCleaner: typeof import('./src/components/BackgroundCleaner.vue')['default']
+    CardListView: typeof import('./src/components/CardListView.vue')['default']
     ConfigProvider: typeof import('./src/components/ConfigProvider.vue')['default']
     FireWorks: typeof import('./src/components/FireWorks.vue')['default']
     FloatingMenu: typeof import('./src/components/FloatingMenu.vue')['default']

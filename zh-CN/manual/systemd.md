@@ -2,6 +2,10 @@
 outline: false
 aside: false
 layout: doc
+date: 2025-03
+title: systemd定时器
+description: systemd定时器
+category: 工具
 pageClass: manual-page-class
 ---
 

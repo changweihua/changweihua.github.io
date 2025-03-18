@@ -13,7 +13,7 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     },
     {
       text: "手册",
-      link: "/zh-CN/manauls.md",
+      link: "/zh-CN/manual/",
     },
     {
       text: "那些年",

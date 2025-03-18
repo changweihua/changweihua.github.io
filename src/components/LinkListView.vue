@@ -52,6 +52,14 @@
 import { useTemplateRef, ref } from "vue";
 import ColorThief from "colorthief";
 
+// // 示例：解析 CSV 字符串
+// const csvString = `name,age,city\nAlice,25,New York\nBob,30,Los Angeles`;
+// parseCSVFile(csvString).then(parsedData => {
+//   console.log(parsedData);
+// }).catch(error => {
+//   console.error('Error parsing CSV:', error);
+// });
+
 const palette = useTemplateRef<HTMLDivElement>("palette");
 
 const colorThief = new ColorThief();

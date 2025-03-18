@@ -1,6 +1,11 @@
 ---
 outline: page
 footer: false
+date: 2025-03
+title: Mermaid
+description: Mermaid
+category: 工具
+pageClass: manual-page-class
 ---
 
 ## 用户旅程图 ##

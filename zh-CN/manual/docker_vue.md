@@ -2,6 +2,10 @@
 outline: false
 aside: false
 layout: doc
+date: 2025-01
+title: docker的安装
+description: docker的安装
+category: 工具
 pageClass: manual-page-class
 ---
 

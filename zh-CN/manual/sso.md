@@ -2,6 +2,10 @@
 outline: false
 aside: false
 layout: doc
+date: 2025-03
+title: SSO 单点登录
+description: SSO 单点登录
+category: 平台
 pageClass: manual-page-class
 ---
 
