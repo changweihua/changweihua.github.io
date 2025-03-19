@@ -4,6 +4,19 @@
   ],
   "hints": {
     "compat-api/css": "off",
-    "css-prefix-order": "off"
+    "css-prefix-order": "off",
+    "axe/name-role-value": [
+      "default",
+      {
+        "link-name": "off"
+      }
+    ],
+    "button-type": "off",
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
+      }
+    ]
   }
 }

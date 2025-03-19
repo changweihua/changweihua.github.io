@@ -36,65 +36,69 @@
 }
 
 .vp-doc .custom-block {
-    padding: 8px 16px;
+  padding: 8px 16px;
 }
 
 .vp-doc .custom-block :first-child:first-child {
-    margin: 8px 0;
+  margin: 8px 0;
 }
 
 .VPMenuGroup > .title {
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
 
 .vp-doc a {
-    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 2px;
-    text-decoration: none;
-    transition: 0.2s;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 2px;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
 .vp-doc a:hover {
-    border-radius: 0.2em;
-    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 100%;
+  border-radius: 0.2em;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 100%;
 }
 
 .vp-doc strong {
-    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 40%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 40%;
 }
 
 .vp-doc s {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 /* 首页 Feature 图标样式 */
 .VPFeature {
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
 }
 
 .VPFeature .icon {
-    position: absolute;
-    opacity: 0.15;
-    right: 10%;
-    background-color: transparent;
-    font-size: 8em;
-    z-index: -1;
+  position: absolute;
+  opacity: 0.15;
+  right: 10%;
+  background-color: transparent;
+  font-size: 8em;
+  z-index: -1;
 }
 
-.fa-solid, .fa-regular, .fa-brands {
-    width: 1.2em;
-    vertical-align: middle;
-    text-align: center;
+.fa-solid,
+.fa-regular,
+.fa-brands {
+  width: 1.2em;
+  vertical-align: middle;
+  text-align: center;
 }
 
 :where(.iconify) {
-    display: inline-block;
-    flex-shrink: 0;
-    font-size: 1.2em;
-    vertical-align: sub;
+  display: inline-block;
+  flex-shrink: 0;
+  font-size: 1.2em;
+  vertical-align: sub;
 }
-
 
 /* 文档二级标题编号 */
 // .vp-doc {
@@ -114,3 +118,39 @@
 //     color: var(--vp-c-divider);
 //     z-index: -1;
 // }
+
+@media print {
+  /* 隐藏导航栏/侧边栏等不需要打印的元素 */
+  .VPNav,
+  .VPSidebar,
+  .edit-link,
+  .prev-next {
+    display: none !important;
+  }
+
+  /* 优化内容显示 */
+  .content {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* 强制黑白打印 */
+  * {
+    color: #000 !important;
+    background: transparent !important;
+  }
+
+  /* 处理代码块换行 */
+  pre {
+    white-space: pre-wrap !important;
+  }
+
+  /* 防止分页截断内容 */
+  .content-block {
+    page-break-inside: avoid;
+  }
+  /* 在标题前分页 */
+  h2 {
+    page-break-before: always;
+  }
+}

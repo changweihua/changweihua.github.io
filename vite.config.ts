@@ -9,18 +9,20 @@ import type { Plugin } from "vite";
 import { vitePluginVersionMark } from "vite-plugin-version-mark";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import Inspect from "vite-plugin-inspect";
-import ViteCompressionPlugin from 'vite-plugin-compression'
+import ViteCompressionPlugin from "vite-plugin-compression";
 import VueDevTools from "vite-plugin-vue-devtools";
 import mkcert from "vite-plugin-mkcert";
-import Iconify from 'unplugin-iconify-generator/vite'
-import { envParse } from 'vite-plugin-env-parse'
+import Iconify from "unplugin-iconify-generator/vite";
+import { envParse } from "vite-plugin-env-parse";
 import fs from "node:fs";
 import { preloadImages } from "./plugins/vitePreloadImage.ts";
-import { vitePluginFakeServer } from 'vite-plugin-fake-server'
-import { updateMetadata } from './plugins/vitePluginUpdateMetadata'
+import { vitePluginFakeServer } from "vite-plugin-fake-server";
+import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 // import VueDevTools from 'vite-plugin-vue-devtools-cn'
 // import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
-import versionInjector from 'unplugin-version-injector';
+import versionInjector from "unplugin-version-injector";
+import importToCDN from "vite-plugin-cdn-import";
+import { visualizer } from "rollup-plugin-visualizer";
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -60,7 +62,16 @@ export default defineConfig({
     // minify: true, // 必须开启：使用terserOptions才有效果
     chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
     emptyOutDir: true,
-    rollupOptions: {},
+    rollupOptions: {
+      // external: ["vue"], // 排除已配置 CDN 的依赖
+      output: {
+        manualChunks: (id) => {
+          // 自定义分包逻辑（如将工具库单独分包）
+          if (id.includes("lodash")) return "lodash";
+          if (id.includes("echarts")) return "echarts";
+        },
+      },
+    },
     // minify: 'terser', // 使用 Terser 进行压缩
     // terserOptions: {
     //   compress: {
@@ -79,8 +90,8 @@ export default defineConfig({
     "process.env.RSS_BASE": JSON.stringify(
       `${getEnvValue(
         process.env.NODE_ENV || "github",
-        "VITE_APP_RSS_BASE_URL"
-      )}`
+        "VITE_APP_RSS_BASE_URL",
+      )}`,
     ),
   },
   plugins: [
@@ -95,14 +106,24 @@ export default defineConfig({
       ifLog: true,
       ifGlobal: true,
     }),
+    // importToCDN({
+    //   modules: process.env.NODE_ENV === 'production' ? [
+    //     // 自动配置常见库的 CDN 地址
+    //     {
+    //       name: "vue",
+    //       var: "Vue",
+    //       path: "https://unpkg.com/vue@3.5.13/dist/vue.global.prod.js",
+    //     },
+    //   ] : [],
+    // }),
     // versionInjector.vite(),
     updateMetadata(),
     yourPlugin(),
     // ViteCompressionPlugin({
-		// 	algorithm: "brotliCompress",
-		// 	ext: ".br",
-		// 	deleteOriginFile: true,
-		// }),
+    // 	algorithm: "brotliCompress",
+    // 	ext: ".br",
+    // 	deleteOriginFile: true,
+    // }),
     chunkSplitPlugin({
       strategy: "default",
       // // 指定拆包策略
@@ -115,8 +136,8 @@ export default defineConfig({
     }),
     Iconify({
       collections: {
-        cmono: './src/assets/icons/mono'
-      }
+        cmono: "./src/assets/icons/mono",
+      },
     }),
     // vuePreviewPlugin({
     //   props: {
@@ -168,17 +189,21 @@ export default defineConfig({
       dir: "**.{jpg,png,svg,jpeg}",
       attrs: {
         rel: "preload",
-      }
+      },
     }),
     vitePluginFakeServer({
-      include: 'mock', // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
-      enableProd: true // 是否在生产环境下设置mock
+      include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
+      enableProd: true, // 是否在生产环境下设置mock
     }),
     mkcert({
       savePath: "./certs", // save the generated certificate into certs directory
       autoUpgrade: false,
       force: false, // force generation of certs even without setting https property in the vite config
     }),
+    // visualizer({
+    //   open: true,
+    //   filename: "stats.html",
+    // }),
   ],
   css: {
     preprocessorOptions: {

@@ -42,6 +42,8 @@
 </template>
 
 <script setup lang="ts">
+// import HoverableCard from './HoverableCard.vue'
+
 interface CardListItem {
   title: string;
   link: string;
@@ -102,7 +104,6 @@ defineProps({
 
 .card {
   height: 300px;
-  margin: 0 25px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
   background-color: #fff;
   width: 100%;

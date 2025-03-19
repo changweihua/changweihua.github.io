@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录</title>
+    <style>
+      * {
+        list-style: none;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .login-container {
+        background-color: #2c2e39;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+
+        .login-box {
+          background-color: #ffffff;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          width: 720px;
+          overflow: hidden;
+          margin: auto 8%;
+
+          border-radius: 6px;
+          box-shadow:
+            0 4px 6px -1px rgb(0 0 0 / 0.1),
+            0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+          .form {
+            padding: 24px;
+            text-align: center;
+            color: rgb(55 65 81);
+            line-height: 1.75rem;
+
+            h2 {
+              font-size: 1.125rem;
+              margin: 25px 0;
+            }
+
+            .content {
+              display: flex;
+              flex-wrap: wrap;
+
+              .link {
+                width: 100%;
+                display: flex;
+                justify-content: space-evenly;
+                padding: 2px 6px;
+                font-size: small;
+                color: #2a1c1c;
+                transition-property: color;
+              }
+
+              .link a:hover {
+                color: #9a919a;
+                transition-duration: 300ms;
+              }
+
+              .button {
+                font-size: medium;
+                color: white;
+                width: 100%;
+                margin: 6px;
+                background-color: #394150;
+                outline: none;
+                border: none;
+                border-radius: 6px;
+                padding: 10px 6px;
+                transition-property: background-color;
+              }
+
+              .button:hover {
+                background-color: #6c727f;
+                transition-duration: 500ms;
+                cursor: pointer;
+              }
+
+              .input {
+                background-color: #f9f9f8;
+                border: 1px solid rgb(229 231 235);
+                width: 100%;
+                font-size: medium;
+                border-radius: 3px; /* 2px */
+                padding: 10px 6px;
+                margin: 8px;
+                outline: none;
+                transition-property: box-shadow;
+              }
+
+              input:focus {
+                border-color: #f9f9f8;
+                box-shadow:
+                  0 0 0 3px #6c727f,
+                  0 0 0 3px #6c727f;
+                transition-duration: 500ms;
+              }
+
+              input::placeholder {
+                color: gray;
+                font-family: "Graphik", Merriweather, Arial, sans-serif;
+                font-size: 0.8rem; /* 12px */
+                line-height: 16px; /* 16px */
+              }
+            }
+          }
+
+          img {
+            display: block;
+            height: 352px;
+            width: 100%;
+            background-size: cover;
+          }
+        }
+      }
+
+      /* 响应式布局 */
+      @media screen and (min-width: 640px) {
+      }
+      @media screen and (max-width: 640px) {
+        .img {
+          display: none;
+        }
+        .login-box {
+          display: block;
+          margin: auto 8%;
+        }
+        .input {
+          outline: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-box">
+        <div class="form">
+          <h2>用户登录</h2>
+          <div class="content">
+            <input class="input" type="text" placeholder="请输入账号" />
+            <input class="input" type="password" placeholder="请输入密码" />
+            <button class="button">登录</button>
+            <div class="link">
+              <a href="#">新手注册</a>
+              <a href="#">忘记密码</a>
+              <a href="#">游客访问</a>
+            </div>
+          </div>
+        </div>
+        <div class="img">
+          <img src="./images/login.jpg" alt="#" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

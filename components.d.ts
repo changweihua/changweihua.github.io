@@ -16,6 +16,7 @@ declare module 'vue' {
     ConfigProvider: typeof import('./src/components/ConfigProvider.vue')['default']
     FireWorks: typeof import('./src/components/FireWorks.vue')['default']
     FloatingMenu: typeof import('./src/components/FloatingMenu.vue')['default']
+    HoverableCard: typeof import('./src/components/HoverableCard.vue')['default']
     IconLogosMarkdown: typeof import('~icons/logos/markdown')['default']
     LinkListView: typeof import('./src/components/LinkListView.vue')['default']
     ListView: typeof import('./src/components/ListView.vue')['default']
