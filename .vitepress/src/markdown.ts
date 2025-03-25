@@ -28,6 +28,7 @@ import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
+import path from "path";
 import anchor from 'markdown-it-anchor'
 import Expl3 from '../assets/latexs/LaTeX-Expl3.tmLanguage.json';
 import { vitepressDemoPlugin } from 'vitepress-demo-plugin';
@@ -61,7 +62,11 @@ const markdown: MarkdownOptions | undefined = {
   config: (md) => {
     useDefinePlugin(md, CONSTS);
 
-    md.use(vitepressDemoPlugin);
+    md.use(vitepressDemoPlugin, {
+      demoDir: path.resolve(__dirname, "@/demos"),
+      lightTheme: "github-light",
+      darkTheme: "github-dark",
+    });
     md.use(footnote);
     md.use(tasklist);
     md.use(ruby);

@@ -6,10 +6,20 @@
 
 <script lang="ts" setup>
 import { useData } from "vitepress";
-import { onMounted, onBeforeUnmount, ref, watch, useTemplateRef, nextTick } from "vue";
-import * as echarts from 'echarts';
+import {
+  onMounted,
+  onBeforeUnmount,
+  ref,
+  watch,
+  useTemplateRef,
+  nextTick,
+  shallowRef,
+} from "vue";
+import * as echarts from "echarts";
 import { deepmerge } from "deepmerge-ts";
 import { baseThemeOption } from "../assets/echarts/echarts.option";
+import ElementResize from "element-resize-detector";
+import { debounce } from "lodash-es";
 
 const props = defineProps({
   id: String,
@@ -20,10 +30,21 @@ const chartRef = useTemplateRef<HTMLDivElement>("chartRef");
 
 const { isDark } = useData();
 
+const initChart = (theme: string) => {
+  myChart && myChart.dispose();
+  myChart = echarts.init(chartRef.value!, theme, { renderer: "svg" });
+
+  myChart.setOption(
+    // @ts-ignore
+    deepmerge(baseThemeOption, JSON.parse(decodeURIComponent(props.code!))),
+  );
+};
+
 watch(
   () => isDark.value,
   (nVal, oVal) => {
-    console.log(`current theme from ${oVal} to ${nVal}`);
+    console.log(`isDark from ${oVal} to ${nVal}`);
+    initChart(isDark.value ? "dark" : "light");
   },
 );
 
@@ -55,16 +76,29 @@ const config = {
 
 onBeforeUnmount(() => {
   observer.disconnect();
+  chartRef.value && elementResize.uninstall(chartRef.value);
 });
 
-onMounted(() => {
-  nextTick(() => {
-    const myChart = echarts.init(chartRef.value!)
+let myChart: echarts.ECharts;
 
-    // @ts-ignore
-    myChart.setOption(deepmerge(baseThemeOption, JSON.parse(decodeURIComponent(props.code!))))
-  })
+onMounted(() => {
+  elementResize.listenTo(chartRef.value!, debounce(resizeChart, 500));
+  nextTick(() => {
+    initChart(isDark.value ? "dark" : "light");
+  });
   // observer.observe(chartRef.value, config);
+});
+
+const resizeChart = () => {
+  console.log("resizeChart");
+  nextTick(function () {
+    myChart && myChart.resize();
+  });
+};
+
+const elementResize = ElementResize({
+  strategy: "scroll",
+  callOnAdd: true,
 });
 </script>
 

@@ -127,7 +127,7 @@ export default withMermaid({
   },
   // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
   mermaidPlugin: {
-    class: "mermaid rough-mermaid", // 为父容器设置额外的CSS类
+    class: "mermaid styled-mermaid", // 为父容器设置额外的CSS类
   },
   // srcDir: '.',
   vite: {

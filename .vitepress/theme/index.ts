@@ -17,10 +17,10 @@ import Vue3Autocounter from "vue3-autocounter";
 import ThreeLogo from "#.vitepress/components/ThreeLogo.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import CubicLoading from "#.vitepress/components/CubicLoading.vue";
-import { getDeviceFingerprint } from "../utils/fingerprint"
+import { getDeviceFingerprint } from "../utils/fingerprint";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
-
+import chalk from "chalk";
 import AnimationTitle from "../components/AnimationTitle.vue";
 
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
@@ -36,8 +36,8 @@ pinyin("常伟华");
 // import 'svg-pan-zoom-container'
 
 import directives from "../directives";
-import mermaid from 'mermaid';
-import { icons } from '@iconify-json/logos';
+import mermaid from "mermaid";
+import { icons } from "@iconify-json/logos";
 // import { icons as skillIcons } from '@iconify-json/skill-icons';
 // import { icons as devIcons } from '@iconify-json/devicon';
 // import { icons as vscodeIcons } from '@iconify-json/vscode-icons';
@@ -47,8 +47,9 @@ mermaid.registerIconPacks([
     icons,
   },
   {
-    name: 'devicon',
-    loader: () => import('@iconify-json/devicon').then((module) => module.icons),
+    name: "devicon",
+    loader: () =>
+      import("@iconify-json/devicon").then((module) => module.icons),
   },
   // {
   //   name: skillIcons.prefix, // To use the prefix defined in the icon pack
@@ -60,8 +61,8 @@ mermaid.registerIconPacks([
   // },
 ]);
 
-import zenuml from '@mermaid-js/mermaid-zenuml';
-import mindmap from '@mermaid-js/mermaid-mindmap';
+import zenuml from "@mermaid-js/mermaid-zenuml";
+import mindmap from "@mermaid-js/mermaid-mindmap";
 mermaid.registerExternalDiagrams([zenuml, mindmap]);
 
 // import { SfcPlayground } from '@sakitam-gis/vitepress-playground';
@@ -182,8 +183,44 @@ export default {
       () => route.path,
       () => {
         console.log("页面动画");
-      }
+      },
     );
+
+    console.log(chalk.blue("Hello world!"));
+
+    // const log = console.log;
+
+    // // Combine styled and normal strings
+    // log(chalk.blue("Hello") + " World" + chalk.red("!"));
+
+    // // Compose multiple styles using the chainable API
+    // log(chalk.blue.bgRed.bold("Hello world!"));
+
+    // // Pass in multiple arguments
+    // log(chalk.blue("Hello", "World!", "Foo", "bar", "biz", "baz"));
+
+    // // Nest styles
+    // log(chalk.red("Hello", chalk.underline.bgBlue("world") + "!"));
+
+    // // Nest styles of the same type even (color, underline, background)
+    // log(
+    //   chalk.green(
+    //     "I am a green line " +
+    //       chalk.blue.underline.bold("with a blue substring") +
+    //       " that becomes green again!",
+    //   ),
+    // );
+
+    // // ES2015 template literal
+    // log(`
+    //   CPU: ${chalk.red("90%")}
+    //   RAM: ${chalk.green("40%")}
+    //   DISK: ${chalk.yellow("70%")}
+    //   `);
+
+    // // Use RGB colors in terminal emulators that support it.
+    // log(chalk.rgb(123, 45, 67).underline("Underlined reddish color"));
+    // log(chalk.hex("#DEADED").bold("Bold gray!"));
 
     return h(AnimatingLayout, null, {
       // "home-hero-before": () => h(AnimationTitle),
@@ -229,7 +266,7 @@ export default {
               src: "/cwh.svg",
               class: "VPImage image-src",
             }),
-          ]
+          ],
         ),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
@@ -418,7 +455,6 @@ export default {
 
         console.log(await getDeviceFingerprint(true));
 
-
         // Here you can set the routes you want to configure.
         if (to == "/") {
           await router.go("/zh-CN/");
@@ -467,8 +503,6 @@ export default {
       app.component("Confetti", Confetti);
       app.component("Guidance", Guidance); //注册全局组件
     }
-
-
 
     if (inBrowser) {
       // const { promise, resolve, reject } = Promise.withResolvers();
