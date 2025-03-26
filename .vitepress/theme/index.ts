@@ -110,8 +110,6 @@ mermaid.registerExternalDiagrams([zenuml, mindmap]);
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
 
-import busuanzi from "busuanzi.pure.js";
-
 // 引入 Ant Design Vue
 import Antd from "ant-design-vue";
 

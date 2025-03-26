@@ -30,7 +30,10 @@ export const head: HeadConfig[] = [
   // ["meta", { name: "theme-color", content: "#ffffff" }],
   ["meta", { name: "mobile-web-app-capable", content: "yes" }],
   ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
-  ["meta", { name: "apple-mobile-web-app-status-bar-style", content: "default" }],
+  [
+    "meta",
+    { name: "apple-mobile-web-app-status-bar-style", content: "default" },
+  ],
   ["meta", { name: "application-name", content: "CMONO.NET" }],
   ["meta", { name: "apple-touch-icon-precomposed", content: "/favicon.svg" }],
   // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
@@ -74,7 +77,7 @@ export const head: HeadConfig[] = [
     {
       name: "theme-color",
       content: "#ffffff",
-      'media': '(prefers-color-scheme: light)'
+      media: "(prefers-color-scheme: light)",
     },
   ],
   [
@@ -82,7 +85,7 @@ export const head: HeadConfig[] = [
     {
       name: "theme-color",
       content: "#000000",
-      'media': '(prefers-color-scheme: dark)'
+      media: "(prefers-color-scheme: dark)",
     },
   ],
   [
@@ -90,7 +93,7 @@ export const head: HeadConfig[] = [
     {
       name: "apple-mobile-web-app-status-bar-style",
       content: "default",
-      'media': '(prefers-color-scheme: light)'
+      media: "(prefers-color-scheme: light)",
     },
   ],
   [
@@ -98,13 +101,22 @@ export const head: HeadConfig[] = [
     {
       name: "apple-mobile-web-app-status-bar-style",
       content: "black",
-      'media': '(prefers-color-scheme: dark)'
+      media: "(prefers-color-scheme: dark)",
     },
   ],
   [
     "script",
     {
       src: "/cursor.js",
+      "data-site": "https://changweihua.github.io",
+      "data-spa": "auto",
+      defer: "true",
+    },
+  ],
+  [
+    "script",
+    {
+      src: "/gradient.js",
       "data-site": "https://changweihua.github.io",
       "data-spa": "auto",
       defer: "true",

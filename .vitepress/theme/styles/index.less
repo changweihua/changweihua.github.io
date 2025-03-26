@@ -11,8 +11,8 @@
   --vp-font-family-mono: @app-font-family;
   --vp-header-anchor-symbol: "🔗";
   /* 建立CSS变量与Mermaid的映射 */
-  --zenuml-primary: var(--mermaid-zenumlPrimary, #4CAF50);
-  --zenuml-bg: var(--mermaid-zenumlBg, #FAFAFA);
+  --zenuml-primary: var(--mermaid-zenumlPrimary, #4caf50);
+  --zenuml-bg: var(--mermaid-zenumlBg, #fafafa);
 }
 
 /* 组件样式继承 */
@@ -20,7 +20,6 @@
   background: var(--zenuml-bg);
   border: 1px solid var(--zenuml-primary);
 }
-
 
 html,
 body {
@@ -67,13 +66,94 @@ body {
   }
 }
 
-
 .index-page-class {
   body {
     cursor: none;
     background-color: #fff;
   }
 
+  .VPButton.brand {
+    position: relative;
+    transition: all 0.3s;
+  }
+  .VPButton.brand::before,
+  .VPButton.brand::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid var(--vp-c-brand-light);
+    transition: all 0.5s;
+    border-radius: 20px;
+    animation: clippath 3s infinite linear;
+  }
+  .VPButton.brand::after {
+    animation: clippath 3s infinite -1.5s linear;
+  }
+  @keyframes clippath {
+    0%,
+    100% {
+      clip-path: inset(0 0 98% 0);
+    }
+    25% {
+      clip-path: inset(0 98% 0 0);
+    }
+    50% {
+      clip-path: inset(98% 0 0 0);
+    }
+    75% {
+      clip-path: inset(0 0 0 98%);
+    }
+  }
+
+  .acctions {
+    gap: 30px;
+  }
+
+  .action:last-child {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+
+    .VPButton.alt:hover::before {
+      content: "";
+      position: absolute;
+      left: -50%;
+      top: -50%;
+      width: 200%;
+      height: 200%;
+      border-radius: 10px;
+      background-image: conic-gradient(
+        transparent,
+        var(--vp-c-brand),
+        transparent 30%
+      );
+      z-index: 20;
+      animation: rotation 4s linear infinite;
+    }
+
+    .VPButton.alt:hover::after {
+      content: "";
+      position: absolute;
+      --g: 4px;
+      width: calc(100% - var(--g) * 2);
+      height: calc(100% - var(--g) * 2);
+      // background: #000;
+      left: var(--g);
+      top: var(--g);
+      border-radius: inherit;
+      z-index: 20;
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes rotation {
+    to {
+      transform: rotate(360deg);
+    }
+  }
   // .VPImage {
   //   background: repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 50% 0/2500px
   //       2500px,
@@ -207,7 +287,8 @@ body {
 
 .medium-zoom-image--opened {
   border-radius: 0.3em;
-  box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.3) inset,
+  box-shadow:
+    0 0 0 1px hsla(0, 0%, 100%, 0.3) inset,
     0 0.5em 1em rgba(0, 0, 0, 0.6);
   text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.3);
   // background: hsla(0, 0%, 100%, 0.3);
@@ -314,8 +395,10 @@ html[data-theme="dark"] {
   margin-right: 0;
 }
 
-.gallery-page-class, .blog-page-class, .manual-page-class, .manuals-page-class {
-
+.gallery-page-class,
+.blog-page-class,
+.manual-page-class,
+.manuals-page-class {
   [data-animate] {
     --stagger: 0;
     --delay: 120ms;
@@ -340,7 +423,6 @@ html[data-theme="dark"] {
       transform: none;
     }
   }
-
 
   .vp-doc > div > * {
     --stagger: 0;

@@ -9,21 +9,14 @@ import type { Plugin } from "vite";
 import { vitePluginVersionMark } from "vite-plugin-version-mark";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import Inspect from "vite-plugin-inspect";
-import ViteCompressionPlugin from "vite-plugin-compression";
-import VueDevTools from "vite-plugin-vue-devtools";
 import updater from "./utils/updater";
 import mkcert from "vite-plugin-mkcert";
 import Iconify from "unplugin-iconify-generator/vite";
 import { envParse } from "vite-plugin-env-parse";
-import fs from "node:fs";
 import { preloadImages } from "./plugins/vitePreloadImage.ts";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 // import VueDevTools from 'vite-plugin-vue-devtools-cn'
-// import { vuePreviewPlugin } from 'vite-plugin-vue-preview'
-import versionInjector from "unplugin-version-injector";
-import importToCDN from "vite-plugin-cdn-import";
-import { visualizer } from "rollup-plugin-visualizer";
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -64,18 +57,18 @@ export default defineConfig(() => {
       minify: "esbuild", // 使用esbuild进行压缩
       sourcemap: process.env.NODE_ENV !== "production", // Seems to cause JavaScript heap out of memory errors on build
       // minify: true, // 必须开启：使用terserOptions才有效果
-      chunkSizeWarningLimit: 2000, // 设置 chunk 大小警告的限制为 2000 KiB
+      chunkSizeWarningLimit: 5000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
       rollupOptions: {
         // external: ["fs", "path"],
         // external: ["vue"], // 排除已配置 CDN 的依赖
-        output: {
-          manualChunks: (id) => {
-            // 自定义分包逻辑（如将工具库单独分包）
-            if (id.includes("lodash")) return "lodash";
-            if (id.includes("echarts")) return "echarts";
-          },
-        },
+        // output: {
+        //   manualChunks: (id) => {
+        //     // 自定义分包逻辑（如将工具库单独分包）
+        //     if (id.includes("lodash")) return "lodash";
+        //     if (id.includes("echarts")) return "echarts";
+        //   },
+        // },
       },
       // minify: 'terser', // 使用 Terser 进行压缩
       // terserOptions: {
@@ -192,7 +185,6 @@ export default defineConfig(() => {
         autoInstall: true,
       }),
       // VueDevTools(),
-      // Icons({ autoInstall: true }),
       UnoCSS(),
       Inspect(),
       preloadImages({
