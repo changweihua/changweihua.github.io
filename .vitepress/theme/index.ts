@@ -30,7 +30,23 @@ import yuppie from "yuppie-ui";
 
 import { pinyin } from "pinyin-pro";
 
-pinyin("常伟华");
+console.log(pinyin("常伟华"));
+
+// 版本监控
+const versionCheck = async () => {
+  // if (import.meta.env.MODE === "development") return;
+  // const response = await fetch("version.json");
+  // if (APP_VERSION !== response.data.version) {
+  //   showToast({
+  //     message: "发现新内容，自动更新中...",
+  //     type: "loading",
+  //     duration: 1500,
+  //     onClose: () => {
+  //       window.location.reload();
+  //     },
+  //   });
+  // }
+}
 
 // SVG 缩放
 // import 'svg-pan-zoom-container'
@@ -445,6 +461,9 @@ export default {
 
       router.onBeforeRouteChange = async (to) => {
         console.log("onBeforeRouteChange");
+
+        versionCheck();
+
         //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
         const { browser, cpu, device } = UAParser();
 

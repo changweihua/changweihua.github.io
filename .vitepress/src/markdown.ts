@@ -63,9 +63,19 @@ const markdown: MarkdownOptions | undefined = {
     useDefinePlugin(md, CONSTS);
 
     md.use(vitepressDemoPlugin, {
-      demoDir: path.resolve(__dirname, "@/demos"),
-      lightTheme: "github-light",
-      darkTheme: "github-dark",
+      demoDir: path.resolve(__dirname, "../../src/demos"),
+      lightTheme: "catppuccin-latte",
+      darkTheme: "catppuccin-mocha",
+      tabs: {
+        order: "html,vue,react",
+        select: "vue",
+      },
+      stackblitz: {
+        show: true,
+      },
+      codesandbox: {
+        show: true,
+      },
     });
     md.use(footnote);
     md.use(tasklist);
