@@ -23,6 +23,7 @@ pageClass: gallery-page-class
 - 上线巴士管家功能模块
 - 更新小程序图片资源
 
-### 开放平台 ###
+### Envoy 开放认证授权平台 ###
 
-- 集成Envoy的网关
+- 集成Envoy的网关，网关支持JWKS认证和RBAC鉴权、流量控制、多种认证机制、镜像访问
+- 

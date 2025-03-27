@@ -61,7 +61,7 @@ defineProps({
 
 <style lang="less" scoped>
 .container {
-  font-family: "JetBrains Maple Mono", JetBrainsMapleMono, AlibabaPuHuiTi,
+  font-family: MapleMono, "JetBrains Maple Mono", AlibabaPuHuiTi,
     "阿里巴巴普惠体 3.0" !important;
 }
 

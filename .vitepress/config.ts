@@ -121,9 +121,9 @@ export default withMermaid({
     //   // 'tertiaryColor': '#fff'
     // },
     fontFamily:
-      "'PING FANG CHANG AN', LikeJianJianTi, JetBrainsMapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
     altFontFamily:
-      "'PING FANG CHANG AN', LikeJianJianTi, JetBrainsMapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
     startOnLoad: false,
     //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
   },

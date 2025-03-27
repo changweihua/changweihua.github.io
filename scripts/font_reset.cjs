@@ -9,7 +9,7 @@ console.log(rootFolder);
 var myArgs = process.argv.slice(2);
 console.log('myArgs: ', myArgs);
 
-let fontName = 'JetBrainsMapleMono'
+let fontName = 'MapleMono'
 
 switch (myArgs[0]) {
   case '--font':

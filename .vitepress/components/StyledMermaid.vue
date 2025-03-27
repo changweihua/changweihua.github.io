@@ -168,7 +168,7 @@ const props = defineProps({
 const pluginSettings = ref<MermaidConfig>({
   securityLevel: "loose",
   startOnLoad: false,
-  fontFamily: "LikeJianJianTi, 'JetBrains Maple Mono', JetBrainsMapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+  fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
 });
 
 const renderChart = async (id, code) => {

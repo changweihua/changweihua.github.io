@@ -56,7 +56,7 @@ const textLines = poem
 <style lang="less" scoped>
 .line {
   margin-bottom: 20px;
-  font-family: "'JetBrains Maple Mono', JetBrainsMapleMono, AlibabaPuHuiTi, JetBrainsMono, HYCuJianHeiJ";
+  font-family: MapleMono, "JetBrains Maple Mono", AlibabaPuHuiTi, JetBrainsMono;
 
   .line-content {
     display: flex;
