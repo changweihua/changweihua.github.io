@@ -5,6 +5,13 @@ pageClass: gallery-page-class
 
 ## 2025 ##
 
+- [ ] Write something here
+- [ ] item 1
+- [x] item 2
+- [X] item 3
+- [x] Write something here
+
+
 > 开花不一定结果，努力一定不会辜负青春。
 > 
 > 2025 对饮 2026 笃行

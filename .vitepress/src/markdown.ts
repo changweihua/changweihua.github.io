@@ -16,7 +16,6 @@ import MarkdownItTodoLists from 'markdown-it-todo-lists'
 import namedCode from 'markdown-it-named-code-blocks'
 import strikethrough from 'markdown-it-strikethrough-alt'
 import hashmention from 'markdown-it-hashmention'
-import { tasklist } from "@mdit/plugin-tasklist";
 import { ruby } from "@mdit/plugin-ruby";
 import markdownCjkBreaks from 'markdown-it-cjk-breaks'
 import { markdownItStepper } from 'vitepress-markdown-it-stepper'
@@ -78,7 +77,6 @@ const markdown: MarkdownOptions | undefined = {
       },
     });
     md.use(footnote);
-    md.use(tasklist);
     md.use(ruby);
     md.use(frontmatter);
     md.use(markdownSup);
@@ -86,6 +84,7 @@ const markdown: MarkdownOptions | undefined = {
     md.use(hashmention);
     md.use(MarkdownItTodoLists, {
       enabled: true,
+      useLabel: true
     });
     md.use(MarkdownItVariable);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
