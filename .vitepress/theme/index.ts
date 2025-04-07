@@ -1,28 +1,23 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, Suspense, watchEffect, watch, ref } from "vue";
+import { h, watchEffect, watch, ref } from "vue";
 import DocAfter from "../components/DocAfter.vue";
 import { UAParser } from "ua-parser-js";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
-import ColorfulWord from "../components/ColorfulWord.vue";
 import DacingNumber from "../components/DacingNumber.vue";
 import DancingLogo from "../components/DancingLogo.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
-import AnimatedLogo from "#.vitepress/components/AnimatedLogo.vue";
 import Vue3Autocounter from "vue3-autocounter";
-import ThreeLogo from "#.vitepress/components/ThreeLogo.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
-import CubicLoading from "#.vitepress/components/CubicLoading.vue";
 import { getDeviceFingerprint } from "../utils/fingerprint";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
-import chalk from "chalk";
 import AnimationTitle from "../components/AnimationTitle.vue";
-
+import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import "@vitepress-code-preview/container/dist/style.css";
 import VueResizeObserver from "vue-resize-observer";
@@ -31,6 +26,9 @@ import yuppie from "yuppie-ui";
 import { pinyin } from "pinyin-pro";
 
 console.log(pinyin("常伟华"));
+
+import "./styles/fonts/MapleMono.css";
+import "./styles/fonts/Mermaid.css";
 
 // 版本监控
 const versionCheck = async () => {
@@ -81,32 +79,6 @@ import zenuml from "@mermaid-js/mermaid-zenuml";
 import mindmap from "@mermaid-js/mermaid-mindmap";
 mermaid.registerExternalDiagrams([zenuml, mindmap]);
 
-// import { SfcPlayground } from '@sakitam-gis/vitepress-playground';
-// import '@sakitam-gis/vitepress-playground/dist/style.css';
-
-// // import('pinyin-pro').then((exports) => {
-// //   exports.pinyin('汉语拼音'); // 'hàn yǔ pīn yīn'
-// // });
-
-// // 引入前需要先通过 `npm install @pinyin-pro/data` 进行安装
-// import CompleteDict from '@pinyin-pro/data/complete';
-// import { pinyin, addDict } from 'pinyin-pro';
-
-// addDict(CompleteDict);
-
-// const result = pinyin('小明硕士毕业于中国科学院计算所，后在日本京都大学深造');
-// console.log(result)
-// 结果: 结果: xiǎo míng shuò shì bì yè yú zhōng guó kē xué yuàn jì suàn suǒ ， hòu zài rì běn jīng dū dà xué shēn zào
-
-// import { VuePreview } from 'vite-plugin-vue-preview'
-// import 'vite-plugin-vue-preview/style.css'
-
-// // getColor 单个颜色
-// // getPalette 多个颜色
-// ColorThief.getColor(ImageRef).then(res=>{
-//   console.log(res)
-// })
-
 import vitepressNprogress from "vitepress-plugin-nprogress";
 import "vitepress-plugin-nprogress/lib/css/index.css";
 
@@ -136,9 +108,6 @@ import "./styles/timeline.fix.less";
 
 import "vitepress-markdown-it-stepper/theme";
 
-import { Tab, Tabs } from "vue3-tabs-component";
-import "@red-asuka/vitepress-plugin-tabs/dist/style.css";
-
 import "virtual:group-icons.css";
 import "uno.css";
 import "animate.css";
@@ -148,9 +117,6 @@ import "vitepress-plugin-back-to-top/dist/style.css";
 
 import type { Theme } from "vitepress";
 
-import { defaultVTheme } from "../hooks/useVChart";
-import VChart from "@visactor/vchart";
-import { allThemeMap } from "@visactor/vchart-theme";
 import AnimatingLayout from "./AnimatingLayout.vue";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
@@ -163,16 +129,6 @@ dayjs.extend(timezone);
 dayjs.tz.setDefault("Asia/Shanghai");
 dayjs.extend(relativeTime);
 dayjs.locale("zh-cn");
-
-// register themes
-allThemeMap.forEach((theme, name) => {
-  theme.fontFamily = defaultVTheme.fontFamily;
-  theme.background = defaultVTheme.background;
-  VChart.ThemeManager.registerTheme(name, theme);
-});
-
-// apply a theme
-VChart.ThemeManager.setCurrentTheme("legacyLight");
 
 export default {
   ...DefaultTheme,
@@ -199,42 +155,6 @@ export default {
         console.log("页面动画");
       },
     );
-
-    console.log(chalk.blue("Hello world!"));
-
-    // const log = console.log;
-
-    // // Combine styled and normal strings
-    // log(chalk.blue("Hello") + " World" + chalk.red("!"));
-
-    // // Compose multiple styles using the chainable API
-    // log(chalk.blue.bgRed.bold("Hello world!"));
-
-    // // Pass in multiple arguments
-    // log(chalk.blue("Hello", "World!", "Foo", "bar", "biz", "baz"));
-
-    // // Nest styles
-    // log(chalk.red("Hello", chalk.underline.bgBlue("world") + "!"));
-
-    // // Nest styles of the same type even (color, underline, background)
-    // log(
-    //   chalk.green(
-    //     "I am a green line " +
-    //       chalk.blue.underline.bold("with a blue substring") +
-    //       " that becomes green again!",
-    //   ),
-    // );
-
-    // // ES2015 template literal
-    // log(`
-    //   CPU: ${chalk.red("90%")}
-    //   RAM: ${chalk.green("40%")}
-    //   DISK: ${chalk.yellow("70%")}
-    //   `);
-
-    // // Use RGB colors in terminal emulators that support it.
-    // log(chalk.rgb(123, 45, 67).underline("Underlined reddish color"));
-    // log(chalk.hex("#DEADED").bold("Bold gray!"));
 
     return h(AnimatingLayout, null, {
       // "home-hero-before": () => h(AnimationTitle),
@@ -413,7 +333,7 @@ export default {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     const { app, router } = ctx;
-
+    enhanceAppWithTabs(app);
     DefaultTheme.enhanceApp(ctx);
 
     // @ts-ignore
@@ -501,9 +421,6 @@ export default {
       app.component("StyledMermaid", StyledMermaid);
       app.component("MarkupView", MarkupView);
       app.component("DacingNumber", DacingNumber);
-
-      app.component("Tab", Tab);
-      app.component("Tabs", Tabs);
 
       app.component("m-icon", Icon);
 

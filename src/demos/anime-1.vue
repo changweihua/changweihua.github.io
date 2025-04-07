@@ -3,10 +3,10 @@
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import anime from 'animejs/lib/anime.es.js';
+import animate from 'animejs';
 
 onMounted(function(){
-  anime({
+  animate({
     targets: '#anime1',
     translateX: 50,
     rotate: '1turn',

@@ -17,9 +17,9 @@ pageClass: blog-page-class
 `build` 后未生成任何 `.d.ts` 文件，反复检查了 `tsconfig.app.json` 文件、`tsconfig.json` 文件、及 `vite.config.ts` 文件，没有任何问题，且配置文件中内容都是脚手架默认生成的配置，插件官网也没有任何需要修改的地方，但是就是无法生成。
 
 
-:::: tabs
+:::tabs
 
-::: tab tsconfig.app.json
+== tab tsconfig.app.json
 
 ```json
 {
@@ -50,9 +50,7 @@ pageClass: blog-page-class
 }
 ```
 
-:::
-
-::: tab tsconfig.json
+== tab tsconfig.json
 
 ```json
 {
@@ -68,9 +66,7 @@ pageClass: blog-page-class
 }
 ```
 
-:::
-
-::: tab vite.config.ts
+== tab vite.config.ts
 
 ```ts
 import { defineConfig } from 'vite'
@@ -141,8 +137,6 @@ export default defineConfig({
 ```
 
 :::
-
-::::
 
 ## 找到症结 ##
 

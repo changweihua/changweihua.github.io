@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch, onUnmounted } from "vue";
-import { useData, useRouter } from "vitepress";
+import { ref, watch } from "vue";
+import { inBrowser, useData, useRouter } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, provide, useSlots, onMounted } from "vue";
 import mediumZoom from "medium-zoom";
@@ -19,6 +19,10 @@ const enableTransitions = () =>
   window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
 
 provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
+  if(!inBrowser) {
+    return;
+  }
+
   if (!enableTransitions()) {
     isDark.value = !isDark.value;
     return;

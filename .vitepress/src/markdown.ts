@@ -1,11 +1,11 @@
 import lightbox from "vitepress-plugin-lightbox"
 import { MarkdownOptions } from "vitepress";
-import * as cheerio from 'cheerio';
 import timeline from "vitepress-markdown-timeline";
 import footnote from 'markdown-it-footnote';
 import markdownSup from 'markdown-it-sup'
 import markdownSub from 'markdown-it-sub'
 import markdownItMark from 'markdown-it-mark'
+import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import frontmatter from 'markdown-it-front-matter'
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless"
 import markdownLinks from 'markdown-it-external-links'
@@ -16,19 +16,14 @@ import MarkdownItTodoLists from 'markdown-it-todo-lists'
 import namedCode from 'markdown-it-named-code-blocks'
 import strikethrough from 'markdown-it-strikethrough-alt'
 import hashmention from 'markdown-it-hashmention'
-import { ruby } from "@mdit/plugin-ruby";
-import markdownCjkBreaks from 'markdown-it-cjk-breaks'
-import { markdownItStepper } from 'vitepress-markdown-it-stepper'
 import { ImagePlugin } from '../plugins/markdown/image'
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
 import markupPlugin from '../plugins/markdown/markup'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
-import tabsPlugin from '@red-asuka/vitepress-plugin-tabs'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
 import path from "path";
-import anchor from 'markdown-it-anchor'
 import Expl3 from '../assets/latexs/LaTeX-Expl3.tmLanguage.json';
 import { vitepressDemoPlugin } from 'vitepress-demo-plugin';
 
@@ -77,7 +72,6 @@ const markdown: MarkdownOptions | undefined = {
       },
     });
     md.use(footnote);
-    md.use(ruby);
     md.use(frontmatter);
     md.use(markdownSup);
     md.use(markdownSub);
@@ -86,6 +80,7 @@ const markdown: MarkdownOptions | undefined = {
       enabled: true,
       useLabel: true
     });
+    md.use(tabsMarkdownPlugin);
     md.use(MarkdownItVariable);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
     markdownItMark(md);
@@ -94,21 +89,11 @@ const markdown: MarkdownOptions | undefined = {
       internalClassName: "custom-internal-link",
       internalDomains: ["https://changweihua.github.io"],
     });
-    // @ts-ignore
-    markdownItStepper(md);
-    // md.use(fitmedia, {
-    //   //default options, you can omit these
-    //   imgDir: "",
-    //   imgLazyLoad: true,
-    //   imgDecoding: "auto",
-    //   fitElements: ["iframe", "video"],
-    // })
     strikethrough(md);
     md.use(lightbox, {});
     md.use(namedCode, { isEnableInlineCss: true });
     md.use(lazy_loading);
     md.use(timeline);
-    tabsPlugin(md);
     md.use(groupIconMdPlugin);
     md.use(echartsMarkdownPlugin)
     md.use(markupPlugin);
@@ -130,17 +115,6 @@ const markdown: MarkdownOptions | undefined = {
       // if (tokens[idx].tag === 'h1') htmlResult += `\n<ClientOnly><ArticleMetadata v-if="($frontmatter?.aside ?? true) && ($frontmatter?.showArticleMetadata ?? true)" :article="$frontmatter" /></ClientOnly>`;
       return htmlResult;
     };
-
-    // const orig = md.render;
-    // md.render = (src, env) => {
-    //   const res = orig.call(md, src, env);
-    //   if (env.excerpt && !env.frontmatter.description) {
-    //     const $ = cheerio.load(res);
-    //     const p = $('p').first().text().trim().slice(0, 200);
-    //     env.frontmatter.description = p;
-    //   }
-    //   return res;
-    // };
   },
 }
 

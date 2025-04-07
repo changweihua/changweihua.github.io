@@ -47,11 +47,11 @@ Anime.js（发音为 /ˈæn.ə.meɪ/）是一个专注于创建各种动画效�
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import anime from 'animejs/lib/anime.es.js';
+import animate from 'animejs';
 
 onMounted(function(){
   const svgPath = document.querySelector('path');
-  anime({
+  animate({
     targets: svgPath,
     d: 'M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80',
     duration: 2000,
@@ -79,12 +79,12 @@ onMounted(function(){
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import anime from 'animejs/lib/anime.es.js';
+import animate from 'animejs';
 
 onMounted(function(){
   const items = document.querySelectorAll('.anime-item');
 
-  anime({
+  animate({
     targets: items,
     translateX: 100,
     opacity: 1,
@@ -115,13 +115,13 @@ delay 属性使用了 anime.stagger(100)，这会使每个元素的动画启动�
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import anime from 'animejs/lib/anime.es.js';
+import animate from 'animejs';
 
 
 onMounted(function(){
   const gradientElement = document.getElementById('gradient');
 
-  anime({
+  animate({
     targets: gradientElement,
     backgroundImage: 'linear-gradient(to bottom, #FF0000, #0000FF)',
     duration: 3000,
@@ -147,11 +147,11 @@ onMounted(function(){
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import anime from 'animejs/lib/anime.es.js';
+import animate from 'animejs';
 
 onMounted(function(){
   const sphere = document.querySelector('.sphere');
-  anime({
+  animate({
     targets: sphere,
     translateX: '20px',
     translateY: '20px',
@@ -179,12 +179,12 @@ onMounted(function(){
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import anime from 'animejs/lib/anime.es.js';
+import animate from 'animejs';
 
 
 onMounted(function(){
   const text = document.querySelector('.sphereh1');
-  anime({
+  animate({
     targets: text,
     translateX: [-20, 20],
     translateY: [10, -10],
