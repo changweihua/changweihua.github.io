@@ -22,7 +22,7 @@ const computedYearMap = computed(()=> {
 })
 
 </script>
-
+  <div class="flex p-6 justify-center items-center">
 <div class="w-full px-6 py-8 mx-auto">
   <div v-for="year in yearList" :key="year">
     <div v-text="year" class="pt-3 pb-2 text-xl"></div>
@@ -35,3 +35,4 @@ const computedYearMap = computed(()=> {
     </div>
   </div>
 </div>
+  </div>
