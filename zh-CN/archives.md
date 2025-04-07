@@ -2,6 +2,8 @@
 layout: page
 sidebar: false
 title: changweihua.github.io 最新文章 CMONO.NET
+layoutClass: m-nav-layout
+pageClass: blog-index-page
 ---
 ​
 <script lang="ts" setup>
