@@ -10,6 +10,7 @@ import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import DacingNumber from "../components/DacingNumber.vue";
 import DancingLogo from "../components/DancingLogo.vue";
+import ReadText from "../components/ReadText.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
@@ -22,6 +23,7 @@ import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import "@vitepress-code-preview/container/dist/style.css";
 import VueResizeObserver from "vue-resize-observer";
 import yuppie from "yuppie-ui";
+import * as AntIconsVue from '@ant-design/icons-vue';
 
 import { pinyin } from "pinyin-pro";
 
@@ -333,11 +335,12 @@ export default {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     const { app, router } = ctx;
-    enhanceAppWithTabs(app);
+
     DefaultTheme.enhanceApp(ctx);
 
     // @ts-ignore
     if (!import.meta.env.SSR) {
+      enhanceAppWithTabs(app);
       // const plugin = await import('@vp/plugins/markdown/rough-mermaid')
       // app.use(plugin.default)
 
@@ -416,7 +419,9 @@ export default {
       useComponents(app, DemoPreview);
 
       app.use(Antd);
-
+      for (const [key, component] of Object.entries(AntIconsVue)) {
+        app.component(key, component);
+      }
       app.component("vue3-autocounter", Vue3Autocounter);
       app.component("StyledMermaid", StyledMermaid);
       app.component("MarkupView", MarkupView);
@@ -435,7 +440,8 @@ export default {
       app.component("DancingLogo", DancingLogo);
       app.component("MagicCard", MagicCard);
       app.component("Confetti", Confetti);
-      app.component("Guidance", Guidance); //注册全局组件
+      app.component("Guidance", Guidance);
+      app.component("m-read-text", ReadText);
     }
 
     if (inBrowser) {

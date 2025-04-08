@@ -17,6 +17,8 @@ import namedCode from 'markdown-it-named-code-blocks'
 import strikethrough from 'markdown-it-strikethrough-alt'
 import hashmention from 'markdown-it-hashmention'
 import { ImagePlugin } from '../plugins/markdown/image'
+import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
+import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
 import markupPlugin from '../plugins/markdown/markup'
 import useDefinePlugin from 'vitepress-plugin-markdown-define'
@@ -80,7 +82,9 @@ const markdown: MarkdownOptions | undefined = {
       enabled: true,
       useLabel: true
     });
-    md.use(tabsMarkdownPlugin);
+    md.use(circleMarkdownPlugin);
+    md.use(readerMarkdownPlugin);
+    md.use(tabsMarkdownPlugin);;
     md.use(MarkdownItVariable);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
     markdownItMark(md);

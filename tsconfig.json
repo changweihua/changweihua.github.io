@@ -39,8 +39,8 @@
     "outDir": "dist",
   },
   "diagnostics": true,
-  // "typeRoots": ["vite/client", "node_modules", "typings"],
-  "include": [".", "src", ".vitepress", "typings", "env.d.ts"],
+  "types": ["vite/client", "typings"],
+  "include": [".", "src", ".vitepress", "./typings", "env.d.ts"],
   "exclude": [
     "node_modules",
     ".vitepress/cache",

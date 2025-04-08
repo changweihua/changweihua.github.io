@@ -14,9 +14,11 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 
 ## 💥 简介 ##
 
+o又o
+
 ::: tip 👨🏻‍💻
 
-- 目前就职于 *`上海民航华东凯亚江苏分公司`* ，担任 **[高级开发经理]** 职务，主要面向 `无锡硕放机场`、`扬州泰州国际机场`、`南京禄口国际机场` 等江苏省内机场提供民航体系应用服务保障及项目开发和管理工作。
+- read目前就职read于 *`上海民航华东凯亚江苏分公司`* ，担任 **[高级开发经理]** 职务，主要面向 `无锡硕放机场`、`扬州泰州国际机场`、`南京禄口国际机场` 等江苏省内机场提供民航体系应用服务保障及项目开发和管理工作。
 
 - 曾就职于萨孚凯无锡分公司，服务过 `星巴克`、`尼尔森`、`西门子`、`雅培`、`罗氏`、`康宝莱`等世界五百强企业。
 
@@ -54,6 +56,7 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 
 ## 🥇 近期作品 ##
 
+- [Ollama大模型](/zh-CN/manual/ollama_anythingllm.md)
 - [Electron跨平台](/zh-CN/gallery/electron_app.md)
 - [基于iFrame的微前端框架](/zh-CN/gallery/web_app.md)
 - [无锡硕放机场-新生产统计系统](/zh-CN/gallery/maui.md)

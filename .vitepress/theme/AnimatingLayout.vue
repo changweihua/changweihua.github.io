@@ -62,7 +62,7 @@ watch(
     // 动画结束后重置状态
     setTimeout(() => {
       isTransitioning.value = false;
-    }, 1500); // 500ms 要和 CSS 动画时间匹配
+    }, 500); // 500ms 要和 CSS 动画时间匹配
   },
 );
 
@@ -496,14 +496,14 @@ body {
   animation-timeline: scroll();
 }
 
-body {
+/* body {
   margin: 0;
   transition: --scroll-position-delayed 0.15s linear;
   --scroll-velocity: calc(
     var(--scroll-position) - var(--scroll-position-delayed)
   );
   --scroll-dynamic: calc(var(--scroll-velocity) / var(--scroll-velocity));
-}
+} */
 
 .back {
   position: fixed;
@@ -520,21 +520,22 @@ body {
     animation-timeline: scroll();
     animation-range:entry 0 100px; */
 }
-
-.shade2s {
+.shade {
   position: fixed;
   width: 100%;
   height: 100vh;
-  background-color: var(--vp-c-bg);
+  background-color: rgb(255, 255, 255);
   z-index: 100;
   pointer-events: none;
   opacity: 0;
-  transition: transform 1.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+  display: none;
 }
 
 .shade-active {
+  display: block;
   opacity: 0;
-  animation: shadeAnimation 1.5s ease-in-out;
+  animation: shadeAnimation 0.5s ease-in-out;
 }
 
 @keyframes shadeAnimation {
@@ -550,4 +551,5 @@ body {
     transform: translateY(100vh);
   }
 }
+
 </style>

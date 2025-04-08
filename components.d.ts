@@ -11,6 +11,7 @@ declare module 'vue' {
     About: typeof import('./src/components/about.vue')['default']
     Airport: typeof import('./src/components/Airport.vue')['default']
     AirStrip: typeof import('./src/components/AirStrip.vue')['default']
+    ArchiveList: typeof import('./src/components/ArchiveList.vue')['default']
     BackgroundCleaner: typeof import('./src/components/BackgroundCleaner.vue')['default']
     CardListView: typeof import('./src/components/CardListView.vue')['default']
     ConfigProvider: typeof import('./src/components/ConfigProvider.vue')['default']

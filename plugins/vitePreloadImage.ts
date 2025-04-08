@@ -29,3 +29,8 @@ return {
     },
   };
 };
+
+import { glob, globSync } from "tinyglobby";
+
+await glob(["files/*.ts", "!**/*.d.ts"], { cwd: "src" });
+globSync(["src/**/*.ts"], { ignore: ["**/*.d.ts"] });
