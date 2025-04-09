@@ -228,7 +228,6 @@
     "ua-parser-js": "^2.0.3",
     "vite-plugin-inspect": "^11.0.0",
     "vitepress-markdown-timeline": "^1.2.2",
-    "vitepress-plugin-announcement": "^0.1.4",
     "vitepress-plugin-back-to-top": "^1.0.1",
     "vitepress-plugin-codeblocks-fold": "^1.2.35",
     "vitepress-plugin-detype": "^0.8.0",
