@@ -2,10 +2,8 @@ import { themeConfig } from "./src/theme";
 import { docsConfig } from "./src/docs";
 import { head } from "./src/head";
 import { markdown } from "./src/markdown";
-import { RssPlugin } from "vitepress-plugin-rss";
-import { RSS } from "./src/rss";
 import { withMermaid } from "vitepress-plugin-panzoom-mermaid";
-import { defineConfig, HeadConfig } from "vitepress";
+import { HeadConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from "vite-plugin-git-revision-info";
 import { getChangelogAndContributors } from "vitepress-plugin-changelog";
@@ -13,7 +11,6 @@ import vitepressProtectPlugin from "vitepress-protect-plugin";
 import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-// import config from '@sakitam-gis/vitepress-playground/config';
 
 const customElements = [
   "mjx-container",
@@ -150,7 +147,6 @@ export default withMermaid({
           // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
         },
       }),
-      RssPlugin(RSS),
       vitepressProtectPlugin({
         disableF12: true,
         disableCopy: true,
@@ -213,6 +209,10 @@ export default withMermaid({
 
     if (isNotFound) {
       pageData.title = "Not Found";
+    }
+
+    if (pageData.relativePath.includes("blog")) {
+      pageData.titleTemplate = ":title | Blog";
     }
 
     return {

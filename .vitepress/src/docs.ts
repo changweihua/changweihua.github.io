@@ -39,8 +39,8 @@ const docsConfig: UserConfig<DefaultTheme.Config> = {
   locales: {
     // 若果配置了root，则双击title的时候不会返回/路径下了，只会返回在link路径下
     // root: { label: "简体中文", lang: "zh-CN", link: "/zh-CN/",  ...zhConfig },
-    'zh-CN': { label: "简体中文", lang: "zh-CN", link: "/zh-CN/", ...zhConfig },
-    'en-US': { label: "English", lang: "en-US", link: "/en-US/", ...enConfig },
+    "zh-CN": { label: "简体中文", lang: "zh-CN", link: "/zh-CN/", ...zhConfig },
+    "en-US": { label: "English", lang: "en-US", link: "/en-US/", ...enConfig },
   },
 };
 

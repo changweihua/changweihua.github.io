@@ -5,11 +5,22 @@ pageClass: gallery-page-class
 
 ## 2025 ##
 
-- [ ] Write something here
-- [ ] item 1
-- [x] item 2
-- [X] item 3
-- [x] Write something here
+- [ ]  未完成任务（注意：方括号后必须有两个空格）
+- [ ] 已完成任务（必须小写 x，且方括号后有两个空格）
+
+::: tasklist 代办
+
+- [ ] 静态任务
+- [x] 动态任务（支持点击）
+- [ ] 
+:::
+
+```markdown:line-numbers {2}
+::: tasklist
+- [ ] 未完成任务
+- [x] 已完成任务
+:::
+```
 
 
 > 开花不一定结果，努力一定不会辜负青春。

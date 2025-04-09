@@ -247,6 +247,34 @@ body {
   }
 }
 
+/* 强制显示原生复选框 */
+.task-list-item input[type="checkbox"] {
+  display: inline-block !important;
+  margin: 0 0.2em 0.25em -1.6em !important;
+}
+
+/* 动态交互效果 */
+.task-list-item [type="checkbox"]:checked::before {
+  content: "✓";
+  color: #42b983;
+  font-weight: bold;
+  position: absolute;
+  left: 2px;
+}
+
+.task-list-item [type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
 // .blog-page {
 //   // img {
 //   //   clip-path: url(#customClipPath);

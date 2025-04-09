@@ -21,6 +21,7 @@ export const themeConfig: DefaultTheme.Config = {
   lightModeSwitchTitle: "浅色",
   darkModeSwitchTitle: "深色",
   returnToTopLabel: "返回顶部",
+  skipToContentLabel: "回到正文",
   langMenuLabel: "选择语言",
   externalLinkIcon: true,
   socialLinks: [

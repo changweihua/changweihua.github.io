@@ -101,6 +101,7 @@ import StyledMermaid from "../components/StyledMermaid.vue";
 import MarkupView from "../components/MarkupView.vue";
 import Confetti from "../components/Confetti.vue";
 import Guidance from "../components/Guidance.vue";
+import TaskList from "../components/TaskList.vue";
 import "markmap-toolbar/dist/style.css";
 
 import { Icon } from "@iconify/vue";
@@ -426,7 +427,7 @@ export default {
       app.component("StyledMermaid", StyledMermaid);
       app.component("MarkupView", MarkupView);
       app.component("DacingNumber", DacingNumber);
-
+      app.component("TaskList", TaskList);
       app.component("m-icon", Icon);
 
       app.component("header-profile", HeaderProfile);

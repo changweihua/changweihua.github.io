@@ -2,6 +2,7 @@ import lightbox from "vitepress-plugin-lightbox";
 import { MarkdownOptions } from "vitepress";
 import timeline from "vitepress-markdown-timeline";
 import footnote from "markdown-it-footnote";
+import anchor from "markdown-it-anchor";
 import markdownSup from "markdown-it-sup";
 import markdownSub from "markdown-it-sub";
 import markdownItMark from "markdown-it-mark";
@@ -12,7 +13,6 @@ import markdownLinks from "markdown-it-external-links";
 import MarkdownItCollapsible from "markdown-it-collapsible";
 import lazy_loading from "markdown-it-image-lazy-loading";
 import MarkdownItVariable from "markdown-it-variable";
-import MarkdownItTodoLists from "markdown-it-todo-lists";
 import namedCode from "markdown-it-named-code-blocks";
 import strikethrough from "markdown-it-strikethrough-alt";
 import hashmention from "markdown-it-hashmention";
@@ -20,6 +20,7 @@ import { ImagePlugin } from "../plugins/markdown/image";
 import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
 import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
+import markdownItContainer from "markdown-it-container";
 import markupPlugin from "../plugins/markdown/markup";
 import useDefinePlugin from "vitepress-plugin-markdown-define";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
@@ -35,12 +36,17 @@ const CONSTS = {
 
 const markdown: MarkdownOptions | undefined = {
   lineNumbers: true,
+  // 直接启用 GitHub 风格列表
+  breaks: true,
+  // 允许 HTML 渲染
+  html: true,
   linkify: true,
   math: true,
   anchor: {
-    // permalink: anchor.permalink.ariaHidden({ // you can use other variants too, refer - https://github.com/valeriangalliat/markdown-it-anchor#permalinks
-    //   symbol: `🔗`
-    // })
+    permalink: anchor.permalink.ariaHidden({
+      // you can use other variants too, refer - https://github.com/valeriangalliat/markdown-it-anchor#permalinks
+      symbol: `🔗`,
+    }),
   },
   // @ts-ignore
   languages: [Expl3],
@@ -51,13 +57,81 @@ const markdown: MarkdownOptions | undefined = {
   frontmatter: {
     grayMatterOptions: {
       excerpt: true,
-      excerpt_separator: "<!-- more -->",
+      excerpt_separator: "<!-- 更多 -->",
     },
     renderExcerpt: false,
   },
-  preConfig: (md) => {},
+  preConfig: async (md) => {},
   config: (md) => {
     useDefinePlugin(md, CONSTS);
+
+    // md.use(markdownList);
+
+    // md.core.ruler.after("inline", "task-lists", (state) => {
+    //   state.tokens.forEach((token) => {
+    //     if (
+    //       token.content.startsWith("[ ] ") ||
+    //       token.content.startsWith("[x] ")
+    //     ) {
+    //       token.type = "task";
+    //       // @ts-ignore
+    //       token.checked = token.content.startsWith("[x] ");
+    //     }
+    //   });
+    // });
+
+    // // 强制启用任务列表解析
+    // md.set({
+    //   breaks: true,
+    //   html: true,
+    //   linkify: true,
+    // });
+
+    md.use(markdownItContainer, "tasklist", {
+      validate: (params) => {
+        // 匹配 "::: tasklist" 或带参数的 "::: tasklist 标题"
+        return params.trim().match(/^tasklist(\s+.*)?$/);
+      },
+      render: function (tokens, idx, options, env, self) {
+        const token = tokens[idx];
+        const info = token.info
+          .trim()
+          .replace(/^tasklist/, "")
+          .trim();
+
+        if (tokens[idx].nesting === 1) {
+          // 提取容器标题（如 "::: tasklist 待办事项" 中的 "待办事项"）
+          const title = info || "默认标题";
+          let content = tokens[idx].content || "";
+          console.log(tokens[idx]);
+          // 收集子 Token 的原始 Markdown 内容
+          for (let i = idx + 1; tokens[i].nesting !== -1; i++) {
+            console.log(tokens[i]);
+            if (tokens[i].type === "inline") {
+              content += tokens[i].content + "\n"; // 保留换行符
+            }
+          }
+
+          // 渲染为 HTML
+          return `<ClientOnly><TaskList title="${title}" content="${encodeURIComponent(content)}">`;
+        }
+        return "</TaskList></ClientOnly>";
+      },
+    });
+
+    // 手动添加任务列表解析规则
+    md.core.ruler.before("inline", "task-lists", (state) => {
+      state.tokens.forEach((token) => {
+        if (token.type === "list_item_open") {
+          const regex = /^\[( |x)\]\s/;
+          const match = regex.exec(token.content);
+          if (match) {
+            token.attrSet("class", "task-list-item");
+            token.attrSet("data-checked", match[1] === "x" ? "true" : "false");
+          }
+        }
+      });
+    });
 
     md.use(vitepressDemoPlugin, {
       demoDir: path.resolve(__dirname, "../../src/demos"),
@@ -79,10 +153,6 @@ const markdown: MarkdownOptions | undefined = {
     md.use(markdownSup);
     md.use(markdownSub);
     md.use(hashmention);
-    md.use(MarkdownItTodoLists, {
-      enabled: true,
-      useLabel: true,
-    });
     md.use(circleMarkdownPlugin);
     md.use(readerMarkdownPlugin);
     md.use(tabsMarkdownPlugin);
