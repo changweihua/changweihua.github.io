@@ -11,19 +11,21 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 const props = defineProps({ content: String, title: String });
-const tasks = ref([]);
+const tasks = ref<Array<{ checked: boolean; text: string }>>([]);
 // 匹配所有任务项（含状态）
 const pattern = /^\s*-\s+$$([ x])$$\s+(.+)$/gm;
 onMounted(() => {
-  console.log('props.content', props.content)
-  tasks.value = props.content
+  console.log("props.content", props.content);
+  if (props.content) {
+    tasks.value = decodeURIComponent(props.content)
       .split("\n")
       .filter((line) => line && line.trim().match(pattern))
       .map((line) => ({
         checked: line.includes("[x]"),
         text: line.replace(pattern, "").trim(),
       }));
-})
+  }
+});
 </script>
 
 <style lang="less" scoped>

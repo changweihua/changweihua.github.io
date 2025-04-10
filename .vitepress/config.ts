@@ -153,7 +153,7 @@ export default withMermaid({
         disableSelect: true,
       }),
       viteDemoPreviewPlugin(),
-      vueJsx(),
+      vueJsx()
     ],
   },
   vue: {

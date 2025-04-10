@@ -103,10 +103,8 @@ const markdown: MarkdownOptions | undefined = {
           // 提取容器标题（如 "::: tasklist 待办事项" 中的 "待办事项"）
           const title = info || "默认标题";
           let content = tokens[idx].content || "";
-          console.log(tokens[idx]);
           // 收集子 Token 的原始 Markdown 内容
           for (let i = idx + 1; tokens[i].nesting !== -1; i++) {
-            console.log(tokens[i]);
             if (tokens[i].type === "inline") {
               content += tokens[i].content + "\n"; // 保留换行符
             }
@@ -119,19 +117,19 @@ const markdown: MarkdownOptions | undefined = {
       },
     });
 
-    // 手动添加任务列表解析规则
-    md.core.ruler.before("inline", "task-lists", (state) => {
-      state.tokens.forEach((token) => {
-        if (token.type === "list_item_open") {
-          const regex = /^\[( |x)\]\s/;
-          const match = regex.exec(token.content);
-          if (match) {
-            token.attrSet("class", "task-list-item");
-            token.attrSet("data-checked", match[1] === "x" ? "true" : "false");
-          }
-        }
-      });
-    });
+    // // 手动添加任务列表解析规则
+    // md.core.ruler.before("inline", "task-lists", (state) => {
+    //   state.tokens.forEach((token) => {
+    //     if (token.type === "list_item_open") {
+    //       const regex = /^\[( |x)\]\s/;
+    //       const match = regex.exec(token.content);
+    //       if (match) {
+    //         token.attrSet("class", "task-list-item");
+    //         token.attrSet("data-checked", match[1] === "x" ? "true" : "false");
+    //       }
+    //     }
+    //   });
+    // });
 
     md.use(vitepressDemoPlugin, {
       demoDir: path.resolve(__dirname, "../../src/demos"),
