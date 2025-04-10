@@ -21,6 +21,9 @@ o又o
 +bar
 ```
 
+
+<LinkCard url="https://changweihua.github.io/" title="CMONO.NET" description="https://changweihua.github.io/" logo="https://changweihua.github.io/logo.png"/>
+
 ```text
 <Sidebar collapsible="icon" variant="sidebar">  [!code --]
 <Sidebar collapsible="icon" variant="inset">   [!code ++]

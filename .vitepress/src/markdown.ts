@@ -29,6 +29,7 @@ import { fileURLToPath, URL } from "node:url";
 import path from "path";
 import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
+import markdownItTaskCheckbox from "markdown-it-task-checkbox";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -64,9 +65,7 @@ const markdown: MarkdownOptions | undefined = {
   preConfig: async (md) => {},
   config: (md) => {
     useDefinePlugin(md, CONSTS);
-
-    // md.use(markdownList);
-
+    md.use(markdownItTaskCheckbox) //todo
     // md.core.ruler.after("inline", "task-lists", (state) => {
     //   state.tokens.forEach((token) => {
     //     if (

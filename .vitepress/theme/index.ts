@@ -9,6 +9,7 @@ import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import DacingNumber from "../components/DacingNumber.vue";
+import LinkCard from "../components/LinkCard.vue";
 import DancingLogo from "../components/DancingLogo.vue";
 import ReadText from "../components/ReadText.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
@@ -23,7 +24,9 @@ import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import "@vitepress-code-preview/container/dist/style.css";
 import VueResizeObserver from "vue-resize-observer";
 import yuppie from "yuppie-ui";
-import * as AntIconsVue from '@ant-design/icons-vue';
+import * as AntIconsVue from "@ant-design/icons-vue";
+// 彩虹背景动画样式
+let homePageStyle: HTMLStyleElement | undefined
 
 import { pinyin } from "pinyin-pro";
 
@@ -46,6 +49,25 @@ const versionCheck = async () => {
   //     },
   //   });
   // }
+};
+
+// 彩虹背景动画样式
+function updateHomePageStyle(value: boolean) {
+  if (value) {
+    if (homePageStyle) return
+
+    homePageStyle = document.createElement('style')
+    homePageStyle.innerHTML = `
+    :root {
+      animation: rainbow 12s linear infinite;
+    }`
+    document.body.appendChild(homePageStyle)
+  } else {
+    if (!homePageStyle) return
+
+    homePageStyle.remove()
+    homePageStyle = undefined
+  }
 }
 
 // SVG 缩放
@@ -81,8 +103,8 @@ import zenuml from "@mermaid-js/mermaid-zenuml";
 import mindmap from "@mermaid-js/mermaid-mindmap";
 mermaid.registerExternalDiagrams([zenuml, mindmap]);
 
-import vitepressNprogress from "vitepress-plugin-nprogress";
-import "vitepress-plugin-nprogress/lib/css/index.css";
+import { NProgress } from "nprogress-v2/dist/index.js"; // 进度条组件
+import "nprogress-v2/dist/index.css"; // 进度条样式
 
 // 引入 Ant Design Vue
 import Antd from "ant-design-vue";
@@ -156,7 +178,7 @@ export default {
       () => route.path,
       () => {
         console.log("页面动画");
-      },
+      }
     );
 
     return h(AnimatingLayout, null, {
@@ -203,7 +225,7 @@ export default {
               src: "/cwh.svg",
               class: "VPImage image-src",
             }),
-          ],
+          ]
         ),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
@@ -339,8 +361,18 @@ export default {
 
     DefaultTheme.enhanceApp(ctx);
 
-    // @ts-ignore
-    if (!import.meta.env.SSR) {
+    if (inBrowser) {
+      NProgress.configure({ showSpinner: false });
+
+      // 彩虹背景动画样式
+      if (typeof window !== "undefined") {
+        watch(
+          () => router.route.data.relativePath,
+          () => updateHomePageStyle(location.pathname === "/"),
+          { immediate: true }
+        );
+      }
+
       enhanceAppWithTabs(app);
       // const plugin = await import('@vp/plugins/markdown/rough-mermaid')
       // app.use(plugin.default)
@@ -355,7 +387,7 @@ export default {
       app.use(VueResizeObserver);
 
       app.component("MarkdownEChart", MarkdownEChart);
-
+      app.component("LinkCard", LinkCard);
       app.use(directives);
 
       app.directive("aria-empty", {
@@ -383,7 +415,7 @@ export default {
 
       router.onBeforeRouteChange = async (to) => {
         console.log("onBeforeRouteChange");
-
+        NProgress.start(); // 开始进度条
         versionCheck();
 
         //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
@@ -411,11 +443,9 @@ export default {
 
       router.onAfterPageLoad = async () => {
         console.log("onAfterPageLoad");
-
+        NProgress.done(); // 停止进度条
         // 图片添加边缘透明效果
       };
-
-      vitepressNprogress(ctx);
 
       useComponents(app, DemoPreview);
 

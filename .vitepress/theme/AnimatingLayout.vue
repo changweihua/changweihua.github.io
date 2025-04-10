@@ -9,8 +9,8 @@ import {
   styleImage,
   styleImageContainer,
 } from "#.vitepress/utils/fillImage.ts";
-// import { MyButton, Panel } from 'yuppie-ui'
-// import Kinet from 'kinet';
+import MouseClick from "../components/MouseClick.vue";
+import MouseFollower from "../components/MouseFollower.vue";
 
 const { isDark } = useData();
 const slots = Object.keys(useSlots());
@@ -125,12 +125,13 @@ console.log(
     enter-active-class="animate__animated animate__tada"
     leave-active-class="animate__animated animate__bounce"
   >
-    <div>
       <DefaultTheme.Layout>
         <template #doc-top>
           <div class="shade" :class="{ 'shade-active': isTransitioning }">
             &nbsp;
           </div>
+          <MouseFollower />
+          <MouseClick />
         </template>
         <template
           v-for="(slotKey, slotIndex) in slots"
@@ -164,7 +165,6 @@ console.log(
       <!-- <my-button></my-button>
       <Panel :user="'changeweihua'" :age="10" /> -->
       <!-- <a class="back" href="#"></a> -->
-    </div>
   </transition>
 </template>
 

@@ -5,6 +5,7 @@
 @import "./vp-code-group.less";
 @import "./ext.less";
 @import "./mermaid.less";
+@import "./rainbow.less";
 
 :root {
   --vp-font-family-base: @app-font-family;
@@ -592,6 +593,11 @@ html[data-theme="dark"] {
   opacity: 1;
 }
 
+.vp-doc div[class*="language-"],
+.vp-block {
+  border-radius: 8px;
+}
+
 // @view-transition {
 //   navigation: auto;
 // }
@@ -720,4 +726,8 @@ a.VPSkipLink::after {
   mask-mode: alpha;
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
+}
+
+.nprogress .bar {
+  background: var(--vp-c-brand-light) !important;
 }
