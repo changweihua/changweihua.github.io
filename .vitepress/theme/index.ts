@@ -9,7 +9,7 @@ import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
 import DacingNumber from "../components/DacingNumber.vue";
-import LinkCard from "../components/LinkCard.vue";
+import HrefCard from "../components/HrefCard.vue";
 import DancingLogo from "../components/DancingLogo.vue";
 import ReadText from "../components/ReadText.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
@@ -387,7 +387,7 @@ export default {
       app.use(VueResizeObserver);
 
       app.component("MarkdownEChart", MarkdownEChart);
-      app.component("LinkCard", LinkCard);
+      app.component("HrefCard", HrefCard);
       app.use(directives);
 
       app.directive("aria-empty", {

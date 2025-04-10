@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 
 <template>
-    <div class="linkcard">
+    <div class="href-card">
         <a :href="props.url" target="_blank">
             <p class="description">{{ props.title }}<br><span>{{ props.description }}</span></p>
             <div class="logo">
@@ -26,9 +26,9 @@ const props = withDefaults(defineProps<Props>(), {
     </div>
 </template>
 
-<style>
+<style scoped>
 /* 卡片背景 */
-.linkcard {
+.href-card {
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
     padding: 8px 16px 8px 8px;
@@ -37,18 +37,18 @@ const props = withDefaults(defineProps<Props>(), {
 }
 
 /* 卡片鼠标悬停 */
-.linkcard:hover {
+.href-card:hover {
     background-color: var(--vp-c-yellow-soft);
 }
 
 /* 链接样式 */
-.linkcard a {
+.href-card a {
     display: flex;
     align-items: center;
 }
 
 /* 描述链接文字 */
-.linkcard .description {
+.href-card .description {
     flex: 1;
     font-weight: 500;
     font-size: 16px;
@@ -59,12 +59,12 @@ const props = withDefaults(defineProps<Props>(), {
 }
 
 /* 描述链接文字2 */
-.linkcard .description span {
+.href-card .description span {
     font-size: 14px;
 }
 
 /* logo图片 */
-.linkcard .logo img {
+.href-card .logo img {
     width: 80px;
     object-fit: contain;
 }
