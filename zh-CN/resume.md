@@ -12,6 +12,8 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 <ShadowLogo />
 <!-- <text class="resume-title">为你定制 发现精彩</text> -->
 
+<ColorfulName />
+
 ## 💥 简介 ##
 
 o又o

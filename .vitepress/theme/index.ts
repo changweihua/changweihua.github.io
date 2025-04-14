@@ -12,6 +12,7 @@ import DacingNumber from "../components/DacingNumber.vue";
 import HrefCard from "../components/HrefCard.vue";
 import DancingLogo from "../components/DancingLogo.vue";
 import ReadText from "../components/ReadText.vue";
+import ColorfulName from "../components/ColorfulName.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
@@ -26,7 +27,7 @@ import VueResizeObserver from "vue-resize-observer";
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
 // 彩虹背景动画样式
-let homePageStyle: HTMLStyleElement | undefined
+let homePageStyle: HTMLStyleElement | undefined;
 
 import { pinyin } from "pinyin-pro";
 
@@ -54,19 +55,19 @@ const versionCheck = async () => {
 // 彩虹背景动画样式
 function updateHomePageStyle(value: boolean) {
   if (value) {
-    if (homePageStyle) return
+    if (homePageStyle) return;
 
-    homePageStyle = document.createElement('style')
+    homePageStyle = document.createElement("style");
     homePageStyle.innerHTML = `
     :root {
       animation: rainbow 12s linear infinite;
-    }`
-    document.body.appendChild(homePageStyle)
+    }`;
+    document.body.appendChild(homePageStyle);
   } else {
-    if (!homePageStyle) return
+    if (!homePageStyle) return;
 
-    homePageStyle.remove()
-    homePageStyle = undefined
+    homePageStyle.remove();
+    homePageStyle = undefined;
   }
 }
 
@@ -388,6 +389,7 @@ export default {
 
       app.component("MarkdownEChart", MarkdownEChart);
       app.component("HrefCard", HrefCard);
+      app.component("ColorfulName", ColorfulName);
       app.use(directives);
 
       app.directive("aria-empty", {

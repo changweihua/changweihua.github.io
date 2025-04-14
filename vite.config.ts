@@ -10,6 +10,9 @@ import { vitePluginVersionMark } from "vite-plugin-version-mark";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import Inspect from "vite-plugin-inspect";
 import updater from "./utils/updater";
+import VitePluginBuildLegacy, {
+  GeneratVersion,
+} from "./utils/vite-plugin-build-legacy";
 import mkcert from "vite-plugin-mkcert";
 import Iconify from "unplugin-iconify-generator/vite";
 import { envParse } from "vite-plugin-env-parse";
@@ -57,6 +60,7 @@ export default defineConfig(() => {
     define: {
       APP_VERSION: timestamp,
       __VUE_PROD_DEVTOOLS__: false,
+      // __version__: JSON.stringify(GeneratVersion()),
       "process.env": {},
       // 注意要用 JSON.stringify
       "process.env.RSS_BASE": JSON.stringify(
@@ -114,6 +118,7 @@ export default defineConfig(() => {
           rel: "preload",
         },
       }),
+      // VitePluginBuildLegacy(),
       vitePluginFakeServer({
         include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
         enableProd: true, // 是否在生产环境下设置mock
