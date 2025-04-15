@@ -1,13 +1,14 @@
 @import "./fonts/index.less";
-@import "./vars.less";
-@import "./blur.less";
-@import "./global.less";
-@import "./vp-code-group.less";
-@import "./ext.less";
-@import "./mermaid.less";
-@import "./rainbow.less";
+
+// @import "./blur.less";
+// @import "./global.less";
+// @import "./vp-code-group.less";
+// @import "./ext.less";
+// @import "./mermaid.less";
+// @import "./rainbow.less";
 
 :root {
+  --vp-nav-bg-color: transparent;
   --vp-font-family-base: @app-font-family;
   --vp-font-family-mono: @app-font-family;
   --vp-header-anchor-symbol: "🔗";
@@ -155,77 +156,6 @@ body {
       transform: rotate(360deg);
     }
   }
-  // .VPImage {
-  //   background: repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 50% 0/2500px
-  //       2500px,
-  //     repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 50% 50%/2500px
-  //       2500px;
-  //   background-blend-mode: difference;
-  //   mix-blend-mode: lighten;
-  //   -webkit-background-clip: text;
-  //   background-clip: text;
-  // }
-
-  // .VPImage,
-  // .VPImage::after {
-  //   background-size: cover;
-  //   background-repeat: no-repeat;
-  // }
-
-  // .VPImage {
-  //   height: 512px;
-  //   width: 720px;
-  //   position: relative;
-  //   overflow: hidden;
-  //   transition: all 2s cubic-bezier(0.5, 0, 0, 1);
-  // }
-
-  // .VPImage::after {
-  //   position: absolute;
-  //   content: "";
-  //   left: 300px;
-  //   background-position: -300px 0;
-  //   width: 1px;
-  //   top: 0;
-  //   bottom: 0;
-  //   transform-origin: 0 0;
-  //   transform: scale(6000, 1);
-  //   background-image: inherit;
-  //   image-rendering: pixelated;
-  //   transition: all 2s cubic-bezier(0.5, 0, 0, 1);
-  // }
-  // .VPImage:hover,
-  // .VPImage:hover::after {
-  //   cursor: pointer;
-  // }
-  // .VPImage:hover::after {
-  //   transform: scale(1, 1);
-  //   left: 720px;
-  //   background-position: -720px 0;
-  // }
-
-  // #g-pointer-1,
-  // #g-pointer-2 {
-  //   position: absolute;
-  //   pointer-events: none;
-  //   top: 0;
-  //   left: 0;
-  //   width: 12px;
-  //   height: 12px;
-  //   background: #999;
-  //   border-radius: 50%;
-  //   background-color: #fff;
-  //   mix-blend-mode: exclusion;
-  //   z-index: 9999;
-  // }
-  // #g-pointer-2 {
-  //   width: 42px;
-  //   height: 42px;
-  //   background: #222;
-  //   transition: 0.2s ease-out;
-  //   z-index: 9999;
-  // }
-  // background-color: red;
 }
 
 .blog-index-page {
@@ -236,51 +166,6 @@ body {
     background: red;
   }
 }
-
-.intersection-observer2-style {
-  h2[id="完整示例"] + section,
-  h3[id="无限滚动加载更多内容"] + section,
-  h3[id="元素进入视窗时添加动画"] + section {
-    .container {
-      max-height: 150px;
-      overflow-y: auto;
-    }
-  }
-}
-
-/* 强制显示原生复选框 */
-.task-list-item input[type="checkbox"] {
-  display: inline-block !important;
-  margin: 0 0.2em 0.25em -1.6em !important;
-}
-
-/* 动态交互效果 */
-.task-list-item [type="checkbox"]:checked::before {
-  content: "✓";
-  color: #42b983;
-  font-weight: bold;
-  position: absolute;
-  left: 2px;
-}
-
-.task-list-item [type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-}
-
-// .blog-page {
-//   // img {
-//   //   clip-path: url(#customClipPath);
-//   // }
-// }
 
 .medium-zoom-overlay {
   backdrop-filter: blur(5rem);
@@ -382,9 +267,6 @@ html[data-theme="dark"] {
   }
 }
 
-:root {
-  --vp-nav-bg-color: transparent;
-}
 
 .VPNav,
 .VPLocalNav {
@@ -706,12 +588,6 @@ a.VPSkipLink {
 }
 a.VPSkipLink::after {
   content: "转至正文";
-}
-
-@media (max-width: 640px) {
-  .theme-blog-popover-close {
-    display: none !important;
-  }
 }
 
 .vp-doc .header-anchor::before {
