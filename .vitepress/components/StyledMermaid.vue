@@ -241,8 +241,3 @@ onUnmounted(() => mut?.disconnect());
 // }
 </style>
 
-<style lang="less">
-// tspan {
-//   font-family: Fangyuan;
-// }
-</style>

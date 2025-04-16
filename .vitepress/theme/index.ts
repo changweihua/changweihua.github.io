@@ -71,15 +71,9 @@ function updateHomePageStyle(value: boolean) {
   }
 }
 
-// SVG 缩放
-// import 'svg-pan-zoom-container'
-
 import directives from "../directives";
 import mermaid from "mermaid";
 import { icons } from "@iconify-json/logos";
-// import { icons as skillIcons } from '@iconify-json/skill-icons';
-// import { icons as devIcons } from '@iconify-json/devicon';
-// import { icons as vscodeIcons } from '@iconify-json/vscode-icons';
 mermaid.registerIconPacks([
   {
     name: icons.prefix, // To use the prefix defined in the icon pack
@@ -125,7 +119,6 @@ import MarkupView from "../components/MarkupView.vue";
 import Confetti from "../components/Confetti.vue";
 import Guidance from "../components/Guidance.vue";
 import TaskList from "../components/TaskList.vue";
-import "markmap-toolbar/dist/style.css";
 
 import { Icon } from "@iconify/vue";
 

@@ -16,7 +16,7 @@ const { frontmatter } = useData();
 
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 lottie-panel {
   width: 200px;
   height: 100px;

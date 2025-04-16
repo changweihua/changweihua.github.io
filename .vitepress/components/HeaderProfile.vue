@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
 :root {
   --clr: #f0f2f5;
 }

@@ -68,7 +68,7 @@ const props = defineProps({
 // );
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .waving-border {
   transition: ease-in-out 0.3s;
   background: linear-gradient(0, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px)

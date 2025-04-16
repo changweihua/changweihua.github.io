@@ -14,6 +14,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import { useScreenfullEffect } from '@vp/utils/useScreenfullEffect'
 import { delay } from 'lodash-es'
 import screenfull from 'screenfull';
+import "markmap-toolbar/dist/style.css";
 
 const { handleFullscreenElement, isFullElementTag } = useScreenfullEffect()
 

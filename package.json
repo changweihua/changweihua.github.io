@@ -58,7 +58,7 @@
     "@iconify-json/skill-icons": "^1.2.0",
     "@iconify-json/vscode-icons": "^1.2.19",
     "@iconify/icons-emojione": "^1.2.6",
-    "@iconify/json": "^2.2.327",
+    "@iconify/json": "^2.2.328",
     "@release-it/conventional-changelog": "^10.0.0",
     "@types/bluebird": "^3.5.42",
     "@types/fs-extra": "^11.0.4",
