@@ -1,4 +1,3 @@
-import lightbox from "vitepress-plugin-lightbox";
 import { MarkdownOptions } from "vitepress";
 import timeline from "vitepress-markdown-timeline";
 import footnote from "markdown-it-footnote";
@@ -162,7 +161,6 @@ const markdown: MarkdownOptions | undefined = {
       internalDomains: ["https://changweihua.github.io"],
     });
     strikethrough(md);
-    md.use(lightbox, {});
     md.use(namedCode, { isEnableInlineCss: true });
     md.use(lazy_loading);
     md.use(timeline);

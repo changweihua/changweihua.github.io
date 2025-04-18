@@ -8,11 +8,9 @@ import { fileURLToPath } from "url";
 import type { Plugin } from "vite";
 import { vitePluginVersionMark } from "vite-plugin-version-mark";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
+import { compression } from 'vite-plugin-compression2'
 import Inspect from "vite-plugin-inspect";
 import updater from "./utils/updater";
-import VitePluginBuildLegacy, {
-  GeneratVersion,
-} from "./utils/vite-plugin-build-legacy";
 import mkcert from "vite-plugin-mkcert";
 import Iconify from "unplugin-iconify-generator/vite";
 import { envParse } from "vite-plugin-env-parse";
@@ -128,6 +126,7 @@ export default defineConfig(() => {
         autoUpgrade: false,
         force: false, // force generation of certs even without setting https property in the vite config
       }),
+      compression()
     ],
     css: {
       preprocessorOptions: {
