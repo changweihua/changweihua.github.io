@@ -33,12 +33,23 @@ export default defineConfig({
   //   // shortcuts to multiple utilities
   //   ['card','border-rd-30 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% mb-4vw p-2rem'],
   // ]
-  include: [
-    /\.vue$/, // 扫描 Vue 组件
-    /\.md$/,  // 扫描 Markdown 文件
-    /\.vitepress\/theme\/.*\.vue/, // 扫描主题组件
-    // 补充其他可能使用样式的文件路径
-  ],
+  content: {
+    pipeline: {
+      include: [
+        /\.vue$/,
+        /\.md$/,
+        /\.vitepress\/theme\/.*\.vue/,
+        // 其他需要扫描的文件路径
+      ],
+      extract: {
+      // 可选：打印被扫描的文件
+      transform: (code, id) => {
+        console.log('Scanning:', id)
+        return code
+      }
+    }
+    }
+  },
   shortcuts: {
     'border-main': 'border-gray-400 border-opacity-30',
     'bg-main': 'bg-gray-400',
