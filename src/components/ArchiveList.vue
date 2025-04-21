@@ -1,6 +1,5 @@
 <template>
-  <div class="flex p-6 justify-center items-center">
-    <div class="w-full">
+  <div class="w-full">
       <div v-for="year in yearList" :key="year">
         <div class="pt-3 pb-2">
           <h1 v-text="year" class="text-xl"></h1>
@@ -27,7 +26,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script lang="ts" setup>
 import { computed } from "vue";
