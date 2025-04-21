@@ -83,21 +83,21 @@ const markdown: MarkdownOptions | undefined = {
     md.use(frontmatter);
     md.use(markdownSup);
     md.use(markdownSub);
-    md.use(hashmention);
+    //md.use(hashmention);
     md.use(circleMarkdownPlugin);
     md.use(readerMarkdownPlugin);
     md.use(tabsMarkdownPlugin);
-    md.use(MarkdownItVariable);
-    md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
+    //md.use(MarkdownItVariable);
+    //md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
     markdownItMark(md);
-    markdownLinks(md, {
-      externalClassName: "custom-external-link",
-      internalClassName: "custom-internal-link",
-      internalDomains: ["https://changweihua.github.io"],
-    });
-    strikethrough(md);
-    md.use(namedCode, { isEnableInlineCss: true });
-    md.use(lazy_loading);
+    //markdownLinks(md, {
+    //  externalClassName: "custom-external-link",
+   //   internalClassName: "custom-internal-link",
+     // internalDomains: ["https://changweihua.github.io"],
+   // });
+    //strikethrough(md);
+    //md.use(namedCode, { isEnableInlineCss: true });
+   // md.use(lazy_loading);
     md.use(timeline);
     md.use(groupIconMdPlugin);
     md.use(echartsMarkdownPlugin);
@@ -109,7 +109,7 @@ const markdown: MarkdownOptions | undefined = {
       docRoot,
     });
 
-    md.use(ImagePlugin);
+    //md.use(ImagePlugin);
 
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {
