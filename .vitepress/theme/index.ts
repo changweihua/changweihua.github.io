@@ -129,7 +129,7 @@ import "vitepress-markdown-it-stepper/theme";
 
 import "virtual:group-icons.css";
 import "virtual:uno.css";
-import "animate.css";
+//import "animate.css";
 
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
@@ -378,7 +378,7 @@ export default {
 
       app.use(yuppie);
       // @ts-ignore
-      app.use(VueResizeObserver);
+      //app.use(VueResizeObserver);
 
       app.component("MarkdownEChart", MarkdownEChart);
       app.component("HrefCard", HrefCard);
@@ -411,7 +411,7 @@ export default {
       router.onBeforeRouteChange = async (to) => {
         console.log("onBeforeRouteChange");
         NProgress.start(); // 开始进度条
-        versionCheck();
+        //versionCheck();
 
         //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
         const { browser, cpu, device } = UAParser();
