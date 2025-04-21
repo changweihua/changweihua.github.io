@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/changweihua.github.io"
   },
+  "sideEffects": ["**/*.css"],
   "license": "ISC",
   "scripts": {
     "docs:dev": "vitepress --mode development --host",
