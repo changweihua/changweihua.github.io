@@ -12,7 +12,6 @@ import Inspect from "vite-plugin-inspect";
 import mkcert from "vite-plugin-mkcert";
 import Iconify from "unplugin-iconify-generator/vite";
 import { envParse } from "vite-plugin-env-parse";
-import { preloadImages } from "./plugins/vitePreloadImage.ts";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 import versionInjector from 'unplugin-version-injector/vite';
@@ -100,12 +99,6 @@ export default defineConfig(() => {
       // VueDevTools(),
       UnoCSS(),
       Inspect(),
-      preloadImages({
-        dir: "**.{jpg,png,svg,jpeg}",
-        attrs: {
-          rel: "preload",
-        },
-      }),
       // VitePluginBuildLegacy(),
       vitePluginFakeServer({
         include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
