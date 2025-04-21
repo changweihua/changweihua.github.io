@@ -130,6 +130,9 @@ export default withMermaid({
   // srcDir: '.',
   vite: {
     logLevel: "info",
+    build: {
+      cssMinify: false
+    },
     // optimizeDeps: { include: ["@braintree/sanitize-url"] },
     // resolve: {
     //   alias: {
