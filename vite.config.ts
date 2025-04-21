@@ -113,6 +113,7 @@ export default defineConfig(() => {
       versionInjector()
     ],
     css: {
+      codeSplit: false,
       preprocessorOptions: {
         less: {
           modifyVars: {
