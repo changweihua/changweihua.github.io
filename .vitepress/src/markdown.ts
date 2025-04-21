@@ -28,7 +28,6 @@ import { fileURLToPath, URL } from "node:url";
 import path from "path";
 import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
-import markdownItTaskCheckbox from "markdown-it-task-checkbox";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -64,70 +63,6 @@ const markdown: MarkdownOptions | undefined = {
   preConfig: async (md) => {},
   config: (md) => {
     useDefinePlugin(md, CONSTS);
-    md.use(markdownItTaskCheckbox) //todo
-    // md.core.ruler.after("inline", "task-lists", (state) => {
-    //   state.tokens.forEach((token) => {
-    //     if (
-    //       token.content.startsWith("[ ] ") ||
-    //       token.content.startsWith("[x] ")
-    //     ) {
-    //       token.type = "task";
-    //       // @ts-ignore
-    //       token.checked = token.content.startsWith("[x] ");
-    //     }
-    //   });
-    // });
-
-    // // 强制启用任务列表解析
-    // md.set({
-    //   breaks: true,
-    //   html: true,
-    //   linkify: true,
-    // });
-
-    md.use(markdownItContainer, "tasklist", {
-      validate: (params) => {
-        // 匹配 "::: tasklist" 或带参数的 "::: tasklist 标题"
-        return params.trim().match(/^tasklist(\s+.*)?$/);
-      },
-      render: function (tokens, idx, options, env, self) {
-        const token = tokens[idx];
-        const info = token.info
-          .trim()
-          .replace(/^tasklist/, "")
-          .trim();
-
-        if (tokens[idx].nesting === 1) {
-          // 提取容器标题（如 "::: tasklist 待办事项" 中的 "待办事项"）
-          const title = info || "默认标题";
-          let content = tokens[idx].content || "";
-          // 收集子 Token 的原始 Markdown 内容
-          for (let i = idx + 1; tokens[i].nesting !== -1; i++) {
-            if (tokens[i].type === "inline") {
-              content += tokens[i].content + "\n"; // 保留换行符
-            }
-          }
-
-          // 渲染为 HTML
-          return `<ClientOnly><TaskList title="${title}" content="${encodeURIComponent(content)}">`;
-        }
-        return "</TaskList></ClientOnly>";
-      },
-    });
-
-    // // 手动添加任务列表解析规则
-    // md.core.ruler.before("inline", "task-lists", (state) => {
-    //   state.tokens.forEach((token) => {
-    //     if (token.type === "list_item_open") {
-    //       const regex = /^\[( |x)\]\s/;
-    //       const match = regex.exec(token.content);
-    //       if (match) {
-    //         token.attrSet("class", "task-list-item");
-    //         token.attrSet("data-checked", match[1] === "x" ? "true" : "false");
-    //       }
-    //     }
-    //   });
-    // });
 
     md.use(vitepressDemoPlugin, {
       demoDir: path.resolve(__dirname, "../../src/demos"),

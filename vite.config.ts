@@ -6,17 +6,16 @@ import UnoCSS from "unocss/vite";
 import path, { resolve } from "path";
 import { fileURLToPath } from "url";
 import type { Plugin } from "vite";
-import { vitePluginVersionMark } from "vite-plugin-version-mark";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import { compression } from 'vite-plugin-compression2'
 import Inspect from "vite-plugin-inspect";
-import updater from "./utils/updater";
 import mkcert from "vite-plugin-mkcert";
 import Iconify from "unplugin-iconify-generator/vite";
 import { envParse } from "vite-plugin-env-parse";
 import { preloadImages } from "./plugins/vitePreloadImage.ts";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
+import versionInjector from 'unplugin-version-injector/vite';
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -70,17 +69,8 @@ export default defineConfig(() => {
     },
     plugins: [
       envParse(),
-      vitePluginVersionMark({
-        ifShortSHA: true,
-        ifMeta: true,
-        ifLog: true,
-        ifGlobal: true,
-      }),
       updateMetadata(),
       yourPlugin(),
-      updater({
-        version: timestamp,
-      }),
       chunkSplitPlugin({
         strategy: "default",
       }),
@@ -126,7 +116,8 @@ export default defineConfig(() => {
         autoUpgrade: false,
         force: false, // force generation of certs even without setting https property in the vite config
       }),
-      compression()
+      compression(),
+      versionInjector()
     ],
     css: {
       preprocessorOptions: {

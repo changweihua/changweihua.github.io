@@ -133,5 +133,8 @@ head:
       content: changweihua.github.io 首页 CMONO.NET
 ---
 
+- [ ] 未完成任务
+- [x] 已完成任务
+
 <Confetti />
 <!-- <Guidance :steps="[{element: '.VPHomeHero'}]" /> -->

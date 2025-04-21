@@ -1,0 +1,36 @@
+
+@media print {
+  /* 隐藏导航栏/侧边栏等不需要打印的元素 */
+  .VPNav,
+  .VPSidebar,
+  .edit-link,
+  .prev-next {
+    display: none !important;
+  }
+
+  /* 优化内容显示 */
+  .content {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* 强制黑白打印 */
+  * {
+    color: #000 !important;
+    background: transparent !important;
+  }
+
+  /* 处理代码块换行 */
+  pre {
+    white-space: pre-wrap !important;
+  }
+
+  /* 防止分页截断内容 */
+  .content-block {
+    page-break-inside: avoid;
+  }
+  /* 在标题前分页 */
+  h2 {
+    page-break-before: always;
+  }
+}
