@@ -128,7 +128,7 @@ import "./styles/timeline.fix.less";
 import "vitepress-markdown-it-stepper/theme";
 
 import "virtual:group-icons.css";
-import "uno.css";
+import "virtual:uno.css";
 import "animate.css";
 
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
