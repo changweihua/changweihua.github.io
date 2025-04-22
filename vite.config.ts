@@ -120,6 +120,9 @@ export default defineConfig(() => {
             hack: 'true; @import "@vp/theme/styles/vars.less"',
           },
           javascriptEnabled: true,
+          globalVars: {
+
+          }
         },
       },
     },

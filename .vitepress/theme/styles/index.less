@@ -4,3 +4,23 @@
 @import './markdown.ext.less';
 @import './mermaid.ext.less';
 @import "./fonts/index.less";
+
+/* 滚动条里面轨道，能向上向下移动 */
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  display: none;
+  background: #E2E6F1;
+}
+
+/* 滚动条里面的小方块，能向上向下移动 */
+*:hover::-webkit-scrollbar-thumb {
+  display: flex;
+  background: #E2E6F1;
+}
+
+*:hover::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}

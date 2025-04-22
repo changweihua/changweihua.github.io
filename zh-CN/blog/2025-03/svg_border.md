@@ -440,7 +440,7 @@ mask元素的内容是一个单一的circle元素，它填充了一个白色到�
 
 ```vue
 <template>
-  <div class="body">
+  <div class="svg-body">
     <svg width="400" height="200">
       <defs>
         <pattern
@@ -530,7 +530,7 @@ mask元素的内容是一个单一的circle元素，它填充了一个白色到�
   </div>
 </template>
 <style>
-body {
+.svg-body {
         margin: unset;
         display: grid;
         place-content: center;

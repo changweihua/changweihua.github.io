@@ -11,6 +11,8 @@ import vitepressProtectPlugin from "vitepress-protect-plugin";
 import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
 
 const customElements = [
   "mjx-container",
@@ -116,10 +118,8 @@ export default withMermaid({
     //   // 'secondaryColor': '#006100',
     //   // 'tertiaryColor': '#fff'
     // },
-    fontFamily:
-      "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-    altFontFamily:
-      "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
     startOnLoad: false,
     //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
   },
@@ -131,7 +131,29 @@ export default withMermaid({
   vite: {
     logLevel: "info",
     build: {
-      cssMinify: false
+      cssMinify: false,
+    },
+    css: {
+      postcss: {
+        plugins: [
+          autoprefixer({
+            overrideBrowserslist: [
+              "Android 4.1",
+              "iOS 7.1",
+              "Chrome > 31",
+              "ff > 31",
+              "ie >= 8",
+            ],
+            grid: true,
+          }),
+          // postcssPxtorem({ rootValue: 16 }), // 添加 px 转 rem 插件
+          cssnano({
+            preset: "default",
+            // 禁用可能冲突的插件
+            // "postcss-zindex": false,
+          }),
+        ],
+      },
     },
     // optimizeDeps: { include: ["@braintree/sanitize-url"] },
     // resolve: {
@@ -156,7 +178,7 @@ export default withMermaid({
         disableSelect: true,
       }),
       viteDemoPreviewPlugin(),
-      vueJsx()
+      vueJsx(),
     ],
   },
   vue: {
@@ -200,13 +222,16 @@ export default withMermaid({
   },
   async transformPageData(pageData) {
     const { isNotFound, relativePath } = pageData;
-    const { contributors, changelog } =
-      await getChangelogAndContributors(relativePath);
+    const { contributors, changelog } = await getChangelogAndContributors(
+      relativePath
+    );
     const CustomAvatars = {
       changweihua: "2877201",
     };
     const CustomContributors = contributors.map((contributor) => {
-      contributor.avatar = `https://avatars.githubusercontent.com/u/${CustomAvatars[contributor.name]}?v=4`;
+      contributor.avatar = `https://avatars.githubusercontent.com/u/${
+        CustomAvatars[contributor.name]
+      }?v=4`;
       return contributor;
     });
 

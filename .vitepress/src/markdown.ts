@@ -4,7 +4,6 @@ import footnote from "markdown-it-footnote";
 import anchor from "markdown-it-anchor";
 import markdownSup from "markdown-it-sup";
 import markdownSub from "markdown-it-sub";
-import markdownItMark from "markdown-it-mark";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import frontmatter from "markdown-it-front-matter";
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless";
@@ -19,7 +18,6 @@ import { ImagePlugin } from "../plugins/markdown/image";
 import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
 import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
-import markdownItContainer from "markdown-it-container";
 import markupPlugin from "../plugins/markdown/markup";
 import useDefinePlugin from "vitepress-plugin-markdown-define";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
@@ -49,8 +47,6 @@ const markdown: MarkdownOptions | undefined = {
   },
   // @ts-ignore
   languages: [Expl3],
-  // 默认禁用图片懒加载
-  //@ts-ignore
   lazyLoading: true,
   theme: { light: "catppuccin-latte", dark: "catppuccin-mocha" },
   frontmatter: {
@@ -63,6 +59,39 @@ const markdown: MarkdownOptions | undefined = {
   preConfig: async (md) => {},
   config: (md) => {
     useDefinePlugin(md, CONSTS);
+
+    md.use(footnote);
+    md.use(frontmatter);
+    md.use(markdownSup);
+    md.use(markdownSub);
+    md.use(hashmention);
+    md.use(circleMarkdownPlugin);
+    md.use(readerMarkdownPlugin);
+    md.use(tabsMarkdownPlugin);
+    md.use(MarkdownItVariable);
+    md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
+
+    markdownLinks(md, {
+     externalClassName: "custom-external-link",
+     internalClassName: "custom-internal-link",
+     internalDomains: ["https://changweihua.github.io"],
+   });
+    strikethrough(md);
+    md.use(namedCode, { isEnableInlineCss: true });
+    md.use(lazy_loading);
+    md.use(timeline);
+    md.use(groupIconMdPlugin);
+    md.use(echartsMarkdownPlugin);
+    md.use(markupPlugin);
+    md.use(MarkdownItCollapsible);
+
+    const docRoot = fileURLToPath(new URL("../../", import.meta.url));
+    md.use(demoPreviewPlugin, {
+      docRoot,
+    });
+
+    md.use(ImagePlugin);
+
 
     md.use(vitepressDemoPlugin, {
       demoDir: path.resolve(__dirname, "../../src/demos"),
@@ -79,37 +108,6 @@ const markdown: MarkdownOptions | undefined = {
         show: true,
       },
     });
-    md.use(footnote);
-    md.use(frontmatter);
-    md.use(markdownSup);
-    md.use(markdownSub);
-    //md.use(hashmention);
-    md.use(circleMarkdownPlugin);
-    md.use(readerMarkdownPlugin);
-    md.use(tabsMarkdownPlugin);
-    //md.use(MarkdownItVariable);
-    //md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
-    markdownItMark(md);
-    //markdownLinks(md, {
-    //  externalClassName: "custom-external-link",
-   //   internalClassName: "custom-internal-link",
-     // internalDomains: ["https://changweihua.github.io"],
-   // });
-    //strikethrough(md);
-    //md.use(namedCode, { isEnableInlineCss: true });
-   // md.use(lazy_loading);
-    md.use(timeline);
-    md.use(groupIconMdPlugin);
-    md.use(echartsMarkdownPlugin);
-    md.use(markupPlugin);
-    md.use(MarkdownItCollapsible);
-
-    const docRoot = fileURLToPath(new URL("../../", import.meta.url));
-    md.use(demoPreviewPlugin, {
-      docRoot,
-    });
-
-    //md.use(ImagePlugin);
 
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {

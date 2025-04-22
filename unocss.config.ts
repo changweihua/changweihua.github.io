@@ -35,27 +35,24 @@ export default defineConfig({
   // ]
   content: {
     pipeline: {
-      include: [
-        /\.vue$/,
-        /\.md$/,
-        /\.vitepress\/theme\/.*\.vue/,
-        // 其他需要扫描的文件路径
-      ],
-      extract: {
-      // 可选：打印被扫描的文件
-      transform: (code, id) => {
-        console.log('Scanning:', id)
-        return code
-      }
-    }
-    }
+      include: [/\.vue$/, /\.md$/],
+      // extract: {
+      //   // 可选：打印被扫描的文件
+      //   transform: (code, id) => {
+      //     console.log('Scanning:', id)
+      //     return code
+      //   }
+      // }
+    },
   },
   shortcuts: {
-    'border-main': 'border-gray-400 border-opacity-30',
-    'bg-main': 'bg-gray-400',
-    'bg-base': 'bg-white dark:bg-hex-1a1a1a',
-    'uno-card': 'border-rd-30 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% mb-4vw p-2rem',
-    'markup-card': 'border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem',
+    "border-main": "border-gray-400 border-opacity-30",
+    "bg-main": "bg-gray-400",
+    "bg-base": "bg-white dark:bg-hex-1a1a1a",
+    "uno-card":
+      "border-rd-30 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% mb-4vw p-2rem",
+    "markup-card":
+      "border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem",
   },
   presets: [
     presetUno(),
@@ -63,20 +60,25 @@ export default defineConfig({
     presetIcons({
       scale: 1.2,
       warn: true,
-      prefix: ['i-'],
+      prefix: ["i-"],
       extraProperties: {
-        display: 'inline-block',
+        display: "inline-block",
       },
       collections: {
-        mono: FileSystemIconLoader('src/assets/icons/mono'),
+        mono: FileSystemIconLoader("src/assets/icons/mono"),
         custom: {
-          circle: '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50"></circle></svg>',
+          circle:
+            '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50"></circle></svg>',
         },
         carbon: () =>
-          import('@iconify-json/carbon/icons.json').then(i => i.default),
-        'line-md': () => import('@iconify-json/line-md/icons.json').then(i => i.default),
+          // @ts-ignore
+          import("@iconify-json/carbon/icons.json").then((i) => i.default),
+        "line-md": () =>
+          // @ts-ignore
+          import("@iconify-json/line-md/icons.json").then((i) => i.default),
         mdi: () =>
-          import('@iconify-json/mdi/icons.json').then(i => i.default),
+          // @ts-ignore
+          import("@iconify-json/mdi/icons.json").then((i) => i.default),
         // ...collections
       },
     }),
@@ -84,14 +86,11 @@ export default defineConfig({
   // safelist: Object.values(icons).flat() as string[],
   theme: {
     colors: {
-      primary: '#3eaf7c',
+      primary: "#3eaf7c",
     },
     fontFamily: {
-      mono: 'var(--vt-font-family-mono)',
+      mono: "var(--vt-font-family-mono)",
     },
   },
-  transformers: [
-    transformerDirectives(),
-    transformerVariantGroup(),
-  ],
-})
+  transformers: [transformerDirectives(), transformerVariantGroup()],
+});

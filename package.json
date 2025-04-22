@@ -229,7 +229,6 @@
     "vitepress-plugin-rss": "^0.3.1",
     "vitepress-protect-plugin": "^1.0.6",
     "vue-draggable-next": "^2.2.1",
-    "vue-resize-observer": "^2.0.16",
     "vue3-autocounter": "^1.0.8",
     "vue3-simple-icons": "^13.2.0",
     "xmind-embed-viewer": "^1.2.0",

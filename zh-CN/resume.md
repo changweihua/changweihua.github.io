@@ -3,6 +3,7 @@
 commentabled: false
 # 开启推荐
 recommended: false
+aside: false
 ---
 
 <script lang="ts" setup>

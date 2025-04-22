@@ -9,8 +9,6 @@ import {
   styleImage,
   styleImageContainer,
 } from "#.vitepress/utils/fillImage.ts";
-import MouseClick from "../components/MouseClick.vue";
-import MouseFollower from "../components/MouseFollower.vue";
 
 const { isDark } = useData();
 const slots = Object.keys(useSlots());
@@ -130,8 +128,6 @@ console.log(
           <div class="shade" :class="{ 'shade-active': isTransitioning }">
             &nbsp;
           </div>
-          <MouseFollower />
-          <MouseClick />
         </template>
         <template
           v-for="(slotKey, slotIndex) in slots"

@@ -136,5 +136,13 @@ head:
 - [ ] 未完成任务
 - [x] 已完成任务
 
+<GalleryCard title="标题" />
+
+<CubesLoader  />
+
 <Confetti />
+
+::: raw
+Wraps in a <div class="vp-raw"></div>
+:::
 <!-- <Guidance :steps="[{element: '.VPHomeHero'}]" /> -->

@@ -13,6 +13,7 @@ import HrefCard from "../components/HrefCard.vue";
 import DancingLogo from "../components/DancingLogo.vue";
 import ReadText from "../components/ReadText.vue";
 import ColorfulName from "../components/ColorfulName.vue";
+import CubesLoader from "../components/CubesLoader.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
@@ -22,8 +23,7 @@ import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimationTitle.vue";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
-import "@vitepress-code-preview/container/dist/style.css";
-import VueResizeObserver from "vue-resize-observer";
+
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
 // 彩虹背景动画样式
@@ -35,6 +35,7 @@ console.log(pinyin("常伟华"));
 
 import "./styles/fonts/MapleMono.css";
 import "./styles/fonts/Mermaid.css";
+import "@vitepress-code-preview/container/dist/style.css";
 
 // 版本监控
 const versionCheck = async () => {
@@ -119,6 +120,8 @@ import MarkupView from "../components/MarkupView.vue";
 import Confetti from "../components/Confetti.vue";
 import Guidance from "../components/Guidance.vue";
 import TaskList from "../components/TaskList.vue";
+import ScrollableParagraph from "../components/ScrollableParagraph.vue";
+import GalleryCard from "../components/GalleryCard.vue";
 
 import { Icon } from "@iconify/vue";
 
@@ -368,8 +371,6 @@ export default {
       }
 
       enhanceAppWithTabs(app);
-      // const plugin = await import('@vp/plugins/markdown/rough-mermaid')
-      // app.use(plugin.default)
 
       vitepressBackToTop({
         // default
@@ -377,8 +378,6 @@ export default {
       });
 
       app.use(yuppie);
-      // @ts-ignore
-      //app.use(VueResizeObserver);
 
       app.component("MarkdownEChart", MarkdownEChart);
       app.component("HrefCard", HrefCard);
@@ -411,7 +410,7 @@ export default {
       router.onBeforeRouteChange = async (to) => {
         console.log("onBeforeRouteChange");
         NProgress.start(); // 开始进度条
-        //versionCheck();
+        versionCheck();
 
         //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
         const { browser, cpu, device } = UAParser();
@@ -453,6 +452,9 @@ export default {
       app.component("MarkupView", MarkupView);
       app.component("DacingNumber", DacingNumber);
       app.component("TaskList", TaskList);
+      app.component("ScrollableParagraph", ScrollableParagraph);
+      app.component("GalleryCard", GalleryCard);
+      app.component("CubesLoader", CubesLoader);
       app.component("m-icon", Icon);
 
       app.component("header-profile", HeaderProfile);
