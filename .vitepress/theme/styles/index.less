@@ -24,3 +24,25 @@
 *:hover::-webkit-scrollbar-track-piece {
   background-color: transparent;
 }
+
+html, body {
+      background-color: transparent;
+      margin: 0;
+      height: 100%;
+    }
+
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -1000px;
+      bottom: -1000px;
+      left: 0;
+      right: 0;
+      background-color: transparent;
+      z-index: -1;
+    }
