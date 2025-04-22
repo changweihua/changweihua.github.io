@@ -529,7 +529,7 @@ mask元素的内容是一个单一的circle元素，它填充了一个白色到�
     </svg>
   </div>
 </template>
-<style>
+<style scoped>
 .svg-body {
         margin: unset;
         display: grid;

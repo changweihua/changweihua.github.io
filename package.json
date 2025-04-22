@@ -7,7 +7,9 @@
     "type": "git",
     "url": "https://github.com/changweihua.github.io"
   },
-  "sideEffects": ["**/*.css"],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "license": "ISC",
   "scripts": {
     "docs:dev": "vitepress --mode development --host",
@@ -93,6 +95,7 @@
     "md5": "^2.3.0",
     "mermaid": "^11.6.0",
     "mkcert": "^3.2.0",
+    "mockjs": "^1.1.0",
     "patch-package": "^8.0.0",
     "postcss": "^8.5.3",
     "sass": "^1.86.3",
@@ -114,6 +117,7 @@
     "vite-plugin-git-revision-info": "^1.1.0",
     "vite-plugin-html-config": "^2.0.2",
     "vite-plugin-mkcert": "^1.17.8",
+    "vite-plugin-mock": "^3.0.2",
     "vite-plugin-remove-console": "^2.2.0",
     "vite-plugin-version-mark": "^0.1.4",
     "vitepress": "^2.0.0-alpha.4",

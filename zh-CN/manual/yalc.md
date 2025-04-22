@@ -2,7 +2,7 @@
 outline: false
 aside: false
 layout: doc
-date: 2025-054
+date: 2025-04
 title: yalc 使用
 description: yalc 使用
 category: 工具

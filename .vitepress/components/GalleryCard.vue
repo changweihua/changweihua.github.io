@@ -5,6 +5,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 interface Props {
   title: string;
 }
@@ -12,11 +14,14 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   title: "标题",
 });
+
+const content = ref(props.title);
+
 </script>
 
 <style scoped>
 :root {
-  --gallery-card-title: v-bind('props.title');
+  --gallery-card-title: v-bind('content');
 }
 </style>
 
@@ -55,7 +60,7 @@ const props = withDefaults(defineProps<Props>(), {
 }
 
 .card_box span::before {
-  content: var(--gallery-card-title);
+  content: v-bind('content');
   position: absolute;
   width: 150%;
   height: 40px;

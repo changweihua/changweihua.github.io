@@ -140,9 +140,9 @@ head:
 
 <CubesLoader  />
 
-<Confetti />
+<!-- <Confetti /> -->
 
 ::: raw
-Wraps in a <div class="vp-raw"></div>
+Wraps in a <span class="vp-raw"></span>
 :::
 <!-- <Guidance :steps="[{element: '.VPHomeHero'}]" /> -->

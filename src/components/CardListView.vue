@@ -103,7 +103,7 @@ defineProps({
 }
 
 .card {
-  height: 300px;
+  height: 350px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
   background-color: #fff;
   width: 100%;

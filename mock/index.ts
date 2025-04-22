@@ -1,5 +1,9 @@
 import { defineFakeRoute } from 'vite-plugin-fake-server/client'
-import user from './user'
+import fakeRoutes from './fake-routes'
 
-// @ts-ignore
-export default defineFakeRoute([...user])
+import dataAnalysisMock from "./mock-data";
+
+export default defineFakeRoute(fakeRoutes as any);
+
+// 导出所有的 Mock 数据
+export const worker = [...dataAnalysisMock];

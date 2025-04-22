@@ -39,6 +39,10 @@ const markdown: MarkdownOptions | undefined = {
   html: true,
   linkify: true,
   math: true,
+  // 标记组件为行内
+  component: {
+    inlineTags: []
+  },
   anchor: {
     permalink: anchor.permalink.ariaHidden({
       // you can use other variants too, refer - https://github.com/valeriangalliat/markdown-it-anchor#permalinks

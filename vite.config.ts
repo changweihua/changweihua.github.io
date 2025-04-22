@@ -15,6 +15,7 @@ import { envParse } from "vite-plugin-env-parse";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 import versionInjector from 'unplugin-version-injector/vite';
+import { viteMockServe } from "vite-plugin-mock";
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -110,7 +111,18 @@ export default defineConfig(() => {
         force: false, // force generation of certs even without setting https property in the vite config
       }),
       compression(),
-      versionInjector()
+      versionInjector(),
+      // viteMockServe({
+      //   mockPath: './mock/',
+      //   localEnabled: command === 'serve', // 开发环境启用
+      //   prodEnabled: command !== 'serve', // 生产环境启用
+      //   supportTs: true, // 支持 TypeScript 文件
+      //   watchFiles: true, // 监视文件更改
+      //   injectCode: `
+      //     import { setupProdMockServer } from './mockProdServer';
+      //     setupProdMockServer();
+      //   `,
+      // }),
     ],
     css: {
       codeSplit: false,

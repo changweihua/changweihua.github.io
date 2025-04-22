@@ -14,6 +14,7 @@ import DancingLogo from "../components/DancingLogo.vue";
 import ReadText from "../components/ReadText.vue";
 import ColorfulName from "../components/ColorfulName.vue";
 import CubesLoader from "../components/CubesLoader.vue";
+import ArticleFooter from "../components/ArticleFooter.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
@@ -244,7 +245,7 @@ export default {
       //     name: "doc-top",
       //   }),
       "doc-bottom": () => h(Recommend),
-      // "doc-footer-before": () => h(Changelog),
+      "doc-footer-before": () => h(ArticleFooter),
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
       //     name: "doc-footer-before",
