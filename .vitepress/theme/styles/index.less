@@ -46,3 +46,38 @@ html, body {
       background-color: transparent;
       z-index: -1;
     }
+
+html {
+  background-color: transparent !important; /* 强制透明 */
+  height: 100%;
+}
+
+body {
+  background-color: transparent !important;
+  min-height: 100vh;
+  margin: 0;
+}
+body {
+  padding-top: env(safe-area-inset-top); /* 顶部留出状态栏空间 */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+body::after {
+  content: '';
+  position: fixed; /* 固定定位覆盖整个屏幕 */
+  top: -5000px;
+  left: 0;
+  right: 0;
+  bottom: -5000px;
+  background-color: transparent; /* 强制透明 */
+  z-index: -1; /* 置于底层 */
+}
+body {
+  padding-top: constant(safe-area-inset-top); /* iOS <11.2 */
+  padding-top: env(safe-area-inset-top); /* iOS ≥11.2 */
+  /* 其他方向同理 */
+}
+
+
+
