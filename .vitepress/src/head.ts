@@ -32,7 +32,7 @@ export const head: HeadConfig[] = [
   ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
   [
     "meta",
-    { name: "apple-mobile-web-app-status-bar-style", content: "default" },
+    { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
   ],
   ["meta", { name: "application-name", content: "CMONO.NET" }],
   ["meta", { name: "apple-touch-icon-precomposed", content: "/favicon.svg" }],
@@ -92,7 +92,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "apple-mobile-web-app-status-bar-style",
-      content: "default",
+      content: "black-translucent",
       media: "(prefers-color-scheme: light)",
     },
   ],
@@ -100,7 +100,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "apple-mobile-web-app-status-bar-style",
-      content: "black",
+      content: "black-translucent",
       media: "(prefers-color-scheme: dark)",
     },
   ],
