@@ -148,10 +148,11 @@ export default withMermaid({
           }),
           // postcssPxtorem({ rootValue: 16 }), // 添加 px 转 rem 插件
           cssnano({
-            preset: "default",
-            // 禁用可能冲突的插件
-            // "postcss-zindex": false,
-          }),
+          preset: ["advanced", {
+            zindex: false,    // 禁用 z-index 优化
+            discardComments: { removeAll: true } // 移除所有注释
+          }]
+        })
         ],
       },
     },
