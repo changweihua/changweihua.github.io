@@ -1,8 +1,8 @@
-@import './vitepress.ext.less';
-@import './vitepress.print.less';
-@import './vitepress.code.less';
-@import './markdown.ext.less';
-@import './mermaid.ext.less';
+@import "./vitepress.ext.less";
+@import "./vitepress.print.less";
+@import "./vitepress.code.less";
+@import "./markdown.ext.less";
+@import "./mermaid.ext.less";
 @import "./fonts/index.less";
 
 /* 滚动条里面轨道，能向上向下移动 */
@@ -12,11 +12,44 @@
 
 ::-webkit-scrollbar-thumb {
   display: none;
-  background: #E2E6F1;
+  background: #e2e6f1;
 }
 
 /* 滚动条里面的小方块，能向上向下移动 */
 *:hover::-webkit-scrollbar-thumb {
   display: flex;
-  background: #E2E6F1;
+  background: #e2e6f1;
+}
+
+/* 关键重置 */
+html {
+  background-color: var(--vp-c-bg);
+  height: 100%;
+}
+
+body {
+  background-color: var(--vp-c-bg);
+  min-height: 100vh;
+  margin: 0;
+  /* 安全区域适配 */
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* 覆盖弹性滚动背景 */
+body::after {
+  content: "";
+  position: fixed;
+  top: -5000px;
+  left: 0;
+  right: 0;
+  bottom: -5000px;
+  background-color: var(--vp-c-bg);
+  z-index: -1;
 }

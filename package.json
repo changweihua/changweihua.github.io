@@ -16,6 +16,7 @@
     "docs:prepare": "esno scripts/prepare.ts",
     "docs:build": "set NODE_OPTIONS=--max-old-space-size=4096 && vitepress build",
     "docs:test": "esno ./utils/build-version.ts",
+    "docker:build": "docker build -t changweihua-github:latest . -f Dockerfile",
     "docs:preview": "vitepress preview --host",
     "docs:pdf": "npm run docs:build && node generate-pdf.js",
     "commit": "git add . && cz-customizable",

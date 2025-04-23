@@ -7,14 +7,14 @@ import path, { resolve } from "path";
 import { fileURLToPath } from "url";
 import type { Plugin } from "vite";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
-import { compression } from 'vite-plugin-compression2'
+import { compression } from "vite-plugin-compression2";
 import Inspect from "vite-plugin-inspect";
 import mkcert from "vite-plugin-mkcert";
 import Iconify from "unplugin-iconify-generator/vite";
 import { envParse } from "vite-plugin-env-parse";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
-import versionInjector from 'unplugin-version-injector/vite';
+import versionInjector from "unplugin-version-injector/vite";
 import { viteMockServe } from "vite-plugin-mock";
 
 const getEnvValue = (mode: string, target: string) => {
@@ -49,6 +49,26 @@ export default defineConfig(() => {
       sourcemap: process.env.NODE_ENV !== "production", // Seems to cause JavaScript heap out of memory errors on build
       chunkSizeWarningLimit: 5000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vue: ["vue", "vue-router", "pinia"],
+            echarts: ["echarts"],
+            vp: ["./.vitepress"],
+            src: ["./src"],
+            utils: ["./utils"],
+            App: ["./src/App.vue"],
+          },
+          entryFileNames: `js/[name]-[hash].js`,
+          chunkFileNames: `js/[name]-[hash].js`,
+          assetFileNames(assetInfos) {
+            // if (assetInfos.name.endsWith(".css")) {
+            //   return `css/[name]-[hash].css`;
+            // }
+            return `[ext]/[name]-[hash].[ext]`;
+          },
+        },
+      },
     },
     esbuild: {
       exclude:
@@ -132,9 +152,7 @@ export default defineConfig(() => {
             hack: 'true; @import "@vp/theme/styles/vars.less"',
           },
           javascriptEnabled: true,
-          globalVars: {
-
-          }
+          globalVars: {},
         },
       },
     },

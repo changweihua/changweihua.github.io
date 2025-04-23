@@ -10,13 +10,6 @@ export const head: HeadConfig[] = [
   ],
   ["meta", { name: "mobile-web-app-capable", content: "yes" }],
   ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
-  [
-    "meta",
-    {
-      name: "apple-mobile-web-app-status-bar-style",
-      content: "black-translucent",
-    },
-  ],
   ["meta", { name: "application-name", content: "CMONO.NET" }],
   ["meta", { name: "apple-touch-icon-precomposed", content: "/favicon.svg" }],
   // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
@@ -59,7 +52,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "theme-color",
-      content: "black-translucent",
+      content: "#ffffff",
       media: "(prefers-color-scheme: light)",
     },
   ],
@@ -67,7 +60,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "theme-color",
-      content: "black-translucent",
+      content: "#000000",
       media: "(prefers-color-scheme: dark)",
     },
   ],
@@ -75,7 +68,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "apple-mobile-web-app-status-bar-style",
-      content: "black-translucent",
+      content: "default",
       media: "(prefers-color-scheme: light)",
     },
   ],
@@ -83,7 +76,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "apple-mobile-web-app-status-bar-style",
-      content: "black-translucent",
+      content: "dark",
       media: "(prefers-color-scheme: dark)",
     },
   ],
