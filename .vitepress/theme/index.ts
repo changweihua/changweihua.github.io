@@ -14,6 +14,7 @@ import DancingLogo from "../components/DancingLogo.vue";
 import ReadText from "../components/ReadText.vue";
 import ColorfulName from "../components/ColorfulName.vue";
 import CubesLoader from "../components/CubesLoader.vue";
+import CubeLoader from "../components/CubeLoader.vue";
 import ArticleFooter from "../components/ArticleFooter.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
@@ -127,13 +128,12 @@ import GalleryCard from "../components/GalleryCard.vue";
 import { Icon } from "@iconify/vue";
 
 import "vitepress-markdown-timeline/dist/theme/index.css";
-import "./styles/timeline.fix.less";
 
 import "vitepress-markdown-it-stepper/theme";
 
 import "virtual:group-icons.css";
 import "virtual:uno.css";
-//import "animate.css";
+import "animate.css";
 
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
@@ -456,6 +456,7 @@ export default {
       app.component("ScrollableParagraph", ScrollableParagraph);
       app.component("GalleryCard", GalleryCard);
       app.component("CubesLoader", CubesLoader);
+      app.component("CubeLoader", CubeLoader);
       app.component("m-icon", Icon);
 
       app.component("header-profile", HeaderProfile);

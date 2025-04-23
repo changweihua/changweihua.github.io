@@ -187,6 +187,7 @@ export default withMermaid({
         isCustomElement: (tag) => customElements.includes(tag),
         whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
       },
+
     },
   },
   /* 文档配置 */

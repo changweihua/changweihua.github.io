@@ -18,6 +18,7 @@ export function useMediumZoom() {
 
 export function useMediumZoomProvider(app: App, router: Router) {
   // 如果是TS项目, 必须要有`.vitepress/.env.d.ts`文件,否则这里会报错说 import.mata对象上没有env属性
+  // @ts-ignore
   if (import.meta.env.SSR) return
   const zoom = mediumZoom()
   zoom.refresh = () => {

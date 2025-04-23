@@ -99,7 +99,7 @@
                 </text> -->
                 <!-- <text ref="sinText" x="30" y="240" style="font-size: 16px;">{{ brand }}</text> -->
                 <text
-                  width="100%"
+                  width="100%" ref="sinText"
                   style="letter-spacing: 3"
                   lengthAdjust="spacingAndGlyphs"
                   font-stretch="expanded"
@@ -110,6 +110,7 @@
                     :textLength="circlePathLength"
                     xlink:href="#circle"
                     class="text"
+                    ref="sinTextPath"
                   >
                     <tspan dx="0" dy="10">𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣</tspan>
                     <animate
@@ -132,7 +133,7 @@
         </template>
         <template #fallback>
           <div>
-            <CubicLoading />
+            <CubeLoader />
           </div>
         </template>
       </Suspense>
@@ -150,7 +151,6 @@ import { onMounted, useTemplateRef, nextTick, ref } from "vue";
 import CubicLoading from "./CubicLoading.vue";
 import WithSuspense from "./WithSuspense.vue";
 import { delay } from "lodash-es";
-import opentype from "opentype.js";
 
 const handleMainContentPending = () => {
   console.log("开始加载主内容...");
@@ -178,7 +178,8 @@ var w = 0.02;
 var t = 0;
 
 const circlePath = useTemplateRef<SVGPathElement>("circlePath");
-const sinText = useTemplateRef<SVGTSpanElement>("sinText");
+const sinText = useTemplateRef<SVGTextElement>("sinText");
+const sinTextPath = useTemplateRef<SVGTextPathElement>("sinTextPath");
 
 //横向间隔20
 while (i--) {
@@ -210,7 +211,7 @@ function render() {
 
 //动态改变t的值
 function frame() {
-  t += 0.02;
+  t += 0.01;
   arrange(t);
   render();
   window.requestAnimationFrame(frame); //动画效果：递归调用frame方法
@@ -221,17 +222,17 @@ const circlePathLength = ref(600);
 onMounted(async function () {
   console.log("HeroImage onMounted");
   nextTick(function () {
-    frame();
+    // frame();
   });
   delay(function () {
-    if (circlePath.value) {
+    if (circlePath.value && sinTextPath.value) {
       console.log(
         "circlePath.value.getTotalLength",
         circlePath.value.getTotalLength() * window.devicePixelRatio,
       );
-      circlePathLength.value = circlePath.value.getTotalLength();
+      circlePathLength.value = circlePath.value.getTotalLength() + 5 * (texts.length - 2);
     }
-  }, 3500);
+  }, 1500);
   // const buffer = await fetch("./fonts/fangyuan.ttf").then((res) =>
   //   res.arrayBuffer(),
   // );

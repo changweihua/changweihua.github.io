@@ -83,6 +83,20 @@ export default defineConfig({
       },
     }),
   ],
+  // rules: [
+  //   [/^divider-x$/, () => ({
+  //     'position': 'relative',
+  //     '&::after': {
+  //       content: '""',
+  //       position: 'absolute',
+  //       right: '-0.5rem',
+  //       top: '0',
+  //       height: '100%',
+  //       width: '1px',
+  //       'background-color': '#e5e7eb'
+  //     }
+  //   })]
+  // ],
   // safelist: Object.values(icons).flat() as string[],
   theme: {
     colors: {

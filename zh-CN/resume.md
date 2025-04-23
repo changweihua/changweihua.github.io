@@ -13,24 +13,12 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 <ShadowLogo />
 <!-- <text class="resume-title">为你定制 发现精彩</text> -->
 
-<ColorfulName />
+<CubeLoader  />
 
 ## 💥 简介 ##
 
-o又o
 
-```diff
--foo
-+bar
-```
-
-
-<HrefCard url="https://changweihua.github.io/" title="CMONO.NET" description="https://changweihua.github.io/" logo="https://changweihua.github.io/logo.png"/>
-
-```text
-<Sidebar collapsible="icon" variant="sidebar">  [!code --]
-<Sidebar collapsible="icon" variant="inset">   [!code ++]
-```
+<HrefCard url="https://changweihua.github.io/" title="CMONO.NET" description="https://changweihua.github.io/" logo="https://changweihua.github.io/logo.png" class="my-5" />
 
 ::: tip 👨🏻‍💻
 
@@ -60,12 +48,12 @@ o又o
 
 ## 📋 主要履历 ##
 
-::: timeline 2019-09 ~ Now
+::: timeline 2019-07 ~ Now
 - **上海民航华东凯亚系统集成有限公司江苏分公司**
 - 高级开发经理
 :::
 
-::: timeline 2016 ~ 2019
+::: timeline 2016-06 ~ 2019-06
 - **萨孚凯信息系统(无锡)有限公司**
 - 高级开发工程师、系统架构师
 :::
@@ -289,3 +277,16 @@ o又o
 <m-icon icon="logos:vue" :width="96" :height="96" />
 
 </div>
+
+
+o又o
+
+```diff
+-foo
++bar
+```
+
+```text
+<Sidebar collapsible="icon" variant="sidebar">  [!code --]
+<Sidebar collapsible="icon" variant="inset">   [!code ++]
+```

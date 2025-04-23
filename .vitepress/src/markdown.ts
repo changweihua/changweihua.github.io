@@ -26,6 +26,7 @@ import { fileURLToPath, URL } from "node:url";
 import path from "path";
 import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
+import taskLists from "markdown-it-task-checkbox";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -41,7 +42,7 @@ const markdown: MarkdownOptions | undefined = {
   math: true,
   // 标记组件为行内
   component: {
-    inlineTags: []
+    inlineTags: [],
   },
   anchor: {
     permalink: anchor.permalink.ariaHidden({
@@ -64,6 +65,15 @@ const markdown: MarkdownOptions | undefined = {
   config: (md) => {
     useDefinePlugin(md, CONSTS);
 
+    md.use(taskLists, {
+      disabled: true,
+      divWrap: false,
+      divClass: "checkbox",
+      idPrefix: "cbx_",
+      ulClass: "task-list",
+      liClass: "task-list-item",
+    });
+
     md.use(footnote);
     md.use(frontmatter);
     md.use(markdownSup);
@@ -76,10 +86,10 @@ const markdown: MarkdownOptions | undefined = {
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
 
     markdownLinks(md, {
-     externalClassName: "custom-external-link",
-     internalClassName: "custom-internal-link",
-     internalDomains: ["https://changweihua.github.io"],
-   });
+      externalClassName: "custom-external-link",
+      internalClassName: "custom-internal-link",
+      internalDomains: ["https://changweihua.github.io"],
+    });
     strikethrough(md);
     md.use(namedCode, { isEnableInlineCss: true });
     md.use(lazy_loading);
@@ -95,7 +105,6 @@ const markdown: MarkdownOptions | undefined = {
     });
 
     md.use(ImagePlugin);
-
 
     md.use(vitepressDemoPlugin, {
       demoDir: path.resolve(__dirname, "../../src/demos"),

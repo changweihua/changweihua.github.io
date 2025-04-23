@@ -1,13 +1,28 @@
 <template>
   <div class="dancing-container hidden md:visible">
-    <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="200" height="60">
+    <svg
+      id="svg"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      width="200"
+      height="60"
+    >
       <defs>
-        <pattern id="grid" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
-          <path d="M0,0H6V6" style="stroke: #f1f1f1;fill: none"></path>
+        <pattern
+          id="grid"
+          x="0"
+          y="0"
+          width="6"
+          height="6"
+          patternUnits="userSpaceOnUse"
+        >
+          <path d="M0,0H6V6" style="stroke: #f1f1f1; fill: none"></path>
         </pattern>
       </defs>
       <!-- <rect fill="url(#grid)" width="200" height="60"></rect> -->
-      <text ref="dancingText" x="6" y="38" style="font-size: 20px;">{{ brand }}</text>
+      <text ref="dancingText" x="6" y="38" class="dacing-text">
+        {{ brand }}
+      </text>
     </svg>
   </div>
 </template>
@@ -17,8 +32,8 @@ import { onMounted, useTemplateRef, nextTick, onUnmounted } from "vue";
 
 //x = [20,20,20,...]
 //y = s*sin(w*x+t);
-const brand = '𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣'
-const texts = brand.split('')
+const brand = "𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣";
+const texts = brand.split("");
 var n = brand.length;
 var x: number[] = [];
 var y: number[] = [];
@@ -27,7 +42,7 @@ var s = 10;
 var w = 0.02;
 var t = 0;
 
-const dancingText = useTemplateRef<SVGTSpanElement>('dancingText')
+const dancingText = useTemplateRef<SVGTSpanElement>("dancingText");
 
 //横向间隔20
 while (i--) {
@@ -43,7 +58,8 @@ while (i--) {
 //纵向按照sin()函数变化
 function arrange(t) {
   y = [];
-  var ly = 0, cy;
+  var ly = 0,
+    cy;
   for (i = 0; i < n; ++i) {
     cy = -s * Math.sin(w * i * 20 + t);
     y.push(cy - ly);
@@ -52,8 +68,8 @@ function arrange(t) {
 }
 //将数组转换成字符串并设置为dx,dy值
 function render() {
-  dancingText.value?.setAttribute('dx', x.join(' '));
-  dancingText.value?.setAttribute('dy', y.join(' '));
+  dancingText.value?.setAttribute("dx", x.join(" "));
+  dancingText.value?.setAttribute("dy", y.join(" "));
 }
 
 //动态改变t的值
@@ -61,16 +77,16 @@ function frame() {
   t += 0.02;
   arrange(t);
   render();
-  rafId = window.requestAnimationFrame(frame);//动画效果：递归调用frame方法
+  rafId = window.requestAnimationFrame(frame); //动画效果：递归调用frame方法
 }
 
 let rafId: number | null = null;
 
 onMounted(function () {
   nextTick(function () {
-    frame()
+    frame();
   });
-})
+});
 
 onUnmounted(() => {
   if (rafId) {
@@ -89,5 +105,14 @@ onUnmounted(() => {
 .dancing-container {
   display: grid;
   place-content: center;
+
+  svg {
+    fill: var(--vp-c-text-1);
+  }
+
+  .dacing-text {
+    font-size: 20px;
+    color: var(--vp-c-text-1);
+  }
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <div class="card_box" :style="{ '--title': title }">
+  <div class="card_box" :data-content="content" :style="{ '--dynamic-content': title }">
     <span></span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
 interface Props {
   title: string;
@@ -16,17 +16,9 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const content = ref(props.title);
-
 </script>
 
-<style scoped>
-:root {
-  --gallery-card-title: v-bind('content');
-}
-</style>
-
-<style lang="less" scoped>
-
+<style lang="less" >
 .card_box {
   width: 200px;
   height: 250px;
@@ -44,7 +36,7 @@ const content = ref(props.title);
 }
 
 .card_box:hover {
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 
 .card_box span {
@@ -60,7 +52,9 @@ const content = ref(props.title);
 }
 
 .card_box span::before {
-  content: v-bind('content');
+  content: attr(data-content);
+  // content: v-bind(content);
+  // content: var(--dynamic-content);
   position: absolute;
   width: 150%;
   height: 40px;

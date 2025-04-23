@@ -1,38 +1,21 @@
 import type { HeadConfig } from "vitepress";
 
 export const head: HeadConfig[] = [
-  // [
-  //     'link',
-  //     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }
-  //     // would render:
-  //     //
-  //     // <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  //   ],
-
-  //   [
-  //     'script',
-  //     { id: 'register-sw' },
-  //     `;(() => {
-  //       if ('serviceWorker' in navigator) {
-  //         navigator.serviceWorker.register('/sw.js')
-  //       }
-  //     })()`
-  //     // would render:
-  //     //
-  //     // <script id="register-sw">
-  //     // ;(() => {
-  //     //   if ('serviceWorker' in navigator) {
-  //     //     navigator.serviceWorker.register('/sw.js')
-  //     //   }
-  //     // })()
-  //     // </script>
-  //   ]
-  ["meta", { name: "viewport", content: "width=device-width, initial-scale=1.0, viewport-fit=cover" }],
+  [
+    "meta",
+    {
+      name: "viewport",
+      content: "width=device-width, initial-scale=1.0, viewport-fit=cover",
+    },
+  ],
   ["meta", { name: "mobile-web-app-capable", content: "yes" }],
   ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
   [
     "meta",
-    { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+    {
+      name: "apple-mobile-web-app-status-bar-style",
+      content: "black-translucent",
+    },
   ],
   ["meta", { name: "application-name", content: "CMONO.NET" }],
   ["meta", { name: "apple-touch-icon-precomposed", content: "/favicon.svg" }],
@@ -76,7 +59,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "theme-color",
-      content: "#ffffff",
+      content: "black-translucent",
       media: "(prefers-color-scheme: light)",
     },
   ],
@@ -84,7 +67,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "theme-color",
-      content: "#000000",
+      content: "black-translucent",
       media: "(prefers-color-scheme: dark)",
     },
   ],

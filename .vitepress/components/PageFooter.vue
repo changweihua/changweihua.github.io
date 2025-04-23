@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-3 flex-row items-center justify-center pb-6">
+  <div class="page-footer flex gap-3 flex-row items-center justify-center pb-6">
     V{{ version }} |
     <!--<NumberFlow
       :value
@@ -46,10 +46,9 @@ const version = ref("N/A");
 const { value, next } = useCycle([543, 12000, -3200]);
 
 onMounted(() => {
-
   useRootClick(next);
   const docsVersionSpan = document.querySelector(
-    "footer.VPFooter > .container > p.version-tag",
+    "footer.VPFooter > .container > p.version-tag"
   );
   if (!docsVersionSpan) {
     fetchVersion().then((v) => {
@@ -60,6 +59,14 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
+.page-footer {
+  color: var(--vp-c-text-1);
+
+  svg {
+    fill: var(--vp-c-text-1);
+  }
+}
+
 number-flow-vue {
   --number-flow-char-height: 0.85em;
   font-size: 1rem;

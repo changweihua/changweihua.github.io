@@ -17,7 +17,7 @@ const enableTransitions = () =>
   window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
 
 provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
-  if(!inBrowser) {
+  if (!inBrowser) {
     return;
   }
 
@@ -30,7 +30,7 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
     `circle(0px at ${x}px ${y}px)`,
     `circle(${Math.hypot(
       Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y),
+      Math.max(y, innerHeight - y)
     )}px at ${x}px ${y}px)`,
   ];
 
@@ -45,7 +45,7 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
       duration: 300,
       easing: "ease-in",
       pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`,
-    },
+    }
   );
 });
 
@@ -61,13 +61,13 @@ watch(
     setTimeout(() => {
       isTransitioning.value = false;
     }, 500); // 500ms 要和 CSS 动画时间匹配
-  },
+  }
 );
 
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
   mediumZoom("[data-zoomable]", {
-    background: "transparent",
+    background: "var(--vp-c-bg)",
     container: document.body,
   });
 };
@@ -79,7 +79,9 @@ const setupMediumZoom = () => {
 let observer: MutationObserver;
 
 onMounted(() => {
-  setupMediumZoom();
+  nextTick(function () {
+    setupMediumZoom();
+  });
   // observer = new MutationObserver((mutations) => {
   //   console.log(mutations);
   //   // => 返回一个我们监听到的MutationRecord对象
@@ -89,11 +91,18 @@ onMounted(() => {
 });
 
 // onUnmounted(() => observer?.disconnect());
-
 const router = useRouter();
+
+watch(
+  () => route.path,
+  () => nextTick(() => setupMediumZoom())
+);
+
 // Subscribe to route changes to re-apply medium zoom effect
 router.onAfterPageLoad = function () {
-  setupMediumZoom();
+  nextTick(function () {
+    setupMediumZoom();
+  });
 
   /*
   const images = document.querySelectorAll(".vp-doc img");
@@ -111,7 +120,7 @@ console.log(
     seed: "test", //不传值就是随机
     format: "hex",
     alpha: 0.5,
-  }),
+  })
 );
 
 // v-slot:default="slotProps"
@@ -123,20 +132,20 @@ console.log(
     enter-active-class="animate__animated animate__tada"
     leave-active-class="animate__animated animate__bounce"
   >
-      <DefaultTheme.Layout>
-        <template #doc-top>
-          <div class="shade" :class="{ 'shade-active': isTransitioning }">
-            &nbsp;
-          </div>
-        </template>
-        <template
-          v-for="(slotKey, slotIndex) in slots"
-          :key="slotIndex"
-          v-slot:[slotKey]
-        >
-          <slot :name="slotKey"></slot>
-        </template>
-        <!-- <template #doc-after>
+    <DefaultTheme.Layout>
+      <template #doc-top>
+        <div class="shade" :class="{ 'shade-active': isTransitioning }">
+          &nbsp;
+        </div>
+      </template>
+      <template
+        v-for="(slotKey, slotIndex) in slots"
+        :key="slotIndex"
+        v-slot:[slotKey]
+      >
+        <slot :name="slotKey"></slot>
+      </template>
+      <!-- <template #doc-after>
       <DocAfter />
     </template>
 <template #doc-bottom>
@@ -157,10 +166,10 @@ console.log(
         <img src="/cwh.svg" class="VPImage image-src">
       </div>
     </template> -->
-      </DefaultTheme.Layout>
-      <!-- <my-button></my-button>
+    </DefaultTheme.Layout>
+    <!-- <my-button></my-button>
       <Panel :user="'changeweihua'" :age="10" /> -->
-      <!-- <a class="back" href="#"></a> -->
+    <!-- <a class="back" href="#"></a> -->
   </transition>
 </template>
 
@@ -201,9 +210,7 @@ console.log(
   mix-blend-mode: screen;
   z-index: 10;
   background-color: var(--vp-c-brand);
-  box-shadow:
-    0px 0px 8px 0px #fdfca9 inset,
-    0px 0px 24px 0px #ffeb3b,
+  box-shadow: 0px 0px 8px 0px #fdfca9 inset, 0px 0px 24px 0px #ffeb3b,
     0px 0px 8px 0px #ffffff42;
 }
 
@@ -237,9 +244,7 @@ console.log(
 
 .button::after {
   content: "";
-  box-shadow:
-    0px 0px 23px 0px #fdfca9 inset,
-    0px 0px 8px 0px #ffffff42;
+  box-shadow: 0px 0px 23px 0px #fdfca9 inset, 0px 0px 8px 0px #ffffff42;
   transition: opacity 0.3s;
 
   position: absolute;
@@ -278,8 +283,7 @@ console.log(
 
 .dot::after {
   content: "";
-  animation:
-    hoverFirefly var(--speed) infinite,
+  animation: hoverFirefly var(--speed) infinite,
     dimFirefly calc(var(--speed) / 2) infinite calc(var(--speed) / 3);
   animation-play-state: paused;
   display: block;
@@ -287,9 +291,7 @@ console.log(
   background: yellow;
   width: 100%;
   height: 100%;
-  box-shadow:
-    0px 0px 6px 0px #ffeb3b,
-    0px 0px 4px 0px #fdfca9 inset,
+  box-shadow: 0px 0px 6px 0px #ffeb3b, 0px 0px 4px 0px #fdfca9 inset,
     0px 0px 2px 1px #ffffff42;
 }
 
@@ -547,5 +549,4 @@ body {
     transform: translateY(100vh);
   }
 }
-
 </style>

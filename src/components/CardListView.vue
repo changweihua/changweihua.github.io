@@ -2,7 +2,7 @@
   <div class="container" ref="palette">
     <div
       v-if="items && items.length > 0"
-      class="w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-3"
+      class="w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-2 lg:grid-cols-3"
     >
       <div class="flex flex-col justify-center" v-for="(item, _i) in items">
         <article class="card card">

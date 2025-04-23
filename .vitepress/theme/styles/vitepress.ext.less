@@ -46,6 +46,7 @@ body {
 
 .medium-zoom-overlay {
   backdrop-filter: blur(5rem);
+  -webkit-backdrop-filter: blur(5rem);
   filter: blur(3px);
   opacity: 0.9 !important;
   z-index: 9;
@@ -60,6 +61,7 @@ body {
   height: 100%;
   background-color: var(--vp-c-bg-alt);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   opacity: 0.8;
 }
 
@@ -339,12 +341,14 @@ a.VPSkipLink::after {
   .VPNavBar {
     background-color: rgba(255, 255, 255, 0) !important;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   /* 文档页导航两侧 */
   .VPNavBar:not(.home) {
     background-color: rgba(255, 255, 255, 0) !important;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   @media (min-width: 960px) {
@@ -352,12 +356,14 @@ a.VPSkipLink::after {
     .VPNavBar:not(.home) {
       background-color: rgba(255, 255, 255, 0) !important;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     /* 首页下滑后导航两侧 */
     .VPNavBar:not(.has-sidebar):not(.home.top) {
       background-color: rgba(255, 255, 255, 0) !important;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
   }
 
@@ -366,12 +372,14 @@ a.VPSkipLink::after {
     .VPNavBar:not(.home.top) .content-body {
       background-color: rgba(255, 255, 255, 0) !important;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     /* 首页下滑后导航中间 */
     .VPNavBar:not(.has-sidebar):not(.home.top) .content-body {
       background-color: rgba(255, 255, 255, 0) !important;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
   }
 
@@ -382,12 +390,14 @@ a.VPSkipLink::after {
     .VPNavBar:not(.home.top) .divider-line {
       background-color: rgba(255, 255, 255, 0) !important;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     /* 首页分割线 */
     .VPNavBar:not(.has-sidebar):not(.home.top) .divider {
       background-color: rgba(255, 255, 255, 0) !important;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
   }
 
@@ -395,12 +405,14 @@ a.VPSkipLink::after {
   .DocSearch-Button {
     background-color: rgba(255, 255, 255, 0) !important;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   /* 移动端大纲栏 */
   .VPLocalNav {
     background-color: rgba(255, 255, 255, 0) !important;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     /* 隐藏分割线 */
     border-bottom: 5px solid var(--vp-c-gutter);
     border-bottom: 0px;
@@ -509,9 +521,9 @@ a.VPSkipLink::after {
   vertical-align: sub;
 }
 
-
 .dark {
-  .VPNavBar, .VPNavBar.screen-open {
-    background-color: rgba(255, 255, 255, 0) ;
+  .VPNavBar,
+  .VPNavBar.screen-open {
+    background-color: rgba(255, 255, 255, 0);
   }
 }
