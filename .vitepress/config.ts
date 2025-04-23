@@ -131,7 +131,7 @@ export default withMermaid({
   vite: {
     logLevel: "info",
     build: {
-      cssMinify: false,
+      cssMinify: "cssnano",
     },
     css: {
       postcss: {
@@ -149,6 +149,7 @@ export default withMermaid({
           // postcssPxtorem({ rootValue: 16 }), // 添加 px 转 rem 插件
           cssnano({
           preset: ["advanced", {
+            autoprefixer: false,
             zindex: false,    // 禁用 z-index 优化
             discardComments: { removeAll: true } // 移除所有注释
           }]
