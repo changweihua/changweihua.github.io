@@ -84,6 +84,7 @@
     "conventional-changelog-cli": "^5.0.0",
     "conventional-changelog-gitmoji-config": "^1.5.2",
     "cssnano": "^7.0.6",
+    "cssnano-preset-advanced": "^7.0.6",
     "cz-customizable": "^7.4.0",
     "cz-message-helper": "^2.0.0",
     "feed": "^4.2.2",
