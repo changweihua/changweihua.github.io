@@ -137,13 +137,6 @@ export default withMermaid({
       postcss: {
         plugins: [
           autoprefixer({
-            overrideBrowserslist: [
-              "Android 4.1",
-              "iOS 7.1",
-              "Chrome > 31",
-              "ff > 31",
-              "ie >= 8",
-            ],
             grid: true,
           }),
           // postcssPxtorem({ rootValue: 16 }), // 添加 px 转 rem 插件
