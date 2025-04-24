@@ -23,6 +23,20 @@ export const head: HeadConfig[] = [
     "link",
     {
       rel: "stylesheet",
+      href: "/MapleMono.css",
+    },
+  ],
+  [
+    "link",
+    {
+      rel: "stylesheet",
+      href: "/Mermaid.css",
+    },
+  ],
+  [
+    "link",
+    {
+      rel: "stylesheet",
       href: "/font.css",
     },
   ],

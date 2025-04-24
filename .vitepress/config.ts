@@ -130,9 +130,9 @@ export default withMermaid({
   // srcDir: '.',
   vite: {
     logLevel: "info",
-    build: {
-      cssMinify: "cssnano",
-    },
+    // build: {
+    //   cssMinify: "cssnano",
+    // },
     css: {
       postcss: {
         plugins: [
@@ -144,6 +144,9 @@ export default withMermaid({
           preset: ["advanced", {
             autoprefixer: false,
             zindex: false,    // 禁用 z-index 优化
+            discardUnused: {
+              fontFace: false // 关键：禁止移除未使用的 @font-face
+            },
             discardComments: { removeAll: true } // 移除所有注释
           }]
         })
