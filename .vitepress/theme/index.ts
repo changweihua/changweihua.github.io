@@ -35,8 +35,8 @@ import { pinyin } from "pinyin-pro";
 
 console.log(pinyin("常伟华"));
 
-import "./styles/MapleMono.css";
-import "./styles/Mermaid.css";
+//import "./styles/MapleMono.css";
+//import "./styles/Mermaid.css";
 import "@vitepress-code-preview/container/dist/style.css";
 
 // 版本监控
