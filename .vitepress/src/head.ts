@@ -90,7 +90,7 @@ export const head: HeadConfig[] = [
     "meta",
     {
       name: "apple-mobile-web-app-status-bar-style",
-      content: "dark",
+      content: "black-translucent",
       media: "(prefers-color-scheme: dark)",
     },
   ],
