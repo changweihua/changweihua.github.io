@@ -48,6 +48,7 @@ const markdown: MarkdownOptions | undefined = {
     permalink: anchor.permalink.ariaHidden({
       // you can use other variants too, refer - https://github.com/valeriangalliat/markdown-it-anchor#permalinks
       symbol: `🔗`,
+      placement: "before",
     }),
   },
   // @ts-ignore

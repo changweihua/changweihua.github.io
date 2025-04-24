@@ -209,6 +209,11 @@ export default withMermaid({
       return items;
     },
   },
+  // 配置路由选项
+  router: {
+    // linkActiveClass: 'active-parent', // 自定义一级路由高亮类名
+    // linkExactActiveClass: 'active-exact' // 精确匹配类名（可选）
+  },
   rewrites: {
     "^/index.md": "/zh-CN/index.md",
   },

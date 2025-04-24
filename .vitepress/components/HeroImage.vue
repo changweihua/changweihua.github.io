@@ -31,7 +31,7 @@ const gRef = useTemplateRef<SVGGElement>("gRef");
 // 配置参数
 const config = {
   viewBoxSize: 400, // 对应viewBox尺寸
-  radiusRatio: 0.375, // 半径比例（150/400）
+  radiusRatio: 0.28, // 半径比例（150/400）
   startAngle: -90, // 起始角度（顶部开始）
 };
 
@@ -79,7 +79,7 @@ onMounted(function () {
 <style lang="less" scoped>
 .svg-container {
   width: 100%;
-  max-width: 220px;
+  max-width: 180px;
   cursor: pointer;
 }
 
@@ -95,7 +95,7 @@ svg {
   left: 0;
   width: 100%;
   height: 100%;
-  font-size: 3.5em;
+  font-size: 3em;
   fill: var(--vp-c-brand);
 }
 

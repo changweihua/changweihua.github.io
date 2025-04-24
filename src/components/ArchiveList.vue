@@ -5,7 +5,7 @@
       <div class="pt-3 pb-2">
         <h1 v-text="year" class="text-xl"></h1>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 lg:grid-cols-3 lg:gap-x-20">
         <div
           v-for="article in computedYearMap[year]"
           :key="article.url"

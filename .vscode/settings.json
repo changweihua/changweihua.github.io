@@ -28,10 +28,11 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "index.html": "index.html,index.*.html,*.css",
-    "package.json": ".nvmrc,.npmrc,tsconfig.*.json,*.cjs,*.js,*.json,*.config.ts,*.config.cjs,*.config.mjs,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig",
+    "package.json": ".nvmrc,.npmrc,tsconfig.*.json,*.cjs,*.js,*.json,*.config.ts,*.config.cjs,*.config.mjs,.preettierrc,.eslintrc.cjs,.eslintrc,.gitignore,.editorconfig,.node-version,.browserslistrc,.hintrc,licenses.csv",
     ".env": "env.*,.env.*",
-    "auto-imports.d.ts": "auto-imports.d.ts,components.d.ts",
-    "index.md": "index.md,archives.md,tags.md,me.*.md,manuals.md,resume.md,about.md,en-US.md,zh-CN.md,sponsor.md,CONTRIBUTING.md,CODE_OF_CONDUCT.md,CONTRIBUTING.zh-CN.md,README.md,CHANGELOG.md,PRIVACY_POLICY.md,TERMS_OF_SERVICE.md"
+    "components.d.ts": "auto-imports.d.ts,components.d.ts",
+    "index.md": "index.md,archives.md,tags.md,me.*.md,manuals.md,resume.md,about.md,en-US.md,zh-CN.md,sponsor.md,CONTRIBUTING.md,CODE_OF_CONDUCT.md,CONTRIBUTING.zh-CN.md,README.md,CHANGELOG.md,PRIVACY_POLICY.md,TERMS_OF_SERVICE.md",
+    "Dockerfile": "Dockerfile, .dockerignore"
   },
   "workbench.navigationControl.enabled": false,
   "typescript.tsdk": "node_modules/typescript/lib",

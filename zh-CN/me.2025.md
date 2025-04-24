@@ -5,25 +5,6 @@ pageClass: gallery-page-class
 
 ## 2025 ##
 
-
-- [ ]  未完成任务（注意：方括号后必须有两个空格）
-- [ ] 已完成任务（必须小写 x，且方括号后有两个空格）
-
-::: tasklist 代办
-
-- [ ] 静态任务
-- [x] 动态任务（支持点击）
-- [ ] 
-:::
-
-```markdown:line-numbers {2}
-::: tasklist
-- [ ] 未完成任务
-- [x] 已完成任务
-:::
-```
-
-
 > 开花不一定结果，努力一定不会辜负青春。
 > 
 > 2025 对饮 2026 笃行
@@ -46,3 +27,8 @@ pageClass: gallery-page-class
 
 - 集成Envoy的网关，网关支持JWKS认证和RBAC鉴权、流量控制、多种认证机制、镜像访问
 - 
+
+### AI Gallery ###
+
+- 本地搭建 Ollama 大模型，AnythingLLM 向量支持，本地调用，实现 SSE 输出
+- 学习 Agent 和 MCP，实现智能调用

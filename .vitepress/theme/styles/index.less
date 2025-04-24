@@ -53,3 +53,15 @@ body::after {
   background-color: var(--vp-c-bg);
   z-index: -1;
 }
+
+/* 一级路由高亮 */
+.active-parent {
+  color: #42b983; /* 主题色 */
+  font-weight: bold;
+  border-bottom: 2px solid #42b983;
+}
+
+/* 精确匹配的二级路由（可选） */
+.active-exact {
+  opacity: 0.8;
+}

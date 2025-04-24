@@ -6,6 +6,7 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     {
       text: "博客",
       link: "/zh-CN/blog/",
+      activeMatch: "/blog/",
     },
     {
       text: "归档",
@@ -14,10 +15,12 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     {
       text: "手册",
       link: "/zh-CN/manual/",
+      activeMatch: "/manual/",
     },
     {
       text: "那些年",
       items: [
+        { text: "2025", link: "/zh-CN/me.2025.md" },
         { text: "2024", link: "/zh-CN/me.2024.md" },
         { text: "2023", link: "/zh-CN/me.2023.md" },
         { text: "2022", link: "/zh-CN/me.2022.md" },
