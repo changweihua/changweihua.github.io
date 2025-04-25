@@ -16,6 +16,7 @@ import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 import versionInjector from "unplugin-version-injector/vite";
 import { viteMockServe } from "vite-plugin-mock";
+import imagePreload from "vite-plugin-image-preload";
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -36,7 +37,7 @@ export default defineConfig(() => {
 
   return {
     server: {
-      port: 2233,
+      port: 5500,
       hmr: {
         overlay: false,
       },
@@ -55,9 +56,9 @@ export default defineConfig(() => {
             vue: ["vue", "vue-router", "pinia"],
             echarts: ["echarts"],
             vp: ["./.vitepress"],
-            src: ["./src"],
+            core: ["./src"],
             utils: ["./utils"],
-            App: ["./src/App.vue"],
+            app: ["./src/App.vue"],
           },
           entryFileNames: `js/[name]-[hash].js`,
           chunkFileNames: `js/[name]-[hash].js`,
@@ -132,6 +133,12 @@ export default defineConfig(() => {
       }),
       compression(),
       versionInjector(),
+      imagePreload({
+        dir: "images/**/*.{png,jpg,jpeg,gif,svg,webp}",
+        attrs: {
+        rel:'prefetch'
+        }
+      }),
       // viteMockServe({
       //   mockPath: './mock/',
       //   localEnabled: command === 'serve', // 开发环境启用

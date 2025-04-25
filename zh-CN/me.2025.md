@@ -3,11 +3,23 @@ layout: doc
 pageClass: gallery-page-class
 ---
 
-## 2025 ##
+<HoverableText title="2025" /> 
+
+<br />
 
 > 开花不一定结果，努力一定不会辜负青春。
 > 
 > 2025 对饮 2026 笃行
+
+### Envoy 开放认证授权平台 ###
+
+- 集成Envoy的网关，网关支持JWKS认证和RBAC鉴权、流量控制、多种认证机制、镜像访问
+- Docker Compose 部署，Seq 等日志平台
+
+### AI Gallery ###
+
+- 本地搭建 Ollama 大模型，AnythingLLM 向量支持，本地调用，实现 SSE 输出
+- 学习 Agent 和 MCP，实现智能调用
 
 ### 常州奔牛国际机场行李智能测量项目 ###
 
@@ -22,13 +34,3 @@ pageClass: gallery-page-class
 - 配合完成微信认证和备案
 - 上线巴士管家功能模块
 - 更新小程序图片资源
-
-### Envoy 开放认证授权平台 ###
-
-- 集成Envoy的网关，网关支持JWKS认证和RBAC鉴权、流量控制、多种认证机制、镜像访问
-- 
-
-### AI Gallery ###
-
-- 本地搭建 Ollama 大模型，AnythingLLM 向量支持，本地调用，实现 SSE 输出
-- 学习 Agent 和 MCP，实现智能调用

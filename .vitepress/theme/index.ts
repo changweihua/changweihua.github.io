@@ -15,6 +15,8 @@ import ReadText from "../components/ReadText.vue";
 import ColorfulName from "../components/ColorfulName.vue";
 import CubesLoader from "../components/CubesLoader.vue";
 import CubeLoader from "../components/CubeLoader.vue";
+import PyramidLoader from "../components/PyramidLoader.vue";
+import HoverableText from "../components/HoverableText.vue";
 import ArticleFooter from "../components/ArticleFooter.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
@@ -383,6 +385,7 @@ export default {
       app.component("MarkdownEChart", MarkdownEChart);
       app.component("HrefCard", HrefCard);
       app.component("ColorfulName", ColorfulName);
+      app.component("HoverableText", HoverableText);
       app.use(directives);
 
       app.directive("aria-empty", {
@@ -456,6 +459,7 @@ export default {
       app.component("ScrollableParagraph", ScrollableParagraph);
       app.component("GalleryCard", GalleryCard);
       app.component("CubesLoader", CubesLoader);
+      app.component("PyramidLoader", PyramidLoader);
       app.component("CubeLoader", CubeLoader);
       app.component("m-icon", Icon);
 
