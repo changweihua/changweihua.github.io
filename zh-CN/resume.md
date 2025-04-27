@@ -18,7 +18,7 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 ## 💥 简介 ##
 
 
-<HrefCard url="https://changweihua.github.io/" title="CMONO.NET" description="https://changweihua.github.io/" logo="https://changweihua.github.io/logo.png" class="my-5" />
+<HrefCard url="https://changweihua.github.io/" title="CMONO.NET" description="https://changweihua.github.io/" logo="/logo.svg" class="my-5" />
 
 ::: tip 👨🏻‍💻
 

@@ -277,5 +277,6 @@ export default withMermaid({
 
     },
   },
-  ...withI18n(vitePressOptions, vitePressI18nOptions)
+  ...vitePressOptions,
+  // ...withI18n(vitePressOptions, vitePressI18nOptions)
 });

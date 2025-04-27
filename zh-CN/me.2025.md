@@ -21,6 +21,10 @@ pageClass: gallery-page-class
 - 本地搭建 Ollama 大模型，AnythingLLM 向量支持，本地调用，实现 SSE 输出
 - 学习 Agent 和 MCP，实现智能调用
 
+### 华东凯亚雀巢平台 ###
+
+- 负责移动端应用架构，搭建基于H5的移动平台框架
+
 ### 常州奔牛国际机场行李智能测量项目 ###
 
 - 试运行中
