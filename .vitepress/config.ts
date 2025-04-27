@@ -13,6 +13,9 @@ import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
+import { withI18n } from "vitepress-i18n";
+import { type UserConfig } from "vitepress";
+import { VitePressI18nOptions } from "vitepress-i18n/types";
 
 const customElements = [
   "mjx-container",
@@ -104,6 +107,92 @@ const customElements = [
   "annotation-xml",
 ];
 
+const vitePressOptions : UserConfig = {
+  /* 文档配置 */
+  ...docsConfig,
+  /* 标头配置 */
+  head,
+  /* 主题配置 */
+  themeConfig,
+  markdown,
+  metaChunk: true,
+  sitemap: {
+    hostname: "https://changweihua.github.io",
+    lastmodDateOnly: false,
+    transformItems: (items) => {
+      // add new items or modify/filter existing items
+      items.push({
+        url: "/extra-page",
+        changefreq: "monthly",
+        priority: 0.8,
+      });
+      return items;
+    },
+  },
+  // 配置路由选项
+  router: {
+    // linkActiveClass: 'active-parent', // 自定义一级路由高亮类名
+    // linkExactActiveClass: 'active-exact' // 精确匹配类名（可选）
+  },
+  rewrites: {
+    "^/index.md": "/zh-CN/index.md",
+  },
+  ignoreDeadLinks: true,
+  async transformHead(context): Promise<HeadConfig[]> {
+    // const { assets }= context
+    const head = handleHeadMeta(context);
+
+    return head;
+  },
+  async transformPageData(pageData) {
+    const { isNotFound, relativePath } = pageData;
+    const { contributors, changelog } = await getChangelogAndContributors(
+      relativePath
+    );
+    const CustomAvatars = {
+      changweihua: "2877201",
+    };
+    const CustomContributors = contributors.map((contributor) => {
+      contributor.avatar = `https://avatars.githubusercontent.com/u/${
+        CustomAvatars[contributor.name]
+      }?v=4`;
+      return contributor;
+    });
+
+    if (isNotFound) {
+      pageData.title = "Not Found";
+    }
+
+    if (pageData.relativePath.includes("blog")) {
+      pageData.titleTemplate = ":title | Blog";
+    }
+
+    return {
+      CommitData: {
+        contributors: CustomContributors,
+        changelog,
+        commitURL:
+          "https://github.com/changweihua/changweihua.github.io/commit/",
+        title: "Changelog",
+      },
+    };
+  },
+};
+
+
+const vitePressI18nOptions: Partial<VitePressI18nOptions> = {
+  locales: [
+    { path: "en-US", locale: "en" },
+    { path: "zh-CN", locale: "zhHans" },
+  ],
+  rootLocale: "zhHans",
+  description: {
+    en: "Hello",
+    zhHans: "你好",
+  },
+};
+
+
 export default withMermaid({
   // extends: config,
   mermaid: {
@@ -188,73 +277,5 @@ export default withMermaid({
 
     },
   },
-  /* 文档配置 */
-  ...docsConfig,
-  /* 标头配置 */
-  head,
-  /* 主题配置 */
-  themeConfig,
-  markdown,
-  metaChunk: true,
-  sitemap: {
-    hostname: "https://changweihua.github.io",
-    lastmodDateOnly: false,
-    transformItems: (items) => {
-      // add new items or modify/filter existing items
-      items.push({
-        url: "/extra-page",
-        changefreq: "monthly",
-        priority: 0.8,
-      });
-      return items;
-    },
-  },
-  // 配置路由选项
-  router: {
-    // linkActiveClass: 'active-parent', // 自定义一级路由高亮类名
-    // linkExactActiveClass: 'active-exact' // 精确匹配类名（可选）
-  },
-  rewrites: {
-    "^/index.md": "/zh-CN/index.md",
-  },
-  ignoreDeadLinks: true,
-  async transformHead(context): Promise<HeadConfig[]> {
-    // const { assets }= context
-    const head = handleHeadMeta(context);
-
-    return head;
-  },
-  async transformPageData(pageData) {
-    const { isNotFound, relativePath } = pageData;
-    const { contributors, changelog } = await getChangelogAndContributors(
-      relativePath
-    );
-    const CustomAvatars = {
-      changweihua: "2877201",
-    };
-    const CustomContributors = contributors.map((contributor) => {
-      contributor.avatar = `https://avatars.githubusercontent.com/u/${
-        CustomAvatars[contributor.name]
-      }?v=4`;
-      return contributor;
-    });
-
-    if (isNotFound) {
-      pageData.title = "Not Found";
-    }
-
-    if (pageData.relativePath.includes("blog")) {
-      pageData.titleTemplate = ":title | Blog";
-    }
-
-    return {
-      CommitData: {
-        contributors: CustomContributors,
-        changelog,
-        commitURL:
-          "https://github.com/changweihua/changweihua.github.io/commit/",
-        title: "Changelog",
-      },
-    };
-  },
+  ...withI18n(vitePressOptions, vitePressI18nOptions)
 });
