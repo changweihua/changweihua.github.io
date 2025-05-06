@@ -18,10 +18,10 @@
           ></a>
           <a-tooltip>
             <template #title>{{
-              dayjs.tz(article.date.time).format("YYYY-MM-DD hh:mm")
+              dayjs(article.date.time).format("YYYY-MM-DD hh:mm")
             }}</template>
             <span
-              v-text="dayjs.tz(article.date.time).fromNow()"
+              v-text="dayjs(article.date.time).fromNow()"
               class="pl-4 whitespace-nowrap"
             ></span>
           </a-tooltip>

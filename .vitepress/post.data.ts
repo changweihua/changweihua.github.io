@@ -2,12 +2,7 @@ import { createContentLoader, SiteConfig } from 'vitepress'
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import relativeTime from "dayjs/plugin/relativeTime";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-dayjs.extend(utc)
-dayjs.extend(timezone)
 
-dayjs.tz.setDefault("Asia/Shanghai")
 dayjs.extend(relativeTime);
 dayjs.locale("zh-cn");
 
@@ -83,7 +78,7 @@ export default createContentLoader("**/blog/**/!(index|README).md", {
 
 function formatDate(raw: string) {
   return {
-    time: dayjs.tz(raw).valueOf(),
-    string: dayjs.tz(raw).format('YYYY-MM-DD hh:mm')
+    time: dayjs(raw).valueOf(),
+    string: dayjs(raw).format('YYYY-MM-DD hh:mm')
   }
 }

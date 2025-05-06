@@ -17,6 +17,10 @@ import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 import versionInjector from "unplugin-version-injector/vite";
 import { viteMockServe } from "vite-plugin-mock";
 import imagePreload from "vite-plugin-image-preload";
+// import Sonda from 'sonda/vite';
+// import progress from 'vite-plugin-progress'
+import colors from 'picocolors'
+import llmstxt from 'vitepress-plugin-llms'
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -47,9 +51,18 @@ export default defineConfig(() => {
     },
     clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     build: {
-      sourcemap: process.env.NODE_ENV !== "production", // Seems to cause JavaScript heap out of memory errors on build
+      // target: 'es2022',
+      // cssTarget: 'chrome118',
+      // minify: 'esbuild',
+      // terserOptions: {
+      //   format: {
+      //     comments: false,
+      //   }
+      // },
+      sourcemap: false, // Seems to cause JavaScript heap out of memory errors on build
       chunkSizeWarningLimit: 5000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
+      reportCompressedSize: false,
       rollupOptions: {
         output: {
           manualChunks: {
@@ -75,6 +88,11 @@ export default defineConfig(() => {
       exclude:
         process.env.NODE_ENV !== "production" ? [] : ["console", "debugger"],
     },
+    // experimental: {
+    //   importGlobRestoreExtension: true,
+    //   hmrPartialAccept: true,
+    //   webComponents: true
+    // },
     define: {
       APP_VERSION: timestamp,
       __VUE_PROD_DEVTOOLS__: false,
@@ -95,6 +113,9 @@ export default defineConfig(() => {
       chunkSplitPlugin({
         strategy: "default",
       }),
+      // progress({
+      //   format:  `${colors.green(colors.bold('Bouilding'))} ${colors.cyan('[:bar]')} :percent`
+      // }),
       Iconify({
         collections: {
           cmono: "./src/assets/icons/mono",
@@ -136,9 +157,20 @@ export default defineConfig(() => {
       imagePreload({
         dir: "images/**/*.{png,jpg,jpeg,gif,svg,webp}",
         attrs: {
-        rel:'prefetch'
-        }
+          rel: "prefetch",
+        },
       }),
+      // Sonda(),
+      llmstxt(),
+      // llmstxt({
+      //   generateLLMsFullTxt: false,
+      //   ignoreFiles: ['sponsors/*'],
+      //   customLLMsTxtTemplate: `# {title}\n\n{foo}`,
+      //   title: 'Awesome tool',
+      //   customTemplateVariables: {
+      //     foo: 'bar'
+      //   }
+      // })
       // viteMockServe({
       //   mockPath: './mock/',
       //   localEnabled: command === 'serve', // 开发环境启用
@@ -162,6 +194,14 @@ export default defineConfig(() => {
           globalVars: {},
         },
       },
+      // transform: 'lightningcss',
+      // lightningcss: {
+      //   drafts: {
+      //     nesting: true,
+      //     customMedia: true
+      //   }
+      // },
+      // devSourcemap: true
     },
     resolve: {
       alias: {
@@ -181,13 +221,20 @@ export default defineConfig(() => {
         // // 配置图片要这样引用
         // "/img": "./src/assets",
       },
+      // conditions: [],
+      // mainFields: []
     },
     ssr: {
       noExternal: ["fs"], // Externalize Node.js modules
     },
     optimizeDeps: {
-      // include: [],
+      include: ['vue'],
       exclude: ["vitepress", "svg2roughjs", "echarts", "echarts-gl"],
+      // esbuildOptions: {
+      //   treeShaking: true,
+      //   legalComments: true
+      // }
     },
+
   };
 });

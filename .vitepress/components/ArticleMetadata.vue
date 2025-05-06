@@ -14,7 +14,7 @@
     </span>
     <span class="flex items-center justify-center gap-1">
       <m-icon icon="tabler:clock-filled" />
-      发布&ensp;{{ dayjs.tz(date).fromNow() }}
+      发布&ensp;{{ dayjs(date).fromNow() }}
     </span>
   </div>
   <div class="bar" style="--percent: 50;"></div>
