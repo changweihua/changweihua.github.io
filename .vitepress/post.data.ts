@@ -1,10 +1,5 @@
 import { createContentLoader, SiteConfig } from 'vitepress'
-import dayjs from "dayjs";
-import "dayjs/locale/zh-cn";
-import relativeTime from "dayjs/plugin/relativeTime";
-
-dayjs.extend(relativeTime);
-dayjs.locale("zh-cn");
+import date from "./utils/date";
 
 const config: SiteConfig = (globalThis as any).VITEPRESS_CONFIG
 const locales = Object.keys(config.userConfig.locales ?? {})
@@ -78,7 +73,9 @@ export default createContentLoader("**/blog/**/!(index|README).md", {
 
 function formatDate(raw: string) {
   return {
-    time: dayjs(raw).valueOf(),
-    string: dayjs(raw).format('YYYY-MM-DD hh:mm')
-  }
+    time: date.tz(`${raw}:00`, "Asia/Shanghai").valueOf(),
+    string: date
+      .tz(`${raw}:00`, "Asia/Shanghai")
+      .format("YYYY-MM-DD HH:mm"),
+  };
 }

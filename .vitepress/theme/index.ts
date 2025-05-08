@@ -143,12 +143,6 @@ import "vitepress-plugin-back-to-top/dist/style.css";
 import type { Theme } from "vitepress";
 
 import AnimatingLayout from "./AnimatingLayout.vue";
-import dayjs from "dayjs";
-import "dayjs/locale/zh-cn";
-import relativeTime from "dayjs/plugin/relativeTime";
-
-dayjs.extend(relativeTime);
-dayjs.locale("zh-cn");
 
 export default {
   ...DefaultTheme,

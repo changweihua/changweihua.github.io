@@ -18,10 +18,10 @@
           ></a>
           <a-tooltip>
             <template #title>{{
-              dayjs(article.date.time).format("YYYY-MM-DD hh:mm")
+              date(article.date.time).tz("Asia/Shanghai").format("YYYY-MM-DD HH:mm")
             }}</template>
             <span
-              v-text="dayjs(article.date.time).fromNow()"
+              v-text="date(article.date.time).fromNow()"
               class="pl-4 whitespace-nowrap"
             ></span>
           </a-tooltip>
@@ -34,7 +34,7 @@
 import { computed } from "vue";
 // @ts-ignore
 import { data } from "@vp/post.data";
-import dayjs from "dayjs";
+import date from "@vp/utils/date";
 
 const { yearMap, postMap } = data;
 const yearList = Object.keys(yearMap).sort((a, b) => parseInt(b) - parseInt(a)); // 按年份降序排序

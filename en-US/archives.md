@@ -7,7 +7,7 @@ title: changweihua.github.io 最新文章 CMONO.NET
 <script lang="ts" setup>
 import { ref, unref, computed, onMounted } from 'vue'
 import  { data }  from '@vp/post.data'
-import dayjs from "dayjs";
+import date from "@vp/utils/date";
 import { useData } from 'vitepress'
 
 const { lang } = useData()
@@ -31,8 +31,8 @@ const computedYearMap = computed(()=> {
     <div v-for="(article, index) in computedYearMap[year]" :key="article.url" class="flex justify-between items-center py-1 pl-6">
       <a v-text="article.title" :href="article.url" class="post-dot overflow-hidden whitespace-nowrap text-ellipsis"></a>
       <a-tooltip>
-        <template #title>{{dayjs(article.date.time).format('YYYY-MM-DD hh:mm')}}</template>
-        <div v-text="dayjs(article.date.time).fromNow()" class="pl-4 whitespace-nowrap"></div>
+        <template #title>{{date.tz(article.date.time).format('YYYY-MM-DD hh:mm')}}</template>
+        <div v-text="date.tz(article.date.time).fromNow()" class="pl-4 whitespace-nowrap"></div>
       </a-tooltip>
     </div>
   </div>

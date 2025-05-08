@@ -2,7 +2,7 @@
 
 <script setup lang="ts">
 // 引入
-import dayjs from "dayjs";
+import date from "@vp/utils/date";
 import lunisolar from "lunisolar";
 // // 引入 theGods 插件
 // import theGods from 'lunisolar/src/plugins/theGods'
@@ -10,7 +10,7 @@ import lunisolar from "lunisolar";
 // lunisolar.extend(theGods)
 
 // 使用
-const now = dayjs().toString();
+const now = date.tz().toString();
 const d = lunisolar(now);
 
 // --- format ---

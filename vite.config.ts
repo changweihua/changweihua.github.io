@@ -161,7 +161,7 @@ export default defineConfig(() => {
         },
       }),
       // Sonda(),
-      llmstxt(),
+      // llmstxt(),
       // llmstxt({
       //   generateLLMsFullTxt: false,
       //   ignoreFiles: ['sponsors/*'],
