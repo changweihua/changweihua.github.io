@@ -5,6 +5,7 @@ import anchor from "markdown-it-anchor";
 import markdownSup from "markdown-it-sup";
 import markdownSub from "markdown-it-sub";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 import frontmatter from "markdown-it-front-matter";
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless";
 import markdownLinks from "markdown-it-external-links";
@@ -83,6 +84,7 @@ const markdown: MarkdownOptions | undefined = {
     md.use(circleMarkdownPlugin);
     md.use(readerMarkdownPlugin);
     md.use(tabsMarkdownPlugin);
+    md.use(npmCommandsMarkdownPlugin);
     md.use(MarkdownItVariable);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
 

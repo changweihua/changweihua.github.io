@@ -33,9 +33,9 @@ import * as AntIconsVue from "@ant-design/icons-vue";
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
 
-import { pinyin } from "pinyin-pro";
+// import { pinyin } from "pinyin-pro";
 
-console.log(pinyin("常伟华"));
+// console.log(styleText('italic', styleText('bold', styleText('blue', pinyin("常伟华")))));
 
 //import "./styles/MapleMono.css";
 //import "./styles/Mermaid.css";
