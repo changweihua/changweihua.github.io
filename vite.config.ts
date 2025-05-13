@@ -14,9 +14,12 @@ import Iconify from "unplugin-iconify-generator/vite";
 import { envParse } from "vite-plugin-env-parse";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
+import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
 import versionInjector from "unplugin-version-injector/vite";
 import { viteMockServe } from "vite-plugin-mock";
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import imagePreload from "vite-plugin-image-preload";
+import { robots } from "vite-plugin-robots";
 // import Sonda from 'sonda/vite';
 // import progress from 'vite-plugin-progress'
 import colors from 'picocolors'
@@ -121,6 +124,12 @@ export default defineConfig(() => {
           cmono: "./src/assets/icons/mono",
         },
       }),
+      ViteImageOptimizer({
+        png: { quality: 80 },
+        jpeg: { quality: 75 },
+        svg: { multipass: true },
+      }),
+      robots(),
       Components({
         resolvers: [
           IconsResolver({
@@ -147,6 +156,7 @@ export default defineConfig(() => {
         include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
         enableProd: true, // 是否在生产环境下设置mock
       }),
+      prefetchDnsPlugin(),
       mkcert({
         savePath: "./certs", // save the generated certificate into certs directory
         autoUpgrade: false,
@@ -161,7 +171,7 @@ export default defineConfig(() => {
         },
       }),
       // Sonda(),
-      // llmstxt(),
+      llmstxt(),
       // llmstxt({
       //   generateLLMsFullTxt: false,
       //   ignoreFiles: ['sponsors/*'],
@@ -228,13 +238,12 @@ export default defineConfig(() => {
       noExternal: ["fs"], // Externalize Node.js modules
     },
     optimizeDeps: {
-      include: ['vue'],
+      include: ["vue"],
       exclude: ["vitepress", "svg2roughjs", "echarts", "echarts-gl"],
       // esbuildOptions: {
       //   treeShaking: true,
       //   legalComments: true
       // }
     },
-
   };
 });
