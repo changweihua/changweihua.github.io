@@ -33,9 +33,26 @@ import * as AntIconsVue from "@ant-design/icons-vue";
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
 
-// import { pinyin } from "pinyin-pro";
+import { pinyin } from "pinyin-pro";
 
 // console.log(styleText('italic', styleText('bold', styleText('blue', pinyin("常伟华")))));
+
+import { xlogs } from "xlogs";
+
+// 气泡对话
+xlogs.bubble('Hello!', 'bot');
+xlogs.bubble('Hi there!', 'user');
+
+// 天气主题
+xlogs.weather('sunny', 'Nice weather today!');
+xlogs.weather('rainy', 'Remember your umbrella');
+
+// ASCII艺术
+xlogs.ascii('Important', 'box');
+xlogs.ascii('Warning', 'cloud');
+
+// 3D文字
+xlogs.banner(pinyin("常伟华"), 'neon');
 
 //import "./styles/MapleMono.css";
 //import "./styles/Mermaid.css";

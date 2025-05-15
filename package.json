@@ -149,7 +149,7 @@
   },
   "dependencies": {
     "@dash14/svg-pan-zoom": "^3.6.9",
-    "@faker-js/faker": "^9.7.0",
+    "@faker-js/faker": "^9.8.0",
     "@fingerprintjs/fingerprintjs": "^4.6.2",
     "@heroicons/vue": "^2.2.0",
     "@iconify/iconify": "^3.1.1",
@@ -246,7 +246,7 @@
     "vitepress-markdown-timeline": "^1.2.2",
     "vitepress-plugin-back-to-top": "^1.0.1",
     "vitepress-plugin-codeblocks-fold": "^1.2.35",
-    "vitepress-plugin-group-icons": "^1.5.3",
+    "vitepress-plugin-group-icons": "^1.5.4",
     "vitepress-plugin-image-viewer": "^1.1.6",
     "vitepress-plugin-panzoom-mermaid": "^2.0.21",
     "vitepress-plugin-rss": "^0.3.1",
@@ -254,6 +254,7 @@
     "vue-draggable-next": "^2.2.1",
     "vue3-autocounter": "^1.0.8",
     "vue3-simple-icons": "^13.2.0",
+    "xlogs": "^0.1.0",
     "xmind-embed-viewer": "^1.2.0",
     "yuppie-ui": "^0.0.11"
   },
