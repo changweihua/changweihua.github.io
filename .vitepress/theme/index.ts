@@ -40,7 +40,7 @@ import { pinyin } from "pinyin-pro";
 import { xlogs } from "xlogs";
 
 // 气泡对话
-xlogs.bubble('Hello!', 'bot');
+xlogs.bubble(`Hello!`, 'bot');
 xlogs.bubble('Hi there!', 'user');
 
 // 天气主题
