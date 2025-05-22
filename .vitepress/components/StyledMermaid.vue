@@ -176,6 +176,7 @@ const renderChart = async (id, code) => {
 
   let mermaidConfig: MermaidConfig = {
     ...pluginSettings.value,
+    // ...{ sequence: { showSequenceNumbers: true } }
   };
 
   if (hasDarkClass) mermaidConfig.theme = "dark";

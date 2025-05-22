@@ -134,16 +134,10 @@ a.VPSkipLink::after {
 }
 
 .search-bar {
-  // width: 400px;
-  // height: 40px;
-  // padding: 5px 12px;
-  font-size: 16px;
-  // font-family: 'Arial', sans-serif;
-  color: #333;
   outline: none;
 
   /* 渐变边框 */
-  border: 1px solid transparent;
+  border: none !important;// 1px solid transparent;
   background: linear-gradient(white, white) padding-box,
     linear-gradient(45deg, #ff7eb3, #65d9ff, #c7f464, #ff7eb3) border-box;
   border-radius: 30px;
@@ -155,6 +149,7 @@ a.VPSkipLink::after {
 
 /* Hover 状态 */
 .search-bar:hover {
+  border: none !important;
   background: linear-gradient(white, white) padding-box,
     linear-gradient(135deg, #ff0076, #1eaeff, #28ffbf, #ff0076) border-box;
   box-shadow: 0 0 5px rgba(255, 0, 118, 0.5), 0 0 20px rgba(30, 174, 255, 0.5);
@@ -163,6 +158,7 @@ a.VPSkipLink::after {
 /* Focus 状态 */
 .search-bar:focus,
 .search-bar:focus-within {
+  border: none !important;
   background: linear-gradient(white, white) padding-box,
     linear-gradient(45deg, #ff0076, #1eaeff, #28ffbf, #ff0076) border-box;
   box-shadow: 0 0 15px rgba(255, 0, 118, 0.7), 0 0 25px rgba(30, 174, 255, 0.7);
@@ -174,6 +170,55 @@ a.VPSkipLink::after {
   color: #aaa;
   font-style: italic;
 }
+
+
+/* 跑马灯输入框 */
+.search-input {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(
+        270deg,
+        #ff4d4d,
+        #ffa64d,
+        #ffff4d,
+        #4dff88,
+        #4dd2ff,
+        #b84dff,
+        #ff4da6,
+        #ff4d4d
+      )
+      border-box;
+  background-size: 400% 100%;
+  background-repeat: repeat;
+  background-position: 0 0;
+  animation: marquee-border 6s linear infinite;
+
+  transition: box-shadow 0.3s ease;
+}
+
+/* 动画关键帧 */
+@keyframes marquee-border {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* placeholder 样式 */
+.search-input::placeholder {
+  font-style: italic;
+}
+
+/* hover + focus 时加点炫光效果 */
+.search-input::hover,
+.search-input::focus {
+  box-shadow: 0 0 8px rgba(255, 77, 77, 0.3), 0 0 20px rgba(77, 210, 255, 0.4);
+}
+
 
 .char-circle {
   display: inline-block;
@@ -333,6 +378,16 @@ a.VPSkipLink::after {
   b,
   strong {
     font-weight: 700;
+  }
+
+  .vp-doc::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
   }
 }
 

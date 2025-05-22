@@ -128,7 +128,7 @@ console.log(
 
 <template>
   <transition
-    class="animate__tada"
+    class="animate__tada" style="view-transition-name: layout;"
     enter-active-class="animate__animated animate__tada"
     leave-active-class="animate__animated animate__bounce"
   >
@@ -188,6 +188,22 @@ console.log(
 ::view-transition-new(root),
 .dark::view-transition-old(root) {
   z-index: 9999;
+}
+
+::view-transition-old(layout),
+::view-transition-new(layout) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(layout),
+.dark::view-transition-new(layout) {
+  animation: fade-out 0.3s ease;
+}
+
+::view-transition-new(layout),
+.dark::view-transition-old(layout) {
+  animation: fade-in 0.3s ease;
 }
 
 .VPSwitchAppearance {
