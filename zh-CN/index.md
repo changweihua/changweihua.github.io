@@ -133,17 +133,20 @@ head:
       content: changweihua.github.io 首页 CMONO.NET
 ---
 
+<!-- <Robot />
+
 - [ ] 未完成任务
 - [x] 已完成任务
 
 <GalleryCard title="标题" />
 
-<CubesLoader  />
+<CubesLoader  /> -->
 
 
 <!-- <Confetti /> -->
 
-::: raw
+<!-- ::: raw
 Wraps in a <span class="vp-raw"></span>
-:::
+::: -->
+
 <!-- <Guidance :steps="[{element: '.VPHomeHero'}]" /> -->

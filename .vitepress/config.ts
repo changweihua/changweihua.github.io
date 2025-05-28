@@ -3,7 +3,7 @@ import { docsConfig } from "./src/docs";
 import { head } from "./src/head";
 import { markdown } from "./src/markdown";
 import { withMermaid } from "vitepress-plugin-panzoom-mermaid";
-import { HeadConfig } from "vitepress";
+import { HeadConfig, defineConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from "vite-plugin-git-revision-info";
 import { getChangelogAndContributors } from "vitepress-plugin-changelog";
@@ -179,7 +179,6 @@ const vitePressOptions : UserConfig = {
   },
 };
 
-
 const vitePressI18nOptions: Partial<VitePressI18nOptions> = {
   locales: [
     { path: "en-US", locale: "en" },
@@ -192,6 +191,71 @@ const vitePressI18nOptions: Partial<VitePressI18nOptions> = {
   },
 };
 
+// export default defineConfig({
+//   // srcDir: '.',
+//   vite: {
+//     logLevel: "info",
+//     // build: {
+//     //   cssMinify: "cssnano",
+//     // },
+//     css: {
+//       postcss: {
+//         plugins: [
+//           autoprefixer({
+//             grid: true,
+//           }),
+//           // postcssPxtorem({ rootValue: 16 }), // 添加 px 转 rem 插件
+//           cssnano({
+//           preset: ["advanced", {
+//             autoprefixer: false,
+//             zindex: false,    // 禁用 z-index 优化
+//             discardUnused: {
+//               fontFace: false // 关键：禁止移除未使用的 @font-face
+//             },
+//             discardComments: { removeAll: true } // 移除所有注释
+//           }]
+//         })
+//         ],
+//       },
+//     },
+//     // optimizeDeps: { include: ["@braintree/sanitize-url"] },
+//     // resolve: {
+//     //   alias: {
+//     //     dayjs: "dayjs/",
+//     //   },
+//     // },
+//     plugins: [
+//       GitRevisionInfoPlugin(),
+//       groupIconVitePlugin({
+//         customIcon: {
+//           ae: "logos:adobe-after-effects",
+//           ai: "logos:adobe-illustrator",
+//           ps: "logos:adobe-photoshop",
+//           // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
+//           // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
+//         },
+//       }),
+//       vitepressProtectPlugin({
+//         disableF12: true,
+//         disableCopy: true,
+//         disableSelect: true,
+//       }),
+//       viteDemoPreviewPlugin(),
+//       vueJsx(),
+//     ],
+//   },
+//   vue: {
+//     template: {
+//       compilerOptions: {
+//         isCustomElement: (tag) => customElements.includes(tag),
+//         whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
+//       },
+
+//     },
+//   },
+//   ...vitePressOptions,
+//   // ...withI18n(vitePressOptions, vitePressI18nOptions)
+// })
 
 export default withMermaid({
   // extends: config,

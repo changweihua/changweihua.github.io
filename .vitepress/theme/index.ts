@@ -1,7 +1,7 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, watchEffect, watch, ref } from "vue";
+import { h, watchEffect, watch, ref, nextTick } from "vue";
 import DocAfter from "../components/DocAfter.vue";
 import { UAParser } from "ua-parser-js";
 import Recommend from "../components/Recommend.vue";
@@ -18,6 +18,7 @@ import CubeLoader from "../components/CubeLoader.vue";
 import PyramidLoader from "../components/PyramidLoader.vue";
 import HoverableText from "../components/HoverableText.vue";
 import ArticleFooter from "../components/ArticleFooter.vue";
+import Robot from "../components/Robot.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
@@ -160,6 +161,9 @@ import "vitepress-plugin-back-to-top/dist/style.css";
 import type { Theme } from "vitepress";
 
 import AnimatingLayout from "./AnimatingLayout.vue";
+
+import { createMermaidRenderer } from "vitepress-mermaid-renderer";
+// import "vitepress-mermaid-renderer/dist/style.css";s
 
 export default {
   ...DefaultTheme,
@@ -367,6 +371,10 @@ export default {
 
     DefaultTheme.enhanceApp(ctx);
 
+    // // Use the client-safe wrapper for SSR compatibility
+    // const mermaidRenderer = createMermaidRenderer();
+    // mermaidRenderer.initialize();
+
     if (inBrowser) {
       NProgress.configure({ showSpinner: false });
 
@@ -392,6 +400,7 @@ export default {
       app.component("HrefCard", HrefCard);
       app.component("ColorfulName", ColorfulName);
       app.component("HoverableText", HoverableText);
+      app.component("Robot", Robot);
       app.use(directives);
 
       app.directive("aria-empty", {
@@ -494,6 +503,12 @@ export default {
       //         reject('失败');
       //     }
       // }, 1000);
+    }
+
+    if (router) {
+      router.onAfterRouteChange = () => {
+        // nextTick(() => mermaidRenderer.renderMermaidDiagrams());
+      };
     }
   },
   setup() {

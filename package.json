@@ -245,6 +245,7 @@
     "vite-plugin-inspect": "^11.1.0",
     "vitepress": "^2.0.0-alpha.5",
     "vitepress-markdown-timeline": "^1.2.2",
+    "vitepress-mermaid-renderer": "^1.0.14",
     "vitepress-plugin-back-to-top": "^1.0.1",
     "vitepress-plugin-codeblocks-fold": "^1.2.35",
     "vitepress-plugin-group-icons": "^1.5.5",

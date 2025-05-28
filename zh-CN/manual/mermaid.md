@@ -399,3 +399,38 @@ stateDiagram-v2
     A->>B: Hello Bob, how is Charley?
     B->>C: Hello Charley, how are you?
 ```
+
+```mermaid
+---
+title: "Grades"
+---
+radar-beta
+  axis m["Math"], s["Science"], e["English"]
+  axis h["History"], g["Geography"], a["Art"]
+  curve a["Alice"]{85, 90, 80, 70, 75, 90}
+  curve b["Bob"]{70, 75, 85, 80, 90, 85}
+
+  max 100
+  min 0
+```
+
+```mermaid
+---
+config:
+  radar:
+    axisScaleFactor: 0.25
+    curveTension: 0.1
+  theme: base
+  themeVariables:
+    cScale0: "#FF0000"
+    cScale1: "#00FF00"
+    cScale2: "#0000FF"
+    radar:
+      curveOpacity: 0
+---
+radar-beta
+  axis A, B, C, D, E
+  curve c1{1,2,3,4,5}
+  curve c2{5,4,3,2,1}
+  curve c3{3,3,3,3,3}
+```
