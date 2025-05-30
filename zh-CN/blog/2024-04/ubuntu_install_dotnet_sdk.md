@@ -60,15 +60,21 @@ export DOTNET_ROOT=$HOME/dotnet/7.01
 
 最后刷新配置文件生效
 
-  source /etc/profile
+```bash
+source /etc/profile
+```
 
 验证是否安装成功
 
-  dotnet --version
+```bash
+dotnet --version
+```
 
 或
 
-  dotnet --info
+```bash
+dotnet --info
+```
 
 ## 安装 8.0 ##
 
@@ -76,8 +82,12 @@ export DOTNET_ROOT=$HOME/dotnet/7.01
 
 ### 创建8.0的软连接 ###
 
-  sudo ln -s /root/dotnet801/dotnet /usr/local/bin/dotnet8.01
+```bash
+sudo ln -s /root/dotnet801/dotnet /usr/local/bin/dotnet8.01
+```
 
 最后执行查询版本是否安装成功
 
-  dotnet8.01 --info
+```bash
+dotnet8.01 --info
+```
