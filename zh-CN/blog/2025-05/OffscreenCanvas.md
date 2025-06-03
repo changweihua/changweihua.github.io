@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: Web Worker + OffscreenCanvas，实现真正多线程渲染体验
 description: Web Worker + OffscreenCanvas，实现真正多线程渲染体验
-date: 2025-05-28 10:30:00 
+date: 2025-05-30 16:30:00 
 pageClass: blog-page-class
 ---
 

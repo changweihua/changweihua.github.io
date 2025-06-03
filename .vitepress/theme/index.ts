@@ -163,7 +163,19 @@ import type { Theme } from "vitepress";
 import AnimatingLayout from "./AnimatingLayout.vue";
 
 import { createMermaidRenderer } from "vitepress-mermaid-renderer";
-// import "vitepress-mermaid-renderer/dist/style.css";s
+import { Hashids } from 'hashids';
+
+const hashids = new Hashids("this is my salt", 8); // 盐值与最小长度
+
+// 加密整数到哈希字符串
+let hashid = hashids.encode('Chang weihua');
+console.log(hashid);
+
+// 解密哈希字符串回整数
+let ids = hashids.decode(hashid);
+console.log(ids[0]);
+
+// import "vitepress-mermaid-renderer/dist/style.css";
 
 export default {
   ...DefaultTheme,
