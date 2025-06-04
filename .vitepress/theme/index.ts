@@ -163,7 +163,7 @@ import type { Theme } from "vitepress";
 import AnimatingLayout from "./AnimatingLayout.vue";
 
 import { createMermaidRenderer } from "vitepress-mermaid-renderer";
-import { Hashids } from 'hashids';
+import Hashids from "hashids";
 
 const hashids = new Hashids("this is my salt", 8); // 盐值与最小长度
 
@@ -174,6 +174,27 @@ console.log(hashid);
 // 解密哈希字符串回整数
 let ids = hashids.decode(hashid);
 console.log(ids[0]);
+
+import { nanoid, customAlphabet } from 'nanoid';
+
+const id = nanoid();
+// 默认ID 长度为21字符
+// 随机，URL安全（不会出现 + / = ）
+console.log(id); // 如：Kh_1OuFVecVCKfMdj1NXq
+
+console.log(nanoid(10));  // 10位ID，如: Y3Xh9md3Wz
+console.log(nanoid(32));  // 32位ID
+
+const aids = Array.from({ length: 5 }, () => nanoid());
+console.log(aids); // ['wr9bcsr1Te5HKEn_WYVKx','Fho3hazZDYNGWorG7APit','VIuIpbrVamSjnKMVg9IpO','3ArbZPt8qc_JL_IF8WTbJ','V9YCFTNFgaWF6hnQRgJBH']
+
+// 仅数字ID
+const nanoidNumber = customAlphabet('1234567890', 8);
+console.log(nanoidNumber()); // 24736672
+
+// 全大写字母+数字
+const nanoidUpper = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 8);
+console.log(nanoidUpper()); // OO8QE8V0
 
 // import "vitepress-mermaid-renderer/dist/style.css";
 

@@ -145,7 +145,7 @@
     "vitepress-plugin-markdown-define": "^1.0.2",
     "vitepress-plugin-npm-commands": "^0.8.1",
     "vitepress-plugin-tabs": "^0.7.1",
-    "vitest": "^3.2.0"
+    "vitest": "^3.2.1"
   },
   "dependencies": {
     "@dash14/svg-pan-zoom": "^3.6.9",
@@ -160,8 +160,8 @@
     "@tweenjs/tween.js": "^25.0.0",
     "@vitepress-code-preview/container": "^1.0.8",
     "@vitepress-code-preview/plugin": "^1.0.6",
-    "@vitest/coverage-v8": "^3.2.0",
-    "@vitest/ui": "^3.1.4",
+    "@vitest/coverage-v8": "^3.2.1",
+    "@vitest/ui": "^3.2.1",
     "@vue/test-utils": "^2.4.6",
     "@vuecs/timeago": "^1.1.1",
     "animate.css": "^4.1.1",
@@ -224,6 +224,7 @@
     "markmap-toolbar": "^0.18.10",
     "markmap-view": "^0.18.10",
     "medium-zoom": "^1.1.0",
+    "nanoid": "^5.1.5",
     "nprogress-v2": "^1.1.10",
     "ofetch": "^1.4.1",
     "oimo-esm": "^1.0.10",
