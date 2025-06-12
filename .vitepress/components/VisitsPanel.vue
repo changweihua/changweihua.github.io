@@ -12,10 +12,10 @@ onMounted(function () {
 </script>
 
 <template>
-  <div class="panel">
+  <div id="VSTPL" class="visits-panel">
     <div class="container">
       <section class="grid">
-        <span class="text">
+        <span class="total-text">
           <a-space
             ><span>总访问</span> <DacingNumber :target="siteVisitCount" /><span
               >次</span
@@ -30,7 +30,7 @@ onMounted(function () {
           <m-icon class="item" icon="svg-spinners:wind-toy" :width="32" :height="32" /> -->
           <DancingLogo />
         </figure>
-        <span class="text">
+        <span class="user-text">
           <a-space
             ><span>总访客</span> <DacingNumber :target="userVisitCount" /><span
               >次</span
