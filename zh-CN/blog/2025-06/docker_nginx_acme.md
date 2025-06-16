@@ -48,7 +48,7 @@ docker run --name nginx -d -v /data/nginx/conf:/etc/nginx/conf.d -v /data/nginx/
 
 ## 部署acme.sh ##
 
-```bassh
+```bash
 docker run --name alidns_acme -d --net=host --restart=always -v /data/nginx/certs:/certs -v  /var/run/docker.sock:/var/run/docker.sock -v /data/acme.sh/:/acme.sh -e Ali_Key=[阿里云appid] -e  Ali_Secret=[阿里云secret] neilpang/acme.sh daemon
 ```
 

@@ -20,7 +20,7 @@
         </pattern>
       </defs>
       <!-- <rect fill="url(#grid)" width="200" height="60"></rect> -->
-      <text ref="dancingText" x="6" y="38" class="dacing-text">
+      <text ref="dancingText" x="30" y="38" class="dacing-text">
         {{ brand }}
       </text>
     </svg>

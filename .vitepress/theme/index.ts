@@ -130,6 +130,7 @@ import Antd from "ant-design-vue";
 import "./styles/index.less";
 
 import NotFound from "../components/NotFound.vue";
+import NotFounds from "../components/NotFounds.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
@@ -343,7 +344,7 @@ export default {
       //     name: "page-bottom",
       //   }),
 
-      "not-found": () => h(NotFound),
+      "not-found": () => h(NotFounds),
 
       //  Always
       // "layout-top": () =>

@@ -20,6 +20,7 @@ import { viteMockServe } from "vite-plugin-mock";
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import imagePreload from "vite-plugin-image-preload";
 import { robots } from "vite-plugin-robots";
+import vueStyledPlugin from "@vue-styled-components/plugin";
 // import Sonda from 'sonda/vite';
 // import progress from 'vite-plugin-progress'
 import colors from 'picocolors'
@@ -116,6 +117,7 @@ export default defineConfig(() => {
       chunkSplitPlugin({
         strategy: "default",
       }),
+      vueStyledPlugin(),
       // progress({
       //   format:  `${colors.green(colors.bold('Bouilding'))} ${colors.cyan('[:bar]')} :percent`
       // }),
