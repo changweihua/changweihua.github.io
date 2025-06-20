@@ -153,7 +153,7 @@ export default defineConfig(() => {
         },
       }),
       imagePlaceholder({ prefix: "image/placeholder" }),
-      findImageDuplicates({ imagePath: ["public/images"] }),
+     // findImageDuplicates({ imagePath: ["public/images"] }),
       shortcutsPlugin({
         shortcuts: [
           {
