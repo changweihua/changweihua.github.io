@@ -18,6 +18,7 @@ import CubeLoader from "../components/CubeLoader.vue";
 import PyramidLoader from "../components/PyramidLoader.vue";
 import HoverableText from "../components/HoverableText.vue";
 import ArticleFooter from "../components/ArticleFooter.vue";
+import LiquidCard from "../components/LiquidCard.vue";
 import Robot from "../components/Robot.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
@@ -33,6 +34,8 @@ import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
+
+#v-ifdef VITE_MY_ENV
 
 import { pinyin } from "pinyin-pro";
 
@@ -54,6 +57,8 @@ xlogs.ascii('Warning', 'cloud');
 
 // 3D文字
 xlogs.banner(pinyin("常伟华"), 'neon');
+
+#v-endif
 
 //import "./styles/MapleMono.css";
 //import "./styles/Mermaid.css";
@@ -523,7 +528,8 @@ export default {
       app.component("DancingLogo", DancingLogo);
       app.component("MagicCard", MagicCard);
       app.component("Confetti", Confetti);
-      app.component("Guidance", Guidance);
+      app.component("LiquidCard", LiquidCard);
+      app.component("Guidance", Guidance);;
       app.component("m-read-text", ReadText);
     }
 

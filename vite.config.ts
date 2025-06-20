@@ -21,10 +21,18 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import imagePreload from "vite-plugin-image-preload";
 import { robots } from "vite-plugin-robots";
 import vueStyledPlugin from "@vue-styled-components/plugin";
-// import Sonda from 'sonda/vite';
-// import progress from 'vite-plugin-progress'
+import { qrcode } from "vite-plugin-qrcode";
 import colors from 'picocolors'
 import llmstxt from 'vitepress-plugin-llms'
+import { webUpdateNotice } from "@plugin-web-update-notification/vite";
+import { ValidateEnv, Schema } from "@julr/vite-plugin-validate-env";
+import ConditionalCompile from "vite-plugin-conditional-compiler";
+import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
+import { shortcutsPlugin } from "vite-plugin-shortcuts";
+import imagePlaceholder from "vite-plugin-image-placeholder";
+import findImageDuplicates from "vite-plugin-find-image-duplicates";
+import { ViteTips } from 'vite-plugin-tips';
+
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -117,6 +125,7 @@ export default defineConfig(() => {
       chunkSplitPlugin({
         strategy: "default",
       }),
+      qrcode(),
       vueStyledPlugin(),
       // progress({
       //   format:  `${colors.green(colors.bold('Bouilding'))} ${colors.cyan('[:bar]')} :percent`
@@ -125,6 +134,66 @@ export default defineConfig(() => {
         collections: {
           cmono: "./src/assets/icons/mono",
         },
+      }),
+      mockDevServerPlugin(),
+      ConditionalCompile(),
+      ValidateEnv({
+        validator: "builtin",
+        schema: {
+          VITE_APP_PRIMARY_COLOR: Schema.string(),
+        },
+      }),
+      ViteTips(),
+      webUpdateNotice({
+        logVersion: true,
+        notificationProps: {
+          title: "系统更新",
+          description: "系统有更新，请刷新页面",
+          buttonText: "刷新",
+        },
+      }),
+      imagePlaceholder({ prefix: "image/placeholder" }),
+      findImageDuplicates({ imagePath: ["public/images"] }),
+      shortcutsPlugin({
+        shortcuts: [
+          {
+            key: "c",
+            description: "close console",
+            action: (server) => {
+              server.config.logger.clearScreen("error");
+            },
+          },
+          {
+            key: "s",
+            description: "reset console",
+            action: (server) => {
+              server.config.logger.clearScreen("error");
+              server.printUrls();
+            },
+          },
+          // {
+          //   key: 'r',
+          //   description: 'restart the server',
+          //   async action(server) {
+          //     await server.restart();
+          //   },
+          // },
+          // {
+          //   key: 'u',
+          //   description: 'show server url',
+          //   action(server) {
+          //     server.config.logger.info('');
+          //     server.printUrls();
+          //   },
+          // },
+          // {
+          //   key: 'q',
+          //   description: 'quit',
+          //   async action(server) {
+          //     await server.close().finally(() => process.exit());
+          //   },
+          // },
+        ],
       }),
       ViteImageOptimizer({
         png: { quality: 80 },
