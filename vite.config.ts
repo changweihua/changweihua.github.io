@@ -22,8 +22,8 @@ import imagePreload from "vite-plugin-image-preload";
 import { robots } from "vite-plugin-robots";
 import vueStyledPlugin from "@vue-styled-components/plugin";
 import { qrcode } from "vite-plugin-qrcode";
-import colors from 'picocolors'
-import llmstxt from 'vitepress-plugin-llms'
+import colors from "picocolors";
+import llmstxt from "vitepress-plugin-llms";
 import { webUpdateNotice } from "@plugin-web-update-notification/vite";
 import { ValidateEnv, Schema } from "@julr/vite-plugin-validate-env";
 import ConditionalCompile from "vite-plugin-conditional-compiler";
@@ -31,8 +31,7 @@ import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
 import findImageDuplicates from "vite-plugin-find-image-duplicates";
-import { ViteTips } from 'vite-plugin-tips';
-
+import { ViteTips } from "vite-plugin-tips";
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -46,6 +45,66 @@ const yourPlugin: () => Plugin = () => ({
     console.log(config.define);
   },
 });
+
+function getDevPlugins() {
+  if (process.env.NODE_ENV === "production") {
+    return [];
+  }
+  return [
+    qrcode(),
+    ViteTips(),
+    mockDevServerPlugin(),
+    findImageDuplicates({ imagePath: ["public/images"] }),
+    shortcutsPlugin({
+      shortcuts: [
+        {
+          key: "c",
+          description: "close console",
+          action: (server) => {
+            server.config.logger.clearScreen("error");
+          },
+        },
+        {
+          key: "s",
+          description: "reset console",
+          action: (server) => {
+            server.config.logger.clearScreen("error");
+            server.printUrls();
+          },
+        },
+        // {
+        //   key: 'r',
+        //   description: 'restart the server',
+        //   async action(server) {
+        //     await server.restart();
+        //   },
+        // },
+        // {
+        //   key: 'u',
+        //   description: 'show server url',
+        //   action(server) {
+        //     server.config.logger.info('');
+        //     server.printUrls();
+        //   },
+        // },
+        // {
+        //   key: 'q',
+        //   description: 'quit',
+        //   async action(server) {
+        //     await server.close().finally(() => process.exit());
+        //   },
+        // },
+      ],
+    }),
+    Inspect(),
+    // VitePluginBuildLegacy(),
+    vitePluginFakeServer({
+      include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
+      enableProd: true, // 是否在生产环境下设置mock
+    }),
+    llmstxt(),
+  ];
+}
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
@@ -119,13 +178,13 @@ export default defineConfig(() => {
       ),
     },
     plugins: [
+      ...getDevPlugins(),
       envParse(),
       updateMetadata(),
       yourPlugin(),
       chunkSplitPlugin({
         strategy: "default",
       }),
-      qrcode(),
       vueStyledPlugin(),
       // progress({
       //   format:  `${colors.green(colors.bold('Bouilding'))} ${colors.cyan('[:bar]')} :percent`
@@ -135,15 +194,13 @@ export default defineConfig(() => {
           cmono: "./src/assets/icons/mono",
         },
       }),
-      mockDevServerPlugin(),
-      ConditionalCompile(),
+      // ConditionalCompile(),
       ValidateEnv({
         validator: "builtin",
         schema: {
           VITE_APP_PRIMARY_COLOR: Schema.string(),
         },
       }),
-      ViteTips(),
       webUpdateNotice({
         logVersion: true,
         notificationProps: {
@@ -199,7 +256,25 @@ export default defineConfig(() => {
         png: { quality: 80 },
         jpeg: { quality: 75 },
         svg: { multipass: true },
+        // 排除不需要优化的文件夹/文件
+        exclude: [
+          // 忽略整个目录（正则表达式）
+          // /\/src\/assets\/raw\/.*/,
+
+          // 忽略特定文件类型
+          // /.*\.svg$/,
+
+          // 使用 glob 模式（插件内部转为正则）
+          "**/fonts/**",
+          // "public/do-not-optimize/*.png"
+        ],
       }),
+      // ViteImageOptimizer({
+      //   png: { quality: 80 },
+      //   jpeg: { quality: 75 },
+      //   svg: { multipass: true },
+      //   exclude: ['fonts']
+      // }),
       robots(),
       Components({
         resolvers: [
@@ -221,12 +296,6 @@ export default defineConfig(() => {
       }),
       // VueDevTools(),
       UnoCSS(),
-      Inspect(),
-      // VitePluginBuildLegacy(),
-      vitePluginFakeServer({
-        include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
-        enableProd: true, // 是否在生产环境下设置mock
-      }),
       prefetchDnsPlugin(),
       mkcert({
         savePath: "./certs", // save the generated certificate into certs directory
@@ -242,7 +311,6 @@ export default defineConfig(() => {
         },
       }),
       // Sonda(),
-      llmstxt(),
       // llmstxt({
       //   generateLLMsFullTxt: false,
       //   ignoreFiles: ['sponsors/*'],

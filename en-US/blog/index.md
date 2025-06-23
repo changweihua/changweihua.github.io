@@ -24,7 +24,7 @@ import LinkListView from '@/components/LinkListView.vue';
 import BlogIndex from "@vp/components/BlogIndex.vue";
 import { useData } from 'vitepress'
 import { data } from '@vp/blog.data'
-console.log('data',data)
+
 const { lang } = useData()
 
 const spinning = ref<boolean>(false);

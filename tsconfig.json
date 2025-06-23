@@ -36,7 +36,7 @@
       ]
     },
     //提示无法覆盖文件时，需要考虑设置此项
-    "outDir": "dist",
+    "outDir": "dist"
   },
   "diagnostics": true,
   "types": ["vite/client", "typings"],

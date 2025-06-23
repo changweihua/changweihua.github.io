@@ -35,7 +35,7 @@ import * as AntIconsVue from "@ant-design/icons-vue";
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
 
-#v-ifdef VITE_MY_ENV
+// #v-ifdef VITE_MY_ENV
 
 import { pinyin } from "pinyin-pro";
 
@@ -58,7 +58,7 @@ xlogs.ascii('Warning', 'cloud');
 // 3D文字
 xlogs.banner(pinyin("常伟华"), 'neon');
 
-#v-endif
+// #v-endif
 
 //import "./styles/MapleMono.css";
 //import "./styles/Mermaid.css";
