@@ -281,5 +281,5 @@
     "vite-plugin-html": "^3.2.2",
     "vue": "^3.5.13"
   },
-  "version": "0.5.17"
+  "version": "0.5.18"
 }
