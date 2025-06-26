@@ -29,7 +29,7 @@ onBeforeUnmount(() => {
   }
 })
 </script>
-<style lang="less" scoped>
+<style scoped>
 body {
   timeline-scope: --progress-scroller;
 }

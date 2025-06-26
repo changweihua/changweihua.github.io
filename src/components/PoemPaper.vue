@@ -53,7 +53,7 @@ const textLines = poem
   .filter((line) => line.characters.length > 0);
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .line {
   margin-bottom: 20px;
   font-family: MapleMono, "JetBrains Maple Mono", AlibabaPuHuiTi, JetBrainsMono;

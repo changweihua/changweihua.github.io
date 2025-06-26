@@ -179,7 +179,7 @@ class Particle {
 }
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 canvas {
   display: block;
   width: 100%;

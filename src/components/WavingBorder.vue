@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .banner {
   background: url("/border.svg");
 

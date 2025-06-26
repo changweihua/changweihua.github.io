@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .card {
   width: 230px;
   height: 230px;

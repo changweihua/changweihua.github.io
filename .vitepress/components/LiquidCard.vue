@@ -107,7 +107,7 @@ function handleMouseLeave() {
 }
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -234,7 +234,6 @@ function handleMouseLeave() {
   }
 }
 
-// 添加点击波纹效果
 .click-gradient {
   position: absolute;
   border-radius: 50%;

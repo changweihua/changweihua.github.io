@@ -45,7 +45,7 @@ onMounted(function () {
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .panel {
   margin-top: 12px;
   margin-bottom: 8px;

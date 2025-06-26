@@ -13,7 +13,7 @@ import { useData } from "vitepress";
 const { frontmatter } = useData();
 </script>
 
-<style lang="less">
+<style scoped>
 lottie-panel {
   width: 200px;
   height: 100px;

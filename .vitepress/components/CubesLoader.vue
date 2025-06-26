@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: "标题",
 });
 </script>
-<style lang="less" scoped>
+<style scoped>
 @keyframes up-down {
    50% {
      transform: translateZ(calc(var(--size)));

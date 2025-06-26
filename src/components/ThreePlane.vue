@@ -640,7 +640,7 @@ const handleHeroResize = ({
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 #heroRef {
   width: 600px;
   height: 600px;

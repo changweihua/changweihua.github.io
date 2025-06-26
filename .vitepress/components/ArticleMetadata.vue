@@ -80,7 +80,7 @@ onMounted(() => {
 }
 </style>
 
-<style lang="less" scoped>
+<style scoped>
 .meta-container {
   margin: 10px 0;
   display: flex;
@@ -104,8 +104,8 @@ onMounted(() => {
   }
 
   .bar::before {
-    counter-reset: progress var(--percent); // 创建计数器
-    content: counter(progress) '%\2002'; // 显示计数器内容
+    counter-reset: progress var(--percent);
+    content: counter(progress) '%\2002';
     display: flex;
     justify-content: end;
     width: calc(var(--percent) * 1%);

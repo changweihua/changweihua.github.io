@@ -52,7 +52,7 @@ const onReadText = (e) => {
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .reader-content {
   display: inline-block;
   margin: 0 !important;

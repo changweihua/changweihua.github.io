@@ -17,7 +17,7 @@
 
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 * {
   margin: 0;
   padding: 0;

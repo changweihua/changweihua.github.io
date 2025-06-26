@@ -223,7 +223,7 @@
 <script setup lang="ts">
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 svg#robot {
   display: block;
   position: relative;

@@ -20,4 +20,4 @@
 // import sponsor from "../../public/lotties/sponsor.json";
 </script>
 
-<style lang="less" scoped></style>
+<style scoped></style>

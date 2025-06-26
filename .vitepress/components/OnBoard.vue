@@ -20,4 +20,4 @@
 // import onboard from "@/lotties/onboard.json";
 </script>
 
-<style lang="less" scoped></style>
+<style scoped></style>

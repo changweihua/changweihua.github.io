@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: "标题",
 });
 </script>
-<style lang="less" scoped>
+<style scoped>
 .loadingspinner {
   --square: 26px;
   --offset: 30px;

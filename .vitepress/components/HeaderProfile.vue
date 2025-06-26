@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 :root {
   --clr: #f0f2f5;
 }
@@ -289,7 +289,6 @@
   cursor: pointer;
   position: relative;
   border-radius: 50%;
-  // border: 2px solid #000;
 }
 
 .animated-avatar::before,

@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 @property --rotate {
   syntax: "<angle>";
   initial-value: 132deg;

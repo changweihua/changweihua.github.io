@@ -96,7 +96,7 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .number {
   display: flex;
   align-items: center;

@@ -239,8 +239,8 @@
   // 启动 Liquid Glass 效果
   function createLiquidGlass() {
     const shader = new Shader({
-      width: 300,
-      height: 200,
+      width: 100,
+      height: 100,
       fragment: (uv, mouse) => {
         const ix = uv.x - 0.5;
         const iy = uv.y - 0.5;

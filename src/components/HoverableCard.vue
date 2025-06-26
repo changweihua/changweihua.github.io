@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .card-title {
   color: #262626;
   font-size: 1.2em;

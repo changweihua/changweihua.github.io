@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
 const content = ref(props.title);
 </script>
 
-<style lang="less" >
+<style scoped>
 .card_box {
   width: 200px;
   height: 250px;
@@ -53,8 +53,6 @@ const content = ref(props.title);
 
 .card_box span::before {
   content: attr(data-content);
-  // content: v-bind(content);
-  // content: var(--dynamic-content);
   position: absolute;
   width: 150%;
   height: 40px;

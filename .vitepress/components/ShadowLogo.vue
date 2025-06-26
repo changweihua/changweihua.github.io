@@ -28,7 +28,7 @@ const props = defineProps({
 });
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .shadow-logo {
   font-size: 34px;
   text-anchor: middle;

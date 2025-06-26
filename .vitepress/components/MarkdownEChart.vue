@@ -102,7 +102,7 @@ const elementResize = ElementResize({
 });
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .chart-div {
   width: 100%;
   min-height: 300px;

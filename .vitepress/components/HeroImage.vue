@@ -76,7 +76,7 @@ onMounted(function () {
 });
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .svg-container {
   width: 100%;
   max-width: 180px;
@@ -109,9 +109,4 @@ text {
 text:hover {
   fill: #2196f3;
 }
-
-/* 调试用悬停区域可见 */
-// .hover-area {
-//   fill: rgba(255, 0, 0, 0.3);
-// }
 </style>

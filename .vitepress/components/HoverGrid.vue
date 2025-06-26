@@ -71,7 +71,7 @@ document.addEventListener("mousemove", function (event) {
 
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .box-container {
   margin: 0;
   padding: 0;

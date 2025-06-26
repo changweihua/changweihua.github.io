@@ -164,7 +164,7 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .markup-card {
   background-color: initial;
 

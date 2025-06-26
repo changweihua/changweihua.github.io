@@ -230,15 +230,6 @@ onMounted(async () => {
 onUnmounted(() => mut?.disconnect());
 </script>
 
-<style lang="less" scoped>
-// .mermaid-graph {
-//   // :deep(.text-container) * {
-//   //   font-family: Fangyuan !important;
-//   // }
-
-//   // background-image: url("/images/mermaid-background.svg");
-//   // background-repeat: no-repeat;
-//   // background-size: cover;
-// }
+<style scoped>
 </style>
 

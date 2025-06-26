@@ -83,7 +83,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 /* .theme-code-group {} */
 .theme-code-group__nav {
   margin-bottom: -35px;

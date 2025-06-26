@@ -43,7 +43,7 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style scoped>
 #xmind-container {
   display: flex;
   height: 80vh;

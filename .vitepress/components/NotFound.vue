@@ -67,16 +67,15 @@ onMounted(() => {
 
 
 </script>
-<style lang="less" scoped>
+<style scoped>
 .error-container {
-  // 使用变量承接
-  @height: v-bind(container_height);
+  --height: v-bind(container_height);
 
   :deep(.VPContent) {
     display: flex;
   }
 
-  height: @height;
+  height: var(--height);
   width: 100%;
   background: #fff;
   overflow: hidden;

@@ -27,7 +27,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .logo-container {
   margin: 0px;
   width: 100%;

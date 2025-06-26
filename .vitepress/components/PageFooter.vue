@@ -58,7 +58,7 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .page-footer {
   color: var(--vp-c-text-1);
 

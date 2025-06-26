@@ -28,7 +28,7 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .task-list-item input[type="checkbox"] {
   transition: all 0.3s ease;
   accent-color: var(--vp-c-brand); /* 使用主题色 */

@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .discussion-item-header:last-child {
   padding-bottom: 0;
 }

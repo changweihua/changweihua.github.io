@@ -142,7 +142,7 @@ onBeforeUnmount(function(){
 
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .lazy-load {
   opacity: 0;
   transition: opacity 0.5s;
@@ -212,7 +212,7 @@ onBeforeUnmount(function(){
 
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .lazy-load {
   opacity: 0;
   transition: opacity 0.5s;
@@ -273,7 +273,7 @@ onBeforeUnmount(function(){
 
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .box {
   opacity: 0;
   transform: translateY(100px);

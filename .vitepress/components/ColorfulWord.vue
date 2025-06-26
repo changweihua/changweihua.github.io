@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .container {
   --bg: #000000;
   --clr-1: #00c2ff;

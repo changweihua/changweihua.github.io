@@ -1048,7 +1048,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .qr-container {
   height: 100%;
 

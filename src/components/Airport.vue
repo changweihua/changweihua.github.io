@@ -483,7 +483,7 @@ function handleSave() {
   <a-button @click="handleSave">保存图片</a-button>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 #container {
   width: calc(100vw - 50px);
   height: calc(100vh - 100px);

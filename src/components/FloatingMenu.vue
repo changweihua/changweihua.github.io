@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .floating-menu {
   position: fixed;
   right: 100px;

@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .ai-bot {
   --surface: #111;
   --c: white;

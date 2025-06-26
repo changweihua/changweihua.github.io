@@ -38,7 +38,7 @@ const timeAxis = [
 ];
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 /* 时间轴 */
 .dynamicFiles {
   position: relative;

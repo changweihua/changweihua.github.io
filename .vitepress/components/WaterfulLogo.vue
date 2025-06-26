@@ -36,7 +36,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
     *,
     *:after,
     *:before {

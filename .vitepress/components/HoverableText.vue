@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: "标题",
 });
 </script>
-<style lang="less" scoped>
+<style scoped>
 .container {
   margin: 0 auto;
   height: 35px;
@@ -51,9 +51,4 @@ const props = withDefaults(defineProps<Props>(), {
   transition: 0.5s;
   -webkit-text-stroke: 1px var(--animation-color);
 }
-
-// .container:hover .hovertext {
-//   width: 100px;
-//   filter: drop-shadow(0 0 20px var(--animation-color));
-// }
 </style>

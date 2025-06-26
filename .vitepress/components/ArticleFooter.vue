@@ -67,7 +67,7 @@
 <script setup lang="ts">
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 
 .like-dislike-container {
   --dark-grey: var(--vp-c-text-1);
@@ -87,27 +87,10 @@
   opacity: 0.9;
   padding: 1.5rem;
   font-weight: 600;
-  // background: var(--lightest-grey);
-  // max-width: max-content;
   border-radius: var(--border-radius-main);
-  // box-shadow: var(--shadow);
   transition: 0.2s ease all;
   width: 100%;
 }
-
-
-// @media (prefers-color-scheme: dark) {
-//   --dark-grey: #353535;
-//   --middle-grey: #767676;
-//   --lightest-grey: linear-gradient(#fafafa, #ebebeb);
-//   --shadow: 0 5px 5px 0 #00000026;
-//   --shadow-active: 0 5px 5px 0 #00000026;
-// }
-
-
-// .like-dislike-container:hover {
-//   box-shadow: var(--shadow-active);
-// }
 
 .like-dislike-container .tool-box {
   position: absolute;
@@ -184,12 +167,10 @@
 
 .like-dislike-container .icons:hover {
   opacity: 0.9;
-  // box-shadow: var(--shadow);
 }
 
 .like-dislike-container .icons:active {
   opacity: 0.9;
-  // box-shadow: var(--shadow-active);
 }
 
 .like-dislike-container .icons .btn-label {

@@ -27,7 +27,7 @@ onMounted(() => {
 </template>
 
 
-<style>
+<style scoped>
 .utterances-comment {
   width: 100%;
   min-height: 300px;

@@ -72,7 +72,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .name {
   background: -webkit-linear-gradient(315deg,
       rgb(210, 86, 53) 10%,
@@ -180,7 +180,6 @@ onMounted(() => {
   background: var(--vp-c-white);
   color: var(--vp-c-black);
   padding: 3px 12px;
-  // border: 1px solid var(--vp-c-black);
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -205,7 +204,6 @@ onMounted(() => {
   .contrast {
     background: var(--vp-c-bg);
     color: var(--vp-c-white);
-    // border: 1px solid var(--vp-c-white);
   }
 
   .contrast::after {

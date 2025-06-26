@@ -66,7 +66,7 @@ const lineCount = computed(() => Math.round(props.icons.length / props.lines))
 
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .marquee-wrapper {
   --logo-width: 96px;
   --logo-height: 96px;

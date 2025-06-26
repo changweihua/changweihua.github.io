@@ -281,7 +281,7 @@ const handleHeroLogoResize = ({
   <div v-resize="handleHeroLogoResize" ref="hero_logo" id="hero_logo" class="w-full h-full"></div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 #hero_logo {
   width: 300px;
   height: 300px;

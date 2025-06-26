@@ -13,7 +13,7 @@
 </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
 .pyramid-loader {
   position: relative;
   margin: 0 auto;

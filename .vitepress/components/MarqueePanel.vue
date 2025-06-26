@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .marquee-wrapper {
   --logo-width: 200px;
   --logo-height: 100px;

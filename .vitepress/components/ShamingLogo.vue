@@ -79,7 +79,7 @@ onMounted(() => {
 // });
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .shaming-area {
   position: relative;
   width: 100%;

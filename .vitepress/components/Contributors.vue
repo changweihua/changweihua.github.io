@@ -41,9 +41,6 @@ function isNotEmpty(arr: string | string[]) {
   </div>
 </template>
 
-<style lang="less" scoped>
-// .avator{
-//   width: 48px;
-//   height: 48px;
-// }
+<style scoped>
+
 </style>

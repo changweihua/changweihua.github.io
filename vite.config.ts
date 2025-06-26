@@ -42,6 +42,10 @@ const yourPlugin: () => Plugin = () => ({
     console.log(config.define);
   },
   resolveId() {
+    console.log(
+      this.meta.viteVersion,this.meta.rollupVersion,
+      this.meta.rolldownVersion
+    );
     if (this.meta.rolldownVersion) {
       console.log("rolldown-vite 的逻辑");
     } else {
@@ -107,12 +111,74 @@ function getDevPlugins() {
     //   { load: { id: /\.svg\?react$/ } },
     // ),
     Inspect(),
-    // VitePluginBuildLegacy(),
+    envParse(),
+    yourPlugin(),
     vitePluginFakeServer({
       include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: true, // 是否在生产环境下设置mock
     }),
-    // llmstxt(),
+    ValidateEnv({
+      validator: "builtin",
+      schema: {
+        VITE_APP_PRIMARY_COLOR: Schema.string(),
+      },
+    }),
+    webUpdateNotice({
+      logVersion: true,
+      notificationProps: {
+        title: "系统更新",
+        description: "系统有更新，请刷新页面",
+        buttonText: "刷新",
+      },
+    }),
+    imagePlaceholder({ prefix: "image/placeholder" }),
+    shortcutsPlugin({
+      shortcuts: [
+        {
+          key: "c",
+          description: "close console",
+          action: (server) => {
+            server.config.logger.clearScreen("error");
+          },
+        },
+        {
+          key: "s",
+          description: "reset console",
+          action: (server) => {
+            server.config.logger.clearScreen("error");
+            server.printUrls();
+          },
+        },
+        // {
+        //   key: 'r',
+        //   description: 'restart the server',
+        //   async action(server) {
+        //     await server.restart();
+        //   },
+        // },
+        // {
+        //   key: 'u',
+        //   description: 'show server url',
+        //   action(server) {
+        //     server.config.logger.info('');
+        //     server.printUrls();
+        //   },
+        // },
+        // {
+        //   key: 'q',
+        //   description: 'quit',
+        //   async action(server) {
+        //     await server.close().finally(() => process.exit());
+        //   },
+        // },
+      ],
+    }),
+    mkcert({
+      savePath: "./certs", // save the generated certificate into certs directory
+      autoUpgrade: false,
+      force: false, // force generation of certs even without setting https property in the vite config
+    }),
+    llmstxt(),
   ];
 }
 
@@ -178,9 +244,7 @@ export default defineConfig(() => {
       emptyOutDir: true,
       rollupOptions: {
         output: {
-          advancedChunks: {
-            groups: [{ name: "vendor", test: /\/vue(?:-dom)?/ }],
-          },
+          advancedChunks: manualChunks
         },
       },
       reportCompressedSize: false,
@@ -225,79 +289,15 @@ export default defineConfig(() => {
       }),
       UnoCSS(),
       ...getDevPlugins(),
-      envParse(),
       updateMetadata(),
-      yourPlugin(),
       vueStyledPlugin(),
       Iconify({
         collections: {
           cmono: "./src/assets/icons/mono",
         },
       }),
-      ValidateEnv({
-        validator: "builtin",
-        schema: {
-          VITE_APP_PRIMARY_COLOR: Schema.string(),
-        },
-      }),
-      webUpdateNotice({
-        logVersion: true,
-        notificationProps: {
-          title: "系统更新",
-          description: "系统有更新，请刷新页面",
-          buttonText: "刷新",
-        },
-      }),
-      // imagePlaceholder({ prefix: "image/placeholder" }),
-      // findImageDuplicates({ imagePath: ["public/images"] }),
-      shortcutsPlugin({
-        shortcuts: [
-          {
-            key: "c",
-            description: "close console",
-            action: (server) => {
-              server.config.logger.clearScreen("error");
-            },
-          },
-          {
-            key: "s",
-            description: "reset console",
-            action: (server) => {
-              server.config.logger.clearScreen("error");
-              server.printUrls();
-            },
-          },
-          // {
-          //   key: 'r',
-          //   description: 'restart the server',
-          //   async action(server) {
-          //     await server.restart();
-          //   },
-          // },
-          // {
-          //   key: 'u',
-          //   description: 'show server url',
-          //   action(server) {
-          //     server.config.logger.info('');
-          //     server.printUrls();
-          //   },
-          // },
-          // {
-          //   key: 'q',
-          //   description: 'quit',
-          //   async action(server) {
-          //     await server.close().finally(() => process.exit());
-          //   },
-          // },
-        ],
-      }),
       robots(),
       prefetchDnsPlugin(),
-      mkcert({
-        savePath: "./certs", // save the generated certificate into certs directory
-        autoUpgrade: false,
-        force: false, // force generation of certs even without setting https property in the vite config
-      }),
       compression(),
       versionInjector(),
       imagePreload({
@@ -348,7 +348,7 @@ export default defineConfig(() => {
       noExternal: ["fs"], // Externalize Node.js modules
     },
     optimizeDeps: {
-      force: true,
+      // force: true,
       include: ["vue"],
       exclude: [
         "vitepress",

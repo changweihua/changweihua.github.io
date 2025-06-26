@@ -91,7 +91,7 @@ Nested paragraph
 import SkillRadar from '@/components/SkillRadar.vue';
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 @media only screen and (max-width: 768px) {
   /** add more styles */
   .stepper .card,
