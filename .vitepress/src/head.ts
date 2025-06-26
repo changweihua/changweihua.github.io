@@ -41,12 +41,6 @@ export const head: HeadConfig[] = [
     },
   ],
   ["meta", { name: "referrer", content: "no-referrer" }],
-  // [
-  //   "script",
-  //   {
-  //     src: "/clarity.js",
-  //   },
-  // ],
   [
     "meta",
     {
@@ -100,6 +94,13 @@ export const head: HeadConfig[] = [
       src: "/cursor.js",
       "data-site": "https://changweihua.github.io",
       "data-spa": "auto",
+      defer: "true",
+    },
+  ],
+  [
+    "script",
+    {
+      src: "/liquid-glass.js",
       defer: "true",
     },
   ],

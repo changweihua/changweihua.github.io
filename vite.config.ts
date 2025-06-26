@@ -6,7 +6,6 @@ import UnoCSS from "unocss/vite";
 import path, { resolve } from "path";
 import { fileURLToPath } from "url";
 import type { Plugin } from "vite";
-import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import { compression } from "vite-plugin-compression2";
 import Inspect from "vite-plugin-inspect";
 import mkcert from "vite-plugin-mkcert";
@@ -17,7 +16,6 @@ import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
 import versionInjector from "unplugin-version-injector/vite";
 import { viteMockServe } from "vite-plugin-mock";
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import imagePreload from "vite-plugin-image-preload";
 import { robots } from "vite-plugin-robots";
 import vueStyledPlugin from "@vue-styled-components/plugin";
@@ -31,7 +29,6 @@ import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
 import findImageDuplicates from "vite-plugin-find-image-duplicates";
-import { ViteTips } from "vite-plugin-tips";
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -44,6 +41,13 @@ const yourPlugin: () => Plugin = () => ({
     // get version in vitePlugin if you open `ifGlobal`
     console.log(config.define);
   },
+  resolveId() {
+    if (this.meta.rolldownVersion) {
+      console.log("rolldown-vite 的逻辑");
+    } else {
+      console.log("rollup-vite 的逻辑");
+    }
+  },
 });
 
 function getDevPlugins() {
@@ -52,7 +56,6 @@ function getDevPlugins() {
   }
   return [
     qrcode(),
-    ViteTips(),
     mockDevServerPlugin(),
     findImageDuplicates({ imagePath: ["public/images"] }),
     shortcutsPlugin({
@@ -96,14 +99,53 @@ function getDevPlugins() {
         // },
       ],
     }),
+    // // 仅对以 `.svg?react` 结尾的文件加载 `svgr` 插件
+    // withFilter(
+    //   svgr({
+    //     /*...*/
+    //   }),
+    //   { load: { id: /\.svg\?react$/ } },
+    // ),
     Inspect(),
     // VitePluginBuildLegacy(),
     vitePluginFakeServer({
       include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: true, // 是否在生产环境下设置mock
     }),
-    llmstxt(),
+    // llmstxt(),
   ];
+}
+
+function manualChunks(id, { getModuleInfo }) {
+  const match = /.*\.strings\.(\w+)\.js/.exec(id);
+  if (match) {
+    const language = match[1]; // e.g. "en"
+    const dependentEntryPoints = [];
+
+    // 我们在这里使用 Set 集合，这样每个模块最多处理一次。
+    // 这可以防止循环依赖情况下的无限循环
+    const idsToHandle = new Set(getModuleInfo(id).dynamicImporters);
+
+    for (const moduleId of idsToHandle) {
+      const { isEntry, dynamicImporters, importers } = getModuleInfo(moduleId);
+      if (isEntry || dynamicImporters.length > 0)
+        dependentEntryPoints.push(moduleId);
+
+      // Set 迭代器足够智能，可以迭代迭代过程中添加的元素
+      for (const importerId of importers) idsToHandle.add(importerId);
+    }
+
+    // 如果有唯一条目，我们会根据条目名称将其放入一个块中
+    if (dependentEntryPoints.length === 1) {
+      return `${
+        dependentEntryPoints[0].split("/").slice(-1)[0].split(".")[0]
+      }.strings.${language}`;
+    }
+    // 对于多个条目，我们将其放入“共享”块中
+    if (dependentEntryPoints.length > 1) {
+      return `shared.strings.${language}`;
+    }
+  }
 }
 
 // https://vitejs.dev/config/
@@ -111,6 +153,15 @@ export default defineConfig(() => {
   const timestamp = new Date().getTime();
 
   return {
+    builder: {
+      buildApp: async (builder) => {
+        const environments = Object.values(builder.environments);
+        console.log("environments", environments);
+        return Promise.all(
+          environments.map((environment) => builder.build(environment))
+        );
+      },
+    },
     server: {
       port: 5500,
       hmr: {
@@ -122,48 +173,24 @@ export default defineConfig(() => {
     },
     clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     build: {
-      // target: 'es2022',
-      // cssTarget: 'chrome118',
-      // minify: 'esbuild',
-      // terserOptions: {
-      //   format: {
-      //     comments: false,
-      //   }
-      // },
       sourcemap: false, // Seems to cause JavaScript heap out of memory errors on build
       chunkSizeWarningLimit: 5000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
-      reportCompressedSize: false,
       rollupOptions: {
         output: {
-          manualChunks: {
-            vue: ["vue", "vue-router", "pinia"],
-            echarts: ["echarts"],
-            vp: ["./.vitepress"],
-            core: ["./src"],
-            utils: ["./utils"],
-            app: ["./src/App.vue"],
-          },
-          entryFileNames: `js/[name]-[hash].js`,
-          chunkFileNames: `js/[name]-[hash].js`,
-          assetFileNames(assetInfos) {
-            // if (assetInfos.name.endsWith(".css")) {
-            //   return `css/[name]-[hash].css`;
-            // }
-            return `[ext]/[name]-[hash].[ext]`;
+          advancedChunks: {
+            groups: [{ name: "vendor", test: /\/vue(?:-dom)?/ }],
           },
         },
       },
+      reportCompressedSize: false,
     },
-    esbuild: {
-      exclude:
-        process.env.NODE_ENV !== "production" ? [] : ["console", "debugger"],
+    experimental: {
+      importGlobRestoreExtension: true,
+      hmrPartialAccept: true,
+      webComponents: true,
+      enableNativePlugin: true,
     },
-    // experimental: {
-    //   importGlobRestoreExtension: true,
-    //   hmrPartialAccept: true,
-    //   webComponents: true
-    // },
     define: {
       APP_VERSION: timestamp,
       __VUE_PROD_DEVTOOLS__: false,
@@ -178,23 +205,35 @@ export default defineConfig(() => {
       ),
     },
     plugins: [
+      Components({
+        resolvers: [
+          IconsResolver({
+            // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
+            prefix: "icon",
+            strict: true,
+            // 当图标集名字过长时，可使用集合别名
+            // alias: {
+            //   system: 'system-uicons'
+            // },
+            // enabledCollections: ['logos']
+          }),
+        ],
+      }),
+      Icons({
+        compiler: "vue3",
+        autoInstall: true,
+      }),
+      UnoCSS(),
       ...getDevPlugins(),
       envParse(),
       updateMetadata(),
       yourPlugin(),
-      chunkSplitPlugin({
-        strategy: "default",
-      }),
       vueStyledPlugin(),
-      // progress({
-      //   format:  `${colors.green(colors.bold('Bouilding'))} ${colors.cyan('[:bar]')} :percent`
-      // }),
       Iconify({
         collections: {
           cmono: "./src/assets/icons/mono",
         },
       }),
-      // ConditionalCompile(),
       ValidateEnv({
         validator: "builtin",
         schema: {
@@ -209,8 +248,8 @@ export default defineConfig(() => {
           buttonText: "刷新",
         },
       }),
-      imagePlaceholder({ prefix: "image/placeholder" }),
-     // findImageDuplicates({ imagePath: ["public/images"] }),
+      // imagePlaceholder({ prefix: "image/placeholder" }),
+      // findImageDuplicates({ imagePath: ["public/images"] }),
       shortcutsPlugin({
         shortcuts: [
           {
@@ -252,50 +291,7 @@ export default defineConfig(() => {
           // },
         ],
       }),
-      ViteImageOptimizer({
-        png: { quality: 80 },
-        jpeg: { quality: 75 },
-        svg: { multipass: true },
-        // 排除不需要优化的文件夹/文件
-        exclude: [
-          // 忽略整个目录（正则表达式）
-          // /\/src\/assets\/raw\/.*/,
-
-          // 忽略特定文件类型
-          // /.*\.svg$/,
-
-          // 使用 glob 模式（插件内部转为正则）
-          "**/fonts/**",
-          // "public/do-not-optimize/*.png"
-        ],
-      }),
-      // ViteImageOptimizer({
-      //   png: { quality: 80 },
-      //   jpeg: { quality: 75 },
-      //   svg: { multipass: true },
-      //   exclude: ['fonts']
-      // }),
       robots(),
-      Components({
-        resolvers: [
-          IconsResolver({
-            // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
-            prefix: "icon",
-            strict: true,
-            // 当图标集名字过长时，可使用集合别名
-            // alias: {
-            //   system: 'system-uicons'
-            // },
-            // enabledCollections: ['logos']
-          }),
-        ],
-      }),
-      Icons({
-        compiler: "vue3",
-        autoInstall: true,
-      }),
-      // VueDevTools(),
-      UnoCSS(),
       prefetchDnsPlugin(),
       mkcert({
         savePath: "./certs", // save the generated certificate into certs directory
@@ -310,47 +306,22 @@ export default defineConfig(() => {
           rel: "prefetch",
         },
       }),
-      // Sonda(),
-      // llmstxt({
-      //   generateLLMsFullTxt: false,
-      //   ignoreFiles: ['sponsors/*'],
-      //   customLLMsTxtTemplate: `# {title}\n\n{foo}`,
-      //   title: 'Awesome tool',
-      //   customTemplateVariables: {
-      //     foo: 'bar'
-      //   }
-      // })
-      // viteMockServe({
-      //   mockPath: './mock/',
-      //   localEnabled: command === 'serve', // 开发环境启用
-      //   prodEnabled: command !== 'serve', // 生产环境启用
-      //   supportTs: true, // 支持 TypeScript 文件
-      //   watchFiles: true, // 监视文件更改
-      //   injectCode: `
-      //     import { setupProdMockServer } from './mockProdServer';
-      //     setupProdMockServer();
-      //   `,
-      // }),
     ],
     css: {
+      devSourcemap: false,
       codeSplit: false,
       preprocessorOptions: {
         less: {
-          modifyVars: {
-            hack: 'true; @import "@vp/theme/styles/vars.less"',
-          },
-          javascriptEnabled: true,
-          globalVars: {},
+          timeout: 30000, // 超时延长至 30 秒
+          math: "parens", // 避免严格模式性能问题
+          // math: "parens-division", // 提升计算性能
+          javascriptEnabled: false, // 如需在 Less 中使用 JS 表达式
+          // modifyVars: {
+          //   hack: 'true; @import "@vp/theme/styles/vars.less"',
+          // },
+          additionalData: `@import "@vp/theme/styles/vars.less";`,
         },
       },
-      // transform: 'lightningcss',
-      // lightningcss: {
-      //   drafts: {
-      //     nesting: true,
-      //     customMedia: true
-      //   }
-      // },
-      // devSourcemap: true
     },
     resolve: {
       alias: {
@@ -377,8 +348,17 @@ export default defineConfig(() => {
       noExternal: ["fs"], // Externalize Node.js modules
     },
     optimizeDeps: {
+      force: true,
       include: ["vue"],
-      exclude: ["vitepress", "svg2roughjs", "echarts", "echarts-gl"],
+      exclude: [
+        "vitepress",
+        "svg2roughjs",
+        "echarts",
+        "echarts-gl",
+        ".vite",
+        "node-modules/.vite",
+        "node-modules/.cache",
+      ],
       // esbuildOptions: {
       //   treeShaking: true,
       //   legalComments: true

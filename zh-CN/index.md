@@ -133,7 +133,7 @@ head:
       content: changweihua.github.io 首页 CMONO.NET
 ---
 
-<LiquidCard />
+<!--<LiquidCard />-->
 
 <!-- <Robot />
 
