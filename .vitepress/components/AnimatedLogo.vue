@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Suspense>
+    <Suspense suspensible>
       <div>
         <AsyncHeroImage />
       </div>

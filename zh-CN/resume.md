@@ -42,6 +42,7 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 - 业余时间积极参加开源社区。
 - MAUI Electron React-Native 等跨平台开发技术。
 - 研究机器视觉，自学 Yolo 目标检测算法。
+- AI 大模型方向，MCP ONNX Ollama Dify等。
 
 :::
 

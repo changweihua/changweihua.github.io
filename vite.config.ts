@@ -42,14 +42,11 @@ const yourPlugin: () => Plugin = () => ({
     console.log(config.define);
   },
   resolveId() {
-    console.log(
-      this.meta.viteVersion,this.meta.rollupVersion,
-      this.meta.rolldownVersion
-    );
-    if (this.meta.rolldownVersion) {
-      console.log("rolldown-vite 的逻辑");
-    } else {
+    console.log(this.meta.viteVersion, this.meta.rollupVersion);
+    if (this.meta.rollupVersion) {
       console.log("rollup-vite 的逻辑");
+    } else {
+      console.log("rolldown-vite 的逻辑");
     }
   },
 });
@@ -178,7 +175,7 @@ function getDevPlugins() {
       autoUpgrade: false,
       force: false, // force generation of certs even without setting https property in the vite config
     }),
-    llmstxt(),
+    // llmstxt(),
   ];
 }
 
@@ -186,7 +183,7 @@ function manualChunks(id, { getModuleInfo }) {
   const match = /.*\.strings\.(\w+)\.js/.exec(id);
   if (match) {
     const language = match[1]; // e.g. "en"
-    const dependentEntryPoints = [];
+    const dependentEntryPoints: Array<any> = [];
 
     // 我们在这里使用 Set 集合，这样每个模块最多处理一次。
     // 这可以防止循环依赖情况下的无限循环
@@ -219,15 +216,15 @@ export default defineConfig(() => {
   const timestamp = new Date().getTime();
 
   return {
-    builder: {
-      buildApp: async (builder) => {
-        const environments = Object.values(builder.environments);
-        console.log("environments", environments);
-        return Promise.all(
-          environments.map((environment) => builder.build(environment))
-        );
-      },
-    },
+    // builder: {
+    //   // buildApp: async (builder) => {
+    //   //   const environments = Object.values(builder.environments);
+    //   //   console.log("environments", environments);
+    //   //   return Promise.all(
+    //   //     environments.map((environment) => builder.build(environment))
+    //   //   );
+    //   // },
+    // },
     server: {
       port: 5500,
       hmr: {
@@ -244,7 +241,7 @@ export default defineConfig(() => {
       emptyOutDir: true,
       rollupOptions: {
         output: {
-          advancedChunks: manualChunks
+          // advancedChunks: manualChunks
         },
       },
       reportCompressedSize: false,
@@ -308,18 +305,27 @@ export default defineConfig(() => {
       }),
     ],
     css: {
-      devSourcemap: false,
+      devSourcemap: true,
       codeSplit: false,
+      /**
+       * 如果启用了这个选项，那么 CSS 预处理器会尽可能在 worker 线程中运行；即通过多线程运行 CSS 预处理器，从而极大提高其处理速度
+       * https://cn.vitejs.dev/config/shared-options#css-preprocessormaxworkers
+       */
+      preprocessorMaxWorkers: 3,
+      /**
+       * 建议只用来嵌入 SCSS 的变量声明文件，嵌入后全局可用
+       * 该选项可以用来为每一段样式内容添加额外的代码。但是要注意，如果你添加的是实际的样式而不仅仅是变量，那这些样式在最终的产物中会重复
+       * https://cn.vitejs.dev/config/shared-options.html#css-preprocessoroptions-extension-additionaldata
+       */
       preprocessorOptions: {
-        less: {
-          timeout: 30000, // 超时延长至 30 秒
-          math: "parens", // 避免严格模式性能问题
-          // math: "parens-division", // 提升计算性能
-          javascriptEnabled: false, // 如需在 Less 中使用 JS 表达式
-          // modifyVars: {
-          //   hack: 'true; @import "@vp/theme/styles/vars.less"',
-          // },
-          additionalData: `@import "@vp/theme/styles/vars.less";`,
+        scss: {
+          sourceMap: true,
+          additionalData: `@use "@/assets/styles/variables.scss" as vars;`, // 强制全局注入
+          // // 全局注入变量和混合宏
+          // additionalData: `
+          //   @import "@/assets/styles/variables.scss";
+          //   @import "@/assets/styles/mixins.scss";
+          // `,
         },
       },
     },
@@ -359,10 +365,6 @@ export default defineConfig(() => {
         "node-modules/.vite",
         "node-modules/.cache",
       ],
-      // esbuildOptions: {
-      //   treeShaking: true,
-      //   legalComments: true
-      // }
     },
   };
 });

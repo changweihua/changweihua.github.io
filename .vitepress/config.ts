@@ -283,35 +283,6 @@ export default withMermaid({
   // srcDir: '.',
   vite: {
     logLevel: "info",
-    // build: {
-    //   cssMinify: "cssnano",
-    // },
-    css: {
-      postcss: {
-        plugins: [
-          autoprefixer({
-            grid: true,
-          }),
-          // postcssPxtorem({ rootValue: 16 }), // 添加 px 转 rem 插件
-          cssnano({
-          preset: ["advanced", {
-            autoprefixer: false,
-            zindex: false,    // 禁用 z-index 优化
-            discardUnused: {
-              fontFace: false // 关键：禁止移除未使用的 @font-face
-            },
-            discardComments: { removeAll: true } // 移除所有注释
-          }]
-        })
-        ],
-      },
-    },
-    // optimizeDeps: { include: ["@braintree/sanitize-url"] },
-    // resolve: {
-    //   alias: {
-    //     dayjs: "dayjs/",
-    //   },
-    // },
     plugins: [
       GitRevisionInfoPlugin(),
       groupIconVitePlugin({

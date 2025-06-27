@@ -1,0 +1,51 @@
+
+$app-font-family:
+  MapleMono, 'JetBrains Maple Mono', JetBrainsMapleMono,
+  PingFangSC,
+  AlibabaPuHuiTi,
+  JetBrainsMono,
+  "HarmonyOS Sans",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  Arial,
+  "Noto Sans",
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji";
+$mermaid-font-family: 'JetBrains Maple Mono', JetBrainsMapleMono, PingFangSC, AlibabaPuHuiTi,
+    JetBrainsMono, "HarmonyOS Sans";
+$error-header-font-size: 32px;
+$app-font-weight: 400;
+$app-font-size-adjust: 0.5;
+$app-font-size: 16px;
+
+// variables.scss
+// 颜色系统
+$colors: (
+  primary: #3eaf7c,
+  secondary: #6c757d,
+  success: #28a745,
+  // ...
+);
+
+// 间距系统
+$spacers: (
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  // ...
+);
+
+// 获取变量函数
+@function color($key) {
+  @return map-get($colors, $key);
+}
+
+@function spacing($key) {
+  @return map-get($spacers, $key);
+}

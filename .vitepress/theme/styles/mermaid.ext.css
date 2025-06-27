@@ -9,3 +9,9 @@
   font-family: LikeJianJianTi, "PING FANG CHANG AN", JetBrainsMapleMono !important;
   font-size: 14px !important;
 }
+
+/* 组件样式继承 */
+.zenuml-diagram {
+  background: var(--zenuml-bg);
+  border: 1px solid var(--zenuml-primary);
+}

@@ -60,8 +60,6 @@ xlogs.banner(pinyin("常伟华"), 'neon');
 
 // #v-endif
 
-//import "./styles/MapleMono.css";
-//import "./styles/Mermaid.css";
 import "@vitepress-code-preview/container/dist/style.css";
 
 // 版本监控
@@ -132,7 +130,12 @@ import "nprogress-v2/dist/index.css"; // 进度条样式
 // 引入 Ant Design Vue
 import Antd from "ant-design-vue";
 
-import "./styles/index.less";
+import "./styles/index.scss";
+import "./styles/vitepress.ext.scss";
+import "./styles/vitepress.print.css";
+import "./styles/vitepress.code.css";
+import "./styles/markdown.ext.css";
+import "./styles/mermaid.ext.css";
 
 import NotFound from "../components/NotFound.vue";
 import NotFounds from "../components/NotFounds.vue";
@@ -219,16 +222,6 @@ export default {
     if (frontmatter.value?.layoutClass) {
       props.class = frontmatter.value.layoutClass;
     }
-
-    const route = useRoute();
-    const isTransitioning = ref(false);
-
-    watch(
-      () => route.path,
-      () => {
-        console.log("页面动画");
-      }
-    );
 
     return h(AnimatingLayout, null, {
       // "home-hero-before": () => h(AnimationTitle),

@@ -1,46 +1,98 @@
+
+/**
+ * Colors
+ * -------------------------------------------------------------------------- */
+
+ :root {
+  --vp-c-brand: #646cff;
+  --vp-c-brand-light: #747bff;
+  --vp-c-brand-lighter: #9499ff;
+  --vp-c-brand-lightest: #bcc0ff;
+  --vp-c-brand-dark: #535bf2;
+  --vp-c-brand-darker: #454ce1;
+  --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
+  --c-brand: #646cff;
+  --c-brand-light: #747bff;
+  --vp-nav-bg-color: rgba(240, 242, 245, 1);
+}
+
+/**
+   * Component: Button
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-button-brand-border: var(--vp-c-brand-light);
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-bg: var(--vp-c-brand);
+  --vp-button-brand-hover-border: var(--vp-c-brand-light);
+  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-light);
+  --vp-button-brand-active-border: var(--vp-c-brand-light);
+  --vp-button-brand-active-text: var(--vp-c-white);
+  --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+}
+
+/**
+   * Component: Custom Block
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-custom-block-tip-border: var(--vp-c-brand);
+  --vp-custom-block-tip-text: var(--vp-c-brand-darker);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+}
+
+.dark {
+  --vp-custom-block-tip-border: var(--vp-c-brand);
+  --vp-custom-block-tip-text: var(--vp-c-brand-lightest);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+}
+
+/**
+     * Component: Algolia
+     * -------------------------------------------------------------------------- */
+
+.DocSearch {
+  --docsearch-primary-color: var(--vp-c-brand) !important;
+}
+
 :root {
   --vp-nav-bg-color: transparent;
-  --vp-font-family-base: @app-font-family;
-  --vp-font-family-mono: @app-font-family;
-  // --vp-header-anchor-symbol: "🔗";
+  --vp-font-family-base: vars.$app-font-family;
+  --vp-font-family-mono: $app-font-family;
+  /* --vp-header-anchor-symbol: "🔗"; */
   /* 建立CSS变量与Mermaid的映射 */
   --zenuml-primary: var(--mermaid-zenumlPrimary, #4caf50);
   --zenuml-bg: var(--mermaid-zenumlBg, #fafafa);
-}
-
-/* 组件样式继承 */
-.zenuml-diagram {
-  background: var(--zenuml-bg);
-  border: 1px solid var(--zenuml-primary);
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: @app-font-family;
+  font-family: vars.$app-font-family;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: @app-font-weight;
-  font-size-adjust: @app-font-size-adjust;
+  font-weight:  vars.$app-font-weight;
+  font-size-adjust:  vars.$app-font-size-adjust;
   font-display: swap;
   scroll-behavior: smooth;
 }
 
 #app {
-  font-family: @app-font-family;
+  font-family:  vars.$app-font-family;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: @app-font-weight;
-  font-size-adjust: @app-font-size-adjust;
+  font-weight:  vars.$app-font-weight;
+  font-size-adjust:  vars.$app-font-size-adjust;
   font-display: swap;
 
   :deep(*) {
-    font-family: @app-font-family;
-    font-weight: @app-font-weight;
-    font-size-adjust: @app-font-size-adjust;
+    font-family: vars.$app-font-family;
+    font-weight:  vars.$app-font-weight;
+    font-size-adjust:  vars.$app-font-size-adjust;
   }
 }
 
@@ -83,7 +135,6 @@ body {
   box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.3) inset,
     0 0.5em 1em rgba(0, 0, 0, 0.6);
   text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.3);
-  // background: hsla(0, 0%, 100%, 0.3);
 }
 
 .text-emphasis-fire {
@@ -137,7 +188,7 @@ a.VPSkipLink::after {
   outline: none;
 
   /* 渐变边框 */
-  border: none !important;// 1px solid transparent;
+  border: none !important;
   background: linear-gradient(white, white) padding-box,
     linear-gradient(45deg, #ff7eb3, #65d9ff, #c7f464, #ff7eb3) border-box;
   border-radius: 30px;
@@ -379,16 +430,6 @@ a.VPSkipLink::after {
   strong {
     font-weight: 700;
   }
-
-  // .vp-doc::before {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
-  // }
 }
 
 :root {

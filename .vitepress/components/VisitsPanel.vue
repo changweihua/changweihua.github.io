@@ -15,7 +15,7 @@ onMounted(function () {
   <div id="VSTPL" class="visits-panel">
     <div class="container">
       <section class="grid">
-        <span class="total-text">
+        <span class="total-text text">
           <a-space
             ><span>总访问</span> <DacingNumber :target="siteVisitCount" /><span
               >次</span
@@ -30,7 +30,7 @@ onMounted(function () {
           <m-icon class="item" icon="svg-spinners:wind-toy" :width="32" :height="32" /> -->
           <DancingLogo />
         </figure>
-        <span class="user-text">
+        <span class="user-text text">
           <a-space
             ><span>总访客</span> <DacingNumber :target="userVisitCount" /><span
               >次</span
@@ -45,7 +45,7 @@ onMounted(function () {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .panel {
   margin-top: 12px;
   margin-bottom: 8px;
@@ -90,11 +90,12 @@ onMounted(function () {
 }
 
 .text {
-  * {
-    font-family: @app-font-family;
-  }
   font-size: 0.875rem;
   line-height: 1.25rem;
+
+  * {
+    font-family: vars.$app-font-family;
+  }
 }
 
 @media (max-width: 640px) {

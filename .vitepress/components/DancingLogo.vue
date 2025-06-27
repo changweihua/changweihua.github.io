@@ -4,7 +4,7 @@
       id="svg"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
-      width="200"
+      width="240"
       height="60"
     >
       <defs>

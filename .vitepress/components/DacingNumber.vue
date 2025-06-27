@@ -55,7 +55,7 @@ const updateValues = () => {
 
   const thousendsString = thousends.join("");
   if (leftRef.value && rightRef.value) {
-    if (+leftRef.value.innerText != thousendsString) {
+    if (+leftRef.value.innerText != parseInt(thousendsString)) {
       leftRef.value.classList.add("animate");
     } else {
       leftRef.value.classList.remove("animate");
