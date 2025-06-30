@@ -55,6 +55,8 @@ body {
   animation: color linear forwards;
   animation-timeline: --progress-scroller;
 }
+</style>
+<style>
 @keyframes color {
   from {
     color: red;

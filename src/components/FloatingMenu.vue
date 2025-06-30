@@ -109,7 +109,11 @@
     animation: jello 1s;
   }
 
-  @keyframes jello {
+}
+</style>
+<style>
+
+@keyframes jello {
     from,
     11.1%,
     to {
@@ -137,5 +141,4 @@
       transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
     }
   }
-}
 </style>

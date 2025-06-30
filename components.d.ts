@@ -9,13 +9,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     About: typeof import('./src/components/about.vue')['default']
-    Airport: typeof import('./src/components/Airport.vue')['default']
-    AirStrip: typeof import('./src/components/AirStrip.vue')['default']
     ArchiveList: typeof import('./src/components/ArchiveList.vue')['default']
     BackgroundCleaner: typeof import('./src/components/BackgroundCleaner.vue')['default']
     CardListView: typeof import('./src/components/CardListView.vue')['default']
     ConfigProvider: typeof import('./src/components/ConfigProvider.vue')['default']
-    FireWorks: typeof import('./src/components/FireWorks.vue')['default']
     FloatingMenu: typeof import('./src/components/FloatingMenu.vue')['default']
     HoverableCard: typeof import('./src/components/HoverableCard.vue')['default']
     IconLogosMarkdown: typeof import('~icons/logos/markdown')['default']
@@ -24,9 +21,7 @@ declare module 'vue' {
     LunarCalendar: typeof import('./src/components/LunarCalendar.vue')['default']
     PoemPaper: typeof import('./src/components/PoemPaper.vue')['default']
     ShareLink: typeof import('./src/components/ShareLink.vue')['default']
-    SkillRadar: typeof import('./src/components/SkillRadar.vue')['default']
     TagPanel: typeof import('./src/components/TagPanel.vue')['default']
-    ThreePlane: typeof import('./src/components/ThreePlane.vue')['default']
     WavingBorder: typeof import('./src/components/WavingBorder.vue')['default']
   }
 }

@@ -131,31 +131,6 @@ onMounted(() => {
         transparent 5%);
     animation: rotate2 2s linear infinite;
   }
-
-  // .box::before {
-  //   content: "";
-  //   position: absolute;
-  //   width: 300px;
-  //   height: 300px;
-  //   top: 0px;
-  //   left: 0px;
-  //   background: repeating-radial-gradient(
-  //       #000,
-  //       #000 50%,
-  //       transparent 50%,
-  //       transparent 60%,
-  //       #000 60%,
-  //       #000 100%
-  //     ),
-  //     repeating-conic-gradient(
-  //       rgb(42, 153, 255) 0,
-  //       rgb(42, 153, 255) 4%,
-  //       transparent 4%,
-  //       transparent 5%
-  //     );
-  //   transform: translateZ(200px);
-  //   animation: rotate1 2s linear infinite;
-  // }
   .box::after {
     content: "";
     position: absolute;
@@ -163,7 +138,6 @@ onMounted(() => {
     height: 300px;
     top: 0px;
     left: 0px;
-    // background: #fff;
     background: repeating-radial-gradient(#000 0 0.0001%, #747bff 0 0.0002%) 50% 0/2500px 2500px,
       repeating-conic-gradient(#000 0 0.0001%, #747bff 0 0.0002%) 50% 50%/2500px 2500px;
     background-blend-mode: difference;
@@ -185,6 +159,8 @@ onMounted(() => {
     animation: line 2s linear infinite;
   }
 }
+</style>
+<style>
 
 @keyframes line {
   0% {

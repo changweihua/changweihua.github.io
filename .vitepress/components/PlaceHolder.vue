@@ -32,21 +32,6 @@ const props = defineProps({
   background-size: 400% 400%;
   animation: gradient 5s ease infinite;
 }
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .name,
 .text {
   max-width: 392px;
@@ -101,4 +86,22 @@ const props = defineProps({
     font-size: 24px;
   }
 }
+</style>
+<style>
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 </style>

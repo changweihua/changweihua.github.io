@@ -25,8 +25,11 @@ switch (myArgs[0]) {
 console.log("清空字体缓存");
 
 // 删除指定文件夹下面的所有文件或文件夹
-fs.emptyDirSync(path.join(rootFolder, `font/${fontName}`));
-fs.copySync(path.join(rootFolder, `font/${fontName}Ttf`), path.join(rootFolder, `font/${fontName}/ttf`))
+fs.emptyDirSync(path.join(rootFolder, `fonts-spider/${fontName}`));
+fs.copySync(
+  path.join(rootFolder, `fonts-spider/${fontName}Ttf`),
+  path.join(rootFolder, `font/${fontName}/ttf`)
+);
 
 
 // fs.emptyDirSync(path.join(rootFolder, `font/JetBrains`));

@@ -265,8 +265,8 @@ a.VPSkipLink::after {
 }
 
 /* hover + focus 时加点炫光效果 */
-.search-input::hover,
-.search-input::focus {
+.search-input:hover,
+.search-input:focus {
   box-shadow: 0 0 8px rgba(255, 77, 77, 0.3), 0 0 20px rgba(77, 210, 255, 0.4);
 }
 

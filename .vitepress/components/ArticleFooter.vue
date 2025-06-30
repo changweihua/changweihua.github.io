@@ -312,6 +312,9 @@
     1s fireworks-gravity ease-in forwards, 5s fireworks-position linear forwards;
   animation-duration: 1.25s, 1.25s, 6.25s;
 }
+</style>
+<style>
+
 
 @keyframes rotate-icon-like {
   0% {

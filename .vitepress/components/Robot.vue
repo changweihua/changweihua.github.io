@@ -120,6 +120,20 @@
   scale: 1 1;
   animation: mouth 1.2s ease-in infinite;
 }
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100dvh;
+  background: var(--surface);
+}
+</style>
+
+<style>
+
 
 @keyframes blink {
   0%,
@@ -171,14 +185,4 @@
   }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  display: grid;
-  place-items: center;
-  height: 100dvh;
-  background: var(--surface);
-}
 </style>

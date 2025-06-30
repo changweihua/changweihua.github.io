@@ -11,11 +11,11 @@ import vitepressProtectPlugin from "vitepress-protect-plugin";
 import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
 import { withI18n } from "vitepress-i18n";
 import { type UserConfig } from "vitepress";
 import { VitePressI18nOptions } from "vitepress-i18n/types";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
 
 const customElements = [
   "mjx-container",
@@ -191,97 +191,59 @@ const vitePressI18nOptions: Partial<VitePressI18nOptions> = {
   },
 };
 
-// export default defineConfig({
-//   // srcDir: '.',
-//   vite: {
-//     logLevel: "info",
-//     // build: {
-//     //   cssMinify: "cssnano",
-//     // },
-//     css: {
-//       postcss: {
-//         plugins: [
-//           autoprefixer({
-//             grid: true,
-//           }),
-//           // postcssPxtorem({ rootValue: 16 }), // 添加 px 转 rem 插件
-//           cssnano({
-//           preset: ["advanced", {
-//             autoprefixer: false,
-//             zindex: false,    // 禁用 z-index 优化
-//             discardUnused: {
-//               fontFace: false // 关键：禁止移除未使用的 @font-face
-//             },
-//             discardComments: { removeAll: true } // 移除所有注释
-//           }]
-//         })
-//         ],
-//       },
-//     },
-//     // optimizeDeps: { include: ["@braintree/sanitize-url"] },
-//     // resolve: {
-//     //   alias: {
-//     //     dayjs: "dayjs/",
-//     //   },
-//     // },
-//     plugins: [
-//       GitRevisionInfoPlugin(),
-//       groupIconVitePlugin({
-//         customIcon: {
-//           ae: "logos:adobe-after-effects",
-//           ai: "logos:adobe-illustrator",
-//           ps: "logos:adobe-photoshop",
-//           // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
-//           // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
-//         },
-//       }),
-//       vitepressProtectPlugin({
-//         disableF12: true,
-//         disableCopy: true,
-//         disableSelect: true,
-//       }),
-//       viteDemoPreviewPlugin(),
-//       vueJsx(),
-//     ],
-//   },
-//   vue: {
-//     template: {
-//       compilerOptions: {
-//         isCustomElement: (tag) => customElements.includes(tag),
-//         whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
-//       },
-
-//     },
-//   },
-//   ...vitePressOptions,
-//   // ...withI18n(vitePressOptions, vitePressI18nOptions)
-// })
-
 export default withMermaid({
   // extends: config,
   mermaid: {
     look: "handDrawn",
     handDrawnSeed: 2,
-    // 'theme': 'base',
-    // 'themeVariables': {
-    //   'primaryColor': '#506bee',
-    //   // 'primaryTextColor': '#fff',
-    //   // 'primaryBorderColor': '#7C0000',
-    //   // 'lineColor': '#F8B229',
-    //   // 'secondaryColor': '#006100',
-    //   // 'tertiaryColor': '#fff'
-    // },
     fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
     altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-    startOnLoad: false,
+    startOnLoad: true,
     //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
   },
   // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
   mermaidPlugin: {
     class: "mermaid styled-mermaid", // 为父容器设置额外的CSS类
   },
-  // srcDir: '.',
   vite: {
+    // css: {
+    //   // transformer: "postcss",
+    //   // postcss: {
+    //   //   minify: false,
+    //   //   plugins: [
+    //   //     autoprefixer({
+    //   //       grid: true,
+    //   //     }),
+    //   //     cssnano({
+    //   //       preset: [
+    //   //         "advanced",
+    //   //         {
+    //   //           autoprefixer: false,
+    //   //           zindex: false, // 禁用 z-index 优化
+    //   //           discardUnused: {
+    //   //             fontFace: false, // 关键：禁止移除未使用的 @font-face
+    //   //           },
+    //   //           discardComments: { removeAll: true }, // 移除所有注释
+    //   //         },
+    //   //       ],
+    //   //     }),
+    //   //   ],
+    //   // },
+    //   lightningcss: {
+    //     // 禁用特定优化
+    //     minify: false,
+    //     drafts: {
+    //       nesting: true, // 启用嵌套语法
+    //       customMedia: true, // 启用媒体查询变量
+    //       keyframes: true, // 启用实验性关键帧支持
+    //     },
+    //   },
+    // },
+    resolve: {
+      alias: {
+        vite: "rolldown-vite",
+      },
+    },
     logLevel: "info",
     plugins: [
       GitRevisionInfoPlugin(),

@@ -49,8 +49,6 @@ importMap: {
 }
 ---
 
-<SkillRadar />
-
 # Heading
 
 ::: stepper
@@ -88,7 +86,6 @@ Nested paragraph
 <sfc-playground src="../src/components/FireWorks.vue" language="vue" title="plotty" desc="plotty渲染"></sfc-playground>
 
 <script lang="ts" setup>
-import SkillRadar from '@/components/SkillRadar.vue';
 </script>
 
 <style scoped>

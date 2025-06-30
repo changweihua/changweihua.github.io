@@ -92,6 +92,26 @@ const props = withDefaults(defineProps<Props>(), {
     squarefadein var(--in-duration) calc(4 * var(--in-delay)) var(--in-timing-function) both;
 }
 
+.glass-panel {
+  position: relative;
+  padding: 20px;
+  color: white;
+  /* 回退背景 */
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* 支持 backdrop-filter 的浏览器 */
+@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+  .glass-panel {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+</style>
+
+<style>
+
 @keyframes square1 {
   0% {
     left: calc(0 * var(--offset));
@@ -271,20 +291,4 @@ const props = withDefaults(defineProps<Props>(), {
   }
 }
 
-.glass-panel {
-  position: relative;
-  padding: 20px;
-  color: white;
-  /* 回退背景 */
-  background: rgba(0, 0, 0, 0.5);
-}
-
-/* 支持 backdrop-filter 的浏览器 */
-@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
-  .glass-panel {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-}
 </style>

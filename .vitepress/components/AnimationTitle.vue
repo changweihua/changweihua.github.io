@@ -72,20 +72,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-.name {
-  background: -webkit-linear-gradient(315deg,
-      rgb(210, 86, 53) 10%,
-      #647eff 50%,
-      rgb(238, 224, 112) 90%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  background-size: 400% 400%;
-  animation: gradient 5s ease infinite;
-}
-
+<style>
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -100,6 +87,29 @@ onMounted(() => {
   }
 }
 
+@keyframes waveFlow {
+    from {
+      background-position-x: -10px, 0;
+    }
+    to {
+      background-position-x: -30px, -20px;
+    }
+  }
+</style>
+
+<style scoped>
+.name {
+  background: -webkit-linear-gradient(315deg,
+      rgb(210, 86, 53) 10%,
+      #647eff 50%,
+      rgb(238, 224, 112) 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+}
 .name,
 .text {
   max-width: 392px;
@@ -287,15 +297,6 @@ onMounted(() => {
     background-position: -10px calc(100% + 16px), 0 calc(100% - 4px);
     -webkit-animation: waveFlow 1s infinite linear;
     animation: waveFlow 1s infinite linear;
-  }
-
-  @keyframes waveFlow {
-    from {
-      background-position-x: -10px, 0;
-    }
-    to {
-      background-position-x: -30px, -20px;
-    }
   }
 
 </style>

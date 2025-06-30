@@ -385,62 +385,6 @@ console.log(
   left: 44px;
 }
 
-@keyframes dimFirefly {
-  0% {
-    opacity: 1;
-  }
-
-  25% {
-    opacity: 0.4;
-  }
-
-  50% {
-    opacity: 0.8;
-  }
-
-  75% {
-    opacity: 0.5;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes hoverFirefly {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  12% {
-    transform: translate(3px, 1px);
-  }
-
-  24% {
-    transform: translate(-2px, 3px);
-  }
-
-  37% {
-    transform: translate(2px, -2px);
-  }
-
-  55% {
-    transform: translate(-1px, 0);
-  }
-
-  74% {
-    transform: translate(0, 2px);
-  }
-
-  88% {
-    transform: translate(-3px, -1px);
-  }
-
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
 /* @property --scroll-position {
   syntax: "<number>";
   inherits: true;
@@ -497,14 +441,6 @@ body {
   inherits: true;
   initial-value: 0;
 }
-
-@keyframes adjust-pos {
-  to {
-    --scroll-position: 100;
-    --scroll-position-delayed: 100;
-  }
-}
-
 :root {
   animation: adjust-pos 3s linear both;
   animation-timeline: scroll();
@@ -551,6 +487,74 @@ body {
   opacity: 0;
   animation: shadeAnimation 0.5s ease-in-out;
 }
+
+</style>
+
+<style>
+
+@keyframes dimFirefly {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  75% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hoverFirefly {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  12% {
+    transform: translate(3px, 1px);
+  }
+
+  24% {
+    transform: translate(-2px, 3px);
+  }
+
+  37% {
+    transform: translate(2px, -2px);
+  }
+
+  55% {
+    transform: translate(-1px, 0);
+  }
+
+  74% {
+    transform: translate(0, 2px);
+  }
+
+  88% {
+    transform: translate(-3px, -1px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes adjust-pos {
+  to {
+    --scroll-position: 100;
+    --scroll-position-delayed: 100;
+  }
+}
+
 
 @keyframes shadeAnimation {
   0% {

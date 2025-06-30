@@ -14,7 +14,7 @@
     </span>
     <span class="flex items-center justify-center gap-1">
       <m-icon icon="tabler:clock-filled" />
-      发布&ensp;{{ dayjs(date).fromNow() }}
+      发布&ensp;{{ getFromNow(date) }}
     </span>
   </div>
   <div class="bar" style="--percent: 50;"></div>
@@ -23,7 +23,8 @@
 <script lang="ts" setup>
 import { PropType, reactive, toRefs, ref, onMounted, nextTick } from "vue";
 import { useData } from "vitepress";
-import dayjs from 'dayjs'
+// @ts-ignore
+import { getFromNow } from "@vp/utils/date";
 
 // 定义文章属性
 const props = defineProps({
@@ -57,14 +58,17 @@ const readCost = ref(10)
 
 onMounted(() => {
   nextTick(() => {
-    let readTime = document.querySelector(".VPContent").innerText.length;
-    readTime = Math.round(readTime / 400);    //四舍五入
+    const content= document.querySelector<HTMLDivElement>(".VPContent")
+    if (content) {
+      let readTime = content.innerText.length;
+      readTime = Math.round(readTime / 400);    //四舍五入
 
-    if (readTime > 1) {
-      readCost.value = readTime
-      console.log('预计阅读时长：' + readTime + '分钟');
-    } else {
-      console.log('预计阅读时长：1分钟');
+      if (readTime > 1) {
+        readCost.value = readTime
+        console.log('预计阅读时长：' + readTime + '分钟');
+      } else {
+        console.log('预计阅读时长：1分钟');
+      }
     }
   })
 })

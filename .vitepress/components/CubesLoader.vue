@@ -21,12 +21,15 @@ const props = withDefaults(defineProps<Props>(), {
   title: "标题",
 });
 </script>
-<style scoped>
+<style>
+
 @keyframes up-down {
    50% {
      transform: translateZ(calc(var(--size)));
    }
  }
+</style>
+<style scoped>
  .cube-group {
    --size: 50px;
    padding: calc(var(--size));

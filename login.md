@@ -4,7 +4,7 @@ layout: login
 
 <script setup>
 import { ref } from 'vue'
-import { setAuthToken, isLoggedIn } from '.vitepress/theme/auth'
+import { setAuthToken, isLoggedIn } from '@vp/theme/auth'
 import { useRouter } from 'vitepress'
 
 const router = useRouter()

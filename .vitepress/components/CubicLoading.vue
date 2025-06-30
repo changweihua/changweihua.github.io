@@ -43,20 +43,6 @@
 
     animation: loading 1.5s ease-in-out infinite;
   }
-  @keyframes loading {
-    0%,
-    100% {
-      opacity: 0;
-      transform: scale(0);
-    }
-
-    35%,
-    65% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
   /* 1~3 */
   .loader span:nth-child(-n + 3) {
     background-color: #4bc8eb;
@@ -101,4 +87,21 @@
     animation-delay: 1s;
   }
 }
+</style>
+<style>
+
+@keyframes loading {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    35%,
+    65% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
 </style>

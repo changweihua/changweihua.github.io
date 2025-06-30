@@ -89,6 +89,15 @@ body {
   animation: spin 2.5s linear infinite;
 }
 
+a {
+  color: #212534;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+</style>
+<style>
 @keyframes spin {
   0% {
     --rotate: 0deg;
@@ -97,13 +106,5 @@ body {
   100% {
     --rotate: 360deg;
   }
-}
-
-a {
-  color: #212534;
-  text-decoration: none;
-  font-family: sans-serif;
-  font-weight: bold;
-  margin-top: 2rem;
 }
 </style>

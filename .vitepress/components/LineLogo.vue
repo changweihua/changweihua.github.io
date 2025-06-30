@@ -73,6 +73,10 @@ svg {
   animation: move 2.4s infinite linear;
 }
 
+</style>
+
+<style>
+
 @keyframes move {
   0% {
     stroke-dashoffset: 8;

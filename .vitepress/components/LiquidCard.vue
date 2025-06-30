@@ -81,7 +81,7 @@
 <script lang="ts" setup>
 import { useTemplateRef } from "vue";
 
-const tiltCardRef = useTemplateRef<HtmlDivElement>("tiltCard");
+const tiltCardRef = useTemplateRef<HTMLDivElement>("tiltCard");
 
 function handleMouseMove(e) {
   if (tiltCardRef.value) {
@@ -101,7 +101,7 @@ function handleMouseMove(e) {
 
 function handleMouseLeave() {
   if (tiltCardRef.value) {
-    card.style.transform =
+    tiltCardRef.value.style.transform =
       "perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)";
   }
 }
@@ -253,6 +253,14 @@ function handleMouseLeave() {
 .glass-component.clicked .click-gradient {
   animation: gradient-ripple 0.6s ease-out;
 }
+.glass-component {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+</style>
+
+<style>
+
 
 @keyframes gradient-ripple {
   0% {
@@ -263,10 +271,5 @@ function handleMouseLeave() {
     transform: translate(-50%, -50%) scale(3);
     opacity: 0;
   }
-}
-
-.glass-component {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
 }
 </style>

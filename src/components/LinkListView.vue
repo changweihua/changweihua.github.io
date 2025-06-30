@@ -209,21 +209,6 @@ const handleMouseLeave = () => {
   border-radius: 9999px;
 }
 
-@keyframes floating-points {
-  0% {
-    transform: translateY(0);
-  }
-
-  85% {
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(-55px);
-    opacity: 0;
-  }
-}
-
 .points_wrapper .point:nth-child(1) {
   left: 10%;
   opacity: 1;
@@ -290,5 +275,22 @@ const handleMouseLeave = () => {
   opacity: 1;
   animation-duration: 2.5s;
   animation-delay: 0.2s;
+}
+</style>
+<style>
+
+@keyframes floating-points {
+  0% {
+    transform: translateY(0);
+  }
+
+  85% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-55px);
+    opacity: 0;
+  }
 }
 </style>

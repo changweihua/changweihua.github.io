@@ -104,6 +104,9 @@
   animation: aurora-border 6s ease-in-out infinite,
     aurora-4 24s ease-in-out infinite alternate;
 }
+</style>
+<style>
+
 
 @keyframes aurora-1 {
   0% {

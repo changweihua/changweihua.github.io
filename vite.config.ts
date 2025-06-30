@@ -6,7 +6,6 @@ import UnoCSS from "unocss/vite";
 import path, { resolve } from "path";
 import { fileURLToPath } from "url";
 import type { Plugin } from "vite";
-import { compression } from "vite-plugin-compression2";
 import Inspect from "vite-plugin-inspect";
 import mkcert from "vite-plugin-mkcert";
 import Iconify from "unplugin-iconify-generator/vite";
@@ -42,12 +41,11 @@ const yourPlugin: () => Plugin = () => ({
     console.log(config.define);
   },
   resolveId() {
-    console.log(this.meta.viteVersion, this.meta.rollupVersion);
-    if (this.meta.rollupVersion) {
-      console.log("rollup-vite 的逻辑");
-    } else {
-      console.log("rolldown-vite 的逻辑");
-    }
+    console.log(
+      this.meta.viteVersion,
+      this.meta.rollupVersion,
+      this.meta.rolldownVersion
+    );
   },
 });
 
@@ -236,15 +234,17 @@ export default defineConfig(() => {
     },
     clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     build: {
+      bundler: "rolldown", // 显式声明使用 Rolldown
       sourcemap: false, // Seems to cause JavaScript heap out of memory errors on build
       chunkSizeWarningLimit: 5000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
-      rollupOptions: {
-        output: {
-          // advancedChunks: manualChunks
-        },
-      },
+      // rollupOptions: {
+      //   output: {
+      //     advancedChunks: manualChunks
+      //   },
+      // },
       reportCompressedSize: false,
+      // cssMinify: "lightningcss", // 确保生产构建使用相同配置
     },
     experimental: {
       importGlobRestoreExtension: true,
@@ -295,7 +295,6 @@ export default defineConfig(() => {
       }),
       robots(),
       prefetchDnsPlugin(),
-      compression(),
       versionInjector(),
       imagePreload({
         dir: "images/**/*.{png,jpg,jpeg,gif,svg,webp}",
@@ -305,7 +304,27 @@ export default defineConfig(() => {
       }),
     ],
     css: {
+      lightningcss: {
+        // 禁用特定优化
+        minify: true,
+        drafts: {
+          nesting: true, // 启用嵌套语法
+          customMedia: true, // 启用媒体查询变量
+          keyframes: true, // 启用实验性关键帧支持
+        },
+        // 解决 scoped 样式问题
+        cssModules: {
+          // 禁用对 scoped 样式的命名转换
+          pattern: "[name]__[local]",
+        },
+        // 允许特殊规则
+        unrecognized: {
+          pseudos: 'ignore', // 忽略未知伪类错误
+          atRules: "ignore", // 忽略无法识别的规则（包括 @keyframes）
+        },
+      },
       devSourcemap: true,
+      // transformer: "postcss", // 使用 Rust 实现的 CSS 处理器
       codeSplit: false,
       /**
        * 如果启用了这个选项，那么 CSS 预处理器会尽可能在 worker 线程中运行；即通过多线程运行 CSS 预处理器，从而极大提高其处理速度
@@ -351,11 +370,16 @@ export default defineConfig(() => {
       // mainFields: []
     },
     ssr: {
-      noExternal: ["fs"], // Externalize Node.js modules
+      noExternal: ["fs", "mermaid"], // Externalize Node.js modules
     },
     optimizeDeps: {
       // force: true,
-      include: ["vue"],
+      include: [
+        "vue",
+        "mermaid",
+        "@mermaid-js/mermaid-mindmap",
+        "@mermaid-js/mermaid-zenuml",
+      ],
       exclude: [
         "vitepress",
         "svg2roughjs",

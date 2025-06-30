@@ -30,9 +30,6 @@
       ],
       "@vp/*": [
         "./.vitepress/*"
-      ],
-      "public": [
-        "./public/*"
       ]
     },
     //提示无法覆盖文件时，需要考虑设置此项
@@ -44,7 +41,8 @@
   "exclude": [
     "node_modules",
     ".vitepress/cache",
-    "dist"
+    "dist",
+    "fonts-spider"
   ],
   "typedocOptions": {
     "entryPoints": [

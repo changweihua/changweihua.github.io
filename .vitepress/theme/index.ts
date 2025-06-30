@@ -27,7 +27,7 @@ import { getDeviceFingerprint } from "../utils/fingerprint";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimationTitle.vue";
-import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
+// import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 
 import yuppie from "yuppie-ui";
@@ -171,7 +171,6 @@ import type { Theme } from "vitepress";
 
 import AnimatingLayout from "./AnimatingLayout.vue";
 
-import { createMermaidRenderer } from "vitepress-mermaid-renderer";
 import Hashids from "hashids";
 
 const hashids = new Hashids("this is my salt", 8); // 盐值与最小长度
@@ -239,17 +238,6 @@ export default {
           text: "知识汪洋只此一瓢",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
-      // "home-hero-image": () => h(Suspense, ThreeLogo),
-      // "home-hero-image": () => h(ThreeLogo),
-      // "home-hero-image": () => h('div', {
-      //   class: "w-full h-full flex items-center justify-center",
-      //   style: "position: relative;"
-      // }, [
-      //   h('img', {
-      //     src: '/cwh.svg',
-      //     class: 'VPImage image-src',
-      //   })
-      // ]),
       "home-hero-image": () =>
         h(
           "div",
@@ -403,10 +391,6 @@ export default {
 
     DefaultTheme.enhanceApp(ctx);
 
-    // // Use the client-safe wrapper for SSR compatibility
-    // const mermaidRenderer = createMermaidRenderer();
-    // mermaidRenderer.initialize();
-
     if (inBrowser) {
       NProgress.configure({ showSpinner: false });
 
@@ -419,7 +403,7 @@ export default {
         );
       }
 
-      enhanceAppWithTabs(app);
+      // enhanceAppWithTabs(app);
 
       vitepressBackToTop({
         // default
@@ -538,11 +522,6 @@ export default {
       // }, 1000);
     }
 
-    if (router) {
-      router.onAfterRouteChange = () => {
-        // nextTick(() => mermaidRenderer.renderMermaidDiagrams());
-      };
-    }
   },
   setup() {
     // get frontmatter and route

@@ -26,7 +26,7 @@ switch (myArgs[0]) {
 
 // 删除指定文件夹下面的所有文件或文件夹
 fs.emptyDirSync(path.join(rootFolder, `public/fonts/${fontName}`));
-fs.copySync(path.join(rootFolder, `font/${fontName}`), path.join(rootFolder, `public/fonts/${fontName}`))
+fs.copySync(path.join(rootFolder, `fonts-spider/${fontName}`), path.join(rootFolder, `public/fonts/${fontName}`))
 
 // fs.emptyDirSync(path.join(rootFolder, `public/fonts/JetBrains`));
 // fs.copySync(path.join(rootFolder, `font/JetBrains`), path.join(rootFolder, `public/fonts/JetBrains`))

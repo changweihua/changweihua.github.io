@@ -1,7 +1,7 @@
 <template>
   <div class="marquee-wrapper">
     <template v-for="line in lines">
-      <div class="marquee">
+      <div class="marquee" v-if="icons">
         <div class="marquee__group">
           <template v-for="icon in icons.slice((line - 1) * lineCount, line * lineCount)">
             <m-icon class="item" :icon="icon" :width="96" :height="96" />
@@ -58,11 +58,10 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   msg: 'hello',
   title: () => ['one', 'two'],
-  icons: [],
   lines: 3
 })
 
-const lineCount = computed(() => Math.round(props.icons.length / props.lines))
+const lineCount = computed(() => Math.round(props.icons ? props.icons.length / props.lines:3))
 
 </script>
 
@@ -113,6 +112,10 @@ const lineCount = computed(() => Math.round(props.icons.length / props.lines))
   height: var(--logo-height);
   border-radius: 6px;
 }
+
+</style>
+
+<style>
 
 @keyframes scrollLeft {
   from {

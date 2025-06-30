@@ -32,12 +32,6 @@
   animation: spin 4s linear infinite;
 }
 
-@keyframes spin {
-  100% {
-    transform: rotateY(360deg);
-  }
-}
-
 .pyramid-loader .wrapper .side {
   width: 70px;
   height: 70px;
@@ -83,5 +77,14 @@
   margin: auto;
   transform: rotateX(90deg) translateZ(-40px);
   filter: blur(12px);
+}
+</style>
+<style>
+
+
+@keyframes spin {
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 </style>

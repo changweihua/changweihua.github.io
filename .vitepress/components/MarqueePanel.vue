@@ -50,7 +50,8 @@
     animation-delay: calc(var(--duration) / var(--logo-count) * (var(--logo-count) - var(--count)) * -1);
   }
 }
-
+</style>
+<style>
 @keyframes scrollLeft {
   to {
     left: calc(var(--logo-width) * -1);

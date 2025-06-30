@@ -59,13 +59,6 @@ onMounted(function () {
   z-index: -1;
   animation: pulse 4s cubic-bezier(0, 0, 0, 0.5) infinite;
 }
-
-@keyframes pulse {
-  50% {
-    transform: scale(1.5);
-  }
-}
-
 .container {
   background-color: var(--vp-c-bg);
   border-radius: 8px;
@@ -103,4 +96,14 @@ onMounted(function () {
     display: none;
   }
 }
+</style>
+<style>
+
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.5);
+  }
+}
+
 </style>
