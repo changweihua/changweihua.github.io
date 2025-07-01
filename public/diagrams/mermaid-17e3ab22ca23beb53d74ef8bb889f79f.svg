@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="890" height="893" viewBox="0 0 890 893" version="1.1">
+<rect fill="#fff5f7" width="890" height="893"/>
+<text id="text" xml:space="preserve" font-weight="bold" fill="#cd0930" font-family="BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', Arial, sans-serif" font-size="16px" x="0" y="5" dy="0">
+<tspan x="10" dy="16">Error 400: SyntaxError: No diagram type detected matching given configuration for text: zenuml</tspan>
+<tspan x="10" dy="16">  title WEB/H5 独立开放平台访问</tspan>
+<tspan x="10" dy="16"></tspan>
+<tspan x="10" dy="16">  @Actor User</tspan>
+<tspan x="10" dy="16">  @AzureCDN SP as BusinessApp</tspan>
+<tspan x="10" dy="16">  @PubSub Gateway as Envoy</tspan>
+<tspan x="10" dy="16">  @CosmosDB IDP as IdentityProvider</tspan>
+<tspan x="10" dy="16">  @Database RO as ResourceOwner</tspan>
+<tspan x="10" dy="16">  </tspan>
+<tspan x="10" dy="16">  SP-&gt;SP: 检测登录状态</tspan>
+<tspan x="10" dy="16">  // **BusinessApp 认证授权**</tspan>
+<tspan x="10" dy="16">  par {</tspan>
+<tspan x="10" dy="16">      SP-&gt;IDP: 跳转至IdentityProvider</tspan>
+<tspan x="10" dy="16">      IDP-&gt;IDP: 检测IdentityProvider认证状态</tspan>
+<tspan x="10" dy="16">      // IdentityProvider 已认证</tspan>
+<tspan x="10" dy="16">      opt {</tspan>
+<tspan x="10" dy="16">        IDP-&gt;IDP: 跳转至授权页</tspan>
+<tspan x="10" dy="16">        // 同意</tspan>
+<tspan x="10" dy="16">        IDP-&gt;SP: 跳转至BusinessApp默认回调页</tspan>
+<tspan x="10" dy="16">        // 拒绝</tspan>
+<tspan x="10" dy="16">        IDP-&gt;IDP: 跳转至授权失败页</tspan>
+<tspan x="10" dy="16">      }</tspan>
+<tspan x="10" dy="16">      // IdentityProvider 未认证</tspan>
+<tspan x="10" dy="16">      opt {</tspan>
+<tspan x="10" dy="16">        SP-&gt;IDP: 跳转至认证页</tspan>
+<tspan x="10" dy="16">        IDP-&gt;IDP: 用户输入用户名、密码等登录</tspan>
+<tspan x="10" dy="16">        IDP-&gt;IDP: 认证通过，跳转至授权页</tspan>
+<tspan x="10" dy="16">        // 同意</tspan>
+<tspan x="10" dy="16">        IDP-&gt;SP: 跳转至BusinessApp默认回调页</tspan>
+<tspan x="10" dy="16">        // 拒绝</tspan>
+<tspan x="10" dy="16">        IDP-&gt;IDP: 跳转至授权失败页</tspan>
+<tspan x="10" dy="16">      }</tspan>
+<tspan x="10" dy="16">  }</tspan>
+<tspan x="10" dy="16"></tspan>
+<tspan x="10" dy="16">  SP-&gt;Gateway: 获取应用资源</tspan>
+<tspan x="10" dy="16">  Gateway-&gt;IDP: 认证</tspan>
+<tspan x="10" dy="16">  if(Unauthenticated) {</tspan>
+<tspan x="10" dy="16">      IDP-&gt;Gateway: 401</tspan>
+<tspan x="10" dy="16">      Gateway-&gt;SP: 401</tspan>
+<tspan x="10" dy="16">      SP-&gt;IDP: 跳转至IdentityProvider</tspan>
+<tspan x="10" dy="16">  } else {</tspan>
+<tspan x="10" dy="16">    Gateway-&gt;IDP: 鉴权</tspan>
+<tspan x="10" dy="16">    if(Unauthorized) {</tspan>
+<tspan x="10" dy="16">      IDP-&gt;Gateway: 403</tspan>
+<tspan x="10" dy="16">      Gateway-&gt;SP: 403</tspan>
+<tspan x="10" dy="16">      SP-&gt;SP: 自定义处理</tspan>
+<tspan x="10" dy="16">    } else {</tspan>
+<tspan x="10" dy="16">      IDP-&gt;Gateway: 200</tspan>
+<tspan x="10" dy="16">      Gateway-&gt;RO: 转发请求</tspan>
+<tspan x="10" dy="16">      RO-&gt;SP: 返回资源</tspan>
+<tspan x="10" dy="16">      SP-&gt;SP: 资源展示</tspan>
+<tspan x="10" dy="16">    }</tspan>
+<tspan x="10" dy="16">  }</tspan>
+<tspan x="10" dy="16">Error: Syntax error in graph</tspan>
+<tspan x="10" dy="16">    at Worker.convert (file:///usr/local/kroki/src/worker.js:44:15)</tspan>
+<tspan x="10" dy="16">    at runNextTicks (node:internal/process/task_queues:65:5)</tspan>
+<tspan x="10" dy="16">    at process.processImmediate (node:internal/timers:453:9)</tspan>
+<tspan x="10" dy="16">    at async file:///usr/local/kroki/src/index.js:31:28</tspan>
+</text>
+<rect fill="#ff3860" width="3" height="893"/>
+</svg>

@@ -58,9 +58,10 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .page-footer {
-  color: var(--vp-c-text-1);
+  z-index: var(--vp-z-index-footer);
+  background-color: var(--vp-c-bg);
 
   svg {
     fill: var(--vp-c-text-1);

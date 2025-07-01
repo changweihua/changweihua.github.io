@@ -63,9 +63,8 @@
       this.container = document.createElement('div');
       this.container.style.cssText = `
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        bottom: 30px;
+        right: 30px;
         width: ${this.width}px;
         height: ${this.height}px;
         overflow: hidden;

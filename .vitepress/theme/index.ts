@@ -61,6 +61,7 @@ xlogs.banner(pinyin("常伟华"), 'neon');
 // #v-endif
 
 import "@vitepress-code-preview/container/dist/style.css";
+import Breadcrumb from "vitepress-plugin-breadcrumb/Breadcrumb.vue";
 
 // 版本监控
 const versionCheck = async () => {
@@ -119,7 +120,7 @@ mermaid.registerIconPacks([
   //   icons: devIcons,
   // },
 ]);
-
+// https://juejin.cn/post/7520511198015586313
 import zenuml from "@mermaid-js/mermaid-zenuml";
 import mindmap from "@mermaid-js/mermaid-mindmap";
 mermaid.registerExternalDiagrams([zenuml, mindmap]);
@@ -153,6 +154,8 @@ import Guidance from "../components/Guidance.vue";
 import TaskList from "../components/TaskList.vue";
 import ScrollableParagraph from "../components/ScrollableParagraph.vue";
 import GalleryCard from "../components/GalleryCard.vue";
+import GlossaryTooltip from "vitepress-plugin-glossary/vue";
+import CopyOrDownloadAsMarkdownButtons from "../components/CopyOrDownloadAsMarkdownButtons.vue";
 
 import { Icon } from "@iconify/vue";
 
@@ -286,6 +289,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "doc-before",
       //   }),
+      // "doc-before": () => h(Breadcrumb, { breadcrumb: true }),
       "doc-after": () => h(DocAfter),
       // "sidebar-nav-before": () =>
       //   h(PlaceHolder, {
@@ -412,6 +416,11 @@ export default {
 
       app.use(yuppie);
 
+      app.component(
+        "CopyOrDownloadAsMarkdownButtons",
+        CopyOrDownloadAsMarkdownButtons
+      );
+      app.component("GlossaryTooltip", GlossaryTooltip);
       app.component("MarkdownEChart", MarkdownEChart);
       app.component("HrefCard", HrefCard);
       app.component("ColorfulName", ColorfulName);

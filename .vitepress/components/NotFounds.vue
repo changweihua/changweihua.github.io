@@ -2,7 +2,7 @@
   <Container>
     <template v-for="blot in inkBlots" :key="blot.id">
       <InkBlot
-        :size="blot.size"
+        :props="{ size: blot.size }"
         :style="{
           top: blot.top,
           left: blot.left,
@@ -25,25 +25,29 @@
         或返首页，或观他处，皆可随心
       </Subtitle>
 
-      <Button @click="() => (window.location.href = '/')"> 返回首页 </Button>
+      <Button @click="goHome"> 返回首页 </Button>
     </Content>
   </Container>
 </template>
 
 <script setup lang="ts">
 import { styled, keyframes } from "@vue-styled-components/core";
-import { onMounted, nextTick, ref } from 'vue'
+import { onMounted, nextTick, ref } from "vue";
 
-const container_height = ref('30vh')
+function goHome() {
+  window.location.href = "/";
+}
+
+const container_height = ref("30vh");
 
 onMounted(() => {
   nextTick(() => {
-    var vpc = document.getElementById("VPContent")
+    var vpc = document.getElementById("VPContent");
     if (vpc) {
       container_height.value = `${vpc.clientHeight}px`;
     }
-  })
-})
+  });
+});
 
 // 水墨扩散动画
 const inkSpread = keyframes`
@@ -57,22 +61,22 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: ${container_height.value}px;
-  background: #f9f5e9;
+  background: transparent;
   position: relative;
   overflow: hidden;
 `;
 
 const InkBlot = styled.div`
   position: absolute;
-  width: ${(props) => props.size}px;
-  height: ${(props) => props.size}px;
+  width: ${(props: any) => props.size}px;
+  height: ${(props: any) => props.size}px;
   background: radial-gradient(
     circle,
-    rgba(0, 0, 0, 0.08) 0%,
-    rgba(0, 0, 0, 0) 70%
+    rgba(249, 245, 233, 0.95) 30%,
+    rgba(249, 245, 233, 0.85) 60%
   );
   border-radius: 50%;
-  animation: ${inkSpread} 3s ease-out forwards;
+  animation: ${inkSpread} 3s ease-out infinite;
   z-index: 0;
   pointer-events: none; /* 防止干扰交互 */
 `;
@@ -95,7 +99,7 @@ const Svg404 = styled.svg`
     fill: none;
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
-    animation: brushStroke 3s ease-in-out forwards;
+    animation: brushStroke 3s ease-in-out infinite;
   }
 
   @keyframes brushStroke {

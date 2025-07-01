@@ -28,6 +28,12 @@ import path from "path";
 import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
 import taskLists from "markdown-it-task-checkbox";
+import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
+import { configureDiagramsPlugin } from "vitepress-plugin-diagrams";
+import { markdownGlossaryPlugin } from "vitepress-plugin-glossary";
+import glossary from "../glossary.json";
+import examplePlugin from "vitepress-plugin-example";
+import { fmTitlePlugin } from 'vitepress-plugin-frontmatter'
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -76,6 +82,11 @@ const markdown: MarkdownOptions | undefined = {
       liClass: "task-list-item",
     });
 
+    md.use(markdownGlossaryPlugin, {
+      glossary: glossary,
+      firstOccurrenceOnly: true
+    });
+
     md.use(footnote);
     md.use(frontmatter);
     md.use(markdownSup);
@@ -87,12 +98,17 @@ const markdown: MarkdownOptions | undefined = {
     // md.use(npmCommandsMarkdownPlugin);
     md.use(MarkdownItVariable);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
-
+    // md.use(copyOrDownloadAsMarkdownButtons);
+    configureDiagramsPlugin(md, {
+      diagramsDir: "public/diagrams", // Optional: custom directory for SVG files
+      publicPath: "/diagrams", // Optional: custom public path for images
+    });
     markdownLinks(md, {
       externalClassName: "custom-external-link",
       internalClassName: "custom-internal-link",
       internalDomains: ["https://changweihua.github.io"],
     });
+    md.use(fmTitlePlugin);
     strikethrough(md);
     md.use(namedCode, { isEnableInlineCss: true });
     md.use(lazy_loading);
@@ -124,7 +140,7 @@ const markdown: MarkdownOptions | undefined = {
         show: true,
       },
     });
-
+    md.use(examplePlugin);
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {
       let htmlResult = slf.renderToken(tokens, idx, options);

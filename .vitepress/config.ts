@@ -14,8 +14,9 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import { withI18n } from "vitepress-i18n";
 import { type UserConfig } from "vitepress";
 import { VitePressI18nOptions } from "vitepress-i18n/types";
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
+import { La51Plugin } from "vitepress-plugin-51la";
+import MdH1 from "vitepress-plugin-md-h1";
+// import DocAnalysis from "vitepress-plugin-doc-analysis";
 
 const customElements = [
   "mjx-container",
@@ -256,6 +257,13 @@ export default withMermaid({
           // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
         },
       }),
+      La51Plugin({
+        id: "3070906",
+        ck: "3MfPCMKHJ65JsmJH",
+        importMode: "async",
+      }),
+      MdH1(),
+      // DocAnalysis(/* options */),
       vitepressProtectPlugin({
         disableF12: true,
         disableCopy: true,

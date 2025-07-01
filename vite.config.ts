@@ -173,7 +173,18 @@ function getDevPlugins() {
       autoUpgrade: false,
       force: false, // force generation of certs even without setting https property in the vite config
     }),
-    // llmstxt(),
+    llmstxt({
+      generateLLMsFullTxt: false,
+      ignoreFiles: ['sponsors/*'],
+      customLLMsTxtTemplate: `# {title}\n\n{foo}`,
+      title: 'Awesome tool',
+      customTemplateVariables: {
+        foo: 'bar'
+      },
+      experimental: {
+        depth: 2 // Generate llms.txt and llms-full.txt in root and first-level subdirectories
+      }
+    })
   ];
 }
 

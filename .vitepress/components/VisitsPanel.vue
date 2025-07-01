@@ -49,6 +49,12 @@ onMounted(function () {
 .panel {
   margin-top: 12px;
   margin-bottom: 8px;
+
+}
+
+.visits-panel {
+  z-index: var(--vp-z-index-footer);
+  background-color: var(--vp-c-bg);
 }
 
 .item-bg {
