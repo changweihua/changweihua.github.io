@@ -169,7 +169,7 @@ You can now run this app with the dotnet run command.
 ## All Code ##
 
 ```c#
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 
 using System.Globalization;
 using StackExchange.Redis;

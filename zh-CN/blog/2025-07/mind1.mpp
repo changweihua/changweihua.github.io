@@ -1,0 +1,21 @@
+# Code Fence Syntax
+
+```mindmap
+## Core Features
+- **Mindmap Integration**
+- Drag & Zoom
+- Theme Support
+  - Dark Mode
+  - Light Mode
+
+## Installation
+- `npm install vitepress-plugin-mindmap`
+- `yarn add vitepress-plugin-mindmap`
+- `pnpm add vitepress-plugin-mindmap`
+
+## Use Cases
+1. Technical Documentation
+2. Project Planning
+3. Knowledge Organization
+4. Meeting Notes
+```

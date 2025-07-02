@@ -6,6 +6,7 @@ title: 理解 .env 文件和 .gitignore 文件的作用与最佳实践
 description: 理解 .env 文件和 .gitignore 文件的作用与最佳实践
 date: 2025-06-13 11:00:00 
 pageClass: blog-page-class
+cover: /covers/nodejs.svg
 ---
 
 # 理解 .env 文件和 .gitignore 文件的作用与最佳实践 #

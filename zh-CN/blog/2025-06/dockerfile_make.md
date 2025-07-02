@@ -6,6 +6,7 @@ title:  Dockerfile最佳实践
 description: Dockerfile最佳实践
 date: 2025-06-23 11:18:00
 pageClass: blog-page-class
+cover: /covers/Dockerfile.svg
 ---
 
 # Dockerfile最佳实践 #

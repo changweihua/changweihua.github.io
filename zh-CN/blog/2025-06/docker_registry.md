@@ -6,6 +6,7 @@ title: 使用registry搭建私服并推送拉去私服镜像
 description: 使用registry搭建私服并推送拉去私服镜像
 date: 2025-06-03 10:30:00 
 pageClass: blog-page-class
+cover: /covers/Dockerfile.svg
 ---
 
 # 使用registry搭建私服并推送拉去私服镜像 #

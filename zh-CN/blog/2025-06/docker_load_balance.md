@@ -6,6 +6,7 @@ title: 基于Nginx的负载均衡部署
 description: 基于Nginx的负载均衡部署
 date: 2025-06-03 10:45:00 
 pageClass: blog-page-class
+cover: /covers/Dockerfile.svg
 ---
 
 # 基于Nginx的负载均衡部署 #

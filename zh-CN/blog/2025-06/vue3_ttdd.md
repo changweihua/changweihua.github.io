@@ -6,6 +6,7 @@ title: 如何在 Vue3 中优雅地防止按钮重复点击
 description: 如何在 Vue3 中优雅地防止按钮重复点击
 date: 2025-06-20 15:35:00 
 pageClass: blog-page-class
+cover: /covers/vue.svg
 ---
 
 # 如何在 Vue3 中优雅地防止按钮重复点击 #

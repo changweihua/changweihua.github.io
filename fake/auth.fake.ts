@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker' // 这里我使用了@faker-js/faker，也可以使用mockjs或者直接假数据
-import { FakeRouteConfig } from "vite-plugin-fake-server/client";
+import { defineFakeRoute } from 'vite-plugin-fake-server';
 
-const routes: FakeRouteConfig = [
+export default defineFakeRoute( [
   {
     url: "/api/auth/login",
     method: "post",
@@ -48,6 +48,4 @@ const routes: FakeRouteConfig = [
       };
     },
   },
-];
-
-export default routes;
+])

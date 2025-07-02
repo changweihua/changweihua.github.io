@@ -51,18 +51,34 @@
 <script setup lang="ts">
 import { useTemplateRef, ref } from "vue";
 import ColorThief from "colorthief";
+// import CoverWorker from "@/workers/cover-worker?worker";
 
-// // 示例：解析 CSV 字符串
-// const csvString = `name,age,city\nAlice,25,New York\nBob,30,Los Angeles`;
-// parseCSVFile(csvString).then(parsedData => {
-//   console.log(parsedData);
-// }).catch(error => {
-//   console.error('Error parsing CSV:', error);
-// });
+// const coverWorker = new CoverWorker();
+
+// //监听 Web Worker 返回的数据,并销毁
+// coverWorker.onmessage = async (e) => {
+//   // coverWorker.terminate()
+//   console.log("接收数据" + e);
+
+//   const { colors, index } = e.data;
+//   //通过操作dom修改页面的背景颜色，将背景颜色设置为向右的三色渐变背景
+
+//   const card =
+//     document.querySelectorAll<HTMLDivElement>(".palette-card")[index];
+//   if (card) {
+//     card.style.setProperty(
+//       "background",
+//       `linear-gradient(to right, ${colors[0]}, ${colors[1]},${colors[2]})`
+//     );
+//   }
+// };
+// // 监听报错
+// coverWorker.onerror = (err) => {
+//   console.error("Worker error:", err);
+//   coverWorker.terminate();
+// };
 
 const palette = useTemplateRef<HTMLDivElement>("palette");
-
-const colorThief = new ColorThief();
 
 interface CategoryItem {
   title: string;
@@ -77,30 +93,38 @@ defineProps({
   categories: Array<CategoryItem>,
 });
 
+let colorThief: ColorThief
+
 //创建响应式变量，用来区分图片的移入和移出的状态
 const hoverIndex = ref(-1);
 //鼠标移入函数
 const handleMouseEnter = async (img, i) => {
+  if (!colorThief) {
+    colorThief=  new ColorThief()
+  }
   hoverIndex.value = i;
-  //通过colorThief.getPalette(img,3) 获取图片中的三种颜色
-  //getPalette()函数接受两个参数 第一个参数是目标图片，第二个参数是要获取颜色的数量，该函数返回的是一个二维数组 二维数组的每一个元素是 rgb格式的颜色
-  const colors = await colorThief.getPalette(img.querySelector("img"), 3);
-  console.log(colors);
-  //遍历二维数组 将颜色处理成我们想要的rgb格式
-  const nColors = colors.map((c) => `rgba(${c[0]},${c[1]},${c[2]},0.5)`);
-  //通过操作dom修改页面的背景颜色，将背景颜色设置为向右的三色渐变背景
-  const card = document.querySelectorAll<HTMLDivElement>(".palette-card")[i];
-  if (card) {
-    card.style.setProperty(
-      "background",
-      `linear-gradient(to right, ${nColors[0]}, ${nColors[1]},${nColors[2]})`
-    );
+  // 向 Web Worker 发送数据
+  // coverWorker.postMessage({ image: img, index: i });
+  if (img.querySelector("img")) {
+    const colors = await colorThief.getPalette(img.querySelector("img"), 3);
+    console.log('colors', colors)
+    const card =
+      document.querySelectorAll<HTMLDivElement>(".palette-card")[i];
+    if (card) {
+      card.style.setProperty(
+        "background",
+        `linear-gradient(to right, ${colors[0]}, ${colors[1]},${colors[2]}) !important`
+      );
+    }
   }
 };
 
 //离开图片时将页面背景颜色重置为白色
 const handleMouseLeave = () => {
-  const card = document.querySelectorAll<HTMLDivElement>(".palette-card")[hoverIndex.value];
+  const card =
+    document.querySelectorAll<HTMLDivElement>(".palette-card")[
+      hoverIndex.value
+    ];
   if (card) {
     card.style.setProperty("background", "var(--vp-c-bg-soft)");
     hoverIndex.value = -1;
@@ -136,15 +160,12 @@ const handleMouseLeave = () => {
   position: relative;
 }
 
-
 /* 卡片背景 */
 .linkcard {
   background-color: var(--vp-c-bg-soft);
   border-radius: 8px;
   padding: 8px 16px 8px 8px;
-  transition:
-    color 0.5s,
-    background-color 0.5s;
+  transition: color 0.5s, background-color 0.5s;
 }
 
 /* 卡片鼠标悬停 */
@@ -278,7 +299,6 @@ const handleMouseLeave = () => {
 }
 </style>
 <style>
-
 @keyframes floating-points {
   0% {
     transform: translateY(0);

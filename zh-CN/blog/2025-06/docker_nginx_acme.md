@@ -6,6 +6,7 @@ title: docker 部署nginx+acme.sh 申请阿里云域名证书并且自动更新
 description: docker 部署nginx+acme.sh 申请阿里云域名证书并且自动更新
 date: 2025-06-12 15:55:00 
 pageClass: blog-page-class
+cover: /covers/Dockerfile.svg
 ---
 
 # 从界面到API对接：实现AI回复效果的完整实践 #

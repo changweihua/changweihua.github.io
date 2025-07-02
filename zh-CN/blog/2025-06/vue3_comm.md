@@ -6,6 +6,7 @@ title: Vue3 组件通信全攻略：12种方式与实战示例
 description: Vue3 组件通信全攻略：12种方式与实战示例
 date: 2025-06-23 10:35:00 
 pageClass: blog-page-class
+cover: /covers/vue.svg
 ---
 
 # Vue3 组件通信全攻略：12种方式与实战示例 #

@@ -6,6 +6,7 @@ title: C#.NET System.Text.Json 详解
 description: C#.NET System.Text.Json 详解
 date: 2025-06-30 16:30:00 
 pageClass: blog-page-class
+cover: /covers/dotnet.png
 ---
 
 # C#.NET System.Text.Json 详解 #

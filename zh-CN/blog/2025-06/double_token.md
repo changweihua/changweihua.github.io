@@ -6,6 +6,7 @@ title: 双 Token 认证机制详解与完整
 description: 双 Token 认证机制详解与完整
 date: 2025-06-13 10:30:00 
 pageClass: blog-page-class
+cover: /covers/platform.svg
 ---
 
 # 双 Token 认证机制详解与完整 #

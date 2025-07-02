@@ -6,6 +6,7 @@ title: 从 input 到响应的浏览器事件链 + requestIdleCallback 提速实�
 description: 从 input 到响应的浏览器事件链 + requestIdleCallback 提速实践
 date: 2025-06-12 14:35:00 
 pageClass: blog-page-class
+cover: /covers/html5.svg
 ---
 
 # 从 input 到响应的浏览器事件链 + requestIdleCallback 提速实践 #

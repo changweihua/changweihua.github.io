@@ -11,11 +11,13 @@ import vitepressProtectPlugin from "vitepress-protect-plugin";
 import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import fs from "fs";
 import { withI18n } from "vitepress-i18n";
 import { type UserConfig } from "vitepress";
 import { VitePressI18nOptions } from "vitepress-i18n/types";
 import { La51Plugin } from "vitepress-plugin-51la";
 import MdH1 from "vitepress-plugin-md-h1";
+import  withMindMap from '@dhlx/vitepress-plugin-mindmap'
 // import DocAnalysis from "vitepress-plugin-doc-analysis";
 
 const customElements = [
@@ -192,6 +194,50 @@ const vitePressI18nOptions: Partial<VitePressI18nOptions> = {
   },
 };
 
+// 转义Markdown中的尖括号，但保留代码块内容
+function escapeMarkdownBrackets(markdownContent) {
+  // 正则表达式模式：匹配代码块
+  const codeBlockPattern = /```[\s\S]*?```|`[\s\S]*?`/g
+
+  // 临时替换代码块为占位符
+  const codeBlocks:Array<any> = []
+  const contentWithoutCodeBlocks = markdownContent.replace(codeBlockPattern, (match) => {
+    codeBlocks.push(match)
+    return `__CODE_BLOCK_${codeBlocks.length - 1}__`
+  })
+
+  // 转义普通文本中的尖括号
+  const escapedContent = contentWithoutCodeBlocks
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+
+  // 恢复代码块内容
+  return escapedContent.replace(/__CODE_BLOCK_(\d+)__/g, (match, index) => {
+    return codeBlocks[index]
+  })
+}
+
+// Vite插件：在Markdown文件被处理前转义尖括号
+const markdownBracketEscaper = {
+  name: 'markdown-bracket-escaper',
+  enforce: 'pre',
+  async transform(code, id) {
+    // 只处理Markdown文件
+    if (!id.endsWith('.md')) return null
+
+    try {
+      // 读取原始文件内容
+      const rawContent = await fs.promises.readFile(id, 'utf-8')
+      // 转义尖括号
+      const escapedContent = escapeMarkdownBrackets(rawContent)
+      return escapedContent
+    } catch (err) {
+      console.error('Error processing Markdown file:', err)
+      return code
+    }
+  }
+}
+
 export default withMermaid({
   // extends: config,
   mermaid: {
@@ -262,6 +308,7 @@ export default withMermaid({
         ck: "3MfPCMKHJ65JsmJH",
         importMode: "async",
       }),
+      // markdownBracketEscaper,
       MdH1(),
       // DocAnalysis(/* options */),
       vitepressProtectPlugin({

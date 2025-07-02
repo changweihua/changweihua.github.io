@@ -1,6 +1,6 @@
 <template>
-  <div v-if="frontmatter['commentabled']" style="width: 200px; height: 100px; margin: 0 auto"
-    class="justify-center items-center flex">
+  <div v-if="frontmatter['commentabled']"  style="width: 200px; height: 100px; margin: 0 auto;display: none;"
+    class="comment-container justify-center items-center flex">
     <!-- <lottie-panel :animation-data="party"></lottie-panel> -->
   </div>
 </template>

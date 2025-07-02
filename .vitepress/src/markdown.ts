@@ -34,6 +34,7 @@ import { markdownGlossaryPlugin } from "vitepress-plugin-glossary";
 import glossary from "../glossary.json";
 import examplePlugin from "vitepress-plugin-example";
 import { fmTitlePlugin } from 'vitepress-plugin-frontmatter'
+import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -108,7 +109,7 @@ const markdown: MarkdownOptions | undefined = {
       internalClassName: "custom-internal-link",
       internalDomains: ["https://changweihua.github.io"],
     });
-    md.use(fmTitlePlugin);
+    // md.use(fmTitlePlugin);
     strikethrough(md);
     md.use(namedCode, { isEnableInlineCss: true });
     md.use(lazy_loading);
@@ -141,10 +142,35 @@ const markdown: MarkdownOptions | undefined = {
       },
     });
     md.use(examplePlugin);
+    md.use(autoArticleTitlePlugin, {
+      relativePaths: ['/blog/']
+    });
+
+    // 修改表格的 HTML 结构
+    md.renderer.rules.table_open = () => '<table style="border-collapse: collapse; width: 100%;">';
+    md.renderer.rules.table_close = () => '</table>';
+
+    // 修改表头单元格样式
+    md.renderer.rules.th_open = () => '<th style="border: 1px solid #ddd; padding: 8px; background: #f5f5f5;">';
+    md.renderer.rules.td_open = () => '<td style="border: 1px solid #ddd; padding: 8px;">';
+
+    // // 自定义加粗文本的渲染
+    // md.renderer.rules.strong_open = () => '<strong class="font-bold">'
+    // md.renderer.rules.strong_close = () => '</strong>'
+
+    // // 自定义斜体文本的渲染
+    // md.renderer.rules.em_open = () => '<em class="italic">'
+    // md.renderer.rules.em_close = () => '</em>'
+
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
-    md.renderer.rules.heading_close = (tokens, idx, options, env, slf) => {
-      let htmlResult = slf.renderToken(tokens, idx, options);
-      if (tokens[idx].tag === "h1") {
+    md.renderer.rules.heading_close = (tokens, idx, options, env, render) => {
+      let htmlResult = render.renderToken(tokens, idx, options);
+      if (
+        env["relativePath"] &&
+        env["relativePath"].includes("/blog/") &&
+        tokens[idx].tag === "h1"
+      ) {
+        console.log(env["relativePath"], env["frontmatter"]["layout"]);
         htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`;
       }
       // if (tokens[idx].tag === 'h1') htmlResult += `\n<ClientOnly><ArticleMetadata v-if="($frontmatter?.aside ?? true) && ($frontmatter?.showArticleMetadata ?? true)" :article="$frontmatter" /></ClientOnly>`;

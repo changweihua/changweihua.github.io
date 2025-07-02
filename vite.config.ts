@@ -14,7 +14,6 @@ import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
 import versionInjector from "unplugin-version-injector/vite";
-import { viteMockServe } from "vite-plugin-mock";
 import imagePreload from "vite-plugin-image-preload";
 import { robots } from "vite-plugin-robots";
 import vueStyledPlugin from "@vue-styled-components/plugin";
@@ -42,9 +41,17 @@ const yourPlugin: () => Plugin = () => ({
   },
   resolveId() {
     console.log(
-      this.meta.viteVersion,
-      this.meta.rollupVersion,
-      this.meta.rolldownVersion
+      colors.red(
+        ` viteVersion: ${colors.italic(this.meta.viteVersion)} `
+      ),
+      colors.green(
+        ` viteVrollupVersionersion: ${colors.italic(
+          this.meta.rollupVersion
+        )} `
+      ),
+      colors.blue(
+        ` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `
+      )
     );
   },
 });
@@ -109,7 +116,7 @@ function getDevPlugins() {
     envParse(),
     yourPlugin(),
     vitePluginFakeServer({
-      include: "mock", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
+      include: "fake", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: true, // 是否在生产环境下设置mock
     }),
     ValidateEnv({
@@ -172,18 +179,6 @@ function getDevPlugins() {
       savePath: "./certs", // save the generated certificate into certs directory
       autoUpgrade: false,
       force: false, // force generation of certs even without setting https property in the vite config
-    }),
-    llmstxt({
-      generateLLMsFullTxt: false,
-      ignoreFiles: ['sponsors/*'],
-      customLLMsTxtTemplate: `# {title}\n\n{foo}`,
-      title: 'Awesome tool',
-      customTemplateVariables: {
-        foo: 'bar'
-      },
-      experimental: {
-        depth: 2 // Generate llms.txt and llms-full.txt in root and first-level subdirectories
-      }
     })
   ];
 }
@@ -242,6 +237,11 @@ export default defineConfig(() => {
       fs: {
         allow: [resolve(__dirname, "..")],
       },
+      // vite-plugin-mock-dev-server
+      // plugin will read `server.proxy`
+      // proxy: {
+      //   "^/api": { target: "http://example.com" },
+      // },
     },
     clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     build: {
@@ -263,6 +263,7 @@ export default defineConfig(() => {
       webComponents: true,
       enableNativePlugin: true,
     },
+    // The fields defined here can also be used in mock.
     define: {
       APP_VERSION: timestamp,
       __VUE_PROD_DEVTOOLS__: false,
@@ -313,6 +314,18 @@ export default defineConfig(() => {
           rel: "prefetch",
         },
       }),
+      llmstxt({
+        generateLLMsFullTxt: false,
+        ignoreFiles: ["sponsors/*"],
+        customLLMsTxtTemplate: `# {title}\n\n{foo}`,
+        title: "CMONO.NET - Changweihua.github.io",
+        customTemplateVariables: {
+          foo: "bar",
+        },
+        experimental: {
+          depth: 2, // Generate llms.txt and llms-full.txt in root and first-level subdirectories
+        },
+      }),
     ],
     css: {
       lightningcss: {
@@ -330,7 +343,7 @@ export default defineConfig(() => {
         },
         // 允许特殊规则
         unrecognized: {
-          pseudos: 'ignore', // 忽略未知伪类错误
+          pseudos: "ignore", // 忽略未知伪类错误
           atRules: "ignore", // 忽略无法识别的规则（包括 @keyframes）
         },
       },
@@ -383,6 +396,7 @@ export default defineConfig(() => {
     ssr: {
       noExternal: ["fs", "mermaid"], // Externalize Node.js modules
     },
+    // 强制预构建
     optimizeDeps: {
       // force: true,
       include: [

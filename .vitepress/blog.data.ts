@@ -35,27 +35,28 @@ const locales = Object.keys(config.userConfig.locales ?? {})
 
 // or simply - const locales = ['root', 'fr']
 
-
 export default createContentLoader([
     "**/blog/**/!(index|README).md",
   ], {
     includeSrc: true, // 包含原始 markdown 源?
     render: true,     // 包含渲染的整页 HTML?
     excerpt: true,    // 包含摘录?
-  transform(raw) {
+  transform(raws) {
 
     const grouped: Data = {}
     const pattern = /!\[(.*?)\]\((.*?)\)/mg;
 
-    raw.forEach((item) => {
+    raws.forEach((item) => {
       const { url, frontmatter, excerpt, src } = item
+      console.log("frontmatter", frontmatter);
 
       // src?.match(/!\[(.*?)\]\((.*?)\)/)
 
-      let cover = ''
+      let cover = frontmatter['cover']
       let matcher;
 
-      if (src) {
+      if (!cover && src) {
+
         while (( matcher = pattern.exec(src)) !== null) {
           // console.log(matcher);
           cover = matcher[2]

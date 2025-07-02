@@ -6,6 +6,7 @@ title: C# 高性能获取对象属性
 description: C# 高性能获取对象属性
 date: 2025-06-03 10:35:00 
 pageClass: blog-page-class
+cover: /covers/csharp.svg
 ---
 
 # C# 高性能获取对象属性 #

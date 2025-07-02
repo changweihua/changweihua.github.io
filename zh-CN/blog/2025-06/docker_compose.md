@@ -6,6 +6,7 @@ title: Docker Compose 简介
 description: Docker Compose 简介
 date: 2025-06-03 15:35:00 
 pageClass: blog-page-class
+cover: /covers/Dockerfile.svg
 ---
 
 # Docker Compose 简介 #

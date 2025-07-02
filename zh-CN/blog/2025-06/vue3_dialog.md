@@ -6,9 +6,11 @@ title: Vue3弹窗交互进阶：五种优雅返回结果方案解析
 description: Vue3弹窗交互进阶：五种优雅返回结果方案解析
 date: 2025-06-27 15:35:00 
 pageClass: blog-page-class
+cover: /covers/vue.svg
 ---
 
 # Vue3弹窗交互进阶：五种优雅返回结果方案解析 #
+
 
 在Vue的组件化世界里却需要重新理解状态流。经过多个中后台项目的迭代验证，我总结出5种方案：
 

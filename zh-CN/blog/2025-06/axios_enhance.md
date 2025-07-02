@@ -6,6 +6,7 @@ title: 基于axios 二次封装：构建强大的 HTTP 请求层
 description: 基于axios 二次封装：构建强大的 HTTP 请求层
 date: 2025-06-20 15:55:00 
 pageClass: blog-page-class
+cover: /covers/axios.svg
 ---
 
 # 基于axios 二次封装：构建强大的 HTTP 请求层 #
