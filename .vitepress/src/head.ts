@@ -19,20 +19,20 @@ export const head: HeadConfig[] = [
   ],
   // ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#ffffff' }],
   // ['link', { rel: 'apple-touch-icon', href: '/favicon.svg', sizes: '180x180' }],
-  [
-    "link",
-    {
-      rel: "stylesheet",
-      href: "/MapleMono.css",
-    },
-  ],
-  [
-    "link",
-    {
-      rel: "stylesheet",
-      href: "/Mermaid.css",
-    },
-  ],
+  // [
+  //   "link",
+  //   {
+  //     rel: "stylesheet",
+  //     href: "/MapleMono.css",
+  //   },
+  // ],
+  // [
+  //   "link",
+  //   {
+  //     rel: "stylesheet",
+  //     href: "/Mermaid.css",
+  //   },
+  // ],
   [
     "link",
     {
@@ -88,31 +88,31 @@ export const head: HeadConfig[] = [
       media: "(prefers-color-scheme: dark)",
     },
   ],
-  [
-    "script",
-    {
-      src: "/cursor.js",
-      "data-site": "https://changweihua.github.io",
-      "data-spa": "auto",
-      defer: "true",
-    },
-  ],
-  [
-    "script",
-    {
-      src: "/liquid-glass.js",
-      defer: "true",
-    },
-  ],
-  [
-    "script",
-    {
-      src: "/gradient.js",
-      "data-site": "https://changweihua.github.io",
-      "data-spa": "auto",
-      defer: "true",
-    },
-  ],
+  // [
+  //   "script",
+  //   {
+  //     src: "/cursor.js",
+  //     "data-site": "https://changweihua.github.io",
+  //     "data-spa": "auto",
+  //     defer: "true",
+  //   },
+  // ],
+  // [
+  //   "script",
+  //   {
+  //     src: "/liquid-glass.js",
+  //     defer: "true",
+  //   },
+  // ],
+  // [
+  //   "script",
+  //   {
+  //     src: "/gradient.js",
+  //     "data-site": "https://changweihua.github.io",
+  //     "data-spa": "auto",
+  //     defer: "true",
+  //   },
+  // ],
   [
     "script",
     {

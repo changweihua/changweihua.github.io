@@ -55,12 +55,9 @@ export default createContentLoader([
       let cover = frontmatter['cover']
       let matcher;
 
-      if (!cover && src) {
-
+      if (src) {
         while (( matcher = pattern.exec(src)) !== null) {
-          // console.log(matcher);
           cover = matcher[2]
-          // console.log('cover', cover)
           break;
         }
       }

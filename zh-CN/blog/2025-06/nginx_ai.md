@@ -6,6 +6,7 @@ title: Nginx AI 服务代理与认证配置
 description: Nginx AI 服务代理与认证配置
 date: 2025-06-05 15:35:00 
 pageClass: blog-page-class
+cover: /covers/Nginx.svg
 ---
 
 # Nginx AI 服务代理与认证配置 #

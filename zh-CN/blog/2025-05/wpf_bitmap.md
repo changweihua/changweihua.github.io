@@ -6,6 +6,7 @@ title: 在 WPF 界面上高效地刷新来自 C++ 处理的超大分辨率相机
 description: 在 WPF 界面上高效地刷新来自 C++ 处理的超大分辨率相机图像
 date: 2025-05-27 16:00:00
 pageClass: blog-page-class
+cover: /covers/dotnet.svg
 ---
 
 # 在 WPF 界面上高效地刷新来自 C++ 处理的超大分辨率相机图像 #

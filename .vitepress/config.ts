@@ -303,11 +303,11 @@ export default withMermaid({
           // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
         },
       }),
-      La51Plugin({
-        id: "3070906",
-        ck: "3MfPCMKHJ65JsmJH",
-        importMode: "async",
-      }),
+      // La51Plugin({
+      //   id: "",
+      //   ck: "",
+      //   importMode: "async",
+      // }),
       // markdownBracketEscaper,
       MdH1(),
       // DocAnalysis(/* options */),

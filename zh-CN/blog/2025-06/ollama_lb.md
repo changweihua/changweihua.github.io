@@ -6,6 +6,7 @@ title: Ollama多容器部署Deepseek大模型集群访问的负载均衡方案
 description: Ollama多容器部署Deepseek大模型集群访问的负载均衡方案
 date: 2025-06-05 14:35:00 
 pageClass: blog-page-class
+cover: /covers/ollama.svg
 ---
 
 # Ollama多容器部署Deepseek大模型集群访问的负载均衡方案 #

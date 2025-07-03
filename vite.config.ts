@@ -28,11 +28,13 @@ import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
 import findImageDuplicates from "vite-plugin-find-image-duplicates";
 
+
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
   return value;
 };
 
+// ♻️ 重构
 const yourPlugin: () => Plugin = () => ({
   name: "test-plugin",
   config(config) {

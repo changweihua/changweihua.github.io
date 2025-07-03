@@ -1,6 +1,7 @@
 ---
 layout: doc
 pageClass: gallery-page-class
+title: 扬泰机场智能机器人
 ---
 
 ## 项目简介 ##

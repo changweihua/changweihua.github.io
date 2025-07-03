@@ -44,7 +44,7 @@ let categories: ref<Array<{
 
 onMounted(() => {
   categories.value = (data[lang.value] ?? []).sort((a, b) => b.date.time - a.date.time)
-      .slice(0, 12).map((p) => {
+      .slice(0, 30).map((p) => {
     return {
       link: p.url,
       title: p.title ,

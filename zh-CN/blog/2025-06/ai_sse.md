@@ -6,6 +6,7 @@ title: AI 应用使用 SSE
 description: AI 应用使用 SSE
 date: 2025-06-12 14:05:00 
 pageClass: blog-page-class
+cover: /covers/ollama.svg
 ---
 
 # AI 应用使用 SSE #
