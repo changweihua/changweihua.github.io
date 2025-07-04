@@ -3,9 +3,10 @@ layout: doc
 # 开启推荐
 recommended: true
 pageClass: gallery-page-class
+title: 无锡机场旅客服务平台
 ---
 
-## 项目简介 ##
+## 项目
 
 无锡机场旅客服务平台在旅客服务方面，为机场提供了数字化赋能，解决了服务能力与旅客需求难匹配的运营痛点，助力旅客便捷出行。
 

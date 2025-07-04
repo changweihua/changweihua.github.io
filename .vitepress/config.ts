@@ -12,11 +12,13 @@ import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import fs from "fs";
+import { chineseSearchOptimize, pagefindPlugin } from "vitepress-plugin-pagefind";
 import { withI18n } from "vitepress-i18n";
 import { type UserConfig } from "vitepress";
 import { VitePressI18nOptions } from "vitepress-i18n/types";
 import { La51Plugin } from "vitepress-plugin-51la";
 import MdH1 from "vitepress-plugin-md-h1";
+import AutoFrontmatter, { FileInfo } from "vitepress-plugin-auto-frontmatter";
 import  withMindMap from '@dhlx/vitepress-plugin-mindmap'
 // import DocAnalysis from "vitepress-plugin-doc-analysis";
 
@@ -217,6 +219,34 @@ function escapeMarkdownBrackets(markdownContent) {
   })
 }
 
+/**
+ * 创建 permalink 永久链接
+ */
+const createPermalink = () => {
+  return {
+    permalink: `/pages/${(Math.random() + Math.random()).toString(16).slice(2, 8)}`,
+  };
+};
+
+/**
+ * 创建 categories 分类列表
+ *
+ * @param fileInfo 文件信息
+ */
+const createCategory = (fileInfo: FileInfo) => {
+  // relativePath 为基于 vp srcDir 的相对路径，默认是基于项目根目录，如 guide/vue/getting.md
+  const relativePathArr = fileInfo.relativePath.split("/");
+
+  const categories: string[] = [];
+  relativePathArr.forEach((filename, index) => {
+    // 忽略文件名
+    if (index !== relativePathArr.length - 1) categories.push(filename);
+  });
+
+  // [""] 表示添加一个为空的 categories
+  return { categories: categories.length ? categories : [""] };
+};
+
 // Vite插件：在Markdown文件被处理前转义尖括号
 const markdownBracketEscaper = {
   name: 'markdown-bracket-escaper',
@@ -309,7 +339,53 @@ export default withMermaid({
       //   importMode: "async",
       // }),
       // markdownBracketEscaper,
-      MdH1(),
+      MdH1({
+        ignoreList: ["/gallery/"],
+        // beforeInject: (frontmatter, id, title) => {
+        //   // 根据 frontmatter 的某个值判断
+        //   if (frontmatter.catalogue) return false;
+
+        //   // 根据文档路径判断
+        //   if (id.includes("@page")) return false;
+
+        //   // 根据即将生成的一级标题判断
+        //   if (title === "简介") return false;
+
+        // // 根据 frontmatter 的某个值判断
+        // if (frontmatter.archivesPage) return "归档页";
+
+        // // 根据即将生成的一级标题判断
+        // 📝  if (title === "简介") return "文档简介";
+
+        // },
+      }),
+      AutoFrontmatter({
+        pattern: "**/*.md",
+        exclude: { tag: true }, // 排除 tag: true 的 MD 文件，支持多个配置
+        include: { tag: true }, // 支持多个配置
+        // ✨ 通过 transform 函数来添加一个唯一的永久链接
+        transform: (frontmatter, fileInfo) => {
+          let transformResult = {};
+
+          // 如果文件本身存在了 permalink，则不生成
+          if (!frontmatter.permalink) {
+            transformResult = { ...frontmatter, ...createPermalink() };
+          }
+
+          // 如果文件本身存在了 categories，则不生成
+          if (!frontmatter.categories) {
+            transformResult = {
+              ...frontmatter,
+              ...createCategory(fileInfo),
+            };
+          }
+
+          // 确保返回值存在，如果返回 {} 将会清空文件本身的 frontmatter，返回 undefined 则告诉插件不使用 transform 返回的数据
+          return Object.keys(transformResult).length
+            ? transformResult
+            : undefined;
+        },
+      }),
       // DocAnalysis(/* options */),
       vitepressProtectPlugin({
         disableF12: true,
@@ -318,6 +394,31 @@ export default withMermaid({
       }),
       viteDemoPreviewPlugin(),
       vueJsx(),
+      pagefindPlugin({
+        // verbose: true, // 启用详细日志
+        locales: {
+          "en-US": {
+            btnPlaceholder: "Search",
+            placeholder: "Search Docs...",
+            emptyText: "No results",
+            heading: "Total: {{searchResult}} search results.",
+            // 搜索结果不展示最后修改日期日期
+            showDate: false,
+          },
+          "zh-CN": {
+            btnPlaceholder: "搜索",
+            placeholder: "搜索文档",
+            emptyText: "空空如也",
+            heading: "共: {{searchResult}} 条结果",
+            toSelect: "选择",
+            toNavigate: "切换",
+            toClose: "关闭",
+            searchBy:""
+          },
+        },
+        excludeSelector: ["img", "a.header-anchor"],
+        customSearchQuery: chineseSearchOptimize,
+      }),
     ],
   },
   vue: {

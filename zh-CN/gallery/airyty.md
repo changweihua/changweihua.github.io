@@ -1,6 +1,7 @@
 ---
 layout: doc
 pageClass: gallery-page-class
+title: 扬州泰州国际机场微信小程序
 ---
 
 ## 项目简介 ##

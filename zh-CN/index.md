@@ -1,5 +1,4 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 layoutClass: m-nav-layout
 pageClass: index-page-class
@@ -132,23 +131,3 @@ head:
     - name: keywords
       content: changweihua.github.io 首页 CMONO.NET
 ---
-
-<!--<LiquidCard />-->
-
-<!-- <Robot />
-
-- [ ] 未完成任务
-- [x] 已完成任务
-
-<GalleryCard title="标题" />
-
-<CubesLoader  /> -->
-
-
-<!-- <Confetti /> -->
-
-<!-- ::: raw
-Wraps in a <span class="vp-raw"></span>
-::: -->
-
-<!-- <Guidance :steps="[{element: '.VPHomeHero'}]" /> -->
