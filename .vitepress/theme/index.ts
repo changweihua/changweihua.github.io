@@ -494,7 +494,7 @@ export default {
       app.component("LiquidCard", LiquidCard);
       app.component("Guidance", Guidance);
       app.component("m-read-text", ReadText);
-    }
+    
 
     if (router) {
       router.onBeforeRouteChange = async (to) => {
@@ -531,6 +531,7 @@ export default {
         // 图片添加边缘透明效果
       };
     }
+      ｝
 
     if (inBrowser) {
       // const { promise, resolve, reject } = Promise.withResolvers();
