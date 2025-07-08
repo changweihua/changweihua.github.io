@@ -531,7 +531,7 @@ export default {
         // 图片添加边缘透明效果
       };
     }
-      ｝
+    }
 
     if (inBrowser) {
       // const { promise, resolve, reject } = Promise.withResolvers();
