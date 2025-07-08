@@ -2,7 +2,6 @@ import { themeConfig } from "./src/theme";
 import { docsConfig } from "./src/docs";
 import { head } from "./src/head";
 import { markdown } from "./src/markdown";
-import { withMermaid } from "vitepress-plugin-panzoom-mermaid";
 import { HeadConfig, defineConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from "vite-plugin-git-revision-info";
@@ -268,20 +267,20 @@ const markdownBracketEscaper = {
   }
 }
 
-export default withMermaid({
-  // extends: config,
-  mermaid: {
-    look: "handDrawn",
-    handDrawnSeed: 2,
-    fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-    altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-    startOnLoad: true,
-    //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
-  },
-  // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
-  mermaidPlugin: {
-    class: "mermaid styled-mermaid", // 为父容器设置额外的CSS类
-  },
+export default defineConfig({
+  // // extends: config,
+  // mermaid: {
+  //   look: "handDrawn",
+  //   handDrawnSeed: 2,
+  //   fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+  //   altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+  //   startOnLoad: true,
+  //   //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  // },
+  // // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
+  // mermaidPlugin: {
+  //   class: "mermaid styled-mermaid", // 为父容器设置额外的CSS类
+  // },
   vite: {
     // css: {
     //   // transformer: "postcss",
@@ -341,12 +340,13 @@ export default withMermaid({
       // markdownBracketEscaper,
       MdH1({
         ignoreList: ["/gallery/"],
-        // beforeInject: (frontmatter, id, title) => {
-        //   // 根据 frontmatter 的某个值判断
-        //   if (frontmatter.catalogue) return false;
+        beforeInject: (frontmatter, id, title) => {
+          // // 根据 frontmatter 的某个值判断
+          // if (frontmatter.catalogue) return false;
 
-        //   // 根据文档路径判断
-        //   if (id.includes("@page")) return false;
+          // 根据文档路径判断
+          if (id.includes("/resume")) return false;
+          if (id.includes("/me.")) return false;
 
         //   // 根据即将生成的一级标题判断
         //   if (title === "简介") return false;
@@ -357,7 +357,7 @@ export default withMermaid({
         // // 根据即将生成的一级标题判断
         // 📝  if (title === "简介") return "文档简介";
 
-        // },
+        },
       }),
       AutoFrontmatter({
         pattern: "**/*.md",

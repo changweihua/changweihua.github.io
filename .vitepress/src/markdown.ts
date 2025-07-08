@@ -27,12 +27,10 @@ import { fileURLToPath, URL } from "node:url";
 import path from "path";
 import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
-import taskLists from "markdown-it-task-checkbox";
 import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 import { configureDiagramsPlugin } from "vitepress-plugin-diagrams";
 import { markdownGlossaryPlugin } from "vitepress-plugin-glossary";
 import glossary from "../glossary.json";
-import examplePlugin from "vitepress-plugin-example";
 import { fmTitlePlugin } from 'vitepress-plugin-frontmatter'
 import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
 
@@ -74,19 +72,10 @@ const markdown: MarkdownOptions | undefined = {
   config: (md) => {
     useDefinePlugin(md, CONSTS);
 
-    md.use(taskLists, {
-      disabled: true,
-      divWrap: false,
-      divClass: "checkbox",
-      idPrefix: "cbx_",
-      ulClass: "task-list",
-      liClass: "task-list-item",
-    });
-
-    md.use(markdownGlossaryPlugin, {
-      glossary: glossary,
-      firstOccurrenceOnly: true
-    });
+    // md.use(markdownGlossaryPlugin, {
+    //   glossary: glossary,
+    //   firstOccurrenceOnly: true
+    // });
 
     md.use(footnote);
     md.use(frontmatter);
@@ -100,16 +89,17 @@ const markdown: MarkdownOptions | undefined = {
     md.use(MarkdownItVariable);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
     // md.use(copyOrDownloadAsMarkdownButtons);
-    configureDiagramsPlugin(md, {
-      diagramsDir: "public/diagrams", // Optional: custom directory for SVG files
-      publicPath: "/diagrams", // Optional: custom public path for images
-    });
+    // configureDiagramsPlugin(md, {
+    //   diagramsDir: "public/diagrams", // Optional: custom directory for SVG files
+    //   publicPath: "/diagrams", // Optional: custom public path for images
+    // });
     markdownLinks(md, {
       externalClassName: "custom-external-link",
       internalClassName: "custom-internal-link",
       internalDomains: ["https://changweihua.github.io"],
     });
     // md.use(fmTitlePlugin);
+    // roughMermaidPlugin(md);
     strikethrough(md);
     md.use(namedCode, { isEnableInlineCss: true });
     md.use(lazy_loading);
@@ -141,7 +131,6 @@ const markdown: MarkdownOptions | undefined = {
         show: true,
       },
     });
-    md.use(examplePlugin);
     md.use(autoArticleTitlePlugin, {
       relativePaths: ['/blog/']
     });

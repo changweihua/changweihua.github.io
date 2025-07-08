@@ -20,7 +20,7 @@ Mermaid 不仅提供了一组预定义的图表类型（如流程图、序列图
 ### 流程图 ###
 
 ```text
-graph TD;
+flowchart TD;
   A-->B;
   A-->C;
   B-->D;
@@ -28,7 +28,7 @@ graph TD;
 ```
 
 ```mermaid
-graph TD;
+flowchart TD;
   A-->B;
   A-->C;
   B-->D;

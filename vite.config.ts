@@ -401,20 +401,12 @@ export default defineConfig(() => {
     // 强制预构建
     optimizeDeps: {
       // force: true,
-      include: [
-        "vue",
-        "mermaid",
-        "@mermaid-js/mermaid-mindmap",
-        "@mermaid-js/mermaid-zenuml",
-      ],
+      include: ["vue"],
       exclude: [
         "vitepress",
         "svg2roughjs",
         "echarts",
-        "echarts-gl",
-        ".vite",
-        "node-modules/.vite",
-        "node-modules/.cache",
+        "echarts-gl"
       ],
     },
   };

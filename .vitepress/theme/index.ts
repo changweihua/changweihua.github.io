@@ -44,19 +44,19 @@ import { pinyin } from "pinyin-pro";
 import { xlogs } from "xlogs";
 
 // 气泡对话
-xlogs.bubble(`Hello!`, 'bot');
-xlogs.bubble('Hi there!', 'user');
+xlogs.bubble(`Hello!`, "bot");
+xlogs.bubble("Hi there!", "user");
 
 // 天气主题
-xlogs.weather('sunny', 'Nice weather today!');
-xlogs.weather('rainy', 'Remember your umbrella');
+xlogs.weather("sunny", "Nice weather today!");
+xlogs.weather("rainy", "Remember your umbrella");
 
 // ASCII艺术
-xlogs.ascii('Important', 'box');
-xlogs.ascii('Warning', 'cloud');
+xlogs.ascii("Important", "box");
+xlogs.ascii("Warning", "cloud");
 
 // 3D文字
-xlogs.banner(pinyin("常伟华"), 'neon');
+xlogs.banner(pinyin("常伟华"), "neon");
 
 // #v-endif
 
@@ -120,10 +120,9 @@ mermaid.registerIconPacks([
   //   icons: devIcons,
   // },
 ]);
-// https://juejin.cn/post/7520511198015586313
 import zenuml from "@mermaid-js/mermaid-zenuml";
-import mindmap from "@mermaid-js/mermaid-mindmap";
-mermaid.registerExternalDiagrams([zenuml, mindmap]);
+// import mindmap from "@mermaid-js/mermaid-mindmap";
+mermaid.registerExternalDiagrams([zenuml], { lazyLoad: true });
 
 import { NProgress } from "nprogress-v2/dist/index.js"; // 进度条组件
 import "nprogress-v2/dist/index.css"; // 进度条样式
@@ -147,7 +146,6 @@ import HomeContributors from "../components/HomeContributors.vue";
 import PageFooter from "../components/PageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue";
 import MagicCard from "../components/MagicCard.vue";
-import StyledMermaid from "../components/StyledMermaid.vue";
 import MarkupView from "../components/MarkupView.vue";
 import Confetti from "../components/Confetti.vue";
 import Guidance from "../components/Guidance.vue";
@@ -179,35 +177,36 @@ import Hashids from "hashids";
 const hashids = new Hashids("this is my salt", 8); // 盐值与最小长度
 
 // 加密整数到哈希字符串
-let hashid = hashids.encode('Chang weihua');
+let hashid = hashids.encode("Chang weihua");
 console.log(hashid);
 
 // 解密哈希字符串回整数
 let ids = hashids.decode(hashid);
 console.log(ids[0]);
 
-import { nanoid, customAlphabet } from 'nanoid';
+import { nanoid, customAlphabet } from "nanoid";
 
 const id = nanoid();
 // 默认ID 长度为21字符
 // 随机，URL安全（不会出现 + / = ）
 console.log(id); // 如：Kh_1OuFVecVCKfMdj1NXq
 
-console.log(nanoid(10));  // 10位ID，如: Y3Xh9md3Wz
-console.log(nanoid(32));  // 32位ID
+console.log(nanoid(10)); // 10位ID，如: Y3Xh9md3Wz
+console.log(nanoid(32)); // 32位ID
 
 const aids = Array.from({ length: 5 }, () => nanoid());
 console.log(aids); // ['wr9bcsr1Te5HKEn_WYVKx','Fho3hazZDYNGWorG7APit','VIuIpbrVamSjnKMVg9IpO','3ArbZPt8qc_JL_IF8WTbJ','V9YCFTNFgaWF6hnQRgJBH']
 
 // 仅数字ID
-const nanoidNumber = customAlphabet('1234567890', 8);
+const nanoidNumber = customAlphabet("1234567890", 8);
 console.log(nanoidNumber()); // 24736672
 
 // 全大写字母+数字
-const nanoidUpper = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 8);
+const nanoidUpper = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 8);
 console.log(nanoidUpper()); // OO8QE8V0
 
-// import "vitepress-mermaid-renderer/dist/style.css";
+import { createMermaidRenderer } from "vitepress-mermaid-renderer";
+import "vitepress-mermaid-renderer/dist/style.css";
 
 export default {
   ...DefaultTheme,
@@ -389,11 +388,25 @@ export default {
     });
   },
   enhanceApp: async (ctx) => {
-    // app is the Vue 3 app instance from `createApp()`. router is VitePress'
-    // custom router. `siteData`` is a `ref`` of current site-level metadata.
-    const { app, router } = ctx;
-
+    const { app, router, siteData } = ctx;
     DefaultTheme.enhanceApp(ctx);
+
+    // Use the client-safe wrapper for SSR compatibility
+    const mermaidRenderer = createMermaidRenderer({
+      look: "handDrawn",
+      handDrawnSeed: 2,
+      fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      theme: "neutral",
+      flowchart: { curve: "basis" },
+      securityLevel: "loose",
+      logLevel: "error",
+      suppressErrorRendering: false,
+      layout: "TB",
+      maxTextSize: 100000, // 防止大文本出错
+      // ... other Mermaid configuration options
+    });
+    mermaidRenderer.initialize();
 
     if (inBrowser) {
       NProgress.configure({ showSpinner: false });
@@ -450,12 +463,45 @@ export default {
       //     })
       //   },
       // });
+      useComponents(app, DemoPreview);
 
+      app.use(Antd);
+      for (const [key, component] of Object.entries(AntIconsVue)) {
+        app.component(key, component);
+      }
+      app.component("vue3-autocounter", Vue3Autocounter);
+      app.component("MarkupView", MarkupView);
+      app.component("DacingNumber", DacingNumber);
+      app.component("TaskList", TaskList);
+      app.component("ScrollableParagraph", ScrollableParagraph);
+      app.component("GalleryCard", GalleryCard);
+      app.component("CubesLoader", CubesLoader);
+      app.component("PyramidLoader", PyramidLoader);
+      app.component("CubeLoader", CubeLoader);
+      app.component("m-icon", Icon);
+
+      app.component("header-profile", HeaderProfile);
+      app.component("lottie-panel", LottiePanel);
+      app.component("code-group", CodeGroup);
+      app.component("ArticleMetadata", ArticleMetadata);
+      app.component("Contributors", Contributors);
+      app.component("HomeContributors", HomeContributors);
+      app.component("CopyRight", CopyRight);
+      app.component("HoverGrid", HoverGrid);
+      app.component("DancingLogo", DancingLogo);
+      app.component("MagicCard", MagicCard);
+      app.component("Confetti", Confetti);
+      app.component("LiquidCard", LiquidCard);
+      app.component("Guidance", Guidance);
+      app.component("m-read-text", ReadText);
+    }
+
+    if (router) {
       router.onBeforeRouteChange = async (to) => {
         console.log("onBeforeRouteChange");
         NProgress.start(); // 开始进度条
         versionCheck();
-
+        nextTick(() => mermaidRenderer.renderMermaidDiagrams());
         //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
         const { browser, cpu, device } = UAParser();
 
@@ -484,39 +530,6 @@ export default {
         NProgress.done(); // 停止进度条
         // 图片添加边缘透明效果
       };
-
-      useComponents(app, DemoPreview);
-
-      app.use(Antd);
-      for (const [key, component] of Object.entries(AntIconsVue)) {
-        app.component(key, component);
-      }
-      app.component("vue3-autocounter", Vue3Autocounter);
-      app.component("StyledMermaid", StyledMermaid);
-      app.component("MarkupView", MarkupView);
-      app.component("DacingNumber", DacingNumber);
-      app.component("TaskList", TaskList);
-      app.component("ScrollableParagraph", ScrollableParagraph);
-      app.component("GalleryCard", GalleryCard);
-      app.component("CubesLoader", CubesLoader);
-      app.component("PyramidLoader", PyramidLoader);
-      app.component("CubeLoader", CubeLoader);
-      app.component("m-icon", Icon);
-
-      app.component("header-profile", HeaderProfile);
-      app.component("lottie-panel", LottiePanel);
-      app.component("code-group", CodeGroup);
-      app.component("ArticleMetadata", ArticleMetadata);
-      app.component("Contributors", Contributors);
-      app.component("HomeContributors", HomeContributors);
-      app.component("CopyRight", CopyRight);
-      app.component("HoverGrid", HoverGrid);
-      app.component("DancingLogo", DancingLogo);
-      app.component("MagicCard", MagicCard);
-      app.component("Confetti", Confetti);
-      app.component("LiquidCard", LiquidCard);
-      app.component("Guidance", Guidance);;
-      app.component("m-read-text", ReadText);
     }
 
     if (inBrowser) {
@@ -530,7 +543,6 @@ export default {
       //     }
       // }, 1000);
     }
-
   },
   setup() {
     // get frontmatter and route

@@ -11,6 +11,17 @@ pageClass: manual-page-class
 
 # 双Token无感刷新全流程拆解 #
 
+```mermaid
+graph TD
+
+title[<u>My Title</u>]
+title-->FirstStep
+style title fill:#FFF,stroke:#FFF
+linkStyle 0 stroke:#FFF,stroke-width:0;
+
+FirstStep-->...
+```
+
 ## 核心概念 ##
 
 双Token无感刷新方案中有两个核心概念：`Access Token (访问令牌)`、`Refresh Token (刷新令牌)`。
@@ -35,7 +46,7 @@ pageClass: manual-page-class
 我将无感刷新的流程拆分成4部分：
 
 ```mermaid
-graph TD
+graph TB;
     A[完整流程] --- B[登录流程]
     A --- C[调用受保护的API]
     A --- D[Token刷新流程]
@@ -66,7 +77,7 @@ graph TD
 ## 登录流程 ##
 
 ```mermaid
-graph TD
+flowchart TD
     A[完整流程] --- B[登录流程]
     A --- C[调用受保护的API]
     A --- D[Token刷新流程]

@@ -136,7 +136,7 @@ graph TB
 ## 硬件交互 ##
 
 ```mermaid
-graph TD;
+flowchart TD;
   subgraph 行李检测仪
     A[智能手机] -->|MQTT消息| B[消息代理器]
     B -->|App控制| C[树莓派1]

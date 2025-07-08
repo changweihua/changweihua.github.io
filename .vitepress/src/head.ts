@@ -18,21 +18,21 @@ export const head: HeadConfig[] = [
     { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: "any" },
   ],
   // ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#ffffff' }],
-  // ['link', { rel: 'apple-touch-icon', href: '/favicon.svg', sizes: '180x180' }],
-  // [
-  //   "link",
-  //   {
-  //     rel: "stylesheet",
-  //     href: "/MapleMono.css",
-  //   },
-  // ],
-  // [
-  //   "link",
-  //   {
-  //     rel: "stylesheet",
-  //     href: "/Mermaid.css",
-  //   },
-  // ],
+  ['link', { rel: 'apple-touch-icon', href: '/favicon.svg', sizes: '180x180' }],
+  [
+    "link",
+    {
+      rel: "stylesheet",
+      href: "/MapleMono.css",
+    },
+  ],
+  [
+    "link",
+    {
+      rel: "stylesheet",
+      href: "/Mermaid.css",
+    },
+  ],
   [
     "link",
     {

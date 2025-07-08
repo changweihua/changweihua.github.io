@@ -33,7 +33,7 @@ MCP采用*客户端-服务器架构*：
 #### 数据流转示例 ####
 
 ```mermaid
-graph TD
+flowchart TD
 A[用户请求] --> B[MCP Client]
 B --> C[MCP Server]
 C --> D[调用外部工具]

@@ -5,9 +5,10 @@
 }
 
 .zenuml,
-.styled-mermaid {
+.styled-mermaid,
+.mermaid-container,
+[id^="mermaid-"] {
   font-family: LikeJianJianTi, "PING FANG CHANG AN", JetBrainsMapleMono !important;
-  font-size: 14px !important;
 }
 
 /* 组件样式继承 */
