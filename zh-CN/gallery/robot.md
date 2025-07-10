@@ -16,11 +16,11 @@ title: 扬泰机场智能机器人
 
 <div class="grid grid-cols-3 gap-2">
 
-![Alt text](/images/robot_welcome.png)
+![Alt text](/images/robot_welcome.png){data-zoomable}
 
-![Alt text](/images/3-2.png)
+![Alt text](/images/3-2.png){data-zoomable}
 
-![预览图](/images/20241217135539.jpg)
+![预览图](/images/20241217135539.jpg){data-zoomable}
 
 </div>
 

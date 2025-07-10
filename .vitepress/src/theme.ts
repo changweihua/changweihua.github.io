@@ -6,7 +6,7 @@ export const themeConfig: DefaultTheme.Config = {
   editLink: {
     pattern:
       "https://github.com/changweihua/changweihua.github.io/edit/master//:path",
-    text: "Edit this page on GitHub",
+    text: "编辑本页面",
   }, // 自定义上次更新的文本和日期格式
   lastUpdated: {
     text: "上次更新：",

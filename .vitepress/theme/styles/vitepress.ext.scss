@@ -14,6 +14,11 @@
   --c-brand: #646cff;
   --c-brand-light: #747bff;
   --vp-nav-bg-color: rgba(240, 242, 245, 1);
+
+  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --vp-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --vp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --vp-transition-duration: 0.3s;
 }
 
 /**
@@ -435,48 +440,60 @@ a.VPSkipLink::after {
 :root {
   /* 首页导航 */
   .VPNavBar {
-    background-color: rgba(255, 255, 255, 0) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px) saturate(1.2);
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: backdrop-filter 0.4s ease;
+    will-change: backdrop-filter;
   }
 
   /* 文档页导航两侧 */
   .VPNavBar:not(.home) {
-    background-color: rgba(255, 255, 255, 0) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: backdrop-filter 0.4s ease;
+    will-change: backdrop-filter;
   }
 
   @media (min-width: 960px) {
     /* 文档页导航两侧 */
     .VPNavBar:not(.home) {
-      background-color: rgba(255, 255, 255, 0) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.3) !important;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: backdrop-filter 0.4s ease;
+      will-change: backdrop-filter;
     }
 
     /* 首页下滑后导航两侧 */
     .VPNavBar:not(.has-sidebar):not(.home.top) {
-      background-color: rgba(255, 255, 255, 0) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.3) !important;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: backdrop-filter 0.4s ease;
+      will-change: backdrop-filter;
     }
   }
 
   @media (min-width: 960px) {
     /* 文档页导航中间 */
-    .VPNavBar:not(.home.top) .content-body {
-      background-color: rgba(255, 255, 255, 0) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+    // .VPNavBar:not(.home.top) .content-body {
+    //   background-color: rgba(255, 255, 255, 0.3) !important;
+    //   backdrop-filter: blur(20px);
+    //   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    //   transition: backdrop-filter 0.4s ease;
+    //   will-change: backdrop-filter;
+    // }
 
     /* 首页下滑后导航中间 */
-    .VPNavBar:not(.has-sidebar):not(.home.top) .content-body {
-      background-color: rgba(255, 255, 255, 0) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+    // .VPNavBar:not(.has-sidebar):not(.home.top) .content-body {
+    //   background-color: rgba(255, 255, 255, 0.3) !important;
+    //   backdrop-filter: blur(20px);
+    //   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    //   transition: backdrop-filter 0.4s ease;
+    //   will-change: backdrop-filter;
+    // }
   }
 
   /* 分割线 */
@@ -484,31 +501,40 @@ a.VPSkipLink::after {
   @media (min-width: 960px) {
     /* 文档页分割线 */
     .VPNavBar:not(.home.top) .divider-line {
-      background-color: rgba(255, 255, 255, 0) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.3) !important;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: backdrop-filter 0.4s ease;
+      will-change: backdrop-filter;
     }
 
     /* 首页分割线 */
     .VPNavBar:not(.has-sidebar):not(.home.top) .divider {
-      background-color: rgba(255, 255, 255, 0) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.3) !important;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: backdrop-filter 0.4s ease;
+      will-change: backdrop-filter;
     }
   }
 
   /* 搜索框 VPNavBarSearchButton.vue */
   .DocSearch-Button {
-    background-color: rgba(255, 255, 255, 0) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: backdrop-filter 0.4s ease;
+    will-change: backdrop-filter;
   }
 
   /* 移动端大纲栏 */
   .VPLocalNav {
     background-color: rgba(255, 255, 255, 0) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: backdrop-filter 0.4s ease;
+    will-change: backdrop-filter;
     /* 隐藏分割线 */
     border-bottom: 5px solid var(--vp-c-gutter);
     border-bottom: 0px;

@@ -29,7 +29,7 @@ import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimationTitle.vue";
 // import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
-
+import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
 // 彩虹背景动画样式
@@ -223,6 +223,14 @@ mermaid.registerLayoutLoaders(elkLayouts);
 //   // ... other Mermaid configuration options
 // });
 
+// Setup medium zoom with the desired options
+const setupMediumZoom = () => {
+  mediumZoom("[data-zoomable]", {
+    background: "var(--vp-c-bg)",
+    container: document.body,
+  });
+};
+
 export default {
   ...DefaultTheme,
   NotFound: NotFound, // <- this is a Vue 3 functional component
@@ -272,7 +280,7 @@ export default {
               src: "/cwh.svg",
               class: "VPImage image-src",
             }),
-          ]
+          ],
         ),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
@@ -431,7 +439,7 @@ export default {
         watch(
           () => router.route.data.relativePath,
           () => updateHomePageStyle(location.pathname === "/"),
-          { immediate: true }
+          { immediate: true },
         );
       }
 
@@ -446,7 +454,7 @@ export default {
 
       app.component(
         "CopyOrDownloadAsMarkdownButtons",
-        CopyOrDownloadAsMarkdownButtons
+        CopyOrDownloadAsMarkdownButtons,
       );
       app.component("GlossaryTooltip", GlossaryTooltip);
       app.component("MarkdownEChart", MarkdownEChart);
@@ -510,42 +518,43 @@ export default {
       app.component("Guidance", Guidance);
       app.component("m-read-text", ReadText);
 
+      if (router) {
+        router.onBeforeRouteChange = async (to) => {
+          console.log("onBeforeRouteChange");
+          NProgress.start(); // 开始进度条
+          // versionCheck();
+          nextTick(() => mermaidRenderer.renderMermaidDiagrams());
+          // //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
+          // const { browser, cpu, device } = UAParser();
 
-    if (router) {
-      router.onBeforeRouteChange = async (to) => {
-        console.log("onBeforeRouteChange");
-        NProgress.start(); // 开始进度条
-        // versionCheck();
-        nextTick(() => mermaidRenderer.renderMermaidDiagrams());
-        // //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
-        // const { browser, cpu, device } = UAParser();
+          // console.log(browser.name); // Maemo Browser
+          // console.log(cpu.is("arm")); // true
+          // console.log(device.is("mobile")); // true
+          // console.log(device.model); // N900
 
-        // console.log(browser.name); // Maemo Browser
-        // console.log(cpu.is("arm")); // true
-        // console.log(device.is("mobile")); // true
-        // console.log(device.model); // N900
+          // 🧪 console.log(await getDeviceFingerprint(true));
 
-        // 🧪 console.log(await getDeviceFingerprint(true));
+          // Here you can set the routes you want to configure.
+          if (to == "/") {
+            await router.go("/zh-CN/");
+            return false;
+          }
 
-        // Here you can set the routes you want to configure.
-        if (to == "/") {
-          await router.go("/zh-CN/");
-          return false;
-        }
+          // if (typeof window._hmt !== 'undefined') {
+          //   window._hmt.push(['_trackPageview', to]);
+          // }
 
-        // if (typeof window._hmt !== 'undefined') {
-        //   window._hmt.push(['_trackPageview', to]);
-        // }
+          return true;
+        };
 
-        return true;
-      };
-
-      router.onAfterPageLoad = async () => {
-        console.log("onAfterPageLoad");
-        NProgress.done(); // 停止进度条
-        // 图片添加边缘透明效果
-      };
-    }
+        router.onAfterPageLoad = async () => {
+          console.log("onAfterPageLoad");
+          NProgress.done(); // 停止进度条
+          nextTick(function () {
+            setupMediumZoom();
+          });
+        };
+      }
     }
 
     if (inBrowser) {

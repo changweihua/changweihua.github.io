@@ -20,9 +20,7 @@ import vueStyledPlugin from "@vue-styled-components/plugin";
 import { qrcode } from "vite-plugin-qrcode";
 import colors from "picocolors";
 import llmstxt from "vitepress-plugin-llms";
-import { webUpdateNotice } from "@plugin-web-update-notification/vite";
 import { ValidateEnv, Schema } from "@julr/vite-plugin-validate-env";
-import ConditionalCompile from "vite-plugin-conditional-compiler";
 import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
@@ -125,14 +123,6 @@ function getDevPlugins() {
       validator: "builtin",
       schema: {
         VITE_APP_PRIMARY_COLOR: Schema.string(),
-      },
-    }),
-    webUpdateNotice({
-      logVersion: true,
-      notificationProps: {
-        title: "系统更新",
-        description: "系统有更新，请刷新页面",
-        buttonText: "刷新",
       },
     }),
     imagePlaceholder({ prefix: "image/placeholder" }),
@@ -275,8 +265,8 @@ export default defineConfig(() => {
       "process.env.RSS_BASE": JSON.stringify(
         `${getEnvValue(
           process.env.NODE_ENV || "github",
-          "VITE_APP_RSS_BASE_URL"
-        )}`
+          "VITE_APP_RSS_BASE_URL",
+        )}`,
       ),
     },
     plugins: [
@@ -404,9 +394,9 @@ export default defineConfig(() => {
       include: ["vue"],
       exclude: [
         "vitepress",
+        "vitepress-mermaid-renderer",
         "svg2roughjs",
         "echarts",
-        "echarts-gl"
       ],
     },
   };

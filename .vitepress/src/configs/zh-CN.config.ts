@@ -5,8 +5,6 @@ import { getZhCNNav } from "../navs";
 import { getZhCNSidebar } from "../sidebars";
 import { getZhCNFooter } from "../footers"
 
-import dayjs from 'dayjs'
-
 export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: "CMONO.NET 之家",
   title: "CMONO.NET",
