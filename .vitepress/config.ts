@@ -18,7 +18,6 @@ import { VitePressI18nOptions } from "vitepress-i18n/types";
 import { La51Plugin } from "vitepress-plugin-51la";
 import MdH1 from "vitepress-plugin-md-h1";
 import AutoFrontmatter, { FileInfo } from "vitepress-plugin-auto-frontmatter";
-import  withMindMap from '@dhlx/vitepress-plugin-mindmap'
 // import DocAnalysis from "vitepress-plugin-doc-analysis";
 
 const customElements = [
@@ -318,6 +317,8 @@ export default defineConfig({
     resolve: {
       alias: {
         vite: "rolldown-vite",
+        // 强制 VitePress 使用项目安装的 Mermaid
+        mermaid: "mermaid",
       },
     },
     logLevel: "info",
@@ -348,15 +349,14 @@ export default defineConfig({
           if (id.includes("/resume")) return false;
           if (id.includes("/me.")) return false;
 
-        //   // 根据即将生成的一级标题判断
-        //   if (title === "简介") return false;
+          //   // 根据即将生成的一级标题判断
+          //   if (title === "简介") return false;
 
-        // // 根据 frontmatter 的某个值判断
-        // if (frontmatter.archivesPage) return "归档页";
+          // // 根据 frontmatter 的某个值判断
+          // if (frontmatter.archivesPage) return "归档页";
 
-        // // 根据即将生成的一级标题判断
-        // 📝  if (title === "简介") return "文档简介";
-
+          // // 根据即将生成的一级标题判断
+          // 📝  if (title === "简介") return "文档简介";
         },
       }),
       AutoFrontmatter({
@@ -413,7 +413,7 @@ export default defineConfig({
             toSelect: "选择",
             toNavigate: "切换",
             toClose: "关闭",
-            searchBy:""
+            searchBy: "",
           },
         },
         excludeSelector: ["img", "a.header-anchor"],
@@ -425,7 +425,7 @@ export default defineConfig({
     template: {
       compilerOptions: {
         isCustomElement: (tag) => customElements.includes(tag),
-        whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
+        // whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
       },
     },
   },

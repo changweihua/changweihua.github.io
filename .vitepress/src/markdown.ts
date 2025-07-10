@@ -8,14 +8,11 @@ import markdownSub from "markdown-it-sub";
 // import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 import frontmatter from "markdown-it-front-matter";
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless";
-import markdownLinks from "markdown-it-external-links";
 import MarkdownItCollapsible from "markdown-it-collapsible";
 import lazy_loading from "markdown-it-image-lazy-loading";
-import MarkdownItVariable from "markdown-it-variable";
 import namedCode from "markdown-it-named-code-blocks";
 import strikethrough from "markdown-it-strikethrough-alt";
 import hashmention from "markdown-it-hashmention";
-import { ImagePlugin } from "../plugins/markdown/image";
 import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
 import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
@@ -50,13 +47,14 @@ const markdown: MarkdownOptions | undefined = {
   component: {
     inlineTags: [],
   },
-  anchor: {
-    permalink: anchor.permalink.ariaHidden({
-      // you can use other variants too, refer - https://github.com/valeriangalliat/markdown-it-anchor#permalinks
-      symbol: `🔗`,
-      placement: "before",
-    }),
-  },
+  mermaid: true,
+  // anchor: {
+  //   permalink: anchor.permalink.ariaHidden({
+  //     // you can use other variants too, refer - https://github.com/valeriangalliat/markdown-it-anchor#permalinks
+  //     symbol: `🔗`,
+  //     placement: "before",
+  //   }),
+  // },
   // @ts-ignore
   languages: [Expl3],
   lazyLoading: true,
@@ -86,18 +84,17 @@ const markdown: MarkdownOptions | undefined = {
     md.use(readerMarkdownPlugin);
     // md.use(tabsMarkdownPlugin);
     // md.use(npmCommandsMarkdownPlugin);
-    md.use(MarkdownItVariable);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
     // md.use(copyOrDownloadAsMarkdownButtons);
     // configureDiagramsPlugin(md, {
     //   diagramsDir: "public/diagrams", // Optional: custom directory for SVG files
     //   publicPath: "/diagrams", // Optional: custom public path for images
     // });
-    markdownLinks(md, {
-      externalClassName: "custom-external-link",
-      internalClassName: "custom-internal-link",
-      internalDomains: ["https://changweihua.github.io"],
-    });
+    // markdownLinks(md, {
+    //   externalClassName: "custom-external-link",
+    //   internalClassName: "custom-internal-link",
+    //   internalDomains: ["https://changweihua.github.io"],
+    // });
     // md.use(fmTitlePlugin);
     // roughMermaidPlugin(md);
     strikethrough(md);
@@ -113,8 +110,6 @@ const markdown: MarkdownOptions | undefined = {
     md.use(demoPreviewPlugin, {
       docRoot,
     });
-
-    md.use(ImagePlugin);
 
     md.use(vitepressDemoPlugin, {
       demoDir: path.resolve(__dirname, "../../src/demos"),
@@ -143,13 +138,13 @@ const markdown: MarkdownOptions | undefined = {
     md.renderer.rules.th_open = () => '<th style="border: 1px solid #ddd; padding: 8px; background: #f5f5f5;">';
     md.renderer.rules.td_open = () => '<td style="border: 1px solid #ddd; padding: 8px;">';
 
-    // // 自定义加粗文本的渲染
-    // md.renderer.rules.strong_open = () => '<strong class="font-bold">'
-    // md.renderer.rules.strong_close = () => '</strong>'
+    // 自定义加粗文本的渲染
+    md.renderer.rules.strong_open = () => '<strong class="font-bold">'
+    md.renderer.rules.strong_close = () => '</strong>'
 
-    // // 自定义斜体文本的渲染
-    // md.renderer.rules.em_open = () => '<em class="italic">'
-    // md.renderer.rules.em_close = () => '</em>'
+    // 自定义斜体文本的渲染
+    md.renderer.rules.em_open = () => '<em class="italic">'
+    md.renderer.rules.em_close = () => '</em>'
 
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, render) => {

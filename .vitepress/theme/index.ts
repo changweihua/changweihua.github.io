@@ -61,7 +61,6 @@ xlogs.banner(pinyin("常伟华"), "neon");
 // #v-endif
 
 import "@vitepress-code-preview/container/dist/style.css";
-import Breadcrumb from "vitepress-plugin-breadcrumb/Breadcrumb.vue";
 
 // 版本监控
 const versionCheck = async () => {
@@ -99,31 +98,6 @@ function updateHomePageStyle(value: boolean) {
 }
 
 import directives from "../directives";
-import mermaid from "mermaid";
-import { icons } from "@iconify-json/logos";
-mermaid.registerIconPacks([
-  {
-    name: icons.prefix, // To use the prefix defined in the icon pack
-    icons,
-  },
-  {
-    name: "devicon",
-    loader: () =>
-      import("@iconify-json/devicon").then((module) => module.icons),
-  },
-  // {
-  //   name: skillIcons.prefix, // To use the prefix defined in the icon pack
-  //   icons: skillIcons,
-  // },
-  // {
-  //   name: devIcons.prefix, // To use the prefix defined in the icon pack
-  //   icons: devIcons,
-  // },
-]);
-import zenuml from "@mermaid-js/mermaid-zenuml";
-// import mindmap from "@mermaid-js/mermaid-mindmap";
-mermaid.registerExternalDiagrams([zenuml], { lazyLoad: true });
-
 import { NProgress } from "nprogress-v2/dist/index.js"; // 进度条组件
 import "nprogress-v2/dist/index.css"; // 进度条样式
 
@@ -207,6 +181,47 @@ console.log(nanoidUpper()); // OO8QE8V0
 
 import { createMermaidRenderer } from "vitepress-mermaid-renderer";
 import "vitepress-mermaid-renderer/dist/style.css";
+import mermaid from "mermaid";
+import { icons } from "@iconify-json/logos";
+mermaid.registerIconPacks([
+  {
+    name: icons.prefix, // To use the prefix defined in the icon pack
+    icons,
+  },
+  {
+    name: "devicon",
+    loader: () =>
+      import("@iconify-json/devicon").then((module) => module.icons),
+  },
+  // {
+  //   name: skillIcons.prefix, // To use the prefix defined in the icon pack
+  //   icons: skillIcons,
+  // },
+  // {
+  //   name: devIcons.prefix, // To use the prefix defined in the icon pack
+  //   icons: devIcons,
+  // },
+]);
+import zenuml from "@mermaid-js/mermaid-zenuml";
+mermaid.registerExternalDiagrams([zenuml], { lazyLoad: true });
+
+import elkLayouts from "@mermaid-js/layout-elk";
+mermaid.registerLayoutLoaders(elkLayouts);
+
+// mermaid.initialize({
+//   look: "handDrawn",
+//   handDrawnSeed: 2,
+//   fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+//   altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+//   theme: "neutral",
+//   flowchart: { curve: "basis" },
+//   securityLevel: "loose",
+//   logLevel: "error",
+//   suppressErrorRendering: false,
+//   startOnLoad: true,
+//   maxTextSize: 100000, // 防止大文本出错
+//   // ... other Mermaid configuration options
+// });
 
 export default {
   ...DefaultTheme,
@@ -402,7 +417,7 @@ export default {
       securityLevel: "loose",
       logLevel: "error",
       suppressErrorRendering: false,
-      layout: "TB",
+      startOnLoad: true,
       maxTextSize: 100000, // 防止大文本出错
       // ... other Mermaid configuration options
     });
@@ -494,23 +509,23 @@ export default {
       app.component("LiquidCard", LiquidCard);
       app.component("Guidance", Guidance);
       app.component("m-read-text", ReadText);
-    
+
 
     if (router) {
       router.onBeforeRouteChange = async (to) => {
         console.log("onBeforeRouteChange");
         NProgress.start(); // 开始进度条
-        versionCheck();
+        // versionCheck();
         nextTick(() => mermaidRenderer.renderMermaidDiagrams());
-        //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
-        const { browser, cpu, device } = UAParser();
+        // //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
+        // const { browser, cpu, device } = UAParser();
 
-        console.log(browser.name); // Maemo Browser
-        console.log(cpu.is("arm")); // true
-        console.log(device.is("mobile")); // true
-        console.log(device.model); // N900
+        // console.log(browser.name); // Maemo Browser
+        // console.log(cpu.is("arm")); // true
+        // console.log(device.is("mobile")); // true
+        // console.log(device.model); // N900
 
-        console.log(await getDeviceFingerprint(true));
+        // 🧪 console.log(await getDeviceFingerprint(true));
 
         // Here you can set the routes you want to configure.
         if (to == "/") {
