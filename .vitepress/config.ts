@@ -12,13 +12,10 @@ import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import fs from "fs";
 import { chineseSearchOptimize, pagefindPlugin } from "vitepress-plugin-pagefind";
-import { withI18n } from "vitepress-i18n";
 import { type UserConfig } from "vitepress";
 import { VitePressI18nOptions } from "vitepress-i18n/types";
-import { La51Plugin } from "vitepress-plugin-51la";
 import MdH1 from "vitepress-plugin-md-h1";
 import AutoFrontmatter, { FileInfo } from "vitepress-plugin-auto-frontmatter";
-// import DocAnalysis from "vitepress-plugin-doc-analysis";
 
 const customElements = [
   "mjx-container",

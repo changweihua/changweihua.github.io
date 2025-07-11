@@ -26,7 +26,7 @@ hero:
     #   link: https://github.com/changweihua
 
 features:
-  - title: 扬泰机场智能机器人
+  - title: 🍃扬泰机场智能机器人
     icon:
       src: /ai_robot.svg
       alt: 扬泰机场智能机器人

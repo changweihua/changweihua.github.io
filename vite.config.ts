@@ -208,19 +208,20 @@ function manualChunks(id, { getModuleInfo }) {
 }
 
 // https://vitejs.dev/config/
+// @ts-ignore
 export default defineConfig(() => {
   const timestamp = new Date().getTime();
 
   return {
-    // builder: {
-    //   // buildApp: async (builder) => {
-    //   //   const environments = Object.values(builder.environments);
-    //   //   console.log("environments", environments);
-    //   //   return Promise.all(
-    //   //     environments.map((environment) => builder.build(environment))
-    //   //   );
-    //   // },
-    // },
+    builder: {
+      buildApp: async (builder) => {
+        const environments = Object.values(builder.environments);
+        console.log("environments", environments);
+        return Promise.all(
+          environments.map((environment) => builder.build(environment))
+        );
+      },
+    },
     server: {
       port: 5500,
       hmr: {
@@ -386,7 +387,7 @@ export default defineConfig(() => {
       // mainFields: []
     },
     ssr: {
-      noExternal: ["fs", "mermaid"], // Externalize Node.js modules
+      noExternal: ["fs"], // Externalize Node.js modules
     },
     // 强制预构建
     optimizeDeps: {
@@ -398,6 +399,10 @@ export default defineConfig(() => {
         "svg2roughjs",
         "echarts",
       ],
+      // @ts-ignore
+      rollupOptions: {
+        jsx: "preserve"
+      }
     },
   };
 });

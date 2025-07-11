@@ -26,7 +26,6 @@ import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
 import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 import { configureDiagramsPlugin } from "vitepress-plugin-diagrams";
-import { markdownGlossaryPlugin } from "vitepress-plugin-glossary";
 import glossary from "../glossary.json";
 import { fmTitlePlugin } from 'vitepress-plugin-frontmatter'
 import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
@@ -69,11 +68,6 @@ const markdown: MarkdownOptions | undefined = {
   preConfig: async (md) => {},
   config: (md) => {
     useDefinePlugin(md, CONSTS);
-
-    // md.use(markdownGlossaryPlugin, {
-    //   glossary: glossary,
-    //   firstOccurrenceOnly: true
-    // });
 
     md.use(footnote);
     md.use(frontmatter);

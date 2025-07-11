@@ -126,7 +126,6 @@ import Guidance from "../components/Guidance.vue";
 import TaskList from "../components/TaskList.vue";
 import ScrollableParagraph from "../components/ScrollableParagraph.vue";
 import GalleryCard from "../components/GalleryCard.vue";
-import GlossaryTooltip from "vitepress-plugin-glossary/vue";
 import CopyOrDownloadAsMarkdownButtons from "../components/CopyOrDownloadAsMarkdownButtons.vue";
 
 import { Icon } from "@iconify/vue";
@@ -456,7 +455,6 @@ export default {
         "CopyOrDownloadAsMarkdownButtons",
         CopyOrDownloadAsMarkdownButtons,
       );
-      app.component("GlossaryTooltip", GlossaryTooltip);
       app.component("MarkdownEChart", MarkdownEChart);
       app.component("HrefCard", HrefCard);
       app.component("ColorfulName", ColorfulName);
