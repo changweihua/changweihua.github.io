@@ -50,27 +50,27 @@ const currentPage = ref("home");
 watch(
   () => route.path,
   () => {
-    console.log("页面动画");
-    isTransitioning.value = true;
-    // 检查浏览器支持
-    if (document.startViewTransition) {
-      // 使用 View Transitions API
-      const transition = document.startViewTransition(() => {
-        currentPage.value = route.path;
-      });
+    nextTick(() => setupMediumZoom())
+    // isTransitioning.value = true;
+    // // 检查浏览器支持
+    // if (document.startViewTransition) {
+    //   // 使用 View Transitions API
+    //   const transition = document.startViewTransition(() => {
+    //     currentPage.value = route.path;
+    //   });
 
-      transition.finished.finally(() => {
-        isTransitioning.value = false;
-      });
-    } else {
-      // 回退方案：使用 Vue 过渡
-      setTimeout(() => {
-        currentPage.value = route.path;
-        setTimeout(() => {
-          isTransitioning.value = false;
-        }, 400);
-      }, 50);
-    }
+    //   transition.finished.finally(() => {
+    //     isTransitioning.value = false;
+    //   });
+    // } else {
+    //   // 回退方案：使用 Vue 过渡
+    //   setTimeout(() => {
+    //     currentPage.value = route.path;
+    //     setTimeout(() => {
+    //       isTransitioning.value = false;
+    //     }, 400);
+    //   }, 50);
+    // }
   },
 );
 
@@ -89,11 +89,6 @@ onMounted(() => {
 });
 
 const router = useRouter();
-
-watch(
-  () => route.path,
-  () => nextTick(() => setupMediumZoom()),
-);
 
 // Subscribe to route changes to re-apply medium zoom effect
 router.onAfterPageLoad = function () {

@@ -255,6 +255,7 @@ export default defineConfig(() => {
       hmrPartialAccept: true,
       webComponents: true,
       enableNativePlugin: true,
+      fullBundleMode: true
     },
     // The fields defined here can also be used in mock.
     define: {
