@@ -39,19 +39,18 @@ const yourPlugin: () => Plugin = () => ({
     // get version in vitePlugin if you open `ifGlobal`
     console.log(config.define);
   },
+  configResolved(config) {
+    console.log("options", config.optimizeDeps, config.oxc);
+  },
   resolveId() {
     console.log(
-      colors.red(
-        ` viteVersion: ${colors.italic(this.meta.viteVersion)} `
-      ),
+      colors.red(` viteVersion: ${colors.italic(this.meta.viteVersion)} `),
       colors.green(
-        ` viteVrollupVersionersion: ${colors.italic(
-          this.meta.rollupVersion
-        )} `
+        ` viteVrollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `,
       ),
       colors.blue(
-        ` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `
-      )
+        ` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `,
+      ),
     );
   },
 });
@@ -218,7 +217,7 @@ export default defineConfig(() => {
         const environments = Object.values(builder.environments);
         console.log("environments", environments);
         return Promise.all(
-          environments.map((environment) => builder.build(environment))
+          environments.map((environment) => builder.build(environment)),
         );
       },
     },
@@ -237,6 +236,9 @@ export default defineConfig(() => {
       // },
     },
     clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
+    dev: {
+      bundler: "rolldown",
+    },
     build: {
       bundler: "rolldown", // 显式声明使用 Rolldown
       sourcemap: false, // Seems to cause JavaScript heap out of memory errors on build
@@ -255,7 +257,7 @@ export default defineConfig(() => {
       hmrPartialAccept: true,
       webComponents: true,
       enableNativePlugin: true,
-      fullBundleMode: true
+      fullBundleMode: true,
     },
     // The fields defined here can also be used in mock.
     define: {
@@ -402,8 +404,8 @@ export default defineConfig(() => {
       ],
       // @ts-ignore
       rollupOptions: {
-        jsx: "preserve"
-      }
+        jsx: "preserve",
+      },
     },
   };
 });
