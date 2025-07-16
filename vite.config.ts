@@ -398,8 +398,6 @@ export default defineConfig(() => {
       include: ["vue"],
       exclude: [
         "vitepress",
-        "vitepress-mermaid-renderer",
-        "svg2roughjs",
         "echarts",
       ],
       // @ts-ignore
