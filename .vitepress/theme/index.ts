@@ -130,17 +130,6 @@ import CopyOrDownloadAsMarkdownButtons from "../components/CopyOrDownloadAsMarkd
 
 import { Icon } from "@iconify/vue";
 
-import "vitepress-markdown-timeline/dist/theme/index.css";
-
-import "vitepress-markdown-it-stepper/theme";
-
-import "virtual:group-icons.css";
-import "virtual:uno.css";
-import "animate.css";
-
-import vitepressBackToTop from "vitepress-plugin-back-to-top";
-import "vitepress-plugin-back-to-top/dist/style.css";
-
 import type { Theme } from "vitepress";
 
 import AnimatingLayout from "./AnimatingLayout.vue";
@@ -221,6 +210,16 @@ mermaid.registerLayoutLoaders(elkLayouts);
 //   maxTextSize: 100000, // 防止大文本出错
 //   // ... other Mermaid configuration options
 // });
+
+import "vitepress-markdown-timeline/dist/theme/index.css";
+import "vitepress-markdown-it-stepper/theme";
+
+import "virtual:group-icons.css";
+import "virtual:uno.css";
+import "animate.css";
+
+import vitepressBackToTop from "vitepress-plugin-back-to-top";
+import "vitepress-plugin-back-to-top/dist/style.css";
 
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
@@ -416,15 +415,15 @@ export default {
     // Use the client-safe wrapper for SSR compatibility
     const mermaidRenderer = createMermaidRenderer({
       look: "handDrawn",
-      handDrawnSeed: 2,
+      handDrawnSeed: 3,
       fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
       altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
       theme: "neutral",
-      flowchart: { curve: "basis" },
+      // flowchart: { curve: "basis" },
       securityLevel: "loose",
       logLevel: "error",
       suppressErrorRendering: false,
-      startOnLoad: true,
+      // startOnLoad: true,
       maxTextSize: 100000, // 防止大文本出错
       // ... other Mermaid configuration options
     });

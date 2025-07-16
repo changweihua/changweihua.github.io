@@ -8,11 +8,33 @@
 .styled-mermaid,
 .mermaid-container,
 [id^="mermaid-"] {
-  font-family: LikeJianJianTi, "PING FANG CHANG AN", JetBrainsMapleMono !important;
+  font-family:
+    LikeJianJianTi, "PING FANG CHANG AN", JetBrainsMapleMono !important;
 }
 
 /* 组件样式继承 */
 .zenuml-diagram {
   background: var(--zenuml-bg);
   border: 1px solid var(--zenuml-primary);
+}
+
+.mobile-controls {
+  .mobile-zoom-controls,
+  .mobile-utility-controls,
+  .mobile-nav-buttons {
+    button {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .mobile-zoom-controls {
+    .zoom-level {
+      display: none;
+    }
+  }
+
+  .mobile-nav-buttons, .mobile-utility-controls {
+    display: none;
+  }
 }
