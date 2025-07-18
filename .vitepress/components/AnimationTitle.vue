@@ -143,7 +143,7 @@ onMounted(() => {
   padding-top: 8px;
   max-width: 392px;
   line-height: 28px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   white-space: pre-wrap;
   color: var(--vp-c-text-2);
@@ -156,7 +156,7 @@ onMounted(() => {
     padding-top: 12px;
     max-width: 576px;
     line-height: 32px;
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
