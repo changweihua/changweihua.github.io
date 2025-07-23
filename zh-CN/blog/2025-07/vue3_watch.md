@@ -104,3 +104,80 @@ export function myFetch(url: string, options: RequestInit) {
     })
 </script>
 ```
+
+> 下面细说 `onWatcherCleanup` 副作用清理API所带来的作用和具体用法。
+
+## 什么场景需要副作用清理？ ##
+
+作为一名用Vue开发的程序员，watch算是必不可少的，但Vue3.5之前其实有缺陷的，特别是处理异步时。
+
+如下所示，有时候我们会在watch中进行接口请求之类的异步操作，但如果userId在请求完成之前发生了更改怎么办？这时会使用已经过期的userId进行接口请求，因为接口请求已经在进行中，从而导致异常。
+
+```vue
+<script setup>
+  import { watch, onWatcherCleanup } from 'vue';
+  watch(id, (userId) => {
+    fetch(`/api/user/${userId}`).then(() => {
+	  
+    })
+  })
+</script>
+```
+
+## 用onWatcherCleanup进行副作用清理 ##
+
+> **作用简述**： onWatcherCleanup就是专门用来解决上述例子或者相似的业务场景，即在userId更改为新值时取消过时的请求。如下所示
+
+```vue
+<script setup>
+import { watch, onWatcherCleanup } from 'vue'
+
+watch(id, (userId) => {
+  const contr = new AbortController()
+
+  fetch(`/api/user/${userId}`, { signal: contr.signal }).then(() => {
+    
+  })
+
+  onWatcherCleanup(() => {
+    contr.abort()
+  })
+})
+</script>
+```
+
+**注意**： 留意第五行代码，要尽量放在最前面，一定不能异步函数中的语句之后调用它。但如果你想不受同步异步约束，可以用以下方法。
+
+## 不受同步约束的用法 ##
+
+上面的用法容易有容易有异步问题 ，官方其实有提供更简洁并且能兼顾异步的用法。
+
+如下所示，把 `onCleanup` 函数作为第三个参数传递回调，如下所示
+
+```vue
+<script setup>
+import { watch } from 'vue'
+
+watch(id, (newId, oldId, onCleanup) => {
+   onCleanup(() => {
+        // 清理器
+   })
+  })
+</script>
+```
+
+但如果使用 `watchEffect` 时单独传入一个 `onCleanup` 即可，如下所示
+
+```vue
+<script setup>
+import { watchEffect } from 'vue'
+
+watchEffect((onCleanup) => {
+      onCleanup(() => {
+            // 清理器
+      })
+  })
+</script>
+```
+
+由于 `onCleanup` 通过函数传递的参数与观察者实例绑定在一起，所以它不受同步约束，因此更推荐这种用法。

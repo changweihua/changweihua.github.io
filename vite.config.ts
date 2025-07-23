@@ -396,7 +396,7 @@ export default defineConfig(() => {
     optimizeDeps: {
       // force: true,
       include: ["vue"],
-      exclude: ["vitepress", "echarts", "vitepress-plugin-legend"],
+      exclude: ["vitepress", "echarts"],
       // @ts-ignore
       rollupOptions: {
         jsx: "preserve",

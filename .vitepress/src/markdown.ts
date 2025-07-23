@@ -125,6 +125,7 @@ const markdown: MarkdownOptions | undefined = {
       relativePaths: ["/blog/"],
     });
 
+    // // @ts-ignore
     // vitepressPluginLegend(md, {
     //   markmap: { showToolbar: true }, // 显示脑图工具栏
     //   mermaid: true, // 启用 Mermaid

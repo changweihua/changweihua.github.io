@@ -62,22 +62,6 @@ xlogs.banner(pinyin("常伟华"), "neon");
 
 import "@vitepress-code-preview/container/dist/style.css";
 
-// 版本监控
-const versionCheck = async () => {
-  // if (import.meta.env.MODE === "development") return;
-  // const response = await fetch("version.json");
-  // if (APP_VERSION !== response.data.version) {
-  //   showToast({
-  //     message: "发现新内容，自动更新中...",
-  //     type: "loading",
-  //     duration: 1500,
-  //     onClose: () => {
-  //       window.location.reload();
-  //     },
-  //   });
-  // }
-};
-
 // 彩虹背景动画样式
 function updateHomePageStyle(value: boolean) {
   if (value) {
@@ -220,6 +204,9 @@ import "animate.css";
 
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
+
+// import { initComponent } from 'vitepress-mermaid-preview/component';
+// import 'vitepress-mermaid-preview/dist/index.css';
 
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
@@ -408,9 +395,11 @@ export default {
       // ],
     });
   },
-  enhanceApp: async (ctx) => {
+  enhanceApp: (ctx) => {
     const { app, router, siteData } = ctx;
     DefaultTheme.enhanceApp(ctx);
+
+    // initComponent(app);
 
     // Use the client-safe wrapper for SSR compatibility
     const mermaidRenderer = createMermaidRenderer({
@@ -521,7 +510,7 @@ export default {
         router.onBeforeRouteChange = async (to) => {
           console.log("onBeforeRouteChange");
           NProgress.start(); // 开始进度条
-          // versionCheck();
+
           nextTick(() => mermaidRenderer.renderMermaidDiagrams());
           // //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
           // const { browser, cpu, device } = UAParser();
