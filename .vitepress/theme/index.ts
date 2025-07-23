@@ -416,8 +416,10 @@ export default {
     const mermaidRenderer = createMermaidRenderer({
       look: "handDrawn",
       handDrawnSeed: 3,
-      fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-      altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      fontFamily:
+        "XiaolaiMono, MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      altFontFamily:
+        "XiaolaiMono, MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
       theme: "neutral",
       // flowchart: { curve: "basis" },
       securityLevel: "loose",
@@ -533,7 +535,11 @@ export default {
 
           // Here you can set the routes you want to configure.
           if (to == "/") {
-            await router.go("/zh-CN/");
+            await router.go("/zh-CN/", {
+              initialLoad: true,
+              smoothScroll: true,
+              replace: true
+            });
             return false;
           }
 

@@ -9,7 +9,7 @@
 .mermaid-container,
 [id^="mermaid-"] {
   font-family:
-    LikeJianJianTi, "PING FANG CHANG AN", JetBrainsMapleMono !important;
+    XiaolaiMono, LikeJianJianTi, "PING FANG CHANG AN", JetBrainsMapleMono !important;
 }
 
 /* 组件样式继承 */
@@ -37,4 +37,9 @@
   .mobile-nav-buttons, .mobile-utility-controls {
     display: none;
   }
+}
+
+.mermaid svg {
+    width: 100%;
+    height: auto;
 }

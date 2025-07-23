@@ -4,7 +4,7 @@ aside: false
 layout: doc
 date: 2025-04
 title: 双Token无感刷新全流程拆解
-description: 双Token无感刷新全流程拆解：附多张专业时序图+流程图，一看就懂
+description: 双Token无感刷新全流程拆解
 category: 文档
 pageClass: manual-page-class
 ---
@@ -12,7 +12,7 @@ pageClass: manual-page-class
 # 双Token无感刷新全流程拆解 #
 
 ```mermaid
-flowchart LR
+flowchart TB
 
 A[Hard] -->|Text| B(Round)
 B --> C{Decision}
@@ -56,7 +56,7 @@ Bob-->>John: Jolly good!
 我将无感刷新的流程拆分成4部分：
 
 ```mermaid
-flowchart-elk TB
+flowchart TB
     A[完整流程] --- B[登录流程]
     A --- C[调用受保护的API]
     A --- D[Token刷新流程]
@@ -87,7 +87,7 @@ flowchart-elk TB
 ## 登录流程 ##
 
 ```mermaid
-flowchart TD
+flowchart TB
     A[完整流程] --- B[登录流程]
     A --- C[调用受保护的API]
     A --- D[Token刷新流程]

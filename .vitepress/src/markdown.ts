@@ -24,11 +24,12 @@ import { fileURLToPath, URL } from "node:url";
 import path from "path";
 import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
 import { vitepressDemoPlugin } from "vitepress-demo-plugin";
-import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
+import { copyOrDownloadAsMarkdownButtons } from "vitepress-plugin-llms";
 import { configureDiagramsPlugin } from "vitepress-plugin-diagrams";
 import glossary from "../glossary.json";
-import { fmTitlePlugin } from 'vitepress-plugin-frontmatter'
+import { fmTitlePlugin } from "vitepress-plugin-frontmatter";
 import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
+import { vitepressPluginLegend } from "vitepress-plugin-legend";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -121,24 +122,32 @@ const markdown: MarkdownOptions | undefined = {
       },
     });
     md.use(autoArticleTitlePlugin, {
-      relativePaths: ['/blog/']
+      relativePaths: ["/blog/"],
     });
 
+    // vitepressPluginLegend(md, {
+    //   markmap: { showToolbar: true }, // 显示脑图工具栏
+    //   mermaid: true, // 启用 Mermaid
+    // });
+
     // 修改表格的 HTML 结构
-    md.renderer.rules.table_open = () => '<table style="border-collapse: collapse; width: 100%;">';
-    md.renderer.rules.table_close = () => '</table>';
+    md.renderer.rules.table_open = () =>
+      '<table style="border-collapse: collapse; width: 100%;">';
+    md.renderer.rules.table_close = () => "</table>";
 
     // 修改表头单元格样式
-    md.renderer.rules.th_open = () => '<th style="border: 1px solid #ddd; padding: 8px; background: #f5f5f5;">';
-    md.renderer.rules.td_open = () => '<td style="border: 1px solid #ddd; padding: 8px;">';
+    md.renderer.rules.th_open = () =>
+      '<th style="border: 1px solid #ddd; padding: 8px; background: #f5f5f5;">';
+    md.renderer.rules.td_open = () =>
+      '<td style="border: 1px solid #ddd; padding: 8px;">';
 
     // 自定义加粗文本的渲染
-    md.renderer.rules.strong_open = () => '<strong class="font-bold">'
-    md.renderer.rules.strong_close = () => '</strong>'
+    md.renderer.rules.strong_open = () => '<strong class="font-bold">';
+    md.renderer.rules.strong_close = () => "</strong>";
 
     // 自定义斜体文本的渲染
-    md.renderer.rules.em_open = () => '<em class="italic">'
-    md.renderer.rules.em_close = () => '</em>'
+    md.renderer.rules.em_open = () => '<em class="italic">';
+    md.renderer.rules.em_close = () => "</em>";
 
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, render) => {

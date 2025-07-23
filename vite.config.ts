@@ -217,7 +217,7 @@ export default defineConfig(() => {
         const environments = Object.values(builder.environments);
         console.log("environments", environments);
         return Promise.all(
-          environments.map((environment) => builder.build(environment)),
+          environments.map((environment) => builder.build(environment))
         );
       },
     },
@@ -269,8 +269,8 @@ export default defineConfig(() => {
       "process.env.RSS_BASE": JSON.stringify(
         `${getEnvValue(
           process.env.NODE_ENV || "github",
-          "VITE_APP_RSS_BASE_URL",
-        )}`,
+          "VITE_APP_RSS_BASE_URL"
+        )}`
       ),
     },
     plugins: [
@@ -396,14 +396,14 @@ export default defineConfig(() => {
     optimizeDeps: {
       // force: true,
       include: ["vue"],
-      exclude: [
-        "vitepress",
-        "echarts",
-      ],
+      exclude: ["vitepress", "echarts", "vitepress-plugin-legend"],
       // @ts-ignore
       rollupOptions: {
         jsx: "preserve",
       },
+      // esbuildOptions: {
+
+      // }
     },
   };
 });

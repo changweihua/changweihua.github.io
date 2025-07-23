@@ -39,3 +39,10 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "XiaolaiMono";
+  src: url('/fonts/XiaolaiMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
