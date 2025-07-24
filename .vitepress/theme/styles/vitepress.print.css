@@ -42,7 +42,7 @@
     display: none;
   }
 
-  #VSTPL span[class$="-text"] {
+  #VSTPL span[class$="-text"], #VSTPL div[class$="-text"], #vercount_container_site_pv, #vercount_container_site_uv {
     display: none;
   }
 

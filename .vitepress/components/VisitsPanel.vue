@@ -15,19 +15,14 @@ onMounted(function () {
   <div id="VSTPL" class="visits-panel">
     <div class="container">
       <section class="grid">
-        <span class="total-text text">
+        <!-- <span class="total-text text">
           <a-space
             ><span>总访问</span> <DacingNumber :target="siteVisitCount" /><span
               >次</span
             >
           </a-space>
-          <!-- <vue3-autocounter ref="siteVisitCounter" :startAmount="1000" :endAmount="siteVisitCount" :duration="3"
-            prefix="总访问" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" /> -->
-          <!-- <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 -->
         </span>
         <figure class="dacing-figure">
-          <!-- <section class="item-bg"></section>
-          <m-icon class="item" icon="svg-spinners:wind-toy" :width="32" :height="32" /> -->
           <DancingLogo />
         </figure>
         <span class="user-text text">
@@ -36,10 +31,17 @@ onMounted(function () {
               >次</span
             >
           </a-space>
-          <!-- <vue3-autocounter ref="userVisitCounter" :startAmount="500" :endAmount="userVisitCount" :duration="3"
-            prefix="总访客" suffix="次" separator="," decimalSeparator="." :decimals="0" :autoinit="true" /> -->
-          <!-- <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次 -->
-        </span>
+        </span> -->
+        <!-- Vercount用法 -->
+        <div class="total-text text" id="vercount_container_site_pv" style="display: none">
+          <div>本站访客数</div>
+          <span id="vercount_value_site_pv" class="font-bold">--</span>次
+        </div>
+        <DancingLogo />
+        <div class="user-text text" id="vercount_container_site_uv" style="display: none">
+          <div>本站总访问量</div>
+          <span id="vercount_value_site_uv" class="font-bold">--</span>人次
+        </div>
       </section>
     </div>
   </div>
@@ -49,7 +51,6 @@ onMounted(function () {
 .panel {
   margin-top: 12px;
   margin-bottom: 8px;
-
 }
 
 .visits-panel {
@@ -104,12 +105,9 @@ onMounted(function () {
 }
 </style>
 <style>
-
-
 @keyframes pulse {
   50% {
     transform: scale(1.5);
   }
 }
-
 </style>

@@ -198,6 +198,9 @@ mermaid.registerLayoutLoaders(elkLayouts);
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "vitepress-markdown-it-stepper/theme";
 
+// 导入hooks
+import useVisitData from '../hooks/useVisitData'
+
 import "virtual:group-icons.css";
 import "virtual:uno.css";
 import "animate.css";
@@ -527,7 +530,7 @@ export default {
             await router.go("/zh-CN/", {
               initialLoad: true,
               smoothScroll: true,
-              replace: true
+              replace: true,
             });
             return false;
           }
@@ -539,8 +542,10 @@ export default {
           return true;
         };
 
+        // 路由加载完成，在加载页面组件后（在更新页面组件之前）调用。
         router.onAfterPageLoad = async () => {
-          console.log("onAfterPageLoad");
+          console.log("onAfterPageLoad");// 调用统计访问接口hooks
+          useVisitData()
           NProgress.done(); // 停止进度条
           nextTick(function () {
             setupMediumZoom();
