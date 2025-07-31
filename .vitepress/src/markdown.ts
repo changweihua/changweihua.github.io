@@ -16,6 +16,7 @@ import hashmention from "markdown-it-hashmention";
 import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
 import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
+import markmapMarkdownPlugin from "../plugins/markdown/markmap-markdown";
 import markupPlugin from "../plugins/markdown/markup";
 import useDefinePlugin from "vitepress-plugin-markdown-define";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
@@ -98,7 +99,8 @@ const markdown: MarkdownOptions | undefined = {
     md.use(timeline);
     md.use(groupIconMdPlugin);
     md.use(echartsMarkdownPlugin);
-    md.use(markupPlugin);
+    md.use(markmapMarkdownPlugin);
+    // md.use(markupPlugin);
     md.use(MarkdownItCollapsible);
 
     const docRoot = fileURLToPath(new URL("../../", import.meta.url));

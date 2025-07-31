@@ -175,10 +175,10 @@ mermaid.registerIconPacks([
   // },
 ]);
 import zenuml from "@mermaid-js/mermaid-zenuml";
-mermaid.registerExternalDiagrams([zenuml], { lazyLoad: true });
+mermaid.registerExternalDiagrams([zenuml]);
 
-import elkLayouts from "@mermaid-js/layout-elk";
-mermaid.registerLayoutLoaders(elkLayouts);
+// import elkLayout from "@mermaid-js/layout-elk";
+// mermaid.registerLayoutLoaders(elkLayout);
 
 // mermaid.initialize({
 //   look: "handDrawn",
@@ -416,7 +416,7 @@ export default {
       // flowchart: { curve: "basis" },
       securityLevel: "loose",
       logLevel: "error",
-      suppressErrorRendering: false,
+      suppressErrorRendering: true,
       // startOnLoad: true,
       maxTextSize: 100000, // 防止大文本出错
       // ... other Mermaid configuration options

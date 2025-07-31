@@ -35,7 +35,7 @@ pageClass: gallery-page-class
 
 - 负责移动端应用架构，搭建基于H5的移动平台框架
 - 优化平台架构，[统一认证授权平台](/zh-CN/manual/kyt.md)
-- 搭建基于 iframe 的微前端架构，通过 postMessage 实现组件的全局通信，封装功能组件，实现抽象继承能力。
+- 搭建基于 `iframe` 的微前端架构，通过 `postMessage` 实现组件的全局通信，封装功能组件，实现抽象继承能力。
 
 ### 常州奔牛国际机场行李智能测量项目 ###
 

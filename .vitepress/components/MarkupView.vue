@@ -6,12 +6,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watch, onBeforeUnmount, h } from 'vue';
+import { ref, onMounted, onBeforeUnmount, h } from 'vue';
 import { Transformer } from 'markmap-lib';
-import { Markmap, loadCSS, loadJS } from 'markmap-view';
+import { Markmap } from 'markmap-view';
 import { Toolbar } from 'markmap-toolbar';
 import ResizeObserver from 'resize-observer-polyfill';
-import { useScreenfullEffect } from '@vp/utils/useScreenfullEffect'
+import { useScreenfullEffect } from '../utils/useScreenfullEffect'
 import { delay } from 'lodash-es'
 import screenfull from 'screenfull';
 import "markmap-toolbar/dist/style.css";
@@ -40,7 +40,6 @@ const renderToolbar = (mm: Markmap, wrapper: HTMLElement) => {
   while (wrapper?.firstChild) wrapper.firstChild.remove();
   if (mm && wrapper) {
     const toolbar = new Toolbar();
-    toolbar.setBrand(false); // 隐藏 toolbar 中 markmap 的logo和url
     toolbar.attach(mm);
     //toolbar.setItems([]); // 重新设置默认的功能模块
 
