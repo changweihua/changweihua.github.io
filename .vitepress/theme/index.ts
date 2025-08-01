@@ -88,6 +88,8 @@ import "nprogress-v2/dist/index.css"; // 进度条样式
 // 引入 Ant Design Vue
 import Antd from "ant-design-vue";
 
+import "@catppuccin/vitepress/theme/frappe/lavender.css";
+
 import "./styles/index.scss";
 import "./styles/vitepress.ext.scss";
 import "./styles/vitepress.print.css";
@@ -207,6 +209,12 @@ import "animate.css";
 
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
+import { setupMultipleChoice } from "markdown-it-multiple-choice";
+import "markdown-it-multiple-choice/style.css";
+
+import "markdown-it-github-alerts/styles/github-colors-light.css";
+import "markdown-it-github-alerts/styles/github-colors-dark-media.css";
+import "markdown-it-github-alerts/styles/github-base.css";
 
 // import { initComponent } from 'vitepress-mermaid-preview/component';
 // import 'vitepress-mermaid-preview/dist/index.css';
@@ -579,5 +587,6 @@ export default {
         }; expires=${new Date().toUTCString()}; path=/`;
       }
     });
+    // setupMultipleChoice();
   },
 } satisfies Theme;

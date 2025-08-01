@@ -31,6 +31,12 @@ import glossary from "../glossary.json";
 import { fmTitlePlugin } from "vitepress-plugin-frontmatter";
 import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
 import { vitepressPluginLegend } from "vitepress-plugin-legend";
+import MarkdownItGitHubAlerts from "markdown-it-github-alerts";
+import markdownItRegex from "markdown-it-regex";
+import markdownItReplaceLink from "markdown-it-replace-link";
+import multipleChoicePlugin from "markdown-it-multiple-choice";
+import markdownItTableExt from "markdown-it-multimd-table-ext";
+import markdownItCjkFriendly from "markdown-it-cjk-friendly";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -71,6 +77,7 @@ const markdown: MarkdownOptions | undefined = {
   config: (md) => {
     useDefinePlugin(md, CONSTS);
 
+    md.use(markdownItCjkFriendly);
     md.use(footnote);
     md.use(frontmatter);
     md.use(markdownSup);
@@ -102,16 +109,35 @@ const markdown: MarkdownOptions | undefined = {
     md.use(markmapMarkdownPlugin);
     // md.use(markupPlugin);
     md.use(MarkdownItCollapsible);
-
+    md.use(MarkdownItGitHubAlerts, {
+      /* Options */
+      markers: "*",
+    });
+    // md.use(markdownItRegex, {
+    //   name: "emoji",
+    //   regex: /(:(?:heart|panda_face|car):)/,
+    //   replace: (match) => {
+    //     return `<i class="e1a-${match.slice(1, -1)}"></i>`;
+    //   },
+    // });
+    // md.use(markdownItTableExt, {
+    //   multiline: true,
+    //   rowspan: false,
+    //   headerless: true,
+    //   multibody: true,
+    //   autolabel: true,
+    // });
     const docRoot = fileURLToPath(new URL("../../", import.meta.url));
     md.use(demoPreviewPlugin, {
       docRoot,
     });
 
+    // md.use(multipleChoicePlugin);
+
     md.use(vitepressDemoPlugin, {
       demoDir: path.resolve(__dirname, "../../src/demos"),
       lightTheme: "catppuccin-latte",
-      darkTheme: "catppuccin-mocha",
+      darkTheme: "catppuccin-frappe",
       tabs: {
         order: "html,vue,react",
         select: "vue",
@@ -125,6 +151,13 @@ const markdown: MarkdownOptions | undefined = {
     });
     md.use(autoArticleTitlePlugin, {
       relativePaths: ["/blog/"],
+    });
+
+    md.use(markdownItReplaceLink, {
+      processHTML: false, // defaults to false for backwards compatibility
+      replaceLink: function (link, env, token, htmlToken) {
+        return link + "?c=" + Date.now();
+      },
     });
 
     // // @ts-ignore

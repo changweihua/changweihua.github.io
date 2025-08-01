@@ -390,7 +390,7 @@ export default defineConfig(() => {
       // mainFields: []
     },
     ssr: {
-      noExternal: ["fs"], // Externalize Node.js modules
+      noExternal: ["fs", 'markdown-it-multiple-choice'], // Externalize Node.js modules
     },
     // 强制预构建
     optimizeDeps: {

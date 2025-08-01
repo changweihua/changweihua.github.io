@@ -5,13 +5,10 @@ pageClass: gallery-page-class
 
 <HoverableText title="2025" /> 
 
-<br />
-
-<!-- <Robot /> -->
-
+> [!IMPORTANT] 年度关键词
 > 开花不一定结果，努力一定不会辜负青春。
 > 
-> 2025 对饮 2026 笃行
+> 2025 对饮 2026 笃行。
 
 ### Yolo 8~12 ###
 
@@ -50,3 +47,18 @@ pageClass: gallery-page-class
 - 配合完成微信认证和备案
 - 上线巴士管家功能模块
 - 更新小程序图片资源
+
+
+> [!NOTE]
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!WARNING]
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+
+<!-- <Robot /> -->
