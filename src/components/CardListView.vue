@@ -105,7 +105,7 @@ defineProps({
 .card {
   height: 350px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
-  background-color: #fff;
+  background-color: var(--vp-c-bg-soft);
   width: 100%;
   position: relative;
   border-radius: 12px;
@@ -120,7 +120,7 @@ defineProps({
 
 .card__info {
   z-index: 2;
-  background-color: #fff;
+  background-color: var(--vp-c-bg-soft);
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   padding: 16px 24px 24px 24px;
@@ -132,7 +132,7 @@ defineProps({
   font-size: 22px;
   letter-spacing: 2px;
   font-weight: 500;
-  color: #868686;
+  color: var(--vp-c-brand);
 }
 
 .card__title {

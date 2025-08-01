@@ -56,6 +56,7 @@ onMounted(function () {
 .visits-panel {
   z-index: var(--vp-z-index-footer);
   background-color: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
 }
 
 .item-bg {

@@ -158,7 +158,6 @@
     "animate.css": "^4.1.1",
     "animejs": "3.2.2",
     "ant-design-vue": "4.2.6",
-    "colorthief": "^2.6.0",
     "cross-env": "^10.0.0",
     "crypto": "^1.0.1",
     "dayjs": "^1.11.13",

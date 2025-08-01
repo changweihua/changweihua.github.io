@@ -8,15 +8,25 @@
           left: blot.left,
           right: blot.right,
           bottom: blot.bottom,
-          animationDelay: blot.delay,
+  animationDelay: blot.delay,
+          background: `radial-gradient(circle, rgba(229, 225, 233, 0.95) 80%, rgba(239, 235, 233, 0.85) 90%)`
         }"
       />
     </template>
     <Content>
       <Svg404 viewBox="0 0 200 100">
-        <path d="M30,80 L30,20 M30,50 L70,10 M70,10 L70,80" />
-        <path d="M90,80 C90,20 150,20 150,80 C150,140 90,140 90,80 Z" />
-        <path d="M170,80 L170,20 M170,50 L210,10 M210,10 L210,80" />
+        <path
+          :style="{ stroke: theme.svgStroke }"
+          d="M30,80 L30,20 M30,50 L70,10 M70,10 L70,80"
+        />
+        <path
+          :style="{ stroke: theme.svgStroke }"
+          d="M90,80 C90,20 150,20 150,80 C150,140 90,140 90,80 Z"
+        />
+        <path
+          :style="{ stroke: theme.svgStroke }"
+          d="M170,80 L170,20 M170,50 L210,10 M210,10 L210,80"
+        />
       </Svg404>
 
       <Title>页面未寻得</Title>
@@ -25,14 +35,53 @@
         或返首页，或观他处，皆可随心
       </Subtitle>
 
-      <Button @click="goHome"> 返回首页 </Button>
+      <Button
+        :style="{ border: theme.buttonBorder, color: theme.buttonColor }"
+        @click="goHome"
+      >
+        返回首页
+      </Button>
     </Content>
   </Container>
 </template>
 
 <script setup lang="ts">
 import { styled, keyframes } from "@vue-styled-components/core";
-import { onMounted, nextTick, ref } from "vue";
+import { useData } from "vitepress";
+import { onMounted, nextTick, ref, watch, reactive } from "vue";
+
+const { isDark } = useData();
+const theme = reactive({
+  svgStroke: "#333",
+  buttonColor: "#333",
+  buttonBorder: "1px solid #333",
+  inkBackground: "radial-gradient(circle, rgba(30, 174, 255, 0.5) 80%, rgba(30, 174, 255, 0.7) 90%)"
+});
+
+// 监听主题变化
+watch(
+  () => isDark.value,
+  (newVal) => {
+    console.log("主题模式变化:", newVal ? "深色" : "浅色");
+
+    // 执行自定义操作
+    if (newVal) {
+      // 深色模式逻辑
+      theme.svgStroke = "#fff";
+      theme.buttonColor = "#fff";
+      theme.buttonBorder = "1px solid #fff";
+      theme.inkBackground = "radial-gradient(circle, rgba(229, 225, 233, 0.95) 80%, rgba(239, 235, 233, 0.85) 90%)";
+    } else {
+      // 浅色模式逻辑
+      theme.svgStroke = "#333";
+      theme.buttonColor = "#333";
+      theme.buttonBorder = "1px solid #333";
+      theme.inkBackground = "radial-gradient(circle, rgba(30, 174, 255, 0.5) 80%, rgba(30, 174, 255, 0.7) 90%)";
+    }
+  }, {
+    immediate: true
+  }
+);
 
 function goHome() {
   window.location.href = "/";
@@ -72,8 +121,8 @@ const InkBlot = styled.div`
   height: ${(props: any) => props.size}px;
   background: radial-gradient(
     circle,
-    rgba(249, 245, 233, 0.95) 30%,
-    rgba(249, 245, 233, 0.85) 60%
+    rgba(229, 225, 233, 0.95) 80%,
+    rgba(239, 235, 233, 0.85) 90%
   );
   border-radius: 50%;
   animation: ${inkSpread} 3s ease-out infinite;
@@ -94,7 +143,7 @@ const Svg404 = styled.svg`
   margin-bottom: 2rem;
 
   path {
-    stroke: #333;
+    stroke: ${theme.svgStroke};
     stroke-width: 2;
     fill: none;
     stroke-dasharray: 1000;
@@ -114,7 +163,7 @@ const Svg404 = styled.svg`
 
 const Title = styled.h1`
   font-size: 2.5rem;
-  color: #333;
+  color: inherit;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 5px;
@@ -122,7 +171,7 @@ const Title = styled.h1`
 
 const Subtitle = styled.p`
   font-size: 1.1rem;
-  color: #666;
+  color: inherit;
   line-height: 1.8;
   margin-bottom: 2rem;
 `;
@@ -130,8 +179,8 @@ const Subtitle = styled.p`
 const Button = styled.button`
   padding: 12px 32px;
   background: transparent;
-  color: #333;
-  border: 1px solid #333;
+  color: ${theme.buttonColor};
+  border: ${theme.buttonBorder};
   border-radius: 0;
   font-size: 1rem;
   cursor: pointer;

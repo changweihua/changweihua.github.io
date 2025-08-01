@@ -6,13 +6,7 @@
     >
       <div
         class="palette-card linkcard flex flex-col justify-center"
-        @mouseenter="handleMouseEnter($event.target, i)"
-        @mouseleave="handleMouseLeave"
-        :style="{
-          opacity: hoverIndex === -1 ? 1 : i === hoverIndex ? 1 : 0.6,
-          transition: '0.5s',
-        }"
-        v-for="(category, i) in categories"
+        v-for="(category) in categories"
       >
         <a :href="category.link">
           <p class="description">
@@ -49,34 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTemplateRef, ref } from "vue";
-import ColorThief from "colorthief";
-// import CoverWorker from "@/workers/cover-worker?worker";
-
-// const coverWorker = new CoverWorker();
-
-// //监听 Web Worker 返回的数据,并销毁
-// coverWorker.onmessage = async (e) => {
-//   // coverWorker.terminate()
-//   console.log("接收数据" + e);
-
-//   const { colors, index } = e.data;
-//   //通过操作dom修改页面的背景颜色，将背景颜色设置为向右的三色渐变背景
-
-//   const card =
-//     document.querySelectorAll<HTMLDivElement>(".palette-card")[index];
-//   if (card) {
-//     card.style.setProperty(
-//       "background",
-//       `linear-gradient(to right, ${colors[0]}, ${colors[1]},${colors[2]})`
-//     );
-//   }
-// };
-// // 监听报错
-// coverWorker.onerror = (err) => {
-//   console.error("Worker error:", err);
-//   coverWorker.terminate();
-// };
+import { useTemplateRef } from "vue";
 
 const palette = useTemplateRef<HTMLDivElement>("palette");
 
@@ -92,44 +59,6 @@ interface CategoryItem {
 defineProps({
   categories: Array<CategoryItem>,
 });
-
-let colorThief: ColorThief
-
-//创建响应式变量，用来区分图片的移入和移出的状态
-const hoverIndex = ref(-1);
-//鼠标移入函数
-const handleMouseEnter = async (img, i) => {
-  if (!colorThief) {
-    colorThief=  new ColorThief()
-  }
-  hoverIndex.value = i;
-  // 向 Web Worker 发送数据
-  // coverWorker.postMessage({ image: img, index: i });
-  if (img.querySelector("img")) {
-    const colors = await colorThief.getPalette(img.querySelector("img"), 3);
-    console.log('colors', colors)
-    const card =
-      document.querySelectorAll<HTMLDivElement>(".palette-card")[i];
-    if (card) {
-      card.style.setProperty(
-        "background",
-        `linear-gradient(to right, ${colors[0]}, ${colors[1]},${colors[2]}) !important`
-      );
-    }
-  }
-};
-
-//离开图片时将页面背景颜色重置为白色
-const handleMouseLeave = () => {
-  const card =
-    document.querySelectorAll<HTMLDivElement>(".palette-card")[
-      hoverIndex.value
-    ];
-  if (card) {
-    card.style.setProperty("background", "var(--vp-c-bg-soft)");
-    hoverIndex.value = -1;
-  }
-};
 </script>
 
 <style scoped>
@@ -158,6 +87,7 @@ const handleMouseLeave = () => {
 
 .linkcard {
   position: relative;
+  height: 120px;
 }
 
 /* 卡片背景 */
@@ -170,7 +100,7 @@ const handleMouseLeave = () => {
 
 /* 卡片鼠标悬停 */
 .linkcard:hover {
-  background-color: var(--vp-c-yellow-soft);
+  background-color: var(--vp-c-white);
 }
 
 /* 链接样式 */

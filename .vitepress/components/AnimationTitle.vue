@@ -60,7 +60,7 @@ onMounted(() => {
         </path>
       </svg>
     </h1>
-    <p v-if="text" class="text contrast wave-title">{{ text }}</p>
+    <p v-if="text" class="text">{{ text }}</p>
     <!-- <p v-if="tagline" class="tagline">
     {{ tagline }}
   </p> -->
