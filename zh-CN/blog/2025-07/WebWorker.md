@@ -6,7 +6,7 @@ title: WebWorker实现获取 视频缩略图、大数组排序 和 CSV数据解�
 description: WebWorker实现获取 视频缩略图、大数组排序 和 CSV数据解析
 date: 2025-07-01 10:05:00 
 pageClass: blog-page-class
-cover: /covers/java-script.svg
+cover: /covers/javascript.svg
 ---
 
 

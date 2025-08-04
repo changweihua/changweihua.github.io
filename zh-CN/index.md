@@ -26,6 +26,12 @@ hero:
     #   link: https://github.com/changweihua
 
 features:
+  - title: 华东凯亚雀巢平台
+    icon:
+      src: /nestwise.png
+      alt: 华东凯亚雀巢平台
+    details: 华东凯亚雀巢平台
+    link: /zh-CN/gallery/nestwise
   - title: 🍃扬泰机场智能机器人
     icon:
       src: /ai_robot.svg
