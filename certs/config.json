@@ -4,11 +4,11 @@
       "localhost",
       "80.0.20.22",
       "127.0.0.1",
-      "172.19.96.1"
+      "172.30.208.1"
     ],
     "hash": {
-      "key": "bb1a2a2128056dda2e83c41c6e825ab24a6625f7bc1323cc235d52268f71930e",
-      "cert": "749355a001a33473f9b235bf8a2891f88ab17ddd1a06b145306e7c832fb3f656"
+      "key": "d6011662b58794ee563c18b3768b796eb1d418ed596522e9d0360cf47f172932",
+      "cert": "943dc31e8c70315e8eecf195ae551b170007cb193c90ec6881d6d109401572b3"
     }
   },
   "configFilePath": "D:\\Github\\changweihua.github.io\\certs\\config.json"

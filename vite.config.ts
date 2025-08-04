@@ -390,13 +390,13 @@ export default defineConfig(() => {
       // mainFields: []
     },
     ssr: {
-      noExternal: ["fs", 'markdown-it-multiple-choice'], // Externalize Node.js modules
+      noExternal: ["fs", "markdown-it-multiple-choice"], // Externalize Node.js modules
     },
     // 强制预构建
     optimizeDeps: {
       // force: true,
       include: ["vue"],
-      exclude: ["vitepress", "echarts"],
+      exclude: ["vitepress", "echarts", "@dhlx/vitepress-plugin-mindmap"],
       // @ts-ignore
       rollupOptions: {
         jsx: "preserve",

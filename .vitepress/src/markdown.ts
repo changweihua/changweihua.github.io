@@ -172,10 +172,10 @@ const markdown: MarkdownOptions | undefined = {
     md.renderer.rules.table_close = () => "</table>";
 
     // 修改表头单元格样式
-    md.renderer.rules.th_open = () =>
-      '<th style="border: 1px solid #ddd; padding: 8px; background: #f5f5f5;">';
-    md.renderer.rules.td_open = () =>
-      '<td style="border: 1px solid #ddd; padding: 8px;">';
+    // md.renderer.rules.th_open = () =>
+    //   '<th style="border: 1px solid #ddd; padding: 8px; background: #f5f5f5;">';
+    // md.renderer.rules.td_open = () =>
+    //   '<td style="border: 1px solid #ddd; padding: 8px;">';
 
     // 自定义加粗文本的渲染
     md.renderer.rules.strong_open = () => '<strong class="font-bold">';

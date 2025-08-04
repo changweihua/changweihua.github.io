@@ -49,7 +49,7 @@ Test #hahstag @user
 @@你知道的太多了@@
 
 
-```markup
+```mindmap
 
 # 微前端
 

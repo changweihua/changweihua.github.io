@@ -260,6 +260,45 @@ flowchart LR
     C -->|No| E[Result 2]
 ```
 
+
+
+```mermaid
+flowchart-elk TD
+  A --> B
+  A --> C
+```
+
+
+```mermaid
+---
+config:
+  layout: elk
+---
+flowchart TD
+  A --> B
+  A --> C
+```
+
+
+```mermaid
+---
+config:
+  layout: elk.stress
+---
+
+flowchart TD
+  A --> B
+  A --> C
+```
+
+
+```mermaid
+flowchart-elk TD
+  A --> B
+  A --> C
+```
+
+
 ## 时间线图 ##
 
 

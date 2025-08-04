@@ -28,8 +28,8 @@
           d="M170,80 L170,20 M170,50 L210,10 M210,10 L210,80"
         />
       </Svg404>
-
-      <Title>页面未寻得</Title>
+      <h3>{{currentPagePath}}</h3><br />
+      <Title>未寻得</Title>
       <Subtitle>
         所觅之页，如墨入水，散于无形<br />
         或返首页，或观他处，皆可随心
@@ -48,9 +48,10 @@
 <script setup lang="ts">
 import { styled, keyframes } from "@vue-styled-components/core";
 import { useData } from "vitepress";
-import { onMounted, nextTick, ref, watch, reactive } from "vue";
+import { onMounted, nextTick, ref, watch, reactive, computed } from "vue";
 
-const { isDark } = useData();
+const { isDark, page } = useData();
+const currentPagePath = computed(() => page.value.relativePath.replace('.md', '.html'))
 const theme = reactive({
   svgStroke: "#333",
   buttonColor: "#333",
