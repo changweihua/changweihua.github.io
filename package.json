@@ -243,5 +243,5 @@
     "vitepress": "^2.0.0-alpha.9",
     "vue": "^3.5.18"
   },
-  "version": "0.7.1"
+  "version": "0.7.2"
 }
