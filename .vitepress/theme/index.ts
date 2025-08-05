@@ -209,8 +209,8 @@ import "animate.css";
 
 import vitepressBackToTop from "vitepress-plugin-back-to-top";
 import "vitepress-plugin-back-to-top/dist/style.css";
-import { setupMultipleChoice } from "markdown-it-multiple-choice";
-import "markdown-it-multiple-choice/style.css";
+// import { setupMultipleChoice } from "markdown-it-multiple-choice";
+// import "markdown-it-multiple-choice/style.css";
 
 import "markdown-it-github-alerts/styles/github-colors-light.css";
 import "markdown-it-github-alerts/styles/github-colors-dark-media.css";
@@ -591,6 +591,8 @@ export default {
       }
     });
     // setupMultipleChoice();
-    // useMermaidPanZoom();
+    // if (inBrowser) {
+    //   useMermaidPanZoom();
+    // }
   },
 } satisfies Theme;

@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.bootcdn.net/ajax/libs/animejs/3.2.2/anime.min.js"></script>
-  <script>
-    anime({
-      targets: 'div',
-      translateX: 250,
-      rotate: '1turn',
-      backgroundColor: '#FFF',
-      duration: 800
-    });
-  </script>
-</head>
-<body>
-  <div style="width: 50px;height: 50px;background: red;"></div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>AnimeJS</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+    <script>
+      anime({
+        targets: "div",
+        translateX: 250,
+        rotate: "1turn",
+        backgroundColor: "#FFF",
+        duration: 800,
+      });
+    </script>
+    <style>
+      .container {
+        width: 50px;
+        height: 50px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+  </body>
 </html>
