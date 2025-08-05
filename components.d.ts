@@ -14,6 +14,7 @@ declare module 'vue' {
     BackgroundCleaner: typeof import('./src/components/BackgroundCleaner.vue')['default']
     CardListView: typeof import('./src/components/CardListView.vue')['default']
     ConfigProvider: typeof import('./src/components/ConfigProvider.vue')['default']
+    CursorShineCards: typeof import('./src/components/CursorShineCards.vue')['default']
     FloatingMenu: typeof import('./src/components/FloatingMenu.vue')['default']
     HoverableCard: typeof import('./src/components/HoverableCard.vue')['default']
     IconLogosMarkdown: typeof import('~icons/logos/markdown')['default']

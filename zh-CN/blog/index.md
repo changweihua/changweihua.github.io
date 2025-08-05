@@ -13,7 +13,7 @@ head:
 
 <a-spin :spinning="spinning" size="large" :delay="delayTime">
   <div class="flex p-6 justify-center items-center">
-    <LinkListView :categories="categories" />
+    <CursorShineCards :categories="categories" />
   </div>
 </a-spin>
 <!-- 
@@ -24,6 +24,7 @@ head:
 import { onMounted, ref } from "vue";
 import { delay } from "lodash-es";
 import LinkListView from '@/components/LinkListView.vue';
+import CursorShineCards from '@/components/CursorShineCards.vue';
 import BlogIndex from "@vp/components/BlogIndex.vue"
 import { useData } from 'vitepress'
 import { data } from '@vp/blog.data'
