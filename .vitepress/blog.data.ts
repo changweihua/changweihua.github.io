@@ -5,6 +5,7 @@
 
 // Support i18n in contentLoader
 import { createContentLoader, type ContentData, type SiteConfig } from 'vitepress'
+import date from "./utils/date";
 
 export interface Post {
   title: string
@@ -78,16 +79,10 @@ export default createContentLoader([
 })
 
 function formatDate(raw: string): Post['date'] {
-  const date = new Date(raw)
-  date.setUTCHours(12)
   return {
-    time: +date,
-    string: date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
+    time: date.tz(`${raw}:00`, "Asia/Shanghai").valueOf(),
+    string: date.tz(`${raw}:00`, "Asia/Shanghai").format("YYYY-MM-DD HH:mm"),
+  };
 }
 
 

@@ -111,18 +111,18 @@ function handleCardElMouseProperty(e) {
 <style>
 :root {
   --fl-color: rgba(239, 68, 68, 1);
-  --card-bg-color: var(--vp-c-white);
+  --card-bg-color: var(--vp-c-bg-soft);
 }
 </style>
 <style lang="scss" scoped>
-#cards-container {
-  // display: flex;
-  // flex-wrap: wrap;
-  // gap: 8px;
-  // max-width: 916px;
-  // width: calc(100% - 20px);
-  background-color: var(--card-bg-color);
-}
+// #cards-container {
+//   // display: flex;
+//   // flex-wrap: wrap;
+//   // gap: 8px;
+//   // max-width: 916px;
+//   // width: calc(100% - 20px);
+//   // background-color: var(--card-bg-color);
+// }
 
 #cards-container:hover > .card::after {
   opacity: 1;
@@ -137,7 +137,7 @@ function handleCardElMouseProperty(e) {
   border-radius: 10px;
   cursor: pointer;
   display: flex;
-  min-height: 160px;
+  min-height: 120px;
   height: auto;
   flex-direction: column;
   position: relative;
@@ -207,9 +207,9 @@ i {
 }
 
 /* 卡片鼠标悬停 */
-.card-info:hover {
-  background-color: var(--vp-c-white);
-}
+// .card-info:hover {
+//   background-color: var(--vp-c-white);
+// }
 
 /* 链接样式 */
 .card-info a {

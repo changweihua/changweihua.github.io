@@ -279,12 +279,19 @@ export default withMermaid(
       look: "handDrawn",
       handDrawnSeed: 3,
       startOnLoad: false,
+      layout: "elk",
       fontFamily:
         "XiaolaiMono, MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
       altFontFamily:
         "XiaolaiMono, MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
       theme: "neutral",
-      flowchart: { curve: "basis" },
+      flowchart: { curve: "basis", defaultRenderer: "elk" },
+      class: {
+        defaultRenderer: "elk",
+      },
+      state: {
+        defaultRenderer: "elk",
+      },
       securityLevel: "loose",
       logLevel: "error",
       suppressErrorRendering: true,

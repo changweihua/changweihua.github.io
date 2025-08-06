@@ -24,6 +24,17 @@ export function getDate(date: string | Date | undefined): string | null {
   return null;
 }
 
+export function getDateTime(date: string | Date | undefined): string | null {
+  if (date) {
+    const time = dayjs(date);
+    if (time.isValid()) {
+      const currentTime = dayjs(date).format("YYYY-MM-DD HH:mm");
+      return currentTime;
+    }
+  }
+  return null;
+}
+
 export function getFromNow(date: string | Date): string | null {
   if (date) return dayjs(date).utc().local().fromNow();
 
