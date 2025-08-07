@@ -11,10 +11,10 @@
       :key="index"
       :ref="e => setCardListRef(e as unknown as HTMLElement)"
     >
-      <div class="card-content">
+      <div class="card-content px-2 sm:px-8">
         <slot :item="item" :index="index">
-          <div class="card-info w-full flex flex-col justify-center">
-            <a :href="item.link">
+          <div class="card-info w-full  flex flex-col  justify-center">
+            <a :href="item.link" class="card-link flex flex-row gap-5 md:gap-10">
               <p class="description">
                 {{ item.title }}<br /><span>{{ item.description }}</span>
               </p>
@@ -180,7 +180,6 @@ function handleCardElMouseProperty(e) {
   display: flex;
   flex-grow: 1;
   justify-content: flex-start;
-  padding: 0px 20px;
 }
 .card-content:hover {
   opacity: 0.9;
@@ -196,20 +195,10 @@ i {
 .card-info {
   position: relative;
   height: 120px;
-}
-
-/* 卡片背景 */
-.card-info {
   // background-color: var(--vp-c-bg-soft);
   border-radius: 8px;
-  padding: 8px 16px 8px 8px;
   transition: color 0.5s, background-color 0.5s;
 }
-
-/* 卡片鼠标悬停 */
-// .card-info:hover {
-//   background-color: var(--vp-c-white);
-// }
 
 /* 链接样式 */
 .card-info a {

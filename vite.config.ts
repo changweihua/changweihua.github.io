@@ -13,6 +13,7 @@ import { envParse } from "vite-plugin-env-parse";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
+import vitePluginTryCatchConsole from "./plugins/vite-plugin-try-catch-console";
 import versionInjector from "unplugin-version-injector/vite";
 import imagePreload from "vite-plugin-image-preload";
 import { robots } from "vite-plugin-robots";
@@ -114,6 +115,7 @@ function getDevPlugins() {
     Inspect(),
     envParse(),
     yourPlugin(),
+    vitePluginTryCatchConsole(),
     vitePluginFakeServer({
       include: "fake", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: true, // 是否在生产环境下设置mock
@@ -170,7 +172,7 @@ function getDevPlugins() {
       savePath: "./certs", // save the generated certificate into certs directory
       autoUpgrade: false,
       force: false, // force generation of certs even without setting https property in the vite config
-    })
+    }),
   ];
 }
 
@@ -392,6 +394,7 @@ export default defineConfig(() => {
     ssr: {
       noExternal: ["fs", "markdown-it-multiple-choice"], // Externalize Node.js modules
     },
+    esbuild: false,
     // 强制预构建
     optimizeDeps: {
       // force: true,
@@ -401,6 +404,7 @@ export default defineConfig(() => {
       rollupOptions: {
         jsx: "preserve",
       },
+      esbuild: false
       // esbuildOptions: {
 
       // }

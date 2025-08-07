@@ -2,8 +2,8 @@
 lastUpdated: true
 commentabled: true
 recommended: true
-title: 从零开始学习 React Native：初识ReactNative架构
-description: 从零开始学习 React Native：初识ReactNative架构
+title: 初识 React Native 架构
+description: 初识 React Native 架构
 date: 2025-08-06 14:25:00  
 pageClass: blog-page-class
 cover: /covers/reactive.svg
@@ -102,7 +102,7 @@ sequenceDiagram
 
 ## 🚄 JSX → Native UI 全流程 ##
 
-转换节点与负责模块
+### 转换节点与负责模块 ###
 
 ```mermaid
 flowchart TD
