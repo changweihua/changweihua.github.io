@@ -1,127 +1,160 @@
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-Thin.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Thin.woff2") format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-ThinItalic.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ThinItalic.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ThinItalic.woff") format("woff");
   font-weight: 100;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraLight.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraLight.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraLight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraLightItalic.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraLightItalic.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraLightItalic.woff")
+      format("woff");
   font-weight: 200;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-Light.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Light.woff2") format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-LightItalic.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-LightItalic.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-LightItalic.woff")
+      format("woff");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-Regular.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Regular.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-Italic.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Italic.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Italic.woff") format("woff");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-Medium.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Medium.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-MediumItalic.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-MediumItalic.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-MediumItalic.woff")
+      format("woff");
   font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-SemiBold.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-SemiBold.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-SemiBoldItalic.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-SemiBoldItalic.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-SemiBoldItalic.woff")
+      format("woff");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-Bold.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Bold.woff2") format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-BoldItalic.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-BoldItalic.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-BoldItalic.woff") format("woff");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraBold.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraBold.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraBold.woff") format("woff");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MapleMono';
-  src: url('/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraBoldItalic.woff2') format('woff2');
+  font-family: "MapleMono";
+  src: url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraBoldItalic.woff2")
+      format("woff2"),
+    url("/fonts/MapleMono/woff2/MapleMono-NF-CN-ExtraBoldItalic.woff")
+      format("woff");
   font-weight: 800;
   font-style: italic;
   font-display: swap;

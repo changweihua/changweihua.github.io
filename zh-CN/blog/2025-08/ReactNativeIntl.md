@@ -92,7 +92,7 @@ export default i18n;
 
 函数组件：
 
-```react
+```jsx
 import { useTranslation } from 'react-i18next';
 
 const App = () => {

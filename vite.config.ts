@@ -327,6 +327,8 @@ export default defineConfig(() => {
     ],
     css: {
       lightningcss: {
+        // 关键配置：标记 deep 为合法伪类
+        pseudoClasses: { deep: true },
         // 禁用特定优化
         minify: true,
         drafts: {
@@ -408,6 +410,14 @@ export default defineConfig(() => {
       // esbuildOptions: {
 
       // }
+    },
+    vite: {
+      css: {
+        transformer: "lightningcss",
+      },
+      build: {
+        cssMinify: 'lightningcss'
+      }
     },
   };
 });
