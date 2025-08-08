@@ -30,7 +30,7 @@
     "pkg:patch": "patch-package",
     "deploy:win": "powershell scripts/autoDeploy.bat",
     "font:prepare": "node scripts/font_extractor.cjs",
-    "font:build": "node scripts/font_reset.cjs && font-spider font/index.html --no-backup && node scripts/font_move.cjs",
+    "font:build": "node scripts/font_reset.cjs && npx font-spider fonts-spider/index.html --no-backup && node scripts/font_move.cjs",
     "font:test": "node --disable-warning=ExperimentalWarning --env-file .env scripts/env-test.ts",
     "lint": "eslint --fix --ext .ts,.js,.vue src test/unit",
     "fix-memory-limit": "cross-env LIMIT=8048 increase-memory-limit",
