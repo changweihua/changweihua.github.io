@@ -79,6 +79,16 @@ export default defineConfig({
   // ],
   // safelist: Object.values(icons).flat() as string[],
   theme: {
+    animation: {
+      keyframes: {
+        'fade-in': '{0% {opacity:0;} 100% {opacity:1;}}',
+        'slide-in': '{0% {transform:translateX(-100%);} 100% {transform:translateX(0);}}'
+      },
+      durations: {
+        'fade-in': '0.5s',
+        'slide-in': '0.8s'
+      }
+    },
     colors: {
       primary: "#3eaf7c",
     },

@@ -7,7 +7,7 @@
   >
     <div
       v-for="(item, index) in categories"
-      class="card"
+      class="card animate-fade-in animate-duration-500 transform-gpu"
       :key="index"
       :ref="e => setCardListRef(e as unknown as HTMLElement)"
     >
@@ -15,12 +15,12 @@
         <slot :item="item" :index="index">
           <div class="card-info w-full  flex flex-col  justify-center">
             <a :href="item.link" class="card-link flex flex-row gap-5 md:gap-10">
-              <p class="description">
-                {{ item.title }}<br /><span>{{ item.description }}</span>
+              <p class="description flex flex-col gap-3">
+                <span class="overflow-hidden1 whitespace-nowrap1 text-ellipsis1 w1-75" v-html="marked.parse(item.title)"></span><span>{{ item.description }}</span>
               </p>
               <div class="logo">
                 <img
-                  class="rounded-sm"
+                  class="rounded-sm object-cover transition-transform duration-500 group-hover:scale-105"
                   crossorigin="anonymous"
                   width="70px"
                   height="70px"
@@ -51,6 +51,8 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, PropType, ref } from "vue";
+import { marked } from "marked";
+
 defineOptions({
   name: "CursorShineCards",
 });
@@ -115,14 +117,16 @@ function handleCardElMouseProperty(e) {
 }
 </style>
 <style lang="scss" scoped>
-// #cards-container {
+ #cards-container {
+  font-family: MapleMono, "JetBrains Maple Mono", AlibabaPuHuiTi,
+    "阿里巴巴普惠体 3.0" !important;
 //   // display: flex;
 //   // flex-wrap: wrap;
 //   // gap: 8px;
 //   // max-width: 916px;
 //   // width: calc(100% - 20px);
 //   // background-color: var(--card-bg-color);
-// }
+ }
 
 #cards-container:hover > .card::after {
   opacity: 1;

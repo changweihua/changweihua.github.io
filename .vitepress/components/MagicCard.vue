@@ -43,7 +43,7 @@ body {
   font-size: 1.5em;
   color: rgb(88 199 250 / 0%);
   cursor: pointer;
-  font-family: cursive;
+  font-family: XiaolaiMono;
 }
 
 .card:hover {

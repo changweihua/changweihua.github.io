@@ -685,3 +685,32 @@ a.VPSkipLink::after {
     background-color: rgba(0, 0, 0, 0.03) !important;
   }
 }
+
+// :root {
+//     /* 标题 */
+//     --vp-home-hero-name-color: transparent;
+//     --vp-home-hero-name-background: linear-gradient(135deg, #FF6F91 0%, #FF9AAB 100%); /* 更新渐变色 */
+//     --vp-home-hero-name-font-size: 4rem; /* 调整标题大小 */
+//     --vp-home-hero-name-font-weight: bold; /* 加粗标题 */
+//     --vp-home-hero-name-text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* 添加文字阴影 */
+
+//     /* 图标背景 */
+//     --vp-home-hero-image-background-image: linear-gradient(135deg, #FF6F91 10%, #FF9AAB 100%); /* 更新渐变色 */
+//     --vp-home-hero-image-filter: blur(80px); /* 调整模糊程度 */
+
+//     /* 背景 */
+//     --vp-home-hero-background-color: rgba(255, 255, 255, 0.9); /* 增强半透明背景 */
+
+//     /* 按钮样式 */
+//     --vp-button-brand-border: #FFB6C1; /* 浅粉色 */
+//     --vp-button-brand-text: #e89ba7; /* 浅粉色 */
+//     --vp-button-brand-bg: linear-gradient(135deg, #FF6F91, #FFB6C1); /* 渐变背景 */
+
+//     --vp-button-brand-hover-border: #FF6F91; /* 悬停边框色 */
+//     --vp-button-brand-hover-text: #FF6F91; /* 悬停文本色 */
+//     --vp-button-brand-hover-bg: linear-gradient(135deg, #FF6F91, #FFB6C1); /* 渐变背景 */
+
+//     --vp-button-brand-active-border: #FF6F91; /* 激活状态边框色 */
+//     --vp-button-brand-active-text: #FF6F91; /* 悬停文本色 */
+//     --vp-button-brand-active-bg: linear-gradient(135deg, #FF6F91, #FFB6C1); /* 渐变背景 */
+// }

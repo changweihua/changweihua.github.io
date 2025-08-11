@@ -21,10 +21,11 @@ import markupPlugin from "../plugins/markdown/markup";
 import useDefinePlugin from "vitepress-plugin-markdown-define";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
 import { demoPreviewPlugin } from "@vitepress-code-preview/plugin";
+// import { mdVueDemoPlugin } from 'vitepress-vue-demo'
 import { fileURLToPath, URL } from "node:url";
 import path from "path";
 import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
-import { vitepressDemoPlugin } from "vitepress-demo-plugin";
+// import { vitepressDemoPlugin } from "vitepress-demo-plugin";
 import { copyOrDownloadAsMarkdownButtons } from "vitepress-plugin-llms";
 import { configureDiagramsPlugin } from "vitepress-plugin-diagrams";
 import glossary from "../glossary.json";
@@ -135,23 +136,25 @@ const markdown: MarkdownOptions | undefined = {
       docRoot,
     });
 
+    // md.use(mdVueDemoPlugin);
+
     // md.use(multipleChoicePlugin);
 
-    md.use(vitepressDemoPlugin, {
-      demoDir: path.resolve(__dirname, "../../src/demos"),
-      lightTheme: "catppuccin-latte",
-      darkTheme: "catppuccin-frappe",
-      tabs: {
-        order: "html,vue,react",
-        select: "vue",
-      },
-      stackblitz: {
-        show: true,
-      },
-      codesandbox: {
-        show: true,
-      },
-    });
+    // md.use(vitepressDemoPlugin, {
+    //   demoDir: path.resolve(__dirname, "../../src/demos"),
+    //   lightTheme: "catppuccin-latte",
+    //   darkTheme: "catppuccin-frappe",
+    //   tabs: {
+    //     order: "html,vue,react",
+    //     select: "vue",
+    //   },
+    //   stackblitz: {
+    //     show: true,
+    //   },
+    //   codesandbox: {
+    //     show: true,
+    //   },
+    // });
     md.use(autoArticleTitlePlugin, {
       relativePaths: ["/blog/"],
     });

@@ -127,7 +127,7 @@ defineProps({
 }
 
 .card__category {
-  font-family: "Raleway", sans-serif;
+  font-family: XiaolaiMono, sans-serif;
   text-transform: uppercase;
   font-size: 22px;
   letter-spacing: 2px;

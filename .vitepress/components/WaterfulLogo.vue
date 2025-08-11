@@ -53,7 +53,7 @@
       overflow: hidden;
       gap: 24px;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      font-family: 'Dosis', sans-serif;
+      font-family: 'XiaolaiMono', sans-serif;
     }
 
     .box {
