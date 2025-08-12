@@ -11,11 +11,13 @@ head:
       content: changweihua.github.io 最新文章 CMONO.NET
 ---
 
-<a-spin :spinning="spinning" size="large" :delay="delayTime">
-  <div class="flex p-6 justify-center items-center">
-    <CursorShineCards :categories="categories" />
-  </div>
-</a-spin>
+<ClientOnly>
+  <a-spin :spinning="spinning" size="large" :delay="delayTime">
+    <div class="flex p-6 justify-center items-center">
+      <CursorShineCards :categories="categories" />
+    </div>
+  </a-spin>
+</ClientOnly>
 <!-- 
 <demo html="anime-1.html" title="混合语法 DEMO"
   description="这是一个混合 demo 的示例，你可以使用 title 和 description 来指定 demo 的标题和描述" /> -->

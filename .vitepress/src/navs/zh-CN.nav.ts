@@ -5,7 +5,7 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     // { text: "首页", link: "/zh-CN/" },
     {
       text: "博客",
-      link: "/zh-CN/blog/",
+      link: "/zh-CN/blog/index.md",
       activeMatch: "/blog/",
     },
     {
@@ -14,8 +14,8 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     },
     {
       text: "手册",
-      link: "/zh-CN/manual/",
-      activeMatch: "/manual/",
+      link: "/zh-CN/manual/index.md",
+      activeMatch: "/zh-CN/manual/",
     },
     {
       text: "那些年",

@@ -4,7 +4,9 @@ sidebar: false
 title: changweihua.github.io 最新文章 CMONO.NET
 ---
 
-<ArchiveList />
+<ClientOnly>
+  <ArchiveList />
+</ClientOnly>
 
 <script lang="ts" setup>
 import ArchiveList from '@/components/ArchiveList.vue'
