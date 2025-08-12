@@ -26,17 +26,11 @@ hero:
     #   link: https://github.com/changweihua
 
 features:
-  - title: 华东凯亚雀巢平台
-    icon:
-      src: /nestwise.png
-      alt: 华东凯亚雀巢平台
-    details: 华东凯亚雀巢平台
-    link: /zh-CN/gallery/nestwise
   - title: 🍃扬泰机场智能机器人
     icon:
       src: /ai_robot.svg
       alt: 扬泰机场智能机器人
-    details: 扬泰机场智能机器人，用于旅客自助查询航班等相关出现信息
+    details: 扬泰机场智能机器人，用于旅客自助查询航班等相关出行信息
     link: /zh-CN/gallery/robot
   - title: 随身携带行李限额自助查询
     icon:

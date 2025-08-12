@@ -4,7 +4,7 @@ commentabled: false
 recommended: false
 title: 雀巢平台 Wise 前端对接
 description: 雀巢平台 Wise 前端对接
-date: 2025-08-12 16:45:00 
+date: 2025-08-12 09:45:00 
 pageClass: blog-page-class
 cover: /covers/platform.svg
 ---
