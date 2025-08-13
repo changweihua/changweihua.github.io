@@ -43,22 +43,52 @@ Anime.js（发音为 /ˈæn.ə.meɪ/）是一个专注于创建各种动画效�
 
 ```vue
 <template>
-  <div style="width: 100px;height: 100px;"></div>
+  <div class="animite-svg-1" style="width: 100px;height: 100px;">
+    <svg viewBox="0 0 304 112">
+  <g stroke="none" fill="none" fill-rule="evenodd">
+    <path d="M189.142857,4 C227.456875,4 248.420457,4.00974888 256.864191,4.00974888 C263.817211,4.00974888 271.61219,3.69583517 274.986231,6.63061513 C276.382736,7.84531176 279.193529,11.3814152 280.479499,13.4815847 C281.719344,15.5064248 284.841964,20.3571626 275.608629,20.3571626 C265.817756,20.3571626 247.262478,19.9013915 243.955117,19.9013915 C239.27946,19.9013915 235.350655,24.7304885 228.6344,24.7304885 C224.377263,24.7304885 219.472178,21.0304113 214.535324,21.0304113 C207.18393,21.0304113 200.882842,30.4798911 194.124187,30.4798911 C186.992968,30.4798911 182.652552,23.6245972 173.457298,23.6245972 C164.83277,23.6245972 157.191045,31.5424105 157.191045,39.1815359 C157.191045,48.466779 167.088672,63.6623005 166.666679,66.9065088 C166.378668,69.1206889 155.842137,79.2568633 151.508744,77.8570506 C145.044576,75.7689355 109.126667,61.6405346 98.7556561,52.9785141 C96.4766876,51.0750861 89.3680347,39.5769094 83.4195005,38.5221785 C80.6048001,38.0231057 73.0179337,38.7426555 74.4158694,42.6956376 C76.7088819,49.1796531 86.3280337,64.1214904 87.1781062,66.9065088 C88.191957,70.2280995 86.4690152,77.0567847 82.2060607,79.2503488 C79.2489435,80.7719756 73.1324132,82.8858479 64.7015706,83.0708761 C55.1604808,83.2802705 44.4254811,80.401884 39.1722168,80.401884 C25.7762119,80.401884 24.3280517,89.1260466 22.476679,94.4501705 C21.637667,96.8629767 20.4337535,108 33.2301959,108 C37.8976087,108 45.0757044,107.252595 53.4789069,103.876424 C61.8821095,100.500252 122.090049,78.119656 128.36127,75.3523302 C141.413669,69.5926477 151.190142,68.4987755 147.018529,52.0784879 C143.007818,36.291544 143.396957,23.4057975 145.221196,19.6589263 C146.450194,17.1346449 148.420955,14.8552817 153.206723,15.7880203 C155.175319,16.1716965 155.097637,15.0525421 156.757598,11.3860986 C158.417558,7.71965506 161.842736,4.00974888 167.736963,4.00974888 C177.205308,4.00974888 184.938832,4 189.142857,4 Z" id="suzuka" stroke="currentColor" stroke-width="2"></path>
+  </g>
+</svg>
+<div class="square car motion-path-car" style="transform: translateX(189px) translateY(4px);"></div>
+  </div>
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import animate from 'animejs';
+import { animate, svg } from 'animejs';
 
 onMounted(function(){
-  const svgPath = document.querySelector('path');
-  animate({
-    targets: svgPath,
-    d: 'M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80',
-    duration: 2000,
-    easing: 'easeInOutQuad'
+  // Animate the transforms properties of .car the motion path values
+  const carAnimation = animate('.car', {
+    ease: 'linear',
+    duration: 5000,
+    loop: true,
+    ...svg.createMotionPath('path')
+  });
+
+  // Line drawing animation following the motion path values
+  // For demo aesthetic only
+  animate(svg.createDrawable('path'), {
+    draw: '0 1',
+    ease: 'linear',
+    duration: 5000,
+    loop: true
   });
 })
 </script>
+<style>
+#svg-createmotionpath .car {
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  left: -8px;
+  top: -5px;
+  color: red;
+}
+
+#svg-createmotionpath .docs-demo-template .car {
+  display: none;
+}
+</style>
 ```
 
 :::
@@ -79,16 +109,15 @@ onMounted(function(){
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import animate from 'animejs';
+import { animate, stagger } from 'animejs';
 
 onMounted(function(){
   const items = document.querySelectorAll('.anime-item');
 
-  animate({
-    targets: items,
+  animate(items,{
     translateX: 100,
     opacity: 1,
-    delay: anime.stagger(100),
+    delay: stagger(100),
     duration: 1000
   });
 })
@@ -103,7 +132,7 @@ onMounted(function(){
 :::
 
 此案例中，选择了类名为 item 的一组元素。每个元素会在 1000 毫秒内沿 X 轴移动 100 像素并渐变为完全不透明。
-delay 属性使用了 anime.stagger(100)，这会使每个元素的动画启动时间间隔 100 毫秒，从而创建出一种错落有致的动画效果。
+delay 属性使用了 `stagger(100)`，这会使每个元素的动画启动时间间隔 100 毫秒，从而创建出一种错落有致的动画效果。
 
 ### 案例四：渐变地形动画 ###
 
@@ -115,14 +144,13 @@ delay 属性使用了 anime.stagger(100)，这会使每个元素的动画启动�
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import animate from 'animejs';
+import { animate } from 'animejs';
 
 
 onMounted(function(){
   const gradientElement = document.getElementById('gradient');
 
-  animate({
-    targets: gradientElement,
+  animate(gradientElement, {
     backgroundImage: 'linear-gradient(to bottom, #FF0000, #0000FF)',
     duration: 3000,
     easing: 'linear',
@@ -147,12 +175,11 @@ onMounted(function(){
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import animate from 'animejs';
+import { animate } from 'animejs';
 
 onMounted(function(){
   const sphere = document.querySelector('.sphere');
-  animate({
-    targets: sphere,
+  animate(sphere, {
     translateX: '20px',
     translateY: '20px',
     rotateX: '360deg',
@@ -179,13 +206,12 @@ onMounted(function(){
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import animate from 'animejs';
+import { animate } from 'animejs';
 
 
 onMounted(function(){
   const text = document.querySelector('.sphereh1');
-  animate({
-    targets: text,
+  animate(text, {
     translateX: [-20, 20],
     translateY: [10, -10],
     duration: 4000,

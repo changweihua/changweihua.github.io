@@ -328,7 +328,7 @@ export default defineConfig(() => {
     css: {
       lightningcss: {
         // 关键配置：标记 deep 为合法伪类
-        pseudoClasses: { deep: true },
+        pseudoClasses: { deep: true, deepSelectorCombinator: true },
         // 禁用特定优化
         minify: true,
         drafts: {
@@ -339,7 +339,9 @@ export default defineConfig(() => {
         // 解决 scoped 样式问题
         cssModules: {
           // 禁用对 scoped 样式的命名转换
-          pattern: "[name]__[local]",
+          // pattern: "[name]__[local]",
+          // 配置CSS模块化
+          pattern: "[name]__[local]__[hash:base64:5]",
         },
         // 允许特殊规则
         unrecognized: {
@@ -406,7 +408,7 @@ export default defineConfig(() => {
       rollupOptions: {
         jsx: "preserve",
       },
-      esbuild: false
+      esbuild: false,
       // esbuildOptions: {
 
       // }
@@ -416,8 +418,8 @@ export default defineConfig(() => {
         transformer: "lightningcss",
       },
       build: {
-        cssMinify: 'lightningcss'
-      }
+        cssMinify: "lightningcss",
+      },
     },
   };
 });

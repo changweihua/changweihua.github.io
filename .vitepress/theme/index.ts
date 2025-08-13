@@ -26,7 +26,7 @@ import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import { getDeviceFingerprint } from "../utils/fingerprint";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
-import AnimationTitle from "../components/AnimationTitle.vue";
+import AnimationTitle from "../components/AnimtedTitle.vue";
 // import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import mediumZoom from "medium-zoom";
@@ -259,7 +259,7 @@ export default {
       "home-hero-info": () =>
         h(AnimationTitle, {
           name: "CMONO.NET",
-          text: "知识汪洋只此一瓢",
+          slogon: "知识汪洋只此一瓢",
           tagline: "伪前端+伪后端+伪需求=真全栈",
         }),
       "home-hero-image": () =>

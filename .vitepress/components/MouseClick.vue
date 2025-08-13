@@ -7,7 +7,8 @@
 
 <script lang="ts" setup>
 import { useTemplateRef, onMounted, onUnmounted } from "vue";
-import anime from "animejs";
+import { animate, createTimeline, utils } from "animejs";
+import { V } from "vitest/dist/chunks/reporters.d.BFLkQcL6.js";
 const canvas = useTemplateRef<HTMLCanvasElement>('canvas');
 
 // 设置画布大小以适应窗口
@@ -53,9 +54,9 @@ onMounted(() => {
 
       // 设置粒子的运动方向
       function setParticuleDirection(p) {
-        const angle = (anime.random(0, 360) * Math.PI) / 180;
-        const value = anime.random(20, 90);
-        const radius = [-1, 1][anime.random(0, 1)] * value;
+        const angle = (utils.random(0, 360) * Math.PI) / 180;
+        const value = utils.random(20, 90);
+        const radius = [-1, 1][utils.random(0, 1)] * value;
         return {
           x: p.x + radius * Math.cos(angle),
           y: p.y + radius * Math.sin(angle),
@@ -67,8 +68,8 @@ onMounted(() => {
         const p: any = {};
         p.x = x;
         p.y = y;
-        p.color = colors[anime.random(0, colors.length - 1)];
-        p.radius = anime.random(8, 16);
+        p.color = colors[utils.random(0, colors.length - 1)];
+        p.radius = utils.random(8, 16);
         p.endPos = setParticuleDirection(p);
         p.draw = function () {
           ctx!.beginPath();
@@ -114,10 +115,11 @@ onMounted(() => {
         for (let i = 0; i < numberOfParticules; i++) {
           particules.push(createParticule(x, y));
         }
-        anime
-          .timeline()
-          .add({
-            targets: particules,
+
+        const timeline = createTimeline({ defaults: { ease: 'outQuad', duration: 250 } })
+
+        timeline
+          .add(particules, {
             x: function (p) {
               return p.endPos.x;
             },
@@ -125,20 +127,21 @@ onMounted(() => {
               return p.endPos.y;
             },
             radius: 0.1,
-            duration: anime.random(1200, 1800),
+            duration: utils.random(1200, 1800),
             easing: "easeOutExpo",
             update: renderParticule,
           })
-          .add({
-            targets: circle,
-            radius: anime.random(80, 160),
+
+          timeline
+          .add(circle, {
+            radius: utils.random(80, 160),
             lineWidth: 0,
-            alpha: {
-              value: 0,
-              easing: "linear",
-              duration: anime.random(600, 800),
-            },
-            duration: anime.random(1200, 1800),
+            // alpha: {
+            //   value: 0,
+            //   easing: "linear",
+            //   duration: utils.random(600, 800),
+            // },
+            duration: utils.random(1200, 1800),
             easing: "easeOutExpo",
             update: renderParticule,
             offset: 0,
@@ -147,8 +150,8 @@ onMounted(() => {
 
       // 创建随机圆形动画
       function createRandomCircleAnimation(x, y) {
-        const randomSize = anime.random(50, 90);
-        const randomColor = colors[anime.random(0, colors.length - 1)];
+        const randomSize = utils.random(50, 90);
+        const randomColor = colors[utils.random(0, colors.length - 1)];
 
         const circle = {
           x: x,
@@ -166,8 +169,7 @@ onMounted(() => {
           },
         };
 
-        anime({
-          targets: circle,
+        animate(circle, {
           radius: randomSize,
           alpha: 0,
           duration: 1000,
@@ -178,16 +180,16 @@ onMounted(() => {
         });
       }
 
-      // 渲染动画
-      const render = anime({
-        duration: Infinity,
-        update: function () {
-          ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-        },
-      });
+      // // 渲染动画
+      // const render = animate(circle,{
+      //   duration: Infinity,
+      //   update: function () {
+      //     ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+      //   },
+      // });
 
       handleTap = function (e) {
-          render.play();
+          // render.play();
           updateCoords(e);
           animateParticules(pointerX, pointerY);
           createRandomCircleAnimation(pointerX, pointerY); // 添加随机圆形动画
