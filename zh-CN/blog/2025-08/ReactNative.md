@@ -6,7 +6,7 @@ title: 初识 React Native 架构
 description: 初识 React Native 架构
 date: 2025-08-06 14:25:00  
 pageClass: blog-page-class
-cover: /covers/reactive.svg
+cover: /covers/rn.svg
 ---
 
 ## 🙋 前言 ##

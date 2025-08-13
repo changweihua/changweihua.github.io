@@ -26,7 +26,7 @@ import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
 import findImageDuplicates from "vite-plugin-find-image-duplicates";
-
+import { px2rem } from 'vite-plugin-px2rem';
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -303,6 +303,10 @@ export default defineConfig(() => {
           cmono: "./src/assets/icons/mono",
         },
       }),
+      // px2rem({
+      //   width: 1920,
+      //   rootFontSize: 16,
+      // }),
       robots(),
       prefetchDnsPlugin(),
       versionInjector(),

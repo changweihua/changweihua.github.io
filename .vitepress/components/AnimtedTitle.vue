@@ -1,13 +1,12 @@
 <template>
-  <div class="title-container flex flex-col justify-center gap-4xl">
-    <div class="large grid centered square-grid">
-      <h2 class="text-xl font-bold text-shadow-xl">{{ name }}</h2>
+  <div class="title-container flex flex-col justify-center gap-2xl">
+    <div>
+      <h2 class="text-name font-bold text-shadow-xl">{{ name }}</h2>
     </div>
-    <div class="flex flex-row">
-      <p class="text-xl">{{ slogon }}</p>
+    <div class="flex flex-col">
+      <p class="text-slogon justify-center  md:justify-start">{{ slogon }}</p>
     </div>
-    <div class="row"></div>
-    <div class="text-xl flex flex-row">
+    <div class="text-tagline justify-center md:justify-start text-center flex flex-row">
       <div class="square" v-for="c in tagline">{{ c }}</div>
     </div>
   </div>
@@ -36,7 +35,7 @@ onMounted(() => {
   });
 
   animate(words, {
-    y: [{ to: ["100%", "0%"] }, { to: "-100%", delay: 750, ease: "in(3)" }],
+    y: [{ to: ["50%", "0%"] }, { to: "-50%", delay: 750, ease: "in(3)" }],
     duration: 750,
     ease: "out(3)",
     delay: stagger(50),
@@ -48,7 +47,7 @@ onMounted(() => {
   animate(chars, {
     // Property keyframes
     y: [
-      { to: "-2.75rem", ease: "outExpo", duration: 600 },
+      { to: "-1.25rem", ease: "outExpo", duration: 600 },
       { to: 0, ease: "outBounce", duration: 800, delay: 100 },
     ],
     // Property specific parameters
@@ -63,7 +62,7 @@ onMounted(() => {
   });
 
   animate(".square", {
-    y: stagger(["-2.75rem", "2.75rem"]),
+    y: stagger(["-1.75rem", "1.75rem"]),
     rotate: { from: stagger("-.125turn") },
     loop: true,
     alternate: true,
@@ -72,9 +71,21 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.text-xl {
-  font-size: 24px !important;
+.text-tagline {
+  font-size: 18px !important;
   color: currentColor;
-  letter-spacing: 0.6em;
+  letter-spacing: 5px;
+}
+.text-name {
+  font-size: 28px !important;
+  font-weight: bold;
+  color: currentColor;
+  letter-spacing: 5px;
+}
+.text-slogon {
+  font-size: 22px !important;
+  font-weight: bold;
+  color: currentColor;
+  letter-spacing: 5px;
 }
 </style>
