@@ -43,6 +43,7 @@ export default defineConfig({
       prefix: ["i-"],
       extraProperties: {
         display: "inline-block",
+        "vertical-align": "middle",
       },
       collections: {
         mono: FileSystemIconLoader("src/assets/icons/mono"),
@@ -51,14 +52,15 @@ export default defineConfig({
             '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50"></circle></svg>',
         },
         carbon: () =>
-          // @ts-ignore
           import("@iconify-json/carbon/icons.json").then((i) => i.default),
         "line-md": () =>
-          // @ts-ignore
           import("@iconify-json/line-md/icons.json").then((i) => i.default),
         mdi: () =>
-          // @ts-ignore
           import("@iconify-json/mdi/icons.json").then((i) => i.default),
+        ci: () =>
+          import("@opentiny/icons/json/icons.json", {
+            assert: { type: "json" },
+          }).then((i) => i.default),
         // ...collections
       },
     }),
@@ -81,13 +83,14 @@ export default defineConfig({
   theme: {
     animation: {
       keyframes: {
-        'fade-in': '{0% {opacity:0;} 100% {opacity:1;}}',
-        'slide-in': '{0% {transform:translateX(-100%);} 100% {transform:translateX(0);}}'
+        "fade-in": "{0% {opacity:0;} 100% {opacity:1;}}",
+        "slide-in":
+          "{0% {transform:translateX(-100%);} 100% {transform:translateX(0);}}",
       },
       durations: {
-        'fade-in': '0.5s',
-        'slide-in': '0.8s'
-      }
+        "fade-in": "0.5s",
+        "slide-in": "0.8s",
+      },
     },
     colors: {
       primary: "#3eaf7c",

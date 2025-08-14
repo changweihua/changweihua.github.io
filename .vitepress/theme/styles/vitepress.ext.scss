@@ -714,3 +714,39 @@ a.VPSkipLink::after {
 //     --vp-button-brand-active-text: #FF6F91; /* 悬停文本色 */
 //     --vp-button-brand-active-bg: linear-gradient(135deg, #FF6F91, #FFB6C1); /* 渐变背景 */
 // }
+
+// .full-table {
+//   width: max-content;
+//   min-width: 100%;
+//   overflow-x: auto;
+//   border-spacing: 0;
+// }
+
+.full-table {
+  /*table { ... }是CSS规则，用于样式化 HTML 表格,花括号里的内容是声明块，包含的是"属性：值"键值对*/
+  border-collapse: collapse; /* 合并边框，避免双线问题  */
+  table-layout: fixed; /* 列宽由首行或表格宽度决定 */
+  /* 响应式布局：表格宽度占满父容器，使表格自适应不同屏幕宽度*/
+  width: max-content;
+  min-width: 100%;
+  th,
+  td {
+    /*th, td { ... }是CSS规则，用于样式化 HTML 表格*/
+    border: 1px solid #ddd; /* 表头th和单元格td之间添加浅灰色实线边框，宽度1像素 */
+    overflow: hidden; /* 内容溢出时隐藏 */
+  }
+  th {
+    background-color: #f2f2f2; /* 表头背景色浅灰色 */
+  }
+  td {
+    white-space: nowrap; /* 禁止换行 */
+    overflow: hidden; /* 隐藏溢出内容 */
+    text-overflow: ellipsis; /* 显示省略号 */
+    vertical-align: middle;
+    text-align: center;
+  }
+  /* 悬停效果 */
+  tr:hover {
+    background-color: #e0e0e0; /* 悬停时变色 */
+  }
+}

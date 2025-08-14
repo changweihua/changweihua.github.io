@@ -67,7 +67,7 @@ block-beta
 | :-------: | :---------: | :--------: |
 | JS Thread | 执行业务逻辑，生成 React Element Tree | Hermes, React |
 | Shadow Thread | 管理 Shadow Tree，调度 Yoga 布局计算 | Fabric, Yoga |
-| UI Thread | 挂载原生视图，处理用户输入事件 | UIKit/View System |
+| UI Thread | 挂载原生视图，处理用户输入事件 | UIKit/View System <ul><li>列表项1</li><li>列表项2</li></ul>  |
 
 ### 线程交互时序图 ###
 
