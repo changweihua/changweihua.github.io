@@ -868,3 +868,12 @@ h3 {
   //   padding: 10px 12px;
   // }
 }
+
+.VPFeature .details {
+  line-break: anywhere;
+}
+
+::target-text {
+  background: var(--vp-c-brand);
+  color: var(--vp-c-text);
+}
