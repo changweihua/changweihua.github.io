@@ -4,7 +4,7 @@
       v-if="items && items.length > 0"
       class="w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-2 lg:grid-cols-3"
     >
-      <div class="flex flex-col justify-center" v-for="(item, _i) in items">
+      <div :class="`animate__animated animate__slideInUp animate__delay-${i * 2}s flex flex-col justify-center`" v-for="(item, i) in items">
         <article class="card card">
           <div class="card__info-hover flex justify-between">
             <m-icon

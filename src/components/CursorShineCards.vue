@@ -6,8 +6,8 @@
     ref="cardsRef"
   >
     <div
-      v-for="(item, index) in categories"
-      class="card animate-fade-in animate-duration-500 transform-gpu"
+      v-for="(item, index) in categories" v-memo="[item]"
+      :class="`animate__animated animate__slideInUp animate__delay-${index * 2} card animate-fade-in animate-duration-500 transform-gpu`"
       :key="index"
       :ref="e => setCardListRef(e as unknown as HTMLElement)"
     >
@@ -19,7 +19,7 @@
               class="card-link flex flex-row gap-5 md:gap-10"
             >
               <p class="description flex flex-col gap-3 ">
-                <span
+                <span class="title"
                   v-html="
                     DOMPurify.sanitize(`${marked.parseInline(item.title)}`)
                   "
@@ -209,6 +209,10 @@ i {
   // background-color: var(--vp-c-bg-soft);
   border-radius: 8px;
   transition: color 0.5s, background-color 0.5s;
+
+  .title {
+    text-wrap: balance;
+  }
 }
 
 /* 链接样式 */

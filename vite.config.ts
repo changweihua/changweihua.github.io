@@ -27,6 +27,7 @@ import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
 import findImageDuplicates from "vite-plugin-find-image-duplicates";
 import { px2rem } from 'vite-plugin-px2rem';
+import { codeInspectorPlugin } from 'code-inspector-plugin';
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -45,9 +46,9 @@ const yourPlugin: () => Plugin = () => ({
   },
   resolveId() {
     console.log(
-      colors.red(` viteVersion: ${colors.italic(this.meta.viteVersion)} `),
+      colors.red(`viteVersion: ${colors.italic(this.meta.viteVersion)} `),
       colors.green(
-        ` viteVrollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `,
+        ` rollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `,
       ),
       colors.blue(
         ` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `,
@@ -127,6 +128,9 @@ function getDevPlugins() {
       },
     }),
     imagePlaceholder({ prefix: "image/placeholder" }),
+    codeInspectorPlugin({
+      bundler: "vite",
+    }),
     shortcutsPlugin({
       shortcuts: [
         {

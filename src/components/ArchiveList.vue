@@ -1,14 +1,14 @@
 <template>
   <!-- <div class="w-full p-6 md:w-1/2 lg:w-1/3"> -->
-  <div class="w-full p-6">
+  <div class="w-full p-6 animate__animated animate__fadeInUp">
     <div v-for="year in yearList" :key="year" class="mb-10">
       <div
-        class="pt-3 pb-2 animate-slide-in animate-duration-800 transform-gpu"
+        class="pt-3 pb-2 animate__animated animate__zoomIn transform-gpu"
       >
         <h1 v-text="year" class="text-xl"></h1>
       </div>
       <div
-        class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 lg:grid-cols-3 lg:gap-x-20"
+        class="animate__animated animate__slideInLeft grid grid-cols-1 md:grid-cols-2 md:gap-x-20 lg:grid-cols-3 lg:gap-x-20"
       >
         <div
           v-for="article in computedYearMap[year]"

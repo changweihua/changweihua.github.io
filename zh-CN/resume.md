@@ -8,6 +8,7 @@ aside: false
 
 <script lang="ts" setup>
 import ShadowLogo from '@vp/components/ShadowLogo.vue'
+import FlyingPlane from '@/components/FlyingPlane.vue'
 </script>
 
 <ShadowLogo />

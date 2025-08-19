@@ -173,8 +173,9 @@ const markdown: MarkdownOptions | undefined = {
     // });
 
     // 修改表格的 HTML 结构
-    md.renderer.rules.table_open = () => `<table class="full-table">`;
-    md.renderer.rules.table_close = () => "</table>";
+    md.renderer.rules.table_open = () =>
+      `<div class="vp-table-container"><table class="vp-table striped ">`;
+    md.renderer.rules.table_close = () => "</table></div>";
 
     // 修改表头单元格样式
     // md.renderer.rules.th_open = () =>

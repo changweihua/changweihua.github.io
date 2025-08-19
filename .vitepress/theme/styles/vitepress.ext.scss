@@ -90,8 +90,8 @@ body {
 }
 
 .medium-zoom-overlay {
-  backdrop-filter: blur(5rem);
-  -webkit-backdrop-filter: blur(5rem);
+  backdrop-filter: saturate(0.3) contrast(3.5) blur(5rem);
+  -webkit-backdrop-filter: saturate(0.3) contrast(3.5) blur(5rem);
   filter: blur(3px);
   opacity: 0.9 !important;
   z-index: 9;
@@ -426,7 +426,7 @@ a.VPSkipLink::after {
 :root {
   /* 首页导航 */
   .VPNavBar {
-    backdrop-filter: blur(20px) saturate(1.2);
+    backdrop-filter: saturate(0.3) contrast(3.5) blur(20px) saturate(1.2);
     background-color: rgba(255, 255, 255, 0.3) !important;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: backdrop-filter 0.4s ease;
@@ -436,7 +436,7 @@ a.VPSkipLink::after {
   /* 文档页导航两侧 */
   .VPNavBar:not(.home) {
     background-color: rgba(255, 255, 255, 0.3) !important;
-    backdrop-filter: blur(20px);
+    backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: backdrop-filter 0.4s ease;
     will-change: backdrop-filter;
@@ -445,7 +445,7 @@ a.VPSkipLink::after {
   @media (min-width: 960px) {
     /* 文档页导航两侧 */
     .VPNavBar:not(.home) {
-      background-color: rgba(255, 255, 255, 0.3) !important;
+      background-color: saturate(0.3) contrast(3.5) rgba(255, 255, 255, 0.3) !important;
       backdrop-filter: blur(20px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       transition: backdrop-filter 0.4s ease;
@@ -455,7 +455,7 @@ a.VPSkipLink::after {
     /* 首页下滑后导航两侧 */
     .VPNavBar:not(.has-sidebar):not(.home.top) {
       background-color: rgba(255, 255, 255, 0.3) !important;
-      backdrop-filter: blur(20px);
+      backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       transition: backdrop-filter 0.4s ease;
       will-change: backdrop-filter;
@@ -488,7 +488,7 @@ a.VPSkipLink::after {
     /* 文档页分割线 */
     .VPNavBar:not(.home.top) .divider-line {
       background-color: rgba(255, 255, 255, 0.3) !important;
-      backdrop-filter: blur(20px);
+      backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       transition: backdrop-filter 0.4s ease;
       will-change: backdrop-filter;
@@ -498,7 +498,7 @@ a.VPSkipLink::after {
     /* 首页分割线 */
     .VPNavBar:not(.has-sidebar):not(.home.top) .divider {
       background-color: rgba(255, 255, 255, 0.3) !important;
-      backdrop-filter: blur(20px);
+      backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       transition: backdrop-filter 0.4s ease;
       z-index: var(--vp-z-index-nav);
@@ -509,7 +509,7 @@ a.VPSkipLink::after {
   /* 搜索框 VPNavBarSearchButton.vue */
   .DocSearch-Button {
     background-color: rgba(255, 255, 255, 0.3) !important;
-    backdrop-filter: blur(20px);
+    backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: backdrop-filter 0.4s ease;
     will-change: backdrop-filter;
@@ -519,7 +519,7 @@ a.VPSkipLink::after {
   .VPLocalNav {
     background-color: rgba(255, 255, 255, 0) !important;
     background-color: rgba(255, 255, 255, 0.3) !important;
-    backdrop-filter: blur(20px);
+    backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: backdrop-filter 0.4s ease;
     will-change: backdrop-filter;
@@ -729,14 +729,17 @@ a.VPSkipLink::after {
   /* 响应式布局：表格宽度占满父容器，使表格自适应不同屏幕宽度*/
   width: max-content;
   min-width: 100%;
+  // border: 1px solid var(--vp-c-brand);
   th,
   td {
     /*th, td { ... }是CSS规则，用于样式化 HTML 表格*/
-    border: 1px solid #ddd; /* 表头th和单元格td之间添加浅灰色实线边框，宽度1像素 */
+    border: 1px solid var(--vp-c-brand); /* 表头th和单元格td之间添加浅灰色实线边框，宽度1像素 */
     overflow: hidden; /* 内容溢出时隐藏 */
+    text-wrap: balance;
   }
   th {
-    background-color: #f2f2f2; /* 表头背景色浅灰色 */
+    color: var(--vp-c-white);
+    background-color: var(--vp-c-brand); /* 表头背景色浅灰色 */
   }
   td {
     white-space: nowrap; /* 禁止换行 */
@@ -744,9 +747,124 @@ a.VPSkipLink::after {
     text-overflow: ellipsis; /* 显示省略号 */
     vertical-align: middle;
     text-align: center;
+    text-wrap: balance;
   }
   /* 悬停效果 */
   tr:hover {
-    background-color: #e0e0e0; /* 悬停时变色 */
+    background-color: var(--vp-c-brand-light); /* 悬停时变色 */
   }
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+/* VitePress Markdown 表格美化样式 */
+/* 响应式 + 悬停高亮 + 自动暗黑模式适配 */
+
+/* 基础表格样式 */
+.vp-table-container {
+  overflow-x: auto;
+}
+
+.vp-table {
+  border-collapse: collapse;
+  min-width: 600px;
+  width: 100% !important;
+  display: table !important;
+  // table-layout: auto;
+  table-layout: fixed;
+  /* 自动表格布局，根据内容调整列宽 */
+  word-wrap: break-word;
+  /* 允许单词内换行 */
+  overflow-wrap: break-word;
+  /* 同上，更现代的属性 */
+  text-wrap: balance;
+}
+
+.vp-table th,
+.vp-table td {
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.vp-table th {
+  font-weight: 600;
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+}
+
+/* 悬停高亮效果 */
+.vp-table tbody tr {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.vp-table tbody tr:hover {
+  background-color: rgba(var(--vp-c-brand-rgb), 0.08);
+  transform: translateY(-1px);
+}
+
+/* 条纹效果（可选） */
+.vp-table.striped tbody tr:nth-child(even) {
+  background-color: var(--vp-c-bg-soft);
+}
+
+.vp-table.striped tbody tr:nth-child(even):hover {
+  background-color: rgba(var(--vp-c-brand-rgb), 0.1);
+}
+
+/* 卡片式表格 */
+.vp-table.card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.vp-table.card th {
+  background-color: var(--vp-c-brand);
+  color: white;
+}
+
+.vp-table.card th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.vp-table.card th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.vp-table.card tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.vp-table.card tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* 边框式表格 */
+.vp-table.bordered th,
+.vp-table.bordered td {
+  border: 1px solid var(--vp-c-divider);
+}
+
+.vp-table.bordered th {
+  background-color: var(--vp-c-brand);
+  color: white;
+  text-align: center;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .vp-table-container {
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .vp-table {
+    min-width: 100%;
+  }
+
+  // .vp-table th,
+  // .vp-table td {
+  //   padding: 10px 12px;
+  // }
 }

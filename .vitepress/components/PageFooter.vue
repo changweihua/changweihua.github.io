@@ -1,6 +1,6 @@
 <template>
   <div id="PGFT" class="page-footer flex gap-3 flex-row items-center justify-center pb-6">
-    <span>V{{ version }}</span><span> | </span>
+    <span v-once>V{{ version }}</span><span> | </span>
     <!--<NumberFlow
       :value
       :trend="0"
