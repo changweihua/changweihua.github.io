@@ -37,7 +37,7 @@ bun add -D vitepress
 ## 架构 ##
 
 ```mermaid
-block-beta
+block
   columns 6
   block:software:4
     columns 1

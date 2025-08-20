@@ -60,6 +60,13 @@ export const head: HeadConfig[] = [
   [
     "meta",
     {
+      name: "color-scheme",
+      content: "light dark",
+    },
+  ],
+  [
+    "meta",
+    {
       name: "theme-color",
       content: "#ffffff",
       media: "(prefers-color-scheme: light)",

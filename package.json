@@ -226,6 +226,7 @@
     "ua-parser-js": "^2.0.4",
     "vite-plugin-find-image-duplicates": "^0.0.10",
     "vite-plugin-inspect": "^11.3.2",
+    "vite-plugin-pwa": "^1.0.3",
     "vitepress": "^2.0.0-alpha.11",
     "vitepress-markdown-timeline": "^1.2.2",
     "vitepress-plugin-auto-frontmatter": "^1.0.10",

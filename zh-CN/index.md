@@ -38,13 +38,13 @@ features:
       alt: 随身携带行李限额自助查询
     details: 随身携带行李限额自助查询，用于旅客自助核验随身行李是否为三超行李
     link: /zh-CN/gallery/baggage_measurer
-  - title: 阳光服务平台
+  - title: 智慧机场运营管控中心
     icon:
-      src: /sunnyland.svg
-      alt: 阳光服务平台
-    details: 依托微信小程序，为无锡硕放机场量身打造阳光服务平台
-    link: /zh-CN/gallery/sunny-land
-    # linkText: 更多详情
+      src: /ioc.svg
+      alt: 智慧机场运营管控中心
+    details: 智慧机场运营管控中心
+    link: /zh-CN/gallery/ioc
+    linkText: 更多详情
   - title: 无锡硕放机场旅客服务平台
     icon:
       src: /air_wux.png

@@ -483,7 +483,7 @@ sequenceDiagram
 最终，我们需要实现的整体代码架构如下
 
 ```mermaid
-block-beta
+block
   columns 2
 
   block

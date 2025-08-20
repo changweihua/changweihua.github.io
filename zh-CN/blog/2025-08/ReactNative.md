@@ -16,7 +16,7 @@ cover: /covers/rn.svg
 > 本文默认使用 `React Native v0.76` 版本
 
 ```mermaid
-block-beta
+block
   columns 2
 
   block:group1:2

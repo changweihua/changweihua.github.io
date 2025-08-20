@@ -178,7 +178,7 @@ config:
   sankey:
     showValues: false
 ---
-sankey-beta
+sankey
 
 Agricultural 'waste',Bio-conversion,124.729
 Bio-conversion,Liquid,0.597

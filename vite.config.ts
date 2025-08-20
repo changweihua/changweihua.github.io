@@ -26,8 +26,9 @@ import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
 import findImageDuplicates from "vite-plugin-find-image-duplicates";
-import { px2rem } from 'vite-plugin-px2rem';
-import { codeInspectorPlugin } from 'code-inspector-plugin';
+import { px2rem } from "vite-plugin-px2rem";
+import { codeInspectorPlugin } from "code-inspector-plugin";
+import { VitePWA } from "vite-plugin-pwa";
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -48,11 +49,11 @@ const yourPlugin: () => Plugin = () => ({
     console.log(
       colors.red(`viteVersion: ${colors.italic(this.meta.viteVersion)} `),
       colors.green(
-        ` rollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `,
+        ` rollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `
       ),
       colors.blue(
-        ` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `,
-      ),
+        ` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `
+      )
     );
   },
 });
@@ -248,11 +249,20 @@ export default defineConfig(() => {
     build: {
       bundler: "rolldown", // 显式声明使用 Rolldown
       sourcemap: false, // Seems to cause JavaScript heap out of memory errors on build
-      chunkSizeWarningLimit: 5000, // 设置 chunk 大小警告的限制为 2000 KiB
+      chunkSizeWarningLimit: 20*1000*1000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
       // rollupOptions: {
       //   output: {
-      //     advancedChunks: manualChunks
+      //     // advancedChunks: manualChunks
+      //     advancedChunks: {
+      //       groups: [
+      //         { name: "vendor", test: /\/vue(?:-dom)?/ },
+      //         { name: "vitepress", test: /\/vitepress/g },
+      //         { name: "echarts", test: /\/echarts/g },
+      //         { name: "vite-plugin", test: /\/vite-plugin/g },
+      //         { name: "markdown", test: /\/markdown-/ },
+      //       ],
+      //     },
       //   },
       // },
       reportCompressedSize: false,
@@ -330,6 +340,12 @@ export default defineConfig(() => {
         },
         experimental: {
           depth: 2, // Generate llms.txt and llms-full.txt in root and first-level subdirectories
+        },
+      }),
+      VitePWA({
+        registerType: "autoUpdate",
+        workbox: {
+          maximumFileSizeToCacheInBytes: 2 * 10 * 1000 * 1000,
         },
       }),
     ],

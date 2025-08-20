@@ -18,9 +18,6 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 ## 💥 简介 ##
 
-
-<HrefCard url="https://changweihua.github.io/" title="CMONO.NET" description="https://changweihua.github.io/" logo="/logo.svg" class="my-5" />
-
 ::: tip 👨🏻‍💻
 
 - read目前就职read于 *`上海民航华东凯亚江苏分公司`* ，担任 **[高级开发经理]** 职务，主要面向 `无锡硕放机场`、`扬州泰州国际机场`、`南京禄口国际机场` 等江苏省内机场提供民航体系应用服务保障及项目开发和管理工作。
