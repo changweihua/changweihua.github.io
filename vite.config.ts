@@ -249,7 +249,7 @@ export default defineConfig(() => {
     build: {
       bundler: "rolldown", // 显式声明使用 Rolldown
       sourcemap: false, // Seems to cause JavaScript heap out of memory errors on build
-      chunkSizeWarningLimit: 20*1000*1000, // 设置 chunk 大小警告的限制为 2000 KiB
+      chunkSizeWarningLimit: 20 * 1000 * 1000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
       // rollupOptions: {
       //   output: {
@@ -279,6 +279,7 @@ export default defineConfig(() => {
     define: {
       APP_VERSION: timestamp,
       __VUE_PROD_DEVTOOLS__: false,
+      __VUE_OPTIONS_API__: false,
       // __version__: JSON.stringify(GeneratVersion()),
       "process.env": {},
       // 注意要用 JSON.stringify
@@ -350,6 +351,11 @@ export default defineConfig(() => {
       }),
     ],
     css: {
+      // postcss: {
+      //   postcssIsolateStyles: {
+      //     includeFiles: [/vp-doc\.css/],
+      //   },
+      // },
       lightningcss: {
         // 关键配置：标记 deep 为合法伪类
         pseudoClasses: { deep: true, deepSelectorCombinator: true },

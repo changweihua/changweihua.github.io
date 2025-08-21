@@ -7,10 +7,12 @@ aside: false
 ---
 
 <script lang="ts" setup>
+import { SuperellipseAvatar } from '@/components/SuperellipseAvatar.tsx'
 import ShadowLogo from '@vp/components/ShadowLogo.vue'
 import FlyingPlane from '@/components/FlyingPlane.vue'
 </script>
 
+<SuperellipseAvatar :size="80" />
 <ShadowLogo />
 <!-- <text class="resume-title">为你定制 发现精彩</text> -->
 

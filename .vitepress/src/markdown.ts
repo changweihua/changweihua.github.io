@@ -9,14 +9,12 @@ import markdownSub from "markdown-it-sub";
 import frontmatter from "markdown-it-front-matter";
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless";
 import MarkdownItCollapsible from "markdown-it-collapsible";
-import lazy_loading from "markdown-it-image-lazy-loading";
 import namedCode from "markdown-it-named-code-blocks";
 import strikethrough from "markdown-it-strikethrough-alt";
 import hashmention from "markdown-it-hashmention";
 import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
 import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
-import markmapMarkdownPlugin from "../plugins/markdown/markmap-markdown";
 import markupPlugin from "../plugins/markdown/markup";
 import useDefinePlugin from "vitepress-plugin-markdown-define";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
@@ -37,7 +35,6 @@ import markdownItRegex from "markdown-it-regex";
 import markdownItReplaceLink from "markdown-it-replace-link";
 import multipleChoicePlugin from "markdown-it-multiple-choice";
 import markdownItTableExt from "markdown-it-multimd-table-ext";
-import markdownItCjkFriendly from "markdown-it-cjk-friendly";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -51,6 +48,7 @@ const markdown: MarkdownOptions | undefined = {
   html: true,
   linkify: true,
   math: true,
+  cjkFriendly: true,
   // 标记组件为行内
   component: {
     inlineTags: [],
@@ -81,7 +79,6 @@ const markdown: MarkdownOptions | undefined = {
   config: (md) => {
     useDefinePlugin(md, CONSTS);
 
-    md.use(markdownItCjkFriendly);
     md.use(footnote);
     md.use(frontmatter);
     md.use(markdownSup);
@@ -106,12 +103,9 @@ const markdown: MarkdownOptions | undefined = {
     // roughMermaidPlugin(md);
     strikethrough(md);
     md.use(namedCode, { isEnableInlineCss: true });
-    md.use(lazy_loading);
     md.use(timeline);
     md.use(groupIconMdPlugin);
     md.use(echartsMarkdownPlugin);
-    md.use(markmapMarkdownPlugin);
-    // md.use(markupPlugin);
     md.use(MarkdownItCollapsible);
     md.use(MarkdownItGitHubAlerts, {
       /* Options */
@@ -165,12 +159,6 @@ const markdown: MarkdownOptions | undefined = {
         return link + "?c=" + Date.now();
       },
     });
-
-    // // @ts-ignore
-    // vitepressPluginLegend(md, {
-    //   markmap: { showToolbar: true }, // 显示脑图工具栏
-    //   mermaid: true, // 启用 Mermaid
-    // });
 
     // 修改表格的 HTML 结构
     md.renderer.rules.table_open = () =>

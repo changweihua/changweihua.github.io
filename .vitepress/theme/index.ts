@@ -43,6 +43,49 @@ import { pinyin } from "pinyin-pro";
 
 import { xlogs } from "xlogs";
 
+import PinyinMatch from "pinyin-match";
+
+let test = '123曾经沧海难为水除却巫山不是云'
+
+console.log(PinyinMatch.match(test, '23曾')); // [1, 3]
+console.log(PinyinMatch.match(test, "cjc")); // [3, 5]
+console.log(PinyinMatch.match(test, "cengjingcanghai")); // [3, 6]
+console.log(PinyinMatch.match(test, "cengjingcangha"));// [3, 6]
+console.log(PinyinMatch.match(test, "engjingcanghai"));// false
+console.log(PinyinMatch.match(test, "zengjingcang"));// [3, 5]
+console.log(PinyinMatch.match(test, 'sdjkelwqf') )// false
+console.log(PinyinMatch.match(test, "zengji ng cang")); // [3, 5]
+console.log(PinyinMatch.match(test, "zengji ng cangsdjfkl")); // false
+console.log(PinyinMatch.match("   我 爱你 中   国   ", "nzg")); // [6, 12]
+console.log(PinyinMatch.match("   我 爱你 中   国   ", "爱你中")); // [5, 8]
+console.log(PinyinMatch.match("發", "fa")); // [0, 0]
+
+const text = '白日依山尽，黄河入海流'
+
+// 直接中文匹配
+console.log(PinyinMatch.match(text, '黄河'))
+// [6, 7]
+
+// 拼音全拼匹配
+console.log(PinyinMatch.match(text, 'bairiyishanjin'))
+// [0, 4]
+
+// 拼音缩写匹配
+console.log(PinyinMatch.match(text, 'hhrhl'))
+// [6, 9]
+
+// 模糊输入（最后一个字母没打完）
+console.log(PinyinMatch.match(text, 'huan'))
+// [6, 6]
+
+// 拼音 + 汉字混合
+console.log(PinyinMatch.match(text, 'bai日'))
+// [0, 1]
+
+// 无法命中
+console.log(PinyinMatch.match(text, 'abcdef'))
+// false
+
 // 气泡对话
 xlogs.bubble(`Hello!`, "bot");
 xlogs.bubble("Hi there!", "user");
@@ -106,7 +149,6 @@ import HomeContributors from "../components/HomeContributors.vue";
 import PageFooter from "../components/PageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue";
 import MagicCard from "../components/MagicCard.vue";
-import MarkupView from "../components/MarkupView.vue";
 import Confetti from "../components/Confetti.vue";
 import Guidance from "../components/Guidance.vue";
 import TaskList from "../components/TaskList.vue";
@@ -495,7 +537,6 @@ export default {
         app.component(key, component);
       }
       app.component("vue3-autocounter", Vue3Autocounter);
-      app.component("MarkupView", MarkupView);
       app.component("DacingNumber", DacingNumber);
       app.component("TaskList", TaskList);
       app.component("ScrollableParagraph", ScrollableParagraph);
