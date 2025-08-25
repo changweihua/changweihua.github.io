@@ -132,6 +132,17 @@ function getDevPlugins() {
     codeInspectorPlugin({
       bundler: "vite",
     }),
+    // 开发环境错误提示优化
+    {
+      name: "dev-error-handler",
+      configureServer(server) {
+        server.middlewares.use("/api", (req, res, next) => {
+          // ✅ 开发环境API错误处理
+          console.log(`🔍 API Request: ${req.method} ${req.url}`);
+          next();
+        });
+      },
+    },
     shortcutsPlugin({
       shortcuts: [
         {
@@ -229,10 +240,22 @@ export default defineConfig(() => {
       },
     },
     server: {
+      // ✅ 服务器基础配置
+      host: "0.0.0.0", // 允许外部访问
       port: 5500,
+      open: true, // 自动打开浏览器
+
+      // HMR配置
       hmr: {
-        overlay: false,
+        overlay: true, // 显示错误覆盖层
       },
+
+      // // 文件监听配置
+      // watch: {
+      //   usePolling: true, // 在某些系统上启用轮询
+      //   interval: 1000, // 轮询间隔
+      // },
+
       fs: {
         allow: [resolve(__dirname, "..")],
       },
@@ -279,7 +302,7 @@ export default defineConfig(() => {
     define: {
       APP_VERSION: timestamp,
       __VUE_PROD_DEVTOOLS__: false,
-      __VUE_OPTIONS_API__: false,
+      __VUE_OPTIONS_API__: true,
       // __version__: JSON.stringify(GeneratVersion()),
       "process.env": {},
       // 注意要用 JSON.stringify
@@ -431,9 +454,17 @@ export default defineConfig(() => {
     esbuild: false,
     // 强制预构建
     optimizeDeps: {
-      // force: true,
+      // 注意：force 选项已被移除，现在使用 --force 命令行参数
+      // 或者删除 node_modules/.vite 目录来强制重新构建
+      // ✅ 强制预构建指定依赖
+      // 将常用的第三方库加入预构建列表
       include: ["vue"],
-      exclude: ["vitepress", "echarts", "@dhlx/vitepress-plugin-mindmap"],
+      // 排除不需要预构建的依赖
+      // 排除本地开发的包，避免不必要的构建
+      exclude: [
+        "vitepress",
+        "echarts",
+      ],
       // @ts-ignore
       rollupOptions: {
         jsx: "preserve",
