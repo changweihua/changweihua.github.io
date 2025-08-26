@@ -851,7 +851,7 @@ devServer: {
   - gzip off：对此路由禁用压缩。
   - proxy_buffering off：禁止 Nginx 缓冲后端响应数据，确保数据直接流式传输到客户端。
 
-```conf
+```nginx
 # 匹配带有 stream 的接口路径，并关闭 gzip 压缩
 location ~* /stream {
     gzip off;

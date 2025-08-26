@@ -65,20 +65,37 @@ export default defineConfig({
       },
     }),
   ],
-  // rules: [
-  //   [/^divider-x$/, () => ({
-  //     'position': 'relative',
-  //     '&::after': {
-  //       content: '""',
-  //       position: 'absolute',
-  //       right: '-0.5rem',
-  //       top: '0',
-  //       height: '100%',
-  //       width: '1px',
-  //       'background-color': '#e5e7eb'
-  //     }
-  //   })]
-  // ],
+  rules: [
+    // 多行文本截断工具类 text-truncate-2
+    // 多行文本截断已自带了:line-clamp-2， line-clamp-3
+    // @ts-ignore
+    [
+      /^text-truncate-(\d+)$/,
+      ([, lines]) => ({
+        display: "-webkit-box",
+        "-webkit-line-clamp": lines,
+        "-webkit-box-orient": "vertical",
+        overflow: "hidden",
+        "text-overflow": "ellipsis",
+      }),
+    ],
+    // // @ts-ignore
+    // [
+    //   /^divider-x$/,
+    //   () => ({
+    //     position: "relative",
+    //     "&::after": {
+    //       content: '""',
+    //       position: "absolute",
+    //       right: "-0.5rem",
+    //       top: "0",
+    //       height: "100%",
+    //       width: "1px",
+    //       "background-color": "#e5e7eb",
+    //     },
+    //   }),
+    // ],
+  ],
   // safelist: Object.values(icons).flat() as string[],
   theme: {
     animation: {

@@ -8,8 +8,8 @@
           left: blot.left,
           right: blot.right,
           bottom: blot.bottom,
-  animationDelay: blot.delay,
-          background: `radial-gradient(circle, rgba(229, 225, 233, 0.95) 80%, rgba(239, 235, 233, 0.85) 90%)`
+          animationDelay: blot.delay,
+          background: `radial-gradient(circle, rgba(229, 225, 233, 0.95) 80%, rgba(239, 235, 233, 0.85) 90%)`,
         }"
       />
     </template>
@@ -28,14 +28,20 @@
           d="M170,80 L170,20 M170,50 L210,10 M210,10 L210,80"
         />
       </Svg404>
-      <h3>{{currentPagePath}}</h3><br />
-      <Title>未寻得</Title>
+      <h3>{{ currentPagePath }}</h3>
+      <br />
+      <Title class="animate-(ping delay-300 duration-1000)">未寻得</Title>
       <Subtitle>
-        所觅之页，如墨入水，散于无形<br />
-        或返首页，或观他处，皆可随心
+        <div class="dark:( border-gray-500) transition-colors">
+          <p class="dark:text-gray-300">
+            所觅之页，如墨入水，散于无形<br />
+            或返首页，或观他处，皆可随心
+          </p>
+        </div>
       </Subtitle>
 
       <Button
+        class="group transition-all duration-300 my-3 hover:(scale-105 shadow-lg) focus:(outline-none ring-2 ring-blue-500) disabled:(opacity-50 cursor-not-allowed)"
         :style="{ border: theme.buttonBorder, color: theme.buttonColor }"
         @click="goHome"
       >
@@ -51,12 +57,15 @@ import { useData } from "vitepress";
 import { onMounted, nextTick, ref, watch, reactive, computed } from "vue";
 
 const { isDark, page } = useData();
-const currentPagePath = computed(() => page.value.relativePath.replace('.md', '.html'))
+const currentPagePath = computed(() =>
+  page.value.relativePath.replace(".md", ".html")
+);
 const theme = reactive({
   svgStroke: "#333",
   buttonColor: "#333",
   buttonBorder: "1px solid #333",
-  inkBackground: "radial-gradient(circle, rgba(30, 174, 255, 0.5) 80%, rgba(30, 174, 255, 0.7) 90%)"
+  inkBackground:
+    "radial-gradient(circle, rgba(30, 174, 255, 0.5) 80%, rgba(30, 174, 255, 0.7) 90%)",
 });
 
 // 监听主题变化
@@ -71,16 +80,19 @@ watch(
       theme.svgStroke = "#fff";
       theme.buttonColor = "#fff";
       theme.buttonBorder = "1px solid #fff";
-      theme.inkBackground = "radial-gradient(circle, rgba(229, 225, 233, 0.95) 80%, rgba(239, 235, 233, 0.85) 90%)";
+      theme.inkBackground =
+        "radial-gradient(circle, rgba(229, 225, 233, 0.95) 80%, rgba(239, 235, 233, 0.85) 90%)";
     } else {
       // 浅色模式逻辑
       theme.svgStroke = "#333";
       theme.buttonColor = "#333";
       theme.buttonBorder = "1px solid #333";
-      theme.inkBackground = "radial-gradient(circle, rgba(30, 174, 255, 0.5) 80%, rgba(30, 174, 255, 0.7) 90%)";
+      theme.inkBackground =
+        "radial-gradient(circle, rgba(30, 174, 255, 0.5) 80%, rgba(30, 174, 255, 0.7) 90%)";
     }
-  }, {
-    immediate: true
+  },
+  {
+    immediate: true,
   }
 );
 

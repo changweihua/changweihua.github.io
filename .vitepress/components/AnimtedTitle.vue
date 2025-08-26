@@ -3,10 +3,13 @@
     <div>
       <h2 class="text-name font-bold text-shadow-xl">{{ name }}</h2>
     </div>
-    <div class="flex flex-col">
-      <p class="text-slogon justify-center  md:justify-start">{{ slogon }}</p>
+    <div class="flex flex-col group transition-all duration-300
+           hover:(scale-105 shadow-lg p-3)
+           focus:(outline-none ring-2 ring-blue-500)
+           disabled:(opacity-50 cursor-not-allowed)">
+      <p class="text-slogon justify-center  lg:justify-start">{{ slogon }}</p>
     </div>
-    <div class="text-tagline justify-center md:justify-start text-center flex flex-row">
+    <div class="text-tagline justify-center lg:justify-start text-center flex flex-row">
       <div class="square" v-for="c in tagline">{{ c }}</div>
     </div>
   </div>

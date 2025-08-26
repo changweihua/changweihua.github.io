@@ -308,7 +308,7 @@ export default {
         h(
           "div",
           {
-            class: "w-full h-full flex items-center justify-center",
+            class: "hidden lg:(visible flex w-full h-full items-center justify-center)",
             style: "position: relative;",
           },
           [
@@ -321,7 +321,7 @@ export default {
               src: "/cwh.svg",
               class: "VPImage image-src",
             }),
-          ],
+          ]
         ),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
