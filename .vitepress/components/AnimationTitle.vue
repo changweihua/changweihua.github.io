@@ -3,18 +3,6 @@ import { nextTick, onMounted } from "vue";
 import gsap from "gsap";
 import _ from "lodash";
 
-// get other plugins:
-// import ScrollTrigger from "gsap/ScrollTrigger";
-// import Flip from "gsap/Flip";
-// import Draggable from "gsap/Draggable";
-
-// or all tools are exported from the "all" file (excluding members-only plugins):
-// import { gsap, ScrollTrigger, Draggable, MotionPathPlugin } from "gsap/all";
-// import { Draggable, MotionPathPlugin } from "gsap/all";
-
-// don't forget to register plugins
-// gsap.registerPlugin(ScrollTrigger, Draggable, Flip, MotionPathPlugin);
-
 defineProps({
   name: {
     type: String,
@@ -101,8 +89,8 @@ onMounted(() => {
 .name {
   background: -webkit-linear-gradient(315deg,
       rgb(210, 86, 53) 10%,
-      #647eff 50%,
-      rgb(238, 224, 112) 90%);
+      oklch(60% 0.25 240) 50%,
+      oklch(80% 0.25 80) 90%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

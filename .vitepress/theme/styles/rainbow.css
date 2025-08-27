@@ -408,8 +408,8 @@
 
 /* 彩虹色卡初始色 */
 :root {
-  --rainbow-prev: #009ff7;
-  --rainbow-next: #c76dd1;
+  --rainbow-prev: oklch(60% 0.25 240);
+  --rainbow-next: oklch(80% 0.25 80);
   /* animation: rainbow 8s linear infinite; */
 }
 

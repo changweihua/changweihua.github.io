@@ -58,3 +58,37 @@ body::after {
 .active-exact {
   opacity: 0.8;
 }
+
+:root {
+  --base-blue-l: 60%;
+  --base-blue-c: 0.2;
+  --base-blue-h: 240;
+
+  --base-blue: oklch(var(--base-blue-l) var(--base-blue-c) var(--base-blue-h));
+  --base-blue-text-contrast: oklch(calc(var(--base-blue-l) > 50% ? 10% : 90%) 0 0);
+  /* 文本颜色根据背景明度动态调整 */
+  --base-blue-hover: oklch(calc(var(--base-blue-l) + 5%) var(--base-blue-c) var(--base-blue-h));
+  /* 悬停效果 */
+  --base-blue-desaturated: oklch(var(--base-blue-l) calc(var(--base-blue-c) * 0.5) var(--base-blue-h));
+  /* 去饱和度 */
+}
+
+:root {
+  /* 定义一个品牌主色，例如中等亮度的紫色 */
+  --brand-primary-l: 50%;
+  --brand-primary-c: 0.2;
+  --brand-primary-h: 280;
+}
+
+/* 在深色模式下，只需降低 L 值即可生成深色变体，色相和色度保持一致 */
+body.dark-mode {
+  --brand-primary-darker: oklch(calc(var(--brand-primary-l) - 20%) var(--brand-primary-c) var(--brand-primary-h));
+  color: var(--brand-primary-darker);
+  background-color: oklch(10% 0.05 280);
+  /* 匹配的深色背景 */
+}
+
+/* 动态生成更亮的变体 */
+.button-light {
+  background-color: oklch(calc(var(--brand-primary-l) + 15%) var(--brand-primary-c) var(--brand-primary-h));
+}
