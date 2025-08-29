@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: 获取URL参数的最佳实践：兼容Hash模式的TypeScript实现
 description: 获取URL参数的最佳实践：兼容Hash模式的TypeScript实现
-date: 2025-08-29 14:30:00 
+date: 2025-08-28 14:30:00 
 pageClass: blog-page-class
 cover: /covers/typescript.svg
 ---

@@ -9,6 +9,15 @@ import {
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 
 export default defineConfig({
+  // postcss: {
+  //   plugins: {
+  //     '@unocss/postcss': {},
+  //     'postcss-purgecss': {
+  //       content: ['./src/**/*.vue'],
+  //       safelist: [/^grid-cols-\d+$/]
+  //     }
+  //   }
+  // },
   // shortcuts: [
   //   // shortcuts to multiple utilities
   //   ['card','border-rd-30 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% mb-4vw p-2rem'],
