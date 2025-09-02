@@ -118,13 +118,13 @@ const markdown: MarkdownOptions | undefined = {
     //     return `<i class="e1a-${match.slice(1, -1)}"></i>`;
     //   },
     // });
-    // md.use(markdownItTableExt, {
-    //   multiline: true,
-    //   rowspan: false,
-    //   headerless: true,
-    //   multibody: true,
-    //   autolabel: true,
-    // });
+    md.use(markdownItTableExt, {
+      multiline: true,
+      rowspan: false,
+      headerless: false,
+      multibody: false,
+      autolabel: false,
+    });
     const docRoot = fileURLToPath(new URL("../../", import.meta.url));
     md.use(demoPreviewPlugin, {
       docRoot,

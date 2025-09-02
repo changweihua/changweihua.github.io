@@ -21,7 +21,6 @@ import vueStyledPlugin from "@vue-styled-components/plugin";
 import { qrcode } from "vite-plugin-qrcode";
 import colors from "picocolors";
 import llmstxt from "vitepress-plugin-llms";
-import { ValidateEnv, Schema } from "@julr/vite-plugin-validate-env";
 import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
@@ -29,6 +28,9 @@ import findImageDuplicates from "vite-plugin-find-image-duplicates";
 import { px2rem } from "vite-plugin-px2rem";
 import { codeInspectorPlugin } from "code-inspector-plugin";
 import { VitePWA } from "vite-plugin-pwa";
+import { ValidateEnv, Schema } from '@julr/vite-plugin-validate-env'
+import simpleHtmlPlugin from 'vite-plugin-simple-html'
+import { webUpdateNotice } from "@plugin-web-update-notification/vite";
 
 const getEnvValue = (mode: string, target: string) => {
   const value = loadEnv(mode, process.cwd())[target];
@@ -64,6 +66,12 @@ function getDevPlugins() {
   }
   return [
     qrcode(),
+    ValidateEnv({
+      validator: "builtin",
+      schema: {
+        VITE_APP_PRIMARY_COLOR: Schema.string(),
+      },
+    }),
     mockDevServerPlugin(),
     findImageDuplicates({ imagePath: ["public/images"] }),
     shortcutsPlugin({
@@ -122,12 +130,30 @@ function getDevPlugins() {
       include: "fake", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: true, // 是否在生产环境下设置mock
     }),
-    ValidateEnv({
-      validator: "builtin",
-      schema: {
-        VITE_APP_PRIMARY_COLOR: Schema.string(),
+    simpleHtmlPlugin({
+      inject: {
+        data: {
+          title: "控制器携带工具审批",
+          // script: '<script src="index.js"></script>'
+        },
+        tags: [
+          {
+            tag: "meta",
+            attrs: {
+              name: "description",
+              content: "My awesome app",
+            },
+          },
+        ],
       },
+      minify: true,
     }),
+    // ValidateEnv({
+    //   validator: "builtin",
+    //   schema: {
+    //     VITE_APP_PRIMARY_COLOR: Schema.string(),
+    //   },
+    // }),
     imagePlaceholder({ prefix: "image/placeholder" }),
     codeInspectorPlugin({
       bundler: "vite",
@@ -347,6 +373,15 @@ export default defineConfig(() => {
       // }),
       robots(),
       prefetchDnsPlugin(),
+      webUpdateNotice({
+        versionType: "pkg_version",
+        logVersion: true,
+        notificationProps: {
+          title: "系统更新",
+          description: "系统有更新，请刷新页面",
+          buttonText: "刷新",
+        },
+      }),
       versionInjector(),
       imagePreload({
         dir: "images/**/*.{png,jpg,jpeg,gif,svg,webp}",
@@ -461,10 +496,7 @@ export default defineConfig(() => {
       include: ["vue"],
       // 排除不需要预构建的依赖
       // 排除本地开发的包，避免不必要的构建
-      exclude: [
-        "vitepress",
-        "echarts",
-      ],
+      exclude: ["vitepress", "echarts"],
       // @ts-ignore
       rollupOptions: {
         jsx: "preserve",
