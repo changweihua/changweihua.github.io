@@ -20,13 +20,13 @@ export const head: HeadConfig[] = [
   // ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#ffffff' }],
   ["link", { rel: "manifest", href: "/manifest.json" }],
   ["link", { rel: "apple-touch-icon", href: "/favicon.svg", sizes: "180x180" }],
-  [
-    "link",
-    {
-      rel: "stylesheet",
-      href: "/MapleMono.css",
-    },
-  ],
+  // [
+  //   "link",
+  //   {
+  //     rel: "stylesheet",
+  //     href: "/MapleMono.css",
+  //   },
+  // ],
   [
     "link",
     {
