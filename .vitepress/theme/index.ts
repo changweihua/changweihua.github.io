@@ -60,6 +60,8 @@ console.log(PinyinMatch.match("   我 爱你 中   国   ", "nzg")); // [6, 12]
 console.log(PinyinMatch.match("   我 爱你 中   国   ", "爱你中")); // [5, 8]
 console.log(PinyinMatch.match("發", "fa")); // [0, 0]
 
+// import 'dotenv/config'
+
 const text = '白日依山尽，黄河入海流'
 
 // 直接中文匹配

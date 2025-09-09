@@ -418,6 +418,15 @@ export default withMermaid(
           excludeSelector: ["img", "a.header-anchor"],
           customSearchQuery: chineseSearchOptimize,
         }),
+        {
+          name: 'patch-sidebar',
+          enforce: 'pre',
+          transform:(code, id)=>{
+            if(id.includes('VPSidebarItem.vue')){
+              return code.replaceAll(`:is="textTag"`, `is="p"`);
+            }
+          }
+        }
       ],
     },
     vue: {
