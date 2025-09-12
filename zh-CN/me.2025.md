@@ -3,7 +3,34 @@ layout: doc
 pageClass: gallery-page-class
 ---
 
-<HoverableText title="2025" /> 
+<ClientOnly>
+  <HexagonHolder>
+    <text
+          x="150"
+          y="150"
+          font-size="20"
+          text-anchor="middle"
+          fill="#6feffa"
+        >
+          2025
+        </text>
+        <text
+          x="150"
+          y="230"
+          font-size="14"
+          text-anchor="middle"
+          fill="#6feffa"
+        >
+          小结
+        </text>
+  </HexagonHolder>
+</ClientOnly>
+
+<script lang="ts" setup>
+import HexagonHolder from '@/components/HexagonHolder.vue'
+</script>
+
+<!-- <HoverableText title="2025" /> -->
 
 <i class="i-ci-svc-live" style="font-size:72px;"></i>
 

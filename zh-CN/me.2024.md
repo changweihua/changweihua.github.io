@@ -3,7 +3,7 @@ layout: doc
 pageClass: gallery-page-class
 ---
 
-## 2024 ##
+<HoverableText title="2024" />
 
 > 开花不一定结果，努力一定不会辜负青春。
 > 

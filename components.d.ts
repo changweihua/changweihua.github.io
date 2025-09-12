@@ -17,6 +17,7 @@ declare module 'vue' {
     CursorShineCards: typeof import('./src/components/CursorShineCards.vue')['default']
     FloatingMenu: typeof import('./src/components/FloatingMenu.vue')['default']
     FlyingPlane: typeof import('./src/components/FlyingPlane.vue')['default']
+    HexagonHolder: typeof import('./src/components/HexagonHolder.vue')['default']
     HoverableCard: typeof import('./src/components/HoverableCard.vue')['default']
     IconLogosMarkdown: typeof import('~icons/logos/markdown')['default']
     LinkListView: typeof import('./src/components/LinkListView.vue')['default']
