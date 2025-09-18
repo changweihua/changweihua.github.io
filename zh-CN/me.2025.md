@@ -39,6 +39,12 @@ import HexagonHolder from '@/components/HexagonHolder.vue'
 > 
 > 2025 对饮 2026 笃行。
 
+### MAUI 系列 ###
+
+- 基于 Vant 的脚手架
+- 基于 Ant Design Vue 的脚手架
+- 基于 iFrame 的微前端
+
 ### Yolo 8 ~ 13 ###
 
 - Yolo 技术的深入研究，模型训练。
