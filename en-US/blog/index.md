@@ -17,9 +17,9 @@ head:
   </div>
 </a-spin>
 
-<script setup lang="ts">
+<script setup lang="ts
 import { onMounted, ref } from "vue";
-import { delay } from "lodash-es";
+import { delay } from "radashi";
 import LinkListView from '@/components/LinkListView.vue';
 import BlogIndex from "@vp/components/BlogIndex.vue";
 import { useData } from 'vitepress'

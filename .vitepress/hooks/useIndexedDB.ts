@@ -1,5 +1,5 @@
+import { isPlainObject } from "lodash-es";
 import { ref } from "vue";
-import { isPlainObject } from 'lodash-es'
 
 // 定义一个数据项接口，包含 id 和 data 两个属性
 interface DataItem {

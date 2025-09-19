@@ -2,8 +2,8 @@
 lastUpdated: true
 commentabled: true
 recommended: true
-title: 每个开发人员都应该知道的 20 个 TypeScript 技巧
-description: 每个开发人员都应该知道的 20 个 TypeScript 技巧
+title: Nginx 如何配置防止慢速攻击
+description: Nginx 如何配置防止慢速攻击
 date: 2025-09-18 14:00:00 
 pageClass: blog-page-class
 cover: /covers/Nginx.svg

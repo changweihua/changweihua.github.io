@@ -169,13 +169,13 @@ const handleComponentAResolve = () => {
 //y = s*sin(w*x+t);
 const brand = "𝓒𝓜𝓞𝓝𝓞.𝓝𝓔𝓣";
 const texts = brand.split("");
-var n = brand.length;
-var x: number[] = [];
-var y: number[] = [];
-var i = n;
-var s = 20;
-var w = 0.02;
-var t = 0;
+const n = brand.length;
+const x: number[] = [];
+let y: number[] = [];
+let i = n;
+let s = 20;
+let w = 0.02;
+let t = 0;
 
 const circlePath = useTemplateRef<SVGPathElement>("circlePath");
 const sinText = useTemplateRef<SVGTextElement>("sinText");
@@ -193,7 +193,7 @@ while (i--) {
 }
 
 //纵向按照sin()函数变化
-function arrange(t) {
+function arrange(t: number) {
   y = [];
   var ly = 0,
     cy;
@@ -220,7 +220,6 @@ function frame() {
 const circlePathLength = ref(600);
 
 onMounted(async function () {
-  console.log("HeroImage onMounted");
   nextTick(function () {
     // frame();
   });

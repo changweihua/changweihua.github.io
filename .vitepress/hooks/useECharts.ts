@@ -1,12 +1,21 @@
 // hooks/useECharts.ts
 import * as echarts from "echarts";
-import elementResizeDetectorMaker from 'element-resize-detector'
-import { debounce } from 'lodash-es'
-import { onActivated, onDeactivated, onMounted, onBeforeUnmount, reactive, shallowRef, useTemplateRef, watch, nextTick } from "vue";
+import elementResizeDetectorMaker from "element-resize-detector";
+import { debounce } from "lodash-es";
+import {
+  onActivated,
+  onDeactivated,
+  onMounted,
+  onBeforeUnmount,
+  reactive,
+  shallowRef,
+  useTemplateRef,
+  watch,
+  nextTick,
+} from "vue";
 
 /** @type EChartsOption */
-export const defaultOption = {
-}
+export const defaultOption = {};
 
 export interface ChartStrategy {
   getOptions: () => echarts.EChartsOption;
@@ -26,7 +35,7 @@ export function useECharts(
   theme?: string | object | null,
   opts?: echarts.EChartsInitOpts
 ) {
-  const containerRef = useTemplateRef<HTMLDivElement>(containerId)
+  const containerRef = useTemplateRef<HTMLDivElement>(containerId);
   // 使用 shallowRef 创建一个响应式引用，用于保存 ECharts 实例
   const chartInstance = shallowRef<echarts.EChartsType | null>(null);
 
@@ -43,11 +52,14 @@ export function useECharts(
         // 设置图表的初始选项
         chartInstance.value.setOption(options);
       }
-    })
+    });
   };
 
   // 更新图表配置选项的函数
-  const updateChartOptions = (newOptions: echarts.EChartsOption, oldOptions: echarts.EChartsOption) => {
+  const updateChartOptions = (
+    newOptions: echarts.EChartsOption,
+    oldOptions: echarts.EChartsOption
+  ) => {
     if (chartInstance.value) {
       // 使用新的选项更新图表，不合并现有选项并延迟更新以优化性能
       chartInstance.value.setOption(newOptions, {
@@ -57,16 +69,16 @@ export function useECharts(
     }
   };
 
-  const erd = elementResizeDetectorMaker()
+  const erd = elementResizeDetectorMaker();
   // 处理窗口大小调整的函数，确保图表能够自动调整大小
   const handleResize = debounce(() => {
     chartInstance.value?.resize({
       animation: {
         duration: 300,
-        easing: 'cubicInOut'
-      }
-    })
-  }, 100)
+        easing: "cubicInOut",
+      },
+    });
+  }, 100);
 
   // 销毁图表实例的函数，释放内存并清空引用
   const disposeChart = () => {
@@ -81,12 +93,12 @@ export function useECharts(
   // 组件挂载时初始化图表并添加窗口大小调整的事件监听器
   onMounted(() => {
     initChart(); // 初始化图表
-    erd.listenTo(containerRef.value, handleResize)
+    containerRef.value && erd.listenTo(containerRef.value, handleResize);
   });
 
   // 组件卸载时移除事件监听器并销毁图表实例
   onBeforeUnmount(() => {
-    erd.removeListener(containerRef.value, handleResize)
+    containerRef.value && erd.removeListener(containerRef.value, handleResize);
     disposeChart(); // 销毁图表实例
   });
 
@@ -95,30 +107,29 @@ export function useECharts(
     if (!chartInstance.value) {
       initChart(); // 如果图表实例不存在，重新初始化
     }
-    erd.listenTo(containerRef.value, handleResize)
+    containerRef.value && erd.listenTo(containerRef.value, handleResize);
   });
 
   // 组件停用时移除事件监听器并销毁图表实例
   onDeactivated(() => {
-    erd.removeListener(containerRef.value, handleResize)
+    containerRef.value && erd.removeListener(containerRef.value, handleResize);
     disposeChart(); // 销毁图表实例
   });
 
   // 下载图表为图片
-  const downloadChartImage = (filename = 'chart.png') => {
+  const downloadChartImage = (filename = "chart.png") => {
     if (chartInstance.value) {
       const base64 = chartInstance.value.getDataURL({
-        type: 'png',
+        type: "png",
         pixelRatio: 2,
-        backgroundColor: '#fff'
+        backgroundColor: "#fff",
       });
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = base64;
       link.download = filename;
       link.click();
     }
   };
-
 
   // 返回 chartInstance 和相关的控制方法，供外部组件使用
   return {
@@ -127,6 +138,6 @@ export function useECharts(
     initChart, // 返回初始化图表的方法
     handleResize, // 返回手动触发图表调整大小的方法
     disposeChart, // 返回手动销毁图表实例的方法
-    downloadChartImage
+    downloadChartImage,
   };
 }
