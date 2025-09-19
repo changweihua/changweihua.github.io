@@ -2,8 +2,8 @@
 lastUpdated: true
 commentabled: true
 recommended: true
-title: Vue 3 路由切换：页面未刷新问题
-description: Vue 3 路由切换：页面未刷新问题
+title: Vue 3 路由切换页面未刷新问题
+description: Vue 3 路由切换页面未刷新问题
 date: 2025-09-12 13:00:00 
 pageClass: blog-page-class
 cover: /covers/vue.svg

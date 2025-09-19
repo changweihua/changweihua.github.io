@@ -2,8 +2,8 @@
 lastUpdated: true
 commentabled: true
 recommended: true
-title: Vite + Vue3项目版本更新检查与页面自动刷新方案
-description: Vite + Vue3项目版本更新检查与页面自动刷新方案
+title: Vue3项目版本更新检查与页面自动刷新方案
+description: Vue3项目版本更新检查与页面自动刷新方案
 date: 2025-09-19 13:30:00 
 pageClass: blog-page-class
 cover: /covers/vue.svg
