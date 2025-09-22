@@ -48,7 +48,6 @@ const markdown: MarkdownOptions | undefined = {
   html: true,
   linkify: true,
   math: true,
-  cjkFriendly: true,
   // 标记组件为行内
   component: {
     inlineTags: [],
