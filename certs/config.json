@@ -2,14 +2,13 @@
   "record": {
     "hosts": [
       "localhost",
-      "172.30.1.145",
       "80.0.20.24",
       "127.0.0.1",
-      "172.29.176.1"
+      "172.30.80.1"
     ],
     "hash": {
-      "key": "5dc0e38ec04e2844ce2b021c0e848eb0a5c2c3520c8699f4df9159001b2e31c6",
-      "cert": "528b601c9d957b2a5a794c809746dfe8d115e39b95cf9d2f53d48675e6ca6627"
+      "key": "692c4eee396d2555f4c53fdfea9dda558c2d18c57bc5702d557d257616d0d790",
+      "cert": "0333f68068387541e99c84386b8041affe5033da32d683d68e40afb18106b91b"
     }
   },
   "configFilePath": "D:\\Github\\changweihua.github.io\\certs\\config.json"

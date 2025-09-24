@@ -22,14 +22,13 @@ import { qrcode } from "vite-plugin-qrcode";
 import colors from "picocolors";
 import llmstxt from "vitepress-plugin-llms";
 import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
-import { shortcutsPlugin } from "vite-plugin-shortcuts";
 import imagePlaceholder from "vite-plugin-image-placeholder";
 import findImageDuplicates from "vite-plugin-find-image-duplicates";
 import { px2rem } from "vite-plugin-px2rem";
 import { codeInspectorPlugin } from "code-inspector-plugin";
 import { VitePWA } from "vite-plugin-pwa";
-import { ValidateEnv, Schema } from '@julr/vite-plugin-validate-env'
-import simpleHtmlPlugin from 'vite-plugin-simple-html'
+import { ValidateEnv, Schema } from "@julr/vite-plugin-validate-env";
+import simpleHtmlPlugin from "vite-plugin-simple-html";
 import { webUpdateNotice } from "@plugin-web-update-notification/vite";
 
 const getEnvValue = (mode: string, target: string) => {
@@ -74,47 +73,6 @@ function getDevPlugins() {
     }),
     mockDevServerPlugin(),
     findImageDuplicates({ imagePath: ["public/images"] }),
-    shortcutsPlugin({
-      shortcuts: [
-        {
-          key: "c",
-          description: "close console",
-          action: (server) => {
-            server.config.logger.clearScreen("error");
-          },
-        },
-        {
-          key: "s",
-          description: "reset console",
-          action: (server) => {
-            server.config.logger.clearScreen("error");
-            server.printUrls();
-          },
-        },
-        // {
-        //   key: 'r',
-        //   description: 'restart the server',
-        //   async action(server) {
-        //     await server.restart();
-        //   },
-        // },
-        // {
-        //   key: 'u',
-        //   description: 'show server url',
-        //   action(server) {
-        //     server.config.logger.info('');
-        //     server.printUrls();
-        //   },
-        // },
-        // {
-        //   key: 'q',
-        //   description: 'quit',
-        //   async action(server) {
-        //     await server.close().finally(() => process.exit());
-        //   },
-        // },
-      ],
-    }),
     // // 仅对以 `.svg?react` 结尾的文件加载 `svgr` 插件
     // withFilter(
     //   svgr({
@@ -161,55 +119,14 @@ function getDevPlugins() {
     // 开发环境错误提示优化
     {
       name: "dev-error-handler",
-      configureServer(server) {
-        server.middlewares.use("/api", (req, res, next) => {
+      configureServer(server: any) {
+        server.middlewares.use("/api", (req: any, _res: any, next: any) => {
           // ✅ 开发环境API错误处理
           console.log(`🔍 API Request: ${req.method} ${req.url}`);
           next();
         });
       },
     },
-    shortcutsPlugin({
-      shortcuts: [
-        {
-          key: "c",
-          description: "close console",
-          action: (server) => {
-            server.config.logger.clearScreen("error");
-          },
-        },
-        {
-          key: "s",
-          description: "reset console",
-          action: (server) => {
-            server.config.logger.clearScreen("error");
-            server.printUrls();
-          },
-        },
-        // {
-        //   key: 'r',
-        //   description: 'restart the server',
-        //   async action(server) {
-        //     await server.restart();
-        //   },
-        // },
-        // {
-        //   key: 'u',
-        //   description: 'show server url',
-        //   action(server) {
-        //     server.config.logger.info('');
-        //     server.printUrls();
-        //   },
-        // },
-        // {
-        //   key: 'q',
-        //   description: 'quit',
-        //   async action(server) {
-        //     await server.close().finally(() => process.exit());
-        //   },
-        // },
-      ],
-    }),
     mkcert({
       savePath: "./certs", // save the generated certificate into certs directory
       autoUpgrade: false,
@@ -218,7 +135,7 @@ function getDevPlugins() {
   ];
 }
 
-function manualChunks(id, { getModuleInfo }) {
+function manualChunks(id: any, { getModuleInfo }: { getModuleInfo: any }) {
   const match = /.*\.strings\.(\w+)\.js/.exec(id);
   if (match) {
     const language = match[1]; // e.g. "en"
