@@ -9,7 +9,7 @@ pageClass: blog-page-class
 cover: /covers/vue.svg
 ---
 
-> "当你的数据可视化组件需要5秒才能渲染；当3D模型加载让用户失去耐心——传统异步加载已到瓶颈。2025年，我们通过Vue 3.4的<Suspense>、Vite 6.0模块联邦和Web Workers三剑合璧，将重型组件加载时间从秒级压缩至毫秒级。某区域教育平台实测：区域考试实时可视化大屏图表加载从4.2秒→180毫秒！"
+> "当你的数据可视化组件需要5秒才能渲染；当3D模型加载让用户失去耐心——传统异步加载已到瓶颈。2025年，我们通过Vue 3.4的 `<Suspense>`、Vite 6.0模块联邦和Web Workers三剑合璧，将重型组件加载时间从秒级压缩至毫秒级。某区域教育平台实测：区域考试实时可视化大屏图表加载从4.2秒→180毫秒！"
 
 ## 一、2025年重型组件加载的挑战与机遇 ##
 
@@ -64,7 +64,7 @@ const HeavyDataVisualization = defineAsyncComponent({
 </script>
 ```
 
-### 多层Suspense嵌套策略 ###
+### 多层 `Suspense` 嵌套策略 ###
 
 ```vue
 <template>
