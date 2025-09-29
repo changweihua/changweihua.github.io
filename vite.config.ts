@@ -11,7 +11,6 @@ import mkcert from "vite-plugin-mkcert";
 import Iconify from "unplugin-iconify-generator/vite";
 import { envParse } from "vite-plugin-env-parse";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
-import { updateMetadata } from "./plugins/vitePluginUpdateMetadata";
 import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
 import vitePluginTryCatchConsole from "./plugins/vite-plugin-try-catch-console";
 import versionInjector from "unplugin-version-injector/vite";
@@ -20,11 +19,8 @@ import { robots } from "vite-plugin-robots";
 import vueStyledPlugin from "@vue-styled-components/plugin";
 import { qrcode } from "vite-plugin-qrcode";
 import colors from "picocolors";
-import llmstxt from "vitepress-plugin-llms";
 import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import imagePlaceholder from "vite-plugin-image-placeholder";
-import findImageDuplicates from "vite-plugin-find-image-duplicates";
-import { px2rem } from "vite-plugin-px2rem";
 import { codeInspectorPlugin } from "code-inspector-plugin";
 import { VitePWA } from "vite-plugin-pwa";
 import { ValidateEnv, Schema } from "@julr/vite-plugin-validate-env";
@@ -72,7 +68,6 @@ function getDevPlugins() {
       },
     }),
     mockDevServerPlugin(),
-    findImageDuplicates({ imagePath: ["public/images"] }),
     // // 仅对以 `.svg?react` 结尾的文件加载 `svgr` 插件
     // withFilter(
     //   svgr({
@@ -277,7 +272,6 @@ export default defineConfig(() => {
       }),
       UnoCSS(),
       ...getDevPlugins(),
-      updateMetadata(),
       vueStyledPlugin(),
       Iconify({
         collections: {
@@ -306,18 +300,6 @@ export default defineConfig(() => {
           rel: "prefetch",
         },
       }),
-      llmstxt({
-        generateLLMsFullTxt: false,
-        ignoreFiles: ["sponsors/*"],
-        customLLMsTxtTemplate: `# {title}\n\n{foo}`,
-        title: "CMONO.NET - Changweihua.github.io",
-        customTemplateVariables: {
-          foo: "bar",
-        },
-        experimental: {
-          depth: 2, // Generate llms.txt and llms-full.txt in root and first-level subdirectories
-        },
-      }),
       VitePWA({
         registerType: "autoUpdate",
         workbox: {
@@ -326,11 +308,6 @@ export default defineConfig(() => {
       }),
     ],
     css: {
-      // postcss: {
-      //   postcssIsolateStyles: {
-      //     includeFiles: [/vp-doc\.css/],
-      //   },
-      // },
       lightningcss: {
         // 关键配置：标记 deep 为合法伪类
         pseudoClasses: { deep: true, deepSelectorCombinator: true },
@@ -382,7 +359,7 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         // Redirect 'fs' to an empty module or a browser-safe shim
-        fs: path.resolve("./src/empty-module.js"),
+        // fs: path.resolve("./src/empty-module.js"),
         "*": fileURLToPath(new URL(".", import.meta.url)),
         "@": fileURLToPath(new URL("./src", import.meta.url)),
         // "@vp": fileURLToPath(new URL("./.vitepress", import.meta.url)),
@@ -401,7 +378,7 @@ export default defineConfig(() => {
       // mainFields: []
     },
     ssr: {
-      noExternal: ["fs", "markdown-it-multiple-choice"], // Externalize Node.js modules
+      noExternal: [], // Externalize Node.js modules
     },
     esbuild: false,
     // 强制预构建

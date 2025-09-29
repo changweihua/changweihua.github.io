@@ -39,7 +39,6 @@
 
 <script setup lang="ts">
 import { onMounted, nextTick, ref } from 'vue'
-// import notfound from "@/lotties/notfound.json";
 
 const container_height = ref('30vh')
 
@@ -54,7 +53,7 @@ onMounted(() => {
 
 
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .error-container {
 
   :deep(.VPContent) {

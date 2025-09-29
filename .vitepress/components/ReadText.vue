@@ -18,13 +18,13 @@ function isSpeechSynthesisSupported() {
     typeof window.speechSynthesis.speak === "function"
   );
 }
-const findParentElement = (el, className) => {
+const findParentElement = (el: any, className: string) => {
   while (!el?.classList.contains(className)) {
     el = el?.parentElement;
   }
   return el;
 };
-const onReadText = (e) => {
+const onReadText = (e: any) => {
   const target = e.target;
   console.log("target", target);
   if (!target) {

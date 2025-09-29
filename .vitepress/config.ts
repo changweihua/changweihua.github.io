@@ -9,7 +9,6 @@ import vitepressProtectPlugin from "vitepress-protect-plugin";
 import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import fs from "fs";
 import {
   chineseSearchOptimize,
   pagefindPlugin,
@@ -19,6 +18,7 @@ import { VitePressI18nOptions } from "vitepress-i18n/types";
 import MdH1 from "vitepress-plugin-md-h1";
 import AutoFrontmatter, { FileInfo } from "vitepress-plugin-auto-frontmatter";
 import { withMermaid } from "vitepress-plugin-mermaid";
+import fs from "fs-extra";
 
 const customElements = [
   "mjx-container",

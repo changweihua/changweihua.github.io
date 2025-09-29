@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="w-full p-6 md:w-1/2 lg:w-1/3"> -->
   <div class="w-full p-6 animate__animated animate__fadeInUp">
     <div v-for="year in yearList" :key="year" class="mb-10">
       <div

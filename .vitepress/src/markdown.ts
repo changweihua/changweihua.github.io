@@ -3,7 +3,6 @@ import timeline from "vitepress-markdown-timeline";
 import footnote from "markdown-it-footnote";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
-import frontmatter from "markdown-it-front-matter";
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless";
 import MarkdownItCollapsible from "markdown-it-collapsible";
 import namedCode from "markdown-it-named-code-blocks";
@@ -40,17 +39,9 @@ const markdown: MarkdownOptions | undefined = {
     lazyLoading: true,
   },
   theme: { light: "catppuccin-latte", dark: "catppuccin-mocha" },
-  frontmatter: {
-    grayMatterOptions: {
-      excerpt: true,
-      excerpt_separator: "<!-- 更多 -->",
-    },
-    renderExcerpt: false,
-  },
   preConfig: async (md) => {},
   config: (md) => {
     md.use(footnote);
-    md.use(frontmatter);
     md.use(circleMarkdownPlugin);
     md.use(readerMarkdownPlugin);
     md.use(MarkdownItMathJaX3PRO, {

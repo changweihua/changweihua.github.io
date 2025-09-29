@@ -1,6 +1,13 @@
 import path from "path";
-import fs from "fs";
 import JSZip from "jszip";
+import {
+  existsSync,
+  readdirSync,
+  readFileSync,
+  statSync,
+  unlinkSync,
+  writeFileSync,
+} from "fs-extra";
 
 // import { defineConfig } from "vite";
 // import vue from "@vitejs/plugin-vue";
@@ -21,7 +28,7 @@ import JSZip from "jszip";
 interface ZipPluginOptions {
   fileName: string;
   outputPath?: string;
-  enabled:boolean
+  enabled: boolean;
 }
 
 export default function createZipPlugin(options: ZipPluginOptions) {
@@ -48,16 +55,16 @@ export default function createZipPlugin(options: ZipPluginOptions) {
     const distPath = path.resolve(output);
 
     // 递归读取文件夹
-    const readDir = (zipInstance, dirPath) => {
-      const files = fs.readdirSync(dirPath);
+    const readDir = (zipInstance: any, dirPath: string) => {
+      const files = readdirSync(dirPath);
       files.forEach((file) => {
         const filePath = path.join(dirPath, file);
-        const stats = fs.statSync(filePath);
+        const stats = statSync(filePath);
         if (stats.isDirectory()) {
           const folder = zipInstance.folder(file);
           readDir(folder, filePath);
         } else {
-          zipInstance.file(file, fs.readFileSync(filePath));
+          zipInstance.file(file, readFileSync(filePath));
         }
       });
     };
@@ -72,8 +79,8 @@ export default function createZipPlugin(options: ZipPluginOptions) {
       })
       .then((content) => {
         const destPath = path.join(distPath, "../", zipFileName);
-        if (fs.existsSync(destPath)) fs.unlinkSync(destPath);
-        fs.writeFileSync(destPath, content);
+        if (existsSync(destPath)) unlinkSync(destPath);
+        writeFileSync(destPath, content);
       });
   };
 
