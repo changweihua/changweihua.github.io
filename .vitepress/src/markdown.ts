@@ -1,40 +1,25 @@
 import { MarkdownOptions } from "vitepress";
 import timeline from "vitepress-markdown-timeline";
 import footnote from "markdown-it-footnote";
-import anchor from "markdown-it-anchor";
-import markdownSup from "markdown-it-sup";
-import markdownSub from "markdown-it-sub";
-// import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
-// import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
+import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 import frontmatter from "markdown-it-front-matter";
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless";
 import MarkdownItCollapsible from "markdown-it-collapsible";
 import namedCode from "markdown-it-named-code-blocks";
-import strikethrough from "markdown-it-strikethrough-alt";
-import hashmention from "markdown-it-hashmention";
 import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
 import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
-import markupPlugin from "../plugins/markdown/markup";
-import useDefinePlugin from "vitepress-plugin-markdown-define";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
 import { demoPreviewPlugin } from "@vitepress-code-preview/plugin";
-// import { mdVueDemoPlugin } from 'vitepress-vue-demo'
+import MarkdownItMathJaX3PRO from "markdown-it-mathjax3-pro";
 import { fileURLToPath, URL } from "node:url";
-import path from "path";
-import Expl3 from "../assets/latexs/LaTeX-Expl3.tmLanguage.json";
-// import { vitepressDemoPlugin } from "vitepress-demo-plugin";
-import { copyOrDownloadAsMarkdownButtons } from "vitepress-plugin-llms";
-import { configureDiagramsPlugin } from "vitepress-plugin-diagrams";
-import glossary from "../glossary.json";
-import { fmTitlePlugin } from "vitepress-plugin-frontmatter";
+import { vitepressDemoPlugin } from "vitepress-demo-plugin";
 import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
-import { vitepressPluginLegend } from "vitepress-plugin-legend";
 import MarkdownItGitHubAlerts from "markdown-it-github-alerts";
-import markdownItRegex from "markdown-it-regex";
 import markdownItReplaceLink from "markdown-it-replace-link";
-import multipleChoicePlugin from "markdown-it-multiple-choice";
 import markdownItTableExt from "markdown-it-multimd-table-ext";
+import path from 'path';
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -47,25 +32,13 @@ const markdown: MarkdownOptions | undefined = {
   // 允许 HTML 渲染
   html: true,
   linkify: true,
-  math: true,
   // 标记组件为行内
   component: {
     inlineTags: [],
   },
-  mermaid: true,
   image: {
-    lazyLoading: true
+    lazyLoading: true,
   },
-  // anchor: {
-  //   permalink: anchor.permalink.ariaHidden({
-  //     // you can use other variants too, refer - https://github.com/valeriangalliat/markdown-it-anchor#permalinks
-  //     symbol: `🔗`,
-  //     placement: "before",
-  //   }),
-  // },
-  // @ts-ignore
-  languages: [Expl3],
-  lazyLoading: true,
   theme: { light: "catppuccin-latte", dark: "catppuccin-mocha" },
   frontmatter: {
     grayMatterOptions: {
@@ -76,31 +49,20 @@ const markdown: MarkdownOptions | undefined = {
   },
   preConfig: async (md) => {},
   config: (md) => {
-    useDefinePlugin(md, CONSTS);
-
     md.use(footnote);
     md.use(frontmatter);
-    md.use(markdownSup);
-    md.use(markdownSub);
-    md.use(hashmention);
     md.use(circleMarkdownPlugin);
     md.use(readerMarkdownPlugin);
-    // md.use(tabsMarkdownPlugin);
-    // md.use(npmCommandsMarkdownPlugin);
+    md.use(MarkdownItMathJaX3PRO, {
+      user_side: true,
+      mathjax_options: {
+        enableMenu: true,
+        // Other MathJax options
+      },
+    });
+    md.use(tabsMarkdownPlugin);
+    md.use(npmCommandsMarkdownPlugin);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
-    // md.use(copyOrDownloadAsMarkdownButtons);
-    // configureDiagramsPlugin(md, {
-    //   diagramsDir: "public/diagrams", // Optional: custom directory for SVG files
-    //   publicPath: "/diagrams", // Optional: custom public path for images
-    // });
-    // markdownLinks(md, {
-    //   externalClassName: "custom-external-link",
-    //   internalClassName: "custom-internal-link",
-    //   internalDomains: ["https://changweihua.github.io"],
-    // });
-    // md.use(fmTitlePlugin);
-    // roughMermaidPlugin(md);
-    strikethrough(md);
     md.use(namedCode, { isEnableInlineCss: true });
     md.use(timeline);
     md.use(groupIconMdPlugin);
@@ -110,13 +72,6 @@ const markdown: MarkdownOptions | undefined = {
       /* Options */
       markers: "*",
     });
-    // md.use(markdownItRegex, {
-    //   name: "emoji",
-    //   regex: /(:(?:heart|panda_face|car):)/,
-    //   replace: (match) => {
-    //     return `<i class="e1a-${match.slice(1, -1)}"></i>`;
-    //   },
-    // });
     md.use(markdownItTableExt, {
       multiline: true,
       rowspan: false,
@@ -129,25 +84,21 @@ const markdown: MarkdownOptions | undefined = {
       docRoot,
     });
 
-    // md.use(mdVueDemoPlugin);
-
-    // md.use(multipleChoicePlugin);
-
-    // md.use(vitepressDemoPlugin, {
-    //   demoDir: path.resolve(__dirname, "../../src/demos"),
-    //   lightTheme: "catppuccin-latte",
-    //   darkTheme: "catppuccin-frappe",
-    //   tabs: {
-    //     order: "html,vue,react",
-    //     select: "vue",
-    //   },
-    //   stackblitz: {
-    //     show: true,
-    //   },
-    //   codesandbox: {
-    //     show: true,
-    //   },
-    // });
+    md.use(vitepressDemoPlugin, {
+      demoDir: path.resolve(__dirname, "../../src/demos"),
+      lightTheme: "catppuccin-latte",
+      darkTheme: "catppuccin-frappe",
+      tabs: {
+        order: "html,vue,react",
+        select: "vue",
+      },
+      stackblitz: {
+        show: true,
+      },
+      codesandbox: {
+        show: true,
+      },
+    });
     md.use(autoArticleTitlePlugin, {
       relativePaths: ["/blog/"],
     });

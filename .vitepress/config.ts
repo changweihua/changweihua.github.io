@@ -5,7 +5,6 @@ import { markdown } from "./src/markdown";
 import { HeadConfig, defineConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import GitRevisionInfoPlugin from "vite-plugin-git-revision-info";
-import { getChangelogAndContributors } from "vitepress-plugin-changelog";
 import vitepressProtectPlugin from "vitepress-protect-plugin";
 import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
@@ -148,38 +147,28 @@ const vitePressOptions: UserConfig = {
 
     return head;
   },
-  async transformPageData(pageData) {
+   transformPageData(pageData) {
     const { isNotFound, relativePath } = pageData;
-    const { contributors, changelog } = await getChangelogAndContributors(
-      relativePath
-    );
-    const CustomAvatars = {
-      changweihua: "2877201",
-    };
-    const CustomContributors = contributors.map((contributor) => {
-      contributor.avatar = `https://avatars.githubusercontent.com/u/${
-        CustomAvatars[contributor.name]
-      }?v=4`;
-      return contributor;
-    });
 
     if (isNotFound) {
       pageData.title = "Not Found";
     }
 
-    if (pageData.relativePath.includes("blog")) {
+    if (relativePath.includes("blog")) {
       pageData.titleTemplate = ":title | Blog";
     }
 
-    return {
-      CommitData: {
-        contributors: CustomContributors,
-        changelog,
-        commitURL:
-          "https://github.com/changweihua/changweihua.github.io/commit/",
-        title: "Changelog",
-      },
-    };
+    //inject for mathjax script
+    const head = (pageData.frontmatter.head ??= []);
+    const inject_content = pageData.frontmatter.inject_content;
+    if (inject_content && Array.isArray(inject_content)) {
+      inject_content.forEach(item => {
+        const { type, contribution, content } = item;
+        const headEntry = [type, contribution || {}, content || ''].filter(Boolean);
+        head.push(headEntry as HeadConfig);
+      });
+      delete pageData.frontmatter.inject_content;
+    }
   },
 };
 
@@ -196,7 +185,7 @@ const vitePressI18nOptions: Partial<VitePressI18nOptions> = {
 };
 
 // 转义Markdown中的尖括号，但保留代码块内容
-function escapeMarkdownBrackets(markdownContent) {
+function escapeMarkdownBrackets(markdownContent: string) {
   // 正则表达式模式：匹配代码块
   const codeBlockPattern = /```[\s\S]*?```|`[\s\S]*?`/g;
 
@@ -255,7 +244,7 @@ const createCategory = (fileInfo: FileInfo) => {
 const markdownBracketEscaper = {
   name: "markdown-bracket-escaper",
   enforce: "pre",
-  async transform(code, id) {
+  async transform(code:string, id:string) {
     // 只处理Markdown文件
     if (!id.endsWith(".md")) return null;
 
@@ -432,7 +421,7 @@ export default withMermaid(
     vue: {
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => customElements.includes(tag),
+          isCustomElement: (tag) => tag.includes('mjx-') || customElements.includes(tag),
           // whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
         },
       },

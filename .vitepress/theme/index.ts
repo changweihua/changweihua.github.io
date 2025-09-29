@@ -1,9 +1,8 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, watchEffect, watch, ref, nextTick } from "vue";
+import { h, watchEffect, watch,  nextTick } from "vue";
 import DocAfter from "../components/DocAfter.vue";
-import { UAParser } from "ua-parser-js";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
@@ -23,11 +22,10 @@ import Robot from "../components/Robot.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
-import { getDeviceFingerprint } from "../utils/fingerprint";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimtedTitle.vue";
-// import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
+import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
@@ -45,15 +43,15 @@ import { xlogs } from "xlogs";
 
 import PinyinMatch from "pinyin-match";
 
-let test = '123曾经沧海难为水除却巫山不是云'
+let test = "123曾经沧海难为水除却巫山不是云";
 
-console.log(PinyinMatch.match(test, '23曾')); // [1, 3]
+console.log(PinyinMatch.match(test, "23曾")); // [1, 3]
 console.log(PinyinMatch.match(test, "cjc")); // [3, 5]
 console.log(PinyinMatch.match(test, "cengjingcanghai")); // [3, 6]
-console.log(PinyinMatch.match(test, "cengjingcangha"));// [3, 6]
-console.log(PinyinMatch.match(test, "engjingcanghai"));// false
-console.log(PinyinMatch.match(test, "zengjingcang"));// [3, 5]
-console.log(PinyinMatch.match(test, 'sdjkelwqf') )// false
+console.log(PinyinMatch.match(test, "cengjingcangha")); // [3, 6]
+console.log(PinyinMatch.match(test, "engjingcanghai")); // false
+console.log(PinyinMatch.match(test, "zengjingcang")); // [3, 5]
+console.log(PinyinMatch.match(test, "sdjkelwqf")); // false
 console.log(PinyinMatch.match(test, "zengji ng cang")); // [3, 5]
 console.log(PinyinMatch.match(test, "zengji ng cangsdjfkl")); // false
 console.log(PinyinMatch.match("   我 爱你 中   国   ", "nzg")); // [6, 12]
@@ -62,30 +60,30 @@ console.log(PinyinMatch.match("發", "fa")); // [0, 0]
 
 // import 'dotenv/config'
 
-const text = '白日依山尽，黄河入海流'
+const text = "白日依山尽，黄河入海流";
 
 // 直接中文匹配
-console.log(PinyinMatch.match(text, '黄河'))
+console.log(PinyinMatch.match(text, "黄河"));
 // [6, 7]
 
 // 拼音全拼匹配
-console.log(PinyinMatch.match(text, 'bairiyishanjin'))
+console.log(PinyinMatch.match(text, "bairiyishanjin"));
 // [0, 4]
 
 // 拼音缩写匹配
-console.log(PinyinMatch.match(text, 'hhrhl'))
+console.log(PinyinMatch.match(text, "hhrhl"));
 // [6, 9]
 
 // 模糊输入（最后一个字母没打完）
-console.log(PinyinMatch.match(text, 'huan'))
+console.log(PinyinMatch.match(text, "huan"));
 // [6, 6]
 
 // 拼音 + 汉字混合
-console.log(PinyinMatch.match(text, 'bai日'))
+console.log(PinyinMatch.match(text, "bai日"));
 // [0, 1]
 
 // 无法命中
-console.log(PinyinMatch.match(text, 'abcdef'))
+console.log(PinyinMatch.match(text, "abcdef"));
 // false
 
 // 气泡对话
@@ -223,7 +221,7 @@ mermaid.registerIconPacks([
 import zenuml from "@mermaid-js/mermaid-zenuml";
 mermaid.registerExternalDiagrams([zenuml]);
 
-import elkLayouts from '@mermaid-js/layout-elk';
+import elkLayouts from "@mermaid-js/layout-elk";
 mermaid.registerLayoutLoaders(elkLayouts);
 
 // mermaid.initialize({
@@ -245,7 +243,7 @@ import "vitepress-markdown-timeline/dist/theme/index.css";
 import "vitepress-markdown-it-stepper/theme";
 
 // 导入hooks
-import useVisitData from '../hooks/useVisitData'
+import useVisitData from "../hooks/useVisitData";
 
 import "virtual:group-icons.css";
 import "virtual:uno.css";
@@ -310,7 +308,8 @@ export default {
         h(
           "div",
           {
-            class: "hidden lg:(visible flex w-full h-full items-center justify-center)",
+            class:
+              "hidden lg:(visible flex w-full h-full items-center justify-center)",
             style: "position: relative;",
           },
           [
@@ -457,7 +456,7 @@ export default {
     const { app, router, siteData } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
-    // initComponent(app);
+    enhanceAppWithTabs(app);
 
     // // Use the client-safe wrapper for SSR compatibility
     // const mermaidRenderer = createMermaidRenderer({
@@ -486,11 +485,9 @@ export default {
         watch(
           () => router.route.data.relativePath,
           () => updateHomePageStyle(location.pathname === "/"),
-          { immediate: true },
+          { immediate: true }
         );
       }
-
-      // enhanceAppWithTabs(app);
 
       vitepressBackToTop({
         // default
@@ -501,7 +498,7 @@ export default {
 
       app.component(
         "CopyOrDownloadAsMarkdownButtons",
-        CopyOrDownloadAsMarkdownButtons,
+        CopyOrDownloadAsMarkdownButtons
       );
       app.component("MarkdownEChart", MarkdownEChart);
       app.component("HrefCard", HrefCard);
@@ -598,8 +595,8 @@ export default {
 
         // 路由加载完成，在加载页面组件后（在更新页面组件之前）调用。
         router.onAfterPageLoad = async () => {
-          console.log("onAfterPageLoad");// 调用统计访问接口hooks
-          useVisitData()
+          console.log("onAfterPageLoad"); // 调用统计访问接口hooks
+          useVisitData();
           NProgress.done(); // 停止进度条
           nextTick(function () {
             setupMediumZoom();

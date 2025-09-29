@@ -39,6 +39,20 @@ import HexagonHolder from '@/components/HexagonHolder.vue'
 > 
 > 2025 对饮 2026 笃行。
 
+:::tabs key:ab
+== tab a
+a content
+== tab b
+b content
+:::
+
+:::tabs key:ab
+== 选项卡 a
+我是选项卡A的内容
+== 选项卡 b
+我是选项卡B的内容
+:::
+
 ### MAUI 系列 ###
 
 - 基于 Vant 的脚手架
