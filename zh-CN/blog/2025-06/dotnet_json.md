@@ -137,7 +137,7 @@ public class DecimalConverter : JsonConverter<decimal>
 options.Converters.Add(new DecimalConverter());
 ```
 
-### 源码生成器（.NET 6+） ###
+### 源码生成器（`.NET 6+`） ###
 
 **彻底消除反射开销，提升启动性能**
 
@@ -230,7 +230,7 @@ var options = new JsonSerializerOptions {
 string json = JsonSerializer.Serialize(dog, options);
 ```
 
-### 使用 UTF-8 字节数组：避免字符串转换开销 ###
+### 使用 `UTF-8` 字节数组：避免字符串转换开销 ###
 
 ```csharp
 byte[] utf8Json = JsonSerializer.SerializeToUtf8Bytes(person);
@@ -246,7 +246,7 @@ private static readonly JsonSerializerOptions Options = new() {
 string json = JsonSerializer.Serialize(person, Options);
 ```
 
-### 源生成器（Source Generators - .NET 6+） ###
+### 源生成器（Source Generators - `.NET 6+`） ###
 
 ```csharp
 // 1. 创建上下文类（自动生成序列化代码）
@@ -308,8 +308,8 @@ T obj2 = JsonSerializer.Deserialize<T>(json);
 
 ### JsonDocument / JsonElement ###
 
-- **只读 DOM**：JsonDocument 提供 JSON 文档的只读 DOM，解析后可多次遍历但不支持修改。
-- **低分配**：内部使用 UTF-8 解析，JsonElement 代表树中的节点，避免生成中间对象。
+- **只读 DOM**：`JsonDocument` 提供 JSON 文档的只读 DOM，解析后可多次遍历但不支持修改。
+- **低分配**：内部使用 `UTF-8` 解析，JsonElement 代表树中的节点，避免生成中间对象。
 
 ```csharp
 using var doc = JsonDocument.Parse(json);
@@ -338,22 +338,22 @@ string json = Encoding.UTF8.GetString(stream.ToArray());
 
 | 属性        |      说明      |  备注 |
 | :-------------: | :-----------: | :----: |
-| WriteIndented      | 是否缩进输出 |  |
-| DefaultIgnoreCondition      |   空值/默认值忽略策略 (Never/WhenWritingNull)   |  |
-| PropertyNamingPolicy      |   属性名重命名策略 (CamelCase 或 自定义)   |  |
-| DictionaryKeyPolicy      |   字典键名策略   |  |
-| PropertyNameCaseInsensitive      |   反序列化时属性名大小写是否忽略   |  |
-| AllowTrailingCommas      |   允许尾逗号   |  |
-| IgnoreReadOnlyProperties      |   忽略只读属性   |  |
-| NumberHandling      |   数字处理策略 (AllowReadingFromString, WriteAsString)   |  |
+| `WriteIndented`      | 是否缩进输出 |  |
+| `DefaultIgnoreCondition`      |   空值/默认值忽略策略 (`Never`/`WhenWritingNull`)   |  |
+| `PropertyNamingPolicy`      |   属性名重命名策略 (`CamelCase` 或 自定义)   |  |
+| `DictionaryKeyPolicy`      |   字典键名策略   |  |
+| `PropertyNameCaseInsensitive`      |   反序列化时属性名大小写是否忽略   |  |
+| `AllowTrailingCommas`      |   允许尾逗号   |  |
+| `IgnoreReadOnlyProperties`      |   忽略只读属性   |  |
+| `NumberHandling`      |   数字处理策略 (`AllowReadingFromString`, `WriteAsString`)   |  |
 
 ### 属性特性 ###
 
 | 特性        |      用途      |  备注 |
 | :-------------: | :-----------: | :----: |
-| `[JsonPropertyName("json_name")]`      |   指定序列化/反序列化时的 JSON 字段名   |  |
+| `[JsonPropertyName("json_name")]`      |   指定序列化/反序列化时的 `JSON` 字段名   |  |
 | `[JsonIgnore]`      |   忽略该属性   |  |
-| `[JsonInclude]`      |   包括非 public 字段或属性   |  |
+| `[JsonInclude]`      |   包括非 `public` 字段或属性   |  |
 | `[JsonConverter(typeof(MyConverter))]`      |   为该成员或类型指定自定义转换器   |  |
 | `[JsonNumberHandling]`      |   针对数字字段定义特殊处理（例如从字符串读取）   |  |
 | `[JsonExtensionData]`      |   捕获额外字段到 `IDictionary<string, JsonElement>`   |  |
@@ -412,26 +412,3 @@ var app = builder.Build();
 app.MapControllers();
 app.Run();
 ```
-
-<llm-only>
-
-## Section for LLMs
-
-This content appears only in the generated LLMs files without the `<llm-only>` tag
-</llm-only>
-
-<llm-exclude>
-## Section for humans
-
-This content will not be in the generated files for LLMs
-</llm-exclude>
-
-VitePress is built with Vue.
-
-To prevent linking: //VitePress//
-
-
-<!-- ::: example
-example=@/demos/ClipPathDemo.vue
-::: -->
-
