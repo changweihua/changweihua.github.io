@@ -2,9 +2,9 @@
 lastUpdated: true
 commentabled: true
 recommended: true
-title: fnm 简介及使用
-description: 管理不同项目nodejs版本
-date: 2025-09-30 11:00:00 
+title: 团队 Git 分支管理全流程规范
+description: 团队 Git 分支管理全流程规范
+date: 2025-09-30 17:00:00 
 pageClass: blog-page-class
 cover: /covers/platform.svg
 ---
