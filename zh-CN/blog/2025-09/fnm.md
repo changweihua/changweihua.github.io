@@ -6,7 +6,7 @@ title: fnm 简介及使用
 description: 管理不同项目nodejs版本
 date: 2025-09-30 11:00:00 
 pageClass: blog-page-class
-cover: /covers/html5.svg
+cover: /covers/platform.svg
 ---
 
 ## FNM 简介 ##
