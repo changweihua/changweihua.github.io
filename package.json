@@ -121,6 +121,7 @@
     "vite-plugin-image-preload": "^1.0.0",
     "vite-plugin-mkcert": "^1.17.8",
     "vite-plugin-mock-dev-server": "^2.0.1",
+    "vite-plugin-pwa": "^1.0.3",
     "vite-plugin-px2rem": "^1.0.5",
     "vite-plugin-qrcode": "^0.3.0",
     "vite-plugin-robots": "^1.0.5",
