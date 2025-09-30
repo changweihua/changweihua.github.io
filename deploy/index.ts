@@ -1,4 +1,4 @@
-import scpClient from "scp2"; // 自动化部署
+import scpClient from "node-scp2"; // 自动化部署
 import chalk from "chalk"; // 控制台输出的语句
 import ora from "ora"; // 命令行加载动画库
 
@@ -14,7 +14,7 @@ const server = {
 spinner.start();
 
 // 本地打包文件的位置 ./dist
-scpClient.scp("./dist", server, (err) => {
+scpClient.scp("./dist", server, (err: any) => {
   spinner.stop();
   if (!err) {
     console.log(chalk.blue("xxx系统自动化部署完毕!"));

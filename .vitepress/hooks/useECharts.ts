@@ -1,6 +1,5 @@
 // hooks/useECharts.ts
 import * as echarts from "echarts";
-import elementResizeDetectorMaker from "element-resize-detector";
 import { debounce } from "lodash-es";
 import {
   onActivated,
@@ -39,6 +38,8 @@ export function useECharts(
   // 使用 shallowRef 创建一个响应式引用，用于保存 ECharts 实例
   const chartInstance = shallowRef<echarts.EChartsType | null>(null);
 
+  let resizeObserver: ResizeObserver;
+
   // 使用 ref 创建一个响应式引用，用于保存图表的配置选项
   const options = reactive<echarts.EChartsOption>(initOptions);
 
@@ -51,6 +52,17 @@ export function useECharts(
         chartInstance.value = echarts.init(containerRef.value, theme, opts);
         // 设置图表的初始选项
         chartInstance.value.setOption(options);
+
+        // 初始化监听器
+        resizeObserver = new ResizeObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === containerRef.value) {
+              // chartInstance.value && chartInstance.value.resize();
+              handleResize();
+            }
+          });
+        });
+        resizeObserver.observe(containerRef.value);
       }
     });
   };
@@ -69,7 +81,6 @@ export function useECharts(
     }
   };
 
-  const erd = elementResizeDetectorMaker();
   // 处理窗口大小调整的函数，确保图表能够自动调整大小
   const handleResize = debounce(() => {
     chartInstance.value?.resize({
@@ -84,6 +95,7 @@ export function useECharts(
   const disposeChart = () => {
     chartInstance.value?.dispose(); // 调用 ECharts 的 dispose 方法销毁实例
     chartInstance.value = null; // 清空 chartInstance 引用，避免内存泄漏
+    resizeObserver && resizeObserver.disconnect();
   };
 
   // 监听 options 的变化，并在其发生改变时更新图表
@@ -93,12 +105,10 @@ export function useECharts(
   // 组件挂载时初始化图表并添加窗口大小调整的事件监听器
   onMounted(() => {
     initChart(); // 初始化图表
-    containerRef.value && erd.listenTo(containerRef.value, handleResize);
   });
 
   // 组件卸载时移除事件监听器并销毁图表实例
   onBeforeUnmount(() => {
-    containerRef.value && erd.removeListener(containerRef.value, handleResize);
     disposeChart(); // 销毁图表实例
   });
 
@@ -107,12 +117,10 @@ export function useECharts(
     if (!chartInstance.value) {
       initChart(); // 如果图表实例不存在，重新初始化
     }
-    containerRef.value && erd.listenTo(containerRef.value, handleResize);
   });
 
   // 组件停用时移除事件监听器并销毁图表实例
   onDeactivated(() => {
-    containerRef.value && erd.removeListener(containerRef.value, handleResize);
     disposeChart(); // 销毁图表实例
   });
 

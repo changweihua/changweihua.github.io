@@ -9,17 +9,13 @@ import { useData } from "vitepress";
 import {
   onMounted,
   onBeforeUnmount,
-  ref,
   watch,
   useTemplateRef,
   nextTick,
-  shallowRef,
 } from "vue";
 import * as echarts from "echarts";
 import { deepmerge } from "deepmerge-ts";
 import { baseThemeOption } from "../assets/echarts/echarts.option";
-import ElementResize from "element-resize-detector";
-import { debounce } from "lodash-es";
 
 const props = defineProps({
   id: String,
@@ -27,6 +23,8 @@ const props = defineProps({
 });
 
 const chartRef = useTemplateRef<HTMLDivElement>("chartRef");
+
+let myChart: echarts.ECharts;
 
 const { isDark } = useData();
 
@@ -36,7 +34,7 @@ const initChart = (theme: string) => {
 
   myChart.setOption(
     // @ts-ignore
-    deepmerge(baseThemeOption, JSON.parse(decodeURIComponent(props.code!))),
+    deepmerge(baseThemeOption, JSON.parse(decodeURIComponent(props.code!)))
   );
 };
 
@@ -45,48 +43,37 @@ watch(
   (nVal, oVal) => {
     console.log(`isDark from ${oVal} to ${nVal}`);
     initChart(isDark.value ? "dark" : "light");
-  },
+  }
 );
-
-// 创建MutationObserver实例
-const observer = new MutationObserver(function (mutations, instance) {
-  mutations.forEach(function (mutation) {
-    const div = mutation.target as HTMLElement;
-    console.log("div", div);
-    // if (div && div.classList && div.classList.contains("rough-mermaid")) {
-    //   const svg = div.querySelector("svg");
-    //   if (!svg) {
-    //     return;
-    //   }
-
-    //   console.log(svg.id);
-    //   // TODO: 此时开始加载第三方脚本
-    //   observer.disconnect();
-    // }
-  });
+let resizeTimer: number;
+// 创建 ResizeObserver 实例
+const resizeObserver = new ResizeObserver((entries) => {
+  for (const entry of entries) {
+    // 仅处理目标容器的尺寸变化
+    // if (entry.target === myChart.getDom()) {
+    if (entry.target === chartRef.value!) {
+      // 防抖处理：避免高频 resize 导致的性能问题
+      resizeTimer && clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        myChart.resize({
+          animation: { duration: 300 }, // 可选：启用过渡动画
+        });
+      }, 100);
+    }
+  }
 });
-// 配置MutationObserver实例
-const config = {
-  attributes: true,
-  childList: true, // 观察直接子节点
-  subtree: true, // 及其更低的后代节点
-  characterData: true,
-  characterDataOldValue: true, // 将旧的数据传递给回调
-};
 
 onBeforeUnmount(() => {
-  observer.disconnect();
-  chartRef.value && elementResize.uninstall(chartRef.value);
+  // 销毁图表与监听器
+  myChart && myChart.dispose();
+  resizeObserver.disconnect();
 });
 
-let myChart: echarts.ECharts;
-
 onMounted(() => {
-  elementResize.listenTo(chartRef.value!, debounce(resizeChart, 500));
   nextTick(() => {
     initChart(isDark.value ? "dark" : "light");
   });
-  // observer.observe(chartRef.value, config);
+  chartRef.value && resizeObserver.observe(chartRef.value);
 });
 
 const resizeChart = () => {
@@ -95,11 +82,6 @@ const resizeChart = () => {
     myChart && myChart.resize();
   });
 };
-
-const elementResize = ElementResize({
-  strategy: "scroll",
-  callOnAdd: true,
-});
 </script>
 
 <style scoped>

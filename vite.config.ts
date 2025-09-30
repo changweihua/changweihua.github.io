@@ -22,7 +22,6 @@ import colors from "picocolors";
 import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import imagePlaceholder from "vite-plugin-image-placeholder";
 import { codeInspectorPlugin } from "code-inspector-plugin";
-import { VitePWA } from "vite-plugin-pwa";
 import { ValidateEnv, Schema } from "@julr/vite-plugin-validate-env";
 import simpleHtmlPlugin from "vite-plugin-simple-html";
 import { webUpdateNotice } from "@plugin-web-update-notification/vite";
@@ -262,6 +261,7 @@ export default defineConfig(() => {
             // alias: {
             //   system: 'system-uicons'
             // },
+            // this is optional, default enabling all the collections supported by Iconify
             // enabledCollections: ['logos']
           }),
         ],
@@ -269,6 +269,9 @@ export default defineConfig(() => {
       Icons({
         compiler: "vue3",
         autoInstall: true,
+        scale: 1.2, // Scale of icons against 1em
+        defaultStyle: "", // Style apply to icons
+        defaultClass: "", // Class names apply to icons
       }),
       UnoCSS(),
       ...getDevPlugins(),
@@ -298,12 +301,6 @@ export default defineConfig(() => {
         dir: "images/**/*.{png,jpg,jpeg,gif,svg,webp}",
         attrs: {
           rel: "prefetch",
-        },
-      }),
-      VitePWA({
-        registerType: "autoUpdate",
-        workbox: {
-          maximumFileSizeToCacheInBytes: 2 * 10 * 1000 * 1000,
         },
       }),
     ],

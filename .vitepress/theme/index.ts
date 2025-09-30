@@ -1,7 +1,7 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { h, watchEffect, watch,  nextTick } from "vue";
+import { h, watchEffect, watch, nextTick } from "vue";
 import DocAfter from "../components/DocAfter.vue";
 import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
@@ -30,6 +30,7 @@ import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
+import RegisterSW from "../components/RegisterSW.vue";
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
 
@@ -391,7 +392,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "layout-top",
       //   }),
-      "layout-bottom": () => h(PageFooter),
+      "layout-bottom": () => [h(PageFooter), h(RegisterSW)],
       // "nav-bar-title-before": () =>
       //   h(PlaceHolder, {
       //     name: "nav-bar-title-before",
