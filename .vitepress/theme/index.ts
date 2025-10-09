@@ -1,6 +1,6 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from "vitepress";
-import DefaultTheme from "vitepress/theme";
+import DefaultTheme from "vitepress/theme-without-fonts";
 import { h, watchEffect, watch, nextTick } from "vue";
 import DocAfter from "../components/DocAfter.vue";
 import Recommend from "../components/Recommend.vue";
