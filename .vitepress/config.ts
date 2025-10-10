@@ -19,6 +19,7 @@ import AutoFrontmatter, { FileInfo } from "vitepress-plugin-auto-frontmatter";
 import { withMermaid } from "vitepress-plugin-mermaid";
 import fs from "fs-extra";
 import { withPwa } from "@vite-pwa/vitepress";
+import llmstxt from 'vitepress-plugin-llms'
 
 const customElements = [
   "mjx-container",
@@ -409,6 +410,7 @@ export default withPwa(
               // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
             },
           }),
+          llmstxt(),
           // La51Plugin({
           //   id: "",
           //   ck: "",

@@ -13,18 +13,18 @@
   "markdown.copyFiles.destination": {
     "/**/*": "/public/images/cmono-${fileName}"
   },
-  "editor.fontFamily": "JetBrains Maple Mono, Fria Code Retina",         // 代码编辑器
-  "terminal.integrated.fontFamily": "JetBrains Maple Mono, Fria Code Retina",  // 终端
-  "debug.console.fontFamily": "JetBrains Maple Mono, Fria Code Retina",       // 调试控制台
-  "markdown.preview.fontFamily": "JetBrains Maple Mono, Fria Code Retina",     // Markdown预览
-  "gitlens.views.fontFamily": "JetBrains Maple Mono, Fria Code Retina",       // GitLens扩展视图（需安装GitLens）
-  "workbench.tips.fontFamily": "JetBrains Maple Mono, Fria Code Retina",        // 提示信息（部分版本无效）
-  "workbench.desktopUI.fontFamily": "JetBrains Maple Mono, Fria Code Retina",
+  "editor.fontFamily": "Maple Mono Normal NF CN,Maple Mono NF CN, JetBrains Maple Mono,Maple Mono SC NF",         // 代码编辑器
+  "terminal.integrated.fontFamily": "Maple Mono NF CN",  // 终端
+  "debug.console.fontFamily": "Maple Mono NF CN",       // 调试控制台
+  "markdown.preview.fontFamily": "Maple Mono NF CN",     // Markdown预览
+  "gitlens.views.fontFamily": "Maple Mono NF CN",       // GitLens扩展视图（需安装GitLens）
+  "workbench.tips.fontFamily": "Maple Mono NF CN",        // 提示信息（部分版本无效）
+  "workbench.desktopUI.fontFamily": "Maple Mono NF CN",
   "unocss.root": "packages/client",
   "workbench.fontAliasing": "antialiased",  // 字体渲染方式（可选）
   "window.titleBarStyle": "custom",          // 启用自定义标题栏
   "workbench.experimental.settingsSandbox": true,
-  "window.fontFamily": "JetBrains Maple Mono, Fria Code Retina",  // 部分测试版本可能支持
+  "window.fontFamily": "Maple Mono NF CN",  // 部分测试版本可能支持
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "index.html": "index.html,index.*.html,*.css",
@@ -33,6 +33,10 @@
     "components.d.ts": "auto-imports.d.ts,components.d.ts",
     "index.md": "index.md,login.md,archives.md,tags.md,me.*.md,manuals.md,resume.md,about.md,en-US.md,zh-CN.md,sponsor.md,CONTRIBUTING.md,CODE_OF_CONDUCT.md,CONTRIBUTING.zh-CN.md,README.md,CHANGELOG.md,PRIVACY_POLICY.md,TERMS_OF_SERVICE.md,logo.svg",
     "Dockerfile": "Dockerfile, .dockerignore"
+  },
+  "workbench.colorCustomizations": {
+    // "terminal.background": "#ffffff",
+    "minimap.background": "#ffffff",
   },
   "workbench.navigationControl.enabled": false,
   "typescript.tsdk": "node_modules/typescript/lib",

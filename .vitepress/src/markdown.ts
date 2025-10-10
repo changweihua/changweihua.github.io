@@ -19,6 +19,7 @@ import MarkdownItGitHubAlerts from "markdown-it-github-alerts";
 import markdownItReplaceLink from "markdown-it-replace-link";
 import markdownItTableExt from "markdown-it-multimd-table-ext";
 import path from 'path';
+import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -51,6 +52,7 @@ const markdown: MarkdownOptions | undefined = {
         // Other MathJax options
       },
     });
+    md.use(copyOrDownloadAsMarkdownButtons)
     md.use(tabsMarkdownPlugin);
     md.use(npmCommandsMarkdownPlugin);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });

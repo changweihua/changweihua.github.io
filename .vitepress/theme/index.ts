@@ -27,6 +27,7 @@ import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimtedTitle.vue";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
+import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue'
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
@@ -155,7 +156,6 @@ import Guidance from "../components/Guidance.vue";
 import TaskList from "../components/TaskList.vue";
 import ScrollableParagraph from "../components/ScrollableParagraph.vue";
 import GalleryCard from "../components/GalleryCard.vue";
-import CopyOrDownloadAsMarkdownButtons from "../components/CopyOrDownloadAsMarkdownButtons.vue";
 
 import { Icon } from "@iconify/vue";
 
@@ -444,6 +444,8 @@ export default {
     DefaultTheme.enhanceApp(ctx);
 
     enhanceAppWithTabs(app);
+
+    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
     // // Use the client-safe wrapper for SSR compatibility
     // const mermaidRenderer = createMermaidRenderer({

@@ -30,34 +30,27 @@ pageClass: gallery-page-class
 import HexagonHolder from '@/components/HexagonHolder.vue'
 </script>
 
-<!-- <HoverableText title="2025" /> -->
-
-<i class="i-ci-svc-live" style="font-size:72px;"></i>
 
 > [!IMPORTANT] 年度关键词
 > 开花不一定结果，努力一定不会辜负青春。
 > 
 > 2025 对饮 2026 笃行。
 
-:::tabs key:ab
-== tab a
-a content
-== tab b
-b content
-:::
+<llm-exclude>
+## Section for humans
 
-:::tabs key:ab
-== 选项卡 a
-我是选项卡A的内容
-== 选项卡 b
-我是选项卡B的内容
-:::
+This content will not be in the generated files for LLMs
+</llm-exclude>
 
 ### MAUI 系列 ###
 
-- 基于 Vant 的脚手架
-- 基于 Ant Design Vue 的脚手架
-- 基于 iFrame 的微前端
+- 基于 Vant 的脚手架，主要针对 H5（包含内嵌微信小程序端）。
+- 基于 Ant Design Vue 的脚手架，主要针对 WEB PC 端。
+- 基于 iFrame 的微前端，主要针对以 iframe 形式内嵌其他系统集成的。
+
+
+> [!NOTE] 备注
+> 以上项目均已在无锡硕放机场的内部系统及小程序上得到实际应用和测试。
 
 ### Yolo 8 ~ 13 ###
 
@@ -67,10 +60,17 @@ b content
 
 ![](/images/QQ20250805135713.png){data-zoomable}
 
+> [!TIP] 备注
+> 主要基于 Windows 平台。
+
 ### Envoy 开放认证授权平台 ###
 
 - 集成Envoy的网关，网关支持JWKS认证和RBAC鉴权、流量控制、多种认证机制、镜像访问。
 - Docker Compose 部署，Seq 等日志平台。
+
+
+> [!WARNING] 备注
+> 完整的 Docker 集成
 
 ### AI Gallery ###
 
@@ -87,6 +87,9 @@ b content
 - 优化平台架构，[统一认证授权平台](/zh-CN/manual/kyt.md)。
 - 搭建基于 `iframe` 的微前端架构，通过 `postMessage` 实现组件的全局通信，封装功能组件，实现抽象继承能力。
 - 封装 `maui-jsbridge`，`maui-vant`，`maui-shell` 等移动端 npm 库。
+
+> [!CAUTION] 备注
+> 内部系统，无法展示。
 
 ### 常州奔牛国际机场行李智能测量项目 ###
 
@@ -105,16 +108,18 @@ b content
 - 上线巴士管家功能模块。
 - 更新小程序图片资源。
 
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
 
-> [!TIP]
-> Optional information to help a user be more successful.
 
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
 
-> [!CAUTION]
-> Negative potential consequences of an action.
 
 <!-- <Robot /> -->
+
+```sh
+npm i // [!=npm auto]
+npm run build // [!=npm auto]
+npm run test // [!=npm auto]
+```
+
+<!-- <HoverableText title="2025" /> -->
+
+<i class="i-ci-svc-live" style="font-size:72px;"></i>
