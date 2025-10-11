@@ -23,8 +23,7 @@
 <script lang="ts" setup>
 import { PropType, reactive, toRefs, ref, onMounted, nextTick } from "vue";
 import { useData } from "vitepress";
-// @ts-ignore
-import { getFromNow } from "@vp/utils/date";
+import { getFromNow } from "../hooks/useDayjs";
 
 // 定义文章属性
 const props = defineProps({

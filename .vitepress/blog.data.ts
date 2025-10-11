@@ -4,8 +4,8 @@
 // 一个用于数据加载的文件必须以.data.js 或.data.ts 结尾。该文件应该提供一个默认导出的对象，该对象具有 load() 方法：
 
 // Support i18n in contentLoader
-import { createContentLoader, type ContentData, type SiteConfig } from 'vitepress'
-import date from "./utils/date";
+import { createContentLoader, type SiteConfig } from 'vitepress'
+import dayjs from "./hooks/useDayjs";
 
 export interface Post {
   title: string
@@ -80,8 +80,8 @@ export default createContentLoader([
 
 function formatDate(raw: string): Post['date'] {
   return {
-    time: date.tz(`${raw}:00`, "Asia/Shanghai").valueOf(),
-    string: date.tz(`${raw}:00`, "Asia/Shanghai").format("YYYY-MM-DD HH:mm"),
+    time: dayjs.tz(`${raw}:00`, "Asia/Shanghai").valueOf(),
+    string: dayjs.tz(`${raw}:00`, "Asia/Shanghai").format("YYYY-MM-DD HH:mm"),
   };
 }
 

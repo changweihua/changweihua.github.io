@@ -30,7 +30,7 @@ import CursorShineCards from '@/components/CursorShineCards.vue';
 import BlogIndex from "@vp/components/BlogIndex.vue"
 import { useData } from 'vitepress'
 import { data } from '@vp/blog.data'
-import { getDateTime } from '@vp/utils/date'
+import { getDateTime } from  "@vp/hooks/useDayjs";
 
 const { lang } = useData()
 console.log('data',data)

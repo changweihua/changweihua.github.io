@@ -1,4 +1,4 @@
-import date from "../../utils/date";
+import date from "../../hooks/useDayjs";
 import { DefaultTheme } from "vitepress";
 // , activeMatch: "^/$|^/index/"
 export const getEnUSFooter: () => DefaultTheme.Footer = () => {

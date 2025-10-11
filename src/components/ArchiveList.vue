@@ -39,7 +39,7 @@
 import { computed } from "vue";
 // @ts-ignore
 import { data } from "@vp/post.data";
-import date from "@vp/utils/date";
+import date from "@vp/hooks/useDayjs";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 

@@ -7,7 +7,7 @@ title: changweihua.github.io 最新文章 CMONO.NET
 <script lang="ts" setup>
 import { ref, unref, computed, onMounted } from 'vue'
 import  { data }  from '@vp/post.data'
-import date from "@vp/utils/date";
+import date from "@vp/hooks/useDayjs";
 import { useData } from 'vitepress'
 
 const { lang } = useData()

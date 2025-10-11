@@ -108,17 +108,35 @@ const transitionType = ref("vt");
             &nbsp;
           </div>
         </template> -->
-        <template
-          v-for="(slotKey, slotIndex) in slots"
-          :key="slotIndex"
-          v-slot:[slotKey]
-        >
+        <template v-for="(slotKey, slotIndex) in slots" :key="slotIndex" v-slot:[slotKey]>
           <slot :name="slotKey"></slot>
         </template>
       </DefaultTheme.Layout>
     </div>
   </transition>
 </template>
+
+<style scoped>
+.page-content {
+
+  --r: clamp(3, (var(--num) - 99) * 999 + 29, 250);
+  --g: clamp(6, (var(--num) - 100) * -999 + 67, 125);
+  --b: clamp(12, (var(--num) - 100) * -999 + 54, 250);
+
+  :deep(.markdown-copy-buttons) button:hover {
+    color: rgb(var(--r) var(--g) var(--b));
+  }
+
+  :deep(.markdown-copy-buttons) {
+    justify-content: center;
+  }
+
+  :deep(.markdown-copy-buttons-inner) {
+    flex: 1;
+    justify-content: space-around;
+  }
+}
+</style>
 
 <style>
 ::view-transition-old(root),
@@ -136,6 +154,7 @@ const transitionType = ref("vt");
 .dark::view-transition-old(root) {
   z-index: 9999;
 }
+
 /* 视图过渡动画 */
 .vt-enter-active,
 .vt-leave-active {
@@ -246,9 +265,11 @@ const transitionType = ref("vt");
     opacity: 1;
     transform: translateY(0);
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     transform: translateY(100vh);
@@ -298,6 +319,7 @@ const transitionType = ref("vt");
   inherits: true;
   initial-value: 0;
 }
+
 :root {
   animation: adjust-pos 3s linear both;
   animation-timeline: scroll();

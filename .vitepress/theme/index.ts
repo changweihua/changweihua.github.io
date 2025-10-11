@@ -31,7 +31,7 @@ import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-com
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
-import RegisterSW from "../components/RegisterSW.vue";
+// import RegisterSW from "../components/RegisterSW.vue";
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
 
@@ -392,7 +392,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "layout-top",
       //   }),
-      "layout-bottom": () => [h(PageFooter), h(RegisterSW)],
+      "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
       // "nav-bar-title-before": () =>
       //   h(PlaceHolder, {
       //     name: "nav-bar-title-before",
@@ -485,10 +485,6 @@ export default {
 
       app.use(yuppie);
 
-      app.component(
-        "CopyOrDownloadAsMarkdownButtons",
-        CopyOrDownloadAsMarkdownButtons
-      );
       app.component("MarkdownEChart", MarkdownEChart);
       app.component("HrefCard", HrefCard);
       app.component("ColorfulName", ColorfulName);

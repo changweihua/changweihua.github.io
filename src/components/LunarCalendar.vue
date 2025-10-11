@@ -2,7 +2,7 @@
 
 <script setup lang="ts">
 // 引入
-import date from "@vp/utils/date";
+import date from "@vp/hooks/useDayjs";
 import lunisolar from "lunisolar";
 // // 引入 theGods 插件
 // import theGods from 'lunisolar/src/plugins/theGods'

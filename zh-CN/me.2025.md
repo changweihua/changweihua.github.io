@@ -123,3 +123,23 @@ npm run test // [!=npm auto]
 <!-- <HoverableText title="2025" /> -->
 
 <i class="i-ci-svc-live" style="font-size:72px;"></i>
+
+::: code-group
+```ts [a.ts]
+console.log("I'm TypeScript");
+```
+
+```js [b.js]
+console.log("I'm JavaScript");
+```
+
+```md [c.md]
+Markdown 图标演示
+```
+
+```css [d.css]
+h1 {
+  background: red;
+}
+```
+:::

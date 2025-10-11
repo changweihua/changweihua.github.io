@@ -4,7 +4,7 @@ import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 import { getEnUSNav } from "../navs";
 import { getEnUSSidebar } from "../sidebars";
 
-import dayjs from 'dayjs'
+import dayjs from '../../hooks/useDayjs'
 
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: "CMONO.NET HomePage",
