@@ -234,8 +234,8 @@ import "vitepress-markdown-it-stepper/theme";
 // 导入hooks
 import useVisitData from "../hooks/useVisitData";
 
-import "virtual:group-icons.css";
 import "virtual:uno.css";
+import "virtual:group-icons.css";
 import "animate.css";
 
 import vitepressBackToTop from "vitepress-plugin-back-to-top";

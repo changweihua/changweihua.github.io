@@ -41,6 +41,10 @@ export default defineConfig({
           import("@iconify-json/line-md/icons.json").then((i) => i.default),
         mdi: () =>
           import("@iconify-json/mdi/icons.json").then((i) => i.default),
+        // logos: () =>
+        //   import("@iconify-json/logos/icons.json", {
+        //     assert: { type: "json" },
+        //   }).then((i) => i.default),
         ci: () =>
           import("@opentiny/icons/json/icons.json", {
             assert: { type: "json" },
