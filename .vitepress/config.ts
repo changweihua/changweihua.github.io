@@ -2,6 +2,7 @@ import { themeConfig } from "./src/theme";
 import { docsConfig } from "./src/docs";
 import { head } from "./src/head";
 import { markdown } from "./src/markdown";
+import { RSS } from "./src/rss";
 import { HeadConfig, defineConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import vitepressProtectPlugin from "vitepress-protect-plugin";
@@ -18,8 +19,8 @@ import MdH1 from "vitepress-plugin-md-h1";
 import AutoFrontmatter, { FileInfo } from "vitepress-plugin-auto-frontmatter";
 import { withMermaid } from "vitepress-plugin-mermaid";
 import fs from "fs-extra";
-// import { withPwa } from "@vite-pwa/vitepress";
 import llmstxt from 'vitepress-plugin-llms'
+import { RssPlugin } from "vitepress-plugin-rss";
 
 const customElements = [
   "mjx-container",
@@ -489,6 +490,7 @@ export default withMermaid(
         }),
         viteDemoPreviewPlugin(),
         vueJsx(),
+        RssPlugin(RSS),
         pagefindPlugin({
           // verbose: true, // 启用详细日志
           locales: {

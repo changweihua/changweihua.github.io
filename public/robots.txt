@@ -1,0 +1,7 @@
+# public/robots.txt
+
+User-agent: *
+Allow: /
+# ... 其他规则
+
+Allow: /feed.rss

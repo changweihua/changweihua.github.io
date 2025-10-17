@@ -73,6 +73,7 @@ const markdown: MarkdownOptions | undefined = {
       autolabel: false,
     });
     const docRoot = fileURLToPath(new URL("../../", import.meta.url));
+    console.log('docRoot', docRoot)
     md.use(demoPreviewPlugin, {
       docRoot,
     });

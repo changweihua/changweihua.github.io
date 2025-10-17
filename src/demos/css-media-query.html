@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <title>CSS容器查询与元素查询</title>
+<head>
+   
+<meta charset="UTF-8" />
+   
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+   
+   <style>
+/*全局样式重置*/
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+​ body {
+font-family: -apple-system, BlinkMacSystemFont, 'SegoeUI', Roboto,
+sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+padding: 2rem;
+}
+
+​ .container {
+max-width: 1400px;
+margin: 0 auto;
+}
+
+​ .page-header {
+text-align: center;
+color: white;
+margin-bottom: 3rem;
+}
+
+​ .page-title {
+font-size: 2.5rem;
+font-weight: 700;
+margin-bottom: 0.5rem;
+text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+​ .page-subtitle {
+font-size: 1.125rem;
+opacity: 0.9;
+}
+
+​
+
+/*演示区域样式*/
+.demo-section {
+background: white;
+border-radius: 16px;
+padding: 2rem;
+margin-bottom: 2rem;
+box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+​ .section-title {
+font-size: 1.5rem;
+font-weight: 600;
+color: #1a202c;
+margin-bottom: 1rem;
+border-bottom: 2px solid #667eea;
+padding-bottom: 0.5rem;
+display: inline-block;
+}
+
+​ .section-description {
+color: #6b7280;
+margin-bottom: 1.5rem;
+line-height: 1.6;
+}
+
+​
+
+/*演示1：响应式卡片组件*/
+.card-demo {
+display: grid;
+gap: 2rem;
+grid-template-columns: 1fr 2fr;
+}
+
+​ .resize-controls {
+background: #f8fafc;
+border-radius: 8px;
+padding: 1rem;
+}
+
+​ .control-group {
+margin-bottom: 1rem;
+}
+
+​ .control-label {
+display: block;
+font-size: 0.875rem;
+font-weight: 500;
+color: #374151;
+margin-bottom: 0.5rem;
+}
+
+​ .control-slider {
+width: 100%;
+height: 4px;
+border-radius: 2px;
+background: #e5e7eb;
+outline: none;
+cursor: pointer;
+}
+
+​ .control-value {
+display: inline-block;
+background: #667eea;
+color: white;
+padding: 0.25rem 0.5rem;
+border-radius: 4px;
+font-size: 0.75rem;
+font-weight: 500;
+margin-top: 0.5rem;
+}
+
+​ .card-container {
+container-type: inline-size;
+border: 2px dashed #d1d5db;
+border-radius: 8px;
+padding: 1rem;
+resize: horizontal;
+overflow: auto;
+min-width: 200px;
+max-width: 100%;
+width: 400px;
+}
+
+​ .product-card {
+background: white;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+}
+
+​ .product-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+​
+
+/*小容器样式(<300px)*/
+.card-image {
+width: 100%;
+height: 200px;
+object-fit: cover;
+background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+​ .card-content {
+padding: 1rem;
+}
+
+​ .card-title {
+font-size: 1.125rem;
+font-weight: 600;
+color: #1a202c;
+margin-bottom: 0.5rem;
+}
+
+​ .card-description {
+color: #6b7280;
+font-size: 0.875rem;
+margin-bottom: 1rem;
+line-height: 1.5;
+}
+
+​ .card-price {
+font-size: 1.25rem;
+font-weight: 700;
+color: #667eea;
+margin-bottom: 1rem;
+}
+
+​ .card-button {
+width: 100%;
+background: #667eea;
+color: white;
+border: none;
+padding: 0.75rem;
+border-radius: 6px;
+font-weight: 500;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+​ .card-button:hover {
+background: #5a67d8;
+}
+
+​
+
+/*中等容器样式(300px-500px)*/
+@container (min-width: 300px) {
+.product-card {
+display: grid;
+grid-template-columns: 120px 1fr;
+align-items: start;
+}
+
+​ .card-image {
+height: 120px;
+margin: 1rem 0 1rem 1rem;
+border-radius: 8px;
+}
+
+​ .card-content {
+padding: 1rem 1rem 1rem 0;
+}
+
+​ .card-button {
+width: auto;
+padding: 0.5rem 1rem;
+}
+}
+
+​
+
+/*大容器样式(>500px)*/
+@container (min-width: 500px) {
+.product-card {
+grid-template-columns: 150px 1fr auto;
+grid-template-rows: auto;
+gap: 1rem;
+align-items: center;
+}
+
+​ .card-image {
+height: 100px;
+margin: 1rem;
+}
+
+​ .card-content {
+padding: 1rem 0;
+}
+
+​ .card-actions {
+padding: 1rem;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+}
+
+​ .card-button {
+white-space: nowrap;
+}
+
+​ .card-wishlist {
+background: transparent;
+color: #6b7280;
+border: 1px solid #d1d5db;
+padding: 0.5rem 1rem;
+border-radius: 6px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+​ .card-wishlist:hover {
+color: #ef4444;
+border-color: #ef4444;
+}
+}
+
+​
+
+/*演示2：侧边栏导航*/
+.sidebar-demo {
+display: grid;
+grid-template-columns: auto 1fr;
+gap: 2rem;
+min-height: 400px;
+}
+
+​ .sidebar-container {
+container-type: inline-size;
+width: 250px;
+resize: horizontal;
+overflow: auto;
+min-width: 60px;
+max-width: 400px;
+}
+
+​ .sidebar {
+background: #1f2937;
+height: 400px;
+border-radius: 8px;
+padding: 1rem;
+overflow: hidden;
+}
+
+​ .nav-item {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.75rem;
+color: #d1d5db;
+text-decoration: none;
+border-radius: 6px;
+margin-bottom: 0.5rem;
+transition: all 0.3s ease;
+white-space: nowrap;
+}
+
+​ .nav-item:hover {
+background: #374151;
+color: white;
+}
+
+​ .nav-icon {
+font-size: 1.25rem;
+flex-shrink: 0;
+}
+
+​ .nav-text {
+font-weight: 500;
+}
+
+​
+
+/*窄侧边栏样式(<120px)*/
+@container (max-width: 120px) {
+.nav-text {
+display: none;
+}
+
+​ .nav-item {
+justify-content: center;
+padding: 0.75rem 0.5rem;
+}
+}
+
+​
+
+/*超窄侧边栏样式(<80px)*/
+@container (max-width: 80px) {
+.sidebar {
+padding: 0.5rem;
+}
+
+​ .nav-item {
+padding: 0.5rem;
+margin-bottom: 0.25rem;
+}
+
+​ .nav-icon {
+font-size: 1rem;
+}
+}
+
+​ .sidebar-content {
+background: #f8fafc;
+border-radius: 8px;
+padding: 2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #6b7280;
+font-style: italic;
+}
+
+​
+
+/*演示3：数据表格*/
+.table-container {
+container-type: inline-size;
+border: 2px dashed #d1d5db;
+border-radius: 8px;
+padding: 1rem;
+resize: horizontal;
+overflow: auto;
+min-width: 300px;
+max-width: 100%;
+width: 600px;
+margin-top: 1rem;
+}
+
+​ .data-table {
+width: 100%;
+background: white;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+​ .table-row {
+display: grid;
+grid-template-columns: 1fr 100px 100px 80px;
+gap: 1rem;
+padding: 1rem;
+border-bottom: 1px solid #e5e7eb;
+align-items: center;
+}
+
+​ .table-row:last-child {
+border-bottom: none;
+}
+
+​ .table-row:nth-child(even) {
+background: #f9fafb;
+}
+
+​ .table-header {
+background: #667eea !important;
+color: white;
+font-weight: 600;
+}
+
+​ .employee-name {
+font-weight: 500;
+color: #1f2937;
+}
+
+​ .employee-role {
+color: #6b7280;
+font-size: 0.875rem;
+}
+
+​ .status-badge {
+padding: 0.25rem 0.5rem;
+border-radius: 9999px;
+font-size: 0.75rem;
+font-weight: 500;
+text-align: center;
+}
+
+​ .status-active {
+background: #dcfce7;
+color: #166534;
+}
+
+​ .status-inactive {
+background: #fee2e2;
+color: #991b1b;
+}
+
+​ .action-button {
+background: transparent;
+border: 1px solid #d1d5db;
+color: #6b7280;
+padding: 0.25rem 0.5rem;
+border-radius: 4px;
+cursor: pointer;
+font-size: 0.75rem;
+transition: all 0.3s ease;
+}
+
+​ .action-button:hover {
+background: #667eea;
+color: white;
+border-color: #667eea;
+}
+
+​
+
+/*中等容器样式(400px-600px)*/
+@container (max-width: 600px) {
+.table-row {
+grid-template-columns: 1fr 80px;
+gap: 0.5rem;
+}
+
+​ .employee-role,
+.status-badge {
+grid-column: 1;
+margin-top: 0.5rem;
+}
+
+​ .action-button {
+grid-column: 2;
+grid-row: 1 / span 2;
+align-self: center;
+}
+}
+
+​
+
+/*小容器样式(<400px)*/
+@container (max-width: 400px) {
+.table-row {
+grid-template-columns: 1fr;
+gap: 0.5rem;
+padding: 1.5rem 1rem;
+}
+
+​ .table-header {
+display: none;
+}
+
+​ .employee-name::before {
+content: '姓名:';
+font-weight: normal;
+color: #6b7280;
+}
+
+​ .employee-role::before {
+content: '职位:';
+font-weight: normal;
+}
+
+​ .status-badge::before {
+content: '状态:';
+color: #6b7280;
+font-weight: normal;
+}
+}
+
+​
+/*响应式设计*/
+@media (max-width: 768px) {
+
+.card-demo,
+.sidebar-demo {
+grid-template-columns: 1fr;
+}
+
+​ .container {
+padding: 1rem;
+}
+
+​ .page-title {
+font-size: 2rem;
+}
+}
+
+​
+
+/*性能优化*/
+.product-card,
+.nav-item,
+.table-row {
+will-change: transform;
+}
+
+​
+
+/*辅助工具类*/
+.text-center {
+text-align: center;
+}
+
+.mb-2 {
+margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+margin-bottom: 1rem;
+}
+</style>
+ 
+</head>
+
+<body>
+   <div class="container">
+     <!--页面头部-->
+     <header class="page-header">
+       <h1 class="page-title">CSS容器查询与元素查询</h1>
+       <p class="page-subtitle">响应式设计的新纪元 - 基于容器的智能布局</p>
+     </header>
+​
+     <!--演示1：响应式卡片组件-->
+     <section class="demo-section">
+       <h2 class="section-title">演示1：响应式产品卡片</h2>
+       <p class="section-description">
+        拖拽容器边缘调整宽度，观察卡片如何根据容器大小自动调整布局。
+       </p>
+​
+       <div class="card-demo">
+         <div class="resize-controls">
+           <div class="control-group">
+             <label class="control-label">容器宽度</label>
+             <input                type="range"                class="control-slider"          
+     id="cardWidth"                min="200"                max="800"              
+ value="400"               />
+             <span class="control-value" id="cardWidthValue">400px</span>
+           </div>
+           <div class="control-group">
+             <h4 style="margin-bottom:0.5rem;color:#374151;">布局变化:</h4>
+             <div              
+ style="font-size:0.875rem;color:#6b7280;line-height:1.5;"            
+ >
+              • <strong>
+< 300px:</strong> 垂直堆叠布局<br />
+              • <strong>300-500px:</strong> 水平并排布局<br />
+              • <strong>> 500px:</strong> 三列网格布局
+             </div>
+           </div>
+         </div>
+​
+         <div class="card-container" id="cardContainer">
+           <div class="product-card">
+             <div class="card-image"></div>
+             <div class="card-content">
+               <h3 class="card-title">智能手表 Pro</h3>
+               <p class="card-description">
+                全新设计的智能手表，具备健康监测、运动跟踪等多项功能。
+               </p>
+               <div class="card-price">¥2,999</div>
+               <button class="card-button">立即购买</button>
+             </div>
+             <div class="card-actions">
+               <button class="card-wishlist">❤ 收藏</button>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section>
+​
+     <!--演示2：侧边栏导航-->
+     <section class="demo-section">
+       <h2 class="section-title">演示2：自适应侧边栏导航</h2>
+       <p class="section-description">
+        拖拽侧边栏边缘调整宽度，观察导航项如何自动适应空间变化。
+       </p>
+​
+       <div class="sidebar-demo">
+         <div class="sidebar-container">
+           <nav class="sidebar">
+             <a href="#" class="nav-item">
+               <span class="nav-icon">🏠</span>
+               <span class="nav-text">首页</span>
+             </a>
+             <a href="#" class="nav-item">
+               <span class="nav-icon">📊</span>
+               <span class="nav-text">数据分析</span>
+             </a>
+             <a href="#" class="nav-item">
+               <span class="nav-icon">👥</span>
+               <span class="nav-text">用户管理</span>
+             </a>
+             <a href="#" class="nav-item">
+               <span class="nav-icon">⚙️</span>
+               <span class="nav-text">系统设置</span>
+             </a>
+             <a href="#" class="nav-item">
+               <span class="nav-icon">📝</span>
+               <span class="nav-text">内容管理</span>
+             </a>
+             <a href="#" class="nav-item">
+               <span class="nav-icon">📈</span>
+               <span class="nav-text">统计报表</span>
+             </a>
+           </nav>
+         </div>
+​
+         <div class="sidebar-content">
+           <div>
+             <h3 style="color:#1f2937;margin-bottom:0.5rem;">
+              主要内容区域
+             </h3>
+             <p>这里是主要内容区域，会根据侧边栏的变化自动调整。</p>
+           </div>
+         </div>
+       </div>
+     </section>
+​
+     <!--演示3：动态表格布局-->
+     <section class="demo-section">
+       <h2 class="section-title">演示3：响应式数据表格</h2>
+       <p class="section-description">
+        拖拽表格容器边缘，观察表格如何从完整视图转换为卡片式和列表式布局。
+       </p>
+​
+       <div class="table-container">
+         <div class="data-table">
+           <div class="table-rowtable-header">
+             <div>员工姓名</div>
+             <div>职位</div>
+             <div>状态</div>
+             <div>操作</div>
+           </div>
+           <div class="table-row">
+             <div class="employee-name">张三</div>
+             <div class="employee-role">前端工程师</div>
+             <div class="status-badgestatus-active">在职</div>
+             <button class="action-button">编辑</button>
+           </div>
+           <div class="table-row">
+             <div class="employee-name">李四</div>
+             <div class="employee-role">UI设计师</div>
+             <div class="status-badgestatus-active">在职</div>
+             <button class="action-button">编辑</button>
+           </div>
+           <div class="table-row">
+             <div class="employee-name">王五</div>
+             <div class="employee-role">产品经理</div>
+             <div class="status-badgestatus-inactive">离职</div>
+             <button class="action-button">查看</button>
+           </div>
+           <div class="table-row">
+             <div class="employee-name">赵六</div>
+             <div class="employee-role">后端工程师</div>
+             <div class="status-badgestatus-active">在职</div>
+             <button class="action-button">编辑</button>
+           </div>
+         </div>
+       </div>
+     </section>
+   </div>
+​
+   
+<script>
+//卡片容器宽度控制
+const cardWidthSlider = document.getElementById('cardWidth');
+const cardWidthValue = document.getElementById('cardWidthValue');
+const cardContainer = document.getElementById('cardContainer');
+
+cardWidthSlider.addEventListener('input', function () {
+const width = this.value + 'px';
+cardContainer.style.width = width;
+cardWidthValue.textContent = width;
+});
+
+//检测容器查询支持
+function checkContainerQuerySupport() {
+if (CSS.supports('container-type', 'inline-size')) {
+console.log('✅浏览器支持容器查询');
+return true;
+} else {
+console.log('❌浏览器不支持容器查询');
+//可以在这里添加polyfill或降级处理
+return false;
+}
+}
+
+//动态添加容器查询示例
+function addDynamicContainerQuery() {
+const style = document.createElement('style');
+style.textContent = `
+    @container(min-width:350px)and(max-width:450px){
+     .product-card{
+      border:3pxsolid#10b981;
+     }
+     
+     .card-title::after{
+      content:"🎯";
+     }
+    }
+   `;
+document.head.appendChild(style);
+}
+
+//监听容器尺寸变化
+function observeContainerSize() {
+if (window.ResizeObserver) {
+const observer = new ResizeObserver((entries) => {
+entries.forEach((entry) => {
+const width = entry.contentRect.width;
+console.log(`容器宽度变化:${width}px`);
+
+//根据容器大小添加不同的CSS类
+const container = entry.target;
+container.classList.remove('small', 'medium', 'large');
+
+if (width < 300) {
+container.classList.add('small');
+} else if (width < 500) {
+container.classList.add('medium');
+} else {
+container.classList.add('large');
+}
+});
+});
+
+observer.observe(cardContainer);
+}
+}
+
+//添加交互反馈
+function addInteractiveFeedback() {
+//卡片按钮点击效果
+document.querySelectorAll('.card-button').forEach((button) => {
+button.addEventListener('click', function () {
+const originalText = this.textContent;
+this.textContent = '已添加到购物车!';
+this.style.background = '#10b981';
+
+setTimeout(() => {
+this.textContent = originalText;
+this.style.background = '';
+}, 2000);
+});
+});
+
+//导航项点击效果
+document.querySelectorAll('.nav-item').forEach((item) => {
+item.addEventListener('click', function (e) {
+e.preventDefault();
+
+//移除其他项的活跃状态
+document.querySelectorAll('.nav-item').forEach((nav) => {
+nav.style.background = '';
+});
+
+//添加当前项的活跃状态
+this.style.background = '#667eea';
+});
+});
+
+//表格操作按钮
+document.querySelectorAll('.action-button').forEach((button) => {
+button.addEventListener('click', function () {
+const row = this.closest('.table-row');
+row.style.background = '#fef3cd';
+
+setTimeout(() => {
+row.style.background = '';
+}, 1000);
+});
+});
+}
+
+//性能监控
+function monitorPerformance() {
+if ('PerformanceObserver' in window) {
+const observer = new PerformanceObserver((list) => {
+const entries = list.getEntries();
+entries.forEach((entry) => {
+if (entry.entryType === 'measure') {
+console.log(`性能测量:${entry.name}-${entry.duration}ms`);
+}
+});
+});
+
+observer.observe({ entryTypes: ['measure'] });
+}
+}
+
+//初始化
+document.addEventListener('DOMContentLoaded', function () {
+//检查浏览器支持
+const supportsContainerQueries = checkContainerQuerySupport();
+
+if (supportsContainerQueries) {
+//添加动态容器查询
+addDynamicContainerQuery();
+
+//监听容器尺寸变化
+observeContainerSize();
+} else {
+//显示降级提示
+const notice = document.createElement('div');
+notice.style.cssText = `
+     background:#fef3cd;
+     border:1pxsolid#f59e0b;
+     color:#92400e;
+     padding:1rem;
+     border-radius:8px;
+     margin-bottom:2rem;
+     text-align:center;
+    `;
+notice.textContent =
+'您的浏览器不支持容器查询，部分效果可能无法正常显示。建议升级到最新版本的Chrome、Firefox或Safari。';
+
+document
+.querySelector('.container')
+.insertBefore(notice, document.querySelector('.demo-section'));
+}
+
+//添加交互反馈
+addInteractiveFeedback();
+
+//性能监控
+monitorPerformance();
+
+//记录页面加载完成
+performance.mark('page-loaded');
+});
+
+//添加键盘快捷键
+document.addEventListener('keydown', function (e) {
+//Alt+1,2,3快速调整卡片容器大小
+if (e.altKey) {
+switch (e.key) {
+case '1':
+cardWidthSlider.value = 250;
+cardWidthSlider.dispatchEvent(new Event('input'));
+break;
+case '2':
+cardWidthSlider.value = 400;
+cardWidthSlider.dispatchEvent(new Event('input'));
+break;
+case '3':
+cardWidthSlider.value = 600;
+cardWidthSlider.dispatchEvent(new Event('input'));
+break;
+}
+}
+});
+
+//导出调试信息
+window.containerQueryDebug = {
+getContainerInfo: function (selector) {
+const element = document.querySelector(selector);
+if (!element) return null;
+
+const computedStyle = getComputedStyle(element);
+return {
+containerType: computedStyle.containerType,
+containerName: computedStyle.containerName,
+width: element.offsetWidth,
+height: element.offsetHeight,
+};
+},
+
+listAllContainers: function () {
+const containers = document.querySelectorAll(
+'[style*="container-type"],.card-container,.sidebar-container,.table-container'
+);
+return Array.from(containers).map((container) => ({
+element: container,
+info: this.getContainerInfo(
+'.' + container.className.split('')[0]
+),
+}));
+},
+};
+</script>
+ 
+</body>
+
+</html>
