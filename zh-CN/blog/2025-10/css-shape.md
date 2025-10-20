@@ -6,7 +6,7 @@ title: CSS 全新属性如何实现一个内凹圆角
 description: CSS 全新属性如何实现一个内凹圆角
 date: 2025-10-15 09:00:00 
 pageClass: blog-page-class
-cover: /covers/vue.svg
+cover: /covers/css.svg
 ---
 
 ## 什么是shape() ##
