@@ -1,26 +1,15 @@
 <template>
-  <div class="palette_container" ref="palette">
-    <div
-      v-if="categories && categories.length > 0"
-      class="w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-2 lg:grid-cols-3"
-    >
-      <div
-        class="palette-card linkcard flex flex-col justify-center"
-        v-for="(category) in categories"
-      >
+  <div class="palette_container " ref="palette">
+    <div v-if="categories && categories.length > 0"
+      class="w-full overflow-y-auto snap-y snap-mandatory  grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-2 lg:grid-cols-3">
+      <div class="palette-card snap-center linkcard flex flex-col justify-center" v-for="(category) in categories">
         <a :href="category.link">
           <p class="description">
             {{ category.title }}<br /><span>{{ category.description }}</span>
           </p>
           <div class="logo">
-            <img
-              class="rounded-sm"
-              crossorigin="anonymous"
-              width="70px"
-              height="70px"
-              :src="`${category.cover || '/logo.png'}`"
-              :alt="category.coverAlt"
-            />
+            <img class="rounded-sm" crossorigin="anonymous" width="70px" height="70px"
+              :src="`${category.cover || '/logo.png'}`" :alt="category.coverAlt" />
           </div>
         </a>
 
@@ -64,14 +53,10 @@ defineProps({
 <style scoped>
 .waving-border {
   transition: ease-in-out 0.3s;
-  background: linear-gradient(0, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px)
-      no-repeat,
-    linear-gradient(-90deg, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px)
-      no-repeat,
-    linear-gradient(-180deg, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px)
-      no-repeat,
-    linear-gradient(-270deg, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px)
-      no-repeat;
+  background: linear-gradient(0, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px) no-repeat,
+    linear-gradient(-90deg, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px) no-repeat,
+    linear-gradient(-180deg, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px) no-repeat,
+    linear-gradient(-270deg, var(--vp-c-brand) 2px, var(--vp-c-brand) 2px) no-repeat;
   background-size: 0 2px, 2px 0, 0 2px, 2px 0;
   background-position: left top, right top, right bottom, left bottom;
 }
@@ -151,11 +136,9 @@ defineProps({
   pointer-events: none;
   width: 3px;
   height: 3px;
-  background: radial-gradient(
-      65.28% 65.28% at 50% 100%,
+  background: radial-gradient(65.28% 65.28% at 50% 100%,
       rgba(223, 113, 255, 0.8) 0%,
-      rgba(223, 113, 255, 0) 100%
-    ),
+      rgba(223, 113, 255, 0) 100%),
     linear-gradient(0deg, #7a5af8, #7a5af8);
   border-radius: 9999px;
 }

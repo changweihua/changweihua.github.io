@@ -22,7 +22,7 @@
             <div
               class="uppercase tracking-wide text-sm p-2 text-indigo-500 font-semibold"
             >
-              {{ item.title }}
+              {{ item.title }}2
             </div>
             <div class="tracking-wide text-sm p-2">
               {{ item.description || "" }}

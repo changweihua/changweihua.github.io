@@ -134,6 +134,20 @@ const transitionType = ref("vt");
   :deep(.markdown-copy-buttons-inner) {
     flex: 1;
     justify-content: space-around;
+
+    button {
+      font-size: 0;
+    }
+
+    button.copy::after {
+      content: "复制";
+      font-size: 16px;
+    }
+
+    button.download::after {
+      content: "下载";
+      font-size: 16px;
+    }
   }
 }
 </style>
