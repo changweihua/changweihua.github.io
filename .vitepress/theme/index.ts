@@ -31,7 +31,6 @@ import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-com
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
-// import RegisterSW from "../components/RegisterSW.vue";
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
 
@@ -184,8 +183,6 @@ console.log(nanoidNumber()); // 24736672
 const nanoidUpper = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 8);
 console.log(nanoidUpper()); // OO8QE8V0
 
-// import { createMermaidRenderer } from "vitepress-mermaid-renderer";
-// import "vitepress-mermaid-renderer/dist/style.css";
 import mermaid from "mermaid";
 import { icons } from "@iconify-json/logos";
 mermaid.registerIconPacks([
@@ -245,11 +242,7 @@ import "markdown-it-github-alerts/styles/github-colors-light.css";
 import "markdown-it-github-alerts/styles/github-colors-dark-media.css";
 import "markdown-it-github-alerts/styles/github-base.css";
 
-// import { useMermaidPanZoom } from 'vitepress-plugin-mermaid-pan-zoom'
-// import 'vitepress-plugin-mermaid-pan-zoom/dist/style.css'
-
-// import { initComponent } from 'vitepress-mermaid-preview/component';
-// import 'vitepress-mermaid-preview/dist/index.css';
+import { initMarkmapComponent } from 'vitepress-plugin-legend/component';
 
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
@@ -445,26 +438,21 @@ export default {
 
     enhanceAppWithTabs(app);
 
-    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
+    if (inBrowser) {
 
-    // // Use the client-safe wrapper for SSR compatibility
-    // const mermaidRenderer = createMermaidRenderer({
-    //   look: "handDrawn",
-    //   handDrawnSeed: 3,
-    //   fontFamily:
-    //     "XiaolaiMono, MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-    //   altFontFamily:
-    //     "XiaolaiMono, MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-    //   theme: "neutral",
-    //   // flowchart: { curve: "basis" },
-    //   securityLevel: "loose",
-    //   logLevel: "error",
-    //   suppressErrorRendering: true,
-    //   // startOnLoad: true,
-    //   maxTextSize: 100000, // 防止大文本出错
-    //   // ... other Mermaid configuration options
-    // });
-    // mermaidRenderer.initialize();
+      // initMarkmapComponent(app);
+      // const { promise, resolve, reject } = Promise.withResolvers();
+      //   // 一些异步操作
+      // setTimeout(() => {
+      //     if (/* 条件满足 */) {
+      //         resolve('成功');
+      //     } else {
+      //         reject('失败');
+      //     }
+      // }, 1000);
+    }
+
+    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
     if (inBrowser) {
       NProgress.configure({ showSpinner: false });
@@ -506,14 +494,6 @@ export default {
         unmounted(el, binding) {},
       });
 
-      // app.mixin({
-      //   async mounted() {
-      //     //你自己的插件地址
-      //     import('svg-pan-zoom').then(module => {
-      //         app.use(module);
-      //     })
-      //   },
-      // });
       useComponents(app, DemoPreview);
 
       app.use(Antd);
@@ -589,18 +569,6 @@ export default {
         };
       }
     }
-
-    if (inBrowser) {
-      // const { promise, resolve, reject } = Promise.withResolvers();
-      //   // 一些异步操作
-      // setTimeout(() => {
-      //     if (/* 条件满足 */) {
-      //         resolve('成功');
-      //     } else {
-      //         reject('失败');
-      //     }
-      // }, 1000);
-    }
   },
   setup() {
     // get frontmatter and route
@@ -615,9 +583,5 @@ export default {
         }; expires=${new Date().toUTCString()}; path=/`;
       }
     });
-    // setupMultipleChoice();
-    // if (inBrowser) {
-    //   useMermaidPanZoom();
-    // }
   },
 } satisfies Theme;

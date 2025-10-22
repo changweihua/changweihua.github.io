@@ -37,10 +37,21 @@ import HexagonHolder from '@/components/HexagonHolder.vue'
 > 2025 对饮 2026 笃行。
 
 <llm-exclude>
+
 ## Section for humans
 
 This content will not be in the generated files for LLMs
 </llm-exclude>
+
+```markmap
+# Root
+## Branch 1
+- Item 1
+- Item 2
+## Branch 2
+- Item A
+- Item B
+```
 
 ### MAUI 系列 ###
 
