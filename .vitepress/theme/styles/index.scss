@@ -93,3 +93,27 @@ body.dark-mode {
 .button-light {
   background-color: oklch(calc(var(--brand-primary-l) + 15%) var(--brand-primary-c) var(--brand-primary-h));
 }
+
+// h1 {
+//   font-size: clamp(1.1rem, 2vw, 1.3rem);
+// }
+
+
+// p {
+//   font-size: clamp(0.875rem, 1.8vw, 1.125rem);
+// }
+
+/* 标题：在 400px~1200px 之间平滑缩放 */
+// h2 {
+//   font-size: clamp(1.25rem, 1rem + 2vw, 2.5rem);
+//   line-height: 1.2;
+//   margin: 0.5em 0;
+// }
+
+/* 正文：在 400px~1200px 之间平滑缩放 */
+// p {
+//   font-size: clamp(0.875rem, 0.55rem + 1vw, 1.125rem);
+//   line-height: 1.6;
+//   max-width: 65ch;
+//   margin: 0 auto;
+// }

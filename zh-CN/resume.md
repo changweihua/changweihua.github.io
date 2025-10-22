@@ -12,36 +12,40 @@ import ShadowLogo from '@vp/components/ShadowLogo.vue'
 import FlyingPlane from '@/components/FlyingPlane.vue'
 </script>
 
-<SuperellipseAvatar :size="80" />
+<!-- <div class="flex items-center justify-center p-3">
+  <SuperellipseAvatar :size="80" />
+</div> -->
+
 <ShadowLogo />
 <!-- <text class="resume-title">为你定制 发现精彩</text> -->
 
-<PyramidLoader />
+<!-- <PyramidLoader /> -->
 
 ## 💥 简介 ##
 
-::: tip 👨🏻‍💻
+::: tip <SuperellipseAvatar :size="80" />
 
 - read目前就职read于 *`上海民航华东凯亚江苏分公司`* ，担任 **[高级开发经理]** 职务，主要面向 `无锡硕放机场`、`扬州泰州国际机场`、`南京禄口国际机场` 等江苏省内机场提供民航体系应用服务保障及项目开发和管理工作。
 
-- 曾就职于萨孚凯无锡分公司，服务过 `星巴克`、`尼尔森`、`西门子`、`雅培`、`罗氏`、`康宝莱`等世界五百强企业。
+- 曾就职于萨孚凯无锡分公司，历任开发工程师、技术架构师及项目经理等职位，服务过 `星巴克`、`尼尔森`、`西门子`、`雅培`、`罗氏`、`康宝莱`等世界五百强企业，赢得客户的一致好评。
 
-- 目前累积了一套包含微信小程序、PC端、移动端的跨平台开箱即用平台。核心架构包含`DOTNET`服务端跨平台，`Flutter`移动端跨平台，`Ant Design`和`Tencent Design`网页端和小程序端融合统一。拥有多年`WPF`项目开发经验，可胜任`B/S`和`C/S`多端全栈开发。
+- 目前累积一套包含微信小程序、PC端、移动端的跨平台开箱即用平台。核心架构包含`DOTNET`服务端跨平台，`Flutter`移动端跨平台，`Ant Design`和`Tencent Design`网页端和小程序端融合统一。拥有多年`WPF`项目开发经验，可胜任`B/S`和`C/S`多端全栈开发。
+
+- 业务时间积极参与开源。
 
 :::
 
-::: info 🔎
+::: info 🔎 就职意向
 
 - 产品经理、项目经理
 - 系统架构师
 
 :::
 
-::: info 📌 🎯
+::: info 📌 🎯 目前状态
 
-- 业余时间积极参加开源社区。
 - MAUI Electron React-Native 等跨平台开发技术。
-- 研究机器视觉，自学 Yolo 目标检测算法。
+- 研究机器视觉，自学 Yolo 目标检测算法，基于 Yolo8、Yolo10 训练行李识别模型。
 - AI 大模型方向，MCP ONNX Ollama Dify等。
 
 :::
