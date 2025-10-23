@@ -35,7 +35,7 @@ cover: /covers/vue.svg
 
 在 `.gitignore` 中添加：
 
-```gitignore:.gitignore
+```yaml:.gitignore
 # 忽略自动生成的组件类型声明
 src/components.d.ts
 ```

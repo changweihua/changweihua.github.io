@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: 基本用户隐私设置功能设计
 description: 从需求到落地的全流程方案
-date: 2025-10-09 09:45:00 
+date: 2025-10-23 10:45:00 
 pageClass: blog-page-class
 cover: /covers/platform.svg
 ---
