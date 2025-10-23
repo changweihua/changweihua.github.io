@@ -7,3 +7,18 @@ mjx-container > svg {
   margin: auto;
   display: inline-block;
 }
+
+.markdown-body blockquote {
+    position: relative;
+    text-size-adjust: 100%;
+    line-height: 25px;
+    font-weight: 400;
+    border-radius: 10px;
+    font-style: normal;
+    text-align: left;
+    box-sizing: inherit;
+    border: 1px solid #ffd87a;
+    background-color: rgba(189, 134, 0, .5);
+    margin: 20px 0;
+    padding: 20px;
+}
