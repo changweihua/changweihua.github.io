@@ -265,6 +265,7 @@ export default defineConfig(() => {
     },
     plugins: [
       Components({
+        dts: 'typings/components.d.ts',
         resolvers: [
           IconsResolver({
             // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀

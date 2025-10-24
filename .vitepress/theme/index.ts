@@ -20,6 +20,7 @@ import ArticleFooter from "../components/ArticleFooter.vue";
 import LiquidCard from "../components/LiquidCard.vue";
 import Robot from "../components/Robot.vue";
 import HeroImage from "#.vitepress/components/HeroImage.vue";
+import HeroLogo from "#.vitepress/components/HeroLogo.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
@@ -289,21 +290,33 @@ export default {
           "div",
           {
             class:
-              "hidden lg:(visible flex w-full h-full items-center justify-center)",
+              "hidden lg:(visible flex h-full items-center justify-center)",
             style: "position: relative;",
           },
           [
-            h(HeroImage),
-            // h(ColorfulWord),
-            // h('div', [
-            //   h(AnimatedLogo),
-            // ])
-            h("img", {
-              src: "/cwh.svg",
-              class: "VPImage image-src",
-            }),
+            h(HeroLogo)
           ]
         ),
+      // "home-hero-image": () =>
+      //   h(
+      //     "div",
+      //     {
+      //       class:
+      //         "hidden lg:(visible flex w-full h-full items-center justify-center)",
+      //       style: "position: relative;",
+      //     },
+      //     [
+      //       h(HeroLogo),
+      //       // h(ColorfulWord),
+      //       // h('div', [
+      //       //   h(AnimatedLogo),
+      //       // ])
+      //       h("img", {
+      //         src: "/cwh.svg",
+      //         class: "VPImage image-src",
+      //       }),
+      //     ]
+      //   ),
       // "home-hero-after": () =>
       //   h(PlaceHolder, {
       //     name: "home-hero-after",
