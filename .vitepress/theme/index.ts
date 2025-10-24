@@ -243,7 +243,8 @@ import "markdown-it-github-alerts/styles/github-colors-light.css";
 import "markdown-it-github-alerts/styles/github-colors-dark-media.css";
 import "markdown-it-github-alerts/styles/github-base.css";
 
-import { initMarkmapComponent } from 'vitepress-plugin-legend/component';
+import { initComponent as initMarkmapComponent } from 'vitepress-markmap-preview/component';
+import 'vitepress-markmap-preview/dist/index.css';
 
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
@@ -453,7 +454,7 @@ export default {
 
     if (inBrowser) {
 
-      // initMarkmapComponent(app);
+      initMarkmapComponent(app);
       // const { promise, resolve, reject } = Promise.withResolvers();
       //   // 一些异步操作
       // setTimeout(() => {

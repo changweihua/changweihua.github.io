@@ -20,10 +20,7 @@ import markdownItReplaceLink from "markdown-it-replace-link";
 import markdownItTableExt from "markdown-it-multimd-table-ext";
 import path from 'path';
 import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
-// import { vitepressPluginLegend } from 'vitepress-plugin-legend';
-import {
-  vitepressMarkmapPreview,
-} from 'vitepress-plugin-legend';
+import { vitepressMarkmapPreview } from 'vitepress-markmap-preview';
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -82,7 +79,10 @@ const markdown: MarkdownOptions | undefined = {
       docRoot,
     });
 
-    vitepressMarkmapPreview(md);
+    // @ts-ignore
+    vitepressMarkmapPreview(md, {
+      showToolbar: false
+    });
     // vitepressPluginLegend(md, {
     //     markmap: {
     //       showToolbar: true,

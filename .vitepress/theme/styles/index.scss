@@ -120,3 +120,14 @@ body.dark-mode {
 //   max-width: 65ch;
 //   margin: 0 auto;
 // }
+
+img {
+  transition: .25s allow-discrete;
+  opacity: 1;
+}
+
+@starting-style {
+  img {
+    opacity: 0;
+  }
+}
