@@ -236,7 +236,7 @@
     "prismjs": "^1.30.0",
     "release-it": "^19.0.5",
     "svg-pan-zoom": "^3.6.2",
-    "vite": "npm:rolldown-vite@lastest",
+    "vite": "npm:rolldown-vite@7.1.20",
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.12",
     "vue": "^3.5.22"

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>美团购物车小球动画</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #ffd000;
+        margin-bottom: 20px;
+      }
+      .description {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #666;
+      }
+      .items-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+      .item {
+        width: 100px;
+        padding: 10px;
+        background: #f8f8f8;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .item-img {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ffd000, #ffb800);
+        border-radius: 50%;
+        margin: 0 auto 8px;
+      }
+      .cart-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+      }
+      .cart {
+        width: 60px;
+        height: 60px;
+        background: #ffd000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .cart-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #ff3000;
+        color: white;
+        font-size: 12px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ball-container {
+        position: absolute;
+        pointer-events: none;
+      }
+      .ball {
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(135deg, #ff3000, #ff9000);
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .control-panel {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+      .slider-container {
+        margin: 10px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+      input[type="range"] {
+        width: 100%;
+      }
+      .value-display {
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+      }
+      .code-example {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+        overflow-x: auto;
+        font-family: "Fira Code", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="module">
+      const { createApp, ref, reactive } = Vue;
+
+      const App = {
+        setup() {
+          const items = ref([
+            { id: 1, name: "美食", price: 25 },
+            { id: 2, name: "饮料", price: 15 },
+            { id: 3, name: "水果", price: 20 },
+            { id: 4, name: "甜品", price: 18 },
+            { id: 5, name: "快餐", price: 22 },
+            { id: 6, name: "小吃", price: 12 },
+          ]);
+
+          const cart = reactive({
+            count: 0,
+            total: 0,
+          });
+
+          const balls = ref([]);
+          const ballIndex = ref(0);
+          const animationSpeed = ref(600);
+
+          const addToCart = (item, event) => {
+            cart.count++;
+            cart.total += item.price;
+
+            // 获取点击位置
+            const startX = event.clientX;
+            const startY = event.clientY;
+            createBall(startX, startY);
+          };
+
+          // 创建小球
+          const createBall = (startX, startY) => {
+            let endEle = document
+              .querySelector(".cart")
+              .getBoundingClientRect();
+            let endX = Math.floor(endEle.left + endEle.width / 2);
+            let endY = Math.floor(endEle.top + endEle.height / 2);
+            let fatherEle = document.querySelector(".container");
+            let ball = document.createElement("div");
+            ball.classList.add("ball");
+            ball.style.left = startX + "px";
+            ball.style.top = startY + "px";
+            // 贝塞尔曲线路径
+            ball.style.offsetPath = `path('M${0} ${0} C${100} ${-100}, ${
+              endX - startX
+            } ${endY - startY}, ${endX - startX} ${endY - startY}')`;
+
+            fatherEle.appendChild(ball);
+            setTimeout(() => {
+              fatherEle.removeChild(ball);
+            }, Number(animationSpeed.value) - 100);
+            ball.animate(
+              // 将偏移路径动画化
+              { offsetDistance: [0, "100%"] },
+              {
+                duration: Number(animationSpeed.value),
+                iterations: 1,
+                easing: "cubic-bezier(.667,0.01,.333,.99)",
+                direction: "alternate",
+              }
+            );
+          };
+
+          return {
+            items,
+            cart,
+            balls,
+            ballIndex,
+            animationSpeed,
+            addToCart,
+            createBall,
+          };
+        },
+        template: `
+          <div class="container">
+            <h1>美团购物车小球动画</h1>
+            <p class="description">点击商品将生成飞向购物车的小球动画，多个小球实例互不干扰</p>
+
+            <div class="items-container">
+              <div
+                v-for="item in items"
+                :key="item.id"
+                class="item"
+                @click="addToCart(item, $event)"
+              >
+                <div class="item-img"></div>
+                <div>{{ item.name }}</div>
+                <div>¥{{ item.price }}</div>
+              </div>
+            </div>
+
+            <div class="control-panel">
+              <h3>动画控制</h3>
+              <div class="slider-container">
+                <label>动画速度: {{ animationSpeed }}ms</label>
+                <input
+                  type="range"
+                  min="500"
+                  max="1000"
+                  v-model="animationSpeed"
+                >
+                <div class="value-display">调整小球飞行的速度</div>
+              </div>
+            </div>
+
+          <div class="cart-container">
+            <div class="cart">
+              <span>购</span>
+              <div class="cart-count">{{ cart.count }}</div>
+            </div>
+          </div>
+        `,
+      };
+
+      const app = createApp(App);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
+
