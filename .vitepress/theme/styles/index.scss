@@ -18,9 +18,11 @@
 html {
   background-color: var(--vp-c-bg);
   height: 100%;
-  scrollbar-gutter: stable;scrollbar-width: thin;
+  min-height: 100dvh;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
   // scrollbar-gutter: stable both-edges;
-  text-wrap: balance;
+  // text-wrap: balance;
 }
 
 body {
