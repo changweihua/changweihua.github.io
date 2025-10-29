@@ -53,6 +53,17 @@ This content will not be in the generated files for LLMs
 - Item B
 ```
 
+### 无锡硕放机场安检员工培训查询系统 ###
+
+- 合规
+- 进行中
+
+### 隔离区携带工具审批系统 ###
+
+- H5 端，以 iframe 的方式内嵌。
+- H5 端嵌入微信小程序，适配 iOS 等移动端；封装成项目模板，开箱即用。
+- WEB 端后台管理系统，适配内部集成系统，封装成项目模板，开箱即用。
+
 ### MAUI 系列 ###
 
 - 基于 Vant 的脚手架，主要针对 H5（包含内嵌微信小程序端）。
@@ -118,10 +129,6 @@ This content will not be in the generated files for LLMs
 - 指定扬泰机场完成微信认证和备案。
 - 上线巴士管家功能模块。
 - 更新小程序图片资源。
-
-
-
-
 
 <!-- <Robot /> -->
 
