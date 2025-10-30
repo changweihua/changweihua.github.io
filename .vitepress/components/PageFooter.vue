@@ -1,10 +1,10 @@
 <template>
-  <div class="liquid-bg-container">
+  <div class="liquid-bg-container py-5">
     <!-- 3层液态背景层（顺序：底→中→顶） -->
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>
-    <div id="PGFT" class="page-footer flex gap-3 flex-row items-center justify-center pb-6 z-10">
+    <div id="PGFT" class="page-footer flex gap-3 flex-row items-center justify-center z-10">
       <span v-once>V{{ version }}</span><span> | </span>
       <icon-logos-markdown :width="20" :height="20" />
     </div>

@@ -946,9 +946,9 @@ h3 {
 
 :root {
   /* 液态背景核心变量 */
-  --liquid-bg-primary: #0984e3; /* 主液态色（底层） */
-  --liquid-bg-secondary: #74b9ff; /* 次液态色（中层） */
-  --liquid-bg-tertiary: #b2dfff; /* 浅液态色（顶层） */
+  --liquid-bg-primary: var(--vp-c-brand-1, #0984e3); /* 主液态色（底层） */
+  --liquid-bg-secondary: var(--vp-c-brand-2, #74b9ff); /* 次液态色（中层） */
+  --liquid-bg-tertiary: var(--vp-c-brand-3, #b2dfff); /* 浅液态色（顶层） */
   --bg-opacity: 0.15; /* 所有液态层透明度（确保前景可读） */
   --layer-size: 800px; /* 液态层基础大小（大于屏幕，确保流动范围） */
 
