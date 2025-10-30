@@ -112,14 +112,14 @@ body {
 
 .medium-zoom-image {
   transition: transform 0.5s ease;
-    /* 平滑的变换过渡效果 */
+  /* 平滑的变换过渡效果 */
   z-index: 10;
   border-radius: 5px;
 }
 
-.medium-zoom-image:hover{
+.medium-zoom-image:hover {
   transform: translateY(-5px);
-    /* 向上平移图片 */
+  /* 向上平移图片 */
 }
 
 .medium-zoom-image:not(:hover) {
@@ -239,15 +239,18 @@ a.VPSkipLink::after {
   border-radius: 10px;
   outline: none;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(270deg,
-      #ff4d4d,
-      #ffa64d,
-      #ffff4d,
-      #4dff88,
-      #4dd2ff,
-      #b84dff,
-      #ff4da6,
-      #ff4d4d) border-box;
+    linear-gradient(
+        270deg,
+        #ff4d4d,
+        #ffa64d,
+        #ffff4d,
+        #4dff88,
+        #4dd2ff,
+        #b84dff,
+        #ff4da6,
+        #ff4d4d
+      )
+      border-box;
   background-size: 400% 100%;
   background-repeat: repeat;
   background-position: 0 0;
@@ -298,13 +301,17 @@ a.VPSkipLink::after {
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(120deg,
-      #bd34fe 30%,
-      #41d1ff);
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    #bd34fe 30%,
+    #41d1ff
+  );
 
-  --vp-home-hero-image-background-image: linear-gradient(-45deg,
-      #bd34fe 50%,
-      #47caff 50%);
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    #bd34fe 50%,
+    #47caff 50%
+  );
   --vp-home-hero-image-filter: blur(40px);
 }
 
@@ -349,7 +356,7 @@ a.VPSkipLink::after {
     }
   }
 
-  .vp-doc>div>* {
+  .vp-doc > div > * {
     --stagger: 0;
     --delay: 150ms;
     --start: 0ms;
@@ -357,83 +364,83 @@ a.VPSkipLink::after {
     animation-delay: calc(var(--start) + var(--stagger) * var(--delay));
   }
 
-  .vp-doc>div>*:nth-child(1) {
+  .vp-doc > div > *:nth-child(1) {
     --stagger: 1;
   }
 
-  .vp-doc>div>*:nth-child(2) {
+  .vp-doc > div > *:nth-child(2) {
     --stagger: 2;
   }
 
-  .vp-doc>div>*:nth-child(3) {
+  .vp-doc > div > *:nth-child(3) {
     --stagger: 3;
   }
 
-  .vp-doc>div>*:nth-child(4) {
+  .vp-doc > div > *:nth-child(4) {
     --stagger: 4;
   }
 
-  .vp-doc>div>*:nth-child(5) {
+  .vp-doc > div > *:nth-child(5) {
     --stagger: 5;
   }
 
-  .vp-doc>div>*:nth-child(6) {
+  .vp-doc > div > *:nth-child(6) {
     --stagger: 6;
   }
 
-  .vp-doc>div>*:nth-child(7) {
+  .vp-doc > div > *:nth-child(7) {
     --stagger: 7;
   }
 
-  .vp-doc>div>*:nth-child(8) {
+  .vp-doc > div > *:nth-child(8) {
     --stagger: 8;
   }
 
-  .vp-doc>div>*:nth-child(9) {
+  .vp-doc > div > *:nth-child(9) {
     --stagger: 9;
   }
 
-  .vp-doc>div>*:nth-child(10) {
+  .vp-doc > div > *:nth-child(10) {
     --stagger: 10;
   }
 
-  .vp-doc>div>*:nth-child(11) {
+  .vp-doc > div > *:nth-child(11) {
     --stagger: 11;
   }
 
-  .vp-doc>div>*:nth-child(12) {
+  .vp-doc > div > *:nth-child(12) {
     --stagger: 12;
   }
 
-  .vp-doc>div>*:nth-child(13) {
+  .vp-doc > div > *:nth-child(13) {
     --stagger: 13;
   }
 
-  .vp-doc>div>*:nth-child(14) {
+  .vp-doc > div > *:nth-child(14) {
     --stagger: 14;
   }
 
-  .vp-doc>div>*:nth-child(15) {
+  .vp-doc > div > *:nth-child(15) {
     --stagger: 15;
   }
 
-  .vp-doc>div>*:nth-child(16) {
+  .vp-doc > div > *:nth-child(16) {
     --stagger: 16;
   }
 
-  .vp-doc>div>*:nth-child(17) {
+  .vp-doc > div > *:nth-child(17) {
     --stagger: 17;
   }
 
-  .vp-doc>div>*:nth-child(18) {
+  .vp-doc > div > *:nth-child(18) {
     --stagger: 18;
   }
 
-  .vp-doc>div>*:nth-child(19) {
+  .vp-doc > div > *:nth-child(19) {
     --stagger: 19;
   }
 
-  .vp-doc>div>*:nth-child(20) {
+  .vp-doc > div > *:nth-child(20) {
     --stagger: 20;
   }
 
@@ -458,7 +465,6 @@ a.VPSkipLink::after {
 }
 
 :root {
-
   /* 首页导航 */
   .VPNavBar {
     backdrop-filter: saturate(0.3) contrast(3.5) blur(20px) saturate(1.2);
@@ -478,7 +484,6 @@ a.VPSkipLink::after {
   }
 
   @media (min-width: 960px) {
-
     /* 文档页导航两侧 */
     .VPNavBar:not(.home) {
       background-color: saturate(0.3) contrast(3.5) rgba(255, 255, 255, 0.3) !important;
@@ -521,7 +526,6 @@ a.VPSkipLink::after {
   /* 分割线 */
 
   @media (min-width: 960px) {
-
     /* 文档页分割线 */
     .VPNavBar:not(.home.top) .divider-line {
       background-color: rgba(255, 255, 255, 0.3) !important;
@@ -611,23 +615,26 @@ a.VPSkipLink::after {
   margin: 8px 0;
 }
 
-.VPMenuGroup>.title {
+.VPMenuGroup > .title {
   font-size: 0.7em;
 }
 
 .vp-doc a {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 2px;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 2px;
   text-decoration: none;
   transition: 0.2s;
 }
 
 .vp-doc a:hover {
   border-radius: 0.2em;
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 100%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 100%;
 }
 
 .vp-doc strong {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 40%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 40%;
 }
 
 .vp-doc s {
@@ -666,7 +673,6 @@ a.VPSkipLink::after {
 }
 
 .dark {
-
   .VPNavBar,
   .VPNavBar.screen-open {
     background-color: rgba(255, 255, 255, 0);
@@ -683,7 +689,6 @@ a.VPSkipLink::after {
   }
 
   @media (min-width: 960px) {
-
     /* 文档页导航两侧 */
     .VPNavBar:not(.home) {
       background-color: rgba(0, 0, 0, 0.03) !important;
@@ -698,7 +703,6 @@ a.VPSkipLink::after {
   /* 分割线 */
 
   @media (min-width: 960px) {
-
     /* 文档页分割线 */
     .VPNavBar:not(.home.top) .divider-line {
       background-color: rgba(0, 0, 0, 0.03) !important;
@@ -906,7 +910,6 @@ h3 {
 
 /* 响应式调整 */
 @media (max-width: 768px) {
-
   .vp-table-container {
     border-radius: 6px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
@@ -937,7 +940,128 @@ h3 {
   color: var(--vp-c-text);
 }
 
-
 .vp-code-block-title-bar {
   margin: auto !important;
+}
+
+:root {
+  /* 液态背景核心变量 */
+  --liquid-bg-primary: #0984e3; /* 主液态色（底层） */
+  --liquid-bg-secondary: #74b9ff; /* 次液态色（中层） */
+  --liquid-bg-tertiary: #b2dfff; /* 浅液态色（顶层） */
+  --bg-opacity: 0.15; /* 所有液态层透明度（确保前景可读） */
+  --layer-size: 800px; /* 液态层基础大小（大于屏幕，确保流动范围） */
+
+  /* 各层动画参数（不同时长/延迟避免同步） */
+  --layer1-duration: 18s; /* 底层动画时长（最慢） */
+  --layer1-delay: 0s;
+  --layer2-duration: 14s; /* 中层动画时长（中等） */
+  --layer2-delay: 2s;
+  --layer3-duration: 10s; /* 顶层动画时长（最快） */
+  --layer3-delay: 4s;
+}
+
+/* 液态层位置流动关键帧（无规则XY轴移动） */
+@keyframes liquid-flow {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(40px, -30px);
+  }
+
+  50% {
+    transform: translate(-20px, 50px);
+  }
+
+  75% {
+    transform: translate(50px, 20px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* 液态层形态变化关键帧（不规则圆角） */
+@keyframes liquid-shape {
+  0% {
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+  }
+
+  25% {
+    border-radius: 38% 62% 50% 50% / 60% 30% 70% 40%;
+  }
+
+  50% {
+    border-radius: 55% 45% 35% 65% / 55% 60% 40% 45%;
+  }
+
+  75% {
+    border-radius: 60% 40% 70% 30% / 40% 55% 45% 60%;
+  }
+
+  100% {
+    border-radius: 48% 52% 65% 35% / 50% 40% 60% 50%;
+  }
+}
+
+:root {
+  --nav-bg: #fff;
+  /* 导航背景色 */
+  --nav-text-color: #636e72;
+  /* 导航文字色 */
+  --nav-text-hover: #0984e3;
+  /* 导航文字hover色 */
+  --indicator-color: #74b9ff;
+  /* 指示器默认色 */
+  --indicator-active-color: #0984e3;
+  /* 指示器选中色 */
+  --indicator-height: 4px;
+  /* 指示器高度 */
+  --indicator-init-width: 20px;
+  /* 指示器初始宽度 */
+  --indicator-hover-width: 60px;
+  /* 指示器hover宽度 */
+  --transition-duration: 0.4s;
+  /* 过渡时长 */
+  --nav-padding: 1.5rem 0;
+  /* 导航内边距 */
+  --menu-gap: 2.5rem;
+  /* 菜单项间距 */
+}
+
+/* 液态指示器 */
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: var(--indicator-height);
+  width: var(--indicator-init-width);
+  background: var(--indicator-color);
+  border-radius: 2px;
+  transition: left var(--transition-duration) ease,
+    width var(--transition-duration) ease,
+    background var(--transition-duration) ease;
+  animation: indicator-shape 2s ease-in-out infinite alternate;
+}
+
+/* 指示器形态变化关键帧 */
+@keyframes indicator-shape {
+  0% {
+    border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+  }
+  100% {
+    border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+  }
+}
+
+/* 选中状态（通过JS添加active类） */
+.nav-item.active .nav-link {
+  color: var(--indicator-active-color);
+}
+
+.nav-indicator.active {
+  background: var(--indicator-active-color);
 }

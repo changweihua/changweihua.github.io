@@ -401,11 +401,11 @@ export default withMermaid(
           },
         }),
         // DocAnalysis(/* options */),
-        vitepressProtectPlugin({
-          disableF12: true,
-          disableCopy: true,
-          disableSelect: true,
-        }),
+        // vitepressProtectPlugin({
+        //   disableF12: true,
+        //   disableCopy: true,
+        //   disableSelect: true,
+        // }),
         vueJsx(),
         RssPlugin(RSS),
         pagefindPlugin({

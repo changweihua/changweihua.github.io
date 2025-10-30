@@ -19,7 +19,7 @@ import HoverableText from "../components/HoverableText.vue";
 import ArticleFooter from "../components/ArticleFooter.vue";
 import LiquidCard from "../components/LiquidCard.vue";
 import Robot from "../components/Robot.vue";
-import HeroImage from "#.vitepress/components/HeroImage.vue";
+import LiquidMetaCard from "../components/LiquidMetaCard.vue";
 import HeroLogo from "#.vitepress/components/HeroLogo.vue";
 import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
@@ -520,6 +520,7 @@ export default {
       app.component("HrefCard", HrefCard);
       app.component("ColorfulName", ColorfulName);
       app.component("HoverableText", HoverableText);
+      app.component("LiquidMetaCard", LiquidMetaCard);
       app.component("Robot", Robot);
       app.use(directives);
 

@@ -102,6 +102,7 @@ const transitionType = ref("vt");
 <template>
   <transition :name="transitionType" mode="out-in">
     <div :key="currentPage" class="page-content view-transition-container">
+      <div class="nav-indicator" id="navIndicator"></div>
       <DefaultTheme.Layout>
         <!-- <template #doc-top>
           <div class="shade" :class="{ 'shade-active': isTransitioning }">
