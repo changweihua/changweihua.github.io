@@ -27,8 +27,6 @@ import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimtedTitle.vue";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
-import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
-import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue'
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
@@ -105,8 +103,6 @@ xlogs.banner(pinyin("常伟华"), "neon");
 
 // #v-endif
 
-import "@vitepress-code-preview/container/dist/style.css";
-
 // 彩虹背景动画样式
 function updateHomePageStyle(value: boolean) {
   if (value) {
@@ -132,6 +128,11 @@ import "nprogress-v2/dist/index.css"; // 进度条样式
 
 // 引入 Ant Design Vue
 import Antd from "ant-design-vue";
+
+import { AntDesignContainer } from "@vitepress-demo-preview/component";
+import "@vitepress-demo-preview/component/dist/style.css";
+
+import { defineClientComponentConfig } from "@vitepress-demo-preview/core";
 
 import "@catppuccin/vitepress/theme/frappe/lavender.css";
 
@@ -229,6 +230,9 @@ mermaid.registerLayoutLoaders(elkLayouts);
 import "vitepress-markdown-timeline/dist/theme/index.css";
 import "vitepress-markdown-it-stepper/theme";
 
+import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
+import "@vitepress-code-preview/container/dist/style.css";
+
 // 导入hooks
 import useVisitData from "../hooks/useVisitData";
 
@@ -243,8 +247,8 @@ import "markdown-it-github-alerts/styles/github-colors-light.css";
 import "markdown-it-github-alerts/styles/github-colors-dark-media.css";
 import "markdown-it-github-alerts/styles/github-base.css";
 
-import { initComponent as initMarkmapComponent } from 'vitepress-markmap-preview/component';
-import 'vitepress-markmap-preview/dist/index.css';
+import { initComponent as initMarkmapComponent } from "vitepress-markmap-preview/component";
+import "vitepress-markmap-preview/dist/index.css";
 
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
@@ -294,9 +298,7 @@ export default {
               "hidden lg:(visible flex h-full items-center justify-center)",
             style: "position: relative;",
           },
-          [
-            h(HeroLogo)
-          ]
+          [h(HeroLogo)]
         ),
       // "home-hero-image": () =>
       //   h(
@@ -450,10 +452,39 @@ export default {
     const { app, router, siteData } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
+    // 定义国际化配置
+    defineClientComponentConfig({
+      // 保持向后兼容
+      copySuccessText: "代码已复制到剪贴板！",
+      vueApp: app,
+      // 国际化配置
+      i18n: {
+        zh: {
+          copySuccessText: "代码已复制到剪贴板！",
+          copyCode: "复制代码",
+          foldCode: "折叠代码",
+          expandCode: "展开代码",
+          hideSourceCode: "隐藏源代码",
+        },
+        en: {
+          copySuccessText: "Code copied to clipboard!",
+          copyCode: "Copy code",
+          foldCode: "Fold code",
+          expandCode: "Expand code",
+          hideSourceCode: "Hide source code",
+        },
+      },
+      // 设置默认语言为中文
+      defaultLanguage: "zh",
+    });
+
     enhanceAppWithTabs(app);
 
-    if (inBrowser) {
+    useComponents(app, DemoPreview);
 
+    app.component("demo-preview", AntDesignContainer);
+
+    if (inBrowser) {
       initMarkmapComponent(app);
       // const { promise, resolve, reject } = Promise.withResolvers();
       //   // 一些异步操作
@@ -465,8 +496,6 @@ export default {
       //     }
       // }, 1000);
     }
-
-    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
     if (inBrowser) {
       NProgress.configure({ showSpinner: false });
@@ -507,8 +536,6 @@ export default {
         //指令与元素解绑时调用
         unmounted(el, binding) {},
       });
-
-      useComponents(app, DemoPreview);
 
       app.use(Antd);
       for (const [key, component] of Object.entries(AntIconsVue)) {

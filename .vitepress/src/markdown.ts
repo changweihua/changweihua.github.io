@@ -2,7 +2,7 @@ import { MarkdownOptions } from "vitepress";
 import timeline from "vitepress-markdown-timeline";
 import footnote from "markdown-it-footnote";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
-import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
+import { npmCommandsMarkdownPlugin } from "vitepress-plugin-npm-commands";
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless";
 import MarkdownItCollapsible from "markdown-it-collapsible";
 import namedCode from "markdown-it-named-code-blocks";
@@ -10,20 +10,27 @@ import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
 import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
-import { demoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import MarkdownItMathJaX3PRO from "markdown-it-mathjax3-pro";
-import { fileURLToPath, URL } from "node:url";
-import { vitepressDemoPlugin } from "vitepress-demo-plugin";
 import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
 import MarkdownItGitHubAlerts from "markdown-it-github-alerts";
 import markdownItReplaceLink from "markdown-it-replace-link";
 import markdownItTableExt from "markdown-it-multimd-table-ext";
-import path from 'path';
-import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
-import { vitepressMarkmapPreview } from 'vitepress-markmap-preview';
+import { vitepressMarkmapPreview } from "vitepress-markmap-preview";
+import {
+  containerPreview,
+  componentPreview,
+} from "@vitepress-demo-preview/plugin";
+import { vitepressDemoPlugin } from 'vitepress-demo-plugin';
+import { resolve } from "path";
+import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import { fileURLToPath, URL } from 'node:url'
 
 const CONSTS = {
   __custom_variable__: "your value",
+};
+
+const demoAlias = {
+  '@demo': resolve(__dirname, '../../src/demos'),
 };
 
 const markdown: MarkdownOptions | undefined = {
@@ -53,7 +60,13 @@ const markdown: MarkdownOptions | undefined = {
         // Other MathJax options
       },
     });
-    md.use(copyOrDownloadAsMarkdownButtons)
+    /**
+     * SSR Compatibility
+     * @link https://vitepress.dev/guide/ssr-compat
+     * If the components are not SSR-friendly, you can specify the clientOnly to disable SSR.
+     */
+    md.use(containerPreview, { clientOnly: true, alias: demoAlias });
+    md.use(componentPreview, { clientOnly: true, alias: demoAlias });
     md.use(tabsMarkdownPlugin);
     md.use(npmCommandsMarkdownPlugin);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
@@ -81,7 +94,7 @@ const markdown: MarkdownOptions | undefined = {
 
     // @ts-ignore
     vitepressMarkmapPreview(md, {
-      showToolbar: false
+      showToolbar: false,
     });
     // vitepressPluginLegend(md, {
     //     markmap: {
@@ -92,7 +105,7 @@ const markdown: MarkdownOptions | undefined = {
     //   });
 
     md.use(vitepressDemoPlugin, {
-      demoDir: path.resolve(__dirname, "../../src/demos"),
+      demoDir: resolve(__dirname, "../../src/demos"),
       lightTheme: "catppuccin-latte",
       darkTheme: "catppuccin-frappe",
       tabs: {
@@ -106,6 +119,7 @@ const markdown: MarkdownOptions | undefined = {
         show: true,
       },
     });
+
     md.use(autoArticleTitlePlugin, {
       relativePaths: ["/blog/"],
     });

@@ -7,7 +7,6 @@ import { HeadConfig, defineConfig } from "vitepress";
 import { handleHeadMeta } from "./utils/handleHeadMeta";
 import vitepressProtectPlugin from "vitepress-protect-plugin";
 import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
-import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import {
   chineseSearchOptimize,
@@ -21,6 +20,9 @@ import { withMermaid } from "vitepress-plugin-mermaid";
 import fs from "fs-extra";
 import llmstxt from 'vitepress-plugin-llms'
 import { RssPlugin } from "vitepress-plugin-rss";
+import { resolve } from "path";
+
+import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
 
 const customElements = [
   "mjx-container",
@@ -311,10 +313,12 @@ export default withMermaid(
           vite: "rolldown-vite",
           // 强制 VitePress 使用项目安装的 Mermaid
           mermaid: "mermaid",
+          '@demo': resolve(__dirname, '../src/demos'),
         },
       },
       logLevel: "info",
       plugins: [
+        viteDemoPreviewPlugin(),
         groupIconVitePlugin({
           customIcon: {
             ae: "logos:adobe-after-effects",
@@ -402,7 +406,6 @@ export default withMermaid(
           disableCopy: true,
           disableSelect: true,
         }),
-        viteDemoPreviewPlugin(),
         vueJsx(),
         RssPlugin(RSS),
         pagefindPlugin({

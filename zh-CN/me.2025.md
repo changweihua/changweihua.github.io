@@ -36,6 +36,39 @@ import HexagonHolder from '@/components/HexagonHolder.vue'
 > 
 > 2025 对饮 2026 笃行。
 
+<!-- 提示：支持闭合标签 -->
+
+<demo html="liquid-nav.html" htmlWriteWay="srcdoc" />
+
+<!--
+<demo html="anime-1.html" title="混合语法 DEMO" background="#f0ffff"
+  description="这是一个混合 demo 的示例，你可以使用 title 和 description 来指定 demo 的标题和描述" />
+
+<preview path="@demo/ClipPathDemo.vue"></preview>
+
+<preview path="@demo/ClipPathDemo.vue" title="标题"></preview>
+
+<preview path="@demo/ClipPathDemo.vue" title="标题" description="组件描述内容"></preview>
+
+:::preview
+
+demo-preview=@demo/ClipPathDemo.vue
+
+:::
+
+:::preview title
+
+demo-preview=@demo/ClipPathDemo.vue
+
+:::
+
+:::preview title || component description content
+
+demo-preview=@demo/ClipPathDemo.vue
+
+:::
+-->
+
 <llm-exclude>
 
 ## Section for humans

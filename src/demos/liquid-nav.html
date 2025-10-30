@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>案例9：液态导航指示器</title>
+  <style>
+    :root {
+      --nav-bg: #fff; /* 导航背景色 */
+      --nav-text-color: #636e72; /* 导航文字色 */
+      --nav-text-hover: #0984e3; /* 导航文字hover色 */
+      --indicator-color: #74b9ff; /* 指示器默认色 */
+      --indicator-active-color: #0984e3; /* 指示器选中色 */
+      --indicator-height: 4px; /* 指示器高度 */
+      --indicator-init-width: 20px; /* 指示器初始宽度 */
+      --indicator-hover-width: 60px; /* 指示器hover宽度 */
+      --transition-duration: 0.4s; /* 过渡时长 */
+      --nav-padding: 1.5rem 0; /* 导航内边距 */
+      --menu-gap: 2.5rem; /* 菜单项间距 */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    /* 导航容器 */
+    .liquid-nav {
+      background: var(--nav-bg);
+      padding: var(--nav-padding);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* 导航菜单 */
+    .nav-menu {
+      display: flex;
+      gap: var(--menu-gap);
+      list-style: none;
+      position: relative;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--nav-text-color);
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      display: inline-block;
+      transition: color var(--transition-duration) ease;
+    }
+
+    .nav-link:hover {
+      color: var(--nav-text-hover);
+    }
+
+    /* 液态指示器 */
+    .nav-indicator {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: var(--indicator-height);
+      width: var(--indicator-init-width);
+      background: var(--indicator-color);
+      border-radius: 2px;
+      transition:
+        left var(--transition-duration) ease,
+        width var(--transition-duration) ease,
+        background var(--transition-duration) ease;
+      animation: indicator-shape 2s ease-in-out infinite alternate;
+    }
+
+    /* 指示器形态变化关键帧 */
+    @keyframes indicator-shape {
+      0% {
+        border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+      }
+      100% {
+        border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+      }
+    }
+
+    /* 选中状态（通过JS添加active类） */
+    .nav-item.active .nav-link {
+      color: var(--indicator-active-color);
+    }
+
+    .nav-indicator.active {
+      background: var(--indicator-active-color);
+    }
+  </style>
+</head>
+<body>
+  <nav class="liquid-nav">
+    <div class="nav-container">
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item active" data-index="0">
+          <a href="#" class="nav-link">首页</a>
+        </li>
+        <li class="nav-item" data-index="1">
+          <a href="#" class="nav-link">产品</a>
+        </li>
+        <li class="nav-item" data-index="2">
+          <a href="#" class="nav-link">案例</a>
+        </li>
+        <li class="nav-item" data-index="3">
+          <a href="#" class="nav-link">关于</a>
+        </li>
+        <li class="nav-item" data-index="4">
+          <a href="#" class="nav-link">联系</a>
+        </li>
+      </ul>
+      <div class="nav-indicator" id="navIndicator"></div>
+    </div>
+  </nav>
+
+  <script>
+    const navMenu = document.getElementById('navMenu');
+    const navItems = document.querySelectorAll('.nav-item');
+    const navIndicator = document.getElementById('navIndicator');
+    const menuGap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--menu-gap'));
+    const linkWidth = navItems[0].querySelector('.nav-link').offsetWidth;
+    const indicatorInitWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--indicator-init-width'));
+    const indicatorHoverWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--indicator-hover-width'));
+
+    // 初始化指示器位置（第一个菜单项下方）
+    function initIndicator() {
+      const firstItem = navItems[0];
+      const firstItemLeft = firstItem.offsetLeft;
+      // 居中对齐：菜单项左偏移 + (菜单项宽度 - 指示器宽度)/2
+      navIndicator.style.left = `${firstItemLeft + (linkWidth - indicatorInitWidth) / 2}px`;
+    }
+
+    // 更新指示器位置和大小
+    function updateIndicator(item) {
+      const itemLeft = item.offsetLeft;
+      // hover时宽度变大，居中对齐
+      navIndicator.style.width = `${indicatorHoverWidth}px`;
+      navIndicator.style.left = `${itemLeft + (linkWidth - indicatorHoverWidth) / 2}px`;
+    }
+
+    // 重置指示器（无hover时）
+    function resetIndicator() {
+      const activeItem = document.querySelector('.nav-item.active');
+      const activeItemLeft = activeItem.offsetLeft;
+      navIndicator.style.width = `${indicatorInitWidth}px`;
+      navIndicator.style.left = `${activeItemLeft + (linkWidth - indicatorInitWidth) / 2}px`;
+    }
+
+    // 绑定hover事件
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        updateIndicator(item);
+      });
+
+      item.addEventListener('mouseleave', () => {
+        resetIndicator();
+      });
+
+      // 点击菜单项设置为选中状态
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        // 移除其他菜单项的active类
+        navItems.forEach(i => i.classList.remove('active'));
+        // 给当前菜单项添加active类
+        item.classList.add('active');
+        // 激活指示器选中色
+        navIndicator.classList.add('active');
+        // 重置指示器到选中项
+        resetIndicator();
+      });
+    });
+
+    // 页面加载和resize时初始化
+    window.addEventListener('load', initIndicator);
+    window.addEventListener('resize', initIndicator);
+  </script>
+</body>
+</html>
