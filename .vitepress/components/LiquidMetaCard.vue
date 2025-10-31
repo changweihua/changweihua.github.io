@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-
 interface Props {
   msg?: string | number | boolean;
   lines?: string[];
