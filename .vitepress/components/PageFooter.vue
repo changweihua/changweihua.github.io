@@ -1,5 +1,5 @@
 <template>
-  <div class="liquid-bg-container py-5">
+  <div class="liquid-bg-container">
     <!-- 3层液态背景层（顺序：底→中→顶） -->
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>

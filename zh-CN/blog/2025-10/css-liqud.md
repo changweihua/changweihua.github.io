@@ -1485,11 +1485,6 @@ onMounted(() => {
 })
 </script>
 <style>
-body {
-  background: #f8fafc;
-  min-height: 100vh;
-}
-
 /* 导航容器 */
 .liquid-nav {
   background: var(--nav-bg);

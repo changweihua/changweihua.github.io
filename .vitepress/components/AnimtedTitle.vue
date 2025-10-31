@@ -40,7 +40,7 @@ defineProps({
 });
 
 onMounted(() => {
-  const { words } = text.split("p", {
+  const { words } = text.splitText("p", {
     words: { wrap: "clip" },
   });
 
@@ -52,7 +52,7 @@ onMounted(() => {
     loop: true,
   });
 
-  const { chars } = text.split("h2", { words: false, chars: true });
+  const { chars } = text.splitText("h2", { words: false, chars: true });
 
   animate(chars, {
     // Property keyframes
