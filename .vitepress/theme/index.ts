@@ -21,7 +21,6 @@ import LiquidCard from "../components/LiquidCard.vue";
 import Robot from "../components/Robot.vue";
 import LiquidMetaCard from "../components/LiquidMetaCard.vue";
 import HeroLogo from "#.vitepress/components/HeroLogo.vue";
-import Vue3Autocounter from "vue3-autocounter";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
@@ -542,7 +541,6 @@ export default {
       for (const [key, component] of Object.entries(AntIconsVue)) {
         app.component(key, component);
       }
-      app.component("vue3-autocounter", Vue3Autocounter);
       app.component("DacingNumber", DacingNumber);
       app.component("TaskList", TaskList);
       app.component("ScrollableParagraph", ScrollableParagraph);

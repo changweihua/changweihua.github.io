@@ -67,7 +67,7 @@
     }
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.1.0",
+    "@antfu/eslint-config": "^6.2.0",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@commitlint/cz-commitlint": "^20.1.0",
@@ -121,7 +121,7 @@
     "vite-plugin-env-parse": "^1.0.15",
     "vite-plugin-fake-server": "^2.2.0",
     "vite-plugin-html-config": "^2.0.2",
-    "vite-plugin-image-optimizer": "^2.0.2",
+    "vite-plugin-image-optimizer": "^2.0.3",
     "vite-plugin-image-placeholder": "^1.1.0",
     "vite-plugin-image-preload": "^1.0.0",
     "vite-plugin-mkcert": "^1.17.9",
@@ -223,15 +223,13 @@
     "vitepress-plugin-md-h1": "^1.0.11",
     "vitepress-plugin-pagefind": "^0.4.15",
     "vitepress-protect-plugin": "^1.0.6",
-    "vue3-autocounter": "^1.0.8",
     "vue3-simple-icons": "^15.6.0",
     "xlogs": "^0.1.0",
-    "xmind-embed-viewer": "^1.2.0",
     "yuppie-ui": "^0.0.11"
   },
   "overrides": {
     "@zenuml/core": "^3.41.6",
-    "dayjs": "^1.11.18",
+    "dayjs": "^1.11.19",
     "highlight.js": "^11.11.1",
     "mermaid": "^11.12.1",
     "oxc-minify": "^0.93.0",
