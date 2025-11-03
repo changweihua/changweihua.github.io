@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Pendulum Animation</title>
+    <style>
+        /* =====================
+           变量定义与基础重置
+        ===================== */
+        :root {
+            /* 颜色变量 */
+            --color-transparent: rgba(0,0,0,0);
+            --color-black: #000;
+            --color-white: #fff;
+            --color-random-bg: rgba(128,128,128,0.33); /* 简化随机背景色 */
+            --color-green: rgb(169, 197, 47);
+            --color-blue: rgb(44, 93, 99);
+            --color-dark: rgb(40, 55, 57);
+            --color-light: rgb(247, 238, 187);
+
+            /* 字体和尺寸 */
+            --font-primary: 'Podkova', serif;
+            --font-secondary: 'Trebuchet MS', Helvetica, sans-serif;
+            --font-size: calc(1.1vw + 1.1vh - 0.6vmin);
+
+            /* 动画时间 */
+            --animation-time: 4s;
+        }
+
+        * {
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: var(--color-black);
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-size: var(--font-size);
+            color: var(--color-white);
+            background-color: var(--color-random-bg);
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* =====================
+           响应式字体适配
+        ===================== */
+        @media screen and (max-width: 600px) {
+            body > * {
+                font-size: 1.5em;
+            }
+        }
+
+        /* =====================
+           交互控件样式
+        ===================== */
+        #toggle {
+            display: none;
+        }
+
+        .toggle {
+            position: fixed;
+            z-index: 10;
+            left: 1em;
+            top: 1em;
+            display: inline-block;
+            padding: 0.4em 0.5em 0.5em;
+            cursor: pointer;
+            text-indent: 1.7em;
+            color: var(--color-green);
+            border-radius: 0.25em;
+            transition: all calc(var(--animation-time) / 5);
+            background-color: var(--color-dark);
+        }
+        .toggle::before {
+            content: '';
+            position: absolute;
+            z-index: 20;
+            left: 0.5em;
+            top: 0.4em;
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            border: 2px solid var(--color-blue);
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            z-index: 21;
+            display: inline-block;
+            border: 2px solid var(--color-light);
+            border-width: 0 4px 4px 0;
+            left: 0.75em;
+            top: 0.75em;
+            opacity: 0;
+            transition: all calc(var(--animation-time) / 5);
+            transform: rotate(45deg);
+        }
+        #toggle:checked + #sect .toggle {
+            color: var(--color-light);
+        }
+        #toggle:checked + #sect .toggle::after {
+            width: 0.5em;
+            top: 0.25em;
+            height: 1em;
+            opacity: 1;
+        }
+
+        /* =====================
+           3D 场景容器样式
+        ===================== */
+        #sect {
+            width: 100vw;
+            height: 100vh;
+            padding: 1em;
+            text-align: center;
+            display: block;
+            position: relative;
+            perspective: 600px; /* 3D 透视效果 */
+        }
+
+        /* =====================
+           摆动画主结构样式
+        ===================== */
+        #sect ul {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            transition: all calc(var(--animation-time) / 3);
+            transform-style: preserve-3d; /* 保持子元素3D变换 */
+            transform: translateZ(-70vmax) translateX(-50vw) rotateY(0deg);
+        }
+        #toggle:checked + #sect ul {
+            /* 切换视图时的3D旋转 */
+            transform: translateZ(-50em) translateX(0vw) rotateY(90deg);
+        }
+
+        /* =====================
+           摆锤单元样式
+        ===================== */
+        #sect li {
+            display: inline-block;
+            position: absolute;
+            font-size: 3em;
+            margin-left: -5em;
+            transition: all calc(var(--animation-time) / 5);
+            opacity: 1;
+            color: var(--color-light);
+            transform-origin: center -123vmax; /* 摆动轴心点 */
+            animation: pendulum ease-in-out infinite alternate var(--animation-time);
+            list-style-type: none;
+        }
+        #sect li::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            width: 1px;
+            box-shadow: 0 0 0 0.01em var(--color-green);
+            height: 25em;
+            left: 50%;
+            background-color: var(--color-green);
+        }
+
+        /* ===============
+           摆锤分布与延迟
+        =============== */
+        /* 每个li的水平位置和动画延迟，形成连锁反应 */
+        #sect li:nth-of-type(1) { left: 2.5em; animation-delay: -0.1s; }
+        #sect li:nth-of-type(2) { left: 5em; animation-delay: -0.2s; }
+        #sect li:nth-of-type(3) { left: 7.5em; animation-delay: -0.3s; }
+        #sect li:nth-of-type(4) { left: 10em; animation-delay: -0.4s; }
+        #sect li:nth-of-type(5) { left: 12.5em; animation-delay: -0.5s; }
+        #sect li:nth-of-type(6) { left: 15em; animation-delay: -0.6s; }
+        #sect li:nth-of-type(7) { left: 17.5em; animation-delay: -0.7s; }
+        #sect li:nth-of-type(8) { left: 20em; animation-delay: -0.8s; }
+        #sect li:nth-of-type(9) { left: 22.5em; animation-delay: -0.9s; }
+        #sect li:nth-of-type(10) { left: 25em; animation-delay: -1s; }
+        #sect li:nth-of-type(11) { left: 27.5em; animation-delay: -1.1s; }
+        #sect li:nth-of-type(12) { left: 30em; animation-delay: -1.2s; }
+        #sect li:nth-of-type(13) { left: 32.5em; animation-delay: -1.3s; }
+        #sect li:nth-of-type(14) { left: 35em; animation-delay: -1.4s; }
+        #sect li:nth-of-type(15) { left: 37.5em; animation-delay: -1.5s; }
+        #sect li:nth-of-type(16) { left: 40em; animation-delay: -1.6s; }
+        #sect li:nth-of-type(17) { left: 42.5em; animation-delay: -1.7s; }
+        #sect li:nth-of-type(18) { left: 45em; animation-delay: -1.8s; }
+        #sect li:nth-of-type(19) { left: 47.5em; animation-delay: -1.9s; }
+        #sect li:nth-of-type(20) { left: 50em; animation-delay: -2s; }
+
+        /* ===============
+           视图切换时的透明度变化，增强3D层次感
+        =============== */
+        #toggle:checked + #sect li:nth-of-type(1) { opacity: 1; }
+        #toggle:checked + #sect li:nth-of-type(2) { opacity: 0.95; }
+        #toggle:checked + #sect li:nth-of-type(3) { opacity: 0.9; }
+        #toggle:checked + #sect li:nth-of-type(4) { opacity: 0.85; }
+        #toggle:checked + #sect li:nth-of-type(5) { opacity: 0.8; }
+        #toggle:checked + #sect li:nth-of-type(6) { opacity: 0.75; }
+        #toggle:checked + #sect li:nth-of-type(7) { opacity: 0.7; }
+        #toggle:checked + #sect li:nth-of-type(8) { opacity: 0.65; }
+        #toggle:checked + #sect li:nth-of-type(9) { opacity: 0.6; }
+        #toggle:checked + #sect li:nth-of-type(10) { opacity: 0.55; }
+        #toggle:checked + #sect li:nth-of-type(11) { opacity: 0.5; }
+        #toggle:checked + #sect li:nth-of-type(12) { opacity: 0.45; }
+        #toggle:checked + #sect li:nth-of-type(13) { opacity: 0.4; }
+        #toggle:checked + #sect li:nth-of-type(14) { opacity: 0.35; }
+        #toggle:checked + #sect li:nth-of-type(15) { opacity: 0.3; }
+        #toggle:checked + #sect li:nth-of-type(16) { opacity: 0.25; }
+        #toggle:checked + #sect li:nth-of-type(17) { opacity: 0.2; }
+        #toggle:checked + #sect li:nth-of-type(18) { opacity: 0.15; }
+        #toggle:checked + #sect li:nth-of-type(19) { opacity: 0.1; }
+        #toggle:checked + #sect li:nth-of-type(20) { opacity: 0.05; }
+
+        /* ===============
+           摆动动画关键帧
+        =============== */
+        @keyframes pendulum {
+            from { transform: translateY(70vh) rotateX(-45deg); }
+            to   { transform: translateY(70vh) rotateX(45deg); }
+        }
+
+        /* ===============
+           3D小钢珠样式
+        =============== */
+        .ball {
+            display: block;
+            width: 2.2em;
+            height: 2.2em;
+            border-radius: 50%;
+            background: radial-gradient(circle at 65% 35%, #f8fafd 0%, #bfc9d1 20%, #6b7a8f 60%, #222 100%);
+            box-shadow:
+                0 0.3em 0.7em 0.1em rgba(0,0,0,0.5),
+                0 0.1em 0.2em 0.05em rgba(0,0,0,0.3),
+                inset 0.2em 0.2em 0.8em 0.1em rgba(255,255,255,0.7),
+                inset -0.4em -0.4em 1.2em 0.1em rgba(0,0,0,0.5);
+            position: relative;
+            border: 0.18em solid #444c55; /* 金属边 */
+        }
+        .ball::before {
+            content: '';
+            position: absolute;
+            left: 0.1em;
+            top: 0.1em;
+            width: 2em;
+            height: 2em;
+            border-radius: 50%;
+            background: linear-gradient(90deg, rgba(60,60,60,0.25) 0%, rgba(255,255,255,0.12) 40%, rgba(60,60,60,0.25) 100%);
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .ball::after {
+            content: '';
+            position: absolute;
+            left: 1.1em;
+            top: 0.5em;
+            width: 0.4em;
+            height: 0.4em;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            filter: blur(1px);
+            pointer-events: none;
+            opacity: 0.85;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+<!-- 视图切换开关 -->
+<input type="checkbox" id="toggle" checked />
+
+<!-- 3D 摆动画主容器 -->
+<section id="sect">
+    <!-- 视图切换按钮 -->
+    <label for="toggle" class="toggle">change view</label>
+    <!-- 摆锤列表 -->
+    <ul>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+        <li><span class="ball"></span></li>
+    </ul>
+</section>
+</body>
+</html>
