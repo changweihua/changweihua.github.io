@@ -73,16 +73,12 @@ onMounted(function () {
   width: 100%;
   min-height: 32px;
   max-width: 1152px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
 }
 
 .grid {
   font-weight: 500;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 12px;
   justify-content: space-evenly;
   align-items: center;
   //grid-template-columns: repeat(3, minmax(0, 1fr));

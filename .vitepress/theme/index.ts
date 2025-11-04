@@ -148,7 +148,7 @@ import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
-import PageFooter from "../components/PageFooter.vue";
+import PageFooter from "../components/LiquidPageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue";
 import MagicCard from "../components/MagicCard.vue";
 import Confetti from "../components/Confetti.vue";

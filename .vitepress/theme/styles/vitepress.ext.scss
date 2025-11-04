@@ -950,7 +950,7 @@ h3 {
   --liquid-bg-secondary: var(--vp-c-brand-2, #74b9ff); /* 次液态色（中层） */
   --liquid-bg-tertiary: var(--vp-c-brand-3, #b2dfff); /* 浅液态色（顶层） */
   --bg-opacity: 0.15; /* 所有液态层透明度（确保前景可读） */
-  --layer-size: 800px; /* 液态层基础大小（大于屏幕，确保流动范围） */
+  --layer-size: min(600px, 100vw); /* 液态层基础大小（大于屏幕，确保流动范围） */
 
   /* 各层动画参数（不同时长/延迟避免同步） */
   --layer1-duration: 18s; /* 底层动画时长（最慢） */
