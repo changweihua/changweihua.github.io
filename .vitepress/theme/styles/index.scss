@@ -66,9 +66,9 @@ body::after {
 }
 
 :root {
-  --base-blue-l: 60%;
-  --base-blue-c: 0.2;
-  --base-blue-h: 240;
+  // --base-blue-l: 60%;
+  // --base-blue-c: 0.2;
+  // --base-blue-h: 240;
 
   --base-blue: oklch(var(--base-blue-l) var(--base-blue-c) var(--base-blue-h));
   --base-blue-text-contrast: oklch(calc(var(--base-blue-l) > 50% ? 10% : 90%) 0 0);
@@ -79,12 +79,15 @@ body::after {
   /* 去饱和度 */
 }
 
-:root {
-  /* 定义一个品牌主色，例如中等亮度的紫色 */
-  --brand-primary-l: 50%;
-  --brand-primary-c: 0.2;
-  --brand-primary-h: 280;
-}
+// :root {
+//   /* 定义一个品牌主色，例如中等亮度的紫色 */
+//   // --brand-primary-l: 50%;
+//   // --brand-primary-c: 0.2;
+//   // --brand-primary-h: 280;
+//   --base-blue-l: 57%;
+//   --base-blue-c: 0.77;
+//   --base-blue-h: 36;
+// }
 
 /* 在深色模式下，只需降低 L 值即可生成深色变体，色相和色度保持一致 */
 body.dark-mode {

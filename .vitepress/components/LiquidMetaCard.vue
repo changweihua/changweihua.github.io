@@ -29,7 +29,7 @@ withDefaults(defineProps<Props>(), {
 :root {
   --liquid--card-bg: var(--vp-c-bg, #fff);
   /* 卡片背景色 */
-  --liquid--card-liquid-color: var(--vp-c-brand,#74b9ff);
+  --liquid--card-liquid-color: var(--vp-c-brand, #74b9ff);
   /* 液态边框/光泽色 */
   --liquid--card-shadow: 0 4px 12px rgba(116, 185, 255, 0.2);
   /* 卡片阴影 */
@@ -53,6 +53,13 @@ withDefaults(defineProps<Props>(), {
   /* 内容初始透明度 */
   --liquid--content-opacity-hover: 1;
   /* 内容hover透明度 */
+}
+
+@media screen and (max-width: 600px) {
+  /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+  :root {
+    --liquid--card-hover-height: 800px;
+  }
 }
 
 /* 液态卡片容器 */
@@ -88,7 +95,7 @@ withDefaults(defineProps<Props>(), {
   height: 100%;
   background: linear-gradient(
     90deg,
-  var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2)),
+    var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2)),
     rgba(116, 185, 255, 0)
   );
   animation: glow-flow 3s ease-in-out infinite;
@@ -97,6 +104,21 @@ withDefaults(defineProps<Props>(), {
 
 .liquid-meta-card:hover .liquid-meta-card-glow {
   opacity: 1;
+}
+
+.liquid-meta-card:hover .liquid-meta-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease-in-out;
+  /* animation: 3s cubic-bezier(0.1, 0.1, 0.9, 0.1) infinite bounce; */
+}
+
+@media screen and (max-width: 600px) {
+  /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+  .liquid-meta-card:hover .liquid-meta-card-content {
+    flex-direction: column;
+  }
 }
 
 /* 光泽流动关键帧 */
@@ -118,7 +140,7 @@ withDefaults(defineProps<Props>(), {
 }
 
 .liquid-meta-card div {
-  color: var(--vp-c-text-2,#636e72);
+  color: var(--vp-c-text-2, #636e72);
   line-height: 1.5;
   transition: color var(--liquid--transition-duration) ease,
     opacity var(--liquid--transition-duration) ease;

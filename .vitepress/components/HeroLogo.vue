@@ -7,24 +7,24 @@
                 <textPath href="#pathCurrent">CMONO.NET</textPath>
             </text>
         </svg><svg width="100" height="100" viewBox="0 0 100 100" style="margin: 5px 0 0 16px">
-            <path id="path2009" d="M58.32 10.87A40 40 0 0 1 83.16 27.63" fill="none" stroke="#CDB9FF" stroke-width="16"
-                stroke-linecap="round"></path>
-            <path id="path2013" d="M89.39 43.05A40 40 0 0 1 35.02 87.09" fill="none" stroke="#B293FF" stroke-width="16"
-                stroke-dasharray="0" stroke-dashoffset="-2" stroke-linecap="round"></path>
-            <path id="path2025" d="M21.23 77.79A40 40 0 0 1 41.68 10.87" fill="none" stroke="#7D49FF" stroke-width="16"
-                stroke-linecap="round"></path>
-            <path id="pathFinish" d="M41.68 10.87a40 40 0 1 0 16.91 0.06" fill="none" stroke="#3102A8CC"
+            <path id="path2009" d="M58.32 10.87A40 40 0 0 1 83.16 27.63" fill="none" stroke="var(--vp-c-brand-3)"
+                stroke-width="16" stroke-linecap="round"></path>
+            <path id="path2013" d="M89.39 43.05A40 40 0 0 1 35.02 87.09" fill="none" stroke="var(--vp-c-brand-2)"
+                stroke-width="16" stroke-dasharray="0" stroke-dashoffset="-2" stroke-linecap="round"></path>
+            <path id="path2025" d="M21.23 77.79A40 40 0 0 1 41.68 10.87" fill="none" stroke="var(--vp-c-brand-1)"
+                stroke-width="16" stroke-linecap="round"></path>
+            <path id="pathFinish" d="M41.68 10.87a40 40 0 1 0 16.91 0.06" fill="none" stroke="var(--vp-c-brand-3)"
                 stroke-width="4" stroke-linecap="round"></path>
             <defs>
                 <filter x="0" y="0" width="1" height="1" id="bg2009">
-                    <feFlood flood-color="#CDB9FF" result="bg2009"></feFlood>
+                    <feFlood flood-color="var(--vp-c-brand-3)" result="bg2009"></feFlood>
                     <feMerge>
                         <feMergeNode in="bg2009"></feMergeNode>
                         <feMergeNode in="SourceGraphic"></feMergeNode>
                     </feMerge>
                 </filter>
                 <filter x="0" y="0" width="1" height="1" id="bg2013">
-                    <feFlood flood-color="#B293FF" result="bg2013"></feFlood>
+                    <feFlood flood-color="var(--vp-c-brand-2)" result="bg2013"></feFlood>
                     <feMerge>
                         <feMergeNode in="bg2013"></feMergeNode>
                         <feMergeNode in="SourceGraphic"></feMergeNode>
@@ -34,12 +34,12 @@
             <clipPath id="clip2009">
                 <polygon points="50,4 81,10 72,25 56,8"></polygon>
             </clipPath>
-            <text filter="url(#bg2009)" font-size="2" x="0" fill="#2B0095" transform="translate(-3, 2)" stroke="#CDB9FF"
-                stroke-width="2" paint-order="stroke" clip-path="url(#clip2009)">
+            <text filter="url(#bg2009)" font-size="2" x="0" fill="var(--vp-c-brand)" transform="translate(-3, 2)"
+                stroke="var(--vp-c-brand-3)" stroke-width="2" paint-order="stroke" clip-path="url(#clip2009)">
                 <textPath href="#path2009">2009</textPath>
             </text>
-            <text filter="url(#bg2013)" font-size="2.2" x="0" fill="#2B0095" transform="translate(-3, 0)"
-                stroke="#B293FF" stroke-width="2" paint-order="stroke">
+            <text filter="url(#bg2013)" font-size="2.2" x="0" fill="var(--vp-c-brand)" transform="translate(-3, 0)"
+                stroke="var(--vp-c-brand-2)" stroke-width="2" paint-order="stroke">
                 <textPath href="#path2013">2013</textPath>
             </text>
             <text font-size="3" x="0" fill="white" transform="translate(3, 0)">

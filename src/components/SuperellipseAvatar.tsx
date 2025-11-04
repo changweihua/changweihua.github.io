@@ -97,6 +97,7 @@ export const SuperellipseAvatar = defineComponent({
       return (
         <svg
           fill="red"
+          class="VPImage logo"
           width={size}
           height={size}
           viewBox={`0 0 ${size} ${size}`}

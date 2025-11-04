@@ -12,8 +12,7 @@ onMounted(function () {
 </script>
 
 <template>
-  <div id="VSTPL" class="visits-panel">
-    <div class="container">
+  <div id="VSTPL" class="visits-panel w-full">
       <section class="grid">
         <!-- <span class="total-text text">
           <a-space
@@ -44,7 +43,6 @@ onMounted(function () {
         </div>
       </section>
     </div>
-  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -72,8 +70,6 @@ onMounted(function () {
   border-radius: 8px;
   width: 100%;
   min-height: 32px;
-  max-width: 1152px;
-  margin: 0;
 }
 
 .grid {

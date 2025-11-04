@@ -135,6 +135,7 @@ import { defineClientComponentConfig } from "@vitepress-demo-preview/core";
 
 import "@catppuccin/vitepress/theme/frappe/lavender.css";
 
+import "./styles/variables.scss";
 import "./styles/index.scss";
 import "./styles/vitepress.ext.scss";
 import "./styles/vitepress.print.css";

@@ -1,54 +1,3 @@
-/**
- * Colors
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --vp-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
-  --vp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
-  --vp-transition-duration: 0.3s;
-}
-
-/**
-   * Component: Button
-   * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-button-brand-border: var(--vp-c-brand-light);
-  --vp-button-brand-text: var(--vp-c-white);
-  --vp-button-brand-bg: var(--vp-c-brand);
-  --vp-button-brand-hover-border: var(--vp-c-brand-light);
-  --vp-button-brand-hover-text: var(--vp-c-white);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-light);
-  --vp-button-brand-active-border: var(--vp-c-brand-light);
-  --vp-button-brand-active-text: var(--vp-c-white);
-  --vp-button-brand-active-bg: var(--vp-button-brand-bg);
-}
-
-/**
-   * Component: Custom Block
-   * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-custom-block-tip-border: var(--vp-c-brand);
-  --vp-custom-block-tip-text: var(--vp-c-brand-darker);
-  --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
-}
-
-.dark {
-  --vp-custom-block-tip-border: var(--vp-c-brand);
-  --vp-custom-block-tip-text: var(--vp-c-brand-lightest);
-  --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
-}
-
-/**
-     * Component: Algolia
-     * -------------------------------------------------------------------------- */
-
-.DocSearch {
-  --docsearch-primary-color: var(--vp-c-brand) !important;
-}
-
 :root {
   --vp-nav-bg-color: transparent;
   --vp-font-family-base: vars.$app-font-family;
@@ -190,7 +139,11 @@ a.VPSkipLink::after {
 }
 
 .nprogress .bar {
-  background: var(--vp-c-brand-light) !important;
+  background: var(--vp-c-brand-3) !important;
+}
+
+.nprogress .peg {
+  box-shadow: 0 0 10px var(--vp-c-brand-1), 0 0 5px var(--vp-c-brand-1) !important;
 }
 
 .search-bar {
@@ -199,7 +152,7 @@ a.VPSkipLink::after {
   /* 渐变边框 */
   border: none !important;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(45deg, #ff7eb3, #65d9ff, #c7f464, #ff7eb3) border-box;
+    linear-gradient(45deg, var(--vp-c-brand-2), var(--vp-c-brand-1), var(--vp-c-brand), var(--vp-c-brand-2)) border-box;
   border-radius: 30px;
 
   /* 平滑过渡 */
@@ -212,8 +165,11 @@ a.VPSkipLink::after {
 .search-bar:hover {
   border: none !important;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(135deg, #ff0076, #1eaeff, #28ffbf, #ff0076) border-box;
-  box-shadow: 0 0 5px rgba(255, 0, 118, 0.5), 0 0 20px rgba(30, 174, 255, 0.5);
+    linear-gradient(135deg, var(--vp-c-brand-2),
+      var(--vp-c-brand-1),
+      var(--vp-c-brand),
+      var(--vp-c-brand-2)) border-box;
+  box-shadow: 0 0 5px var(--vp-c-brand-1), 0 0 20px var(--vp-c-brand);
 }
 
 /* Focus 状态 */
@@ -221,8 +177,11 @@ a.VPSkipLink::after {
 .search-bar:focus-within {
   border: none !important;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(45deg, #ff0076, #1eaeff, #28ffbf, #ff0076) border-box;
-  box-shadow: 0 0 15px rgba(255, 0, 118, 0.7), 0 0 25px rgba(30, 174, 255, 0.7);
+    linear-gradient(45deg, var(--vp-c-brand-2),
+      var(--vp-c-brand-1),
+      var(--vp-c-brand),
+      var(--vp-c-brand-2)) border-box;
+  box-shadow: 0 0 15px var(--vp-c-brand-1), 0 0 25px var(--vp-c-brand);
   color: #000;
   /* 聚焦时文本颜色 */
 }
@@ -303,14 +262,14 @@ a.VPSkipLink::after {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(
     120deg,
-    #bd34fe 30%,
-    #41d1ff
+    var(--vp-c-brand-1) 30%,
+    var(--vp-c-brand-3)
   );
 
   --vp-home-hero-image-background-image: linear-gradient(
     -45deg,
-    #bd34fe 50%,
-    #47caff 50%
+    var(--vp-c-brand-1) 50%,
+    var(--vp-c-brand-3) 50%
   );
   --vp-home-hero-image-filter: blur(40px);
 }
@@ -1064,4 +1023,13 @@ h3 {
 
 .nav-indicator.active {
   background: var(--indicator-active-color);
+}
+
+
+.VPImage.logo:hover {
+  transform-origin: 50% 50%; /* 设置旋转中心为元素中心 */
+  transform: rotate(666turn);
+  transition-duration: 59s;
+  transition-timing-function:
+    cubic-bezier(.34, 0, .84, 1);
 }
