@@ -29,11 +29,13 @@ withDefaults(defineProps<Props>(), {
 :root {
   --liquid--card-bg: var(--vp-c-bg, #fff);
   /* 卡片背景色 */
-  --liquid--card-liquid-color: var(--vp-c-brand, #74b9ff);
+  --liquid--card-liquid-color: var(--vp-c-brand-1, #74b9ff);
   /* 液态边框/光泽色 */
-  --liquid--card-shadow: 0 4px 12px rgba(116, 185, 255, 0.2);
+  --liquid--card-shadow: 0 4px 12px
+    var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2));
   /* 卡片阴影 */
-  --liquid--card-shadow-hover: 0 8px 24px rgba(116, 185, 255, 0.3);
+  --liquid--card-shadow-hover: 0 8px 24px
+    var(--vp-c-brand-3, rgba(116, 185, 255, 0.3));
   /* hover阴影 */
   --liquid--card-init-width: 100%;
   /* 初始宽度 */
@@ -96,7 +98,7 @@ withDefaults(defineProps<Props>(), {
   background: linear-gradient(
     90deg,
     var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2)),
-    rgba(116, 185, 255, 0)
+    var(--vp-c-brand-3, rgba(116, 185, 255, 0))
   );
   animation: glow-flow 3s ease-in-out infinite;
   transition: opacity var(--liquid--transition-duration) ease;
@@ -110,7 +112,7 @@ withDefaults(defineProps<Props>(), {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, height 0.5s ease;
   /* animation: 3s cubic-bezier(0.1, 0.1, 0.9, 0.1) infinite bounce; */
 }
 
@@ -149,7 +151,7 @@ withDefaults(defineProps<Props>(), {
 
 .liquid-meta-card:hover .liquid-meta-card p {
   opacity: var(--liquid--content-opacity-hover);
-  color: #2d3436;
+  color: var(--vp-c-text-1, #2d3436);
 }
 
 .liquid-meta-card:hover .liquid-meta-card h3 {

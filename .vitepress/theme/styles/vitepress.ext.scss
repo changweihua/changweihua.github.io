@@ -1033,3 +1033,15 @@ h3 {
   transition-timing-function:
     cubic-bezier(.34, 0, .84, 1);
 }
+
+.VPFeature {
+  transition: all 0.3s ease;
+}
+
+.VPFeature:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  /* 悬停时模糊背后背景 */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
