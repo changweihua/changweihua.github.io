@@ -26,12 +26,12 @@ hero:
     #   link: https://github.com/changweihua
 
 features:
-  - title: AI
+  - title: 统一认证平台
     icon:
-      src: /ai.svg
-      alt: AI & Yolo
-    details: AI & Yolo，助理智慧安检
-    link: /zh-CN/gallery/ai
+      src: /oidc.svg
+      alt: 统一认证平台架构
+    details: 统一认证平台架构。
+    link: /zh-CN/gallery/oidc
   - title: Envoy
     icon:
       src: /ipv6gateway.svg
@@ -70,6 +70,12 @@ features:
       alt: 无锡硕放机场旅客服务平台
     details: 为机场提供了数字化赋能，解决了服务能力与旅客需求难匹配的运营痛点，助力旅客便捷出行。
     link: /zh-CN/gallery/airwux
+  - title: AI
+    icon:
+      src: /ai.svg
+      alt: AI & Yolo
+    details: AI & Yolo，助理智慧安检
+    link: /zh-CN/gallery/ai
   # - title: 基于Yolo的对象检测、识别与研究
   #   icon:
   #     src: /yolo.svg
@@ -83,12 +89,6 @@ features:
   #     alt: Yuppie 平台，包含 WEB、MOBILE 双端应用及管理程序
   #   details: 项目积累，实现即开箱即投产的标准化平台
   #   link: /zh-CN/gallery/yuppie
-  - title: Maui Hybird
-    icon:
-      src: /microapp.svg
-      alt: Maui Hybird 架构
-    details: 基于 Maui 的 Hybird 框架。
-    link: /zh-CN/gallery/web_app
   - title: 基于K8S平台的持续交付平台
     icon:
       src: /giteaops.png
