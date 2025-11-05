@@ -29,7 +29,7 @@ withDefaults(defineProps<Props>(), {
 :root {
   --liquid--card-bg: var(--vp-c-bg, #fff);
   /* 卡片背景色 */
-  --liquid--card-liquid-color: var(--vp-c-brand-1, #74b9ff);
+  --liquid--card-liquid-color: var(--vp-c-brand-2, #74b9ff);
   /* 液态边框/光泽色 */
   --liquid--card-shadow: 0 4px 12px
     var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2));

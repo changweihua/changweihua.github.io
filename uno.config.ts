@@ -19,7 +19,9 @@ export default defineConfig({
       "border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem",
   },
   presets: [
-    presetWind3(),
+    presetWind3({
+      dark: 'class' // 关键配置：告知 UnoCSS 使用类名模式而非媒体查询
+    }),
     presetAttributify(),
     presetIcons({
       scale: 1.2,
@@ -98,11 +100,19 @@ export default defineConfig({
       },
     },
     colors: {
-      primary: "#3eaf7c",
+      primary: {
+        dark: '#5eead4', // 暗色系青绿色
+        DEFAULT: "var(--vp-c-brand)",
+      }
     },
     fontFamily: {
       mono: "var(--vt-font-family-mono)",
     },
+    darkMode: 'class' // 基于CSS类名切换
   },
   transformers: [transformerDirectives(), transformerVariantGroup()],
+  // 统一暗色开关：与 VitePress 的 class="dark" 对齐（推荐）
+  // dark: 'class', // 或者用选择器对象：dark: { light: '.light', dark: '.dark' }
+  // 如需更强的类型提示，可补充安全列表（可选）
+  // safelist: ['dark']
 });

@@ -21,11 +21,13 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
     return;
   }
 
+  isTransitioning.value = true;
+
   const clipPath = [
     `circle(0px at ${x}px ${y}px)`,
     `circle(${Math.hypot(
-      Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y),
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
     )}px at ${x}px ${y}px)`,
   ];
 
@@ -34,14 +36,22 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
     await nextTick();
   }).ready;
 
-  document.documentElement.animate(
+  const parallelAnimations = [document.documentElement.animate(
     { clipPath: isDark.value ? clipPath.reverse() : clipPath },
     {
       duration: 300,
-      easing: "ease-in",
+      // easing: "ease-in-out",
+      easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
+      fill: "both",
       pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`,
-    },
-  );
+    }
+  )];
+
+  // 监听所有动画完成
+  Promise.all(parallelAnimations.map(anim => anim.finished)).then(() => {
+    console.log('所有并行动画完成');
+    isTransitioning.value = false
+  });
 });
 
 const { route } = useRouter();
@@ -50,7 +60,7 @@ const currentPage = ref("home");
 watch(
   () => route.path,
   () => {
-    nextTick(() => setupMediumZoom())
+    nextTick(() => setupMediumZoom());
     // isTransitioning.value = true;
     // // 检查浏览器支持
     // if (document.startViewTransition) {
@@ -71,7 +81,7 @@ watch(
     //     }, 400);
     //   }, 50);
     // }
-  },
+  }
 );
 
 // Setup medium zoom with the desired options
@@ -103,12 +113,16 @@ const transitionType = ref("vt");
   <transition :name="transitionType" mode="out-in">
     <div :key="currentPage" class="page-content view-transition-container">
       <DefaultTheme.Layout>
-        <!-- <template #doc-top>
+        <template #doc-top>
           <div class="shade" :class="{ 'shade-active': isTransitioning }">
             &nbsp;
           </div>
-        </template> -->
-        <template v-for="(slotKey, slotIndex) in slots" :key="slotIndex" v-slot:[slotKey]>
+        </template>
+        <template
+          v-for="(slotKey, slotIndex) in slots"
+          :key="slotIndex"
+          v-slot:[slotKey]
+        >
           <slot :name="slotKey"></slot>
         </template>
       </DefaultTheme.Layout>
@@ -118,7 +132,6 @@ const transitionType = ref("vt");
 
 <style scoped>
 .page-content {
-
   --r: clamp(3, (var(--num) - 99) * 999 + 29, 250);
   --g: clamp(6, (var(--num) - 100) * -999 + 67, 125);
   --b: clamp(12, (var(--num) - 100) * -999 + 54, 250);
@@ -159,14 +172,20 @@ const transitionType = ref("vt");
   mix-blend-mode: normal;
 }
 
-::view-transition-old(root),
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+
 .dark::view-transition-new(root) {
   z-index: 1;
 }
 
-::view-transition-new(root),
 .dark::view-transition-old(root) {
-  z-index: 9999;
+  z-index: 2147483646;
 }
 
 /* 视图过渡动画 */
@@ -310,9 +329,7 @@ const transitionType = ref("vt");
   mix-blend-mode: screen;
   z-index: 10;
   background-color: var(--vp-c-brand);
-  box-shadow:
-    0px 0px 8px 0px #fdfca9 inset,
-    0px 0px 24px 0px #ffeb3b,
+  box-shadow: 0px 0px 8px 0px #fdfca9 inset, 0px 0px 24px 0px #ffeb3b,
     0px 0px 8px 0px #ffffff42;
 }
 

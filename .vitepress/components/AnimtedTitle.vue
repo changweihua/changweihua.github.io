@@ -9,14 +9,15 @@
            disabled:(opacity-50 cursor-not-allowed)">
       <p class="text-slogon justify-center  lg:justify-start">{{ slogon }}</p>
     </div> -->
-    <div
-      class="flex flex-col group transition-all duration-300 hover:( ring-2) focus:(outline-none ring-2 ring-blue-500) disabled:(opacity-50 cursor-not-allowed)"
+    <!-- <div
+      class="flex flex-col group transition-all duration-300 hover:(ring-2) focus:(outline-none ring-2 ring-blue-500) disabled:(opacity-50 cursor-not-allowed)"
     >
       <p class="text-slogon justify-center lg:justify-start">{{ slogon }}</p>
+    </div> -->
+    <div class="flex flex-col group transition-all duration-300 disabled:(opacity-50 cursor-not-allowed)">
+      <p class="text-slogon justify-center lg:justify-start">{{ slogon }}</p>
     </div>
-    <div
-      class="text-tagline justify-center lg:justify-start text-center flex flex-row"
-    >
+    <div class="hidden md:flex text-tagline justify-center lg:justify-start text-center flex-row">
       <div class="square" v-for="c in tagline">{{ c }}</div>
     </div>
   </div>

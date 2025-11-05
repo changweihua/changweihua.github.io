@@ -26,9 +26,28 @@ hero:
     #   link: https://github.com/changweihua
 
 features:
+  - title: AI
+    icon:
+      src: /ai.svg
+      alt: AI & Yolo
+    details: AI & Yolo，助理智慧安检
+    link: /zh-CN/gallery/ai
+  - title: Envoy
+    icon:
+      src: /ipv6gateway.svg
+      alt: Envoy
+    details: Envoy 智慧网关
+    link: /zh-CN/gallery/envoy
+  - title: 前端包
+    icon:
+      src: /maui-package.svg
+      alt: 前端包
+    details: 前端包
+    link: /zh-CN/gallery/frontend
+    linkText: 更多详情
   - title: 🍃扬泰机场智能机器人
     icon:
-      src: /ai_robot.svg
+      src: /robot.svg
       alt: 扬泰机场智能机器人
     details: 扬泰机场智能机器人，用于旅客自助查询航班等相关出行信息
     link: /zh-CN/gallery/robot
@@ -103,6 +122,24 @@ features:
   - title: wx-lifecycle-interceptor
     details: 小程序生命周期方法拦截器NPM包。Fork 后适配最新版微信组件生命周期。
     link: https://www.npmjs.com/package/wx-lifecycle-interceptor
+  - title: maui-shell
+    details: 这是一个maui-shell工具包，提供基于iframe的微前端能力。
+    link: https://www.npmjs.com/package/maui-shell
+  - title: maui-vant
+    details: 基于Vue3和Vant的自定义 H5 UI框架, 供项目使用。
+    link: https://www.npmjs.com/package/maui-vant
+  - title: maui-iframe
+    details: 这是一个 maui-iframe 工具包。
+    link: https://www.npmjs.com/package/maui-iframe
+  - title: maui-wechat
+    details: 基于Vue3 Vant的自定义UI框架, 供微信小程序项目使用。
+    link: https://www.npmjs.com/package/maui-wechat
+  - title: maui-antdv
+    details: 基于 Vue3 & Ant Design Vue 的自定义UI框架, 供项目使用。
+    link: https://www.npmjs.com/package/maui-antdv
+  - title: rsbuild-config-preset
+    details: rsbuild-config-preset 功能集合。
+    link: https://www.npmjs.com/package/rsbuild-config-preset
   # - title: antdv-plus-table
   #   details: Ant Design Vue Table 扩展NPM包。
   #   link: https://www.npmjs.com/package/@changweihua/antdv-plus-table
@@ -164,3 +201,9 @@ int main(){
 }
 
 ``` -->
+
+<!-- 在 .md 文件或 Vue 组件中 -->
+<div class="text-black dark:text-white bg-gray-100 dark:bg-gray-800 flex items-center justify-center rd-2xl my-3 py-5
+">
+  这段文字和背景颜色会根据主题自动切换。
+</div>
