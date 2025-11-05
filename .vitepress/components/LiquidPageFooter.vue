@@ -169,7 +169,7 @@ number-flow-vue {
 
 /* 底层液态层（主色+最慢流动） */
 .liquid-layer:nth-child(1) {
-  background: var(--liquid-bg-primary);
+  background: var(--liquid-bg-primary) !important;
   top: calc(50% - var(--layer-size) / 2 - 100px);
   /* 垂直偏移，避免重叠 */
   left: calc(50% - var(--layer-size) / 2 - 150px);
@@ -181,7 +181,7 @@ number-flow-vue {
 
 /* 中层液态层（次色+中等流动） */
 .liquid-layer:nth-child(2) {
-  background: var(--liquid-bg-secondary);
+  background: var(--liquid-bg-secondary) !important;
   top: calc(50% - var(--layer-size) / 2 + 50px);
   left: calc(50% - var(--layer-size) / 2 + 100px);
   animation-duration: var(--layer2-duration), 5s;
@@ -190,7 +190,7 @@ number-flow-vue {
 
 /* 顶层液态层（浅色+最快流动） */
 .liquid-layer:nth-child(3) {
-  background: var(--liquid-bg-tertiary);
+  background: var(--liquid-bg-tertiary) !important;
   top: calc(50% - var(--layer-size) / 2 - 50px);
   left: calc(50% - var(--layer-size) / 2 + 50px);
   animation-duration: var(--layer3-duration), 4s;
