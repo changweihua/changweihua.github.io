@@ -14,23 +14,6 @@ onMounted(function () {
 <template>
   <div id="VSTPL" class="visits-panel w-full">
       <section class="grid">
-        <!-- <span class="total-text text">
-          <a-space
-            ><span>总访问</span> <DacingNumber :target="siteVisitCount" /><span
-              >次</span
-            >
-          </a-space>
-        </span>
-        <figure class="dacing-figure">
-          <DancingLogo />
-        </figure>
-        <span class="user-text text">
-          <a-space
-            ><span>总访客</span> <DacingNumber :target="userVisitCount" /><span
-              >次</span
-            >
-          </a-space>
-        </span> -->
         <!-- Vercount用法 -->
         <div class="total-text text" id="vercount_container_site_pv" style="display: none">
           <div>本站访客数</div>
