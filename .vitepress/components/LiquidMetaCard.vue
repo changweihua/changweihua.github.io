@@ -2,9 +2,11 @@
   <div class="liquid-meta-card">
     <div class="liquid-meta-card-glow"></div>
     <div class="liquid-meta-card-content">
-      <slot name="title">
-        <h3>{{ title }}</h3>
-      </slot>
+      <div class="title">
+        <slot name="title">
+          <h3>{{ title }}</h3>
+        </slot>
+      </div>
       <slot>
         hover时卡片将展开，同时呈现液态光泽流动效果。适合展示产品信息、新闻摘要等内容，增强界面交互感。
       </slot>
@@ -25,17 +27,22 @@ withDefaults(defineProps<Props>(), {
 });
 </script>
 
-<style>
-:root {
-  --liquid--card-bg: var(--vp-c-bg, #fff);
+<style scoped>
+@media screen and (max-width: 600px) {
+  /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+  :root {
+    --liquid--card-hover-height: 800px;
+  }
+}
+
+/* 液态卡片容器 */
+.liquid-meta-card {--liquid--card-bg: var(--vp-c-bg, #fff);
   /* 卡片背景色 */
   --liquid--card-liquid-color: var(--vp-c-brand-2, #74b9ff);
   /* 液态边框/光泽色 */
-  --liquid--card-shadow: 0 4px 12px
-    var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2));
+  --liquid--card-shadow: 0 4px 12px var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2));
   /* 卡片阴影 */
-  --liquid--card-shadow-hover: 0 8px 24px
-    var(--vp-c-brand-3, rgba(116, 185, 255, 0.3));
+  --liquid--card-shadow-hover: 0 8px 24px var(--vp-c-brand-3, rgba(116, 185, 255, 0.3));
   /* hover阴影 */
   --liquid--card-init-width: 100%;
   /* 初始宽度 */
@@ -43,7 +50,7 @@ withDefaults(defineProps<Props>(), {
   /* 初始高度 */
   --liquid--card-hover-width: 100%;
   /* hover宽度 */
-  --liquid--card-hover-height: 520px;
+  --liquid--card-hover-height: 450px;
   /* hover高度 */
   --liquid--card-init-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
   /* 初始液态圆角 */
@@ -55,17 +62,7 @@ withDefaults(defineProps<Props>(), {
   /* 内容初始透明度 */
   --liquid--content-opacity-hover: 1;
   /* 内容hover透明度 */
-}
 
-@media screen and (max-width: 600px) {
-  /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
-  :root {
-    --liquid--card-hover-height: 800px;
-  }
-}
-
-/* 液态卡片容器 */
-.liquid-meta-card {
   position: relative;
   width: var(--liquid--card-init-width);
   height: var(--liquid--card-init-height);
@@ -156,5 +153,10 @@ withDefaults(defineProps<Props>(), {
 
 .liquid-meta-card:hover .liquid-meta-card h3 {
   color: var(--liquid--card-liquid-color);
+}
+
+.liquid-meta-card:hover .title
+{
+  display:none;
 }
 </style>

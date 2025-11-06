@@ -17,7 +17,7 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 <LiquidMetaCard title="💥 简介">
 <template #title>
  <div class="flex items-center justify-center p-3">
-  <SuperellipseAvatar :size="80" />
+  <SuperellipseAvatar class="superellipse-avatar" :size="80" />
 </div>
 </template>
 
@@ -63,6 +63,9 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 ## 🥇 近期作品
 
+
+- [统一认证平台](/zh-CN/gallery/oidc.md)
+- [Envoy 智慧网关](/zh-CN/gallery/envoy.md)
 - [Ollama 大模型](/zh-CN/manual/ollama_anythingllm.md)
 - [Electron 跨平台](/zh-CN/gallery/electron_app.md)
 - [基于 iFrame 的微前端框架](/zh-CN/gallery/web_app.md)

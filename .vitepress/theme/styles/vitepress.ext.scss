@@ -982,3 +982,32 @@ h3 {
   /* 悬停时模糊背后背景 */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
+
+// h1 {
+//   /* 最小值是16px，
+//     理想值是视口宽度的4%，
+//     最大值是32px。
+//   */
+//   font-size: clamp(16px, 4vw, 32px);
+// }
+
+// h1 {
+//   /* 理想值不再是单纯的3vw，
+//     而是 1rem + 3vw。
+//     这意味着它有一个1rem的基础大小，然后再叠加上与视口相关的部分。
+//   */
+//   font-size: clamp(1.5rem, calc(1rem + 3vw), 3rem);
+// }
+
+
+.grid-container-bak {
+  display: grid;
+  /* 网格间距最小15px，最大40px，中间根据视口宽度5%来缩放 */
+  gap: clamp(15px, 5vw, 40px);
+}
+
+.section-bak {
+  /* section的上下内边距，最小20px，最大100px */
+  padding-top: clamp(20px, 10vh, 100px);
+  padding-bottom: clamp(20px, 10vh, 100px);
+}
