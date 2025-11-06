@@ -202,8 +202,10 @@ int main(){
 
 ``` -->
 
+
+
 <!-- 在 .md 文件或 Vue 组件中 -->
 <div class="text-black dark:text-white bg-gray-100 dark:bg-gray-800 flex items-center justify-center rd-2xl my-3 py-5
 ">
-  文字和背景颜色会根据主题自动切换。
+  <CarouselCard></CarouselCard>
 </div>

@@ -14,12 +14,12 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 <ShadowLogo class="my-5" />
 
-<LiquidMetaCard title="💥 简介">
-<template #title>
- <div class="flex items-center justify-center p-3">
-  <SuperellipseAvatar class="superellipse-avatar" :size="80" />
-</div>
-</template>
+<LiquidMetaCard title="💥 简介" class="my-5">
+  <template #title>
+    <div class="flex items-center justify-center p-3">
+      <SuperellipseAvatar class="superellipse-avatar" :size="80" />
+    </div>
+  </template>
 
 - read 目前就职 read 于 _`上海民航华东凯亚江苏分公司`_ ，担任 **[高级开发经理]** 职务，主要面向 `无锡硕放机场`、`扬州泰州国际机场`、`南京禄口国际机场` 等江苏省内机场提供民航体系应用服务保障及项目开发和管理工作。
 
@@ -30,7 +30,6 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 - 业务时间积极参与开源。
 
 </LiquidMetaCard>
-
 
 ::: info 🔎 就职意向
 

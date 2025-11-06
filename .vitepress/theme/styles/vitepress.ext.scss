@@ -152,7 +152,14 @@ a.VPSkipLink::after {
   /* 渐变边框 */
   border: none !important;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(45deg, var(--vp-c-brand-2), var(--vp-c-brand-1), var(--vp-c-brand), var(--vp-c-brand-2)) border-box;
+    linear-gradient(
+        45deg,
+        var(--vp-c-brand-2),
+        var(--vp-c-brand-1),
+        var(--vp-c-brand),
+        var(--vp-c-brand-2)
+      )
+      border-box;
   border-radius: 30px;
 
   /* 平滑过渡 */
@@ -165,10 +172,14 @@ a.VPSkipLink::after {
 .search-bar:hover {
   border: none !important;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(135deg, var(--vp-c-brand-2),
-      var(--vp-c-brand-1),
-      var(--vp-c-brand),
-      var(--vp-c-brand-2)) border-box;
+    linear-gradient(
+        135deg,
+        var(--vp-c-brand-2),
+        var(--vp-c-brand-1),
+        var(--vp-c-brand),
+        var(--vp-c-brand-2)
+      )
+      border-box;
   box-shadow: 0 0 5px var(--vp-c-brand-1), 0 0 20px var(--vp-c-brand);
 }
 
@@ -177,10 +188,14 @@ a.VPSkipLink::after {
 .search-bar:focus-within {
   border: none !important;
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(45deg, var(--vp-c-brand-2),
-      var(--vp-c-brand-1),
-      var(--vp-c-brand),
-      var(--vp-c-brand-2)) border-box;
+    linear-gradient(
+        45deg,
+        var(--vp-c-brand-2),
+        var(--vp-c-brand-1),
+        var(--vp-c-brand),
+        var(--vp-c-brand-2)
+      )
+      border-box;
   box-shadow: 0 0 15px var(--vp-c-brand-1), 0 0 25px var(--vp-c-brand);
   color: #000;
   /* 聚焦时文本颜色 */
@@ -962,13 +977,11 @@ h3 {
   background: var(--indicator-active-color);
 }
 
-
 .VPImage.logo:hover {
   transform-origin: 50% 50%; /* 设置旋转中心为元素中心 */
   transform: rotate(666turn);
   transition-duration: 59s;
-  transition-timing-function:
-    cubic-bezier(.34, 0, .84, 1);
+  transition-timing-function: cubic-bezier(0.34, 0, 0.84, 1);
 }
 
 .VPFeature {
@@ -999,6 +1012,9 @@ h3 {
 //   font-size: clamp(1.5rem, calc(1rem + 3vw), 3rem);
 // }
 
+.go-to-top:hover {
+  background: var(--vp-c-brand-2) !important;
+}
 
 .grid-container-bak {
   display: grid;

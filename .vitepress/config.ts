@@ -360,194 +360,192 @@ const pwaConfig: any = {
   },
 };
 
-export default withPwa(
-  withMermaid(
-    defineConfig({
-      ...pwaConfig,
-      // extends: config,
-      mermaid: {
-        look: "handDrawn",
-        handDrawnSeed: 3,
-        startOnLoad: false,
-        layout: "elk",
-        fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-        altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-        theme: "neutral",
-        flowchart: { curve: "basis", defaultRenderer: "elk" },
-        class: {
-          defaultRenderer: "elk",
-        },
-        state: {
-          defaultRenderer: "elk",
-        },
-        securityLevel: "loose",
-        logLevel: "error",
-        suppressErrorRendering: true,
-        //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+export default withMermaid(
+  defineConfig({
+    // ...pwaConfig,
+    // extends: config,
+    mermaid: {
+      look: "handDrawn",
+      handDrawnSeed: 3,
+      startOnLoad: false,
+      layout: "elk",
+      fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      theme: "neutral",
+      flowchart: { curve: "basis", defaultRenderer: "elk" },
+      class: {
+        defaultRenderer: "elk",
       },
-      // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
-      mermaidPlugin: {
-        class: "mermaid styled-mermaid", // 为父容器设置额外的CSS类
+      state: {
+        defaultRenderer: "elk",
       },
-      vite: {
-        optimizeDeps: {
-          include: [
-            "mermaid",
-            "dayjs",
-            "debug",
-            "@braintree/sanitize-url",
-            "cytoscape",
-            "cytoscape-cose-bilkent",
-          ],
-          exclude: ["vitepress"],
-        },
-        resolve: {
-          alias: {
-            vite: "rolldown-vite",
-            // 强制 VitePress 使用项目安装的 Mermaid
-            mermaid: "mermaid",
-            "@demo": resolve(__dirname, "../src/demos"),
-          },
-        },
-        logLevel: "info",
-        plugins: [
-          viteDemoPreviewPlugin(),
-          groupIconVitePlugin({
-            customIcon: {
-              ae: "logos:adobe-after-effects",
-              ai: "logos:adobe-illustrator",
-              ps: "logos:adobe-photoshop",
-              mts: "vscode-icons:file-type-typescript",
-              cts: "vscode-icons:file-type-typescript",
-              ts: "vscode-icons:file-type-typescript",
-              tsx: "vscode-icons:file-type-typescript",
-              mjs: "vscode-icons:file-type-js",
-              cjs: "vscode-icons:file-type-js",
-              json: "vscode-icons:file-type-json",
-              js: "vscode-icons:file-type-js",
-              jsx: "vscode-icons:file-type-js",
-              md: "vscode-icons:file-type-markdown",
-              py: "vscode-icons:file-type-python",
-              ico: "vscode-icons:file-type-favicon",
-              html: "vscode-icons:file-type-html",
-              css: "vscode-icons:file-type-css",
-              scss: "vscode-icons:file-type-scss",
-              yml: "vscode-icons:file-type-light-yaml",
-              yaml: "vscode-icons:file-type-light-yaml",
-              php: "vscode-icons:file-type-php",
-              // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
-              // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
-            },
-          }),
-          llmstxt(),
-          // La51Plugin({
-          //   id: "",
-          //   ck: "",
-          //   importMode: "async",
-          // }),
-          // markdownBracketEscaper,
-          MdH1({
-            ignoreList: ["/gallery/"],
-            beforeInject: (frontmatter, id, title) => {
-              // // 根据 frontmatter 的某个值判断
-              // if (frontmatter.catalogue) return false;
-
-              // 根据文档路径判断
-              if (id.includes("/resume")) return false;
-              if (id.includes("/me.")) return false;
-
-              //   // 根据即将生成的一级标题判断
-              //   if (title === "简介") return false;
-
-              // // 根据 frontmatter 的某个值判断
-              // if (frontmatter.archivesPage) return "归档页";
-
-              // // 根据即将生成的一级标题判断
-              // 📝  if (title === "简介") return "文档简介";
-            },
-          }),
-          AutoFrontmatter({
-            pattern: "**/*.md",
-            exclude: { tag: true }, // 排除 tag: true 的 MD 文件，支持多个配置
-            include: { tag: true }, // 支持多个配置
-            // ✨ 通过 transform 函数来添加一个唯一的永久链接
-            transform: (frontmatter, fileInfo) => {
-              let transformResult = {};
-
-              // 如果文件本身存在了 permalink，则不生成
-              if (!frontmatter.permalink) {
-                transformResult = { ...frontmatter, ...createPermalink() };
-              }
-
-              // 如果文件本身存在了 categories，则不生成
-              if (!frontmatter.categories) {
-                transformResult = {
-                  ...frontmatter,
-                  ...createCategory(fileInfo),
-                };
-              }
-
-              // 确保返回值存在，如果返回 {} 将会清空文件本身的 frontmatter，返回 undefined 则告诉插件不使用 transform 返回的数据
-              return Object.keys(transformResult).length
-                ? transformResult
-                : undefined;
-            },
-          }),
-          // DocAnalysis(/* options */),
-          // vitepressProtectPlugin({
-          //   disableF12: true,
-          //   disableCopy: true,
-          //   disableSelect: true,
-          // }),
-          vueJsx(),
-          RssPlugin(RSS),
-          pagefindPlugin({
-            // verbose: true, // 启用详细日志
-            locales: {
-              "en-US": {
-                btnPlaceholder: "Search",
-                placeholder: "Search Docs...",
-                emptyText: "No results",
-                heading: "Total: {{searchResult}} search results.",
-                // 搜索结果不展示最后修改日期日期
-                showDate: false,
-              },
-              "zh-CN": {
-                btnPlaceholder: "搜索",
-                placeholder: "搜索文档",
-                emptyText: "空空如也",
-                heading: "共: {{searchResult}} 条结果",
-                toSelect: "选择",
-                toNavigate: "切换",
-                toClose: "关闭",
-                searchBy: "",
-              },
-            },
-            excludeSelector: ["img", "a.header-anchor"],
-            customSearchQuery: chineseSearchOptimize,
-          }),
-          {
-            name: "patch-sidebar",
-            enforce: "pre",
-            transform: (code, id) => {
-              if (id.includes("VPSidebarItem.vue")) {
-                return code.replaceAll(`:is="textTag"`, `is="p"`);
-              }
-            },
-          },
+      securityLevel: "loose",
+      logLevel: "error",
+      suppressErrorRendering: true,
+      //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+    },
+    // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
+    mermaidPlugin: {
+      class: "mermaid styled-mermaid", // 为父容器设置额外的CSS类
+    },
+    vite: {
+      optimizeDeps: {
+        include: [
+          "mermaid",
+          "dayjs",
+          "debug",
+          "@braintree/sanitize-url",
+          "cytoscape",
+          "cytoscape-cose-bilkent",
         ],
+        exclude: ["vitepress"],
       },
-      vue: {
-        template: {
-          compilerOptions: {
-            isCustomElement: (tag) =>
-              tag.includes("mjx-") || customElements.includes(tag),
-            // whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
-          },
+      resolve: {
+        alias: {
+          vite: "rolldown-vite",
+          // 强制 VitePress 使用项目安装的 Mermaid
+          mermaid: "mermaid",
+          "@demo": resolve(__dirname, "../src/demos"),
         },
       },
-      ...vitePressOptions,
-      // ...withI18n(vitePressOptions, vitePressI18nOptions)
-    })
-  )
+      logLevel: "info",
+      plugins: [
+        viteDemoPreviewPlugin(),
+        groupIconVitePlugin({
+          customIcon: {
+            ae: "logos:adobe-after-effects",
+            ai: "logos:adobe-illustrator",
+            ps: "logos:adobe-photoshop",
+            mts: "vscode-icons:file-type-typescript",
+            cts: "vscode-icons:file-type-typescript",
+            ts: "vscode-icons:file-type-typescript",
+            tsx: "vscode-icons:file-type-typescript",
+            mjs: "vscode-icons:file-type-js",
+            cjs: "vscode-icons:file-type-js",
+            json: "vscode-icons:file-type-json",
+            js: "vscode-icons:file-type-js",
+            jsx: "vscode-icons:file-type-js",
+            md: "vscode-icons:file-type-markdown",
+            py: "vscode-icons:file-type-python",
+            ico: "vscode-icons:file-type-favicon",
+            html: "vscode-icons:file-type-html",
+            css: "vscode-icons:file-type-css",
+            scss: "vscode-icons:file-type-scss",
+            yml: "vscode-icons:file-type-light-yaml",
+            yaml: "vscode-icons:file-type-light-yaml",
+            php: "vscode-icons:file-type-php",
+            // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
+            // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
+          },
+        }),
+        llmstxt(),
+        // La51Plugin({
+        //   id: "",
+        //   ck: "",
+        //   importMode: "async",
+        // }),
+        // markdownBracketEscaper,
+        MdH1({
+          ignoreList: ["/gallery/"],
+          beforeInject: (frontmatter, id, title) => {
+            // // 根据 frontmatter 的某个值判断
+            // if (frontmatter.catalogue) return false;
+
+            // 根据文档路径判断
+            if (id.includes("/resume")) return false;
+            if (id.includes("/me.")) return false;
+
+            //   // 根据即将生成的一级标题判断
+            //   if (title === "简介") return false;
+
+            // // 根据 frontmatter 的某个值判断
+            // if (frontmatter.archivesPage) return "归档页";
+
+            // // 根据即将生成的一级标题判断
+            // 📝  if (title === "简介") return "文档简介";
+          },
+        }),
+        AutoFrontmatter({
+          pattern: "**/*.md",
+          exclude: { tag: true }, // 排除 tag: true 的 MD 文件，支持多个配置
+          include: { tag: true }, // 支持多个配置
+          // ✨ 通过 transform 函数来添加一个唯一的永久链接
+          transform: (frontmatter, fileInfo) => {
+            let transformResult = {};
+
+            // 如果文件本身存在了 permalink，则不生成
+            if (!frontmatter.permalink) {
+              transformResult = { ...frontmatter, ...createPermalink() };
+            }
+
+            // 如果文件本身存在了 categories，则不生成
+            if (!frontmatter.categories) {
+              transformResult = {
+                ...frontmatter,
+                ...createCategory(fileInfo),
+              };
+            }
+
+            // 确保返回值存在，如果返回 {} 将会清空文件本身的 frontmatter，返回 undefined 则告诉插件不使用 transform 返回的数据
+            return Object.keys(transformResult).length
+              ? transformResult
+              : undefined;
+          },
+        }),
+        // DocAnalysis(/* options */),
+        // vitepressProtectPlugin({
+        //   disableF12: true,
+        //   disableCopy: true,
+        //   disableSelect: true,
+        // }),
+        vueJsx(),
+        RssPlugin(RSS),
+        pagefindPlugin({
+          // verbose: true, // 启用详细日志
+          locales: {
+            "en-US": {
+              btnPlaceholder: "Search",
+              placeholder: "Search Docs...",
+              emptyText: "No results",
+              heading: "Total: {{searchResult}} search results.",
+              // 搜索结果不展示最后修改日期日期
+              showDate: false,
+            },
+            "zh-CN": {
+              btnPlaceholder: "搜索",
+              placeholder: "搜索文档",
+              emptyText: "空空如也",
+              heading: "共: {{searchResult}} 条结果",
+              toSelect: "选择",
+              toNavigate: "切换",
+              toClose: "关闭",
+              searchBy: "",
+            },
+          },
+          excludeSelector: ["img", "a.header-anchor"],
+          customSearchQuery: chineseSearchOptimize,
+        }),
+        {
+          name: "patch-sidebar",
+          enforce: "pre",
+          transform: (code, id) => {
+            if (id.includes("VPSidebarItem.vue")) {
+              return code.replaceAll(`:is="textTag"`, `is="p"`);
+            }
+          },
+        },
+      ],
+    },
+    vue: {
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) =>
+            tag.includes("mjx-") || customElements.includes(tag),
+          // whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
+        },
+      },
+    },
+    ...vitePressOptions,
+    // ...withI18n(vitePressOptions, vitePressI18nOptions)
+  })
 );

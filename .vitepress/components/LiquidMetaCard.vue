@@ -70,10 +70,10 @@ withDefaults(defineProps<Props>(), {
   border-radius: var(--liquid--card-init-radius);
   border: 2px solid var(--liquid--card-liquid-color);
   padding: 1.5rem;
-  transition: width var(--liquid--transition-duration) ease,
-    height var(--liquid--transition-duration) ease,
-    border-radius var(--liquid--transition-duration) ease,
-    box-shadow var(--liquid--transition-duration) ease;
+  transition: width var(--liquid--transition-duration) ease-in-out,
+    height var(--liquid--transition-duration) ease-in-out,
+    border-radius var(--liquid--transition-duration) ease-in-out,
+    box-shadow var(--liquid--transition-duration) ease-in-out;
   cursor: pointer;
   overflow: hidden;
 }
