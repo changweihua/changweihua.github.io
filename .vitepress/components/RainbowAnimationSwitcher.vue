@@ -43,7 +43,7 @@ const switchTitle = computed(() => {
         <p class="text mr-3">
           {{ text ?? "Rainbow Animation" }}
         </p>
-        <RainbowSwitcher :title="switchTitle" class="RainbowAnimationSwitcher w-full"
+        <RainbowSwitcher :title="switchTitle" class="RainbowAnimationSwitcher"
           :aria-checked="animated ? 'true' : 'false'" @click="toggleRainbow">
           <span class="i-tabler:rainbow animated flex self-center" v-if="animated" />
           <span class="i-tabler:rainbow-off non-animated flex self-center" v-else />
@@ -68,7 +68,6 @@ const switchTitle = computed(() => {
   border-radius: 8px;
   padding: 12px;
   background-color: var(--vp-c-bg-elv);
-  max-width: 220px;
 }
 
 .text {
