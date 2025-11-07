@@ -1,15 +1,11 @@
 <template>
-  <div class="liquid-bg-container liquid-page-footer pt-3">
+  <div v-if="!frontmatter.plain" class="liquid-bg-container liquid-page-footer pt-3">
     <!-- 3层液态背景层（顺序：底→中→顶） -->
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>
-    <div
-      id="PGFT"
-      class="flex gap-3 flex-row items-center justify-center z-100"
-    >
-      <span v-once>V{{ version }}</span
-      ><span> | </span>
+    <div id="PGFT" class="flex gap-3 flex-row items-center justify-center z-100">
+      <span v-once>V{{ version }}</span><span> | </span>
       <icon-logos-markdown :width="20" :height="20" />
     </div>
     <VisitsPanel />
@@ -20,10 +16,11 @@ import { onMounted, ref } from "vue";
 import { fetchVersion } from "../utils/fetchVersion";
 import { useRootClick, useCycle } from "./composables";
 import VisitsPanel from "./VisitsPanel.vue";
+import { useData } from 'vitepress'
+
+const { frontmatter } = useData()
 
 const version = ref("N/A");
-// import { useData } from "vitepress";
-// const { params } = useData();
 const { value, next } = useCycle([543, 12000, -3200]);
 
 onMounted(() => {

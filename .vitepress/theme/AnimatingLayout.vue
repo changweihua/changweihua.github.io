@@ -36,21 +36,25 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
     await nextTick();
   }).ready;
 
-  const parallelAnimations = [document.documentElement.animate(
-    { clipPath: isDark.value ? clipPath.reverse() : clipPath },
-    {
-      duration: 300,
-      // easing: "ease-in-out",
-      easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
-      fill: "both",
-      pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`,
-    }
-  )];
+  const parallelAnimations = [
+    document.documentElement.animate(
+      { clipPath: isDark.value ? clipPath.reverse() : clipPath },
+      {
+        duration: 300,
+        // easing: "ease-in-out",
+        easing: "cubic-bezier(0.68, -0.55, 0.27, 1.55)",
+        fill: "both",
+        pseudoElement: `::view-transition-${
+          isDark.value ? "old" : "new"
+        }(root)`,
+      }
+    ),
+  ];
 
   // 监听所有动画完成
-  Promise.all(parallelAnimations.map(anim => anim.finished)).then(() => {
-    console.log('所有并行动画完成');
-    isTransitioning.value = false
+  Promise.all(parallelAnimations.map((anim) => anim.finished)).then(() => {
+    console.log("所有并行动画完成");
+    isTransitioning.value = false;
   });
 });
 
@@ -107,6 +111,71 @@ router.onAfterPageLoad = function () {
   });
 };
 const transitionType = ref("vt");
+
+function createDots(emojis: string[]) {
+  const temp = document.createDocumentFragment();
+  const random_emojis = emojis
+    .slice(0, Math.ceil(Math.random() * emojis.length))
+    .sort(() => Math.random() - 0.5);
+  random_emojis.forEach((emoji) => {
+    const dot = document.createElement("div");
+    dot.className = "custom-tips-dot";
+    dot.setAttribute("emoji", emoji);
+    dot.style.setProperty("--d", `${Math.random() * 0.2}s`);
+    dot.style.setProperty("--x", `${(Math.random() - 0.5) * 1000}%`);
+    temp.appendChild(dot);
+    dot.addEventListener("animationend", () => {
+      console.log(
+        "dot.parentNode",
+        dot.parentNode,
+        dot.parentNode?.childElementCount
+      );
+      // @ts-ignore
+      if (dot?.parentNode?.childElementCount <= 1) {
+        // @ts-ignore
+        dot.parentNode.remove();
+      } else {
+        dot.remove();
+      }
+    });
+  });
+  return temp;
+}
+
+function createNum() {
+  const current = document.querySelector(".custom-num");
+  let num = 1;
+  if (current) {
+    num = parseInt(`${current.getAttribute("num") }`) + 1;
+    current.remove();
+  }
+  const numDiv = document.createElement("div");
+  numDiv.className = "custom-num";
+  if (num > 1) {
+    // numDiv.style.setProperty('--d','-.3s' )
+  }
+  numDiv.setAttribute("num", `${num}`);
+  numDiv.addEventListener("animationend", () => {
+    numDiv.remove();
+  });
+  return numDiv;
+}
+
+document.addEventListener("click", (ev) => {
+  const { clientX, clientY } = ev;
+  console.log(clientX, clientY);
+  document.body.style.setProperty("--left", `${clientX}px`);
+  document.body.style.setProperty("--top", `${clientY}px`);
+  const tips = document.createElement("div");
+  tips.style.setProperty("--left", `${clientX}px`);
+  tips.style.setProperty("--top", `${clientY}px`);
+  tips.className = "custom-tips";
+  const dots = createDots(["🎉", "😘", "🎊", "🤡", "🥳", "🤪", "💗"]);
+  // const dots = createDots(['🎉']);
+  tips.appendChild(dots);
+  document.body.appendChild(tips);
+  document.body.appendChild(createNum());
+});
 </script>
 
 <template>
@@ -354,5 +423,88 @@ const transitionType = ref("vt");
 :root {
   animation: adjust-pos 3s linear both;
   animation-timeline: scroll();
+}
+</style>
+<style>
+.custom-tips {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  margin-left: -0.5em;
+  margin-top: -0.5em;
+  left: 0;
+  top: 0;
+  transform: translate(var(--left, 50%), var(--top, 50%));
+}
+.custom-tips-dot {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  /* outline: 1px solid yellowgreen; */
+  animation: custom-x 1s var(--d, 0s) linear forwards;
+}
+.custom-tips-dot::before {
+  content: attr(emoji, "🎉");
+  animation: custom-y 1s var(--d, 0s) cubic-bezier(0.56, -1.35, 0.85, 0.36)
+    forwards;
+}
+.custom-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: 2em;
+  height: 2em;
+  font-size: 2em;
+  color: var(--vp-c-brand-3, #fff);
+  justify-content: center;
+  align-items: center;
+  margin-left: -1em;
+  margin-top: -2em;
+  font-weight: bold;
+  text-shadow: 4px 4px 0 var(--vp-c-brand-1, rgba(255, 0, 0));
+  transform: translate(var(--left), var(--top));
+}
+.custom-num::before {
+  content: "+" attr(num);
+  opacity: 0;
+  animation: count-shark 1s var(--d, 0s);
+}
+@keyframes count-shark {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  30%,
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* x方向 */
+@keyframes custom-x {
+  0% {
+    opacity: 0;
+    transform: translateX(0%);
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(var(--x, 300%));
+  }
+}
+/* y方向 */
+@keyframes custom-y {
+  100% {
+    transform: translateY(50vh) rotate(1turn);
+  }
 }
 </style>

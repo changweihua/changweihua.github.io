@@ -21,6 +21,7 @@ import LiquidCard from "../components/LiquidCard.vue";
 import Robot from "../components/Robot.vue";
 import LiquidMetaCard from "../components/LiquidMetaCard.vue";
 import CarouselCard from "../components/CarouselCard.vue";
+import AboutMe from "../components/AboutMe.vue";
 import HeroLogo from "#.vitepress/components/HeroLogo.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
@@ -523,6 +524,7 @@ export default {
       app.component("HoverableText", HoverableText);
       app.component("LiquidMetaCard", LiquidMetaCard);
       app.component("CarouselCard", CarouselCard);
+      app.component("AboutMe", AboutMe);
       app.component("Robot", Robot);
       app.use(directives);
 

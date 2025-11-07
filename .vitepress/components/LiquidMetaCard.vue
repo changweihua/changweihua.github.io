@@ -80,7 +80,8 @@ withDefaults(defineProps<Props>(), {
 
 .liquid-meta-card:hover {
   width: var(--liquid--card-hover-width);
-  height: var(--liquid--card-hover-height);
+  height: calc-size(max-content, var(--liquid--card-hover-height));
+  /* height: var(--liquid--card-hover-height); */
   border-radius: var(--liquid--card-hover-radius);
   box-shadow: var(--liquid--card-shadow-hover);
 }
