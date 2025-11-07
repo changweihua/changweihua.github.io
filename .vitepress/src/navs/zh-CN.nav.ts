@@ -1,4 +1,5 @@
 import { DefaultTheme } from "vitepress";
+import { version } from '../../../package.json'
 // , activeMatch: "^/$|^/index/"
 export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
   return [
@@ -12,7 +13,7 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
       text: "关于",
       link: "/zh-CN/about.md",
       activeMatch: "/about/",
-      target: "blank"
+      target: "blank",
     },
     {
       text: "归档",
@@ -33,6 +34,25 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
         { text: "2021", link: "/zh-CN/me.2021.md" },
         { text: "2020", link: "/zh-CN/me.2020.md" },
         { text: "2019", link: "/zh-CN/me.2019.md" },
+      ],
+    },
+    {
+      text: `v${version}`,
+      items: [
+        {
+          text: "发布日志",
+          link: "https://github.com/changweihua/changweihua.github.io/releases",
+        },
+        {
+          text: "提交 Issue",
+          link: "https://github.com/changweihua/changweihua.github.io/issues",
+        },
+        {
+          component: "RainbowAnimationSwitcher",
+          props: {
+            text: "彩虹动画",
+          },
+        },
       ],
     },
     // {

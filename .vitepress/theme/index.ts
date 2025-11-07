@@ -27,6 +27,7 @@ import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimtedTitle.vue";
+import RainbowAnimationSwitcher from "../components/RainbowAnimationSwitcher.vue";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
@@ -139,6 +140,7 @@ import "@catppuccin/vitepress/theme/frappe/lavender.css";
 
 import "./styles/variables.scss";
 import "./styles/index.scss";
+import "./styles/rainbow.scss";
 import "./styles/vitepress.ext.scss";
 import "./styles/vitepress.print.css";
 import "./styles/vitepress.code.css";
@@ -485,6 +487,7 @@ export default {
     useComponents(app, DemoPreview);
 
     app.component("demo-preview", AntDesignContainer);
+    app.component("RainbowAnimationSwitcher", RainbowAnimationSwitcher);
 
     if (inBrowser) {
       initMarkmapComponent(app);
@@ -506,7 +509,7 @@ export default {
       if (typeof window !== "undefined") {
         watch(
           () => router.route.data.relativePath,
-          () => updateHomePageStyle(location.pathname === "/"),
+          () => updateHomePageStyle(location.pathname === "/zh-CN/"),
           { immediate: true }
         );
       }

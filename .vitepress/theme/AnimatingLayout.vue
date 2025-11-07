@@ -161,21 +161,21 @@ function createNum() {
   return numDiv;
 }
 
-document.addEventListener("click", (ev) => {
-  const { clientX, clientY } = ev;
-  console.log(clientX, clientY);
-  document.body.style.setProperty("--left", `${clientX}px`);
-  document.body.style.setProperty("--top", `${clientY}px`);
-  const tips = document.createElement("div");
-  tips.style.setProperty("--left", `${clientX}px`);
-  tips.style.setProperty("--top", `${clientY}px`);
-  tips.className = "custom-tips";
-  const dots = createDots(["🎉", "😘", "🎊", "🤡", "🥳", "🤪", "💗"]);
-  // const dots = createDots(['🎉']);
-  tips.appendChild(dots);
-  document.body.appendChild(tips);
-  document.body.appendChild(createNum());
-});
+// document.addEventListener("click", (ev) => {
+//   const { clientX, clientY } = ev;
+//   console.log(clientX, clientY);
+//   document.body.style.setProperty("--left", `${clientX}px`);
+//   document.body.style.setProperty("--top", `${clientY}px`);
+//   const tips = document.createElement("div");
+//   tips.style.setProperty("--left", `${clientX}px`);
+//   tips.style.setProperty("--top", `${clientY}px`);
+//   tips.className = "custom-tips";
+//   const dots = createDots(["🎉", "😘", "🎊", "🤡", "🥳", "🤪", "💗"]);
+//   // const dots = createDots(['🎉']);
+//   tips.appendChild(dots);
+//   document.body.appendChild(tips);
+//   document.body.appendChild(createNum());
+// });
 </script>
 
 <template>

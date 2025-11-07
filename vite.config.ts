@@ -192,7 +192,7 @@ export default defineConfig(() => {
     server: {
       // ✅ 服务器基础配置
       host: '0.0.0.0', // 允许外部访问
-      port: 5000,
+      port: 4200,
       open: true, // 自动打开浏览器
 
       // HMR配置
