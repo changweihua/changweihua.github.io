@@ -45,8 +45,8 @@ const switchTitle = computed(() => {
         </p>
         <RainbowSwitcher :title="switchTitle" class="RainbowAnimationSwitcher"
           :aria-checked="animated ? 'true' : 'false'" @click="toggleRainbow">
-          <span class="i-tabler:rainbow animated flex self-center" v-if="animated" />
-          <span class="i-tabler:rainbow-off non-animated flex self-center" v-else />
+          <i class="solar:star-rainbow-bold animated flex self-center" v-if="animated" />
+          <i class="solar:star-rainbow-linear non-animated flex self-center" v-else />
         </RainbowSwitcher>
       </div>
     </div>

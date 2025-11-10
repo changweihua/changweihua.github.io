@@ -36,13 +36,16 @@ withDefaults(defineProps<Props>(), {
 }
 
 /* 液态卡片容器 */
-.liquid-meta-card {--liquid--card-bg: var(--vp-c-bg, #fff);
+.liquid-meta-card {
+  --liquid--card-bg: var(--vp-c-bg, #fff);
   /* 卡片背景色 */
   --liquid--card-liquid-color: var(--vp-c-brand-2, #74b9ff);
   /* 液态边框/光泽色 */
-  --liquid--card-shadow: 0 4px 12px var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2));
+  --liquid--card-shadow: 0 4px 12px
+    var(--vp-c-brand-soft, rgba(116, 185, 255, 0.2));
   /* 卡片阴影 */
-  --liquid--card-shadow-hover: 0 8px 24px var(--vp-c-brand-3, rgba(116, 185, 255, 0.3));
+  --liquid--card-shadow-hover: 0 8px 24px
+    var(--vp-c-brand-3, rgba(116, 185, 255, 0.3));
   /* hover阴影 */
   --liquid--card-init-width: 100%;
   /* 初始宽度 */
@@ -132,6 +135,23 @@ withDefaults(defineProps<Props>(), {
   }
 }
 
+.liquid-meta-card {
+  background-image: linear-gradient(
+      to right,
+      rgba(59, 130, 246, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: rotate(-3deg) scale(1.01);
+}
+
+
+.liquid-meta-card:hover {
+  transform: rotate(0deg) scale(1);
+  transition: all 0.6s ease-in-out;
+}
+
 /* 卡片内容 */
 .liquid-meta-card-content h3 {
   color: var(--vp-c-text-1, #2d3436);
@@ -156,8 +176,7 @@ withDefaults(defineProps<Props>(), {
   color: var(--liquid--card-liquid-color);
 }
 
-.liquid-meta-card:hover .title
-{
-  display:none;
+.liquid-meta-card:hover .title {
+  display: none;
 }
 </style>

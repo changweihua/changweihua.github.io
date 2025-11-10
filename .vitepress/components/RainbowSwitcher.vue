@@ -1,7 +1,7 @@
 <template>
   <button class="VPSwitch flex items-center justify-center" type="button" role="switch">
-    <span class="check flex items-center justify-center gap-2">
-      <span v-if="$slots.default" class="icon">
+    <span class="check flex items-center justify-center">
+      <span v-if="$slots.default" class="icon flex items-center justify-center">
         <slot />
       </span>
     </span>

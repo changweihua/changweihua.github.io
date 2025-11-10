@@ -21,9 +21,10 @@ hero:
     - theme: alt
       text: 我的2025
       link: /zh-CN/me.2025
-    # - theme: alt
-    #   text: Github
-    #   link: https://github.com/changweihua
+    - theme: alt
+      text: 关于
+      link: /zh-CN/about
+      target: blank
 
 features:
   - title: 统一认证平台

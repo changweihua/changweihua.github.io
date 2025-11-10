@@ -9,16 +9,16 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
       link: "/zh-CN/blog/index.md",
       activeMatch: "/blog/",
     },
-    {
-      text: "关于",
-      link: "/zh-CN/about.md",
-      activeMatch: "/about/",
-      target: "blank",
-    },
-    {
-      text: "归档",
-      link: "/zh-CN/archives.md",
-    },
+    // {
+    //   text: "关于",
+    //   link: "/zh-CN/about.md",
+    //   activeMatch: "/about/",
+    //   target: "blank",
+    // },
+    // {
+    //   text: "归档",
+    //   link: "/zh-CN/archives.md",
+    // },
     {
       text: "手册",
       link: "/zh-CN/manual/index.md",

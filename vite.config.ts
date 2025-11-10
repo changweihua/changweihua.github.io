@@ -402,9 +402,8 @@ export default defineConfig(() => {
       // 排除不需要预构建的依赖
       // 排除本地开发的包，避免不必要的构建
       exclude: ['vitepress', 'echarts'],
-      // @ts-ignore
       rollupOptions: {
-        jsx: 'preserve',
+        // jsx: 'preserve',
       },
       esbuild: false,
       // esbuildOptions: {

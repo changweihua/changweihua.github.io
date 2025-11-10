@@ -42,7 +42,8 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
       {
         duration: 300,
         // easing: "ease-in-out",
-        easing: "cubic-bezier(0.68, -0.55, 0.27, 1.55)",
+        // easing: "cubic-bezier(0.68, -0.55, 0.27, 1.55)",
+        easing: "cubic-bezier(.76,.32,.29,.99)",
         fill: "both",
         pseudoElement: `::view-transition-${
           isDark.value ? "old" : "new"
@@ -235,28 +236,6 @@ function createNum() {
 </style>
 
 <style>
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  z-index: 2147483646;
-}
-
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
-
-.dark::view-transition-old(root) {
-  z-index: 2147483646;
-}
-
 /* 视图过渡动画 */
 .vt-enter-active,
 .vt-leave-active {

@@ -1276,18 +1276,14 @@ table {
 /* dark/light radial transition */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
+  animation: none;mix-blend-mode: normal;
 }
 
-::view-transition-old(root),
-.dark::view-transition-new(root) {
-  z-index: 1;
+::view-transition-old(root) {
+  z-index: var(--view-transition-old-zindex);
 }
-
-::view-transition-new(root),
-.dark::view-transition-old(root) {
-  z-index: 9999;
+::view-transition-new(root) {
+  z-index: var(--view-transition-new-zindex);
 }
 
 /* 自定义滚动条样式 */

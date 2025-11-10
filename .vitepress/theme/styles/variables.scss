@@ -11,6 +11,21 @@
   --vp-c-brand-2: rgb(238, 190, 119);
   --vp-c-brand-3: rgb(243, 209, 158);
   --vp-c-brand-soft: rgb(253, 246, 236);
+  // --color-primary: hsl(191, 50%, 90%);
+  // --color-secondary: hsl(191, 50%, 10%);
+  // --color-tertiary: hsl(251, 80%, 20%);
+  // --color-accent: hsl(131, 80%, 20%);
+  --view-transition-old-zindex: 9999;
+  --view-transition-new-zindex: 1;
+}
+
+:root[class="dark"] {
+  // --color-primary: hsl(191, 50%, 10%);
+  // --color-secondary: hsl(191, 50%, 90%);
+  // --color-tertiary: hsl(251, 80%, 80%);
+  // --color-accent: hsl(131, 80%, 80%);
+  --view-transition-old-zindex: 1;
+  --view-transition-new-zindex: 9999;
 }
 
 /**
@@ -86,7 +101,7 @@ table {
   over scoped class data attribute.
 */
 .dark .vp-doc a,
-.dark .vp-doc a>code,
+.dark .vp-doc a > code,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink:hover,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink.active,
 .dark .link.link:hover,
@@ -97,7 +112,7 @@ table {
 }
 
 .dark .vp-doc a:hover,
-.dark .vp-doc a>code:hover {
+.dark .vp-doc a > code:hover {
   color: var(--vp-c-brand-lightest);
   opacity: 1;
 }
@@ -120,11 +135,17 @@ table {
 }
 
 .VPLocalSearchBox .result .excerpt-gradient-top {
-  background: linear-gradient(var(--vp-c-bg-search-result), transparent) !important;
+  background: linear-gradient(
+    var(--vp-c-bg-search-result),
+    transparent
+  ) !important;
 }
 
 .VPLocalSearchBox .result .excerpt-gradient-bottom {
-  background: linear-gradient(transparent, var(--vp-c-bg-search-result)) !important;
+  background: linear-gradient(
+    transparent,
+    var(--vp-c-bg-search-result)
+  ) !important;
 }
 
 .VPLocalSearchBox .title-icon {
@@ -133,23 +154,6 @@ table {
 
 .VPLocalSearchBox .excerpt-wrapper {
   margin-top: 4px;
-}
-
-/* dark/light radial transition */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root),
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root),
-.dark::view-transition-old(root) {
-  z-index: 9999;
 }
 
 /* 自定义滚动条样式 */
