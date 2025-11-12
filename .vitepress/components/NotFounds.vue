@@ -153,6 +153,7 @@ const Content = styled.div`
 const Svg404 = styled.svg`
   width: 200px;
   height: 200px;
+  margin: 0 auto;
   margin-bottom: 2rem;
 
   path {
@@ -178,6 +179,7 @@ const Title = styled.h1`
   font-size: 2.5rem;
   color: inherit;
   font-weight: 400;
+  margin: 0 auto;
   margin-bottom: 1rem;
   letter-spacing: 5px;
 `;

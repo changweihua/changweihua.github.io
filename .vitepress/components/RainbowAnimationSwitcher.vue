@@ -3,6 +3,7 @@ import { useLocalStorage, useMediaQuery } from "@vueuse/core";
 import { inBrowser } from "vitepress";
 import { computed, watch } from "vue";
 import RainbowSwitcher from "./RainbowSwitcher.vue";
+import { Icon } from "@iconify/vue";
 
 defineProps<{ text?: string; screenMenu?: boolean }>();
 
@@ -45,8 +46,10 @@ const switchTitle = computed(() => {
         </p>
         <RainbowSwitcher :title="switchTitle" class="RainbowAnimationSwitcher"
           :aria-checked="animated ? 'true' : 'false'" @click="toggleRainbow">
-          <i class="solar:star-rainbow-bold animated flex self-center" v-if="animated" />
-          <i class="solar:star-rainbow-linear non-animated flex self-center" v-else />
+          <icon-solar-star-rainbow-bold v-if="animated" />
+          <icon-solar-star-rainbow-linear v-else />
+          <!-- <i class="solar:star-rainbow-bold animated flex self-center" v-if="animated" />
+          <Icon icon="bxl:tiktok"  class="solar:star-rainbow-linear non-animated flex self-center" v-else /> -->
         </RainbowSwitcher>
       </div>
     </div>

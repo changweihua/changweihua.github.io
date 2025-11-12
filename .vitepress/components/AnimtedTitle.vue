@@ -1,5 +1,5 @@
 <template>
-  <div class="title-container flex flex-col justify-center gap-2xl">
+  <div class="title-container flex flex-col justify-center gap-2xl cursor-pointer select-none">
     <div>
       <h2 class="text-name font-bold text-shadow-xl">{{ name }}</h2>
     </div>
@@ -15,7 +15,7 @@
       <p class="text-slogon justify-center lg:justify-start">{{ slogon }}</p>
     </div> -->
     <div class="flex flex-col group transition-all duration-300 disabled:(opacity-50 cursor-not-allowed)">
-      <p class="text-slogon justify-center lg:justify-start">{{ slogon }}</p>
+      <h3 :tooltip="slogon" class="text-slogon justify-center lg:justify-start">{{ slogon }}</h3>
     </div>
     <div class="hidden md:flex text-tagline justify-center lg:justify-start text-center flex-row">
       <div class="square" v-for="c in tagline">{{ c }}</div>
@@ -98,5 +98,17 @@ onMounted(() => {
   font-weight: bold;
   color: currentColor;
   letter-spacing: 5px;
+  position: relative;
+}
+.text-slogon::before {
+  content: attr(tooltip);
+  color: #000;
+  font-weight: bolder;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  filter: blur(1px);
+  transform: translateX(8px) translateY(2px) scaleY(0.6) skew(160deg);
+  mask: linear-gradient(transparent, #000);
 }
 </style>
