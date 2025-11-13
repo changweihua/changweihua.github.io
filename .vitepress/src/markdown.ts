@@ -1,7 +1,7 @@
 import { MarkdownOptions } from "vitepress";
 import timeline from "vitepress-markdown-timeline";
 import footnote from "markdown-it-footnote";
-import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+// import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { npmCommandsMarkdownPlugin } from "vitepress-plugin-npm-commands";
 import { wordless, chineseAndJapanese, Options } from "markdown-it-wordless";
 import MarkdownItCollapsible from "markdown-it-collapsible";
@@ -67,7 +67,7 @@ const markdown: MarkdownOptions | undefined = {
      */
     md.use(containerPreview, { clientOnly: true, alias: demoAlias });
     md.use(componentPreview, { clientOnly: true, alias: demoAlias });
-    md.use(tabsMarkdownPlugin);
+    // md.use(tabsMarkdownPlugin);
     md.use(npmCommandsMarkdownPlugin);
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] });
     md.use(namedCode, { isEnableInlineCss: true });

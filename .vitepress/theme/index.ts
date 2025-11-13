@@ -29,7 +29,7 @@ import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimtedTitle.vue";
 import TransitionNavBar from "../components/TransitionNavBar.vue";
 import RainbowAnimationSwitcher from "../components/RainbowAnimationSwitcher.vue";
-import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
+// import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
 import * as AntIconsVue from "@ant-design/icons-vue";
@@ -494,7 +494,7 @@ export default {
 
     if (inBrowser) {
       initMarkmapComponent(app);
-      enhanceAppWithTabs(app);
+      // enhanceAppWithTabs(app);
       // const { promise, resolve, reject } = Promise.withResolvers();
       //   // 一些异步操作
       // setTimeout(() => {
