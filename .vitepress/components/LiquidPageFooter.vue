@@ -9,8 +9,8 @@
         <span v-once>V {{ version }}</span><span> | </span>
         <icon-logos-markdown :width="20" :height="20" />
       </div>
-      <div class="copy-right flex-col items-center justify-center">
-        <span>MIT Licensed</span> <span> | </span>
+      <div class="copy-right flex flex-col items-center justify-center">
+          <span>MIT Licensed</span>
         <span>版权所有 © 2009-2025 CMONO.NET</span>
         <VisitsPanel />
       </div>

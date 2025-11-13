@@ -1333,3 +1333,7 @@ table {
 .vp-doc div[class*="language-"]::-webkit-scrollbar-thumb:hover {
   background: var(--vp-c-text-3);
 }
+
+.VPFlyout.VPNavBarMenuGroup {
+  z-index: 1000;
+}
