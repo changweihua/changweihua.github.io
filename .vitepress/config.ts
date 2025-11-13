@@ -21,8 +21,9 @@ import fs from "fs-extra";
 import llmstxt from "vitepress-plugin-llms";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { resolve } from "path";
-import { withPwa } from "@vite-pwa/vitepress";
+// import { withPwa } from "@vite-pwa/vitepress";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
+import { fileURLToPath } from "url";
 
 const customElements = [
   "mjx-container",
@@ -401,12 +402,22 @@ export default withMermaid(
         exclude: ["vitepress"],
       },
       resolve: {
-        alias: {
-          vite: "rolldown-vite",
-          // 强制 VitePress 使用项目安装的 Mermaid
-          mermaid: "mermaid",
-          "@demo": resolve(__dirname, "../src/demos"),
-        },
+        alias: [
+          { find: 'vite', replacement: 'rolldown-vite' },
+          { find: 'mermaid', replacement: 'mermaid' },
+          { find: '@demo', replacement: resolve(__dirname, "../src/demos") },
+          {
+            find: /^.*\/VPFooter\.vue$/,
+            replacement: resolve(__dirname, './components/LiquidPageFooter.vue')
+          }
+          // { find: 'dep', replacement: '@vitejs/test-resolve-linked' },
+        ]
+        // alias: {
+        //   vite: "rolldown-vite",
+        //   // 强制 VitePress 使用项目安装的 Mermaid
+        //   mermaid: "mermaid",
+        //   "@demo": resolve(__dirname, "../src/demos"),
+        // },
       },
       logLevel: "info",
       plugins: [

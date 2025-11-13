@@ -1,38 +1,35 @@
 <template>
-  <div v-if="!frontmatter.plain" class="liquid-bg-container liquid-page-footer pt-3">
+  <div v-if="!frontmatter.plain" id="LiquidPageFooter" class="liquid-bg-container liquid-page-footer pt-3">
     <!-- 3层液态背景层（顺序：底→中→顶） -->
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>
-    <div id="PGFT" class="flex gap-3 flex-row items-center justify-center z-100">
-      <span v-once>V{{ version }}</span><span> | </span>
-      <icon-logos-markdown :width="20" :height="20" />
+    <div class="footer-content flex gap-3 flex-col items-center justify-center">
+      <div id="PGFT" class="flex gap-3 flex-row items-center justify-center  z-100">
+        <span v-once>V {{ version }}</span><span> | </span>
+        <icon-logos-markdown :width="20" :height="20" />
+      </div>
+      <div class="copy-right flex-col items-center justify-center">
+        <span>MIT Licensed</span> <span> | </span>
+        <span>版权所有 © 2009-2025 CMONO.NET</span>
+        <VisitsPanel />
+      </div>
     </div>
-    <VisitsPanel />
   </div>
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { fetchVersion } from "../utils/fetchVersion";
 import { useRootClick, useCycle } from "./composables";
 import VisitsPanel from "./VisitsPanel.vue";
 import { useData } from 'vitepress'
+import { version } from '../../package.json'
 
 const { frontmatter } = useData()
 
-const version = ref("N/A");
 const { value, next } = useCycle([543, 12000, -3200]);
 
 onMounted(() => {
   useRootClick(next);
-  const docsVersionSpan = document.querySelector(
-    "footer.VPFooter > .container > p.version-tag"
-  );
-  if (!docsVersionSpan) {
-    fetchVersion().then((v) => {
-      version.value = v;
-    });
-  }
 });
 </script>
 <style>
@@ -145,6 +142,10 @@ number-flow-vue {
   // justify-content: center;
   // align-items: center;
   // padding: 2rem;
+}
+
+.footer-content {
+  z-index: var(--vp-z-index-footer);
 }
 
 /* 液态层通用样式（绝对定位+圆形初始形态） */

@@ -27,6 +27,7 @@ import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 import AnimationTitle from "../components/AnimtedTitle.vue";
+import TransitionNavBar from "../components/TransitionNavBar.vue";
 import RainbowAnimationSwitcher from "../components/RainbowAnimationSwitcher.vue";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import mediumZoom from "medium-zoom";
@@ -153,7 +154,7 @@ import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
-import PageFooter from "../components/LiquidPageFooter.vue";
+import LiquidPageFooter from "../components/LiquidPageFooter.vue";
 import HoverGrid from "../components/HoverGrid.vue";
 import MagicCard from "../components/MagicCard.vue";
 import Confetti from "../components/Confetti.vue";
@@ -405,7 +406,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "layout-top",
       //   }),
-      "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
+      // "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
       // "nav-bar-title-before": () =>
       //   h(PlaceHolder, {
       //     name: "nav-bar-title-before",
@@ -456,6 +457,9 @@ export default {
     const { app, router, siteData } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
+    // 使用别名机制覆写默认的VPFooter组件
+    // app.component('VPFooter', LiquidPageFooter)
+
     // 定义国际化配置
     defineClientComponentConfig({
       // 保持向后兼容
@@ -488,6 +492,7 @@ export default {
 
     app.component("demo-preview", AntDesignContainer);
     app.component("RainbowAnimationSwitcher", RainbowAnimationSwitcher);
+    app.component("TransitionNavBar", TransitionNavBar);
 
     if (inBrowser) {
       initMarkmapComponent(app);
