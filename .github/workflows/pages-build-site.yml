@@ -113,6 +113,11 @@ jobs:
         run: |
           echo ${{ github.workspace }}
           npm run docs:build
+        env:
+          NODE_ENV: production
+          # 添加以下环境变量
+          VITE_SSR: false
+          __VUE_PROD_DEVTOOLS__: false
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

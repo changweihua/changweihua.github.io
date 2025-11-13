@@ -402,7 +402,7 @@ export default defineConfig(() => {
       include: ['vue'],
       // 排除不需要预构建的依赖
       // 排除本地开发的包，避免不必要的构建
-      exclude: ['vitepress', 'echarts'],
+      exclude: ['vitepress', 'echarts', 'vitepress-plugin-tabs'],
       rollupOptions: {
         // jsx: 'preserve',
       },

@@ -14,7 +14,7 @@
   "scripts": {
     "docs:dev": "vitepress --mode development --host",
     "docs:prepare": "esno scripts/prepare.ts",
-    "docs:build": "set NODE_OPTIONS=--max-old-space-size=4096 && vitepress build",
+    "docs:build": "set NODE_OPTIONS=--max-old-space-size=4096 && vitepress build --localstorage-file=/tmp/localstorage.json",
     "docs:test": "vitest --ui",
     "docker:build": "docker build -t changweihua-github:latest . -f Dockerfile",
     "docs:preview": "vitepress preview --host",
