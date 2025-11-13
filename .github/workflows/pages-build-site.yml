@@ -67,8 +67,8 @@ jobs:
           cache: 'npm'                # 包管理器缓存
           registry-url: https://registry.npmjs.org/ # 如果不配置将影响publish
           # cache: npm
-        env:
-          NODE_OPTIONS: "--no-webstorage"
+        #env:
+          #NODE_OPTIONS: "--no-webstorage"
 
       #   - uses: pnpm/action-setup@v2 // 配置使用pnpm
       #     name: Install pnpm
