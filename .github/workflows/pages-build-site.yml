@@ -51,18 +51,24 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # 保留 Git 信息
           fetch-depth: 0
 
       # 设置使用 Node.js 版本
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
+          node-version-file: '.node-version'  # 支持.nvmrc、.node-version、package.json等
+          architecture: 'x64'         # 系统架构
+          check-latest: true         # 是否检查最新版本
+          cache: 'npm'                # 包管理器缓存
           registry-url: https://registry.npmjs.org/ # 如果不配置将影响publish
           # cache: npm
+        env:
+          NODE_OPTIONS: "--no-webstorage"
 
       #   - uses: pnpm/action-setup@v2 // 配置使用pnpm
       #     name: Install pnpm
@@ -109,10 +115,10 @@ jobs:
           npm run docs:build
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: .vitepress/dist
 

@@ -486,8 +486,6 @@ export default {
       defaultLanguage: "zh",
     });
 
-    enhanceAppWithTabs(app);
-
     useComponents(app, DemoPreview);
 
     app.component("demo-preview", AntDesignContainer);
@@ -496,6 +494,7 @@ export default {
 
     if (inBrowser) {
       initMarkmapComponent(app);
+      enhanceAppWithTabs(app);
       // const { promise, resolve, reject } = Promise.withResolvers();
       //   // 一些异步操作
       // setTimeout(() => {
