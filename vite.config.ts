@@ -390,7 +390,7 @@ export default defineConfig(() => {
       // mainFields: []
     },
     ssr: {
-      noExternal: [], // Externalize Node.js modules
+      noExternal: ["vitepress-plugin-tabs"], // Externalize Node.js modules
     },
     esbuild: false,
     // 强制预构建
