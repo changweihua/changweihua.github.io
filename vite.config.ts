@@ -392,7 +392,6 @@ export default defineConfig(() => {
       noExternal: [
         "vitepress-plugin-tabs",
         "vitepress-plugin-detype",
-        "vitepress-plugin-tabs",
         "vitepress-plugin-npm-commands",
       ], // Externalize Node.js modules
     },
@@ -409,7 +408,6 @@ export default defineConfig(() => {
       exclude: [
         "vitepress",
         "echarts",
-        "vitepress-plugin-tabs",
         "vitepress-plugin-detype",
         "vitepress-plugin-tabs",
         "vitepress-plugin-npm-commands",

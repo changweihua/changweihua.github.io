@@ -22,6 +22,7 @@ import Robot from "../components/Robot.vue";
 import LiquidMetaCard from "../components/LiquidMetaCard.vue";
 import CarouselCard from "../components/CarouselCard.vue";
 import AboutMe from "../components/AboutMe.vue";
+import NoticeBar from "../components/NoticeBar.vue";
 import HeroLogo from "#.vitepress/components/HeroLogo.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
@@ -280,7 +281,7 @@ export default {
     }
 
     return h(AnimatingLayout, null, {
-      // "home-hero-before": () => h(AnimationTitle),
+      "home-hero-before": () => h(NoticeBar),
       // "home-hero-after": () => h(AnimationTitle),
       // "home-features-after": () =>
       //   h(AnimationTitle, {
@@ -330,7 +331,7 @@ export default {
       //     name: "home-hero-after",
       //   }),
       // "home-features-before": () =>
-      //   h(PlaceHolder, {
+      //   h(NoticeBar, {
       //     name: "home-features-before",
       //   }),
       // "home-features-after": () =>
@@ -403,7 +404,7 @@ export default {
 
       //  Always
       // "layout-top": () =>
-      //   h(PlaceHolder, {
+      //   h(NoticeBar, {
       //     name: "layout-top",
       //   }),
       // "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
