@@ -60,7 +60,7 @@ jobs:
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.node-version }}
+          # node-version: ${{ matrix.node-version }}
           node-version-file: '.node-version'  # 支持.nvmrc、.node-version、package.json等
           architecture: 'x64'         # 系统架构
           check-latest: true         # 是否检查最新版本

@@ -15,10 +15,10 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     //   activeMatch: "/about/",
     //   target: "blank",
     // },
-    // {
-    //   text: "归档",
-    //   link: "/zh-CN/archives.md",
-    // },
+    {
+      text: "归档",
+      link: "/zh-CN/archives.md",
+    },
     {
       text: "手册",
       link: "/zh-CN/manual/index.md",

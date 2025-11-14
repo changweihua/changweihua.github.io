@@ -17,11 +17,9 @@ pageClass: blog-page-class
 `build` 后未生成任何 `.d.ts` 文件，反复检查了 `tsconfig.app.json` 文件、`tsconfig.json` 文件、及 `vite.config.ts` 文件，没有任何问题，且配置文件中内容都是脚手架默认生成的配置，插件官网也没有任何需要修改的地方，但是就是无法生成。
 
 
-:::tabs
+::: code-group
 
-== tab tsconfig.app.json
-
-```json
+```json [tsconfig.app.json]
 {
   "compilerOptions": {
     "target": "ES2020",
@@ -50,9 +48,7 @@ pageClass: blog-page-class
 }
 ```
 
-== tab tsconfig.json
-
-```json
+```json [tsconfig.json]
 {
   "compilerOptions": {
     "strict": true,
@@ -66,9 +62,7 @@ pageClass: blog-page-class
 }
 ```
 
-== tab vite.config.ts
-
-```ts
+```ts [vite.config.ts]
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'

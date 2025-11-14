@@ -4,20 +4,6 @@ sidebar: true
 mermaids: 2
 ---
 
-:::tabs
-== tab a
-a content
-== tab b
-b content
-:::
-
-:::tabs
-== tab a
-a content 2
-== tab b
-b content 2
-:::
-
 $\sqrt{3x-1}+(1+x)^2$
 
 测试脚注 [^1]
