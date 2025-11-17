@@ -111,4 +111,63 @@ onMounted(() => {
   transform: translateX(8px) translateY(2px) scaleY(0.6) skew(160deg);
   mask: linear-gradient(transparent, #000);
 }
+
+.bottomContentItem {
+  display: flex;
+  background-color: #404040;
+  width: 50%;
+  height: 240px;
+  margin: 30px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+
+  .main-title {
+    font-size: 3rem;
+    font-weight: bolder;
+    letter-spacing: 0.2rem;
+    opacity: 0;
+    transform-origin: center;
+    transform: scaleX(0);
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease;
+    z-index: 1;
+  }
+
+  .sub-title {
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+    transition-delay: 0.3s;
+    z-index: 1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 3.125rem;
+    background: linear-gradient(45deg, rgba(255, 213, 135, .9215686275), rgba(251, 0, 0, .2392156863));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: effect-btn-borderflow-rotation 6s linear infinite;
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    top: 1px;
+    left: 1px;
+    z-index: 0;
+    background-color: #404040;
+  }
+}
 </style>
