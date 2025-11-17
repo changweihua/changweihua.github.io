@@ -21,8 +21,6 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
     return;
   }
 
-  isTransitioning.value = true;
-
   const clipPath = [
     `circle(0px at ${x}px ${y}px)`,
     `circle(${Math.hypot(
@@ -55,7 +53,6 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
   // 监听所有动画完成
   Promise.all(parallelAnimations.map((anim) => anim.finished)).then(() => {
     console.log("所有并行动画完成");
-    isTransitioning.value = false;
   });
 });
 
@@ -66,26 +63,11 @@ watch(
   () => route.path,
   () => {
     nextTick(() => setupMediumZoom());
-    // isTransitioning.value = true;
-    // // 检查浏览器支持
-    // if (document.startViewTransition) {
-    //   // 使用 View Transitions API
-    //   const transition = document.startViewTransition(() => {
-    //     currentPage.value = route.path;
-    //   });
-
-    //   transition.finished.finally(() => {
-    //     isTransitioning.value = false;
-    //   });
-    // } else {
-    //   // 回退方案：使用 Vue 过渡
-    //   setTimeout(() => {
-    //     currentPage.value = route.path;
-    //     setTimeout(() => {
-    //       isTransitioning.value = false;
-    //     }, 400);
-    //   }, 50);
-    // }
+    isTransitioning.value = true;
+    // 动画结束后重置状态
+    setTimeout(() => {
+      isTransitioning.value = false;
+    }, 500); // 500ms 要和 CSS 动画时间匹配
   }
 );
 
@@ -180,7 +162,6 @@ function createNum() {
 </script>
 
 <template>
-  <transition :name="transitionType" mode="out-in">
     <div :key="currentPage" class="page-content view-transition-container">
       <DefaultTheme.Layout>
         <template #doc-top>
@@ -197,7 +178,6 @@ function createNum() {
         </template>
       </DefaultTheme.Layout>
     </div>
-  </transition>
 </template>
 
 <style scoped>
