@@ -13,18 +13,18 @@
   "markdown.copyFiles.destination": {
     "/**/*": "/public/images/cmono-${fileName}"
   },
-  "editor.fontFamily": "Maple Mono Normal NF CN,Maple Mono NF CN, JetBrains Maple Mono,Maple Mono SC NF",         // 代码编辑器
-  "terminal.integrated.fontFamily": "Maple Mono NF CN",  // 终端
-  "debug.console.fontFamily": "Maple Mono NF CN",       // 调试控制台
-  "markdown.preview.fontFamily": "Maple Mono NF CN",     // Markdown预览
-  "gitlens.views.fontFamily": "Maple Mono NF CN",       // GitLens扩展视图（需安装GitLens）
-  "workbench.tips.fontFamily": "Maple Mono NF CN",        // 提示信息（部分版本无效）
+  "editor.fontFamily": "Maple Mono Normal NF CN,Maple Mono NF CN, JetBrains Maple Mono,Maple Mono SC NF", // 代码编辑器
+  "terminal.integrated.fontFamily": "Maple Mono NF CN", // 终端
+  "debug.console.fontFamily": "Maple Mono NF CN", // 调试控制台
+  "markdown.preview.fontFamily": "Maple Mono NF CN", // Markdown预览
+  "gitlens.views.fontFamily": "Maple Mono NF CN", // GitLens扩展视图（需安装GitLens）
+  "workbench.tips.fontFamily": "Maple Mono NF CN", // 提示信息（部分版本无效）
   "workbench.desktopUI.fontFamily": "Maple Mono NF CN",
   "unocss.root": "packages/client",
-  "workbench.fontAliasing": "antialiased",  // 字体渲染方式（可选）
-  "window.titleBarStyle": "custom",          // 启用自定义标题栏
+  "workbench.fontAliasing": "antialiased", // 字体渲染方式（可选）
+  "window.titleBarStyle": "custom", // 启用自定义标题栏
   "workbench.experimental.settingsSandbox": true,
-  "window.fontFamily": "Maple Mono NF CN",  // 部分测试版本可能支持
+  "window.fontFamily": "Maple Mono NF CN", // 部分测试版本可能支持
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "index.html": "index.html,index.*.html,*.css",
@@ -36,8 +36,10 @@
   },
   "workbench.colorCustomizations": {
     // "terminal.background": "#ffffff",
-    "minimap.background": "#ffffff",
+    "minimap.background": "#ffffff"
   },
+  "png-to-webp.quality": 100,
+  "png-to-webp.deleteOriginalAfterConversion": false,
   "workbench.navigationControl.enabled": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -76,7 +78,7 @@
   "typescript.tsserver.nodePath": "node",
   "vitest.shellType": "terminal",
   "commentTranslate.targetLanguage": "zh-CN",
-  "commentTranslate.hover.enabled": false,
+  "commentTranslate.hover.enabled": false
   //   // 拖拽行为
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
   //   // 粘贴行为
