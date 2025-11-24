@@ -26,6 +26,7 @@ import { robots } from "vite-plugin-robots";
 import simpleHtmlPlugin from "vite-plugin-simple-html";
 import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
 import vitePluginTryCatchConsole from "./plugins/vite-plugin-try-catch-console";
+import spyPlugin from "./plugins/vite-plugin-spy";
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target];
@@ -60,6 +61,7 @@ function getDevPlugins() {
     return [];
   }
   return [
+    spyPlugin(),
     checker({
       eslint: {
         useFlatConfig: true, // 很重要，使用eslint9必须配置，不然会报错
@@ -389,7 +391,7 @@ export default defineConfig(() => {
       // mainFields: []
     },
     ssr: {
-      noExternal: [
+      external: [
         "vitepress-plugin-tabs",
         "vitepress-plugin-detype",
         "vitepress-plugin-npm-commands",

@@ -11,6 +11,20 @@ pageClass: manual-page-class
 
 > 经过一上午的反复打磨，终于写出了这个让我满意的 HTTP 客户端封装。当我把代码发给朋友时，他竟然挑出了一堆问题！还好我都一一解决了。
 
+:::tabs key:ab
+== tab a
+a content
+== tab b
+b content
+:::
+
+:::tabs key:ab
+== tab a
+a content 2
+== tab b
+b content 2
+:::
+
 ## 🎯 为什么要重新封装 Axios？ ##
 
 我们都知道 Axios 是 JavaScript 世界里最受欢迎的 HTTP 客户端，但在实际项目中，我们总是需要：
