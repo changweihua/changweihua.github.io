@@ -554,6 +554,7 @@ a.VPSkipLink::after {
   font-weight: bolder;
   position: relative;
   text-align: center;
+  margin: auto;
   margin-bottom: 20px;
 }
 
@@ -1224,7 +1225,7 @@ table {
   over scoped class data attribute.
 */
 .dark .vp-doc a,
-.dark .vp-doc a>code,
+.dark .vp-doc a > code,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink:hover,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink.active,
 .dark .link.link:hover,
@@ -1235,7 +1236,7 @@ table {
 }
 
 .dark .vp-doc a:hover,
-.dark .vp-doc a>code:hover {
+.dark .vp-doc a > code:hover {
   color: var(--vp-c-brand-lightest);
   opacity: 1;
 }
@@ -1258,11 +1259,17 @@ table {
 }
 
 .VPLocalSearchBox .result .excerpt-gradient-top {
-  background: linear-gradient(var(--vp-c-bg-search-result), transparent) !important;
+  background: linear-gradient(
+    var(--vp-c-bg-search-result),
+    transparent
+  ) !important;
 }
 
 .VPLocalSearchBox .result .excerpt-gradient-bottom {
-  background: linear-gradient(transparent, var(--vp-c-bg-search-result)) !important;
+  background: linear-gradient(
+    transparent,
+    var(--vp-c-bg-search-result)
+  ) !important;
 }
 
 .VPLocalSearchBox .title-icon {
@@ -1276,7 +1283,8 @@ table {
 /* dark/light radial transition */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none;mix-blend-mode: normal;
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 ::view-transition-old(root) {
@@ -1340,4 +1348,39 @@ table {
 
 .VPFlyout.VPNavBarTranslations .menu {
   z-index: 1000;
+}
+
+.VPLink.link.VPNavBarMenuLink {
+  position: relative; /* 伪元素依赖父元素定位 */
+  display: inline-block;
+  // background: #007bff;
+  // color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease; /* 整体过渡效果 */
+}
+
+/* 下划线用伪元素实现 */
+.VPLink.link.VPNavBarMenuLink::before {
+  content: "";
+  /* 内容可自定义，也能为空 */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--vp-c-brand-light, #e9e4f5);
+  transform: scaleY(0);
+  /* 初始隐藏（Y轴缩放为0） */
+  transform-origin: top right;
+  /* 动画起点：右上角 */
+  transition: transform 0.3s ease;
+  /* 仅缩放动画过渡 */
+}
+
+/* hover时显示下划线，动画反向播放 */
+.VPLink.link.VPNavBarMenuLink:hover::before {
+  transform: scaleY(1);
+  /* 显示下划线（Y轴缩放为1） */
+  transform-origin: bottom left;
+  /* 动画终点：左下角 */
 }
