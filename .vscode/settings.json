@@ -78,7 +78,7 @@
   "typescript.tsserver.nodePath": "node",
   "vitest.shellType": "terminal",
   "commentTranslate.targetLanguage": "zh-CN",
-  "commentTranslate.hover.enabled": false
+  "commentTranslate.hover.enabled": true
   //   // 拖拽行为
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
   //   // 粘贴行为

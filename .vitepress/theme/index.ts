@@ -255,6 +255,7 @@ import "markdown-it-github-alerts/styles/github-base.css";
 
 import { initComponent as initMarkmapComponent } from "vitepress-markmap-preview/component";
 import "vitepress-markmap-preview/dist/index.css";
+import PageCursor from "../components/PageCursor.vue";
 
 // Setup medium zoom with the desired options
 const setupMediumZoom = () => {
@@ -407,6 +408,7 @@ export default {
       //   h(NoticeBar, {
       //     name: "layout-top",
       //   }),
+      "layout-top": () => [h(PageCursor)],
       // "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
       // "nav-bar-title-before": () =>
       //   h(PlaceHolder, {
