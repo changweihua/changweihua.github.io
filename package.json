@@ -138,8 +138,7 @@
     "vitepress-plugin-mermaid": "^2.0.17",
     "vitepress-plugin-npm-commands": "^0.8.1",
     "vitepress-plugin-rss": "^0.3.4",
-    "vitepress-plugin-setfrontmatter": "^1.2.3",
-    "vitest": "^4.0.13"
+    "vitepress-plugin-setfrontmatter": "^1.2.3"
   },
   "dependencies": {
     "@catppuccin/vitepress": "^0.1.2",
@@ -156,8 +155,8 @@
     "@vitepress-code-preview/plugin": "^1.0.6",
     "@vitepress-demo-preview/component": "^2.6.1",
     "@vitepress-demo-preview/plugin": "^1.4.1",
-    "@vitest/coverage-v8": "^4.0.13",
-    "@vitest/ui": "^4.0.13",
+    "@vitest/coverage-v8": "^4.0.4",
+    "@vitest/ui": "^4.0.14",
     "@vue-styled-components/core": "^1.13.3",
     "@vue-styled-components/plugin": "^1.0.1",
     "@vueuse/core": "^14.0.0",
@@ -239,6 +238,7 @@
     "vite": "npm:rolldown-vite@7.2.7",
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.15",
+    "vitest": "^4.0.14",
     "vue": "^3.5.25"
   },
   "version": "0.11.8"

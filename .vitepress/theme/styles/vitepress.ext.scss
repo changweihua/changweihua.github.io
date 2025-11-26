@@ -1392,13 +1392,13 @@ table {
 
 ::-webkit-scrollbar-thumb {
   display: none;
-  background: #E2E6F1;
+  background: #e2e6f1;
 }
 
 /* 滚动条里面的小方块，能向上向下移动 */
 *:hover::-webkit-scrollbar-thumb {
   display: flex;
-  background: #E2E6F1;
+  background: #e2e6f1;
 }
 
 *:hover::-webkit-scrollbar-track-piece {
@@ -1407,13 +1407,13 @@ table {
 
 /* 隐藏滚动条（Chrome/Safari/Edge） */
 .scroll-container::-webkit-scrollbar {
-  width: 0;  /* 垂直滚动条宽度 */
+  width: 0; /* 垂直滚动条宽度 */
   height: 0; /* 水平滚动条高度 */
 }
 
 /* 鼠标移入时显示滚动条 */
 .scroll-container:hover::-webkit-scrollbar {
-  width: 8px;  /* 自定义宽度 */
+  width: 8px; /* 自定义宽度 */
   height: 8px; /* 自定义高度 */
 }
 
@@ -1433,3 +1433,24 @@ table {
 .scroll-container:hover::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.VPContent.is-home::before {
+  content: "";
+  pointer-events: none;
+  background-image: linear-gradient(90deg, #3b82f61a 1px, #0000 1px),
+    linear-gradient(#3b82f61a 1px, #0000 1px);
+  background-position: 50%;
+  background-size: 40px 40px;
+  width: 140vw;
+  height: 140vh;
+  position: absolute;
+  inset: -20vh -20vw;
+  transform: rotate(-10deg);
+  -webkit-mask-image: linear-gradient(#000 0%, #000c 60%, #0000 100%);
+  mask-image: linear-gradient(#000 0%, #000c 60%, #0000 100%);
+  z-index: -1;
+}
+
+// .VPHero {
+//   background: linear-gradient(#fff 0%, #eff6ff99 30%, #fff0 100%);
+// }

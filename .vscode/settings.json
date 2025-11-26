@@ -22,7 +22,7 @@
   "workbench.desktopUI.fontFamily": "Maple Mono NF CN",
   "unocss.root": "packages/client",
   "workbench.fontAliasing": "antialiased", // 字体渲染方式（可选）
-  "window.titleBarStyle": "custom", // 启用自定义标题栏
+  // "window.titleBarStyle": "custom", // 启用自定义标题栏
   "workbench.experimental.settingsSandbox": true,
   "window.fontFamily": "Maple Mono NF CN", // 部分测试版本可能支持
   "explorer.fileNesting.enabled": true,
@@ -38,6 +38,12 @@
     // "terminal.background": "#ffffff",
     "minimap.background": "#ffffff"
   },
+  "apc.electron": {
+    "frame": false,
+    "titleBarStyle": "hidden",
+  },
+  "window.titleBarStyle": "native",
+  "window.customTitleBarVisibility": "never",
   "png-to-webp.quality": 100,
   "png-to-webp.deleteOriginalAfterConversion": false,
   "workbench.navigationControl.enabled": false,
