@@ -1,6 +1,6 @@
 import type MarkdownIt from "markdown-it";
 
-function hasH1Header(content) {
+function hasH1Header(content: any) {
   if (typeof content !== "string" || content.trim().length === 0) {
     return false;
   }

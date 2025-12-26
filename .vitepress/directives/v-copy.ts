@@ -4,7 +4,7 @@
  * 接收参数：string类型/Ref<string>类型/Reactive<string>类型
  */
 import type { Directive, DirectiveBinding } from "vue";
-import { message } from 'ant-design-vue';
+import { MessagePlugin } from 'tdesign-vue-next';
 interface ElType extends HTMLElement {
 	copyData: string | number;
 	__handleClick__: any;
@@ -33,7 +33,7 @@ async function handleClick(this: any) {
 	} else {
 		await navigator.clipboard.writeText(this.copyData);
 	}
-	message.success("复制成功");
+	MessagePlugin.success("复制成功");
 }
 
 export default copy;

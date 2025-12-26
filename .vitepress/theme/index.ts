@@ -3,7 +3,6 @@ import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme-without-fonts";
 import { h, watchEffect, watch, nextTick } from "vue";
 import DocAfter from "../components/DocAfter.vue";
-import Recommend from "../components/Recommend.vue";
 import CopyRight from "../components/CopyRight.vue";
 import HeaderProfile from "../components/HeaderProfile.vue";
 import LottiePanel from "../components/LottiePanel.vue";
@@ -22,7 +21,6 @@ import Robot from "../components/Robot.vue";
 import LiquidMetaCard from "../components/LiquidMetaCard.vue";
 import CarouselCard from "../components/CarouselCard.vue";
 import AboutMe from "../components/AboutMe.vue";
-import NoticeBar from "../components/NoticeBar.vue";
 import HeroLogo from "#.vitepress/components/HeroLogo.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
@@ -33,7 +31,6 @@ import RainbowAnimationSwitcher from "../components/RainbowAnimationSwitcher.vue
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import mediumZoom from "medium-zoom";
 import yuppie from "yuppie-ui";
-import * as AntIconsVue from "@ant-design/icons-vue";
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
 
@@ -130,9 +127,6 @@ import directives from "../directives";
 import { NProgress } from "nprogress-v2/dist/index.js"; // 进度条组件
 import "nprogress-v2/dist/index.css"; // 进度条样式
 
-// 引入 Ant Design Vue
-import Antd from "ant-design-vue";
-
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "@vitepress-demo-preview/component/dist/style.css";
 
@@ -149,13 +143,16 @@ import "./styles/vitepress.code.css";
 import "./styles/markdown.ext.css";
 import "./styles/mermaid.ext.css";
 
+// 引入组件库的少量全局样式变量
+import 'tdesign-vue-next/es/style/index.css';
+
 import NotFound from "../components/NotFound.vue";
 import NotFounds from "../components/NotFounds.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
 import HomeContributors from "../components/HomeContributors.vue";
-import LiquidPageFooter from "../components/LiquidPageFooter.vue";
+import ArticleQRCode from "../components/ArticleQRCode.vue";
 import HoverGrid from "../components/HoverGrid.vue";
 import MagicCard from "../components/MagicCard.vue";
 import Confetti from "../components/Confetti.vue";
@@ -282,7 +279,7 @@ export default {
     }
 
     return h(AnimatingLayout, null, {
-      "home-hero-before": () => h(NoticeBar),
+      // "home-hero-before": () => h(NoticeBar),
       // "home-hero-after": () => h(AnimationTitle),
       // "home-features-after": () =>
       //   h(AnimationTitle, {
@@ -346,8 +343,8 @@ export default {
       //   h(PlaceHolder, {
       //     name: "doc-top",
       //   }),
-      "doc-bottom": () => h(Recommend),
-      "doc-footer-before": () => h(ArticleFooter),
+      // "doc-bottom": () => [h(ArticleQRCode), h(Recommend)],
+      "doc-footer-before": () =>  [h(ArticleQRCode), h(ArticleFooter)],
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
       //     name: "doc-footer-before",
@@ -457,7 +454,7 @@ export default {
     });
   },
   enhanceApp: (ctx) => {
-    const { app, router, siteData } = ctx;
+    const { app, router } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
     // 使用别名机制覆写默认的VPFooter组件
@@ -538,24 +535,20 @@ export default {
       app.component("Robot", Robot);
       app.use(directives);
 
-      app.directive("aria-empty", {
-        //指令绑定到元素时调用
-        mounted(el, binding) {
-          el.removeAttribute("aria-hidden");
-          // // 获取节点
-          // let ariaEls = el.querySelectorAll("svg");
-          // ariaEls.forEach((item) => {
-          //   item.removeAttribute("aria-hidden");
-          // });
-        },
-        //指令与元素解绑时调用
-        unmounted(el, binding) {},
-      });
+      // app.directive("aria-empty", {
+      //   //指令绑定到元素时调用
+      //   mounted(el, binding) {
+      //     el.removeAttribute("aria-hidden");
+      //     // // 获取节点
+      //     // let ariaEls = el.querySelectorAll("svg");
+      //     // ariaEls.forEach((item) => {
+      //     //   item.removeAttribute("aria-hidden");
+      //     // });
+      //   },
+      //   //指令与元素解绑时调用
+      //   unmounted(el, binding) {},
+      // });
 
-      app.use(Antd);
-      for (const [key, component] of Object.entries(AntIconsVue)) {
-        app.component(key, component);
-      }
       app.component("DacingNumber", DacingNumber);
       app.component("TaskList", TaskList);
       app.component("ScrollableParagraph", ScrollableParagraph);

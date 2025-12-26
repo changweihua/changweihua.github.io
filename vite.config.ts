@@ -11,7 +11,9 @@ import Iconify from "unplugin-iconify-generator/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import Icons from "unplugin-icons/vite";
 import versionInjector from "unplugin-version-injector/vite";
+import AutoImport from 'unplugin-auto-import/vite';
 import Components from "unplugin-vue-components/vite";
+import { TDesignResolver } from '@tdesign-vue-next/auto-import-resolver';
 import { defineConfig, loadEnv } from "vite";
 import checker from "vite-plugin-checker";
 import { envParse } from "vite-plugin-env-parse";
@@ -143,38 +145,6 @@ function getDevPlugins() {
   ];
 }
 
-function manualChunks(id: any, { getModuleInfo }: { getModuleInfo: any }) {
-  const match = /.*\.strings\.(\w+)\.js/.exec(id);
-  if (match) {
-    const language = match[1]; // e.g. "en"
-    const dependentEntryPoints: Array<any> = [];
-
-    // 我们在这里使用 Set 集合，这样每个模块最多处理一次。
-    // 这可以防止循环依赖情况下的无限循环
-    const idsToHandle = new Set(getModuleInfo(id).dynamicImporters);
-
-    for (const moduleId of idsToHandle) {
-      const { isEntry, dynamicImporters, importers } = getModuleInfo(moduleId);
-      if (isEntry || dynamicImporters.length > 0)
-        dependentEntryPoints.push(moduleId);
-
-      // Set 迭代器足够智能，可以迭代迭代过程中添加的元素
-      for (const importerId of importers) idsToHandle.add(importerId);
-    }
-
-    // 如果有唯一条目，我们会根据条目名称将其放入一个块中
-    if (dependentEntryPoints.length === 1) {
-      return `${
-        dependentEntryPoints[0].split("/").slice(-1)[0].split(".")[0]
-      }.strings.${language}`;
-    }
-    // 对于多个条目，我们将其放入“共享”块中
-    if (dependentEntryPoints.length > 1) {
-      return `shared.strings.${language}`;
-    }
-  }
-}
-
 // https://vitejs.dev/config/
 // @ts-ignore
 export default defineConfig(() => {
@@ -265,10 +235,18 @@ export default defineConfig(() => {
       ),
     },
     plugins: [
+      AutoImport({
+        resolvers: [TDesignResolver({
+          library: 'vue-next'
+        })],
+      }),
       Components({
         dirs: ["src/components", ".vitepress/components"], // 配置需要自动导入的组件目录
         dts: "typings/components.d.ts",
         resolvers: [
+          TDesignResolver({
+            library: 'vue-next'
+          }),
           IconsResolver({
             // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
             prefix: "icon",
@@ -395,9 +373,9 @@ export default defineConfig(() => {
         "vitepress-plugin-tabs",
         "vitepress-plugin-detype",
         "vitepress-plugin-npm-commands",
+        "vue3-next-qrcode"
       ], // Externalize Node.js modules
     },
-    esbuild: false,
     // 强制预构建
     optimizeDeps: {
       // 注意：force 选项已被移除，现在使用 --force 命令行参数
@@ -417,7 +395,6 @@ export default defineConfig(() => {
       rollupOptions: {
         // jsx: 'preserve',
       },
-      esbuild: false,
       // esbuildOptions: {
 
       // }

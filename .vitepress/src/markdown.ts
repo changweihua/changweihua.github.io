@@ -51,8 +51,8 @@ const markdown: MarkdownOptions | undefined = {
   preConfig: async (md) => {},
   config: (md) => {
     md.use(footnote);
-    md.use(circleMarkdownPlugin);
-    md.use(readerMarkdownPlugin);
+    // md.use(circleMarkdownPlugin);
+    // md.use(readerMarkdownPlugin);
     md.use(MarkdownItMathJaX3PRO, {
       user_side: true,
       mathjax_options: {

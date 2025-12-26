@@ -11,7 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { message } from "ant-design-vue";
+import { MessagePlugin } from 'tdesign-vue-next';
+
 function isSpeechSynthesisSupported() {
   return (
     "speechSynthesis" in window &&
@@ -37,7 +38,7 @@ const onReadText = (e: any) => {
     if (!text) return;
 
     if (!isSpeechSynthesisSupported()) {
-      return message.info("当前环境不支持阅读文本功能!");
+      return MessagePlugin.info("当前环境不支持阅读文本功能!");
     }
     const utterance = new SpeechSynthesisUtterance();
     utterance.text = text;

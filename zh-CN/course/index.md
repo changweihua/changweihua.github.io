@@ -13,12 +13,14 @@ pageClass: course-index-page
 
 <script setup lang="ts">
 import { h, onMounted, ref } from 'vue';
-import { LoadingOutlined } from '@ant-design/icons-vue';
 import { delay } from "lodash-es";
+import {
+  LoadingIcon
+} from 'tdesign-icons-vue-next';
 import ListView from '@/components/ListView.vue';
 import FloatingMenu from "#src/components/FloatingMenu.vue"
 
-const indicator = h(LoadingOutlined, {
+const indicator = h(LoadingIcon, {
   style: {
     fontSize: '48px',
   },
