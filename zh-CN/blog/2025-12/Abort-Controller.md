@@ -225,3 +225,118 @@ await transaction(
 `AbortController` 是一个非常强大的 API，可以用来中止任何操作。如果只用来取消网络请求的话，那它就太浪费了。
 
 当你想要删除事件监听器，取消流式传输，取消事务、或者进行任何中止逻辑时都可以使用 `AbortController` 来实现。
+
+## 优雅地取消请求 ##
+
+> WeakMap+AbortController——优雅地取消请求
+
+### AbortController ###
+
+AbortController可以用来取消fetch请求，MDN给出了简单的案例，就不在此处赘述了。
+
+> `AbortController` 接口表示一个控制器对象，允许你根据需要中止一个或多个 Web 请求。
+> 
+> 你可以使用 `AbortController()` 构造函数创建一个新的 `AbortController` 对象。使用 `AbortSignal` 对象可以完成与异步操作的通信。
+
+### AbortController取消XHR ###
+
+AbortController 的缺点是无法*直接*取消 XHR，但XHR对象本身就提供了 `abort` api，我们可以通过监听 `signal` 的 `abort` 事件，变相实现 AbortController 取消 XHR。
+
+```ts
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/api/data');
+xhr.send();
+
+// 监听 signal
+signal.addEventListener('abort', () => {
+  xhr.abort(); // 使用 xhr 原生取消
+});
+```
+
+axios的请求取消也是基于该思路实现的。
+
+```ts
+// 创建控制器
+const controller = new AbortController();
+const signal = controller.signal;
+
+// 发起请求，传入 signal
+axios.get('/api/data', { signal })
+  .then(response => {
+   ...
+  })
+  .catch(error => {
+    ...
+  });
+
+// 2 秒后取消请求
+setTimeout(() => {
+  controller.abort(); // 会触发上方的 catch 分支
+}, 2000);
+```
+
+然而项目中请求取消与请求发送往往不在同一个文件中，因此需要缓存请求 `Promise实例` 和对应的 `AbortController` 实例，这也意味着开发不仅需要关注请求取消，还需要关注这两个实例的清理，以防止内存泄漏，这引入了额外的心智负担。
+
+### 使用WeakMap缓存请求Promise和AbortController ###
+
+为了减轻这部分心智负担，我倾向于在项目中使用 `WeakMap` 来缓存请求 `Promise` 和 `AbortController`。一般来说，项目中不会额外缓存（引用）请求 `promise`，*请求完成后，只要该promise"不可达"，GC便会回收该实例，对应的 `abortController` 也会因为"不可达"而被回收掉。*
+
+参考代码如下：
+
+```javascript
+// api.ts
+const abortMap = new WeakMap();
+window.abortMap = abortMap; //测试gc
+
+const putSth = () => {
+  const controller = new AbortController();
+  const req = request({ url: "/api/clear", signal: controller.signal }).catch(
+    (e) => console.error(e)
+  );
+  req.t = 1; //测试gc
+  abortMap.set(req, controller);
+  return req;
+};
+// component.ts
+export function ClearTest() {
+  const [visible, setVisible] = useState(true);
+  return (
+    <div>
+      <button
+        onClick={() => {
+          setVisible((v) => !v);
+        }}
+      >
+        toggle
+      </button>
+      {visible && <Test></Test>}
+    </div>
+  );
+}
+function Test() {
+  useEffect(() => {
+    const req = putSth();
+    return () => {
+    //取消请求
+      abortMap.get(req)?.abort("cancel");
+    };
+  }, []);
+  return <div>test</div>;
+}
+```
+
+### 内存观察 ###
+
+上面的 `demo` 中增加了一些调试代码。对组件进行多次挂载卸载测试，观察控制台可以看到*每次请求取消后会打印 `cancel error`。观察abortMap，可以明显看到部分请求 `promise` 被回收了*，程序符合预期。
+
+但也有可能观察到 `abortMap` 中存在大量未被回收的 `promise`。
+
+我们可以手动清理垃圾后再观察。
+
+手动清理虽然会触发 `GC`，但不一定会清理掉所有垃圾对象（**分代垃圾回收**）。
+
+通过快照可以看到这些 `Promise` 实例的距离都是-，这意味着它们“不可达”，如果不在闭包内，将来会被 `GC` 清理掉。
+
+经过一段时间后，再次观察可以看到 `weakMap` 中所有请求 `Promise` 都被回收了：
+
+如果有朋友发现 `weakMap` 中的 `Promise` 始终无法被回收掉，可能和控制台打印有关系，清理控制台关掉后再打开控制台，支持垃圾回收，来回几次，可能就会看到 `weakMap` 被清空了。

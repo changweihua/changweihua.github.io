@@ -11,9 +11,9 @@ import Iconify from "unplugin-iconify-generator/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import Icons from "unplugin-icons/vite";
 import versionInjector from "unplugin-version-injector/vite";
-import AutoImport from 'unplugin-auto-import/vite';
+// import AutoImport from 'unplugin-auto-import/vite';
 import Components from "unplugin-vue-components/vite";
-import { TDesignResolver } from '@tdesign-vue-next/auto-import-resolver';
+import { TDesignResolver } from "@tdesign-vue-next/auto-import-resolver";
 import { defineConfig, loadEnv } from "vite";
 import checker from "vite-plugin-checker";
 import { envParse } from "vite-plugin-env-parse";
@@ -235,17 +235,17 @@ export default defineConfig(() => {
       ),
     },
     plugins: [
-      AutoImport({
-        resolvers: [TDesignResolver({
-          library: 'vue-next'
-        })],
-      }),
+      // AutoImport({
+      //   resolvers: [TDesignResolver({
+      //     library: 'vue-next'
+      //   })],
+      // }),
       Components({
         dirs: ["src/components", ".vitepress/components"], // 配置需要自动导入的组件目录
         dts: "typings/components.d.ts",
         resolvers: [
           TDesignResolver({
-            library: 'vue-next'
+            library: "vue-next",
           }),
           IconsResolver({
             // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
@@ -339,6 +339,7 @@ export default defineConfig(() => {
         scss: {
           sourceMap: true,
           additionalData: `@use "@/assets/styles/variables.scss" as vars;`, // 强制全局注入
+          api: "modern-compiler",
           // // 全局注入变量和混合宏
           // additionalData: `
           //   @import "@/assets/styles/variables.scss";
@@ -373,7 +374,7 @@ export default defineConfig(() => {
         "vitepress-plugin-tabs",
         "vitepress-plugin-detype",
         "vitepress-plugin-npm-commands",
-        "vue3-next-qrcode"
+        "vue3-next-qrcode",
       ], // Externalize Node.js modules
     },
     // 强制预构建

@@ -3,11 +3,11 @@ layout: page
 sidebar: false
 pageClass: course-index-page
 ---
-<a-spin :spinning="spinning" size="large" :delay="delayTime">
+<t-loading :loading="spinning" size="large" :delay="delayTime">
   <div class="flex p-6 justify-center items-center">
     <ListView :categories="categories" />
   </div>
-</a-spin>
+</t-loading>
 
 <FloatingMenu />
 

@@ -188,6 +188,8 @@ console.log(nanoidNumber()); // 24736672
 const nanoidUpper = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 8);
 console.log(nanoidUpper()); // OO8QE8V0
 
+import TDesign from 'tdesign-vue-next';
+
 import mermaid from "mermaid";
 import { icons } from "@iconify-json/logos";
 mermaid.registerIconPacks([
@@ -495,6 +497,8 @@ export default {
     if (inBrowser) {
       initMarkmapComponent(app);
       enhanceAppWithTabs(app);
+
+      app.use(TDesign);
       // const { promise, resolve, reject } = Promise.withResolvers();
       //   // 一些异步操作
       // setTimeout(() => {

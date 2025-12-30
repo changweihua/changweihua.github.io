@@ -24,18 +24,34 @@ const shareUrl = computed(() => {
 
 <template>
   <div class="flex items-center justify-center">
-    <t-popup trigger="hover">
-      <t-button>扫码查看</t-button>
-      <template #content>
-        <t-qrcode
-          icon="/favicon.png"
-          :value="shareUrl"
-          type="svg"
-          :size="146"
-          borderless
-          style="padding: var(--td-comp-paddingTB-m) var(--td-comp-paddingLR-s)"
+    <t-affix
+      ref="affixRef"
+      :z-index="5"
+      class="cursor-pointer"
+      :offset-top="50"
+      :offset-bottom="50"
+    >
+      <t-popup trigger="click"
+        ><t-icon
+          name="qrcode"
+          :fill-color="'transparent'"
+          size="3em"
+          :stroke-color="'currentColor'"
+          :stroke-width="2"
         />
-      </template>
-    </t-popup>
+        <template #content>
+          <t-qrcode
+            icon="/favicon.png"
+            :value="shareUrl"
+            type="svg"
+            :size="146"
+            borderless
+            style="
+              padding: var(--td-comp-paddingTB-m) var(--td-comp-paddingLR-s);
+            "
+          />
+        </template>
+      </t-popup>
+    </t-affix>
   </div>
 </template>

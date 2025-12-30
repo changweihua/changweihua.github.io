@@ -12,18 +12,13 @@ head:
 ---
 
 <ClientOnly>
-  <a-spin :spinning="spinning" size="large" :delay="delayTime">
     <div class="flex p-6 justify-center items-center">
       <CursorShineCards :categories="categories" />
     </div>
-  </a-spin>
 </ClientOnly>
-<!-- 
-<demo html="anime-1.html" title="混合语法 DEMO"
-  description="这是一个混合 demo 的示例，你可以使用 title 和 description 来指定 demo 的标题和描述" /> -->
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { delay } from "lodash-es";
 import LinkListView from '@/components/LinkListView.vue';
 import CursorShineCards from '@/components/CursorShineCards.vue';
@@ -37,8 +32,17 @@ console.log('data',data)
 console.log('lang', `${lang.value}`)
 console.log('data[lang]',data[lang.value])
 
-const spinning = ref<boolean>(false);
-const delayTime = 200;
+const spinning = ref(false);
+watch(
+  () => spinning.value,
+  (v) => {
+    if (!v) return;
+    const timer = setTimeout(() => {
+      spinning.value = false;
+      clearTimeout(timer);
+    }, 6000);
+  },
+);
 
 let categories: ref<Array<{
     title: string;
@@ -61,23 +65,6 @@ onMounted(() => {
       // icon: "VueJS",
     };
   });
-  // fetch(`/jsons/lastest_blogs.json`)
-  //   .then((res) => res.json())
-  //   .then((json) => {
-  //     categories.value = json.map((c) => {
-  //       return {
-  //         title: c["blogName"],
-  //         link: c["filePath"],
-  //         description: c["blogDescription"],
-  //         poster: c["blogPoster"],
-  //         // icon: "VueJS",
-  //       };
-  //     });
-  //   }).finally(() => {
-  //     delay(() => {
-  //       spinning.value = false;
-  //     }, 1500)
-  //   });
 });
 
 
