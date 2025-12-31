@@ -106,6 +106,7 @@ onMounted(() => {
 
   z-index: var(--vp-z-index-footer);
   background-color: var(--vp-c-bg);
+  overflow: hidden;
 
   svg {
     fill: var(--vp-c-text-1);
