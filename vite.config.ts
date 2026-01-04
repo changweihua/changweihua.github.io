@@ -371,10 +371,10 @@ export default defineConfig(() => {
     },
     ssr: {
       external: [
+        "tdesign-vue-next",
         "vitepress-plugin-tabs",
         "vitepress-plugin-detype",
         "vitepress-plugin-npm-commands",
-        "vue3-next-qrcode",
       ], // Externalize Node.js modules
     },
     // 强制预构建
@@ -383,22 +383,14 @@ export default defineConfig(() => {
       // 或者删除 node_modules/.vite 目录来强制重新构建
       // ✅ 强制预构建指定依赖
       // 将常用的第三方库加入预构建列表
-      include: ["vue"],
+      // include: ["vue"],
       // 排除不需要预构建的依赖
       // 排除本地开发的包，避免不必要的构建
       exclude: [
-        "vitepress",
-        "echarts",
         "vitepress-plugin-detype",
         "vitepress-plugin-tabs",
         "vitepress-plugin-npm-commands",
-      ],
-      rollupOptions: {
-        // jsx: 'preserve',
-      },
-      // esbuildOptions: {
-
-      // }
+      ]
     },
     vite: {
       css: {
