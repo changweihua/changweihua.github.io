@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed, nextTick, onMounted } from "vue";
 import { inBrowser, useData, useRouter } from "vitepress";
 import { useQRCode } from "vue3-next-qrcode";
 import "vue3-next-qrcode/es/style.css";
@@ -26,6 +26,8 @@ const shareUrl = computed(() => {
 const { qrcodeURL, isLoading, error, generate, clear } = useQRCode();
 
 onMounted(async () => {
+  await nextTick();
+
   if (inBrowser) {
     await generate({
       text: shareUrl.value,
