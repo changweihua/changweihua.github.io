@@ -379,6 +379,7 @@ export default defineConfig(() => {
     },
     ssr: {
       external: [
+        "vue3-next-qrcode",
         "tdesign-vue-next",
         "vitepress-plugin-tabs",
         "vitepress-plugin-detype",
@@ -392,10 +393,11 @@ export default defineConfig(() => {
       // ✅ 强制预构建指定依赖
       // 将常用的第三方库加入预构建列表
       // include: ["vue"],
-      include: ['vue3-next-qrcode'],
+      // include: ['vue3-next-qrcode'],
       // 排除不需要预构建的依赖
       // 排除本地开发的包，避免不必要的构建
       exclude: [
+        "vue3-next-qrcode",
         "vitepress-plugin-detype",
         "vitepress-plugin-tabs",
         "vitepress-plugin-npm-commands",
@@ -411,3 +413,4 @@ export default defineConfig(() => {
     },
   };
 });
+
