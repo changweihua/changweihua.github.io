@@ -3,106 +3,61 @@ layout: doc
 pageClass: gallery-page-class
 ---
 
-<ClientOnly>
-  <HexagonHolder>
-    <text
-          x="150"
-          y="150"
-          font-size="20"
-          text-anchor="middle"
-          fill="#6feffa"
-        >
-          2025
-        </text>
-        <text
-          x="150"
-          y="230"
-          font-size="14"
-          text-anchor="middle"
-          fill="#6feffa"
-        >
-          小结
-        </text>
-  </HexagonHolder>
-</ClientOnly>
-
-<script lang="ts" setup>
-import HexagonHolder from '@/components/HexagonHolder.vue'
-</script>
-
-
 > [!IMPORTANT] 年度关键词
 > 开花不一定结果，努力一定不会辜负青春。
 > 
 > 2025 对饮 2026 笃行。
 
-<!-- 提示：支持闭合标签 -->
-
-<demo html="liquid-nav.html" htmlWriteWay="srcdoc" />
-
-<!--
-<demo html="anime-1.html" title="混合语法 DEMO" background="#f0ffff"
-  description="这是一个混合 demo 的示例，你可以使用 title 和 description 来指定 demo 的标题和描述" />
-
-<preview path="@demo/ClipPathDemo.vue"></preview>
-
-<preview path="@demo/ClipPathDemo.vue" title="标题"></preview>
-
-<preview path="@demo/ClipPathDemo.vue" title="标题" description="组件描述内容"></preview>
-
-:::preview
-
-demo-preview=@demo/ClipPathDemo.vue
-
-:::
-
-:::preview title
-
-demo-preview=@demo/ClipPathDemo.vue
-
-:::
-
-:::preview title || component description content
-
-demo-preview=@demo/ClipPathDemo.vue
-
-:::
--->
-
-<llm-exclude>
-
-## Section for humans
-
-This content will not be in the generated files for LLMs
-</llm-exclude>
 
 ```markmap
-# Root
-## Branch 1
-- Item 1
-- Item 2
-## Branch 2
-- Item A
-- Item B
+# 2025
+## Q1
+- 常州奔牛国际机场行李智能测量项目
+- 华东凯亚雀巢平台
+- 扬州泰州国际机场智慧出行小程序
+- AI Gallery
+## Q2
+- 华东凯亚雀巢平台
+- Envoy 开放认证授权平台
+- Yolo 8 ~ 13
+## Q3
+- 华东凯亚雀巢平台
+- 无锡硕放机场隔离区携带工具审批系统
+- 无锡硕放机场安检员工培训查询系统
+- MAUI 系列组件库
+## Q4
+- 无锡硕放机场团体旅客保障系统
+- 无锡硕放机场行李智能测量项目
+- 无锡硕放机场安检员工培训查询系统
 ```
+
+<br />
+
+### 无锡硕放机场团体旅客保障系统 ###
+
+- 与用户进行现场需求调研
+- 编制需求规格书和制定开发计划
+- 负责技术选型，完成前后台框架的搭建
+- 基于 Docker Compose 完成项目整体的部署
+- 2026 年 1 月初完成项目试运行
 
 ### 无锡硕放机场安检员工培训查询系统 ###
 
-- 合规
-- 进行中
+- 参与需求讨论和原型设计，完成后台管理平台的前台框架搭建
+- 基于已有 X 光机渲染图，进行二次的加亮加暗的渲染
 
-### 隔离区携带工具审批系统 ###
+### 无锡硕放机场隔离区携带工具审批系统 ###
 
 - H5 端，以 iframe 的方式内嵌。
 - H5 端嵌入微信小程序，适配 iOS 等移动端；封装成项目模板，开箱即用。
 - WEB 端后台管理系统，适配内部集成系统，封装成项目模板，开箱即用。
+- 梳理业务流程并绘制原型图
 
 ### MAUI 系列 ###
 
 - 基于 Vant 的脚手架，主要针对 H5（包含内嵌微信小程序端）。
 - 基于 Ant Design Vue 的脚手架，主要针对 WEB PC 端。
 - 基于 iFrame 的微前端，主要针对以 iframe 形式内嵌其他系统集成的。
-
 
 > [!NOTE] 备注
 > 以上项目均已在无锡硕放机场的内部系统及小程序上得到实际应用和测试。
@@ -113,7 +68,7 @@ This content will not be in the generated files for LLMs
 - 为机场行李识别或危险品识别提供技术储备。
 - 配合 OpenCV，实现动态图像实时判定。
 
-![](/images/QQ20250805135713.png){data-zoomable}
+<!-- ![](/images/QQ20250805135713.png){data-zoomable} -->
 
 > [!TIP] 备注
 > 主要基于 Windows 平台。
@@ -123,9 +78,12 @@ This content will not be in the generated files for LLMs
 - 集成Envoy的网关，网关支持JWKS认证和RBAC鉴权、流量控制、多种认证机制、镜像访问。
 - Docker Compose 部署，Seq 等日志平台。
 
-
 > [!WARNING] 备注
-> 完整的 Docker 集成
+> 完整的 Docker 集成能力，后续项目部署均基于此方案
+
+### eTermBridge ###
+
+- 进一步验证基于接口开发和工厂模式的稳定性
 
 ### AI Gallery ###
 
@@ -148,7 +106,7 @@ This content will not be in the generated files for LLMs
 
 ### 常州奔牛国际机场行李智能测量项目 ###
 
-- 试运行中
+- 稳定试运行中
 
 ### 无锡硕放机场旅客服务平台 ###
 
@@ -163,17 +121,12 @@ This content will not be in the generated files for LLMs
 - 上线巴士管家功能模块。
 - 更新小程序图片资源。
 
-<!-- <Robot /> -->
-
 ```sh
 npm i // [!=npm auto]
 npm run build // [!=npm auto]
 npm run test // [!=npm auto]
 ```
 
-<!-- <HoverableText title="2025" /> -->
-
-<i class="i-ci-svc-live" style="font-size:72px;"></i>
 
 ::: code-group
 ```ts [a.ts]
@@ -194,3 +147,11 @@ h1 {
 }
 ```
 :::
+
+
+<llm-exclude>
+
+## Section for humans
+
+This content will not be in the generated files for LLMs
+</llm-exclude>

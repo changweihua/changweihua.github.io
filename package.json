@@ -143,7 +143,7 @@
   },
   "dependencies": {
     "@catppuccin/vitepress": "^0.1.2",
-    "@faker-js/faker": "^10.1.0",
+    "@faker-js/faker": "^10.2.0",
     "@fingerprintjs/fingerprintjs": "^5.0.1",
     "@iconify-json/carbon": "^1.2.15",
     "@iconify-json/line-md": "^1.2.13",
@@ -224,7 +224,6 @@
     "vitepress-plugin-pagefind": "^0.4.18",
     "vitepress-plugin-tabs": "^0.7.3",
     "vitepress-protect-plugin": "^1.0.6",
-    "vue-client-only": "^2.1.0",
     "vue3-next-qrcode": "^4.0.0",
     "vue3-simple-icons": "^15.6.0",
     "xlogs": "^0.1.0",

@@ -6,7 +6,7 @@ title: 深入理解 DOM 的 dispatchEvent API
 description: 深入理解 DOM 的 dispatchEvent API
 date: 2025-12-26 11:00:00 
 pageClass: blog-page-class
-cover: /covers/css.svg
+cover: /covers/html5.svg
 ---
 
 在前端开发的DOM事件体系中，`dispatchEvent` 是一个核心且灵活的API。它不仅能模拟用户的原生交互，还能实现组件间的解耦通信，甚至支持二进制数据的传递。本文将从基础用法到进阶技巧，全方位拆解这个API的实用价值。

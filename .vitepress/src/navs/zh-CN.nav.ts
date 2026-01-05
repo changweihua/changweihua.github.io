@@ -27,6 +27,7 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     {
       text: "那些年",
       items: [
+        { text: "2026", link: "/zh-CN/me.2026.md" },
         { text: "2025", link: "/zh-CN/me.2025.md" },
         { text: "2024", link: "/zh-CN/me.2024.md" },
         { text: "2023", link: "/zh-CN/me.2023.md" },

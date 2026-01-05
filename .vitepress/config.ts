@@ -390,17 +390,17 @@ export default withMermaid(
       class: "mermaid styled-mermaid", // 为父容器设置额外的CSS类
     },
     vite: {
-      optimizeDeps: {
-        include: [
-          "mermaid",
-          "dayjs",
-          "debug",
-          "@braintree/sanitize-url",
-          "cytoscape",
-          "cytoscape-cose-bilkent",
-        ],
-        exclude: ["vitepress"],
-      },
+      // optimizeDeps: {
+      //   include: [
+      //     "mermaid",
+      //     "dayjs",
+      //     "debug",
+      //     "@braintree/sanitize-url",
+      //     "cytoscape",
+      //     "cytoscape-cose-bilkent",
+      //   ],
+      //   exclude: ["vitepress"],
+      // },
       resolve: {
         alias: [
           { find: 'vite', replacement: 'rolldown-vite' },
@@ -512,9 +512,19 @@ export default withMermaid(
         vueJsx(),
         RssPlugin(RSS),
         pagefindPlugin({
-          // verbose: true, // 启用详细日志
+          forceLanguage:'zh-cn',
           locales: {
-            "en-US": {
+            root: {
+              btnPlaceholder: "搜索",
+              placeholder: "搜索文档",
+              emptyText: "空空如也",
+              heading: "共: {{searchResult}} 条结果",
+              toSelect: "选择",
+              toNavigate: "切换",
+              toClose: "关闭",
+              searchBy: "",
+            },
+            "en-us": {
               btnPlaceholder: "Search",
               placeholder: "Search Docs...",
               emptyText: "No results",
@@ -522,7 +532,7 @@ export default withMermaid(
               // 搜索结果不展示最后修改日期日期
               showDate: false,
             },
-            "zh-CN": {
+            "zh-cn": {
               btnPlaceholder: "搜索",
               placeholder: "搜索文档",
               emptyText: "空空如也",

@@ -30,10 +30,10 @@ const computedYearMap = computed(()=> {
     <div v-text="year" class="pt-3 pb-2 text-xl"></div>
     <div v-for="(article, index) in computedYearMap[year]" :key="article.url" class="flex justify-between items-center py-1 pl-6">
       <a v-text="article.title" :href="article.url" class="post-dot overflow-hidden whitespace-nowrap text-ellipsis"></a>
-      <a-tooltip>
+      <t-tooltip>
         <template #title>{{date.tz(article.date.time).format('YYYY-MM-DD hh:mm')}}</template>
         <div v-text="date.tz(article.date.time).fromNow()" class="pl-4 whitespace-nowrap"></div>
-      </a-tooltip>
+      </t-tooltip>
     </div>
   </div>
   <div class="flex items-center justify-center" v-else>

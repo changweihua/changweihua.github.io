@@ -1,5 +1,6 @@
 ---
 layout: page
+pagefind-indexed: false
 sidebar: false
 layoutClass: m-nav-layout
 pageClass: blog-index-page
@@ -12,9 +13,11 @@ head:
 ---
 
 <ClientOnly>
+  <SpinHolder :spinning="spinning" type="bounce" :fullscreen="spinning" tip="加载中...">
     <div class="flex p-6 justify-center items-center">
       <CursorShineCards :categories="categories" />
     </div>
+  </SpinHolder>
 </ClientOnly>
 
 <script setup lang="ts">
@@ -23,6 +26,7 @@ import { delay } from "lodash-es";
 import LinkListView from '@/components/LinkListView.vue';
 import CursorShineCards from '@/components/CursorShineCards.vue';
 import BlogIndex from "@vp/components/BlogIndex.vue"
+import SpinHolder from "@vp/components/SpinHolder.vue"
 import { useData } from 'vitepress'
 import { data } from '@vp/blog.data'
 import { getDateTime } from  "@vp/hooks/useDayjs";
@@ -32,17 +36,7 @@ console.log('data',data)
 console.log('lang', `${lang.value}`)
 console.log('data[lang]',data[lang.value])
 
-const spinning = ref(false);
-watch(
-  () => spinning.value,
-  (v) => {
-    if (!v) return;
-    const timer = setTimeout(() => {
-      spinning.value = false;
-      clearTimeout(timer);
-    }, 6000);
-  },
-);
+const spinning = ref(true);
 
 let categories: ref<Array<{
     title: string;
@@ -65,6 +59,9 @@ onMounted(() => {
       // icon: "VueJS",
     };
   });
+  delay(function() {
+    spinning.value = false;
+  }, 3000)
 });
 
 

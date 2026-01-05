@@ -10,7 +10,8 @@
           <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
         </feComponentTransfer>
         <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
-        <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight">
+        <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100"
+          lighting-color="white" result="specLight">
           <fePointLight x="-200" y="-200" z="300" />
         </feSpecularLighting>
         <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage" />
@@ -19,12 +20,7 @@
     </svg>
 
     <!-- 登录卡片 -->
-    <div
-      class="glass-component login-card"
-      ref="tiltCard"
-      @mousemove="handleMouseMove"
-      @mouseleave="handleMouseLeave"
-    >
+    <div class="glass-component login-card" ref="tiltCard" @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
       <div class="glass-effect"></div>
       <div class="glass-tint"></div>
       <div class="glass-shine"></div>
@@ -47,13 +43,13 @@
 <script>
 export default {
   name: 'LiquidGlass',
-  data () {
+  data() {
     return {
       // 可以添加需要的数据
     }
   },
   methods: {
-    handleMouseMove (e) {
+    handleMouseMove(e) {
       const card = this.$refs.tiltCard
       const rect = card.getBoundingClientRect()
       const x = e.clientX - rect.left
@@ -66,7 +62,7 @@ export default {
       const rotateX = -((y - centerY) / centerY) * maxTilt
       card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`
     },
-    handleMouseLeave () {
+    handleMouseLeave() {
       const card = this.$refs.tiltCard
       card.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)'
     }
@@ -98,7 +94,7 @@ export default {
   position: relative;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10), 0 1.5px 6px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.10), 0 1.5px 6px 0 rgba(0, 0, 0, 0.08);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.6);
   cursor: pointer;
   background: transparent;
@@ -147,7 +143,7 @@ export default {
   margin-bottom: 2rem;
   font-size: 2rem;
   font-weight: 600;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .form-group {
@@ -206,7 +202,7 @@ export default {
 .click-gradient {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(180,180,255,0.2) 40%, rgba(100,100,255,0.1) 70%, rgba(50,50,255,0) 100%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(180, 180, 255, 0.2) 40%, rgba(100, 100, 255, 0.1) 70%, rgba(50, 50, 255, 0) 100%);
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
   pointer-events: none;
@@ -222,6 +218,7 @@ export default {
     transform: translate(-50%, -50%) scale(0);
     opacity: 1;
   }
+
   100% {
     transform: translate(-50%, -50%) scale(3);
     opacity: 0;
@@ -233,4 +230,3 @@ export default {
   will-change: transform;
 }
 </style>
-

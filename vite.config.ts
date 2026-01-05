@@ -348,6 +348,14 @@ export default defineConfig(() => {
         },
       },
     },
+    // resolve: {
+    //   alias: [
+    //     {
+    //       find: /^@\/(.*)/,
+    //       replacement: fileURLToPath(new URL('./src/', import.meta.url)) + '$1',
+    //     },
+    //   ],
+    // },
     resolve: {
       alias: {
         // Redirect 'fs' to an empty module or a browser-safe shim
@@ -384,6 +392,7 @@ export default defineConfig(() => {
       // ✅ 强制预构建指定依赖
       // 将常用的第三方库加入预构建列表
       // include: ["vue"],
+      include: ['vue3-next-qrcode'],
       // 排除不需要预构建的依赖
       // 排除本地开发的包，避免不必要的构建
       exclude: [

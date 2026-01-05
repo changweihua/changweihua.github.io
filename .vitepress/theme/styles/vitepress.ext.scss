@@ -1455,8 +1455,8 @@ table {
 //   background: linear-gradient(#fff 0%, #eff6ff99 30%, #fff0 100%);
 // }
 
-VPHome.VPFeatures.Features VPLink{
-backdrop-filter: blur(20px) saturate(1.2);
+VPHome.VPFeatures.Features VPLink {
+  backdrop-filter: blur(20px) saturate(1.2);
   background-color: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -1465,4 +1465,54 @@ backdrop-filter: blur(20px) saturate(1.2);
   padding: 24px;
   transition: backdrop-filter 0.4s ease;
   will-change: backdrop-filter;
+}
+
+/* 滚动提示区域样式 */
+.scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 500;
+  border: 2px solid;
+  animation: pulse 2s ease-in-out infinite;
+  font-size: 0.95rem;
+  margin: 3rem auto;
+}
+
+.scroll-hint svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(125, 211, 252, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(125, 211, 252, 0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* 打印隐藏 */
+@media print {
+  .image-qrcode {
+    display: none !important;
+  }
 }
