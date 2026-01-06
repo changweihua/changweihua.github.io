@@ -1,0 +1,111 @@
+@use "sass:map";
+$font-path: "../../assets/MapleMono/";
+$primary-font: "MapleMono";
+
+@mixin font-face($name, $filename, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $name;
+    src: url("#{$font-path}MapleMono-NF-CN-#{$filename}.woff2") format("woff2");
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+  }
+}
+
+// 建立完整字体族体系
+$font-stack: (
+  "MapleMono": (
+    (
+      weight: 100,
+      style: normal,
+      file: "Thin",
+    ),
+    (
+      weight: 100,
+      style: italic,
+      file: "ThinItalic",
+    ),
+    (
+      weight: 200,
+      style: normal,
+      file: "ExtraLight",
+    ),
+    (
+      weight: 200,
+      style: italic,
+      file: "ExtraLightItalic",
+    ),
+    (
+      weight: 300,
+      style: normal,
+      file: "Light",
+    ),
+    (
+      weight: 300,
+      style: italic,
+      file: "LightItalic",
+    ),
+    (
+      weight: 400,
+      style: normal,
+      file: "Regular",
+    ),
+    (
+      weight: 400,
+      style: italic,
+      file: "Italic",
+    ),
+    (
+      weight: 500,
+      style: normal,
+      file: "Medium",
+    ),
+    (
+      weight: 500,
+      style: italic,
+      file: "MediumItalic",
+    ),
+    (
+      weight: 600,
+      style: normal,
+      file: "SemiBold",
+    ),
+    (
+      weight: 600,
+      style: italic,
+      file: "SemiBoldItalic",
+    ),
+    (
+      weight: 700,
+      style: normal,
+      file: "Bold",
+    ),
+    (
+      weight: 700,
+      style: italic,
+      file: "BoldItalic",
+    ),
+    (
+      weight: 800,
+      style: normal,
+      file: "ExtraBold",
+    ),
+    (
+      weight: 800,
+      style: italic,
+      file: "ExtraBoldItalic",
+    ),
+  ),
+);
+
+@each $family, $variants in $font-stack {
+  @each $v in $variants {
+    // 使用map-get函数访问map中的值
+    @include font-face(
+      $family,
+      map.get($v, file),
+      map.get($v, weight),
+      map.get($v, style)
+    );
+  }
+}

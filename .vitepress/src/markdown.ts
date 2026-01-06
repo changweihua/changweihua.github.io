@@ -10,7 +10,8 @@ import readerMarkdownPlugin from "../plugins/markdown/reader-markdown";
 import circleMarkdownPlugin from "../plugins/markdown/circle-markdown";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
-import MarkdownItMathJaX3PRO from "markdown-it-mathjax3-pro";
+// import MarkdownItMathJaX3PRO from "markdown-it-mathjax3-pro";
+import mathjax3 from 'markdown-it-mathjax3';
 import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
 import MarkdownItGitHubAlerts from "markdown-it-github-alerts";
 import markdownItReplaceLink from "markdown-it-replace-link";
@@ -47,19 +48,21 @@ const markdown: MarkdownOptions | undefined = {
   image: {
     lazyLoading: true,
   },
+  math: true,
   theme: { light: "catppuccin-latte", dark: "catppuccin-mocha" },
   preConfig: async (md) => {},
   config: (md) => {
     md.use(footnote);
     // md.use(circleMarkdownPlugin);
     // md.use(readerMarkdownPlugin);
-    md.use(MarkdownItMathJaX3PRO, {
-      user_side: true,
-      mathjax_options: {
-        enableMenu: true,
-        // Other MathJax options
-      },
-    });
+    // md.use(MarkdownItMathJaX3PRO, {
+    //   user_side: true,
+    //   mathjax_options: {
+    //     enableMenu: true,
+    //     // Other MathJax options
+    //   },
+    // });
+    md.use(mathjax3);
     /**
      * SSR Compatibility
      * @link https://vitepress.dev/guide/ssr-compat

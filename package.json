@@ -184,6 +184,7 @@
     "markdown-it-github-alerts": "^1.0.0",
     "markdown-it-hashmention": "^0.3.9",
     "markdown-it-markmap": "^0.1.0",
+    "markdown-it-mathjax3": "^4.3.2",
     "markdown-it-mathjax3-pro": "^1.0.0",
     "markdown-it-multimd-table-ext": "^4.2.35",
     "markdown-it-named-code-blocks": "^1.0.6",

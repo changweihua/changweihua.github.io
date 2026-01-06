@@ -134,7 +134,11 @@ import { defineClientComponentConfig } from "@vitepress-demo-preview/core";
 
 import "@catppuccin/vitepress/theme/frappe/lavender.css";
 
+// 引入组件库的少量全局样式变量
+import 'tdesign-vue-next/es/style/index.css';
+
 import "./styles/variables.scss";
+import "./styles/maple-mono.scss";
 import "./styles/index.scss";
 import "./styles/rainbow.scss";
 import "./styles/vitepress.ext.scss";
@@ -142,9 +146,6 @@ import "./styles/vitepress.print.css";
 import "./styles/vitepress.code.css";
 import "./styles/markdown.ext.css";
 import "./styles/mermaid.ext.css";
-
-// 引入组件库的少量全局样式变量
-import 'tdesign-vue-next/es/style/index.css';
 
 import NotFound from "../components/NotFound.vue";
 import NotFounds from "../components/NotFounds.vue";

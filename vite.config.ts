@@ -11,7 +11,6 @@ import Iconify from "unplugin-iconify-generator/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import Icons from "unplugin-icons/vite";
 import versionInjector from "unplugin-version-injector/vite";
-// import AutoImport from 'unplugin-auto-import/vite';
 import Components from "unplugin-vue-components/vite";
 import { TDesignResolver } from "@tdesign-vue-next/auto-import-resolver";
 import { defineConfig, loadEnv } from "vite";
@@ -170,13 +169,6 @@ export default defineConfig(() => {
       hmr: {
         overlay: true, // 显示错误覆盖层
       },
-
-      // // 文件监听配置
-      // watch: {
-      //   usePolling: true, // 在某些系统上启用轮询
-      //   interval: 1000, // 轮询间隔
-      // },
-
       fs: {
         allow: [resolve(__dirname, "..")],
       },
@@ -195,20 +187,6 @@ export default defineConfig(() => {
       sourcemap: false, // Seems to cause JavaScript heap out of memory errors on build
       chunkSizeWarningLimit: 20 * 1000 * 1000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
-      // rollupOptions: {
-      //   output: {
-      //     // advancedChunks: manualChunks
-      //     advancedChunks: {
-      //       groups: [
-      //         { name: "vendor", test: /\/vue(?:-dom)?/ },
-      //         { name: "vitepress", test: /\/vitepress/g },
-      //         { name: "echarts", test: /\/echarts/g },
-      //         { name: "vite-plugin", test: /\/vite-plugin/g },
-      //         { name: "markdown", test: /\/markdown-/ },
-      //       ],
-      //     },
-      //   },
-      // },
       reportCompressedSize: false,
       // cssMinify: "lightningcss", // 确保生产构建使用相同配置
     },
@@ -235,11 +213,6 @@ export default defineConfig(() => {
       ),
     },
     plugins: [
-      // AutoImport({
-      //   resolvers: [TDesignResolver({
-      //     library: 'vue-next'
-      //   })],
-      // }),
       Components({
         dirs: ["src/components", ".vitepress/components"], // 配置需要自动导入的组件目录
         dts: "typings/components.d.ts",
@@ -275,10 +248,6 @@ export default defineConfig(() => {
           cmono: "./src/assets/icons/mono",
         },
       }),
-      // px2rem({
-      //   width: 1920,
-      //   rootFontSize: 16,
-      // }),
       robots(),
       prefetchDnsPlugin(),
       webUpdateNotice({
@@ -340,22 +309,9 @@ export default defineConfig(() => {
           sourceMap: true,
           additionalData: `@use "@/assets/styles/variables.scss" as vars;`, // 强制全局注入
           api: "modern-compiler",
-          // // 全局注入变量和混合宏
-          // additionalData: `
-          //   @import "@/assets/styles/variables.scss";
-          //   @import "@/assets/styles/mixins.scss";
-          // `,
         },
       },
     },
-    // resolve: {
-    //   alias: [
-    //     {
-    //       find: /^@\/(.*)/,
-    //       replacement: fileURLToPath(new URL('./src/', import.meta.url)) + '$1',
-    //     },
-    //   ],
-    // },
     resolve: {
       alias: {
         // Redirect 'fs' to an empty module or a browser-safe shim
@@ -374,8 +330,6 @@ export default defineConfig(() => {
         // // 配置图片要这样引用
         // "/img": "./src/assets",
       },
-      // conditions: [],
-      // mainFields: []
     },
     vite: {
       css: {

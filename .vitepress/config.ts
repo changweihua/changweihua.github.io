@@ -18,12 +18,9 @@ import MdH1 from "vitepress-plugin-md-h1";
 import AutoFrontmatter, { FileInfo } from "vitepress-plugin-auto-frontmatter";
 import { withMermaid } from "vitepress-plugin-mermaid";
 import fs from "fs-extra";
-import llmstxt from "vitepress-plugin-llms";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { resolve } from "path";
-// import { withPwa } from "@vite-pwa/vitepress";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
-import { fileURLToPath } from "url";
 
 const customElements = [
   "mjx-container",
@@ -392,14 +389,6 @@ export default withMermaid(
     vite: {
       // 强制预构建
       optimizeDeps: {
-        // 注意：force 选项已被移除，现在使用 --force 命令行参数
-        // 或者删除 node_modules/.vite 目录来强制重新构建
-        // ✅ 强制预构建指定依赖
-        // 将常用的第三方库加入预构建列表
-        // include: ["vue"],
-        // include: ['vue3-next-qrcode'],
-        // 排除不需要预构建的依赖
-        // 排除本地开发的包，避免不必要的构建
         exclude: [
           "vue3-next-qrcode",
           "vitepress-plugin-detype",
@@ -430,12 +419,6 @@ export default withMermaid(
           },
           // { find: 'dep', replacement: '@vitejs/test-resolve-linked' },
         ],
-        // alias: {
-        //   vite: "rolldown-vite",
-        //   // 强制 VitePress 使用项目安装的 Mermaid
-        //   mermaid: "mermaid",
-        //   "@demo": resolve(__dirname, "../src/demos"),
-        // },
       },
       logLevel: "info",
       plugins: [
@@ -467,31 +450,12 @@ export default withMermaid(
             // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
           },
         }),
-        llmstxt(),
-        // La51Plugin({
-        //   id: "",
-        //   ck: "",
-        //   importMode: "async",
-        // }),
-        // markdownBracketEscaper,
         MdH1({
           ignoreList: ["/gallery/"],
           beforeInject: (frontmatter, id, title) => {
-            // // 根据 frontmatter 的某个值判断
-            // if (frontmatter.catalogue) return false;
-
             // 根据文档路径判断
             if (id.includes("/resume")) return false;
             if (id.includes("/me.")) return false;
-
-            //   // 根据即将生成的一级标题判断
-            //   if (title === "简介") return false;
-
-            // // 根据 frontmatter 的某个值判断
-            // if (frontmatter.archivesPage) return "归档页";
-
-            // // 根据即将生成的一级标题判断
-            // 📝  if (title === "简介") return "文档简介";
           },
         }),
         AutoFrontmatter({
@@ -521,12 +485,6 @@ export default withMermaid(
               : undefined;
           },
         }),
-        // DocAnalysis(/* options */),
-        // vitepressProtectPlugin({
-        //   disableF12: true,
-        //   disableCopy: true,
-        //   disableSelect: true,
-        // }),
         vueJsx(),
         RssPlugin(RSS),
         pagefindPlugin({
