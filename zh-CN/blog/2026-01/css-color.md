@@ -152,7 +152,7 @@ CSS Color Module Level 4 带来了最激动人心的特性之一：相对颜色�
     ></div>
   </div>
 </template>
-<style>
+<style scoped>
 .container {
   position: relative;
   height: 100px;
@@ -431,186 +431,215 @@ const themeManager = new ThemeManager();
 在前端开发这个不断演进的舞台上，掌握主题切换技术不再是一种选择，而是必备技能。它体现着我们对用户体验的细致关怀，对技术实现的精心打磨。
 当夜幕降临或用户手动切换到深色模式时，一场视觉的芭蕾正在静默中上演，而这一切的幕后，正是这些技术元素的完美协作。
 
-> 网页设计中90%的视觉信息由文本承载，而字体选择直接影响用户体验。掌握@font-face是前端开发的核心技能之一
 
-## `@font-face` 基础概念 ##
+## CSS终于支持渐变色的过渡了🎉 ##
 
-`@font-face` 是 CSS 原生的字体引入规则，允许加载服务器托管的字体文件，突破"Web安全字体"的限制。与传统CSS相比，在SCSS中使用可借助以下优势：
+### 背景 ###
 
-- 变量管理：字体路径/名称统一维护
-- 嵌套组织：相关字体规则逻辑分组
-- 混合宏：创建可复用的字体模板
+在做项目时，总会遇到 UI 给出渐变色的卡片或者按钮，但在做高亮的时候，由于没有过渡，显得尤为生硬。
 
-## 核心属性解析 ##
+### 过去的解决方案 ###
+
+在过去，我们如果要实现渐变色的过渡，通常会使用如下几种方法：
+
+1. 添加遮罩层，通过改变遮罩层的透明度做出淡入淡出的效果，实现过渡。
+2. 通过 `background-size/position` 使得渐变色移动，实现渐变色移动的效果。
+3. 通过 `filter: hue-rotate` 滤镜实现色相旋转，实现过渡。
+
+但这几种方式都有各自的局限性：
+
+- 遮罩层的方式看似平滑，但不是真正的过渡，差点意思。
+
+- `background-size/position` 的方式需要计算好 `background-size` 和 `background-position`，否则会出现渐变不完整的情况。并且只是实现了渐变的移动，而不是过渡。
+
+- `filter: hue-rotate` 也需要计算好旋转角度，实现复杂度高，过渡的也不自然。
+
+:::demo
+
+```vue
+<template>
+<div class="container">
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+</div>
+</template>
+<script lang="ts" setup>
+</script>
+<style scoped>
+.container {
+  display: flex;
+  align-items: center;
+}
+
+div {
+  border-radius: 12px;
+}
+
+div + div {
+  margin-left: 8px;
+}
+
+.box1 {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  overflow: hidden;
+}
+.box1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, #36fd72, #5f1ae0);
+  opacity: 0;
+  transition: opacity .8s;
+}
+.box1:hover::before {
+  opacity: 1;
+}
+
+.box2 {
+  width: 300px;
+  height: 200px;
+  background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #23b9f5);
+  background-size: 200% 100%;
+  transition: background-position .8s;
+}
+.box2:hover {
+  background-position: 100% 0;
+}
+
+.box3 {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.box3::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  transition: filter .8s;
+}
+.box3:hover::before {
+  filter: hue-rotate(320deg);
+}
+</style>
+```
+
+:::
+
+
+## `@property` 新规则 ##
+
+`@property` 规则可以定义一个自定义属性，并且可以指定该属性的语法、是否继承、初始值等。
 
 ```css
-@font-face {
-  font-family: 'CustomFont';  // 定义引用时的字体名称
-  src: 
-    local('Custom Font'),    // 优先使用本地安装字体
-    url('fonts/custom.woff2') format('woff2'),
-    url('fonts/custom.woff') format('woff'); // 多格式兼容
-  font-weight: 700;         // 精确控制字重
-  font-style: italic;       // 定义斜体变体
-  font-display: swap;       // FOIT优化方案
+@property --color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #000000;
 }
 ```
 
-关键属性说明：
+我们只需要把这个自定义属性 `--color` 应用到 `linear-gradient` 中，在特定的时候改变它的值，非常轻松就可以实现渐变色的过渡了。
 
-- `src` 支持级联加载（顺序很重要！）
-- `format()` 声明格式提高加载效率
-- `font-display` 控制 FOIT(不可见文本闪烁)行为
+:::demo
 
-## SCSS优化实践策略 ##
-
-### 方案1：变量集中管理 ###
-
-```scss
-// _variables.scss
-$font-path: '../assets/fonts/';
-$primary-font: 'CustomFont';
-
-@mixin font-face($name, $filename, $weight: normal, $style: normal) {
-  @font-face {
-    font-family: $name;
-    src: 
-      url('#{$font-path}#{$filename}.woff2') format('woff2'),
-      url('#{$font-path}#{$filename}.woff') format('woff');
-    font-weight: $weight;
-    font-style: $style;
-    font-display: swap;
-  }
+```vue
+<template>
+<div class="box"></div>
+</template>
+<script lang="ts" setup>
+</script>
+<style scoped>
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 94.57deg;
+}
+@property --start-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #e0f2ff;
+}
+@property --start-percentage {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 7.66%;
+}
+@property --end-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #b1deff;
+}
+@property --end-percentage {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 94.53%;
 }
 
-// 使用混合宏统一引入
-@include font-face($primary-font, 'custom-regular', 400);
-@include font-face($primary-font, 'custom-bold', 700);
-@include font-face($primary-font, 'custom-italic', 400, italic);
-```
-
-### 方案2：字重映射系统 ###
-
-```scss
-$font-weights: (
-  thin: 100,
-  light: 300,
-  regular: 400,
-  medium: 500,
-  bold: 700,
-  black: 900
-);
-
-@each $name, $weight in $font-weights {
-  @include font-face($primary-font, 'custom-#{$name}', $weight);
+.box {
+  width: 300px;
+  height: 200px;
+  background: linear-gradient(
+    var(--angle),
+    var(--start-color) var(--start-percentage),
+    var(--end-color) var(--end-percentage)
+  );
+  border-radius: 12px;
+  transition: --angle .8s, --start-color .8s, --start-percentage .8s, --end-color .8s, --end-percentage .8s;
 }
-```
-
-### 方案3：字体族分组管理 ###
-
-```scss
-// 建立完整字体族体系
-$font-stack: (
-  'CustomFont': (
-    (weight: 300, style: normal, file: 'light'),
-    (weight: 400, style: normal, file: 'regular'),
-    (weight: 700, style: italic, file: 'bold-italic')
-  ),
-  'SecondFont': (...)
-);
-
-@each $family, $variants in $font-stack {
-  @each $v in $variants {
-    @include font-face(
-      $family, 
-      $v[file], 
-      $v[weight], 
-      $v[style]
-    );
-  }
+.box:hover {
+  --angle: 143.85deg;
+  --start-color: #ffc510;
+  --start-percentage: 14.66%;
+  --end-color: #f44433;
+  --end-percentage: 85.95%;
 }
+</style>
 ```
 
-## 性能优化关键措施 ##
+:::
 
-### 字体格式最佳组合 ###
+我们再看看 `@property` 规则中这些属性的含义。
 
-```css
-src: 
-  url('font.woff2') format('woff2'),  // Web开放字体格式2.0
-  url('font.woff') format('woff');    // 兼容旧浏览器
-```
+### Syntax语法描述符 ###
 
-### 子集化处理（使用pyftsubset等工具） ###
+`Syntax` 用于描述自定义属性的数据类型，必填项，常见值包括：
 
-```shell
-# 中文字体压缩示例
-pyftsubset font.ttf --text="前端开发SCSS"
-```
+- `<number>` 数字（如0，1，2.5）
+- `<percentage>` 百分比（如0%，50%，100%）
+- `<length>` 长度单位（如px，em，rem）
+- `<color>` 颜色值
+- `<angle>` 角度值（如deg，rad）
+- `<time>` 时间值（如s，ms）
+- `<image>` 图片
+- `<*>` 任意类型
 
-### 加载策略强化 ###
+### Inherits继承描述符 ###
 
-```html
-<!-- 预加载关键字体 -->
-<link rel="preload" href="font.woff2" as="font" crossorigin>
-```
+`Inherits` 用于描述自定义属性是否从父元素继承值，必填项：
 
-## 常见问题排错指南 ##
+- `true` 从父元素继承值
+- `false` 不继承，每个元素独立
 
-### 路径错误（编译后路径不一致） ###
+### Initial-value初始值描述符 ###
 
-```scss
-// 解决方案：使用相对根目录路径
-$font-path: '/assets/fonts/';
-```
+`Initial-value` 用于描述自定义属性的初始值，在 `Syntax` 为通用时为可选。
 
-### 字重不匹配 ###
+### 兼容性 ###
 
-```scss
-/* 错误：400字重规则应用在600文本 */
-.bold-text {
-  font-family: 'CustomFont';
-  font-weight: 600; /* 需明确定义600字重的@font-face */
-}
-```
+`@property` 目前仍是实验性规则，但主流浏览器较新版本都已支持。
 
-### FOUT/FOUC现象 ###
+## 总结与展望 ##
 
-```css
-/* 添加过渡效果 */
-body {
-  font-family: sans-serif;
-  transition: font-family 0.3s;
-}
-.font-loaded body {
-  font-family: 'CustomFont';
-}
-```
+`@property` 规则的出现，标志着CSS在动态样式控制方面迈出了重要一步。它不仅解决了渐变色过渡的技术难题，更为未来的CSS动画和交互设计开辟了新的可能性。
 
-### 浏览器兼容方案 ###
+随着浏览器支持的不断完善，我们可以期待：
 
-```css
-src: 
-  url('font.eot?#iefix') format('embedded-opentype'), /* IE9 */
-  url('font.woff2') format('woff2'),
-  url('font.ttf') format('truetype');
-```
-
-## 实战建议 ##
-
-- 字库选择：Google Fonts可查看使用率数据（如 `Inter>74%`）
-- 文件托管：考虑CDN加速（Fonts.com、Typekit）
-- 动态加载：
-
-```javascript
-// 使用Web Font Loader控制
-WebFont.load({
-  custom: { families: ['CustomFont'] }
-});
-```
-
-## 结语 ##
-
-在SCSS中实施 `@font-face`是高效字体管理的起点。通过构建可复用的字体系统、优化加载策略，结合现代格式如WOFF2，可显著提升网站性能指标（LCP降低约40%）。
-
-当Typography成为界面设计的核心表达，恰当的字体工程化方案将使你的网站在体验层面脱颖而出。良好的字体实践如同精妙的排版艺术：用户可能说不出哪里好，但处处感受得到品质的存在。
+- 更丰富的动画效果
+- 更简洁的代码实现
+- 更好的性能表现

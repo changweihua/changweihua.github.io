@@ -123,6 +123,16 @@ function updateHomePageStyle(value: boolean) {
   }
 }
 
+import "./styles/variables.scss";
+import "./styles/maple-mono.scss";
+import "./styles/index.scss";
+import "./styles/rainbow.scss";
+import "./styles/vitepress.ext.scss";
+import "./styles/vitepress.print.css";
+import "./styles/vitepress.code.css";
+import "./styles/markdown.ext.css";
+import "./styles/mermaid.ext.css";
+
 import directives from "../directives";
 import { NProgress } from "nprogress-v2/dist/index.js"; // 进度条组件
 import "nprogress-v2/dist/index.css"; // 进度条样式
@@ -136,16 +146,6 @@ import "@catppuccin/vitepress/theme/frappe/lavender.css";
 
 // 引入组件库的少量全局样式变量
 import 'tdesign-vue-next/es/style/index.css';
-
-import "./styles/variables.scss";
-import "./styles/maple-mono.scss";
-import "./styles/index.scss";
-import "./styles/rainbow.scss";
-import "./styles/vitepress.ext.scss";
-import "./styles/vitepress.print.css";
-import "./styles/vitepress.code.css";
-import "./styles/markdown.ext.css";
-import "./styles/mermaid.ext.css";
 
 import NotFound from "../components/NotFound.vue";
 import NotFounds from "../components/NotFounds.vue";
