@@ -36,7 +36,6 @@ const config = {
 };
 
 onMounted(function () {
-  console.log("HeroImage onMounted", gRef.value);
   if (!gRef.value) {
     return;
   }

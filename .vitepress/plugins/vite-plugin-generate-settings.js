@@ -38,7 +38,6 @@ function generateSettingsPlugin(options) { // 接收一个 options 对象
           settings[envKey] = env[envKey];
         }
       }
-      console.log('\n[Generate Settings] Filtered settings:', settings);
     },
 
     writeBundle(options) {
@@ -59,7 +58,6 @@ function generateSettingsPlugin(options) { // 接收一个 options 对象
           fs.mkdirSync(outDir, { recursive: true });
         }
         fs.writeFileSync(filePath, JSON.stringify(settings, null, 2));
-        console.log(`\n[Generate Settings] Successfully generated setting.json at: ${filePath}`);
       } catch (error) {
         console.error(`[Generate Settings] Error writing setting.json: ${error}`);
       }

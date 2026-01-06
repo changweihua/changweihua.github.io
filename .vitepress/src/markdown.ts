@@ -87,7 +87,6 @@ const markdown: MarkdownOptions | undefined = {
       autolabel: false,
     });
     const docRoot = fileURLToPath(new URL("../../", import.meta.url));
-    console.log('docRoot', docRoot)
     md.use(demoPreviewPlugin, {
       docRoot,
     });
@@ -158,7 +157,7 @@ const markdown: MarkdownOptions | undefined = {
         env["relativePath"].includes("/blog/") &&
         tokens[idx].tag === "h1"
       ) {
-        console.log(env["relativePath"], env["frontmatter"]["layout"]);
+        // console.log(env["relativePath"], env["frontmatter"]["layout"]);
         htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`;
       }
       // if (tokens[idx].tag === 'h1') htmlResult += `\n<ClientOnly><ArticleMetadata v-if="($frontmatter?.aside ?? true) && ($frontmatter?.showArticleMetadata ?? true)" :article="$frontmatter" /></ClientOnly>`;

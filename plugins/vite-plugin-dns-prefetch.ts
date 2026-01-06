@@ -18,7 +18,6 @@ export default function viteDnsPrefetchPlugin(): Plugin {
     },
 
     generateBundle(_, bundle) {
-      console.log('bundle', bundle)
       for (const file of Object.values(bundle)) {
         if (/\.(js|css|html)$/.test(file.fileName)) {
           const content =

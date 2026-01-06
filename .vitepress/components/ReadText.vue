@@ -27,14 +27,12 @@ const findParentElement = (el: any, className: string) => {
 };
 const onReadText = (e: any) => {
   const target = e.target;
-  console.log("target", target);
   if (!target) {
     return;
   }
   if (["svg", "path", "ant-icon"].includes(target.tagName.toLowerCase())) {
     const element = findParentElement(target, "reader-content");
     const text = element.innerText;
-    console.log("text", text);
     if (!text) return;
 
     if (!isSpeechSynthesisSupported()) {

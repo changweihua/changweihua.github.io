@@ -49,7 +49,7 @@ export default createContentLoader([
 
     raws.forEach((item) => {
       const { url, frontmatter, excerpt, src } = item
-      console.log("frontmatter", frontmatter);
+      // console.log("frontmatter", frontmatter);
 
       // src?.match(/!\[(.*?)\]\((.*?)\)/)
 

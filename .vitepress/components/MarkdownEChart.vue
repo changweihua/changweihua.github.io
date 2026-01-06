@@ -41,7 +41,6 @@ const initChart = (theme: string) => {
 watch(
   () => isDark.value,
   (nVal, oVal) => {
-    console.log(`isDark from ${oVal} to ${nVal}`);
     initChart(isDark.value ? "dark" : "light");
   }
 );
@@ -77,7 +76,6 @@ onMounted(() => {
 });
 
 const resizeChart = () => {
-  console.log("resizeChart");
   nextTick(function () {
     myChart && myChart.resize();
   });

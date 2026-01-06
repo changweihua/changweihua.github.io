@@ -41,9 +41,7 @@ export default createContentLoader(["**/manual/**/!(index|README).md"], {
 
       if (src) {
         while ((matcher = pattern.exec(src)) !== null) {
-          // console.log(matcher);
           cover = matcher[2];
-          console.log("cover", cover);
           break;
         }
       }

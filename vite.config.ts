@@ -377,32 +377,6 @@ export default defineConfig(() => {
       // conditions: [],
       // mainFields: []
     },
-    ssr: {
-      external: [
-        "vue3-next-qrcode",
-        "tdesign-vue-next",
-        "vitepress-plugin-tabs",
-        "vitepress-plugin-detype",
-        "vitepress-plugin-npm-commands",
-      ], // Externalize Node.js modules
-    },
-    // 强制预构建
-    optimizeDeps: {
-      // 注意：force 选项已被移除，现在使用 --force 命令行参数
-      // 或者删除 node_modules/.vite 目录来强制重新构建
-      // ✅ 强制预构建指定依赖
-      // 将常用的第三方库加入预构建列表
-      // include: ["vue"],
-      // include: ['vue3-next-qrcode'],
-      // 排除不需要预构建的依赖
-      // 排除本地开发的包，避免不必要的构建
-      exclude: [
-        "vue3-next-qrcode",
-        "vitepress-plugin-detype",
-        "vitepress-plugin-tabs",
-        "vitepress-plugin-npm-commands",
-      ]
-    },
     vite: {
       css: {
         transformer: "lightningcss",

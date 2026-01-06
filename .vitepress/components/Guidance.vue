@@ -1,7 +1,7 @@
 <template></template>
 <script setup lang="ts">
 import { onMounted } from "vue";
-import 'driver.js/dist/driver.css';
+import "driver.js/dist/driver.css";
 import { driver, DriveStep } from "driver.js";
 
 interface IGuidance {
@@ -37,29 +37,22 @@ function showTips() {
       firstButton.innerText = "跳过";
       popover.footerButtons.appendChild(firstButton);
       firstButton.addEventListener("click", () => {
-        console.log(666);
         driverObj.destroy();
       });
     },
     onNextClick: () => {
-      console.log("Next Button Clicked");
       // Implement your own functionality here
       driverObj.moveNext();
     },
     onPrevClick: () => {
-      console.log("Previous Button Clicked");
       // Implement your own functionality here
       driverObj.movePrevious();
     },
     onCloseClick: () => {
-      console.log("Close Button Clicked");
       // Implement your own functionality here
       driverObj.destroy();
     },
     onDestroyStarted: () => {
-      console.log(
-        "onDestroyStarted is called when the user tries to exit the tour"
-      );
       driverObj.destroy();
     },
   });

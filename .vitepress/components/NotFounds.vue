@@ -72,8 +72,6 @@ const theme = reactive({
 watch(
   () => isDark.value,
   (newVal) => {
-    console.log("主题模式变化:", newVal ? "深色" : "浅色");
-
     // 执行自定义操作
     if (newVal) {
       // 深色模式逻辑

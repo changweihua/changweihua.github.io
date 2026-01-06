@@ -82,9 +82,6 @@ const pathTogether = function (angle: number) {
     // @ts-ignore
     return [x.toFixed(2) * 1, y.toFixed(2) * 1].join(" ");
 };
-
-// 输出：30 15.36
-console.log(pathTogether(30));
 </script>
 
 <style scoped>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted } from "vue";
+import { computed, nextTick, onMounted, ref, toRaw } from "vue";
 import { inBrowser, useData, useRouter } from "vitepress";
-import { useQRCode } from "vue3-next-qrcode";
 import "vue3-next-qrcode/es/style.css";
+import { UseQRCodeReturnType } from "vue3-next-qrcode";
 
 const baseUrl = "https://changweihua.github.io";
 
@@ -23,21 +23,59 @@ const shareUrl = computed(() => {
   return `${baseUrl}${router.route.path}`;
 });
 
-const { qrcodeURL, isLoading, error, generate, clear } = useQRCode();
+const qrCodeModule = ref<typeof import("vue3-next-qrcode") | null>(null);
+const loading = ref(true);
+const qrCodeData = ref<UseQRCodeReturnType | null>(null);
 
+// 生成二维码的函数
+const generateQrCode = async () => {
+  loading.value = true;
+  try {
+    // 动态导入模块（仅在客户端执行）
+    if (!qrCodeModule.value) {
+      const module = await import("vue3-next-qrcode");
+      qrCodeModule.value = module;
+    }
+
+    // 使用具名导出的 useQrCode
+    const { useQRCode } = qrCodeModule.value;
+
+    if (!useQRCode) {
+      throw new Error("useQRCode 方法未在 vue3-next-qrcode 中找到");
+    }
+
+    // // 获取当前值
+    // const currentText = getRawValue(text);
+    // const currentOptions = options ? getRawValue(options) : {};
+
+    // 调用 useQrCode
+    qrCodeData.value = useQRCode();
+  } catch (err) {
+    console.error("生成二维码失败:", err);
+    // error.value = err instanceof Error ? err : new Error(String(err));
+  } finally {
+    loading.value = false;
+  }
+};
+
+// 在客户端执行
 onMounted(async () => {
   await nextTick();
 
   if (inBrowser) {
-    await generate({
-      text: shareUrl.value,
-      size: 300,
-      margin: 20,
-      logoImage: "/favicon.png",
-      colorDark: "#000000",
-      autoColor: true,
-      colorLight: "#ffffff",
-    });
+    await generateQrCode();
+    if (qrCodeData.value) {
+      const { qrcodeURL, isLoading, error, generate, clear } = qrCodeData.value;
+      await generate({
+        text: shareUrl.value,
+        size: 300,
+        margin: 20,
+        logoImage: "/favicon.png",
+        colorDark: "#000000",
+        autoColor: true,
+        colorLight: "#ffffff",
+      });
+    }
   }
 });
 </script>
@@ -58,10 +96,13 @@ onMounted(async () => {
         </svg>
         继续滚动显示二维码
       </div>
+      <div v-if="loading" class="loading-state">
+        <span>正在生成二维码...</span>
+      </div>
       <ImageQRCode
-        v-if="qrcodeURL"
-        :image-url="qrcodeURL.toString()"
-        alt-text="示例二维码"
+        v-else-if="qrCodeData && qrCodeData.qrcodeURL"
+        :image-url="qrCodeData.qrcodeURL.toString()"
+        alt-text="文章二维码"
         title="扫码关注"
         description="扫描二维码获取更多信息"
         :trigger-distance="100"

@@ -42,13 +42,11 @@ export function getFromNow(date: string | Date): string | null {
 }
 
 export const http2 = function <T extends number>(options: number): Promise<T> {
-  console.log(options);
   const res: number = 1;
   return Promise.resolve(res as T);
 };
 
 export const http3 = <T extends number>(options: number): Promise<T> => {
-  console.log(options);
   const res: number = 1;
   return Promise.resolve(res as T);
 };

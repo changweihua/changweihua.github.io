@@ -102,17 +102,14 @@ onMounted(() => {
 });
 
 function handlePrevlick() {
-  console.log("handlePrevlick", currentIndex.value - 1);
   updateCarousel(currentIndex.value - 1);
 }
 
 function handleNextlick() {
-  console.log("handleNextlick", currentIndex.value + 1);
   updateCarousel(currentIndex.value + 1);
 }
 
 function updateCarousel(newIndex: number) {
-  console.log(`updateCarousel${newIndex}`);
   if (isAnimating) return;
   isAnimating = true;
 
@@ -121,12 +118,9 @@ function updateCarousel(newIndex: number) {
 
   const cards = carouselContainer.value!.querySelectorAll(".card");
 
-  console.log(cards);
-
   cards.forEach((card, i) => {
     const offset =
       (i - currentIndex.value + cards.length) % teamItems.value.length;
-    console.log("offset", offset);
 
     card.classList.remove(
       "center",

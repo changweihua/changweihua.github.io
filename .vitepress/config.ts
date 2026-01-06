@@ -390,28 +390,46 @@ export default withMermaid(
       class: "mermaid styled-mermaid", // 为父容器设置额外的CSS类
     },
     vite: {
-      // optimizeDeps: {
-      //   include: [
-      //     "mermaid",
-      //     "dayjs",
-      //     "debug",
-      //     "@braintree/sanitize-url",
-      //     "cytoscape",
-      //     "cytoscape-cose-bilkent",
-      //   ],
-      //   exclude: ["vitepress"],
-      // },
+      // 强制预构建
+      optimizeDeps: {
+        // 注意：force 选项已被移除，现在使用 --force 命令行参数
+        // 或者删除 node_modules/.vite 目录来强制重新构建
+        // ✅ 强制预构建指定依赖
+        // 将常用的第三方库加入预构建列表
+        // include: ["vue"],
+        // include: ['vue3-next-qrcode'],
+        // 排除不需要预构建的依赖
+        // 排除本地开发的包，避免不必要的构建
+        exclude: [
+          "vue3-next-qrcode",
+          "vitepress-plugin-detype",
+          "vitepress-plugin-tabs",
+          "vitepress-plugin-npm-commands",
+        ],
+      },
+      ssr: {
+        external: [
+          "vue3-next-qrcode",
+          "tdesign-vue-next",
+          "vitepress-plugin-tabs",
+          "vitepress-plugin-detype",
+          "vitepress-plugin-npm-commands",
+        ], // Externalize Node.js modules
+      },
       resolve: {
         alias: [
-          { find: 'vite', replacement: 'rolldown-vite' },
-          { find: 'mermaid', replacement: 'mermaid' },
-          { find: '@demo', replacement: resolve(__dirname, "../src/demos") },
+          { find: "vite", replacement: "rolldown-vite" },
+          { find: "mermaid", replacement: "mermaid" },
+          { find: "@demo", replacement: resolve(__dirname, "../src/demos") },
           {
             find: /^.*\/VPFooter\.vue$/,
-            replacement: resolve(__dirname, './components/LiquidPageFooter.vue')
-          }
+            replacement: resolve(
+              __dirname,
+              "./components/LiquidPageFooter.vue"
+            ),
+          },
           // { find: 'dep', replacement: '@vitejs/test-resolve-linked' },
-        ]
+        ],
         // alias: {
         //   vite: "rolldown-vite",
         //   // 强制 VitePress 使用项目安装的 Mermaid
@@ -512,7 +530,7 @@ export default withMermaid(
         vueJsx(),
         RssPlugin(RSS),
         pagefindPlugin({
-          forceLanguage:'zh-cn',
+          forceLanguage: "zh-cn",
           locales: {
             root: {
               btnPlaceholder: "搜索",

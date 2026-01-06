@@ -2,7 +2,6 @@
 import Date from './Date.vue'
 import { data as posts } from '../blog.zh-CN.data'
 import { useData } from 'vitepress'
-console.log(posts)
 const { frontmatter } = useData()
 </script>
 
