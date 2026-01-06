@@ -68,7 +68,6 @@ pageClass: gallery-page-class
 - 为机场行李识别或危险品识别提供技术储备。
 - 配合 OpenCV，实现动态图像实时判定。
 
-<!-- ![](/images/QQ20250805135713.png){data-zoomable} -->
 
 > [!TIP] 备注
 > 主要基于 Windows 平台。
@@ -149,9 +148,3 @@ h1 {
 :::
 
 
-<llm-exclude>
-
-## Section for humans
-
-This content will not be in the generated files for LLMs
-</llm-exclude>
