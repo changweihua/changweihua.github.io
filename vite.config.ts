@@ -23,7 +23,7 @@ import Inspect from "vite-plugin-inspect";
 import mkcert from "vite-plugin-mkcert";
 import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import { qrcode } from "vite-plugin-qrcode";
-import { robots } from "vite-plugin-robots";
+// import { robots } from "vite-plugin-robots";
 import simpleHtmlPlugin from "vite-plugin-simple-html";
 import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
 import vitePluginTryCatchConsole from "./plugins/vite-plugin-try-catch-console";
@@ -248,7 +248,7 @@ export default defineConfig(() => {
           cmono: "./src/assets/icons/mono",
         },
       }),
-      robots(),
+      // robots(),
       prefetchDnsPlugin(),
       webUpdateNotice({
         versionType: "pkg_version",
@@ -341,4 +341,5 @@ export default defineConfig(() => {
     },
   };
 });
+
 
