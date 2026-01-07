@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, toRaw } from "vue";
-import { inBrowser, useData, useRouter } from "vitepress";
+import { computed, nextTick, onMounted, ref } from "vue";
+import { inBrowser, useRouter } from "vitepress";
 import "vue3-next-qrcode/es/style.css";
 import { UseQRCodeReturnType } from "vue3-next-qrcode";
 
 const baseUrl = "https://changweihua.github.io";
 
-const { page, frontmatter } = useData();
+// const { page, frontmatter } = useData();
 
-// 获取页面相关信息
-console.log(page.value.filePath); // 页面路径
-console.log(page.value.relativePath); // 相对路径
-console.log(page.value.title); // 页面标题
-console.log(frontmatter.value); // 页面 Frontmatter
+// // 获取页面相关信息
+// console.log(page.value.filePath); // 页面路径
+// console.log(page.value.relativePath); // 相对路径
+// console.log(page.value.title); // 页面标题
+// console.log(frontmatter.value); // 页面 Frontmatter
 
 const router = useRouter();
 

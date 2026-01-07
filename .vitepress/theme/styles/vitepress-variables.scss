@@ -1,0 +1,205 @@
+/**
+ * Colors
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --vp-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --vp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --vp-transition-duration: 0.3s;
+  --vp-c-brand-1: #e6a23c;
+  --vp-c-brand-2: rgb(238, 190, 119);
+  --vp-c-brand-3: rgb(243, 209, 158);
+  --vp-c-brand-soft: rgb(253, 246, 236);
+  // --color-primary: hsl(191, 50%, 90%);
+  // --color-secondary: hsl(191, 50%, 10%);
+  // --color-tertiary: hsl(251, 80%, 20%);
+  // --color-accent: hsl(131, 80%, 20%);
+  --view-transition-old-zindex: 9999;
+  --view-transition-new-zindex: 1;
+}
+
+:root[class="dark"] {
+  // --color-primary: hsl(191, 50%, 10%);
+  // --color-secondary: hsl(191, 50%, 90%);
+  // --color-tertiary: hsl(251, 80%, 80%);
+  // --color-accent: hsl(131, 80%, 80%);
+  --view-transition-old-zindex: 1;
+  --view-transition-new-zindex: 9999;
+}
+
+/**
+   * Component: Button
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-button-brand-border: var(--vp-c-brand-light);
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-bg: var(--vp-c-brand);
+  --vp-button-brand-hover-border: var(--vp-c-brand-light);
+  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-light);
+  --vp-button-brand-active-border: var(--vp-c-brand-light);
+  --vp-button-brand-active-text: var(--vp-c-white);
+  --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+}
+
+/**
+   * Component: Custom Block
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-custom-block-tip-border: var(--vp-c-brand);
+  --vp-custom-block-tip-text: var(--vp-c-brand-darker);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+}
+
+.dark {
+  --vp-custom-block-tip-border: var(--vp-c-brand);
+  --vp-custom-block-tip-text: var(--vp-c-brand-lightest);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+}
+
+/**
+     * Component: Algolia
+     * -------------------------------------------------------------------------- */
+
+.DocSearch {
+  --docsearch-primary-color: var(--vp-c-brand) !important;
+}
+
+.vp-code-group .tabs label {
+  background-color: transparent;
+}
+
+table {
+  width: 100% !important;
+  display: table;
+}
+
+.custom-block.tip .custom-block-title {
+  color: var(--vp-c-brand-1);
+}
+
+.VPHero .image-bg {
+  z-index: 1;
+  opacity: 0.8;
+  transition: opacity 1s ease;
+}
+
+.VPHero .image-container:hover .image-bg {
+  opacity: 0.2;
+}
+
+/**
+ * VitePress: Custom fix
+ * -------------------------------------------------------------------------- */
+
+/*
+  Use lighter colors for links in dark mode for a11y.
+  Also specify some classes twice to have higher specificity
+  over scoped class data attribute.
+*/
+.dark .vp-doc a,
+.dark .vp-doc a > code,
+.dark .VPNavBarMenuLink.VPNavBarMenuLink:hover,
+.dark .VPNavBarMenuLink.VPNavBarMenuLink.active,
+.dark .link.link:hover,
+.dark .link.link.active,
+.dark .edit-link-button.edit-link-button,
+.dark .pager-link .title {
+  color: var(--vp-c-brand-lighter);
+}
+
+.dark .vp-doc a:hover,
+.dark .vp-doc a > code:hover {
+  color: var(--vp-c-brand-lightest);
+  opacity: 1;
+}
+
+/* Transition by color instead of opacity */
+.dark .vp-doc .custom-block a {
+  transition: color 0.25s;
+}
+
+/* VitePress Search */
+.VPLocalSearchBox .result {
+  --vp-c-bg-search-result: var(--vp-c-bg);
+  background: var(--vp-c-bg-search-result) !important;
+  padding: 4px !important;
+  border: 1px solid var(--vp-c-divider) !important;
+}
+
+.VPLocalSearchBox .result.selected {
+  --vp-c-bg-search-result: var(--vp-c-bg-soft) !important;
+}
+
+.VPLocalSearchBox .result .excerpt-gradient-top {
+  background: linear-gradient(
+    var(--vp-c-bg-search-result),
+    transparent
+  ) !important;
+}
+
+.VPLocalSearchBox .result .excerpt-gradient-bottom {
+  background: linear-gradient(
+    transparent,
+    var(--vp-c-bg-search-result)
+  ) !important;
+}
+
+.VPLocalSearchBox .title-icon {
+  display: none;
+}
+
+.VPLocalSearchBox .excerpt-wrapper {
+  margin-top: 4px;
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
+}
+
+/* 深色模式下的滚动条 */
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
+}
+
+/* 针对代码块的滚动条 */
+.vp-doc div[class*="language-"] {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+}
+
+.vp-doc div[class*="language-"]::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.vp-doc div[class*="language-"]::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+  border-radius: 2px;
+}
+
+.vp-doc div[class*="language-"]::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
+}

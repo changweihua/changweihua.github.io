@@ -70,7 +70,7 @@ onMounted(function () {
   line-height: 1.25rem;
 
   * {
-    font-family: vars.$app-font-family;
+    font-family: #{vars.$app-font-family};
   }
 }
 

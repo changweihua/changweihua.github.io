@@ -1,32 +1,37 @@
-const fs = require('fs-extra');
-// const rfs = require('recursive-fs');
+const fs = require("fs-extra");
 const path = require("path");
-const rimraf = require('rimraf');
 
-const rootFolder = process.cwd()
+const rootFolder = process.cwd();
 
 console.log("移动生成好的字体");
 
 var myArgs = process.argv.slice(2);
-console.log('myArgs: ', myArgs);
+console.log("myArgs: ", myArgs);
 
-let fontName = 'MapleMono'
+let fontName = "MapleMono";
 
 switch (myArgs[0]) {
-  case '--font':
+  case "--font":
     console.log(myArgs[1]);
-    fontName = myArgs[1]
+    fontName = myArgs[1];
     break;
-  case 'compliment':
-    console.log(myArgs[1], 'is really cool.');
+  case "compliment":
+    console.log(myArgs[1], "is really cool.");
     break;
   default:
-    console.log('使用默认字体设置');
+    console.log("使用默认字体设置");
 }
 
 // 删除指定文件夹下面的所有文件或文件夹
 fs.emptyDirSync(path.join(rootFolder, `public/fonts/${fontName}`));
-fs.copySync(path.join(rootFolder, `fonts-spider/${fontName}`), path.join(rootFolder, `public/fonts/${fontName}`))
+fs.copySync(
+  path.join(rootFolder, `fonts-spider/${fontName}`),
+  path.join(rootFolder, `public/fonts/${fontName}`)
+);
+fs.copySync(
+  path.join(rootFolder, `fonts-spider/${fontName}/woff2`),
+  path.join(rootFolder, `.vitepress/assets/fonts/${fontName}`)
+);
 
 // fs.emptyDirSync(path.join(rootFolder, `public/fonts/JetBrains`));
 // fs.copySync(path.join(rootFolder, `font/JetBrains`), path.join(rootFolder, `public/fonts/JetBrains`))

@@ -123,7 +123,7 @@ function updateHomePageStyle(value: boolean) {
   }
 }
 
-import "./styles/variables.scss";
+import "./styles/vitepress-variables.scss";
 import "./styles/maple-mono.scss";
 import "./styles/index.scss";
 import "./styles/rainbow.scss";

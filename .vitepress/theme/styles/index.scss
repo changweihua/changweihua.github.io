@@ -42,16 +42,16 @@ body {
 }
 
 /* 覆盖弹性滚动背景 */
-// body::after {
-//   content: "";
-//   position: fixed;
-//   top: -5000px;
-//   left: 0;
-//   right: 0;
-//   bottom: -5000px;
-//   background-color: var(--vp-c-bg);
-//   z-index: -1;
-// }
+body::after {
+  content: "";
+  position: fixed;
+  top: -5000px;
+  left: 0;
+  right: 0;
+  bottom: -5000px;
+  background-color: var(--vp-c-bg);
+  z-index: -1;
+}
 
 /* 一级路由高亮 */
 .active-parent {

@@ -1,40 +1,48 @@
 :root {
   --vp-nav-bg-color: transparent;
-  --vp-font-family-base: vars.$app-font-family;
-  --vp-font-family-mono: $app-font-family;
+  --vp-font-family-base: #{vars.$app-font-family};
+  --font-sans: #{vars.$app-font-family};
+  --vp-font-family-mono: #{vars.$app-font-family};
+  --td-font-family: #{vars.$app-font-family};
+  --td-font-family-medium: #{vars.$app-font-family};
   /* --vp-header-anchor-symbol: "🔗"; */
   /* 建立CSS变量与Mermaid的映射 */
   --zenuml-primary: var(--mermaid-zenumlPrimary, #4caf50);
   --zenuml-bg: var(--mermaid-zenumlBg, #fafafa);
 }
 
+:root:where(:lang(zh)) {
+  --vp-font-family-base: #{vars.$app-font-family};
+  --vp-font-family-mono: #{vars.$app-font-family};
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: vars.$app-font-family;
+  font-family: #{vars.$app-font-family};
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: vars.$app-font-weight;
-  font-size-adjust: vars.$app-font-size-adjust;
+  font-weight: #{vars.$app-font-weight};
+  font-size-adjust: #{vars.$app-font-size-adjust};
   font-display: swap;
   scroll-behavior: smooth;
 }
 
 #app {
-  font-family: vars.$app-font-family;
+  font-family: #{vars.$app-font-family};
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: vars.$app-font-weight;
-  font-size-adjust: vars.$app-font-size-adjust;
+  font-weight: #{vars.$app-font-weight};
+  font-size-adjust: #{vars.$app-font-size-adjust};
   font-display: swap;
 
   :deep(*) {
-    font-family: vars.$app-font-family;
-    font-weight: vars.$app-font-weight;
-    font-size-adjust: vars.$app-font-size-adjust;
+    font-family: #{vars.$app-font-family};
+    font-weight: #{vars.$app-font-weight};
+    font-size-adjust: #{vars.$app-font-size-adjust};
   }
 }
 

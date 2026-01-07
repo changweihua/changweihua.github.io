@@ -188,7 +188,7 @@ export default defineConfig(() => {
       chunkSizeWarningLimit: 20 * 1000 * 1000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
       reportCompressedSize: false,
-      // cssMinify: "lightningcss", // 确保生产构建使用相同配置
+      cssMinify: "lightningcss", // 确保生产构建使用相同配置
     },
     experimental: {
       importGlobRestoreExtension: true,
@@ -267,51 +267,6 @@ export default defineConfig(() => {
         },
       }),
     ],
-    css: {
-      lightningcss: {
-        // 关键配置：标记 deep 为合法伪类
-        pseudoClasses: { deep: true, deepSelectorCombinator: true },
-        // 禁用特定优化
-        minify: true,
-        drafts: {
-          nesting: true, // 启用嵌套语法
-          customMedia: true, // 启用媒体查询变量
-          keyframes: true, // 启用实验性关键帧支持
-        },
-        // 解决 scoped 样式问题
-        cssModules: {
-          // 禁用对 scoped 样式的命名转换
-          // pattern: "[name]__[local]",
-          // 配置CSS模块化
-          pattern: "[name]__[local]__[hash:base64:5]",
-        },
-        // 允许特殊规则
-        unrecognized: {
-          pseudos: "ignore", // 忽略未知伪类错误
-          atRules: "ignore", // 忽略无法识别的规则（包括 @keyframes）
-        },
-      },
-      devSourcemap: true,
-      // transformer: "postcss", // 使用 Rust 实现的 CSS 处理器
-      codeSplit: false,
-      /**
-       * 如果启用了这个选项，那么 CSS 预处理器会尽可能在 worker 线程中运行；即通过多线程运行 CSS 预处理器，从而极大提高其处理速度
-       * https://cn.vitejs.dev/config/shared-options#css-preprocessormaxworkers
-       */
-      preprocessorMaxWorkers: 3,
-      /**
-       * 建议只用来嵌入 SCSS 的变量声明文件，嵌入后全局可用
-       * 该选项可以用来为每一段样式内容添加额外的代码。但是要注意，如果你添加的是实际的样式而不仅仅是变量，那这些样式在最终的产物中会重复
-       * https://cn.vitejs.dev/config/shared-options.html#css-preprocessoroptions-extension-additionaldata
-       */
-      preprocessorOptions: {
-        scss: {
-          sourceMap: true,
-          additionalData: `@use "@/assets/styles/variables.scss" as vars;`, // 强制全局注入
-          api: "modern-compiler",
-        },
-      },
-    },
     resolve: {
       alias: {
         // Redirect 'fs' to an empty module or a browser-safe shim
@@ -331,14 +286,14 @@ export default defineConfig(() => {
         // "/img": "./src/assets",
       },
     },
-    vite: {
-      css: {
-        transformer: "lightningcss",
-      },
-      build: {
-        cssMinify: "lightningcss",
-      },
-    },
+    // vite: {
+    //   css: {
+    //     transformer: "lightningcss",
+    //   },
+    //   build: {
+    //     cssMinify: "lightningcss",
+    //   },
+    // },
   };
 });
 

@@ -1047,3 +1047,179 @@ if (stream.value) {
 但核心思想不变：用 `Buffer` 理解数据，用响应式拥抱变化，用流式传递温度。
 
 > 代码即思想，体验即产品。
+
+> 前端如何优雅地“边聊边等”——用 Fetch 实现流式请求大模型
+
+## 为什么“流式”突然成了刚需？ ##
+
+- 传统接口：一次请求→全部数据→`JSON.parse()`→渲染，用户盯着白屏干等。
+- 大模型接口：一次请求→源源不断的 token→像打字机一样逐字蹦出来，体验拉满。
+- 核心原理：HTTP Transfer-Encoding: chunked，后端把响应拆成一块块往前端“流”，前端边收边渲染。
+
+## Fetch 也能“流”？——先补 3 个冷知识 ##
+
+| **知识点**        |      **一句话记忆**   |      **代码提示**      |
+| :------------- | :------------- | :-----------: |
+|  响应体是 `ReadableStream`  | `response.body` 不是字符串，而是一条“水管”  | `const reader = response.body.getReader()`  |
+|  读取器是异步迭代器  | 用 `while(true)` 逐块拿 `Uint8Array`  | `await reader.read()`  |
+|  解码器 `TextDecoder`  | 把二进制流变成人能看的字符串  | `new TextDecoder().decode(chunk)`  |
+
+## 最简“裸奔”版：30 行看懂流式 Fetch ##
+
+```js
+async function streamChat(prompt) {
+  const response = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt })
+  });
+
+  const reader = response.body.getReader();     // 拿水管
+  const decoder = new TextDecoder();           // 拿解码器
+  let buffer = '';                             // 行缓冲（SSE 格式）
+
+  while (true) {
+    const { done, value } = await reader.read(); // 等待下一块
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true }); // 注意 stream:true 保留末尾残缺字符
+    const lines = buffer.split('\n');                  // 按行切
+    buffer = lines.pop()!;                             // 最后一行可能不完整，留到下一轮
+
+    for (const line of lines) {
+      if (line.startsWith('data: ')) {
+        const data = line.slice(5);                    // 去掉 "data: "
+        if (data === '[DONE]') return;                 // 约定结束标记
+        console.log(JSON.parse(data).content);         // 逐 token 渲染
+      }
+    }
+  }
+}
+```
+
+> 跑起来后，控制台就像打字机一样“哒哒哒”——成就感 +1。
+
+## 生产级封装：既要好用，又要能“踩刹车” ##
+
+裸奔代码只能做 demo，线上还要考虑：
+
+- 随时中断（用户说“停！”）
+- 自动重连（网络抖动）
+- 兼容两种格式（纯 `data: {...}\n\n` 或 SSE）
+- 友好错误（超时/4xx/5xx）
+
+上代码——streamFetcher.ts，复制就能用：
+
+```ts
+type StreamOptions = {
+  url: string;
+  body: Record<string, any>;
+  method?: 'GET' | 'POST';
+  headers?: Record<string, string>;
+  signal?: AbortSignal;              // 外部中断
+  onMessage: (data: any) => void;    // 收到一包数据
+  onDone?: () => void;               // 正常结束
+  onError?: (err: any) => void;      // 异常
+};
+
+export function streamFetcher({
+  url,
+  body,
+  method = 'POST',
+  headers = {},
+  signal,
+  onMessage,
+  onDone,
+  onError
+}: StreamOptions) {
+  let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
+
+  const abort = () => reader?.cancel().catch(() => {}); // 温柔关闭
+  signal?.addEventListener('abort', abort);
+
+  fetch(url, { method, headers: { ...headers, 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal })
+    .then(async res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.body) throw new Error('No stream body');
+
+      reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buf = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split('\n');
+        buf = lines.pop()!;
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const payload = line.slice(6);
+            if (payload === '[DONE]') { onDone?.(); return; }
+            try { onMessage(JSON.parse(payload)); } catch {}
+          }
+        }
+      }
+      onDone?.();
+    })
+    .catch(err => {
+      if (err.name !== 'AbortError') onError?.(err);
+    })
+    .finally(() => {
+      signal?.removeEventListener('abort', abort);
+    });
+
+  // 返回一个“手柄”，外部可主动 cancel
+  return () => {
+    signal?.abort();
+    abort();
+  };
+}
+```
+
+**使用姿势**：
+
+```ts
+const cancel = streamFetcher({
+  url: '/api/chat',
+  body: { prompt: '把 fetch 讲成段子' },
+  onMessage: ({ content }) => appendToDom(content),
+  onError: e => toast.error('网络开小差：' + e.message)
+});
+
+// 用户点击“停止”按钮
+stopBtn.onclick = () => cancel();
+```
+
+## 踩坑备忘录 ##
+
+| **坑**        |      **表现**   |      **解药**      |
+| :------------- | :------------- | :-----------: |
+|  中文被“腰斩”  | 出现乱码  | `TextDecoder({stream:true})` 必须加 |
+|  后端突然断连  | `reader.read()` 直接 `done`  | `onDone` 里给用户提示“回答已结束” |
+|  用户狂点重发  | 旧流还在输出  | 每次新请求先 `cancel()` 旧手柄 |
+|  `nginx` 缓冲  | 迟迟不吐数据  | 加 `X-Accel-Buffering: no` 或 `Transfer-Encoding: chunked` |
+
+六、和其他“实时”技术比比个子
+
+| **技术**        |      **传输方向**   |      **优点**      |     **缺点**   |      **适合场景**      |
+| :------------- | :------------- | :-----------: | :------------- | :-----------: |
+|  `Fetch` 流（本文）  | 服务端→客户端  | 基于 HTTP，零依赖、跨域友好、浏览器默认支持 | 只能服务端单向推  | 大模型打字机、下载进度条 |
+|  EventSource (SSE)  | 服务端→客户端  | 自动重连、浏览器自带 `onmessage` | 仅 GET、仅单向、IE 全灭  | 股票行情、活动推送 |
+|  WebSocket  | 双向  | 全双工、低延迟 | 需额外端口、代理/网关配置复杂  | 聊天室、多人协同 |
+|  长轮询  | 双向模拟  | 兼容性最好 | 延迟高、浪费连接  | 老系统兼容、问卷投票 |
+
+> 一句话总结：
+> 
+> “打字机”读大模型 → Fetch 流最轻；双向实时对战 → WebSocket 最稳；只推不拉 → SSE 最省事。
+
+## 总结（省流版） ##
+
+- `response.body.getReader()` 就是水龙头，边读边渲染就能实现打字机。
+- 记得用 `TextDecoder({stream:true})` 防止中文被砍半。
+- 封装时把 `AbortSignal` 暴露出去，随时可 `cancel`，避免“鬼打印”。
+- 纯推送场景选 SSE，双向实时选 WebSocket，大模型流式输出 Fetch 足够香。
+
+把这段代码丢进项目，老板再提“像 ChatGPT 那样”的需求时，你就可以优雅地回一句：“*安排，已经封装好了，两分钟上线。*”
