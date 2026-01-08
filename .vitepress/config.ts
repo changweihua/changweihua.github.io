@@ -547,7 +547,7 @@ export default withMermaid(
         vueJsx(),
         RssPlugin(RSS),
         pagefindPlugin({
-          forceLanguage: "zh-cn",
+          forceLanguage: "zh-CN",
           locales: {
             root: {
               btnPlaceholder: "搜索",
@@ -567,7 +567,7 @@ export default withMermaid(
               // 搜索结果不展示最后修改日期日期
               showDate: false,
             },
-            "zh-cn": {
+            "zh-CN": {
               btnPlaceholder: "搜索",
               placeholder: "搜索文档",
               emptyText: "空空如也",

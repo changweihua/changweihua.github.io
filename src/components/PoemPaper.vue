@@ -53,10 +53,10 @@ const textLines = poem
   .filter((line) => line.characters.length > 0);
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .line {
   margin-bottom: 20px;
-  font-family: MapleMono, "JetBrains Maple Mono", AlibabaPuHuiTi, JetBrainsMono;
+  font-family: #{vars.$app-font-family};
 
   .line-content {
     display: flex;

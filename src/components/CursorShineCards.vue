@@ -125,8 +125,7 @@ function handleCardElMouseProperty(e) {
 </style>
 <style lang="scss" scoped>
 #cards-container {
-  font-family: MapleMono, "JetBrains Maple Mono", AlibabaPuHuiTi,
-    "阿里巴巴普惠体 3.0" !important;
+  font-family: #{vars.$app-font-family};
   //   // display: flex;
   //   // flex-wrap: wrap;
   //   // gap: 8px;

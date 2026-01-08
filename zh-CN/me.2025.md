@@ -3,6 +3,8 @@ layout: doc
 pageClass: gallery-page-class
 ---
 
+<HoverableText title="2025" />
+
 > [!IMPORTANT] 年度关键词
 > 开花不一定结果，努力一定不会辜负青春。
 > 

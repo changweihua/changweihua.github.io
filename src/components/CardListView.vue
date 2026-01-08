@@ -59,10 +59,9 @@ defineProps({
 });
 </script>
 
-<style scoped>
+<style lang="scss"oped>
 .container {
-  font-family: MapleMono, "JetBrains Maple Mono", AlibabaPuHuiTi,
-    "阿里巴巴普惠体 3.0" !important;
+  font-family: #{vars.$app-font-family};
 }
 
 .card .card__img,

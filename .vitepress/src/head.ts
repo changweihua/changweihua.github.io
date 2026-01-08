@@ -27,13 +27,13 @@ export const head: HeadConfig[] = [
       href: "/Mermaid.css",
     },
   ],
-  [
-    "link",
-    {
-      rel: "stylesheet",
-      href: "/font.css",
-    },
-  ],
+  // [
+  //   "link",
+  //   {
+  //     rel: "stylesheet",
+  //     href: "/font.css",
+  //   },
+  // ],
   ["meta", { name: "referrer", content: "no-referrer" }],
   [
     "meta",

@@ -72,6 +72,11 @@ const teamItems = ref<Array<GalleryItem>>([
     description: "智慧机场运行平台",
     cover: "/images/digital_airport.png",
   },
+  {
+    title: "AI",
+    description: "AI LLMS",
+    cover: "/images/ai_sse.gif",
+  },
 ]);
 
 const currentIndex = ref(3);

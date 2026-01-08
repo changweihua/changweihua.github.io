@@ -246,9 +246,6 @@ import "virtual:uno.css";
 import "virtual:group-icons.css";
 import "animate.css";
 
-import vitepressBackToTop from "vitepress-plugin-back-to-top";
-import "vitepress-plugin-back-to-top/dist/style.css";
-
 import "markdown-it-github-alerts/styles/github-colors-light.css";
 import "markdown-it-github-alerts/styles/github-colors-dark-media.css";
 import "markdown-it-github-alerts/styles/github-base.css";
@@ -522,11 +519,6 @@ export default {
           { immediate: true }
         );
       }
-
-      vitepressBackToTop({
-        // default
-        threshold: 300,
-      });
 
       app.use(yuppie);
 

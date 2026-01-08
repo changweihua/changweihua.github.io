@@ -1459,21 +1459,17 @@ table {
   z-index: -1;
 }
 
-// .VPHero {
-//   background: linear-gradient(#fff 0%, #eff6ff99 30%, #fff0 100%);
+// VPHome.VPFeatures.Features VPLink {
+//   backdrop-filter: blur(20px) saturate(1.2);
+//   background-color: rgba(255, 255, 255, 0.06);
+//   border: 1px solid rgba(255, 255, 255, 0.1);
+//   border-radius: 16px;
+//   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+//   color: #fff;
+//   padding: 24px;
+//   transition: backdrop-filter 0.4s ease;
+//   will-change: backdrop-filter;
 // }
-
-VPHome.VPFeatures.Features VPLink {
-  backdrop-filter: blur(20px) saturate(1.2);
-  background-color: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  color: #fff;
-  padding: 24px;
-  transition: backdrop-filter 0.4s ease;
-  will-change: backdrop-filter;
-}
 
 /* 滚动提示区域样式 */
 .scroll-hint {
@@ -1523,4 +1519,53 @@ VPHome.VPFeatures.Features VPLink {
   .image-qrcode {
     display: none !important;
   }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 94.57deg;
+}
+
+@property --start-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #e0f2ff;
+}
+
+@property --start-percentage {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 7.66%;
+}
+
+@property --end-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #b1deff;
+}
+
+@property --end-percentage {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 94.53%;
+}
+
+.VPHomeFeatures .VPFeature {
+  background: linear-gradient(
+    var(--angle),
+    var(--start-color) var(--start-percentage),
+    var(--end-color) var(--end-percentage)
+  );
+  border-radius: 12px;
+  transition: --angle 0.8s, --start-color 0.8s, --start-percentage 0.8s,
+    --end-color 0.8s, --end-percentage 0.8s;
+}
+
+.VPHomeFeatures .VPFeature:hover {
+  --angle: 143.85deg;
+  --start-color: hsl(191, 50%, 90%);
+  --start-percentage: 14.66%;
+  --end-color: hsl(131, 80%, 80%);
+  --end-percentage: 85.95%;
 }
