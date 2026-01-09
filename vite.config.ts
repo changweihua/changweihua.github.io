@@ -2,7 +2,6 @@ import type { Plugin } from "vite";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Schema, ValidateEnv } from "@julr/vite-plugin-validate-env";
-import { webUpdateNotice } from "@plugin-web-update-notification/vite";
 import vueStyledPlugin from "@vue-styled-components/plugin";
 import colors from "picocolors";
 import UnoCSS from "unocss/vite";
@@ -13,7 +12,7 @@ import versionInjector from "unplugin-version-injector/vite";
 import Components from "unplugin-vue-components/vite";
 import { TDesignResolver } from "@tdesign-vue-next/auto-import-resolver";
 import { defineConfig, loadEnv } from "vite";
-import checker from "vite-plugin-checker";
+import { checker } from "vite-plugin-checker";
 import { envParse } from "vite-plugin-env-parse";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import imagePlaceholder from "vite-plugin-image-placeholder";
@@ -22,7 +21,6 @@ import Inspect from "vite-plugin-inspect";
 import mkcert from "vite-plugin-mkcert";
 import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
 import { qrcode } from "vite-plugin-qrcode";
-import simpleHtmlPlugin from "vite-plugin-simple-html";
 import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
 import vitePluginTryCatchConsole from "./plugins/vite-plugin-try-catch-console";
 import spyPlugin from "./plugins/vite-plugin-spy";
@@ -80,13 +78,6 @@ function getDevPlugins() {
       },
     }),
     mockDevServerPlugin(),
-    // // 仅对以 `.svg?react` 结尾的文件加载 `svgr` 插件
-    // withFilter(
-    //   svgr({
-    //     /*...*/
-    //   }),
-    //   { load: { id: /\.svg\?react$/ } },
-    // ),
     Inspect(),
     envParse(),
     yourPlugin(),
@@ -95,30 +86,6 @@ function getDevPlugins() {
       include: "fake", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: true, // 是否在生产环境下设置mock
     }),
-    simpleHtmlPlugin({
-      inject: {
-        data: {
-          title: "控制器携带工具审批",
-          // script: '<script src="index.js"></script>'
-        },
-        tags: [
-          {
-            tag: "meta",
-            attrs: {
-              name: "description",
-              content: "My awesome app",
-            },
-          },
-        ],
-      },
-      minify: true,
-    }),
-    // ValidateEnv({
-    //   validator: "builtin",
-    //   schema: {
-    //     VITE_APP_PRIMARY_COLOR: Schema.string(),
-    //   },
-    // }),
     imagePlaceholder({ prefix: "image/placeholder" }),
     // 开发环境错误提示优化
     {
@@ -244,15 +211,6 @@ export default defineConfig(() => {
         },
       }),
       prefetchDnsPlugin(),
-      webUpdateNotice({
-        versionType: "pkg_version",
-        logVersion: true,
-        notificationProps: {
-          title: "系统更新",
-          description: "系统有更新，请刷新页面",
-          buttonText: "刷新",
-        },
-      }),
       versionInjector(),
       imagePreload({
         dir: "images/**/*.{png,jpg,jpeg,gif,svg,webp}",

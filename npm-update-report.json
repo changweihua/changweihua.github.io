@@ -1,1138 +1,1124 @@
 {
-  "generatedAt": "2025-09-30T01:49:45.299Z",
+  "generatedAt": "2026-01-09T02:32:40.305Z",
   "packages": [
     {
-      "name": "animejs",
-      "currentVersion": "4.1.4",
-      "latestVersion": "4.2.0",
-      "lastUpdated": "2025-09-29T15:30:19.772Z",
+      "name": "tdesign-vue-next",
+      "currentVersion": "^1.17.7",
+      "latestVersion": "1.18.0",
+      "lastUpdated": "2026-01-08T07:04:48.543Z",
       "daysAgo": 0
     },
     {
-      "name": "cross-env",
-      "currentVersion": "^10.0.0",
-      "latestVersion": "10.1.0",
-      "lastUpdated": "2025-09-29T17:34:12.232Z",
+      "name": "@commitlint/cli",
+      "currentVersion": "^20.3.0",
+      "latestVersion": "20.3.1",
+      "lastUpdated": "2026-01-08T15:16:25.004Z",
       "daysAgo": 0
     },
     {
-      "name": "vitepress-plugin-pagefind",
-      "currentVersion": "^0.4.14",
-      "latestVersion": "0.4.15",
-      "lastUpdated": "2025-09-29T07:38:38.843Z",
+      "name": "@commitlint/config-conventional",
+      "currentVersion": "^20.3.0",
+      "latestVersion": "20.3.1",
+      "lastUpdated": "2026-01-08T15:16:25.749Z",
       "daysAgo": 0
     },
     {
-      "name": "@types/node",
-      "currentVersion": "^24.5.2",
-      "latestVersion": "24.6.0",
-      "lastUpdated": "2025-09-29T18:40:30.729Z",
+      "name": "@commitlint/cz-commitlint",
+      "currentVersion": "^20.3.0",
+      "latestVersion": "20.3.1",
+      "lastUpdated": "2026-01-08T15:16:23.837Z",
       "daysAgo": 0
-    },
-    {
-      "name": "@iconify-json/devicon",
-      "currentVersion": "^1.2.45",
-      "latestVersion": "1.2.45",
-      "lastUpdated": "2025-09-28T04:19:26.240Z",
-      "daysAgo": 1
     },
     {
       "name": "@iconify/json",
-      "currentVersion": "^2.2.389",
-      "latestVersion": "2.2.389",
-      "lastUpdated": "2025-09-28T04:28:09.319Z",
-      "daysAgo": 1
+      "currentVersion": "^2.2.425",
+      "latestVersion": "2.2.426",
+      "lastUpdated": "2026-01-08T06:46:45.235Z",
+      "daysAgo": 0
+    },
+    {
+      "name": "commitlint",
+      "currentVersion": "^20.3.0",
+      "latestVersion": "20.3.1",
+      "lastUpdated": "2026-01-08T15:16:26.977Z",
+      "daysAgo": 0
+    },
+    {
+      "name": "sass-embedded",
+      "currentVersion": "^1.97.2",
+      "latestVersion": "1.97.2",
+      "lastUpdated": "2026-01-06T01:00:47.064Z",
+      "daysAgo": 3
+    },
+    {
+      "name": "@faker-js/faker",
+      "currentVersion": "^10.2.0",
+      "latestVersion": "10.2.0",
+      "lastUpdated": "2026-01-04T13:15:59.196Z",
+      "daysAgo": 4
+    },
+    {
+      "name": "@iconify-json/line-md",
+      "currentVersion": "^1.2.13",
+      "latestVersion": "1.2.13",
+      "lastUpdated": "2026-01-01T08:16:01.976Z",
+      "daysAgo": 7
+    },
+    {
+      "name": "markdown-exit",
+      "currentVersion": "^1.0.0-beta.7",
+      "latestVersion": "1.0.0-beta.7",
+      "lastUpdated": "2025-12-30T16:03:26.644Z",
+      "daysAgo": 9
+    },
+    {
+      "name": "unocss",
+      "currentVersion": "^66.5.12",
+      "latestVersion": "66.5.12",
+      "lastUpdated": "2025-12-30T10:12:18.263Z",
+      "daysAgo": 9
+    },
+    {
+      "name": "@iconify-json/devicon",
+      "currentVersion": "^1.2.56",
+      "latestVersion": "1.2.56",
+      "lastUpdated": "2025-12-29T07:01:06.837Z",
+      "daysAgo": 10
+    },
+    {
+      "name": "vitepress-plugin-llms",
+      "currentVersion": "^1.10.0",
+      "latestVersion": "1.10.0",
+      "lastUpdated": "2025-12-26T17:49:33.816Z",
+      "daysAgo": 13
+    },
+    {
+      "name": "@vitejs/plugin-vue-jsx",
+      "currentVersion": "^5.1.3",
+      "latestVersion": "5.1.3",
+      "lastUpdated": "2025-12-24T03:03:03.522Z",
+      "daysAgo": 15
+    },
+    {
+      "name": "vite-plugin-mock-dev-server",
+      "currentVersion": "^2.0.7",
+      "latestVersion": "2.0.7",
+      "lastUpdated": "2025-12-23T17:08:17.816Z",
+      "daysAgo": 16
+    },
+    {
+      "name": "vitepress-plugin-pagefind",
+      "currentVersion": "^0.4.18",
+      "latestVersion": "0.4.18",
+      "lastUpdated": "2025-12-21T11:50:29.491Z",
+      "daysAgo": 18
+    },
+    {
+      "name": "@antfu/eslint-config",
+      "currentVersion": "^6.7.3",
+      "latestVersion": "6.7.3",
+      "lastUpdated": "2025-12-22T01:38:10.520Z",
+      "daysAgo": 18
+    },
+    {
+      "name": "vitepress-plugin-rss",
+      "currentVersion": "^0.3.4",
+      "latestVersion": "0.4.2",
+      "lastUpdated": "2025-12-21T11:50:29.444Z",
+      "daysAgo": 18
+    },
+    {
+      "name": "fs-extra",
+      "currentVersion": "^11.3.3",
+      "latestVersion": "11.3.3",
+      "lastUpdated": "2025-12-18T17:26:35.464Z",
+      "daysAgo": 21
+    },
+    {
+      "name": "vitepress-i18n",
+      "currentVersion": "^1.3.5",
+      "latestVersion": "1.3.5",
+      "lastUpdated": "2025-12-18T01:29:40.519Z",
+      "daysAgo": 22
+    },
+    {
+      "name": "@vitest/coverage-v8",
+      "currentVersion": "^4.0.16",
+      "latestVersion": "4.0.16",
+      "lastUpdated": "2025-12-16T15:09:07.171Z",
+      "daysAgo": 23
+    },
+    {
+      "name": "@vitest/ui",
+      "currentVersion": "^4.0.16",
+      "latestVersion": "4.0.16",
+      "lastUpdated": "2025-12-16T15:09:10.922Z",
+      "daysAgo": 23
+    },
+    {
+      "name": "lodash-es",
+      "currentVersion": "^4.17.22",
+      "latestVersion": "4.17.22",
+      "lastUpdated": "2025-12-16T16:55:47.833Z",
+      "daysAgo": 23
+    },
+    {
+      "name": "@release-it/conventional-changelog",
+      "currentVersion": "^10.0.4",
+      "latestVersion": "10.0.4",
+      "lastUpdated": "2025-12-16T20:13:43.287Z",
+      "daysAgo": 23
+    },
+    {
+      "name": "@types/node",
+      "currentVersion": "^25.0.3",
+      "latestVersion": "25.0.3",
+      "lastUpdated": "2025-12-16T21:35:20.092Z",
+      "daysAgo": 23
+    },
+    {
+      "name": "vite-plugin-simple-html",
+      "currentVersion": "^1.1.0",
+      "latestVersion": "1.1.0",
+      "lastUpdated": "2025-12-13T18:27:20.878Z",
+      "daysAgo": 26
+    },
+    {
+      "name": "gsap",
+      "currentVersion": "^3.14.2",
+      "latestVersion": "3.14.2",
+      "lastUpdated": "2025-12-12T21:12:52.670Z",
+      "daysAgo": 27
+    },
+    {
+      "name": "eslint",
+      "currentVersion": "^9.39.2",
+      "latestVersion": "9.39.2",
+      "lastUpdated": "2025-12-12T22:44:54.630Z",
+      "daysAgo": 27
+    },
+    {
+      "name": "ua-parser-js",
+      "currentVersion": "^2.0.7",
+      "latestVersion": "2.0.7",
+      "lastUpdated": "2025-12-09T06:30:00.031Z",
+      "daysAgo": 30
+    },
+    {
+      "name": "vite-plugin-checker",
+      "currentVersion": "^0.11.0",
+      "latestVersion": "0.12.0",
+      "lastUpdated": "2025-12-08T14:35:55.704Z",
+      "daysAgo": 31
+    },
+    {
+      "name": "pinyin-match",
+      "currentVersion": "^1.2.10",
+      "latestVersion": "1.2.10",
+      "lastUpdated": "2025-12-07T03:37:04.104Z",
+      "daysAgo": 32
     },
     {
       "name": "vitepress-demo-plugin",
-      "currentVersion": "^1.5.0",
-      "latestVersion": "1.5.0",
-      "lastUpdated": "2025-09-28T07:49:36.477Z",
-      "daysAgo": 1
+      "currentVersion": "^1.5.1",
+      "latestVersion": "1.5.1",
+      "lastUpdated": "2025-12-07T01:33:25.054Z",
+      "daysAgo": 33
+    },
+    {
+      "name": "@iconify-json/carbon",
+      "currentVersion": "^1.2.15",
+      "latestVersion": "1.2.15",
+      "lastUpdated": "2025-12-04T05:47:10.913Z",
+      "daysAgo": 35
+    },
+    {
+      "name": "vitepress-markmap-preview",
+      "currentVersion": "^0.1.0",
+      "latestVersion": "0.2.0",
+      "lastUpdated": "2025-12-04T05:39:16.799Z",
+      "daysAgo": 35
+    },
+    {
+      "name": "vitepress-plugin-legend",
+      "currentVersion": "^1.2.1",
+      "latestVersion": "1.2.1",
+      "lastUpdated": "2025-12-04T07:22:26.297Z",
+      "daysAgo": 35
+    },
+    {
+      "name": "browserslist",
+      "currentVersion": "^4.28.1",
+      "latestVersion": "4.28.1",
+      "lastUpdated": "2025-12-03T16:22:25.708Z",
+      "daysAgo": 36
+    },
+    {
+      "name": "vite-plugin-compression2",
+      "currentVersion": "^2.4.0",
+      "latestVersion": "2.4.0",
+      "lastUpdated": "2025-12-03T17:29:30.407Z",
+      "daysAgo": 36
+    },
+    {
+      "name": "markdown-it-multimd-table-ext",
+      "currentVersion": "^4.2.35",
+      "latestVersion": "4.2.35",
+      "lastUpdated": "2025-12-02T23:21:52.263Z",
+      "daysAgo": 37
+    },
+    {
+      "name": "@iconify-json/vscode-icons",
+      "currentVersion": "^1.2.37",
+      "latestVersion": "1.2.37",
+      "lastUpdated": "2025-11-27T08:20:05.937Z",
+      "daysAgo": 42
+    },
+    {
+      "name": "@iconify/utils",
+      "currentVersion": "^3.1.0",
+      "latestVersion": "3.1.0",
+      "lastUpdated": "2025-11-27T06:37:38.859Z",
+      "daysAgo": 42
+    },
+    {
+      "name": "@vueuse/core",
+      "currentVersion": "^14.1.0",
+      "latestVersion": "14.1.0",
+      "lastUpdated": "2025-11-27T02:13:39.200Z",
+      "daysAgo": 43
+    },
+    {
+      "name": "@zumer/snapdom",
+      "currentVersion": "^2.0.1",
+      "latestVersion": "2.0.1",
+      "lastUpdated": "2025-11-26T20:52:58.436Z",
+      "daysAgo": 43
+    },
+    {
+      "name": "unplugin-auto-import",
+      "currentVersion": "^20.3.0",
+      "latestVersion": "20.3.0",
+      "lastUpdated": "2025-11-27T02:27:02.972Z",
+      "daysAgo": 43
+    },
+    {
+      "name": "vue3-next-qrcode",
+      "currentVersion": "^4.0.0",
+      "latestVersion": "4.0.0",
+      "lastUpdated": "2025-11-22T13:11:51.883Z",
+      "daysAgo": 47
+    },
+    {
+      "name": "marked",
+      "currentVersion": "^17.0.1",
+      "latestVersion": "17.0.1",
+      "lastUpdated": "2025-11-20T17:01:43.302Z",
+      "daysAgo": 49
+    },
+    {
+      "name": "glob",
+      "currentVersion": "^13.0.0",
+      "latestVersion": "13.0.0",
+      "lastUpdated": "2025-11-19T16:04:02.567Z",
+      "daysAgo": 50
+    },
+    {
+      "name": "driver.js",
+      "currentVersion": "^1.4.0",
+      "latestVersion": "1.4.0",
+      "lastUpdated": "2025-11-18T22:22:49.684Z",
+      "daysAgo": 51
+    },
+    {
+      "name": "@tdesign-vue-next/auto-import-resolver",
+      "currentVersion": "^0.1.4",
+      "latestVersion": "0.1.4",
+      "lastUpdated": "2025-11-18T04:46:37.204Z",
+      "daysAgo": 51
+    },
+    {
+      "name": "vite-plugin-fake-server",
+      "currentVersion": "^2.2.2",
+      "latestVersion": "2.2.2",
+      "lastUpdated": "2025-11-12T14:20:43.260Z",
+      "daysAgo": 57
+    },
+    {
+      "name": "sharp",
+      "currentVersion": "^0.34.5",
+      "latestVersion": "0.34.5",
+      "lastUpdated": "2025-11-06T14:19:40.989Z",
+      "daysAgo": 63
+    },
+    {
+      "name": "pinia",
+      "currentVersion": "^3.0.4",
+      "latestVersion": "3.0.4",
+      "lastUpdated": "2025-11-05T09:25:13.853Z",
+      "daysAgo": 64
+    },
+    {
+      "name": "simple-git",
+      "currentVersion": "^3.30.0",
+      "latestVersion": "3.30.0",
+      "lastUpdated": "2025-11-02T08:15:31.481Z",
+      "daysAgo": 67
+    },
+    {
+      "name": "sitemap",
+      "currentVersion": "^9.0.0",
+      "latestVersion": "9.0.0",
+      "lastUpdated": "2025-11-02T05:07:14.371Z",
+      "daysAgo": 67
+    },
+    {
+      "name": "vite-plugin-image-optimizer",
+      "currentVersion": "^2.0.3",
+      "latestVersion": "2.0.3",
+      "lastUpdated": "2025-10-30T17:38:59.249Z",
+      "daysAgo": 70
+    },
+    {
+      "name": "@iconify-json/logos",
+      "currentVersion": "^1.2.10",
+      "latestVersion": "1.2.10",
+      "lastUpdated": "2025-10-27T19:04:02.378Z",
+      "daysAgo": 73
+    },
+    {
+      "name": "canvas-confetti",
+      "currentVersion": "^1.9.4",
+      "latestVersion": "1.9.4",
+      "lastUpdated": "2025-10-25T05:15:41.929Z",
+      "daysAgo": 75
+    },
+    {
+      "name": "@vitepress-demo-preview/component",
+      "currentVersion": "^2.6.1",
+      "latestVersion": "2.6.1",
+      "lastUpdated": "2025-10-24T02:01:06.747Z",
+      "daysAgo": 77
+    },
+    {
+      "name": "vitepress-plugin-group-icons",
+      "currentVersion": "^1.6.5",
+      "latestVersion": "1.6.5",
+      "lastUpdated": "2025-10-24T02:04:01.148Z",
+      "daysAgo": 77
+    },
+    {
+      "name": "@fingerprintjs/fingerprintjs",
+      "currentVersion": "^5.0.1",
+      "latestVersion": "5.0.1",
+      "lastUpdated": "2025-10-22T14:18:28.948Z",
+      "daysAgo": 78
+    },
+    {
+      "name": "unplugin-icons",
+      "currentVersion": "^22.5.0",
+      "latestVersion": "22.5.0",
+      "lastUpdated": "2025-10-19T22:11:04.083Z",
+      "daysAgo": 81
+    },
+    {
+      "name": "unplugin-vue-components",
+      "currentVersion": "^30.0.0",
+      "latestVersion": "30.0.0",
+      "lastUpdated": "2025-10-19T23:16:25.639Z",
+      "daysAgo": 81
+    },
+    {
+      "name": "animejs",
+      "currentVersion": "4.2.2",
+      "latestVersion": "4.2.2",
+      "lastUpdated": "2025-10-07T07:26:46.935Z",
+      "daysAgo": 93
+    },
+    {
+      "name": "vite-plugin-mkcert",
+      "currentVersion": "^1.17.9",
+      "latestVersion": "1.17.9",
+      "lastUpdated": "2025-10-07T03:33:08.250Z",
+      "daysAgo": 93
+    },
+    {
+      "name": "typescript",
+      "currentVersion": "^5.9.3",
+      "latestVersion": "5.9.3",
+      "lastUpdated": "2025-09-30T21:19:38.784Z",
+      "daysAgo": 100
+    },
+    {
+      "name": "cross-env",
+      "currentVersion": "^10.1.0",
+      "latestVersion": "10.1.0",
+      "lastUpdated": "2025-09-29T17:34:12.232Z",
+      "daysAgo": 101
+    },
+    {
+      "name": "markdown-it-mathjax3",
+      "currentVersion": "^4.3.2",
+      "latestVersion": "5.2.0",
+      "lastUpdated": "2025-09-29T15:45:30.595Z",
+      "daysAgo": 101
     },
     {
       "name": "vitepress-plugin-auto-frontmatter",
       "currentVersion": "^1.0.13",
       "latestVersion": "1.0.13",
       "lastUpdated": "2025-09-25T14:03:05.629Z",
-      "daysAgo": 4
-    },
-    {
-      "name": "@commitlint/cli",
-      "currentVersion": "^20.0.0",
-      "latestVersion": "20.0.0",
-      "lastUpdated": "2025-09-25T12:59:12.391Z",
-      "daysAgo": 4
-    },
-    {
-      "name": "@commitlint/config-conventional",
-      "currentVersion": "^20.0.0",
-      "latestVersion": "20.0.0",
-      "lastUpdated": "2025-09-25T12:59:11.973Z",
-      "daysAgo": 4
-    },
-    {
-      "name": "@commitlint/cz-commitlint",
-      "currentVersion": "^20.0.0",
-      "latestVersion": "20.0.0",
-      "lastUpdated": "2025-09-25T12:59:12.454Z",
-      "daysAgo": 4
-    },
-    {
-      "name": "commitlint",
-      "currentVersion": "^20.0.0",
-      "latestVersion": "20.0.0",
-      "lastUpdated": "2025-09-25T12:59:14.598Z",
-      "daysAgo": 4
-    },
-    {
-      "name": "rolldown-vite",
-      "currentVersion": "^7.1.13",
-      "latestVersion": "7.1.13",
-      "lastUpdated": "2025-09-24T12:06:31.299Z",
-      "daysAgo": 5
-    },
-    {
-      "name": "sass-embedded",
-      "currentVersion": "^1.93.2",
-      "latestVersion": "1.93.2",
-      "lastUpdated": "2025-09-23T21:57:04.702Z",
-      "daysAgo": 6
-    },
-    {
-      "name": "unplugin-auto-import",
-      "currentVersion": "^20.2.0",
-      "latestVersion": "20.2.0",
-      "lastUpdated": "2025-09-23T23:57:36.840Z",
-      "daysAgo": 6
+      "daysAgo": 105
     },
     {
       "name": "nanoid",
       "currentVersion": "^5.1.6",
       "latestVersion": "5.1.6",
       "lastUpdated": "2025-09-22T09:45:52.703Z",
-      "daysAgo": 7
+      "daysAgo": 108
     },
     {
-      "name": "unocss",
-      "currentVersion": "^66.5.2",
-      "latestVersion": "66.5.2",
-      "lastUpdated": "2025-09-23T00:54:05.415Z",
-      "daysAgo": 7
-    },
-    {
-      "name": "unplugin-vue-components",
-      "currentVersion": "^29.1.0",
-      "latestVersion": "29.1.0",
-      "lastUpdated": "2025-09-20T22:13:30.934Z",
-      "daysAgo": 9
-    },
-    {
-      "name": "sharp",
-      "currentVersion": "^0.34.4",
-      "latestVersion": "0.34.4",
-      "lastUpdated": "2025-09-17T13:20:20.737Z",
-      "daysAgo": 12
+      "name": "@vitepress-demo-preview/plugin",
+      "currentVersion": "^1.4.1",
+      "latestVersion": "1.4.1",
+      "lastUpdated": "2025-09-21T07:41:15.843Z",
+      "daysAgo": 109
     },
     {
       "name": "ora",
       "currentVersion": "^9.0.0",
       "latestVersion": "9.0.0",
       "lastUpdated": "2025-09-16T03:30:20.976Z",
-      "daysAgo": 13
-    },
-    {
-      "name": "fs-extra",
-      "currentVersion": "^11.3.2",
-      "latestVersion": "11.3.2",
-      "lastUpdated": "2025-09-15T18:05:36.735Z",
-      "daysAgo": 14
-    },
-    {
-      "name": "@iconify/utils",
-      "currentVersion": "^3.0.2",
-      "latestVersion": "3.0.2",
-      "lastUpdated": "2025-09-15T05:20:16.470Z",
-      "daysAgo": 14
-    },
-    {
-      "name": "code-inspector-plugin",
-      "currentVersion": "^1.2.10",
-      "latestVersion": "1.2.10",
-      "lastUpdated": "2025-09-15T12:17:04.834Z",
-      "daysAgo": 14
+      "daysAgo": 114
     },
     {
       "name": "vitepress-plugin-tabs",
       "currentVersion": "^0.7.3",
       "latestVersion": "0.7.3",
       "lastUpdated": "2025-09-15T12:54:59.618Z",
-      "daysAgo": 14
-    },
-    {
-      "name": "marked",
-      "currentVersion": "^16.3.0",
-      "latestVersion": "16.3.0",
-      "lastUpdated": "2025-09-14T14:33:13.655Z",
-      "daysAgo": 15
-    },
-    {
-      "name": "unplugin-icons",
-      "currentVersion": "^22.3.0",
-      "latestVersion": "22.3.0",
-      "lastUpdated": "2025-09-12T01:30:13.131Z",
-      "daysAgo": 18
-    },
-    {
-      "name": "vitepress-plugin-llms",
-      "currentVersion": "^1.7.5",
-      "latestVersion": "1.7.5",
-      "lastUpdated": "2025-09-11T08:08:11.907Z",
-      "daysAgo": 18
+      "daysAgo": 115
     },
     {
       "name": "@vue-styled-components/core",
       "currentVersion": "^1.13.3",
       "latestVersion": "1.13.3",
       "lastUpdated": "2025-09-10T13:36:33.663Z",
-      "daysAgo": 19
-    },
-    {
-      "name": "@zumer/snapdom",
-      "currentVersion": "^1.9.11",
-      "latestVersion": "1.9.11",
-      "lastUpdated": "2025-09-09T14:50:42.889Z",
-      "daysAgo": 20
-    },
-    {
-      "name": "ua-parser-js",
-      "currentVersion": "^2.0.5",
-      "latestVersion": "2.0.5",
-      "lastUpdated": "2025-09-09T13:56:40.283Z",
-      "daysAgo": 20
+      "daysAgo": 120
     },
     {
       "name": "chalk",
       "currentVersion": "^5.6.2",
       "latestVersion": "5.6.2",
       "lastUpdated": "2025-09-08T14:47:54.486Z",
-      "daysAgo": 21
+      "daysAgo": 122
     },
     {
       "name": "@mermaid-js/layout-elk",
       "currentVersion": "^0.2.0",
       "latestVersion": "0.2.0",
       "lastUpdated": "2025-09-04T15:08:07.065Z",
-      "daysAgo": 25
-    },
-    {
-      "name": "vite-plugin-mock-dev-server",
-      "currentVersion": "^2.0.1",
-      "latestVersion": "2.0.1",
-      "lastUpdated": "2025-09-04T04:35:26.465Z",
-      "daysAgo": 25
+      "daysAgo": 126
     },
     {
       "name": "vitepress-plugin-setfrontmatter",
       "currentVersion": "^1.2.3",
       "latestVersion": "1.2.3",
       "lastUpdated": "2025-09-02T09:12:56.661Z",
-      "daysAgo": 27
+      "daysAgo": 128
     },
     {
       "name": "pagefind",
       "currentVersion": "^1.4.0",
       "latestVersion": "1.4.0",
       "lastUpdated": "2025-09-01T05:46:09.737Z",
-      "daysAgo": 28
-    },
-    {
-      "name": "dayjs",
-      "currentVersion": "^1.11.18",
-      "latestVersion": "1.11.18",
-      "lastUpdated": "2025-08-30T03:30:48.541Z",
-      "daysAgo": 30
+      "daysAgo": 129
     },
     {
       "name": "@plugin-web-update-notification/vite",
       "currentVersion": "^2.0.2",
       "latestVersion": "2.0.2",
       "lastUpdated": "2025-08-30T08:19:30.576Z",
-      "daysAgo": 30
-    },
-    {
-      "name": "vite-plugin-compression2",
-      "currentVersion": "^2.2.1",
-      "latestVersion": "2.2.1",
-      "lastUpdated": "2025-08-29T15:07:01.361Z",
-      "daysAgo": 31
-    },
-    {
-      "name": "@vitejs/plugin-vue-jsx",
-      "currentVersion": "^5.1.1",
-      "latestVersion": "5.1.1",
-      "lastUpdated": "2025-08-28T01:59:50.190Z",
-      "daysAgo": 32
+      "daysAgo": 131
     },
     {
       "name": "vite-plugin-inspect",
       "currentVersion": "^11.3.3",
       "latestVersion": "11.3.3",
       "lastUpdated": "2025-08-25T02:41:36.449Z",
-      "daysAgo": 35
-    },
-    {
-      "name": "@iconify-json/vscode-icons",
-      "currentVersion": "^1.2.30",
-      "latestVersion": "1.2.30",
-      "lastUpdated": "2025-08-25T05:33:22.805Z",
-      "daysAgo": 35
-    },
-    {
-      "name": "@faker-js/faker",
-      "currentVersion": "^10.0.0",
-      "latestVersion": "10.0.0",
-      "lastUpdated": "2025-08-24T09:06:28.929Z",
-      "daysAgo": 36
+      "daysAgo": 136
     },
     {
       "name": "cz-customizable",
       "currentVersion": "^7.5.1",
       "latestVersion": "7.5.1",
       "lastUpdated": "2025-08-22T02:03:19.751Z",
-      "daysAgo": 38
+      "daysAgo": 140
     },
     {
       "name": "@mermaid-js/mermaid-zenuml",
       "currentVersion": "^0.2.2",
       "latestVersion": "0.2.2",
       "lastUpdated": "2025-08-19T08:05:00.929Z",
-      "daysAgo": 41
-    },
-    {
-      "name": "vite-plugin-pwa",
-      "currentVersion": "^1.0.3",
-      "latestVersion": "1.0.3",
-      "lastUpdated": "2025-08-19T17:39:42.842Z",
-      "daysAgo": 41
-    },
-    {
-      "name": "vitepress-plugin-group-icons",
-      "currentVersion": "^1.6.3",
-      "latestVersion": "1.6.3",
-      "lastUpdated": "2025-08-13T01:07:24.825Z",
-      "daysAgo": 48
-    },
-    {
-      "name": "@iconify-json/carbon",
-      "currentVersion": "^1.2.13",
-      "latestVersion": "1.2.13",
-      "lastUpdated": "2025-08-11T07:51:25.905Z",
-      "daysAgo": 49
-    },
-    {
-      "name": "@iconify-json/line-md",
-      "currentVersion": "^1.2.11",
-      "latestVersion": "1.2.11",
-      "lastUpdated": "2025-08-11T08:09:33.671Z",
-      "daysAgo": 49
-    },
-    {
-      "name": "vitepress-plugin-legend",
-      "currentVersion": "^1.1.0",
-      "latestVersion": "1.1.0",
-      "lastUpdated": "2025-08-11T05:53:40.044Z",
-      "daysAgo": 49
+      "daysAgo": 142
     },
     {
       "name": "@iconify-json/skill-icons",
       "currentVersion": "^1.2.3",
       "latestVersion": "1.2.3",
       "lastUpdated": "2025-08-11T08:24:16.178Z",
-      "daysAgo": 49
+      "daysAgo": 150
     },
     {
       "name": "vitepress",
-      "currentVersion": "^2.0.0-alpha.12",
+      "currentVersion": "^2.0.0-alpha.15",
       "latestVersion": "1.6.4",
       "lastUpdated": "2025-08-05T13:40:31.197Z",
-      "daysAgo": 55
+      "daysAgo": 156
     },
     {
       "name": "vite-plugin-version-mark",
       "currentVersion": "^0.2.2",
       "latestVersion": "0.2.2",
       "lastUpdated": "2025-08-05T02:20:00.333Z",
-      "daysAgo": 55
+      "daysAgo": 157
     },
     {
       "name": "pinyin-pro",
       "currentVersion": "^3.27.0",
       "latestVersion": "3.27.0",
       "lastUpdated": "2025-08-03T03:18:29.808Z",
-      "daysAgo": 57
+      "daysAgo": 158
     },
     {
       "name": "lunisolar",
       "currentVersion": "^2.6.0",
       "latestVersion": "2.6.0",
       "lastUpdated": "2025-08-01T08:22:24.424Z",
-      "daysAgo": 59
-    },
-    {
-      "name": "typescript",
-      "currentVersion": "^5.9.2",
-      "latestVersion": "5.9.2",
-      "lastUpdated": "2025-07-31T17:54:06.216Z",
-      "daysAgo": 60
+      "daysAgo": 160
     },
     {
       "name": "echarts",
       "currentVersion": "^6.0.0",
       "latestVersion": "6.0.0",
       "lastUpdated": "2025-07-30T02:38:34.897Z",
-      "daysAgo": 61
+      "daysAgo": 162
     },
     {
       "name": "vue3-simple-icons",
       "currentVersion": "^15.6.0",
       "latestVersion": "15.6.0",
       "lastUpdated": "2025-07-19T19:38:28.869Z",
-      "daysAgo": 72
+      "daysAgo": 173
     },
     {
       "name": "random",
       "currentVersion": "^5.4.1",
       "latestVersion": "5.4.1",
       "lastUpdated": "2025-07-12T03:38:09.600Z",
-      "daysAgo": 79
+      "daysAgo": 180
     },
     {
       "name": "markdown-it-mathjax3-pro",
       "currentVersion": "^1.0.0",
       "latestVersion": "1.0.0",
       "lastUpdated": "2025-07-08T07:03:13.975Z",
-      "daysAgo": 83
+      "daysAgo": 184
     },
     {
       "name": "@julr/vite-plugin-validate-env",
       "currentVersion": "^2.2.0",
       "latestVersion": "2.2.0",
       "lastUpdated": "2025-07-03T18:28:43.645Z",
-      "daysAgo": 88
-    },
-    {
-      "name": "vite-plugin-image-optimizer",
-      "currentVersion": "^2.0.2",
-      "latestVersion": "2.0.2",
-      "lastUpdated": "2025-06-30T06:02:04.777Z",
-      "daysAgo": 91
+      "daysAgo": 189
     },
     {
       "name": "vite-plugin-qrcode",
       "currentVersion": "^0.3.0",
       "latestVersion": "0.3.0",
       "lastUpdated": "2025-06-29T18:34:17.393Z",
-      "daysAgo": 92
+      "daysAgo": 193
     },
     {
       "name": "svgo",
       "currentVersion": "^4.0.0",
       "latestVersion": "4.0.0",
       "lastUpdated": "2025-06-21T16:09:03.330Z",
-      "daysAgo": 100
+      "daysAgo": 201
     },
     {
-      "name": "@vitest/coverage-v8",
-      "currentVersion": "^3.2.4",
-      "latestVersion": "3.2.4",
-      "lastUpdated": "2025-06-17T17:54:32.441Z",
-      "daysAgo": 104
-    },
-    {
-      "name": "@vitest/ui",
-      "currentVersion": "^3.2.4",
-      "latestVersion": "3.2.4",
-      "lastUpdated": "2025-06-17T17:54:36.540Z",
-      "daysAgo": 104
-    },
-    {
-      "name": "vitest",
-      "currentVersion": "^3.2.4",
-      "latestVersion": "3.2.4",
-      "lastUpdated": "2025-06-17T17:54:25.895Z",
-      "daysAgo": 104
-    },
-    {
-      "name": "glob",
-      "currentVersion": "^11.0.3",
-      "latestVersion": "11.0.3",
-      "lastUpdated": "2025-06-12T20:23:24.661Z",
-      "daysAgo": 109
-    },
-    {
-      "name": "vite-plugin-simple-html",
-      "currentVersion": "^1.0.1",
-      "latestVersion": "1.0.1",
-      "lastUpdated": "2025-06-12T13:25:17.732Z",
-      "daysAgo": 109
-    },
-    {
-      "name": "simple-git",
-      "currentVersion": "^3.28.0",
-      "latestVersion": "3.28.0",
-      "lastUpdated": "2025-06-06T07:17:38.822Z",
-      "daysAgo": 115
+      "name": "postcss",
+      "currentVersion": "^8.5.6",
+      "latestVersion": "8.5.6",
+      "lastUpdated": "2025-06-16T13:58:02.262Z",
+      "daysAgo": 206
     },
     {
       "name": "unplugin-version-injector",
       "currentVersion": "^2.1.1",
       "latestVersion": "2.1.1",
       "lastUpdated": "2025-06-05T02:17:26.639Z",
-      "daysAgo": 116
-    },
-    {
-      "name": "pinia",
-      "currentVersion": "^3.0.3",
-      "latestVersion": "3.0.3",
-      "lastUpdated": "2025-06-04T09:40:42.410Z",
-      "daysAgo": 117
+      "daysAgo": 218
     },
     {
       "name": "feed",
       "currentVersion": "^5.1.0",
       "latestVersion": "5.1.0",
       "lastUpdated": "2025-05-27T10:08:17.979Z",
-      "daysAgo": 125
+      "daysAgo": 226
     },
     {
       "name": "default-passive-events",
       "currentVersion": "^4.0.0",
       "latestVersion": "4.0.0",
       "lastUpdated": "2025-05-24T23:29:36.596Z",
-      "daysAgo": 128
+      "daysAgo": 229
     },
     {
       "name": "vitepress-plugin-md-h1",
       "currentVersion": "^1.0.11",
       "latestVersion": "1.0.11",
       "lastUpdated": "2025-05-18T17:58:47.205Z",
-      "daysAgo": 134
+      "daysAgo": 235
     },
     {
       "name": "@opentiny/icons",
       "currentVersion": "^0.1.4",
       "latestVersion": "0.1.4",
       "lastUpdated": "2025-05-14T03:17:58.998Z",
-      "daysAgo": 138
-    },
-    {
-      "name": "driver.js",
-      "currentVersion": "^1.3.6",
-      "latestVersion": "1.3.6",
-      "lastUpdated": "2025-05-13T08:38:51.932Z",
-      "daysAgo": 139
-    },
-    {
-      "name": "pinyin-match",
-      "currentVersion": "^1.2.8",
-      "latestVersion": "1.2.8",
-      "lastUpdated": "2025-05-11T03:58:04.732Z",
-      "daysAgo": 141
+      "daysAgo": 239
     },
     {
       "name": "vitepress-plugin-npm-commands",
       "currentVersion": "^0.8.1",
       "latestVersion": "0.8.1",
       "lastUpdated": "2025-05-03T17:10:34.918Z",
-      "daysAgo": 149
+      "daysAgo": 250
     },
     {
       "name": "@iconify/vue",
       "currentVersion": "^5.0.0",
       "latestVersion": "5.0.0",
       "lastUpdated": "2025-04-30T10:22:51.822Z",
-      "daysAgo": 152
-    },
-    {
-      "name": "gsap",
-      "currentVersion": "^3.13.0",
-      "latestVersion": "3.13.0",
-      "lastUpdated": "2025-04-30T15:30:42.322Z",
-      "daysAgo": 152
+      "daysAgo": 253
     },
     {
       "name": "@catppuccin/vitepress",
       "currentVersion": "^0.1.2",
       "latestVersion": "0.1.2",
       "lastUpdated": "2025-04-27T20:24:35.215Z",
-      "daysAgo": 155
-    },
-    {
-      "name": "vitepress-i18n",
-      "currentVersion": "^1.3.4",
-      "latestVersion": "1.3.4",
-      "lastUpdated": "2025-04-26T08:07:15.700Z",
-      "daysAgo": 156
+      "daysAgo": 256
     },
     {
       "name": "vitepress-plugin-frontmatter",
       "currentVersion": "^2.0.1",
       "latestVersion": "2.0.1",
       "lastUpdated": "2025-04-20T03:16:47.133Z",
-      "daysAgo": 162
-    },
-    {
-      "name": "@release-it/conventional-changelog",
-      "currentVersion": "^10.0.1",
-      "latestVersion": "10.0.1",
-      "lastUpdated": "2025-04-18T06:41:11.680Z",
-      "daysAgo": 164
+      "daysAgo": 263
     },
     {
       "name": "xlogs",
       "currentVersion": "^0.1.0",
       "latestVersion": "0.1.0",
       "lastUpdated": "2025-04-14T15:15:40.258Z",
-      "daysAgo": 168
-    },
-    {
-      "name": "@fingerprintjs/fingerprintjs",
-      "currentVersion": "^4.6.2",
-      "latestVersion": "4.6.2",
-      "lastUpdated": "2025-04-10T10:23:56.995Z",
-      "daysAgo": 172
+      "daysAgo": 269
     },
     {
       "name": "markdown-it-github-alerts",
       "currentVersion": "^1.0.0",
       "latestVersion": "1.0.0",
       "lastUpdated": "2025-04-02T03:56:38.252Z",
-      "daysAgo": 180
+      "daysAgo": 281
     },
     {
       "name": "@vue-styled-components/plugin",
       "currentVersion": "^1.0.1",
       "latestVersion": "1.0.1",
       "lastUpdated": "2025-03-14T16:15:09.787Z",
-      "daysAgo": 199
-    },
-    {
-      "name": "vite-plugin-mkcert",
-      "currentVersion": "^1.17.8",
-      "latestVersion": "1.17.8",
-      "lastUpdated": "2025-03-14T06:42:13.196Z",
-      "daysAgo": 199
+      "daysAgo": 300
     },
     {
       "name": "deepmerge-ts",
       "currentVersion": "^7.1.5",
       "latestVersion": "7.1.5",
       "lastUpdated": "2025-02-23T11:14:35.246Z",
-      "daysAgo": 218
+      "daysAgo": 319
     },
     {
       "name": "nprogress-v2",
       "currentVersion": "^1.1.10",
       "latestVersion": "1.1.10",
       "lastUpdated": "2025-02-18T10:02:06.219Z",
-      "daysAgo": 223
+      "daysAgo": 324
     },
     {
       "name": "@iconify-json/mdi",
       "currentVersion": "^1.2.3",
       "latestVersion": "1.2.3",
       "lastUpdated": "2025-01-20T18:38:55.373Z",
-      "daysAgo": 252
+      "daysAgo": 353
     },
     {
       "name": "vite-plugin-px2rem",
       "currentVersion": "^1.0.5",
       "latestVersion": "1.0.5",
       "lastUpdated": "2025-01-18T11:55:06.854Z",
-      "daysAgo": 254
-    },
-    {
-      "name": "vite-plugin-fake-server",
-      "currentVersion": "^2.2.0",
-      "latestVersion": "2.2.0",
-      "lastUpdated": "2025-01-09T06:28:56.652Z",
-      "daysAgo": 263
+      "daysAgo": 355
     },
     {
       "name": "markdown-it-regex",
       "currentVersion": "^0.2.2",
       "latestVersion": "0.2.2",
       "lastUpdated": "2025-01-07T22:19:44.869Z",
-      "daysAgo": 265
-    },
-    {
-      "name": "vite-aliases",
-      "currentVersion": "^0.11.8",
-      "latestVersion": "0.11.8",
-      "lastUpdated": "2025-01-05T14:26:20.447Z",
-      "daysAgo": 267
+      "daysAgo": 366
     },
     {
       "name": "vitepress-markdown-timeline",
       "currentVersion": "^1.2.2",
       "latestVersion": "1.2.2",
       "lastUpdated": "2024-12-27T09:57:48.301Z",
-      "daysAgo": 276
+      "daysAgo": 377
     },
     {
       "name": "vitepress-plugin-codeblocks-fold",
       "currentVersion": "^1.2.35",
       "latestVersion": "1.2.35",
       "lastUpdated": "2024-12-25T02:25:43.318Z",
-      "daysAgo": 278
+      "daysAgo": 380
     },
     {
       "name": "vitepress-markdown-it-stepper",
       "currentVersion": "^0.1.1",
       "latestVersion": "0.1.1",
       "lastUpdated": "2024-12-06T17:43:19.836Z",
-      "daysAgo": 297
+      "daysAgo": 398
     },
     {
       "name": "vite-plugin-image-preload",
       "currentVersion": "^1.0.0",
       "latestVersion": "1.0.0",
       "lastUpdated": "2024-12-01T12:36:35.873Z",
-      "daysAgo": 302
+      "daysAgo": 403
     },
     {
       "name": "cz-message-helper",
       "currentVersion": "^2.0.0",
       "latestVersion": "2.0.0",
       "lastUpdated": "2024-11-26T07:30:47.588Z",
-      "daysAgo": 307
+      "daysAgo": 408
     },
     {
       "name": "markdown-it-replace-link",
       "currentVersion": "^1.2.2",
       "latestVersion": "1.2.2",
       "lastUpdated": "2024-11-20T11:21:40.364Z",
-      "daysAgo": 313
-    },
-    {
-      "name": "markdown-it-multimd-table-ext",
-      "currentVersion": "^4.2.32",
-      "latestVersion": "4.2.32",
-      "lastUpdated": "2024-11-19T14:10:37.617Z",
-      "daysAgo": 314
+      "daysAgo": 414
     },
     {
       "name": "husky",
       "currentVersion": "^9.1.7",
       "latestVersion": "9.1.7",
       "lastUpdated": "2024-11-18T15:28:26.026Z",
-      "daysAgo": 315
-    },
-    {
-      "name": "ant-design-vue",
-      "currentVersion": "4.2.6",
-      "latestVersion": "4.2.6",
-      "lastUpdated": "2024-11-11T09:00:46.901Z",
-      "daysAgo": 322
+      "daysAgo": 416
     },
     {
       "name": "markdown-it-named-code-blocks",
       "currentVersion": "^1.0.6",
       "latestVersion": "1.0.6",
       "lastUpdated": "2024-11-10T10:25:34.820Z",
-      "daysAgo": 323
+      "daysAgo": 424
     },
     {
       "name": "unplugin-iconify-generator",
       "currentVersion": "^0.7.3",
       "latestVersion": "0.7.3",
       "lastUpdated": "2024-10-24T15:34:24.179Z",
-      "daysAgo": 340
-    },
-    {
-      "name": "vue3-autocounter",
-      "currentVersion": "^1.0.8",
-      "latestVersion": "1.0.8",
-      "lastUpdated": "2024-10-16T18:14:30.551Z",
-      "daysAgo": 348
+      "daysAgo": 441
     },
     {
       "name": "picocolors",
       "currentVersion": "^1.1.1",
       "latestVersion": "1.1.1",
       "lastUpdated": "2024-10-16T18:20:03.921Z",
-      "daysAgo": 348
+      "daysAgo": 449
     },
     {
       "name": "esno",
       "currentVersion": "^4.8.0",
       "latestVersion": "4.8.0",
       "lastUpdated": "2024-09-29T00:23:39.051Z",
-      "daysAgo": 366
+      "daysAgo": 467
     },
     {
       "name": "commitizen",
       "currentVersion": "^4.3.1",
       "latestVersion": "4.3.1",
       "lastUpdated": "2024-09-27T04:18:48.788Z",
-      "daysAgo": 367
+      "daysAgo": 468
     },
     {
       "name": "vitepress-plugin-mermaid",
       "currentVersion": "^2.0.17",
       "latestVersion": "2.0.17",
       "lastUpdated": "2024-09-24T01:33:41.160Z",
-      "daysAgo": 371
+      "daysAgo": 472
     },
     {
       "name": "yuppie-ui",
       "currentVersion": "^0.0.11",
       "latestVersion": "0.0.11",
       "lastUpdated": "2024-09-03T08:05:12.403Z",
-      "daysAgo": 391
+      "daysAgo": 492
     },
     {
       "name": "vite-plugin-html-config",
       "currentVersion": "^2.0.2",
       "latestVersion": "2.0.2",
       "lastUpdated": "2024-08-31T10:05:24.092Z",
-      "daysAgo": 394
+      "daysAgo": 495
     },
     {
       "name": "@vitepress-code-preview/plugin",
       "currentVersion": "^1.0.6",
       "latestVersion": "1.0.6",
       "lastUpdated": "2024-08-23T06:24:48.975Z",
-      "daysAgo": 402
+      "daysAgo": 503
     },
     {
       "name": "@vitepress-code-preview/container",
       "currentVersion": "^1.0.8",
       "latestVersion": "1.0.8",
       "lastUpdated": "2024-08-15T05:25:50.363Z",
-      "daysAgo": 410
+      "daysAgo": 511
     },
     {
       "name": "vite-plugin-env-parse",
       "currentVersion": "^1.0.15",
       "latestVersion": "1.0.15",
       "lastUpdated": "2024-07-13T10:24:51.133Z",
-      "daysAgo": 443
+      "daysAgo": 544
     },
     {
       "name": "vitepress-protect-plugin",
       "currentVersion": "^1.0.6",
       "latestVersion": "1.0.6",
       "lastUpdated": "2024-07-11T09:23:40.888Z",
-      "daysAgo": 445
+      "daysAgo": 546
     },
     {
       "name": "markdown-it-wordless",
       "currentVersion": "^1.1.1",
       "latestVersion": "1.1.1",
       "lastUpdated": "2024-06-23T22:51:06.731Z",
-      "daysAgo": 463
-    },
-    {
-      "name": "sitemap",
-      "currentVersion": "^8.0.0",
-      "latestVersion": "8.0.0",
-      "lastUpdated": "2024-05-22T05:25:20.259Z",
-      "daysAgo": 495
+      "daysAgo": 564
     },
     {
       "name": "html2particle",
       "currentVersion": "^0.0.10",
       "latestVersion": "0.0.11-beta.5",
       "lastUpdated": "2024-05-08T15:40:20.492Z",
-      "daysAgo": 509
-    },
-    {
-      "name": "conventional-changelog-cli",
-      "currentVersion": "^5.0.0",
-      "latestVersion": "5.0.0",
-      "lastUpdated": "2024-05-03T22:57:55.122Z",
-      "daysAgo": 514
-    },
-    {
-      "name": "canvas-confetti",
-      "currentVersion": "^1.9.3",
-      "latestVersion": "1.9.3",
-      "lastUpdated": "2024-04-30T22:20:03.794Z",
-      "daysAgo": 517
+      "daysAgo": 610
     },
     {
       "name": "markdown-it-collapsible",
       "currentVersion": "^2.0.2",
       "latestVersion": "2.0.2",
       "lastUpdated": "2024-04-21T09:41:14.297Z",
-      "daysAgo": 526
+      "daysAgo": 627
     },
     {
       "name": "markdown-it-front-matter",
       "currentVersion": "^0.2.4",
       "latestVersion": "0.2.4",
       "lastUpdated": "2024-04-04T04:27:52.788Z",
-      "daysAgo": 543
+      "daysAgo": 644
     },
     {
       "name": "vite-plugin-image-placeholder",
       "currentVersion": "^1.1.0",
       "latestVersion": "1.1.0",
       "lastUpdated": "2024-03-31T11:43:12.942Z",
-      "daysAgo": 547
-    },
-    {
-      "name": "vite-plugin-robots",
-      "currentVersion": "^1.0.5",
-      "latestVersion": "1.0.5",
-      "lastUpdated": "2024-03-20T09:08:24.030Z",
-      "daysAgo": 558
+      "daysAgo": 648
     },
     {
       "name": "markdown-it",
       "currentVersion": "^14.1.0",
       "latestVersion": "14.1.0",
       "lastUpdated": "2024-03-18T23:17:52.302Z",
-      "daysAgo": 560
+      "daysAgo": 661
     },
     {
       "name": "@types/markdown-it-footnote",
       "currentVersion": "^3.0.4",
       "latestVersion": "3.0.4",
       "lastUpdated": "2024-02-07T13:07:10.053Z",
-      "daysAgo": 600
+      "daysAgo": 701
     },
     {
       "name": "markdown-it-footnote",
       "currentVersion": "^4.0.0",
       "latestVersion": "4.0.0",
       "lastUpdated": "2023-12-06T11:36:37.378Z",
-      "daysAgo": 663
+      "daysAgo": 764
     },
     {
       "name": "markdown-it-sub",
       "currentVersion": "^2.0.0",
       "latestVersion": "2.0.0",
       "lastUpdated": "2023-12-05T13:28:27.372Z",
-      "daysAgo": 664
+      "daysAgo": 765
     },
     {
       "name": "markdown-it-sup",
       "currentVersion": "^2.0.0",
       "latestVersion": "2.0.0",
       "lastUpdated": "2023-12-05T13:47:51.751Z",
-      "daysAgo": 664
-    },
-    {
-      "name": "vite-plugin-remove-console",
-      "currentVersion": "^2.2.0",
-      "latestVersion": "2.2.0",
-      "lastUpdated": "2023-12-04T05:52:35.716Z",
-      "daysAgo": 665
+      "daysAgo": 765
     },
     {
       "name": "@types/lodash-es",
       "currentVersion": "^4.17.12",
       "latestVersion": "4.17.12",
       "lastUpdated": "2023-11-21T16:07:38.271Z",
-      "daysAgo": 678
+      "daysAgo": 779
     },
     {
       "name": "medium-zoom",
       "currentVersion": "^1.1.0",
       "latestVersion": "1.1.0",
       "lastUpdated": "2023-11-16T11:29:03.018Z",
-      "daysAgo": 683
-    },
-    {
-      "name": "vite-plugin-chunk-split",
-      "currentVersion": "^0.5.0",
-      "latestVersion": "0.5.0",
-      "lastUpdated": "2023-11-16T06:34:04.534Z",
-      "daysAgo": 683
+      "daysAgo": 784
     },
     {
       "name": "@types/fs-extra",
       "currentVersion": "^11.0.4",
       "latestVersion": "11.0.4",
       "lastUpdated": "2023-11-07T20:15:59.748Z",
-      "daysAgo": 692
+      "daysAgo": 793
     },
     {
       "name": "mkcert",
       "currentVersion": "^3.2.0",
       "latestVersion": "3.2.0",
       "lastUpdated": "2023-11-07T14:04:58.390Z",
-      "daysAgo": 692
-    },
-    {
-      "name": "vite-plugin-git-revision-info",
-      "currentVersion": "^1.1.0",
-      "latestVersion": "1.1.0",
-      "lastUpdated": "2023-09-28T01:47:01.082Z",
-      "daysAgo": 733
-    },
-    {
-      "name": "xmind-embed-viewer",
-      "currentVersion": "^1.2.0",
-      "latestVersion": "1.2.0",
-      "lastUpdated": "2023-07-24T02:22:35.601Z",
-      "daysAgo": 798
-    },
-    {
-      "name": "conventional-changelog-gitmoji-config",
-      "currentVersion": "^1.5.2",
-      "latestVersion": "1.5.2",
-      "lastUpdated": "2023-06-12T13:32:40.599Z",
-      "daysAgo": 840
-    },
-    {
-      "name": "vite-plugin-progress",
-      "currentVersion": "^0.0.7",
-      "latestVersion": "0.0.7",
-      "lastUpdated": "2023-03-31T07:01:47.193Z",
-      "daysAgo": 913
-    },
-    {
-      "name": "vitepress-plugin-back-to-top",
-      "currentVersion": "^1.0.1",
-      "latestVersion": "1.0.1",
-      "lastUpdated": "2023-02-12T12:20:06.649Z",
-      "daysAgo": 960
-    },
-    {
-      "name": "commitlint-config-gitmoji",
-      "currentVersion": "^2.3.1",
-      "latestVersion": "2.3.1",
-      "lastUpdated": "2023-02-11T15:22:24.443Z",
-      "daysAgo": 961
+      "daysAgo": 793
     },
     {
       "name": "@iconify/icons-emojione",
       "currentVersion": "^1.2.6",
       "latestVersion": "1.2.6",
       "lastUpdated": "2023-01-02T09:31:47.851Z",
-      "daysAgo": 1001
+      "daysAgo": 1102
     },
     {
       "name": "jszip",
       "currentVersion": "^3.10.1",
       "latestVersion": "3.10.1",
       "lastUpdated": "2022-08-02T22:49:17.127Z",
-      "daysAgo": 1154
+      "daysAgo": 1255
     },
     {
       "name": "screenfull",
       "currentVersion": "^6.0.2",
       "latestVersion": "6.0.2",
       "lastUpdated": "2022-06-19T14:31:37.099Z",
-      "daysAgo": 1198
-    },
-    {
-      "name": "standard-version",
-      "currentVersion": "^9.5.0",
-      "latestVersion": "9.5.0",
-      "lastUpdated": "2022-05-15T13:46:50.623Z",
-      "daysAgo": 1233
+      "daysAgo": 1299
     },
     {
       "name": "markdown-to-txt",
       "currentVersion": "^2.0.1",
       "latestVersion": "2.0.1",
       "lastUpdated": "2022-04-22T10:04:46.918Z",
-      "daysAgo": 1256
+      "daysAgo": 1357
     },
     {
       "name": "commitlint-config-cz",
       "currentVersion": "^0.13.3",
       "latestVersion": "0.13.3",
       "lastUpdated": "2021-12-20T13:34:53.168Z",
-      "daysAgo": 1379
+      "daysAgo": 1480
     },
     {
       "name": "commitlint-config-git-commit-emoji",
       "currentVersion": "^1.0.0",
       "latestVersion": "1.0.0",
       "lastUpdated": "2021-12-12T06:07:40.166Z",
-      "daysAgo": 1387
+      "daysAgo": 1488
     },
     {
       "name": "gray-matter",
       "currentVersion": "^4.0.3",
       "latestVersion": "4.0.3",
       "lastUpdated": "2021-04-24T03:06:31.539Z",
-      "daysAgo": 1619
+      "daysAgo": 1720
     },
     {
-      "name": "lodash-es",
-      "currentVersion": "^4.17.21",
-      "latestVersion": "4.17.21",
-      "lastUpdated": "2021-02-20T15:43:35.756Z",
-      "daysAgo": 1682
+      "name": "node-scp2",
+      "currentVersion": "^1.0.0",
+      "latestVersion": "1.0.0",
+      "lastUpdated": "2021-03-20T06:11:51.970Z",
+      "daysAgo": 1755
     },
     {
       "name": "animate.css",
       "currentVersion": "^4.1.1",
       "latestVersion": "4.1.1",
       "lastUpdated": "2020-09-07T11:26:10.360Z",
-      "daysAgo": 1848
+      "daysAgo": 1949
     },
     {
       "name": "md5",
       "currentVersion": "^2.3.0",
       "latestVersion": "2.3.0",
       "lastUpdated": "2020-08-02T10:29:33.749Z",
-      "daysAgo": 1884
+      "daysAgo": 1985
     },
     {
       "name": "randomcolor",
       "currentVersion": "^0.6.2",
       "latestVersion": "0.6.2",
       "lastUpdated": "2020-07-14T21:05:29.988Z",
-      "daysAgo": 1903
+      "daysAgo": 2004
     },
     {
-      "name": "increase-memory-limit",
-      "currentVersion": "^1.0.7",
-      "latestVersion": "1.0.7",
-      "lastUpdated": "2019-05-27T20:03:42.332Z",
-      "daysAgo": 2317
+      "name": "markdown-it-markmap",
+      "currentVersion": "^0.1.0",
+      "latestVersion": "0.1.0",
+      "lastUpdated": "2020-05-09T22:49:56.404Z",
+      "daysAgo": 2070
     },
     {
-      "name": "resize-observer-polyfill",
-      "currentVersion": "^1.5.1",
-      "latestVersion": "1.5.1",
-      "lastUpdated": "2018-12-09T15:41:22.096Z",
-      "daysAgo": 2486
+      "name": "font-spider",
+      "currentVersion": "^1.3.5",
+      "latestVersion": "1.3.5",
+      "lastUpdated": "2019-07-19T11:37:53.450Z",
+      "daysAgo": 2365
     },
     {
       "name": "markdown-it-hashmention",
       "currentVersion": "^0.3.9",
       "latestVersion": "0.3.9",
       "lastUpdated": "2016-07-05T23:41:41.122Z",
-      "daysAgo": 3373
+      "daysAgo": 3474
     },
     {
       "name": "scp2",
       "currentVersion": "^0.5.0",
       "latestVersion": "0.5.0",
       "lastUpdated": "2016-05-29T11:01:10.302Z",
-      "daysAgo": 3410
+      "daysAgo": 3511
     },
     {
       "name": "markdown-it-strikethrough-alt",
       "currentVersion": "^1.0.0",
       "latestVersion": "1.0.0",
       "lastUpdated": "2016-03-17T16:12:31.762Z",
-      "daysAgo": 3483
+      "daysAgo": 3584
     }
   ],
   "stats": {
-    "total": 161,
-    "successful": 161,
+    "total": 159,
+    "successful": 159,
     "failed": 0,
-    "avgDaysAgo": 402
+    "avgDaysAgo": 391
   }
 }

@@ -2,7 +2,7 @@ import {
   defineConfig,
   presetAttributify,
   presetIcons,
-  presetWind3,
+  presetWind4,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
@@ -19,7 +19,12 @@ export default defineConfig({
       "border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem",
   },
   presets: [
-    presetWind3({
+    // presetWind3({
+    //   dark: 'class' // 关键配置：告知 UnoCSS 使用类名模式而非媒体查询
+    // }),
+    presetWind4({
+      // wind4 内置了重置样式，可通过 reset 选项启用
+      reset: true,
       dark: 'class' // 关键配置：告知 UnoCSS 使用类名模式而非媒体查询
     }),
     presetAttributify(),
@@ -54,6 +59,12 @@ export default defineConfig({
         // ...collections
       },
     }),
+  ],
+  // 2. 安全列表 (针对 VitePress 的特别设置)
+  safelist: [
+    // 为 VitePress 的某些元素预生成常用样式，确保它们始终可用
+    'prose', 'prose-sm', 'mx-auto', // 用于 Markdown 内容容器
+    'text-left', 'text-center', 'text-right', // 文本对齐
   ],
   rules: [
     // 多行文本截断工具类 text-truncate-2
