@@ -4,11 +4,6 @@ import { inBrowser, useData, useRouter } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, provide, useSlots, onMounted } from "vue";
 import mediumZoom from "medium-zoom";
-import randomColor from "randomcolor";
-import {
-  styleImage,
-  styleImageContainer,
-} from "#.vitepress/utils/fillImage.ts";
 
 const { isDark } = useData();
 const slots = Object.keys(useSlots());
@@ -103,25 +98,7 @@ router.onAfterPageLoad = function () {
   nextTick(function () {
     setupMediumZoom();
   });
-
-  /*
-  const images = document.querySelectorAll(".vp-doc img");
-  images.forEach((image) => {
-    image && styleImage(image as HTMLElement);
-  });
-  */
 };
-
-console.log(
-  randomColor({
-    hue: "yellow",
-    luminosity: "dark",
-    count: 10,
-    seed: "test", //不传值就是随机
-    format: "hex",
-    alpha: 0.5,
-  })
-);
 
 // v-slot:default="slotProps"
 </script>

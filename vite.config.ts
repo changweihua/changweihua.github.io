@@ -15,8 +15,6 @@ import { defineConfig, loadEnv } from "vite";
 import { checker } from "vite-plugin-checker";
 import { envParse } from "vite-plugin-env-parse";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
-import imagePlaceholder from "vite-plugin-image-placeholder";
-import imagePreload from "vite-plugin-image-preload";
 import Inspect from "vite-plugin-inspect";
 import mkcert from "vite-plugin-mkcert";
 import { mockDevServerPlugin } from "vite-plugin-mock-dev-server";
@@ -86,7 +84,6 @@ function getDevPlugins() {
       include: "fake", // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: true, // 是否在生产环境下设置mock
     }),
-    imagePlaceholder({ prefix: "image/placeholder" }),
     // 开发环境错误提示优化
     {
       name: "dev-error-handler",
@@ -212,12 +209,6 @@ export default defineConfig(() => {
       }),
       prefetchDnsPlugin(),
       versionInjector(),
-      imagePreload({
-        dir: "images/**/*.{png,jpg,jpeg,gif,svg,webp}",
-        attrs: {
-          rel: "prefetch",
-        },
-      }),
     ],
     resolve: {
       alias: {

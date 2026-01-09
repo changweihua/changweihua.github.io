@@ -156,7 +156,6 @@ import HomeContributors from "../components/HomeContributors.vue";
 import ArticleQRCode from "../components/ArticleQRCode.vue";
 import HoverGrid from "../components/HoverGrid.vue";
 import MagicCard from "../components/MagicCard.vue";
-import Confetti from "../components/Confetti.vue";
 import Guidance from "../components/Guidance.vue";
 import TaskList from "../components/TaskList.vue";
 import ScrollableParagraph from "../components/ScrollableParagraph.vue";
@@ -565,7 +564,6 @@ export default {
       app.component("HoverGrid", HoverGrid);
       app.component("DancingLogo", DancingLogo);
       app.component("MagicCard", MagicCard);
-      app.component("Confetti", Confetti);
       app.component("LiquidCard", LiquidCard);
       app.component("Guidance", Guidance);
       app.component("m-read-text", ReadText);

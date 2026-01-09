@@ -2,7 +2,6 @@
 outline: page
 layout: home
 pageClass: manuals-page-class
-# footer: false
 
 features:
   - title: SSO
@@ -43,4 +42,3 @@ features:
     link: https://lixiangyun.gitbook.io/envoy
 ---
 
-<!-- [text](https://mermaid.nodejs.cn/) -->
