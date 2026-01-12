@@ -38,12 +38,6 @@ body {
   font-weight: #{vars.$app-font-weight};
   font-size-adjust: #{vars.$app-font-size-adjust};
   font-display: swap;
-
-  // :deep(*) {
-  //   font-family: #{vars.$app-font-family};
-  //   font-weight: #{vars.$app-font-weight};
-  //   font-size-adjust: #{vars.$app-font-size-adjust};
-  // }
 }
 
 .medium-zoom-overlay {

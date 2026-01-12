@@ -206,6 +206,8 @@ const handleCopy = async () => {
 document.getElementById('copyBtn').addEventListener('click', handleCopy);
 ```
 
+<br />
+
 ### 进阶场景：处理复杂复制需求 ###
 
 除了基础的文本复制，copy-to-clipboard 还能应对多种复杂场景，以下是常见场景的实现方案。
@@ -273,6 +275,8 @@ document.getElementById('copyInputBtn').addEventListener('click', () => {
 });
 </script>
 ```
+
+<br />
 
 #### 复制代码片段（保留语法格式） ####
 
@@ -468,7 +472,9 @@ copy-to-clipboard 的 `options` 参数支持以下配置，可根据需求灵活
    document.body.removeChild(textarea);
 ```
 
-## 4.2. HTTPS 环境外 Clipboard API 失效 ##
+<br />
+
+### HTTPS 环境外 Clipboard API 失效 ###
 
 **现象**
 
@@ -508,6 +514,8 @@ Clipboard API 为保障用户隐私，仅在 `HTTPS 环境` 或 `localhost` 开�
      await navigator.clipboard.write(data);
    }
 ```
+
+<br />
 
 ### 复制后页面文本仍处于选中状态 ###
 

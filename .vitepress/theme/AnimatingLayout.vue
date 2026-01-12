@@ -93,95 +93,30 @@ router.onAfterPageLoad = function () {
     setupMediumZoom();
   });
 };
-const transitionType = ref("vt");
-
-function createDots(emojis: string[]) {
-  const temp = document.createDocumentFragment();
-  const random_emojis = emojis
-    .slice(0, Math.ceil(Math.random() * emojis.length))
-    .sort(() => Math.random() - 0.5);
-  random_emojis.forEach((emoji) => {
-    const dot = document.createElement("div");
-    dot.className = "custom-tips-dot";
-    dot.setAttribute("emoji", emoji);
-    dot.style.setProperty("--d", `${Math.random() * 0.2}s`);
-    dot.style.setProperty("--x", `${(Math.random() - 0.5) * 1000}%`);
-    temp.appendChild(dot);
-    dot.addEventListener("animationend", () => {
-      console.log(
-        "dot.parentNode",
-        dot.parentNode,
-        dot.parentNode?.childElementCount
-      );
-      // @ts-ignore
-      if (dot?.parentNode?.childElementCount <= 1) {
-        // @ts-ignore
-        dot.parentNode.remove();
-      } else {
-        dot.remove();
-      }
-    });
-  });
-  return temp;
-}
-
-function createNum() {
-  const current = document.querySelector(".custom-num");
-  let num = 1;
-  if (current) {
-    num = parseInt(`${current.getAttribute("num") }`) + 1;
-    current.remove();
-  }
-  const numDiv = document.createElement("div");
-  numDiv.className = "custom-num";
-  if (num > 1) {
-    // numDiv.style.setProperty('--d','-.3s' )
-  }
-  numDiv.setAttribute("num", `${num}`);
-  numDiv.addEventListener("animationend", () => {
-    numDiv.remove();
-  });
-  return numDiv;
-}
-
-// document.addEventListener("click", (ev) => {
-//   const { clientX, clientY } = ev;
-//   console.log(clientX, clientY);
-//   document.body.style.setProperty("--left", `${clientX}px`);
-//   document.body.style.setProperty("--top", `${clientY}px`);
-//   const tips = document.createElement("div");
-//   tips.style.setProperty("--left", `${clientX}px`);
-//   tips.style.setProperty("--top", `${clientY}px`);
-//   tips.className = "custom-tips";
-//   const dots = createDots(["🎉", "😘", "🎊", "🤡", "🥳", "🤪", "💗"]);
-//   // const dots = createDots(['🎉']);
-//   tips.appendChild(dots);
-//   document.body.appendChild(tips);
-//   document.body.appendChild(createNum());
-// });
 </script>
 
 <template>
-    <div :key="currentPage" class="page-content view-transition-container">
-      <DefaultTheme.Layout>
-        <template #doc-top>
-          <div class="shade" :class="{ 'shade-active': isTransitioning }">
-            &nbsp;
-          </div>
-        </template>
-        <template
-          v-for="(slotKey, slotIndex) in slots"
-          :key="slotIndex"
-          v-slot:[slotKey]
-        >
-          <slot :name="slotKey"></slot>
-        </template>
-      </DefaultTheme.Layout>
-    </div>
+  <div :key="currentPage" class="page-content view-transition-container">
+    <DefaultTheme.Layout>
+      <template
+        v-for="(slotKey, slotIndex) in slots"
+        :key="slotIndex"
+        v-slot:[slotKey]
+      >
+        <slot :name="slotKey"></slot>
+      </template>
+    </DefaultTheme.Layout>
+  </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .page-content {
+  :deep(*) {
+    font-family: #{vars.$app-font-family};
+    font-weight: #{vars.$app-font-weight};
+    font-size-adjust: #{vars.$app-font-size-adjust};
+  }
+
   --r: clamp(3, (var(--num) - 99) * 999 + 29, 250);
   --g: clamp(6, (var(--num) - 100) * -999 + 67, 125);
   --b: clamp(12, (var(--num) - 100) * -999 + 54, 250);
