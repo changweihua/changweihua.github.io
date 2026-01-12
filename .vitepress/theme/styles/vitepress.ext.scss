@@ -39,11 +39,11 @@ body {
   font-size-adjust: #{vars.$app-font-size-adjust};
   font-display: swap;
 
-  :deep(*) {
-    font-family: #{vars.$app-font-family};
-    font-weight: #{vars.$app-font-weight};
-    font-size-adjust: #{vars.$app-font-size-adjust};
-  }
+  // :deep(*) {
+  //   font-family: #{vars.$app-font-family};
+  //   font-weight: #{vars.$app-font-weight};
+  //   font-size-adjust: #{vars.$app-font-size-adjust};
+  // }
 }
 
 .medium-zoom-overlay {
@@ -1568,4 +1568,8 @@ table {
   --start-percentage: 14.66%;
   --end-color: hsl(131, 80%, 80%);
   --end-percentage: 85.95%;
+}
+
+.markmap-container .toolbar {
+  z-index: 999 !important;
 }

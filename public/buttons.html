@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>流光按钮效果</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: radial-gradient(circle at center, #0f1b33, #000);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+        overflow-x: hidden;
+      }
+
+      .container {
+        text-align: center;
+        max-width: 900px;
+        width: 100%;
+      }
+
+      h1 {
+        color: transparent;
+        background: linear-gradient(90deg, #ff0080, #00ffcc, #ff0080);
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-background-clip: text;
+        margin-bottom: 30px;
+        font-size: 2.8rem;
+        animation: textShine 5s linear infinite;
+      }
+
+      .description {
+        color: #a0aec0;
+        margin-bottom: 50px;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      /* 按钮基础样式 */
+      .btn {
+        position: relative;
+        width: 240px;
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #fff;
+        background: rgba(20, 20, 40, 0.8);
+        border-radius: 12px;
+        z-index: 1;
+        transition: all 0.4s ease;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      /* 流光边框效果 */
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #ff0080, #00ffcc, #0066ff, #ff0080);
+        background-size: 400% 400%;
+        border-radius: 14px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        animation: borderGlow 6s ease infinite;
+      }
+
+      /* 内部流光效果 */
+      .btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.7s ease;
+        z-index: 0;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      .btn:hover::before {
+        opacity: 1;
+      }
+
+      .btn:hover::after {
+        left: 100%;
+      }
+
+      .btn span {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* 不同按钮的颜色变化 */
+      .btn-primary::before {
+        background: linear-gradient(45deg, #ff0080, #ff3399, #ff0080);
+      }
+
+      .btn-secondary::before {
+        background: linear-gradient(45deg, #00ffcc, #33ffd6, #00ffcc);
+      }
+
+      .btn-tertiary::before {
+        background: linear-gradient(45deg, #0066ff, #3399ff, #0066ff);
+      }
+
+      @keyframes borderGlow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes textShine {
+        0%,
+        100% {
+          background-position: 0% center;
+        }
+        50% {
+          background-position: 100% center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>这个标题也是有效果的哦~</h1>
+
+      <p class="description">
+        这是一个完全使用CSS创建的流光效果。按钮具有动态流光边框和内部高光动画，当鼠标悬停时，按钮会上升并显示流动的光效，带来沉浸式的视觉体验。
+      </p>
+
+      <div class="button-container">
+        <a href="#" class="btn btn-primary"><span>开始体验</span></a>
+        <a href="#" class="btn btn-secondary"><span>了解更多</span></a>
+        <a href="#" class="btn btn-tertiary"><span>立即下载</span></a>
+      </div>
+    </div>
+  </body>
+</html>

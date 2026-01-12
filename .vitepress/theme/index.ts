@@ -148,7 +148,7 @@ import "@catppuccin/vitepress/theme/frappe/lavender.css";
 import 'tdesign-vue-next/es/style/index.css';
 
 import NotFound from "../components/NotFound.vue";
-import NotFounds from "../components/NotFounds.vue";
+import PageLost from "../components/PageLost.vue";
 import CodeGroup from "../components/CodeGroup.vue";
 import ArticleMetadata from "../components/ArticleMetadata.vue";
 import Contributors from "../components/Contributors.vue";
@@ -197,11 +197,11 @@ mermaid.registerIconPacks([
     name: icons.prefix, // To use the prefix defined in the icon pack
     icons,
   },
-  {
-    name: "devicon",
-    loader: () =>
-      import("@iconify-json/devicon").then((module) => module.icons),
-  },
+  // {
+  //   name: "devicon",
+  //   loader: () =>
+  //     import("@iconify-json/devicon").then((module) => module.icons),
+  // },
   // {
   //   name: skillIcons.prefix, // To use the prefix defined in the icon pack
   //   icons: skillIcons,
@@ -397,7 +397,7 @@ export default {
       //     name: "page-bottom",
       //   }),
 
-      "not-found": () => h(NotFounds),
+      "not-found": () => h(PageLost),
 
       //  Always
       // "layout-top": () =>

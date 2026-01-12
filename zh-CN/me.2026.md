@@ -8,19 +8,9 @@ pageClass: gallery-page-class
 > 
 > 2026 笃行。
 
-<div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-face flip-card-front">
-      <h3>卡片标题</h3>
-      <p>卡片描述</p>
-    </div>
-    <div class="flip-card-face flip-card-back">
-      <h3>背面标题</h3>
-      <p>背面内容</p>
-    </div>
-  </div>
-</div>
-
+- 计划
+- [ ] 计划 A
+- [x] 计划 B
 
 ```markmap
 # 2026

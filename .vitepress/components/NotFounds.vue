@@ -95,7 +95,7 @@ watch(
 );
 
 function goHome() {
-  window.location.href = "/";
+  window.location.href = "/zh-CN";
 }
 
 const container_height = ref("30vh");

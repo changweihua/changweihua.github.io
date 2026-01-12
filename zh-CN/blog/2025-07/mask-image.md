@@ -70,8 +70,8 @@ cover: /covers/css.svg
   background-image: url("/images/macwallpaper.jpg"); /* 原始图片 */
   background-size: cover;
   /* 用圆形遮罩图片（中间不透明，边缘透明） */
-  -webkit-mask-image: url("circle-mask.png");
-  mask-image: url("circle-mask.png");
+  -webkit-mask-image: url("/images/circle-mask.png");
+  mask-image: url("/images/circle-mask.png");
   -webkit-mask-size: cover; /* 遮罩大小与元素一致 */
   mask-size: cover;
 }
@@ -94,8 +94,8 @@ cover: /covers/css.svg
   background-image: url("/images/macwallpaper.jpg"); /* 原始图片 */
   background-size: cover;
   /* 用圆形遮罩图片（中间不透明，边缘透明） */
-  -webkit-mask-image: url("circle-mask.png");
-  mask-image: url("circle-mask.png");
+  -webkit-mask-image: url("/images/circle-mask.png");
+  mask-image: url("/images/circle-mask.png");
   -webkit-mask-size: cover; /* 遮罩大小与元素一致 */
   mask-size: cover;
 }

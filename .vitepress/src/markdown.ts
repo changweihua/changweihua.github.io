@@ -8,7 +8,7 @@ import MarkdownItCollapsible from "markdown-it-collapsible";
 import namedCode from "markdown-it-named-code-blocks";
 import echartsMarkdownPlugin from "../plugins/markdown/echarts-markdown";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
-import mathjax3 from 'markdown-it-mathjax3';
+import mathjax3 from "markdown-it-mathjax3";
 import { autoArticleTitlePlugin } from "../plugins/markdown/autoArticleTitle";
 import MarkdownItGitHubAlerts from "markdown-it-github-alerts";
 import markdownItReplaceLink from "markdown-it-replace-link";
@@ -18,17 +18,21 @@ import {
   containerPreview,
   componentPreview,
 } from "@vitepress-demo-preview/plugin";
-import { vitepressDemoPlugin } from 'vitepress-demo-plugin';
+import { vitepressDemoPlugin } from "vitepress-demo-plugin";
 import { resolve } from "path";
-import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
-import { fileURLToPath, URL } from 'node:url'
+import { demoPreviewPlugin } from "@vitepress-code-preview/plugin";
+import { fileURLToPath, URL } from "node:url";
+import { imgLazyload } from "@mdit/plugin-img-lazyload";
+import { figure } from "@mdit/plugin-figure";
+import { tasklist } from "@mdit/plugin-tasklist";
+
 
 const CONSTS = {
   __custom_variable__: "your value",
 };
 
 const demoAlias = {
-  '@demo': resolve(__dirname, '../../src/demos'),
+  "@demo": resolve(__dirname, "../../src/demos"),
 };
 
 const markdown: MarkdownOptions | undefined = {
@@ -89,6 +93,14 @@ const markdown: MarkdownOptions | undefined = {
     const docRoot = fileURLToPath(new URL("../../", import.meta.url));
     md.use(demoPreviewPlugin, {
       docRoot,
+    });
+
+    md.use(imgLazyload);
+    md.use(tasklist, {
+      // your options, optional
+    });
+    md.use(figure, {
+      // 你的选项，可选的
     });
 
     // @ts-ignore

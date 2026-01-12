@@ -15,7 +15,6 @@ const tasks = ref<Array<{ checked: boolean; text: string }>>([]);
 // 匹配所有任务项（含状态）
 const pattern = /^\s*-\s+$$([ x])$$\s+(.+)$/gm;
 onMounted(() => {
-  console.log("props.content", props.content);
   if (props.content) {
     tasks.value = decodeURIComponent(props.content)
       .split("\n")

@@ -6,7 +6,7 @@ const RSS: RSSOptions = {
     // necessary（必选参数）
     title: 'CMONO.NET',
     baseUrl: rssBaseUrl,
-    copyright: `Copyright (c) 2013-${new Date().getFullYear()}, CMONO.NET`,
+    copyright: `Copyright (c) 2009-${new Date().getFullYear()}, CMONO.NET`,
 
     // optional（可选参数）
     description:
@@ -27,7 +27,7 @@ const RSS: RSSOptions = {
         link: 'https://changweihua.github.io'
     }],
     filename: 'feed.rss',
-    log: true,
+    log: false,
     ignoreHome: true,
 
     renderHTML: (filecontent: string) => {

@@ -23,6 +23,7 @@ import { resolve } from "path";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
 import browserslist from 'browserslist'
 import { browserslistToTargets } from 'lightningcss'
+import { ImagePreviewPlugin } from 'vitepress-plugin-image-preview'
 
 const customElements = [
   "mjx-container",
@@ -479,9 +480,11 @@ export default withMermaid(
           // { find: 'dep', replacement: '@vitejs/test-resolve-linked' },
         ],
       },
-      logLevel: "info",
+      logLevel: "warn",
       plugins: [
         viteDemoPreviewPlugin(),
+        vueJsx(),
+        ImagePreviewPlugin(),
         groupIconVitePlugin({
           customIcon: {
             ae: "logos:adobe-after-effects",
@@ -544,7 +547,6 @@ export default withMermaid(
               : undefined;
           },
         }),
-        vueJsx(),
         RssPlugin(RSS),
         pagefindPlugin({
           forceLanguage: "zh-CN",

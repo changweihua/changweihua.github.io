@@ -1,30 +1,40 @@
 <template>
-  <div v-if="!frontmatter.plain" id="LiquidPageFooter" class="liquid-bg-container liquid-page-footer pt-3">
+  <div
+    v-if="!frontmatter.plain"
+    id="LiquidPageFooter"
+    class="liquid-bg-container liquid-page-footer pt-3"
+  >
     <!-- 3层液态背景层（顺序：底→中→顶） -->
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>
     <div class="liquid-layer"></div>
     <div class="footer-content flex gap-3 flex-col items-center justify-center">
-      <div id="PGFT" class="flex gap-3 flex-row items-center justify-center  z-100">
-        <span v-once>V {{ version }}</span><span> | </span>
+      <div
+        id="PGFT"
+        class="flex gap-3 flex-row items-center justify-center z-100"
+      >
+        <span v-once>V {{ version }}</span
+        ><span> | </span>
         <icon-logos-markdown :width="20" :height="20" />
       </div>
       <div class="copy-right flex flex-col items-center justify-center">
-          <span>MIT Licensed</span>
-        <span>版权所有 © 2009-2025 CMONO.NET</span>
+        <span>基于 MIT Licensed</span>
+        <span>{{ copyright }}</span>
         <VisitsPanel />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { useRootClick, useCycle } from "./composables";
 import VisitsPanel from "./VisitsPanel.vue";
-import { useData } from 'vitepress'
-import { version } from '../../package.json'
+import { useData } from "vitepress";
+import { version } from "../../package.json";
 
-const { frontmatter } = useData()
+const  copyright = `版权所有 © 2009- ${new Date().getFullYear()} CMONO.NET`
+
+const { frontmatter } = useData();
 
 const { value, next } = useCycle([543, 12000, -3200]);
 
