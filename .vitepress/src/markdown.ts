@@ -25,7 +25,7 @@ import { fileURLToPath, URL } from "node:url";
 import { imgLazyload } from "@mdit/plugin-img-lazyload";
 import { figure } from "@mdit/plugin-figure";
 import { tasklist } from "@mdit/plugin-tasklist";
-
+import codeBarPlugin from '../plugins/markdown/codeBarPlugin'
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -94,6 +94,23 @@ const markdown: MarkdownOptions | undefined = {
     md.use(demoPreviewPlugin, {
       docRoot,
     });
+
+    // const original = md.renderer.rules.fence;
+
+    // md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+    //   const result = original ? original(tokens, idx, options, env, self) : "";
+    //   const nextToken = tokens[idx + 1];
+
+    //   // 检查下一个令牌是否是标题
+    //   if (nextToken?.type === "heading_open") {
+    //     return result + '<div class="code-bar"></div>';
+    //   }
+
+    //   return result;
+    // };
+
+    // @ts-ignore
+    codeBarPlugin(md)
 
     md.use(imgLazyload);
     md.use(tasklist, {

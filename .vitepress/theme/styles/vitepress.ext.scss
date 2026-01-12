@@ -1567,3 +1567,67 @@ table {
 .markmap-container .toolbar {
   z-index: 999 !important;
 }
+
+.code-bar {
+  height: 10px;
+  // background: linear-gradient(
+  //   90deg,
+  //   transparent,
+  //   var(--vp-c-brand),
+  //   transparent
+  // );
+  border-radius: 1px;
+}
+
+.dark .code-bar {
+  // background: linear-gradient(
+  //   90deg,
+  //   transparent,
+  //   var(--vp-c-brand-light),
+  //   transparent
+  // );
+  border-radius: 1px;
+}
+
+.code-bar {
+  height: 10px;
+  // background: var(--vp-c-brand);
+  border-radius: 2px;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+/* 悬停效果 */
+.code-bar:hover {
+  opacity: 1;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .code-bar {
+    margin: 24px auto;
+  }
+}
+
+/* 深色模式 */
+.dark .code-bar {
+  // background: var(--vp-c-brand-light);
+  opacity: 0.8;
+}
+
+/* 动画效果 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  to {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+}
+
+.code-bar {
+  animation: slideIn 0.5s ease-out;
+}
