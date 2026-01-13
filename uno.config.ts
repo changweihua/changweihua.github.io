@@ -24,7 +24,7 @@ export default defineConfig({
     // }),
     presetWind4({
       // wind4 内置了重置样式，可通过 reset 选项启用
-      reset: true,
+      reset: false,
       dark: 'class' // 关键配置：告知 UnoCSS 使用类名模式而非媒体查询
     }),
     presetAttributify(),
@@ -127,3 +127,4 @@ export default defineConfig({
   // 如需更强的类型提示，可补充安全列表（可选）
   // safelist: ['dark']
 });
+
