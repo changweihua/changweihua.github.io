@@ -113,8 +113,6 @@ router.onAfterPageLoad = function () {
 .page-content {
   :deep(*) {
     font-family: #{vars.$app-font-family};
-    font-weight: #{vars.$app-font-weight};
-    font-size-adjust: #{vars.$app-font-size-adjust};
   }
 
   --r: clamp(3, (var(--num) - 99) * 999 + 29, 250);
@@ -402,3 +400,4 @@ router.onAfterPageLoad = function () {
   }
 }
 </style>
+
