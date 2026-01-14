@@ -1,3 +1,55 @@
+// 字体应用混合器（Mixin）
+@mixin apply-vp-fonts {
+  body {
+    font-family: var(--vp-font-family-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--vp-font-family-mono);
+  }
+
+  // VitePress特定元素
+  .vp-doc {
+    font-family: var(--vp-font-family-base);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--vp-font-family-base);
+      font-weight: 600;
+    }
+
+    // 代码块特殊处理
+    div[class*="language-"] pre {
+      font-family: var(--vp-font-family-mono);
+    }
+  }
+}
+
+// 紧急覆盖层（高优先级）
+@mixin force-font-override {
+
+  body,
+  .vp-doc,
+  .vp-doc *:not(code):not(pre):not([class*="language-"]) {
+    font-family: var(--vp-font-family-base) !important;
+  }
+}
+
+// 应用字体混合器
+@include apply-vp-fonts;
+
+// 如果仍有覆盖问题，使用紧急覆盖
+// @include fonts.force-font-override;
+
 /* 滚动条里面轨道，能向上向下移动 */
 ::-webkit-scrollbar-track-piece {
   background-color: transparent;
@@ -135,4 +187,8 @@ img {
   img {
     opacity: 0;
   }
+}
+
+h1 {
+  text-box: trim-both cap alphabetic;
 }

@@ -33,11 +33,11 @@ document.addEventListener('clickAfter', (event) => {
 
 **点击之后的截图如下**
 
-![alt text](/images/cmono-20241029090538.png)
+![示例图](/images/cmono-20241029090538.png)
 
 之前在做一个功能（Vue3）的时候，产品忽然想要加一个点击上报。但是因为功能比较复杂，当时拆了好几个组件进行嵌套，关系如下，组件有些数据传递是爷孙之间互传。
 
-![alt text](/images/cmono-20241029090458.png)
+![示例图](/images/cmono-20241029090458.png)
 
 ## 实现组件A和组件C之间的通信 ##
 

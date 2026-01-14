@@ -25,7 +25,7 @@ pageClass: blog-page-class
 
 下图就是针对跨域名的SSO的流程：
 
-![alt text](/images/sso_key1.jpeg){data-zoomable}
+![示例图](/images/sso_key1.jpeg){data-zoomable}
 
 在技术实现上，单点登录可以借助如 CAS（Central Authentication Service）、OAuth、OpenID Connect 等标准协议，也可以基于企业内部的自定义协议实现。在整个流程中，要维护一个全局认可的信任票证（token），并通过集中式的认证服务中心来进行身份的统一管理和验证。 **CAS（Central Authentication Service）和OAuth 2.0（Open Authorization）都是在网络应用中广泛使用的认证和授权协议。**
 
@@ -37,7 +37,7 @@ OAuth 2.0是一个授权框架，允许第三方应用获取对用户资源的�
 
 工作流程：用户授权第三方应用访问自己在另一个服务上的资源时，该应用将获得一个访问令牌。该令牌允许第三方应用代表用户访问其资源。这个在微信开放平台、支付宝等都有相关接入说明及接口，大家可以去参考下。主要流程如下：
 
-![alt text](/images/sso_key2.jpeg){data-zoomable}
+![示例图](/images/sso_key2.jpeg){data-zoomable}
 
 1. 用户请求客户端应用程序访问资源。
 2. 客户端应用向授权服务器请求授权。
@@ -58,7 +58,7 @@ CAS是一种单点登录（SSO）协议，旨在允许用户在多个应用程�
 
 工作流程：用户首次尝试访问应用时被重定向到CAS服务器进行认证。一旦认证成功，用户就可以无需再次登录即可访问其他集成了CAS的应用。一般公司级的应用都会采用这种方式。
 
-![alt text](/images/sso_key3.jpeg){data-zoomable}
+![示例图](/images/sso_key3.jpeg){data-zoomable}
 
 ### 用户未登录访问 app1 ###
 

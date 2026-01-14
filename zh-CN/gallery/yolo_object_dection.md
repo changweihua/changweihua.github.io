@@ -9,11 +9,11 @@ pageClass: gallery-page-class
 
 基于Yolo的对象检测、识别与研究。  
 
-![alt text](/images/cmono-20241028135331.png)
+![示例图](/images/cmono-20241028135331.png)
 
 ### Yolo 介绍 ###
 
-![alt text](/images/cmono-QQ图片20240527132356.png){data-zoomable}
+![示例图](/images/cmono-QQ图片20240527132356.png){data-zoomable}
 
 
 ### 使用labelimg制作数据集 ###

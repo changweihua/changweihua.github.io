@@ -20,7 +20,7 @@ cover: /covers/ollama.svg
 
 ## 拓扑图 ##
 
-![alt text](/images/2682776-20250605121806418-628861802.png)
+![示例图](/images/2682776-20250605121806418-628861802.png)
 
 ### openresty(nginx)的容器配置如下 ###
 

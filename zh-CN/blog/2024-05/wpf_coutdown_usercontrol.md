@@ -12,7 +12,7 @@ pageClass: blog-page-class
 
 > 支持文本和倒计时同时显示
 
-![alt text](/images/cmono_wpf_countdown_.gif){data-zoomable}
+![示例图](/images/cmono_wpf_countdown_.gif){data-zoomable}
 
 ## XAML ##
 

@@ -10,7 +10,7 @@ pageClass: blog-page-class
 
 # 微信小程序时间轴组件 #
 
-![alt text](/images/cmono-RX1FICSLPNO60P.png)
+![示例图](/images/cmono-RX1FICSLPNO60P.png)
 
 ## WXML ##
 

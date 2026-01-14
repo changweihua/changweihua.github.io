@@ -21,9 +21,9 @@ import fs from "fs-extra";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { resolve } from "path";
 import { viteDemoPreviewPlugin } from "@vitepress-code-preview/plugin";
-import browserslist from 'browserslist'
-import { browserslistToTargets } from 'lightningcss'
-import { ImagePreviewPlugin } from 'vitepress-plugin-image-preview'
+import browserslist from "browserslist";
+import { browserslistToTargets } from "lightningcss";
+import { ImagePreviewPlugin } from "vitepress-plugin-image-preview";
 
 const customElements = [
   "mjx-container",
@@ -127,6 +127,7 @@ const vitePressOptions: UserConfig = {
   sitemap: {
     hostname: "https://changweihua.github.io",
     lastmodDateOnly: false,
+    // level: ErrorLevel.SLIENT,
     transformItems: (items) => {
       // add new items or modify/filter existing items
       items.push({
@@ -391,10 +392,10 @@ export default withMermaid(
     },
     vite: {
       css: {
-        transformer: 'lightningcss',
+        transformer: "lightningcss",
         lightningcss: {
           // 将 browserslist 转换为 LightningCSS 的目标格式
-        targets: browserslistToTargets(browserslist('>= 0.25%')),
+          targets: browserslistToTargets(browserslist(">= 0.25%")),
           // 关键配置：标记 deep 为合法伪类
           pseudoClasses: {
             //deep: true,
@@ -410,7 +411,7 @@ export default withMermaid(
           // 解决 scoped 样式问题
           cssModules: {
             // 禁用对 scoped 样式的命名转换
-            pattern: '[name]__[local]___[hash]'
+            pattern: "[name]__[local]___[hash]",
             // 配置CSS模块化
             // pattern: "[name]__[local]__[hash:base64:5]",
           },
@@ -445,7 +446,7 @@ export default withMermaid(
         },
       },
       build: {
-        cssMinify: 'lightningcss'
+        cssMinify: "lightningcss",
       },
       // 强制预构建
       optimizeDeps: {
@@ -482,9 +483,13 @@ export default withMermaid(
       },
       logLevel: "warn",
       plugins: [
+        {
+          name: "custom:adjust-width",
+          transform: (code) => code.replaceAll("1280px", "1280px"),
+        },
         viteDemoPreviewPlugin(),
         vueJsx(),
-        ImagePreviewPlugin(),
+        // ImagePreviewPlugin(),
         groupIconVitePlugin({
           customIcon: {
             ae: "logos:adobe-after-effects",

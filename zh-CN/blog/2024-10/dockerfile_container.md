@@ -10,7 +10,7 @@ pageClass: blog-page-class
 
 # Dockerfile最佳实践-如何创建高效的容器 #
 
-![alt text](/images/cmono-es.png)
+![示例图](/images/cmono-es.png)
 
 ## 简介 ##
 

@@ -10,7 +10,7 @@ pageClass: blog-page-class
 
 # 软键盘挡住输入框问题的终极解决方案 #
 
-![alt text](/images/cmono-QQ图片20240710143215.png){data-zoomable}
+![示例图](/images/cmono-QQ图片20240710143215.png){data-zoomable}
 
 ## 原生输入控件 ##
 
@@ -42,7 +42,7 @@ pageClass: blog-page-class
 
 下面这个表格可以简单列举了具体的情况。
 
-![alt text](/images/cmono-422451-21900dcf02e664f5.webp){data-zoomable}
+![示例图](/images/cmono-422451-21900dcf02e664f5.webp){data-zoomable}
 
 上面表格的这种情况并非是Google所期望的，理想的情况当然是它们都能正常生效才对——所以这其实是Android系统本身的一个BUG。
 

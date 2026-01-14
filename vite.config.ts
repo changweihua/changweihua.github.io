@@ -148,6 +148,70 @@ export default defineConfig(() => {
       emptyOutDir: true,
       reportCompressedSize: false,
       cssMinify: "lightningcss", // 确保生产构建使用相同配置
+      rolldownOptions: {
+        output: {
+          // advancedChunks: {
+          //   groups: [
+          //     // 将 Vue 相关库分组
+          //     {
+          //       name: "vue-vendor",
+          //       test: /[\\/]node_modules[\\/](vue|vue-router|pinia)[\\/]/,
+          //     },
+          //     // // 1. 基础库分组
+          //     // {
+          //     //   name: "vendor-vitepress",
+          //     //   test: /[\\/]node_modules[\\/](@?vitepress)[\\/]/,
+          //     // },
+          //     {
+          //       name: "vendor-markdown-it",
+          //       test: /[\\/]node_modules[\\/](markdown-it)(?![\\/]src)[\\/]/,
+          //     },
+          //     // // 2. 插件分组
+          //     // {
+          //     //   name: "plugin-vitepress",
+          //     //   test: /[\\/]node_modules[\\/](vitepress-(plugin|theme)-[^\\/]+)[\\/]/,
+          //     // },
+          //     {
+          //       name: "plugin-markdown-it",
+          //       test: /[\\/]node_modules[\\/](markdown-it-[^\\/]+)[\\/]/,
+          //     },
+          //     // 将 UI 库分组（如 Element Plus、Ant Design）
+          //     {
+          //       name: "ui-vendor",
+          //       test: /[\\/]node_modules[\\/](element-plus|ant-design-vue)[\\/]/,
+          //     },
+          //     // 将工具库分组（如 lodash、axios）
+          //     {
+          //       name: "utils-vendor",
+          //       test: /[\\/]node_modules[\\/](lodash|axios)[\\/]/,
+          //     },
+          //     // 将大型可视化库单独分组（如 echarts、monaco-editor）
+          //     {
+          //       name: "charts",
+          //       test: /[\\/]node_modules[\\/](echarts|monaco-editor)[\\/]/,
+          //     },
+          //     // 业务代码分割：将公共组件分组
+          //     { name: "components", test: /[\\/]src[\\/]components[\\/]/ },
+          //     // 业务代码分割：将工具函数分组
+          //     { name: "utils", test: /[\\/]src[\\/]utils[\\/]/ },
+
+          //     // 3. 兜底分组：其他 node_modules 依赖
+          //     {
+          //       name: "vendor",
+          //       test: /[\\/]node_modules[\\/]/,
+          //     },
+          //     // {
+          //     //   name: "vitepress-vender",
+          //     //   test: /[\\/]node_modules[\\/](?:@[^\\/]+[\\/])?vitepress-plugin-[^\\/]+[\\/]/,
+          //     // },
+          //     // {
+          //     //   name: "markdownit-vender",
+          //     //   test: /[\\/]node_modules[\\/](?:@[^\\/]+[\\/])?markdown-it-[^\\/]+[\\/]/,
+          //     // },
+          //   ],
+          // },
+        },
+      },
     },
     experimental: {
       importGlobRestoreExtension: true,
@@ -239,5 +303,3 @@ export default defineConfig(() => {
     // },
   };
 });
-
-

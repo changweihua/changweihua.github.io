@@ -107,31 +107,31 @@ graph TB
 
 <div class="grid grid-cols-3 gap-4">
 
-![alt text](/images/cmono-QQ截图20240517084528.png)
+![示例图](/images/cmono-QQ截图20240517084528.png)
 
-![alt text](/images/cmono-QQ截图20240517084704.png)
+![示例图](/images/cmono-QQ截图20240517084704.png)
 
-![alt text](/images/cmono-QQ截图20240517084718.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240517084718.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240517084738.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240517084738.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240517084745.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240517084745.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240517110048.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240517110048.png){data-zoomable}
 
 </div>
 
 ## 横版设计 ##
 
-![alt text](/images/cmono-QQ截图20240514151035.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240514151035.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240514151042.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240514151042.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240514151050.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240514151050.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240514151054.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240514151054.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240514151106.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240514151106.png){data-zoomable}
 
 ## 硬件交互 ##
 

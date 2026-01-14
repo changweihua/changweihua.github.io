@@ -369,11 +369,11 @@ onBeforeUnmount(() => {
 
 <div class="grid grid-cols-3 gap-4">
 
-![alt text](/images/cmono-微信图片_20240816150009.png){data-zoomable}
+![示例图](/images/cmono-微信图片_20240816150009.png){data-zoomable}
 
-![alt text](/images/cmono-微信图片_20240816150020.png){data-zoomable}
+![示例图](/images/cmono-微信图片_20240816150020.png){data-zoomable}
 
-![alt text](/images/cmono-微信图片_20240816150027.png){data-zoomable}
+![示例图](/images/cmono-微信图片_20240816150027.png){data-zoomable}
 
 </div>
 

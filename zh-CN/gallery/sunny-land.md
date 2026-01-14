@@ -42,9 +42,9 @@ pageClass: gallery-page-class
 
 <div class="w-full flex flex-col gap-8 justify-evenly items-center mb-4">
 
-![Alt text](/images/cmono-air_passenger1.png){data-zoomable}
+![示例图](/images/cmono-air_passenger1.png){data-zoomable}
 
-![Alt text](/images/cmono-air_passenger2.png){data-zoomable}
+![示例图](/images/cmono-air_passenger2.png){data-zoomable}
 
 </div>
 
@@ -52,13 +52,13 @@ pageClass: gallery-page-class
 
 <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
 
-![alt text](/images/cmono-IMG_0890(20240425-070743).jpg){data-zoomable}
+![示例图](/images/cmono-IMG_0890(20240425-070743).jpg){data-zoomable}
 
-![Alt text](/images/cmono-20240104150934.png){data-zoomable}
+![示例图](/images/cmono-20240104150934.png){data-zoomable}
 
-![Alt text](/images/cmono-d8ada751f7a9aadebbff2557c19cba0.jpg){data-zoomable}
+![示例图](/images/cmono-d8ada751f7a9aadebbff2557c19cba0.jpg){data-zoomable}
 
-![Alt text](/images/cmono-2f3236719cc6fdee8b1ae6f82d880d5.jpg){data-zoomable}
+![示例图](/images/cmono-2f3236719cc6fdee8b1ae6f82d880d5.jpg){data-zoomable}
 
 </div>
 

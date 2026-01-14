@@ -26,7 +26,7 @@ npx husky init
 ```
 自动生成的 `.husky` 目录和指令：
 
-![alt text](/images/cmono-QQ图片20241112095144.png)
+![示例图](/images/cmono-QQ图片20241112095144.png)
 
 ## Lint-staged ##
 
@@ -89,7 +89,7 @@ npm install --save-dev lint-staged
 npm run lint:lint-staged
 ```
 
-![alt text](/images/cmono-QQ图片20241112095633.png)
+![示例图](/images/cmono-QQ图片20241112095633.png)
 
 **Git 提交代码检测**
 
@@ -97,7 +97,7 @@ npm run lint:lint-staged
 git commit -m "test husky lint-staged"
 ```
 
-![alt text](/images/cmono-QQ图片20241112095812.png)
+![示例图](/images/cmono-QQ图片20241112095812.png)
 
 ## Commitlint ##
 
@@ -161,7 +161,7 @@ export default {
 echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
 ```
 
-![alt text](/images/cmono-QQ图片20241112100253.png)
+![示例图](/images/cmono-QQ图片20241112100253.png)
 
 > husky9.x版本下此命令生成的 `commint-msg` 配置（编码格式为`UTF-16LE`）：
 
@@ -315,7 +315,7 @@ export default {
 
 执行命令之后会出现询问交互，根据提示一步步的完善 `commit msg` 信息。
 
-![alt text](/images/cmono-QQ图片20241112100735.png)
+![示例图](/images/cmono-QQ图片20241112100735.png)
 
 
  

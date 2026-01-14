@@ -25,13 +25,13 @@ cp .env.example .env
 docker compose up -d
 ```
 
-![alt text](/images/dify1.png)
+![示例图](/images/dify1.png)
 
 ## Dify 部署后的整体结构 ##
 
 Dify 使用容器部署，主要由多个模块组成，分为 Dify 核心服务、中间件组件 和 存储支持，所有流量经过 Nginx 反向代理 进行管理。
 
-![alt text](/images/dify2.png)
+![示例图](/images/dify2.png)
 
 ### Dify 核心服务 ###
 
@@ -155,7 +155,7 @@ environment:
 
 ## 如何进行二次开发 ##
 
-![alt text](/images/dify3.png)
+![示例图](/images/dify3.png)
 
 ### 修改代码 ###
 

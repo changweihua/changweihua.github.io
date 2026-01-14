@@ -1,4 +1,6 @@
 :root {
+  --vp-font-stack-system: #{vars.$app-font-family};
+  --vp-font-stack-code: #{vars.$app-font-family};
   --vp-nav-bg-color: transparent;
   --vp-font-family-base: #{vars.$app-font-family};
   --font-sans: #{vars.$app-font-family};
@@ -9,11 +11,6 @@
   /* 建立CSS变量与Mermaid的映射 */
   --zenuml-primary: var(--mermaid-zenumlPrimary, #4caf50);
   --zenuml-bg: var(--mermaid-zenumlBg, #fafafa);
-}
-
-:root:where(:lang(zh)) {
-  --vp-font-family-base: #{vars.$app-font-family};
-  --vp-font-family-mono: #{vars.$app-font-family};
 }
 
 html,
@@ -320,105 +317,127 @@ a.VPSkipLink::after {
     }
   }
 
-  @keyframes slide-enter {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
   .vp-doc > div > * {
-    --stagger: 0;
-    --delay: 150ms;
-    --start: 0ms;
-    animation: slide-enter 1s both 1;
-    animation-delay: calc(var(--start) + var(--stagger) * var(--delay));
+    // transition: opacity 0.3s ease;
+    // transition-delay: calc((sibling-index() - 1) * 100ms);
+
+    // @starting-style {
+    //   opacity: 0;
+    // }
+
+    // --hue: calc(100 + sibling-index() * 50);
+    // color: oklch(70% 70% var(--hue));
+
+    --stagger: calc((sibling-index() - 1) * 0.1s);
+    transition: opacity 1s var(--ease-3) var(--stagger),
+      translate 1s var(--ease-spring-3) var(--stagger);
+
+    /* enter from stage left */
+    @starting-style {
+      opacity: 0;
+      translate: -100px 0;
+    }
   }
 
-  .vp-doc > div > *:nth-child(1) {
-    --stagger: 1;
-  }
+  // @keyframes slide-enter {
+  //   0% {
+  //     opacity: 0;
+  //     transform: translateY(10px);
+  //   }
 
-  .vp-doc > div > *:nth-child(2) {
-    --stagger: 2;
-  }
+  //   to {
+  //     opacity: 1;
+  //     transform: none;
+  //   }
+  // }
 
-  .vp-doc > div > *:nth-child(3) {
-    --stagger: 3;
-  }
+  // .vp-doc > div > * {
+  //   --stagger: 0;
+  //   --delay: 150ms;
+  //   --start: 0ms;
+  //   animation: slide-enter 1s both 1;
+  //   animation-delay: calc(var(--start) + var(--stagger) * var(--delay));
+  // }
 
-  .vp-doc > div > *:nth-child(4) {
-    --stagger: 4;
-  }
+  // .vp-doc > div > *:nth-child(1) {
+  //   --stagger: 1;
+  // }
 
-  .vp-doc > div > *:nth-child(5) {
-    --stagger: 5;
-  }
+  // .vp-doc > div > *:nth-child(2) {
+  //   --stagger: 2;
+  // }
 
-  .vp-doc > div > *:nth-child(6) {
-    --stagger: 6;
-  }
+  // .vp-doc > div > *:nth-child(3) {
+  //   --stagger: 3;
+  // }
 
-  .vp-doc > div > *:nth-child(7) {
-    --stagger: 7;
-  }
+  // .vp-doc > div > *:nth-child(4) {
+  //   --stagger: 4;
+  // }
 
-  .vp-doc > div > *:nth-child(8) {
-    --stagger: 8;
-  }
+  // .vp-doc > div > *:nth-child(5) {
+  //   --stagger: 5;
+  // }
 
-  .vp-doc > div > *:nth-child(9) {
-    --stagger: 9;
-  }
+  // .vp-doc > div > *:nth-child(6) {
+  //   --stagger: 6;
+  // }
 
-  .vp-doc > div > *:nth-child(10) {
-    --stagger: 10;
-  }
+  // .vp-doc > div > *:nth-child(7) {
+  //   --stagger: 7;
+  // }
 
-  .vp-doc > div > *:nth-child(11) {
-    --stagger: 11;
-  }
+  // .vp-doc > div > *:nth-child(8) {
+  //   --stagger: 8;
+  // }
 
-  .vp-doc > div > *:nth-child(12) {
-    --stagger: 12;
-  }
+  // .vp-doc > div > *:nth-child(9) {
+  //   --stagger: 9;
+  // }
 
-  .vp-doc > div > *:nth-child(13) {
-    --stagger: 13;
-  }
+  // .vp-doc > div > *:nth-child(10) {
+  //   --stagger: 10;
+  // }
 
-  .vp-doc > div > *:nth-child(14) {
-    --stagger: 14;
-  }
+  // .vp-doc > div > *:nth-child(11) {
+  //   --stagger: 11;
+  // }
 
-  .vp-doc > div > *:nth-child(15) {
-    --stagger: 15;
-  }
+  // .vp-doc > div > *:nth-child(12) {
+  //   --stagger: 12;
+  // }
 
-  .vp-doc > div > *:nth-child(16) {
-    --stagger: 16;
-  }
+  // .vp-doc > div > *:nth-child(13) {
+  //   --stagger: 13;
+  // }
 
-  .vp-doc > div > *:nth-child(17) {
-    --stagger: 17;
-  }
+  // .vp-doc > div > *:nth-child(14) {
+  //   --stagger: 14;
+  // }
 
-  .vp-doc > div > *:nth-child(18) {
-    --stagger: 18;
-  }
+  // .vp-doc > div > *:nth-child(15) {
+  //   --stagger: 15;
+  // }
 
-  .vp-doc > div > *:nth-child(19) {
-    --stagger: 19;
-  }
+  // .vp-doc > div > *:nth-child(16) {
+  //   --stagger: 16;
+  // }
 
-  .vp-doc > div > *:nth-child(20) {
-    --stagger: 20;
-  }
+  // .vp-doc > div > *:nth-child(17) {
+  //   --stagger: 17;
+  // }
+
+  // .vp-doc > div > *:nth-child(18) {
+  //   --stagger: 18;
+  // }
+
+  // .vp-doc > div > *:nth-child(19) {
+  //   --stagger: 19;
+  // }
+
+  // .vp-doc > div > *:nth-child(20) {
+  //   --stagger: 20;
+  // }
 
   .vp-doc strong {
     color: var(--vp-c-brand-light);
@@ -1630,4 +1649,9 @@ table {
 
 .code-bar {
   animation: slideIn 0.5s ease-out;
+}
+
+figcaption {
+  text-align: center;
+  margin: var(--size-2) 0;
 }

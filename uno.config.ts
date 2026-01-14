@@ -24,7 +24,7 @@ export default defineConfig({
     // }),
     presetWind4({
       // wind4 内置了重置样式，可通过 reset 选项启用
-      reset: false,
+      reset: true,
       dark: 'class' // 关键配置：告知 UnoCSS 使用类名模式而非媒体查询
     }),
     presetAttributify(),
@@ -42,12 +42,12 @@ export default defineConfig({
           circle:
             '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50"></circle></svg>',
         },
-        carbon: () =>
-          import("@iconify-json/carbon/icons.json").then((i) => i.default),
-        "line-md": () =>
-          import("@iconify-json/line-md/icons.json").then((i) => i.default),
-        mdi: () =>
-          import("@iconify-json/mdi/icons.json").then((i) => i.default),
+        // carbon: () =>
+        //   import("@iconify-json/carbon/icons.json").then((i) => i.default),
+        // "line-md": () =>
+        //   import("@iconify-json/line-md/icons.json").then((i) => i.default),
+        // mdi: () =>
+        //   import("@iconify-json/mdi/icons.json").then((i) => i.default),
         // logos: () =>
         //   import("@iconify-json/logos/icons.json", {
         //     assert: { type: "json" },
@@ -117,7 +117,8 @@ export default defineConfig({
       }
     },
     fontFamily: {
-      mono: "var(--vt-font-family-mono)",
+      sans: "var(--vp-font-family-base)",
+      mono: "var(--vp-font-family-mono)",
     },
     darkMode: 'class' // 基于CSS类名切换
   },

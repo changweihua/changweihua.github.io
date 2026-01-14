@@ -5,7 +5,7 @@
       <AsyncComponent />
     </template>
     <template #fallback>
-      <div class="flex justify-center items-center">加载中...</div>
+      <div class="flex h-[50vh] justify-center items-center">加载中...</div>
     </template>
   </Suspense>
 </template>

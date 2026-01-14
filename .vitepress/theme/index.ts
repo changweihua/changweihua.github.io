@@ -123,6 +123,7 @@ function updateHomePageStyle(value: boolean) {
   }
 }
 
+import 'open-props/open-props.min.css';
 import "./styles/vitepress-variables.scss";
 import "./styles/maple-mono.scss";
 import "./styles/index.scss";
@@ -263,7 +264,7 @@ const setupMediumZoom = () => {
 
 export default {
   ...DefaultTheme,
-  NotFound: NotFound, // <- this is a Vue 3 functional component
+  NotFound: PageLost, // <- this is a Vue 3 functional component
   // extends: DefaultTheme,
   // 使用注入插槽的包装组件覆盖 Layout
   // Layout: MyLayout,
@@ -298,7 +299,7 @@ export default {
           "div",
           {
             class:
-              "hidden lg:(visible flex h-full items-center justify-center)",
+              "sm:hidden md:(visible flex h-full items-center justify-center)",
             style: "position: relative;",
           },
           [h(HeroLogo)]

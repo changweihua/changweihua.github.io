@@ -97,4 +97,4 @@ Sass是软件即服务（Software as a Service）的缩写，它提供给客户�
 
 ### 网络架构 ###
 
-![alt text](/images/cmono-TA3BXGFPNSPL8JT7.png)
+![示例图](/images/cmono-TA3BXGFPNSPL8JT7.png)

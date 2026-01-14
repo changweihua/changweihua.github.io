@@ -13,9 +13,9 @@ pageClass: gallery-page-class
 
 <div class="grid grid-cols-3 gap-4">
 
-![alt text](/images/cmono-QQ图片20240704154723.png){data-zoomable}
+![示例图](/images/cmono-QQ图片20240704154723.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240704154955.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240704154955.png){data-zoomable}
 
 </div>
 
@@ -27,9 +27,9 @@ Rsbuild 打包机制
 
 <div class="grid grid-cols-2 gap-4">
 
-![alt text](/images/cmono-QQ图片20240702164208.png){data-zoomable}
+![示例图](/images/cmono-QQ图片20240702164208.png){data-zoomable}
 
-![alt text](/images/cmono-QQ图片20240702164215.png){data-zoomable}
+![示例图](/images/cmono-QQ图片20240702164215.png){data-zoomable}
 
 </div>
 
@@ -37,9 +37,9 @@ Rsbuild 打包机制
 
 <div class="grid grid-cols-2 gap-4">
 
-![alt text](/images/cmono-QQ图片20240703163357.png){data-zoomable}
+![示例图](/images/cmono-QQ图片20240703163357.png){data-zoomable}
 
-![alt text](/images/cmono-QQ截图20240704155118.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240704155118.png){data-zoomable}
 
 </div>
 

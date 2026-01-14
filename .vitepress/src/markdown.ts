@@ -25,7 +25,7 @@ import { fileURLToPath, URL } from "node:url";
 import { imgLazyload } from "@mdit/plugin-img-lazyload";
 import { figure } from "@mdit/plugin-figure";
 import { tasklist } from "@mdit/plugin-tasklist";
-import codeBarPlugin from '../plugins/markdown/codeBarPlugin'
+import codeBarPlugin from "../plugins/markdown/codeBarPlugin";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -110,7 +110,7 @@ const markdown: MarkdownOptions | undefined = {
     // };
 
     // @ts-ignore
-    codeBarPlugin(md)
+    codeBarPlugin(md);
 
     md.use(imgLazyload);
     md.use(tasklist, {
@@ -148,9 +148,9 @@ const markdown: MarkdownOptions | undefined = {
       },
     });
 
-    md.use(autoArticleTitlePlugin, {
-      relativePaths: ["/blog/"],
-    });
+    // md.use(autoArticleTitlePlugin, {
+    //   relativePaths: ["/blog/"],
+    // });
 
     md.use(markdownItReplaceLink, {
       processHTML: false, // defaults to false for backwards compatibility
@@ -181,14 +181,29 @@ const markdown: MarkdownOptions | undefined = {
     // 在所有文档的<h1>标签后添加<ArticleMetadata/>组件
     md.renderer.rules.heading_close = (tokens, idx, options, env, render) => {
       let htmlResult = render.renderToken(tokens, idx, options);
+
+      // 只在第一个h1标签后添加
       if (
+        tokens[idx].tag === "h1" &&
         env["relativePath"] &&
-        env["relativePath"].includes("/blog/") &&
-        tokens[idx].tag === "h1"
+        env["relativePath"].includes("/blog/")
       ) {
-        // console.log(env["relativePath"], env["frontmatter"]["layout"]);
-        htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`;
+        // 检查是否已经添加过
+        const hasAddedMetadata = env._hasAddedMetadata || false;
+        if (!hasAddedMetadata) {
+          env._hasAddedMetadata = true;
+          htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`;
+        }
       }
+
+      // if (
+      //   env["relativePath"] &&
+      //   env["relativePath"].includes("/blog/") &&
+      //   tokens[idx].tag === "h1"
+      // ) {
+      //   // console.log(env["relativePath"], env["frontmatter"]["layout"]);
+      //   htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`;
+      // }
       // if (tokens[idx].tag === 'h1') htmlResult += `\n<ClientOnly><ArticleMetadata v-if="($frontmatter?.aside ?? true) && ($frontmatter?.showArticleMetadata ?? true)" :article="$frontmatter" /></ClientOnly>`;
       return htmlResult;
     };

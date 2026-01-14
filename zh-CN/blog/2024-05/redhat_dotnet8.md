@@ -41,13 +41,13 @@ dotnet --version
 dotnet: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by dotnet)
 dotnet: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by dotnet)
 ```
-![alt text](/images/cmono-QQ截图20240506141018.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240506141018.png){data-zoomable}
 
 这可能是因为CentOS版本太低或者缺少`libstdc++.so.6` 版本 `GLIBCXX_3.4.20` 和 `GLIBCXX_3.4.21`
 
 net8需要的环境 [libstdc.so-.6.0.26_c.gz](/files/net8需要的环境libstdc.so-.6.0.26_c.gz)
 
-![alt text](/images/cmono-QQ截图20240506141039.png){data-zoomable}
+![示例图](/images/cmono-QQ截图20240506141039.png){data-zoomable}
 
 下载后上传至服务器，而后解压
 
