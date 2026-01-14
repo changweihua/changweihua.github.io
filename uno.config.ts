@@ -1,12 +1,51 @@
 import {
   defineConfig,
+  DynamicRule,
   presetAttributify,
   presetIcons,
   presetWind4,
+  Shortcut,
   transformerDirectives,
   transformerVariantGroup,
-} from 'unocss'
-import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
+} from "unocss";
+import { FileSystemIconLoader } from "@iconify/utils/lib/loader/node-loaders";
+import { dataScreenPreset } from "./data-screen.preset";
+
+const dynamicPriceTagRules: DynamicRule[] = [
+  [
+    /^price-tag-(normal|flash|presale)$/,
+    ([, type]) => ({
+      "border-width": "2px",
+      "border-style": type === "flash" ? "dashed" : "solid",
+      "border-color": `var(--color-${type})`,
+      background: `linear-gradient(to bottom, var(--color-${type}-bg) 0%, #fff 100%)`,
+    }),
+  ],
+];
+
+// 旧版表单样式迁移
+const legacyFormRules = {
+  "old-input": "border-1 border-gray-300 rounded-sm px-2 py-1",
+  "old-select": "bg-gray-50 border-1 border-gray-300 rounded-sm",
+} as const;
+
+// 按钮快捷组合
+const buttonShortcuts: Shortcut[] = [
+  ["btn-base", "font-sans transition-colors duration-150 focus:outline-none"],
+  ["btn", "btn-base inline-flex items-center justify-center"],
+  ["btn-sm", "btn px-3 py-1.5 text-sm rounded-md"],
+  ["btn-md", "btn px-4 py-2 text-base rounded-lg"],
+  ["btn-primary", "bg-blue-600 hover:bg-blue-700 text-white"],
+];
+
+// export const bemTransformer: Transformer = {
+//   name: 'bem',
+//   enforce: 'pre',
+//   transform(code) {
+//     return code.replace(/(block)--(modifier)/g, 'block-modifier_$2')
+//               .replace(/(block)__(element)/g, 'block_$2')
+//   }
+// }
 
 export default defineConfig({
   shortcuts: {
@@ -17,15 +56,17 @@ export default defineConfig({
       "border-rd-30 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% mb-4vw p-2rem",
     "markup-card":
       "border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem",
+    ...buttonShortcuts,
   },
   presets: [
+    dataScreenPreset,
     // presetWind3({
     //   dark: 'class' // 关键配置：告知 UnoCSS 使用类名模式而非媒体查询
     // }),
     presetWind4({
       // wind4 内置了重置样式，可通过 reset 选项启用
       reset: true,
-      dark: 'class' // 关键配置：告知 UnoCSS 使用类名模式而非媒体查询
+      dark: "class", // 关键配置：告知 UnoCSS 使用类名模式而非媒体查询
     }),
     presetAttributify(),
     presetIcons({
@@ -63,8 +104,13 @@ export default defineConfig({
   // 2. 安全列表 (针对 VitePress 的特别设置)
   safelist: [
     // 为 VitePress 的某些元素预生成常用样式，确保它们始终可用
-    'prose', 'prose-sm', 'mx-auto', // 用于 Markdown 内容容器
-    'text-left', 'text-center', 'text-right', // 文本对齐
+    "prose",
+    "prose-sm",
+    "mx-auto", // 用于 Markdown 内容容器
+    "text-left",
+    "text-center",
+    "text-right", // 文本对齐
+    ...["normal", "flash", "presale"].map((type) => `price-tag-${type}`),
   ],
   rules: [
     // 多行文本截断工具类 text-truncate-2
@@ -80,6 +126,24 @@ export default defineConfig({
         "text-overflow": "ellipsis",
       }),
     ],
+    // @ts-ignore
+    ...dynamicPriceTagRules,
+    // @ts-ignore
+    [
+      // @ts-ignore
+      "modern-input",
+      {
+        // @ts-ignore
+        "@apply": "border-2 border-primary rounded-md px-3 py-2",
+        // @ts-ignore
+        transition: "all 0.2s ease-in",
+      },
+    ],
+    // @ts-ignore
+    ...Object.entries(legacyFormRules).map(([key, value]) => [
+      key,
+      { "@apply": value },
+    ]),
     // // @ts-ignore
     // [
     //   /^divider-x$/,
@@ -112,15 +176,15 @@ export default defineConfig({
     },
     colors: {
       primary: {
-        dark: '#5eead4', // 暗色系青绿色
+        dark: "#5eead4", // 暗色系青绿色
         DEFAULT: "var(--vp-c-brand)",
-      }
+      },
     },
     fontFamily: {
       sans: "var(--vp-font-family-base)",
       mono: "var(--vp-font-family-mono)",
     },
-    darkMode: 'class' // 基于CSS类名切换
+    darkMode: "class", // 基于CSS类名切换
   },
   transformers: [transformerDirectives(), transformerVariantGroup()],
   // 统一暗色开关：与 VitePress 的 class="dark" 对齐（推荐）
@@ -128,4 +192,3 @@ export default defineConfig({
   // 如需更强的类型提示，可补充安全列表（可选）
   // safelist: ['dark']
 });
-

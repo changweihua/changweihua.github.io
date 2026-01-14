@@ -392,7 +392,7 @@ export default withMermaid(
     },
     vite: {
       css: {
-        transformer: "lightningcss",
+        // transformer: "lightningcss",
         lightningcss: {
           // 将 browserslist 转换为 LightningCSS 的目标格式
           targets: browserslistToTargets(browserslist(">= 0.25%")),
