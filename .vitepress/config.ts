@@ -113,6 +113,7 @@ const customElements = [
   "semantics",
   "annotation",
   "annotation-xml",
+  "hover-tilt",
 ];
 
 const vitePressOptions: UserConfig = {
@@ -415,12 +416,16 @@ export default withMermaid(
             // 配置CSS模块化
             // pattern: "[name]__[local]__[hash:base64:5]",
           },
+          // 不报告未知规则为错误
+          errorRecovery: true,
           // // 允许特殊规则
           // unrecognized: {
           //   pseudos: "ignore", // 忽略未知伪类错误
           //   atRules: "ignore", // 忽略无法识别的规则（包括 @keyframes）
           // },
         },
+        // 同时使用 PostCSS 处理 @apply
+        // postcss: true,
         devSourcemap: true,
         // transformer: "postcss", // 使用 Rust 实现的 CSS 处理器
         // codeSplit: false,
@@ -450,6 +455,7 @@ export default withMermaid(
       },
       // 强制预构建
       optimizeDeps: {
+        include: ["unocss"],
         exclude: [
           "vue3-next-qrcode",
           "vitepress-plugin-detype",
@@ -464,6 +470,7 @@ export default withMermaid(
           "vitepress-plugin-tabs",
           "vitepress-plugin-detype",
           "vitepress-plugin-npm-commands",
+          "hover-tilt",
         ], // Externalize Node.js modules
       },
       resolve: {
@@ -513,6 +520,7 @@ export default withMermaid(
             yml: "vscode-icons:file-type-light-yaml",
             yaml: "vscode-icons:file-type-light-yaml",
             php: "vscode-icons:file-type-php",
+            less: "vscode-icons:file-type-less",
             // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
             // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
           },

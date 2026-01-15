@@ -129,25 +129,6 @@ npm run test // [!=npm auto]
 ```
 
 
-::: code-group
-```ts [a.ts]
-console.log("I'm TypeScript");
-```
-
-```js [b.js]
-console.log("I'm JavaScript");
-```
-
-```md [c.md]
-Markdown 图标演示
-```
-
-```css [d.css]
-h1 {
-  background: red;
-}
-```
-:::
 
 
 

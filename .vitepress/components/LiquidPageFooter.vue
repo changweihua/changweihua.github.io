@@ -2,22 +2,20 @@
   <div
     v-if="!frontmatter.plain"
     id="LiquidPageFooter"
-    class="liquid-bg-container liquid-page-footer pt-3"
+    class="liquid-bg-container liquid-page-footer pt-3 z-10"
   >
+    <LiziBackground class="lizi-bakground" />
     <!-- 3层液态背景层（顺序：底→中→顶） -->
-    <div class="liquid-layer"></div>
-    <div class="liquid-layer"></div>
-    <div class="liquid-layer"></div>
+    <div class="liquid-layer z-48"></div>
+    <div class="liquid-layer z-49"></div>
+    <div class="liquid-layer z-50"></div>
     <div class="footer-content flex gap-3 flex-col items-center justify-center">
-      <div
-        id="PGFT"
-        class="flex gap-3 flex-row items-center justify-center z-100"
-      >
+      <div id="PGFT" class="flex gap-3 flex-row items-center z-100">
         <span v-once>V {{ version }}</span
         ><span> | </span>
         <icon-logos-markdown :width="20" :height="20" />
       </div>
-      <div class="copy-right flex flex-col items-center justify-center">
+      <div class="copy-right flex flex-col items-center z-100">
         <span>基于 MIT Licensed</span>
         <span>{{ copyright }}</span>
         <VisitsPanel />
@@ -31,8 +29,9 @@ import { useRootClick, useCycle } from "./composables";
 import VisitsPanel from "./VisitsPanel.vue";
 import { useData } from "vitepress";
 import { version } from "../../package.json";
+import LiziBackground from "./LiziBackground.vue";
 
-const  copyright = `版权所有 © 2009- ${new Date().getFullYear()} CMONO.NET`
+const copyright = `版权所有 © 2009- ${new Date().getFullYear()} CMONO.NET`;
 
 const { frontmatter } = useData();
 
@@ -157,6 +156,14 @@ number-flow-vue {
 
 .footer-content {
   z-index: var(--vp-z-index-footer);
+}
+
+.lizi-bakground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* 液态层通用样式（绝对定位+圆形初始形态） */

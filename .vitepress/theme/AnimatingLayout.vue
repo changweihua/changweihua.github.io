@@ -111,9 +111,9 @@ router.onAfterPageLoad = function () {
 
 <style lang="scss" scoped>
 .page-content {
-  :deep(*) {
-    font-family: #{vars.$app-font-family};
-  }
+  // :deep(*) {
+  //   font-family: #{vars.$app-font-family};
+  // }
 
   --r: clamp(3, (var(--num) - 99) * 999 + 29, 250);
   --g: clamp(6, (var(--num) - 100) * -999 + 67, 125);

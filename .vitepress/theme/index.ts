@@ -123,6 +123,10 @@ function updateHomePageStyle(value: boolean) {
   }
 }
 
+import "virtual:uno.css";
+import "virtual:group-icons.css";
+import "animate.css";
+
 import 'open-props/open-props.min.css';
 import "./styles/vitepress-variables.scss";
 import "./styles/maple-mono.scss";
@@ -241,10 +245,6 @@ import "@vitepress-code-preview/container/dist/style.css";
 
 // 导入hooks
 import useVisitData from "../hooks/useVisitData";
-
-import "virtual:uno.css";
-import "virtual:group-icons.css";
-import "animate.css";
 
 import "markdown-it-github-alerts/styles/github-colors-light.css";
 import "markdown-it-github-alerts/styles/github-colors-dark-media.css";
@@ -495,6 +495,13 @@ export default {
     if (inBrowser) {
       initMarkmapComponent(app);
       enhanceAppWithTabs(app);
+
+      app.component("TransitionNavBar", TransitionNavBar);
+
+      import('hover-tilt/web-component').then(module => {
+        // 模块已经加载，Web Component 应该已经注册
+        console.log('hover-tilt loaded')
+      })
 
       app.use(TDesign);
       // const { promise, resolve, reject } = Promise.withResolvers();

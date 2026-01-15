@@ -147,7 +147,6 @@ export default defineConfig(() => {
       chunkSizeWarningLimit: 20 * 1000 * 1000, // 设置 chunk 大小警告的限制为 2000 KiB
       emptyOutDir: true,
       reportCompressedSize: false,
-      cssMinify: "lightningcss", // 确保生产构建使用相同配置
       rolldownOptions: {
         output: {
           // advancedChunks: {

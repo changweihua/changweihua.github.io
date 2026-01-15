@@ -1655,3 +1655,39 @@ figcaption {
   text-align: center;
   margin: var(--size-2) 0;
 }
+
+.blog-page-class .vp-doc h1:first-child,
+.gallery-page-class .vp-doc h1:first-child,
+.manual-page-class .vp-doc h1:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  background: linear-gradient(45deg, #f9d423, #ff4e50, #7b4397, #00c6ff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite, pulse 2s infinite alternate;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
