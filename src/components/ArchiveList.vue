@@ -5,8 +5,10 @@
     :fullscreen="spinning"
     tip="正在处理..."
   >
-    <div class="w-full p-6 animate__animated animate__fadeInUp">
-      <div v-for="year in yearList" :key="year" class="mb-10">
+    <div
+      class="archive-container w-full p-6 animate__animated animate__fadeInUp"
+    >
+      <div v-for="year in yearList" :key="year" class="year-archive mb-10">
         <div class="pt-3 pb-2 animate__animated animate__zoomIn transform-gpu">
           <h1 v-text="year" class="text-xl"></h1>
         </div>
@@ -16,7 +18,7 @@
           <div
             v-for="article in computedYearMap[year]"
             :key="article.url"
-            class="flex justify-between items-center py-1 relative after:absolute after:right-[-0.5rem] after:top-0 after:h-full after:w-px after:bg-gray-200"
+            class="archive-article flex justify-between items-center py-1 relative after:absolute after:right-[-0.5rem] after:top-0 after:h-full after:w-px after:bg-gray-200"
           >
             <a
               v-html="
@@ -94,5 +96,32 @@ onMounted(() => {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+
+.archive-container {
+  [data-animate] {
+    --stagger: 0;
+    --delay: 120ms;
+    --start: 0ms;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-animate] {
+      animation: enter 0.6s both;
+      animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
+    }
+  }
+
+  .year-archive .archive-article {
+    --stagger: calc((sibling-index() - 1) * 0.1s);
+    transition: opacity 1s var(--ease-4) var(--stagger),
+      translate 1s var(--ease-spring-2) var(--stagger);
+
+    /* enter from stage left */
+    @starting-style {
+      opacity: 0;
+      translate: -100px 0;
+    }
+  }
 }
 </style>

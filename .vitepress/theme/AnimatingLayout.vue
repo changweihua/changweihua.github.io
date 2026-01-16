@@ -57,17 +57,11 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
 });
 
 const { route } = useRouter();
-const isTransitioning = ref(false);
 const currentPage = ref("home");
 watch(
   () => route.path,
   () => {
     nextTick(() => setupMediumZoom());
-    isTransitioning.value = true;
-    // 动画结束后重置状态
-    setTimeout(() => {
-      isTransitioning.value = false;
-    }, 500); // 500ms 要和 CSS 动画时间匹配
   }
 );
 
@@ -111,10 +105,6 @@ router.onAfterPageLoad = function () {
 
 <style lang="scss" scoped>
 .page-content {
-  // :deep(*) {
-  //   font-family: #{vars.$app-font-family};
-  // }
-
   --r: clamp(3, (var(--num) - 99) * 999 + 29, 250);
   --g: clamp(6, (var(--num) - 100) * -999 + 67, 125);
   --b: clamp(12, (var(--num) - 100) * -999 + 54, 250);

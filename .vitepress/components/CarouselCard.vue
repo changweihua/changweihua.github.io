@@ -43,6 +43,11 @@ const carouselContainer = useTemplateRef<HTMLDivElement>("carouselContainer");
 const currentItem = ref<GalleryItem | null>(null);
 const teamItems = ref<Array<GalleryItem>>([
   {
+    title: "游记",
+    description: "圌山",
+    cover: "/images/微信图片_20260116145420_18_67.jpg",
+  },
+  {
     title: "Windows",
     description: "开发平台",
     cover: "/images/macwallpaper.jpg",

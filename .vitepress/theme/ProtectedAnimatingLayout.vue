@@ -67,25 +67,12 @@ const setupMediumZoom = () => {
   });
 };
 
-/*
- * 在我们创建MutationObserver对象的时候可以传入一个函数，
- *
- */
-let observer: MutationObserver;
-
 onMounted(() => {
   nextTick(function () {
     setupMediumZoom();
   });
-  // observer = new MutationObserver((mutations) => {
-  //   console.log(mutations);
-  //   // => 返回一个我们监听到的MutationRecord对象
-  //   // MutationRecord对象 是我们每修改一个就会在数组里面追加一个
-  // });
-  // observer.observe(document.documentElement, { attributes: true });
 });
 
-// onUnmounted(() => observer?.disconnect());
 const router = useRouter();
 
 watch(
@@ -100,7 +87,6 @@ router.onAfterPageLoad = function () {
   });
 };
 
-// v-slot:default="slotProps"
 </script>
 
 <template>
