@@ -24,10 +24,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import VisitsPanel from "./VisitsPanel.vue";
 import { useData } from "vitepress";
 import { version } from "../../package.json";
-import LiziBackground from "./LiziBackground.vue";
 
 const copyright = `版权所有 © 2009- ${new Date().getFullYear()} CMONO.NET`;
 

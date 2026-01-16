@@ -31,7 +31,7 @@ const props = defineProps({
 });
 
 // 初始化文章元数据信息
-const { theme, page, frontmatter } = useData();
+const { page } = useData();
 
 const data = reactive({
   showMeta: page.value.filePath.includes("blog/"),
@@ -41,7 +41,7 @@ const data = reactive({
   categories: props.frontmatter?.categories ?? [],
   tags: props.frontmatter?.tags ?? [],
 });
-const { date, categories, tags } = toRefs(data);
+const { date } = toRefs(data);
 
 const readCost = ref(10)
 

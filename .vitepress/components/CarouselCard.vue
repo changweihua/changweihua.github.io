@@ -1,11 +1,16 @@
 <template>
-  <div>
-    <h1 class="about-title">Gallery</h1>
+  <div
+    class="carousel-root"
+    @keydown="handleKeydown"
+    @touchstart="handleTouchStart"
+    @touchend="handleTouchEnd"
+  >
+    <h1 class="carousel-title">Gallery</h1>
 
     <div class="carousel-container" ref="carouselContainer">
       <button class="nav-arrow left" @click="handlePrevlick">‹</button>
       <div class="carousel-track">
-        <template v-for="(item, index) in teamItems">
+        <template v-for="item in teamItems">
           <div class="card">
             <img :src="item.cover" :alt="item.description" />
           </div>
@@ -90,24 +95,24 @@ let isAnimating = false;
 let touchStartX = 0;
 let touchEndX = 0;
 
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === "ArrowLeft") {
+    updateCarousel(currentIndex.value - 1);
+  } else if (e.key === "ArrowRight") {
+    updateCarousel(currentIndex.value + 1);
+  }
+};
+
+const handleTouchStart = (e: TouchEvent) => {
+  touchStartX = e.changedTouches[0].screenX;
+};
+
+const handleTouchEnd = (e: TouchEvent) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+};
+
 onMounted(() => {
-  // document.addEventListener("keydown", (e) => {
-  //   if (e.key === "ArrowLeft") {
-  //     updateCarousel(currentIndex - 1);
-  //   } else if (e.key === "ArrowRight") {
-  //     updateCarousel(currentIndex + 1);
-  //   }
-  // });
-
-  // document.addEventListener("touchstart", (e) => {
-  //   touchStartX = e.changedTouches[0].screenX;
-  // });
-
-  // document.addEventListener("touchend", (e) => {
-  //   touchEndX = e.changedTouches[0].screenX;
-  //   handleSwipe();
-  // });
-
   updateCarousel(0);
 });
 
@@ -188,13 +193,15 @@ function handleSwipe() {
 </script>
 
 <style scoped>
-.about-title {
+.carousel-root {
+  width: 100%;
+  max-width: 1200px;
+  overflow: hidden;
+}
+.carousel-title {
   font-size: 6rem;
   font-weight: 800;
   text-transform: uppercase;
-  top: 45px;
-  left: 50%;
-  transform: translateX(-50%);
   pointer-events: none;
   white-space: nowrap;
   background: linear-gradient(
@@ -209,11 +216,11 @@ function handleSwipe() {
 
 .carousel-container {
   width: 100%;
-  max-width: 1200px;
   height: 450px;
   position: relative;
   perspective: 1000px;
   margin-top: 80px;
+  overflow: hidden;
 }
 
 .carousel-track {
@@ -229,7 +236,7 @@ function handleSwipe() {
 
 .card {
   position: absolute;
-  width: 280px;
+  width: 380px;
   height: 380px;
   background: white;
   border-radius: 20px;

@@ -2,108 +2,18 @@
 import { inBrowser, useData, useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme-without-fonts";
 import { h, watchEffect, watch, nextTick } from "vue";
+import AnimationTitle from "../components/AnimtedTitle.vue";
 import DocAfter from "../components/DocAfter.vue";
-import CopyRight from "../components/CopyRight.vue";
-import HeaderProfile from "../components/HeaderProfile.vue";
-import LottiePanel from "../components/LottiePanel.vue";
-import DacingNumber from "../components/DacingNumber.vue";
-import HrefCard from "../components/HrefCard.vue";
-import DancingLogo from "../components/DancingLogo.vue";
-import ReadText from "../components/ReadText.vue";
-import ColorfulName from "../components/ColorfulName.vue";
-import CubesLoader from "../components/CubesLoader.vue";
-import CubeLoader from "../components/CubeLoader.vue";
-import PyramidLoader from "../components/PyramidLoader.vue";
-import HoverableText from "../components/HoverableText.vue";
 import ArticleFooter from "../components/ArticleFooter.vue";
-import LiquidCard from "../components/LiquidCard.vue";
-import Robot from "../components/Robot.vue";
-import LiquidMetaCard from "../components/LiquidMetaCard.vue";
+import HeroLogo from "../components/HeroLogo.vue";
 import CarouselCard from "../components/CarouselCard.vue";
-import CarouselGallery from "../components/CarouselGallery.vue";
-import AboutMe from "../components/AboutMe.vue";
-import HeroLogo from "#.vitepress/components/HeroLogo.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
-import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
-import AnimationTitle from "../components/AnimtedTitle.vue";
-import TransitionNavBar from "../components/TransitionNavBar.vue";
-import RainbowAnimationSwitcher from "../components/RainbowAnimationSwitcher.vue";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import mediumZoom from "medium-zoom";
-import yuppie from "yuppie-ui";
+
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
-
-// #v-ifdef VITE_MY_ENV
-
-import { pinyin } from "pinyin-pro";
-
-// console.log(styleText('italic', styleText('bold', styleText('blue', pinyin("常伟华")))));
-
-import { xlogs } from "xlogs";
-
-import PinyinMatch from "pinyin-match";
-
-let test = "123曾经沧海难为水除却巫山不是云";
-
-console.log(PinyinMatch.match(test, "23曾")); // [1, 3]
-console.log(PinyinMatch.match(test, "cjc")); // [3, 5]
-console.log(PinyinMatch.match(test, "cengjingcanghai")); // [3, 6]
-console.log(PinyinMatch.match(test, "cengjingcangha")); // [3, 6]
-console.log(PinyinMatch.match(test, "engjingcanghai")); // false
-console.log(PinyinMatch.match(test, "zengjingcang")); // [3, 5]
-console.log(PinyinMatch.match(test, "sdjkelwqf")); // false
-console.log(PinyinMatch.match(test, "zengji ng cang")); // [3, 5]
-console.log(PinyinMatch.match(test, "zengji ng cangsdjfkl")); // false
-console.log(PinyinMatch.match("   我 爱你 中   国   ", "nzg")); // [6, 12]
-console.log(PinyinMatch.match("   我 爱你 中   国   ", "爱你中")); // [5, 8]
-console.log(PinyinMatch.match("發", "fa")); // [0, 0]
-
-// import 'dotenv/config'
-
-const text = "白日依山尽，黄河入海流";
-
-// 直接中文匹配
-console.log(PinyinMatch.match(text, "黄河"));
-// [6, 7]
-
-// 拼音全拼匹配
-console.log(PinyinMatch.match(text, "bairiyishanjin"));
-// [0, 4]
-
-// 拼音缩写匹配
-console.log(PinyinMatch.match(text, "hhrhl"));
-// [6, 9]
-
-// 模糊输入（最后一个字母没打完）
-console.log(PinyinMatch.match(text, "huan"));
-// [6, 6]
-
-// 拼音 + 汉字混合
-console.log(PinyinMatch.match(text, "bai日"));
-// [0, 1]
-
-// 无法命中
-console.log(PinyinMatch.match(text, "abcdef"));
-// false
-
-// 气泡对话
-xlogs.bubble(`Hello!`, "bot");
-xlogs.bubble("Hi there!", "user");
-
-// 天气主题
-xlogs.weather("sunny", "Nice weather today!");
-xlogs.weather("rainy", "Remember your umbrella");
-
-// ASCII艺术
-xlogs.ascii("Important", "box");
-xlogs.ascii("Warning", "cloud");
-
-// 3D文字
-xlogs.banner(pinyin("常伟华"), "neon");
-
-// #v-endif
 
 // 彩虹背景动画样式
 function updateHomePageStyle(value: boolean) {
@@ -138,6 +48,7 @@ import "./styles/vitepress.print.css";
 import "./styles/vitepress.code.css";
 import "./styles/markdown.ext.css";
 import "./styles/mermaid.ext.css";
+import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 
 import directives from "../directives";
 import { NProgress } from "nprogress-v2/dist/index.js"; // 进度条组件
@@ -153,19 +64,8 @@ import "@catppuccin/vitepress/theme/frappe/lavender.css";
 // 引入组件库的少量全局样式变量
 import "tdesign-vue-next/es/style/index.css";
 
-import NotFound from "../components/NotFound.vue";
 import PageLost from "../components/PageLost.vue";
-import CodeGroup from "../components/CodeGroup.vue";
-import ArticleMetadata from "../components/ArticleMetadata.vue";
-import Contributors from "../components/Contributors.vue";
-import HomeContributors from "../components/HomeContributors.vue";
 import ArticleQRCode from "../components/ArticleQRCode.vue";
-import HoverGrid from "../components/HoverGrid.vue";
-import MagicCard from "../components/MagicCard.vue";
-import Guidance from "../components/Guidance.vue";
-import TaskList from "../components/TaskList.vue";
-import ScrollableParagraph from "../components/ScrollableParagraph.vue";
-import GalleryCard from "../components/GalleryCard.vue";
 
 import { Icon } from "@iconify/vue";
 
@@ -173,26 +73,6 @@ import type { Theme } from "vitepress";
 
 import AnimatingLayout from "./AnimatingLayout.vue";
 
-import { nanoid, customAlphabet } from "nanoid";
-
-const id = nanoid();
-// 默认ID 长度为21字符
-// 随机，URL安全（不会出现 + / = ）
-console.log(id); // 如：Kh_1OuFVecVCKfMdj1NXq
-
-console.log(nanoid(10)); // 10位ID，如: Y3Xh9md3Wz
-console.log(nanoid(32)); // 32位ID
-
-const aids = Array.from({ length: 5 }, () => nanoid());
-console.log(aids); // ['wr9bcsr1Te5HKEn_WYVKx','Fho3hazZDYNGWorG7APit','VIuIpbrVamSjnKMVg9IpO','3ArbZPt8qc_JL_IF8WTbJ','V9YCFTNFgaWF6hnQRgJBH']
-
-// 仅数字ID
-const nanoidNumber = customAlphabet("1234567890", 8);
-console.log(nanoidNumber()); // 24736672
-
-// 全大写字母+数字
-const nanoidUpper = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 8);
-console.log(nanoidUpper()); // OO8QE8V0
 
 import TDesign from "tdesign-vue-next";
 
@@ -458,9 +338,6 @@ export default {
     const { app, router } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
-    // 使用别名机制覆写默认的VPFooter组件
-    // app.component('VPFooter', LiquidPageFooter)
-
     // 定义国际化配置
     defineClientComponentConfig({
       // 保持向后兼容
@@ -494,9 +371,6 @@ export default {
       useComponents(app, DemoPreview);
 
       app.component("demo-preview", AntDesignContainer);
-      app.component("RainbowAnimationSwitcher", RainbowAnimationSwitcher);
-
-      app.component("TransitionNavBar", TransitionNavBar);
 
       // import("hover-tilt/web-component").then((module) => {
       //   // 模块已经加载，Web Component 应该已经注册
@@ -513,9 +387,7 @@ export default {
       //         reject('失败');
       //     }
       // }, 1000);
-    }
 
-    if (inBrowser) {
       NProgress.configure({ showSpinner: false });
 
       // 彩虹背景动画样式
@@ -527,17 +399,17 @@ export default {
         );
       }
 
-      app.use(yuppie);
-
-      app.component("MarkdownEChart", MarkdownEChart);
-      app.component("HrefCard", HrefCard);
-      app.component("ColorfulName", ColorfulName);
-      app.component("HoverableText", HoverableText);
-      app.component("LiquidMetaCard", LiquidMetaCard);
       app.component("CarouselCard", CarouselCard);
-      app.component("CarouselGallery", CarouselGallery);
-      app.component("AboutMe", AboutMe);
-      app.component("Robot", Robot);
+      app.component("MarkdownEChart", MarkdownEChart);
+
+      // app.component("HrefCard", HrefCard);
+      // app.component("ColorfulName", ColorfulName);
+      // app.component("HoverableText", HoverableText);
+      // app.component("LiquidMetaCard", LiquidMetaCard);
+
+      // app.component("CarouselGallery", CarouselGallery);
+      // app.component("AboutMe", AboutMe);
+      // app.component("Robot", Robot);
       app.use(directives);
 
       // app.directive("aria-empty", {
@@ -554,28 +426,28 @@ export default {
       //   unmounted(el, binding) {},
       // });
 
-      app.component("DacingNumber", DacingNumber);
-      app.component("TaskList", TaskList);
-      app.component("ScrollableParagraph", ScrollableParagraph);
-      app.component("GalleryCard", GalleryCard);
-      app.component("CubesLoader", CubesLoader);
-      app.component("PyramidLoader", PyramidLoader);
-      app.component("CubeLoader", CubeLoader);
+      // app.component("DacingNumber", DacingNumber);
+      // app.component("TaskList", TaskList);
+      // app.component("ScrollableParagraph", ScrollableParagraph);
+      // app.component("GalleryCard", GalleryCard);
+      // app.component("CubesLoader", CubesLoader);
+      // app.component("PyramidLoader", PyramidLoader);
+      // app.component("CubeLoader", CubeLoader);
       app.component("m-icon", Icon);
 
-      app.component("header-profile", HeaderProfile);
-      app.component("lottie-panel", LottiePanel);
-      app.component("code-group", CodeGroup);
-      app.component("ArticleMetadata", ArticleMetadata);
-      app.component("Contributors", Contributors);
-      app.component("HomeContributors", HomeContributors);
-      app.component("CopyRight", CopyRight);
-      app.component("HoverGrid", HoverGrid);
-      app.component("DancingLogo", DancingLogo);
-      app.component("MagicCard", MagicCard);
-      app.component("LiquidCard", LiquidCard);
-      app.component("Guidance", Guidance);
-      app.component("m-read-text", ReadText);
+      // app.component("header-profile", HeaderProfile);
+      // app.component("lottie-panel", LottiePanel);
+      // app.component("code-group", CodeGroup);
+      // app.component("ArticleMetadata", ArticleMetadata);
+      // app.component("Contributors", Contributors);
+      // app.component("HomeContributors", HomeContributors);
+      // app.component("CopyRight", CopyRight);
+      // app.component("HoverGrid", HoverGrid);
+      // app.component("DancingLogo", DancingLogo);
+      // app.component("MagicCard", MagicCard);
+      // app.component("LiquidCard", LiquidCard);
+      // app.component("Guidance", Guidance);
+      // app.component("m-read-text", ReadText);
 
       if (router) {
         router.onBeforeRouteChange = async (to) => {

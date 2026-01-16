@@ -37,7 +37,7 @@
   },
   "diagnostics": true,
   "types": ["vite/client", "typings"],
-  "include": [".", "src", ".vitepress", "./typings", "env.d.ts"],
+  "include": [".", "src", ".vitepress", "./typings", "env.d.ts", "package.json"],
   "exclude": [
     "node_modules",
     ".vitepress/cache",

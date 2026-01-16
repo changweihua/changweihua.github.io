@@ -99,7 +99,7 @@ const indicators = useTemplateRef<HTMLDivElement>("indicators");
 
 // 状态变量
 const currentSlide = ref(0);
-let autoplayInterval;
+let autoplayInterval = 0;
 let isPlaying = carouselConfig.autoplay;
 let autoplaySpeed = carouselConfig.autoplaySpeed;
 let isTransitioning = false; // 过渡状态锁
@@ -124,8 +124,8 @@ function initCarousel() {
 }
 
 // 切换到指定轮播图
-function goToSlide(index) {
-  if (index === currentSlide || isTransitioning) return;
+function goToSlide(index: number) {
+  if (index === currentSlide.value || isTransitioning) return;
 
   isTransitioning = true; // 锁定过渡状态
 
@@ -174,8 +174,11 @@ function goToNextSlide() {
 }
 
 // 图片碎片化函数
-function fragmentImage(img, callback) {
-  if (!img.complete) {
+function fragmentImage(
+  img: HTMLImageElement | null,
+  callback: { (): void; (): void }
+) {
+  if (!img || !img.complete) {
     if (callback) callback();
     return;
   }
@@ -186,8 +189,8 @@ function fragmentImage(img, callback) {
   existingFragments.forEach((frag) => frag.remove());
 
   // 获取图片尺寸和容器尺寸
-  const imgWidth = img.naturalWidth;
-  const imgHeight = img.naturalHeight;
+  const imgWidth = img!.naturalWidth;
+  const imgHeight = img!.naturalHeight;
   const containerWidth = carouselContainer.value!.clientWidth;
   const containerHeight = carouselContainer.value!.clientHeight;
 
@@ -270,7 +273,7 @@ function fragmentImage(img, callback) {
 
 // 开始自动播放
 function startAutoplay() {
-  autoplayInterval = setInterval(() => {
+  autoplayInterval = window.setInterval(() => {
     if (!isTransitioning) goToNextSlide();
   }, autoplaySpeed);
 }

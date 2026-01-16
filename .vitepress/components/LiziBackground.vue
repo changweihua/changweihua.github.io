@@ -1,11 +1,14 @@
 <template>
   <!-- 3d粒子背景 -->
-  <div class="three-container" ref="containerRef"></div>
+  <div class="three-container" v-element-size="onWindowResize" ref="containerRef"></div>
 </template>
 
 <script setup lang="ts">
 import * as THREE from "three";
 import { ref, onMounted, onUnmounted, watch, useTemplateRef } from "vue";
+import {
+  vElementSize
+} from '@vueuse/components'
 
 interface Props {
   // 控制x轴波浪的长度
@@ -36,7 +39,7 @@ let count = 0;
 let animationFrameId: number | null = null;
 
 // 响应式变量
-const windowHalfX = ref(window.innerWidth / 2);
+const windowHalfX = ref(0);
 const height = 200;
 
 // 初始化场景
@@ -209,8 +212,6 @@ const cleanup = () => {
     containerRef.value.removeChild(container);
     container = null;
   }
-
-  window.removeEventListener("resize", onWindowResize);
 };
 
 // 监听props变化，重新初始化
@@ -226,9 +227,9 @@ watch(
 
 // 生命周期
 onMounted(() => {
+  windowHalfX.value = window.innerWidth / 2;
   init();
   animate();
-  window.addEventListener("resize", onWindowResize);
 });
 
 onUnmounted(() => {
