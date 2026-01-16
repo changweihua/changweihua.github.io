@@ -344,3 +344,268 @@ module.exports = {
 - 关注 `core-js@4` 的发展动态
 
 通过合理使用 `core-js`，开发者可以在享受最新语言特性的同时，确保应用的广泛兼容性。
+
+## 基于 RsBuild 实战 ##
+
+```ts:rsbuild.config.ts
+import { defineConfig, loadEnv } from '@rsbuild/core'
+import { pluginVue } from '@rsbuild/plugin-vue'
+import { pluginBabel } from '@rsbuild/plugin-babel'
+import { pluginVueJsx } from '@rsbuild/plugin-vue-jsx'
+import { pluginLess } from '@rsbuild/plugin-less'
+import { pluginEslint } from '@rsbuild/plugin-eslint'
+import { pluginTypeCheck } from '@rsbuild/plugin-type-check'
+import { pluginImageCompress } from '@rsbuild/plugin-image-compress'
+import { pluginCssMinimizer } from '@rsbuild/plugin-css-minimizer'
+import { pluginRem } from '@rsbuild/plugin-rem'
+import { pluginAssetsRetry } from '@rsbuild/plugin-assets-retry'
+import { pluginBasicSsl } from '@rsbuild/plugin-basic-ssl'
+import AutoImport from 'unplugin-auto-import/rspack'
+import Components from 'unplugin-vue-components/rspack'
+import { VantResolver } from '@vant/auto-import-resolver'
+import path from 'path'
+import UnoCSS from '@unocss/postcss'
+
+const { publicVars } = loadEnv({ prefixes: ['VUE_APP_'] })
+
+export default defineConfig({
+  environments: {
+    h5: {
+      source: {
+        entry: {
+          index: './src/index.ts'
+        }
+      },
+      output: {
+        distPath: {
+          root: 'dist/h5'
+        }
+      }
+    },
+    wechat: {
+      source: {
+        include: [{ not: /[\\/]core-js[\\/]/ }],
+        entry: {
+          index: './src/mini-index.ts'
+        }
+      },
+      output: {
+        distPath: {
+          root: 'dist/wechat'
+        }
+      }
+    }
+  },
+  plugins: [
+    pluginVue(),
+    pluginBabel({
+      include: /\.(?:jsx|tsx)$/
+    }),
+    pluginVueJsx(),
+    pluginLess({
+      lessLoaderOptions(config) {
+        config.additionalData = `@import "${path.resolve('./src/assets/style/variables.less')}";`
+        config.lessOptions = {
+          math: 'always', // 括号内才使用数学计算
+          modifyVars: {
+            hack: `true; @import "${path.resolve('./src/assets/style/index.less')}";`
+          },
+          javascriptEnabled: false
+        }
+      }
+    }),
+    pluginEslint({
+      enable: false,
+      eslintPluginOptions: {
+        exclude: ['node_modules', 'dist']
+      }
+    }),
+    pluginTypeCheck(),
+    pluginImageCompress([
+      { use: 'jpeg', test: /\.(?:jpg|jpeg|jpe)$/ },
+      { use: 'png', minQuality: 50 },
+      'ico'
+    ]),
+    pluginCssMinimizer(),
+    pluginRem({
+      screenWidth: 750,
+      pxtorem: {
+        exclude: /node_module/i
+      }
+    }),
+    pluginAssetsRetry()
+    // pluginBasicSsl({
+    //   filename: "vant-tools.pem",
+    //   outputPath: path.join(__dirname, "public/cert"),
+    //   selfsignedAttrs: [{ name: "commonName", value: "80.0.20.24" }],
+    //   selfsignedOptions: {
+    //     days: 100,
+    //   },
+    // })
+  ],
+  dev: {
+    progressBar: true,
+    setupMiddlewares: [
+      middleware => {
+        console.log('middleware', middleware)
+      }
+    ],
+    client: {}
+  },
+  html: {
+    title({ entryName }) {
+      return process.env.PUBLIC_TITLE
+    },
+    meta: {
+      description: 'a description of the page',
+      viewport:
+        'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover'
+    },
+    mountId: 'app',
+    appIcon: {
+      icons: [{ src: './public/favicon.svg', size: 180 }]
+    },
+    favicon: './public/favicon.svg',
+    template: './public/index.html'
+  },
+  source: {
+    define: publicVars
+  },
+  resolve: {
+    alias: {
+      '@/*': './src/*'
+    }
+  },
+  // 生产优化
+  performance: {
+    // removeConsole: true, // 生产环境的 console 移除
+    chunkSplit: {
+      strategy: 'split-by-experience'
+    }
+  },
+  tools: {
+    swc: {
+      env: {
+        // 明确指定目标环境模式，SWC 会据此进行更精准的降级
+        mode: 'entry', // 或 ‘entry’， ‘entry’ 模式更激进
+        coreJs: '3.47' // 与你安装的 core-js 大版本一致
+      }
+    },
+    postcss: {
+      postcssOptions: {
+        plugins: [UnoCSS()]
+      }
+    },
+    rspack: {
+      plugins: [
+        AutoImport({
+          resolvers: [VantResolver()]
+        }),
+        Components({
+          resolvers: [VantResolver()]
+        })
+      ]
+    }
+  },
+  server: {
+    port: 3300,
+    proxy: {
+      // '/n/extend/tools/api': {
+      //   target: 'http://80.0.10.21:3300',
+      //   // pathRewrite: { '^/n/extend/tools/api': '/' },
+      //   secure: false
+      // },
+      '/n/extend/tools/api': {
+        target: 'http://192.168.10.161:5224',
+        pathRewrite: { '^/n/extend/tools/api': '/api/v1.0' },
+        secure: false
+      }
+      // '/n/extend/tools/api': {
+      //   target: 'http://localhost:5224',
+      //   pathRewrite: { '/n/extend/tools/api': '/api/v1.0' },
+      // }
+    }
+  },
+  output: {
+    polyfill: 'entry',
+    // @ts-ignore
+    assetPrefix: import.meta.env.VUE_APP_BASE_URL
+    // @ts-ignore
+    // distPath: import.meta.env.VUE_APP_BASE_URL
+  }
+})
+```
+
+```ts:mini-index.ts
+import { createApp, h, toRaw } from 'vue'
+
+import router, { closeSelf, isAuthorized } from './router'
+
+import './index.css'
+
+import 'vant/es/toast/style'
+import 'vant/es/dialog/style'
+import 'vant/es/notify/style'
+import 'vant/es/image-preview/style'
+
+import '@vant/touch-emulator'
+
+import { Wechat, MauiApp } from 'maui-wechat'
+import 'maui-wechat/dist/maui-wechat.css'
+
+import 'core-js/stable';
+
+const app = createApp(h(MauiApp, {
+    primaryColor: import.meta.env.VUE_APP_PRIMARY_COLOR,
+    baseFont: import.meta.env.VUE_APP_FONT_FAMILY,
+    onTokenParsed(token) {
+        miniSession.value.accessToken = token
+    },
+    onNavButtonLeftClicked() {
+        goHome()
+    }
+}))
+
+import 'animate.css'
+
+import layout from './layout'
+app.use(layout)
+
+import pinia, { miniSession } from './stores'
+app.use(pinia)
+
+import { utils } from 'maui-shell'
+app.use(utils)
+
+app.use(router)
+
+import { useEzRouter } from 'maui-shell'
+import { defaultHomePath, defaultRootPath, goHome } from './router'
+
+Wechat.waitReady(() => {
+    useEzRouter(router, pinia, {
+        allowList: ['error', 'splash', 'blank'],
+        defaultTitle: '携带工具审批',
+        defaultRootPath: defaultRootPath,
+        defaultHomePath: defaultHomePath,
+        allowAnonymous: false,
+        isAuthorized: isAuthorized,
+        onChallenge: function () {
+            closeSelf()
+        },
+
+    })
+        .isReady()
+        .then(() => {
+            app.mount('#app')
+        })
+        .catch(error => {
+            console.error('Router initialization failed:', error)
+            if (error.message.includes('__vrv_devtools')) {
+                console.warn('检测到 Devtools 相关错误，检查路由初始化顺序')
+            }
+        })
+}).finally(() => {
+    console.log('app ready')
+})
+```

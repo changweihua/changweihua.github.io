@@ -20,6 +20,7 @@ import LiquidCard from "../components/LiquidCard.vue";
 import Robot from "../components/Robot.vue";
 import LiquidMetaCard from "../components/LiquidMetaCard.vue";
 import CarouselCard from "../components/CarouselCard.vue";
+import CarouselGallery from "../components/CarouselGallery.vue";
 import AboutMe from "../components/AboutMe.vue";
 import HeroLogo from "#.vitepress/components/HeroLogo.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
@@ -127,7 +128,7 @@ import "virtual:uno.css";
 import "virtual:group-icons.css";
 import "animate.css";
 
-import 'open-props/open-props.min.css';
+import "open-props/open-props.min.css";
 import "./styles/vitepress-variables.scss";
 import "./styles/maple-mono.scss";
 import "./styles/index.scss";
@@ -150,7 +151,7 @@ import { defineClientComponentConfig } from "@vitepress-demo-preview/core";
 import "@catppuccin/vitepress/theme/frappe/lavender.css";
 
 // 引入组件库的少量全局样式变量
-import 'tdesign-vue-next/es/style/index.css';
+import "tdesign-vue-next/es/style/index.css";
 
 import NotFound from "../components/NotFound.vue";
 import PageLost from "../components/PageLost.vue";
@@ -193,7 +194,7 @@ console.log(nanoidNumber()); // 24736672
 const nanoidUpper = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 8);
 console.log(nanoidUpper()); // OO8QE8V0
 
-import TDesign from 'tdesign-vue-next';
+import TDesign from "tdesign-vue-next";
 
 import mermaid from "mermaid";
 import { icons } from "@iconify-json/logos";
@@ -344,7 +345,7 @@ export default {
       //     name: "doc-top",
       //   }),
       // "doc-bottom": () => [h(ArticleQRCode), h(Recommend)],
-      "doc-footer-before": () =>  [h(ArticleQRCode), h(ArticleFooter)],
+      "doc-footer-before": () => [h(ArticleQRCode), h(ArticleFooter)],
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
       //     name: "doc-footer-before",
@@ -486,22 +487,21 @@ export default {
       defaultLanguage: "zh",
     });
 
-    useComponents(app, DemoPreview);
-
-    app.component("demo-preview", AntDesignContainer);
-    app.component("RainbowAnimationSwitcher", RainbowAnimationSwitcher);
-    app.component("TransitionNavBar", TransitionNavBar);
-
     if (inBrowser) {
       initMarkmapComponent(app);
       enhanceAppWithTabs(app);
 
+      useComponents(app, DemoPreview);
+
+      app.component("demo-preview", AntDesignContainer);
+      app.component("RainbowAnimationSwitcher", RainbowAnimationSwitcher);
+
       app.component("TransitionNavBar", TransitionNavBar);
 
-      import('hover-tilt/web-component').then(module => {
-        // 模块已经加载，Web Component 应该已经注册
-        console.log('hover-tilt loaded')
-      })
+      // import("hover-tilt/web-component").then((module) => {
+      //   // 模块已经加载，Web Component 应该已经注册
+      //   console.log("hover-tilt loaded");
+      // });
 
       app.use(TDesign);
       // const { promise, resolve, reject } = Promise.withResolvers();
@@ -535,6 +535,7 @@ export default {
       app.component("HoverableText", HoverableText);
       app.component("LiquidMetaCard", LiquidMetaCard);
       app.component("CarouselCard", CarouselCard);
+      app.component("CarouselGallery", CarouselGallery);
       app.component("AboutMe", AboutMe);
       app.component("Robot", Robot);
       app.use(directives);

@@ -11,6 +11,11 @@ pageClass: gallery-page-class
 > 2025 对饮 2026 笃行。
 
 
+<CarouselGallery></CarouselGallery>
+
+<br />
+
+
 ```markmap
 # 2025
 ## Q1

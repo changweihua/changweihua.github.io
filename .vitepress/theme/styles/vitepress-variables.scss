@@ -7,9 +7,9 @@
   --vp-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
   --vp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
   --vp-transition-duration: 0.3s;
-  --vp-c-brand-1: #e6a23c;
-  --vp-c-brand-2: rgb(238, 190, 119);
-  --vp-c-brand-3: rgb(243, 209, 158);
+  --vp-c-brand-1: oklch(0.835 0.176 91.0);
+  --vp-c-brand-2: oklch(0.920 0.122 91.0);
+  --vp-c-brand-3: oklch(0.960 0.074 91.0);
   --vp-c-brand-soft: rgb(253, 246, 236);
   // --color-primary: hsl(191, 50%, 90%);
   // --color-secondary: hsl(191, 50%, 10%);

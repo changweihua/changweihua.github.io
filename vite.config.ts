@@ -236,7 +236,7 @@ export default defineConfig(() => {
     },
     plugins: [
       Components({
-        dirs: ["src/components", ".vitepress/components"], // 配置需要自动导入的组件目录
+        dirs: ["./src/components", ".vitepress/components"], // 配置需要自动导入的组件目录
         dts: "typings/components.d.ts",
         resolvers: [
           TDesignResolver({

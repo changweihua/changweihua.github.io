@@ -24,8 +24,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { useRootClick, useCycle } from "./composables";
 import VisitsPanel from "./VisitsPanel.vue";
 import { useData } from "vitepress";
 import { version } from "../../package.json";
@@ -35,11 +33,6 @@ const copyright = `版权所有 © 2009- ${new Date().getFullYear()} CMONO.NET`;
 
 const { frontmatter } = useData();
 
-const { value, next } = useCycle([543, 12000, -3200]);
-
-onMounted(() => {
-  useRootClick(next);
-});
 </script>
 <style>
 /* 液态层位置流动关键帧（无规则XY轴移动） */
