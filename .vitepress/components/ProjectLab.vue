@@ -55,13 +55,24 @@ const getFallbackImages = () => {
 </script>
 
 <style scoped>
+ /* 基础布局：使用标准网格，所有浏览器都支持 */
 .images-grid {
-  display: grid-lanes;
-  grid-template-columns:
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+/* 渐进增强：为支持grid-lanes的浏览器提供瀑布流体验 */
+@supports (display: grid-lanes) {
+  .images-grid {
+    display: grid-lanes;
+    /* 可以在此添加grid-lanes特有的属性，如item-tolerance[citation:5] */
+    grid-template-columns:
     repeat(auto-fill, minmax(8rem, 1fr) minmax(16rem, 2fr))
     minmax(8rem, 1fr);
   gap: 16px;
-}
+  }
+} 
 
 .image-card {
   display: flex;
@@ -102,3 +113,4 @@ const getFallbackImages = () => {
   word-break: break-all;
 }
 </style>
+
