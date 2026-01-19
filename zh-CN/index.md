@@ -19,8 +19,8 @@ hero:
       text: 作者简历
       link: /zh-CN/resume
     - theme: alt
-      text: 我的2025
-      link: /zh-CN/me.2025
+      text: 我的2026
+      link: /zh-CN/me.2026
     - theme: alt
       text: 关于
       link: /zh-CN/about
@@ -83,7 +83,7 @@ features:
   #     alt: Yolo
   #   details: 支持Yolo8、9、10三大版本
   #   link: /zh-CN/gallery/yolo_object_dection
-    # linkText: 更多详情
+  # linkText: 更多详情
   # - title: Yuppie 平台
   #   icon:
   #     src: /yuppie.svg
@@ -170,7 +170,7 @@ head:
       content: changweihua.github.io 首页 CMONO.NET
 ---
 
-<!-- 
+<!--
 > [!提醒] 重要
 > 强调用户在快速浏览文档时也不应忽略的重要信息。
 
@@ -185,12 +185,12 @@ head:
 
 > [!注意]
 > 行为可能带来的负面影响。 -->
-<!-- 
+<!--
 * VitePress <Badge type="info" text="default" />
 * VitePress <Badge type="tip" text="^1.9.0" />
 * VitePress <Badge type="warning" text="beta" />
 * VitePress <Badge type="danger" text="caution" /> -->
-<!-- 
+<!--
 ```c [HelloWorld.c]
 #include <stdio.h>
 
@@ -203,13 +203,10 @@ int main(){
 
 ``` -->
 
-
-
 <!-- 在 .md 文件或 Vue 组件中 -->
 <div class="text-black hidden md:flex dark:text-white bg-gray-100 dark:bg-gray-800 items-center justify-center rd-2xl my-3 py-5
 ">
   <CarouselCard></CarouselCard>
 </div>
-
 
 <!-- <TransitionNavBar /> -->

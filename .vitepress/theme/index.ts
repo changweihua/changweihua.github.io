@@ -6,6 +6,9 @@ import AnimationTitle from "../components/AnimtedTitle.vue";
 import DocAfter from "../components/DocAfter.vue";
 import ArticleFooter from "../components/ArticleFooter.vue";
 import HeroLogo from "../components/HeroLogo.vue";
+import HoverableText from "../components/HoverableText.vue";
+import CarouselGallery from "../components/CarouselGallery.vue";
+import ProjectLab from "../components/ProjectLab.vue";
 import CarouselCard from "../components/CarouselCard.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
@@ -72,7 +75,6 @@ import { Icon } from "@iconify/vue";
 import type { Theme } from "vitepress";
 
 import AnimatingLayout from "./AnimatingLayout.vue";
-
 
 import TDesign from "tdesign-vue-next";
 
@@ -183,7 +185,7 @@ export default {
               "sm:hidden md:(visible flex h-full items-center justify-center)",
             style: "position: relative;",
           },
-          [h(HeroLogo)]
+          [h(HeroLogo)],
         ),
       // "home-hero-image": () =>
       //   h(
@@ -371,6 +373,9 @@ export default {
       useComponents(app, DemoPreview);
 
       app.component("demo-preview", AntDesignContainer);
+      app.component("HoverableText", HoverableText);
+      app.component("CarouselGallery", CarouselGallery);
+      app.component("ProjectLab", ProjectLab);
 
       // import("hover-tilt/web-component").then((module) => {
       //   // 模块已经加载，Web Component 应该已经注册
@@ -395,7 +400,7 @@ export default {
         watch(
           () => router.route.data.relativePath,
           () => updateHomePageStyle(location.pathname === "/zh-CN/"),
-          { immediate: true }
+          { immediate: true },
         );
       }
 

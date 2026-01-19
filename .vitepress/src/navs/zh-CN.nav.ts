@@ -1,5 +1,5 @@
 import { DefaultTheme } from "vitepress";
-import { version } from '../../../package.json'
+import { version } from "../../../package.json";
 // , activeMatch: "^/$|^/index/"
 export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
   return [
@@ -18,6 +18,10 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     {
       text: "归档",
       link: "/zh-CN/archives.md",
+    },
+    {
+      text: "万花筒",
+      link: "/zh-CN/cases.md",
     },
     {
       text: "手册",

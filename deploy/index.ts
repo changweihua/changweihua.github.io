@@ -14,7 +14,7 @@ const server = {
 spinner.start();
 
 // 本地打包文件的位置 ./dist
-scpClient.scp("./dist", server, (err: any) => {
+scpClient.upload("./dist", server, (err: any) => {
   spinner.stop();
   if (!err) {
     console.log(chalk.blue("xxx系统自动化部署完毕!"));

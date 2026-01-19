@@ -22,6 +22,7 @@ import { qrcode } from "vite-plugin-qrcode";
 import prefetchDnsPlugin from "./plugins/vite-plugin-dns-prefetch";
 import vitePluginTryCatchConsole from "./plugins/vite-plugin-try-catch-console";
 import spyPlugin from "./plugins/vite-plugin-spy";
+import publicImagesPlugin from "./plugins/vite-plugin-public-images";
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target];
@@ -42,11 +43,11 @@ const yourPlugin: () => Plugin = () => ({
     console.log(
       colors.red(`viteVersion: ${colors.italic(this.meta.viteVersion)} `),
       colors.green(
-        ` rollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `
+        ` rollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `,
       ),
       colors.blue(
-        ` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `
-      )
+        ` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `,
+      ),
     );
   },
 });
@@ -114,7 +115,7 @@ export default defineConfig(() => {
         const environments = Object.values(builder.environments);
         console.log("environments", environments);
         return Promise.all(
-          environments.map((environment) => builder.build(environment))
+          environments.map((environment) => builder.build(environment)),
         );
       },
     },
@@ -193,7 +194,6 @@ export default defineConfig(() => {
           //     { name: "components", test: /[\\/]src[\\/]components[\\/]/ },
           //     // 业务代码分割：将工具函数分组
           //     { name: "utils", test: /[\\/]src[\\/]utils[\\/]/ },
-
           //     // 3. 兜底分组：其他 node_modules 依赖
           //     {
           //       name: "vendor",
@@ -230,14 +230,16 @@ export default defineConfig(() => {
       "process.env.RSS_BASE": JSON.stringify(
         `${getEnvValue(
           process.env.NODE_ENV || "github",
-          "VITE_APP_RSS_BASE_URL"
-        )}`
+          "VITE_APP_RSS_BASE_URL",
+        )}`,
       ),
     },
     plugins: [
       Components({
         dirs: ["./src/components", ".vitepress/components"], // 配置需要自动导入的组件目录
         dts: "typings/components.d.ts",
+        // 关键：让插件处理 .md 文件
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         resolvers: [
           TDesignResolver({
             library: "vue-next",
@@ -272,6 +274,7 @@ export default defineConfig(() => {
       }),
       prefetchDnsPlugin(),
       versionInjector(),
+      publicImagesPlugin(),
     ],
     resolve: {
       alias: {
