@@ -60,6 +60,7 @@ const getFallbackImages = () => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 20px;
+  grid-auto-flow: dense;
 }
 
 /* 渐进增强：为支持grid-lanes的浏览器提供瀑布流体验 */
@@ -113,4 +114,5 @@ const getFallbackImages = () => {
   word-break: break-all;
 }
 </style>
+
 
