@@ -86,7 +86,8 @@ body {
 
 .medium-zoom-image--opened {
   border-radius: 0.3em;
-  box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.3) inset,
+  box-shadow:
+    0 0 0 1px hsla(0, 0%, 100%, 0.3) inset,
     0 0.5em 1em rgba(0, 0, 0, 0.6);
   text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.3);
 }
@@ -142,7 +143,9 @@ a.VPSkipLink::after {
 }
 
 .nprogress .peg {
-  box-shadow: 0 0 10px var(--vp-c-brand-1), 0 0 5px var(--vp-c-brand-1) !important;
+  box-shadow:
+    0 0 10px var(--vp-c-brand-1),
+    0 0 5px var(--vp-c-brand-1) !important;
 }
 
 .search-bar {
@@ -150,7 +153,8 @@ a.VPSkipLink::after {
 
   /* 渐变边框 */
   border: none !important;
-  background: linear-gradient(white, white) padding-box,
+  background:
+    linear-gradient(white, white) padding-box,
     linear-gradient(
         45deg,
         var(--vp-c-brand-2),
@@ -162,7 +166,9 @@ a.VPSkipLink::after {
   border-radius: 30px;
 
   /* 平滑过渡 */
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 /*
@@ -170,7 +176,8 @@ a.VPSkipLink::after {
 /* Hover 状态 */
 .search-bar:hover {
   border: none !important;
-  background: linear-gradient(white, white) padding-box,
+  background:
+    linear-gradient(white, white) padding-box,
     linear-gradient(
         135deg,
         var(--vp-c-brand-2),
@@ -179,14 +186,17 @@ a.VPSkipLink::after {
         var(--vp-c-brand-2)
       )
       border-box;
-  box-shadow: 0 0 5px var(--vp-c-brand-1), 0 0 20px var(--vp-c-brand);
+  box-shadow:
+    0 0 5px var(--vp-c-brand-1),
+    0 0 20px var(--vp-c-brand);
 }
 
 /* Focus 状态 */
 .search-bar:focus,
 .search-bar:focus-within {
   border: none !important;
-  background: linear-gradient(white, white) padding-box,
+  background:
+    linear-gradient(white, white) padding-box,
     linear-gradient(
         45deg,
         var(--vp-c-brand-2),
@@ -195,7 +205,9 @@ a.VPSkipLink::after {
         var(--vp-c-brand-2)
       )
       border-box;
-  box-shadow: 0 0 15px var(--vp-c-brand-1), 0 0 25px var(--vp-c-brand);
+  box-shadow:
+    0 0 15px var(--vp-c-brand-1),
+    0 0 25px var(--vp-c-brand);
   color: #000;
   /* 聚焦时文本颜色 */
 }
@@ -211,7 +223,8 @@ a.VPSkipLink::after {
   border: 2px solid transparent;
   border-radius: 10px;
   outline: none;
-  background: linear-gradient(white, white) padding-box,
+  background:
+    linear-gradient(white, white) padding-box,
     linear-gradient(
         270deg,
         #ff4d4d,
@@ -251,7 +264,9 @@ a.VPSkipLink::after {
 /* hover + focus 时加点炫光效果 */
 .search-input:hover,
 .search-input:focus {
-  box-shadow: 0 0 8px rgba(255, 77, 77, 0.3), 0 0 20px rgba(77, 210, 255, 0.4);
+  box-shadow:
+    0 0 8px rgba(255, 77, 77, 0.3),
+    0 0 20px rgba(77, 210, 255, 0.4);
 }
 
 .char-circle {
@@ -329,7 +344,8 @@ a.VPSkipLink::after {
     // color: oklch(70% 70% var(--hue));
 
     --stagger: calc((sibling-index() - 1) * 0.1s);
-    transition: opacity 1s var(--ease-3) var(--stagger),
+    transition:
+      opacity 1s var(--ease-3) var(--stagger),
       translate 1s var(--ease-spring-3) var(--stagger);
 
     /* enter from stage left */
@@ -847,7 +863,9 @@ h3 {
 
 /* 悬停高亮效果 */
 .vp-table tbody tr {
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .vp-table tbody tr:hover {
@@ -974,7 +992,8 @@ h3 {
   width: var(--indicator-init-width);
   background: var(--indicator-color);
   border-radius: 2px;
-  transition: left var(--transition-duration) ease,
+  transition:
+    left var(--transition-duration) ease,
     width var(--transition-duration) ease,
     background var(--transition-duration) ease;
   animation: indicator-shape 2s ease-in-out infinite alternate;
@@ -1458,7 +1477,8 @@ table {
 .VPContent.is-home::before {
   content: "";
   pointer-events: none;
-  background-image: linear-gradient(90deg, #3b82f61a 1px, #0000 1px),
+  background-image:
+    linear-gradient(90deg, #3b82f61a 1px, #0000 1px),
     linear-gradient(#3b82f61a 1px, #0000 1px);
   background-position: 50%;
   background-size: 40px 40px;
@@ -1571,8 +1591,12 @@ table {
     var(--end-color) var(--end-percentage)
   );
   border-radius: 12px;
-  transition: --angle 0.8s, --start-color 0.8s, --start-percentage 0.8s,
-    --end-color 0.8s, --end-percentage 0.8s;
+  transition:
+    --angle 0.8s,
+    --start-color 0.8s,
+    --start-percentage 0.8s,
+    --end-color 0.8s,
+    --end-percentage 0.8s;
 }
 
 .VPHomeFeatures .VPFeature:hover {
@@ -1668,7 +1692,9 @@ figcaption {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient-shift 8s ease infinite, pulse 2s infinite alternate;
+  animation:
+    gradient-shift 8s ease infinite,
+    pulse 2s infinite alternate;
 }
 
 @keyframes gradient-shift {
@@ -1690,4 +1716,14 @@ figcaption {
   100% {
     transform: scale(1.05);
   }
+}
+
+.vitepress-linkcard-container {
+  border-color: #00000000 !important;
+  background-color: var(--vp-c-bg-soft) !important;
+}
+
+.vitepress-linkcard-container:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  background-color: var(--vp-c-bg-soft) !important;
 }

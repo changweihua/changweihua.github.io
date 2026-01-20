@@ -4,6 +4,7 @@ layoutClass: m-nav-layout
 pageClass: index-page-class
 title: CMONO.NET
 titleTemplate: 首页
+docAnalysis: false
 
 description: CMONO.NET Official Page Site
 

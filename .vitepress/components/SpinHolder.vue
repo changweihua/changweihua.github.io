@@ -11,8 +11,8 @@
           size === 'small'
             ? 'w-12 h-12'
             : size === 'large'
-            ? 'w-20 h-20'
-            : 'w-16 h-16'
+              ? 'w-20 h-20'
+              : 'w-16 h-16'
         "
         :style="{
           '--spin-color': color || 'var(--primary-color, #3b82f6)',
@@ -78,8 +78,8 @@
           size === 'small'
             ? 'text-xs'
             : size === 'large'
-            ? 'text-base'
-            : 'text-sm'
+              ? 'text-base'
+              : 'text-sm'
         "
       >
         {{ tip }}
@@ -206,7 +206,7 @@ const SpinAnimation = defineComponent({
                 class:
                   "spin-pulse-wave absolute inset-0 rounded-full border-2 border-[var(--spin-color)]",
                 style: { animationDelay: `${n * 0.5}s` },
-              })
+              }),
             ),
           ]);
         case "flip":
@@ -249,8 +249,8 @@ const SpinAnimation = defineComponent({
                 class:
                   "spin-bounce-dot w-1/4 h-1/4 rounded-full bg-[var(--spin-color)] mx-0.5",
                 style: { animationDelay: `${n * 0.15}s` },
-              })
-            )
+              }),
+            ),
           );
         case "neural":
           return h("div", { class: "spin-neural relative w-full h-full" }, [
@@ -284,8 +284,8 @@ const SpinAnimation = defineComponent({
                   animationDelay: `${n * 0.083}s`,
                   opacity: 1 - n * 0.08,
                 },
-              })
-            )
+              }),
+            ),
           );
       }
     };
@@ -319,11 +319,11 @@ watch(
       }
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
 
-<style scoped>
+<style>
 /* 默认动画：旋转圆点 */
 @keyframes spin-default {
   0% {

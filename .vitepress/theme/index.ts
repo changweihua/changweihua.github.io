@@ -13,7 +13,8 @@ import CarouselCard from "../components/CarouselCard.vue";
 import MarkdownEChart from "#.vitepress/components/MarkdownEChart.vue";
 import codeblocksFold from "vitepress-plugin-codeblocks-fold"; // import method
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
-import mediumZoom from "medium-zoom";
+import { createMermaidRenderer } from "vitepress-mermaid-renderer";
+import GlossaryTooltip from "vitepress-plugin-glossary/vue";
 
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined;
@@ -54,8 +55,8 @@ import "./styles/mermaid.ext.css";
 import "vitepress-plugin-codeblocks-fold/style/index.css"; // import style
 
 import directives from "../directives";
-import { NProgress } from "nprogress-v2/dist/index.js"; // 进度条组件
-import "nprogress-v2/dist/index.css"; // 进度条样式
+import vitepressNprogress from "vitepress-plugin-nprogress";
+import "vitepress-plugin-nprogress/lib/css/index.css";
 
 import { AntDesignContainer } from "@vitepress-demo-preview/component";
 import "@vitepress-demo-preview/component/dist/style.css";
@@ -105,6 +106,9 @@ mermaid.registerExternalDiagrams([zenuml]);
 import elkLayouts from "@mermaid-js/layout-elk";
 mermaid.registerLayoutLoaders(elkLayouts);
 
+import BackToTopButton from "@miletorix/vitepress-back-to-top-button";
+import "@miletorix/vitepress-back-to-top-button/style.css";
+
 // mermaid.initialize({
 //   look: "handDrawn",
 //   handDrawnSeed: 2,
@@ -137,13 +141,11 @@ import { initComponent as initMarkmapComponent } from "vitepress-markmap-preview
 import "vitepress-markmap-preview/dist/index.css";
 import PageCursor from "../components/PageCursor.vue";
 
-// Setup medium zoom with the desired options
-const setupMediumZoom = () => {
-  mediumZoom("[data-zoomable]", {
-    background: "var(--vp-c-bg)",
-    container: document.body,
-  });
-};
+import vitepressBprogress from "vitepress-plugin-bprogress";
+// Import CSS styles (both imports work)
+import "vitepress-plugin-bprogress/style.css";
+
+import { HtmlPreview } from "@miletorix/vitepress-html-preview";
 
 export default {
   ...DefaultTheme,
@@ -160,6 +162,68 @@ export default {
     if (frontmatter.value?.layoutClass) {
       props.class = frontmatter.value.layoutClass;
     }
+
+    const { isDark } = useData();
+
+    const initMermaid = () => {
+      const mermaidRenderer = createMermaidRenderer({
+        theme: isDark.value ? "dark" : "neutral",
+        layout: "elk",
+        startOnLoad: false,
+        flowchart: {
+          useMaxWidth: true,
+          htmlLabels: true,
+        },
+        sequence: {
+          diagramMarginX: 50,
+          diagramMarginY: 10,
+        },
+        look: "handDrawn",
+        handDrawnSeed: 3,
+        layout: "elk",
+        fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+        altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+        theme: "neutral",
+        flowchart: { curve: "basis", defaultRenderer: "elk" },
+        class: {
+          defaultRenderer: "elk",
+        },
+        state: {
+          defaultRenderer: "elk",
+        },
+        securityLevel: "loose",
+        logLevel: "error",
+        suppressErrorRendering: true,
+      });
+
+      // mermaidRenderer.setToolbar({
+      //   showLanguageLabel: true,
+      //   desktop: {
+      //     zoomIn: "disabled",
+      //     zoomLevel: "enabled",
+      //     positions: { vertical: "top", horizontal: "left" },
+      //   },
+      //   mobile: {
+      //     zoomLevel: "disabled",
+      //     positions: { vertical: "bottom", horizontal: "left" },
+      //   },
+      //   fullscreen: {
+      //     zoomLevel: "enabled",
+      //     positions: { vertical: "top", horizontal: "right" },
+      //   },
+      // });
+    };
+
+    // initial mermaid setup
+    nextTick(() => initMermaid());
+
+    // on theme change, re-render mermaid charts
+    watch(
+      () => isDark.value,
+      () => {
+        initMermaid();
+      },
+    );
 
     return h(AnimatingLayout, null, {
       // "home-hero-before": () => h(NoticeBar),
@@ -340,6 +404,33 @@ export default {
     const { app, router } = ctx;
     DefaultTheme.enhanceApp(ctx);
 
+    // vitepressNprogress(ctx);
+
+    const bProgress = vitepressBprogress(ctx);
+
+    // Custom configuration (optional)
+    if (bProgress) {
+      bProgress.configure({
+        showSpinner: false, // Show loading spinner
+        speed: 300, // Animation speed in ms
+        easing: "ease-out", // CSS easing function
+        minimum: 0.1, // Minimum progress (0-1)
+        trickle: true, // Auto increment
+        trickleSpeed: 200, // Trickle speed
+        direction: "ltr", // Progress direction
+      });
+    }
+
+    BackToTopButton(ctx.app, {
+      progressColor: "var(--vp-c-brand-1)", //"#2563eb", // default is #42b983
+      arrowSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+	<g fill="none" fill-rule="evenodd">
+		<path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path>
+		<path fill="currentColor" d="M11.293 8.293a1 1 0 0 1 1.414 0l5.657 5.657a1 1 0 0 1-1.414 1.414L12 10.414l-4.95 4.95a1 1 0 0 1-1.414-1.414z"></path>
+	</g>
+</svg>`, // only svg code
+    });
+
     // 定义国际化配置
     defineClientComponentConfig({
       // 保持向后兼容
@@ -372,28 +463,20 @@ export default {
 
       useComponents(app, DemoPreview);
 
+      // 在 markdown 文件中使用，必须手动注册
       app.component("demo-preview", AntDesignContainer);
       app.component("HoverableText", HoverableText);
       app.component("CarouselGallery", CarouselGallery);
       app.component("ProjectLab", ProjectLab);
+      app.component("CarouselCard", CarouselCard);
+      app.component("MarkdownEChart", MarkdownEChart);
+      app.component("m-icon", Icon);
+      app.component("GlossaryTooltip", GlossaryTooltip);
+      app.component("HtmlPreview", HtmlPreview);
 
-      // import("hover-tilt/web-component").then((module) => {
-      //   // 模块已经加载，Web Component 应该已经注册
-      //   console.log("hover-tilt loaded");
-      // });
+      // <HtmlPreview src="/demo/point-sketch.html" height="600px" />
 
       app.use(TDesign);
-      // const { promise, resolve, reject } = Promise.withResolvers();
-      //   // 一些异步操作
-      // setTimeout(() => {
-      //     if (/* 条件满足 */) {
-      //         resolve('成功');
-      //     } else {
-      //         reject('失败');
-      //     }
-      // }, 1000);
-
-      NProgress.configure({ showSpinner: false });
 
       // 彩虹背景动画样式
       if (typeof window !== "undefined") {
@@ -404,72 +487,10 @@ export default {
         );
       }
 
-      app.component("CarouselCard", CarouselCard);
-      app.component("MarkdownEChart", MarkdownEChart);
-
-      // app.component("HrefCard", HrefCard);
-      // app.component("ColorfulName", ColorfulName);
-      // app.component("HoverableText", HoverableText);
-      // app.component("LiquidMetaCard", LiquidMetaCard);
-
-      // app.component("CarouselGallery", CarouselGallery);
-      // app.component("AboutMe", AboutMe);
-      // app.component("Robot", Robot);
       app.use(directives);
-
-      // app.directive("aria-empty", {
-      //   //指令绑定到元素时调用
-      //   mounted(el, binding) {
-      //     el.removeAttribute("aria-hidden");
-      //     // // 获取节点
-      //     // let ariaEls = el.querySelectorAll("svg");
-      //     // ariaEls.forEach((item) => {
-      //     //   item.removeAttribute("aria-hidden");
-      //     // });
-      //   },
-      //   //指令与元素解绑时调用
-      //   unmounted(el, binding) {},
-      // });
-
-      // app.component("DacingNumber", DacingNumber);
-      // app.component("TaskList", TaskList);
-      // app.component("ScrollableParagraph", ScrollableParagraph);
-      // app.component("GalleryCard", GalleryCard);
-      // app.component("CubesLoader", CubesLoader);
-      // app.component("PyramidLoader", PyramidLoader);
-      // app.component("CubeLoader", CubeLoader);
-      app.component("m-icon", Icon);
-
-      // app.component("header-profile", HeaderProfile);
-      // app.component("lottie-panel", LottiePanel);
-      // app.component("code-group", CodeGroup);
-      // app.component("ArticleMetadata", ArticleMetadata);
-      // app.component("Contributors", Contributors);
-      // app.component("HomeContributors", HomeContributors);
-      // app.component("CopyRight", CopyRight);
-      // app.component("HoverGrid", HoverGrid);
-      // app.component("DancingLogo", DancingLogo);
-      // app.component("MagicCard", MagicCard);
-      // app.component("LiquidCard", LiquidCard);
-      // app.component("Guidance", Guidance);
-      // app.component("m-read-text", ReadText);
 
       if (router) {
         router.onBeforeRouteChange = async (to) => {
-          console.log("onBeforeRouteChange");
-          NProgress.start(); // 开始进度条
-
-          // nextTick(() => mermaidRenderer.renderMermaidDiagrams());
-          // //'Mozilla/5.0 (X11; U; Linux armv7l; en-GB; rv:1.9.2a1pre) Gecko/20090928 Firefox/3.5 Maemo Browser 1.4.1.22 RX-51 N900'
-          // const { browser, cpu, device } = UAParser();
-
-          // console.log(browser.name); // Maemo Browser
-          // console.log(cpu.is("arm")); // true
-          // console.log(device.is("mobile")); // true
-          // console.log(device.model); // N900
-
-          // 🧪 console.log(await getDeviceFingerprint(true));
-
           // Here you can set the routes you want to configure.
           if (to == "/") {
             await router.go("/zh-CN/", {
@@ -480,21 +501,12 @@ export default {
             return false;
           }
 
-          // if (typeof window._hmt !== 'undefined') {
-          //   window._hmt.push(['_trackPageview', to]);
-          // }
-
           return true;
         };
 
         // 路由加载完成，在加载页面组件后（在更新页面组件之前）调用。
         router.onAfterPageLoad = async () => {
-          console.log("onAfterPageLoad"); // 调用统计访问接口hooks
           useVisitData();
-          NProgress.done(); // 停止进度条
-          nextTick(function () {
-            setupMediumZoom();
-          });
         };
       }
     }

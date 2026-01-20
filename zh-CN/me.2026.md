@@ -1,6 +1,10 @@
 ---
 layout: doc
 pageClass: gallery-page-class
+encrypt: true
+encrypt-input: true
+encrypt-pageType: default
+encrypt-storage: true
 ---
 
 > [!IMPORTANT] 年度关键词
@@ -43,6 +47,8 @@ pageClass: gallery-page-class
 ### 无锡硕放机场进出港查询系统
 
 - 指导完成 2026-01-13 的进出港人数统计数据的补采集
+
+[example](@:https://example.com)
 
 ```markmap
 # 2026

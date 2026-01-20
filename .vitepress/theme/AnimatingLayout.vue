@@ -4,6 +4,8 @@ import { inBrowser, useData, useRouter } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, provide, useSlots, onMounted } from "vue";
 import mediumZoom from "medium-zoom";
+import { MediumZoom } from "vitepress-component-medium-zoom";
+import "vitepress-component-medium-zoom/style.css";
 
 const { isDark } = useData();
 const slots = Object.keys(useSlots());
@@ -25,7 +27,7 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
     `circle(0px at ${x}px ${y}px)`,
     `circle(${Math.hypot(
       Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
+      Math.max(y, window.innerHeight - y),
     )}px at ${x}px ${y}px)`,
   ];
 
@@ -46,7 +48,7 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
         pseudoElement: `::view-transition-${
           isDark.value ? "old" : "new"
         }(root)`,
-      }
+      },
     ),
   ];
 
@@ -62,7 +64,7 @@ watch(
   () => route.path,
   () => {
     nextTick(() => setupMediumZoom());
-  }
+  },
 );
 
 // Setup medium zoom with the desired options
@@ -100,6 +102,7 @@ router.onAfterPageLoad = function () {
         <slot :name="slotKey"></slot>
       </template>
     </DefaultTheme.Layout>
+    <MediumZoom />
   </div>
 </template>
 
@@ -280,7 +283,9 @@ router.onAfterPageLoad = function () {
   mix-blend-mode: screen;
   z-index: 10;
   background-color: var(--vp-c-brand);
-  box-shadow: 0px 0px 8px 0px #fdfca9 inset, 0px 0px 24px 0px #ffeb3b,
+  box-shadow:
+    0px 0px 8px 0px #fdfca9 inset,
+    0px 0px 24px 0px #ffeb3b,
     0px 0px 8px 0px #ffffff42;
 }
 
@@ -390,4 +395,3 @@ router.onAfterPageLoad = function () {
   }
 }
 </style>
-

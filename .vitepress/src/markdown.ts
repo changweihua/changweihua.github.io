@@ -26,6 +26,11 @@ import { imgLazyload } from "@mdit/plugin-img-lazyload";
 import { figure } from "@mdit/plugin-figure";
 import { tasklist } from "@mdit/plugin-tasklist";
 import codeBarPlugin from "../plugins/markdown/codeBarPlugin";
+import { linkToCardPlugin } from "vitepress-linkcard";
+import type { LinkToCardPluginOptions } from "vitepress-linkcard";
+import { markdownGlossaryPlugin } from "vitepress-plugin-glossary";
+import glossary from "./glossary.json";
+import vitepressEncrypt from "markdown-it-vitepress-encrypt";
 
 const CONSTS = {
   __custom_variable__: "your value",
@@ -64,6 +69,9 @@ const markdown: MarkdownOptions | undefined = {
     //   },
     // });
     md.use(mathjax3);
+    md.use<LinkToCardPluginOptions>(linkToCardPlugin, {
+      // target: "_self" // if needed
+    });
     /**
      * SSR Compatibility
      * @link https://vitepress.dev/guide/ssr-compat
@@ -95,6 +103,15 @@ const markdown: MarkdownOptions | undefined = {
       docRoot,
     });
 
+    md.use(markdownGlossaryPlugin, {
+      glossary: glossary,
+      firstOccurrenceOnly: true,
+    });
+
+    md.use(vitepressEncrypt, [
+      { pageType: "default", password: "p1" },
+      { pageType: "vip", password: "p2" },
+    ]);
     // const original = md.renderer.rules.fence;
 
     // md.renderer.rules.fence = (tokens, idx, options, env, self) => {
