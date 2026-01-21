@@ -1,5 +1,51 @@
+/* 通过 CSS 覆盖深色模式下的样式 */
+.dark .mermaid {
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.dark .mermaid .node rect,
+.dark .mermaid .node circle,
+.dark .mermaid .node ellipse,
+.dark .mermaid .node polygon {
+  fill: #242424 !important;
+  stroke: #3eaf7c !important;
+}
+
+.dark .mermaid .node text {
+  fill: #e4e6eb !important;
+}
+
+.dark .mermaid .edgePath .path {
+  stroke: #4abf8a !important;
+}
+
+.dark .mermaid .edgeLabel {
+  background-color: #242424 !important;
+  color: #b0b3b8 !important;
+}
+
+/* 确保Mermaid图表在主题切换时平滑过渡 */
+.mermaid {
+  transition: opacity 0.3s ease;
+}
+
+.mermaid[data-rendering] {
+  opacity: 0.5;
+}
+
+/* 优化深色模式 */
+.dark .mermaid svg {
+  background-color: transparent !important;
+}
+
+/* 确保图表响应式 */
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
 .mermaid-graph {
-  background-image: url("/images/mermaid-background.svg");
+  background-image: url('/images/mermaid-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -7,9 +53,8 @@
 .zenuml,
 .styled-mermaid,
 .mermaid-container,
-[id^="mermaid-"] {
-  font-family:
-    XiaolaiMono, LikeJianJianTi, "PING FANG CHANG AN", JetBrainsMapleMono !important;
+[id^='mermaid-'] {
+  font-family: XiaolaiMono, LikeJianJianTi, 'PING FANG CHANG AN', JetBrainsMapleMono !important;
 }
 
 /* 组件样式继承 */
@@ -34,7 +79,8 @@
     }
   }
 
-  .mobile-nav-buttons, .mobile-utility-controls {
+  .mobile-nav-buttons,
+  .mobile-utility-controls {
     display: none;
   }
 }

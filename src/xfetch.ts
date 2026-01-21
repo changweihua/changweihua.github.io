@@ -1,26 +1,27 @@
-import { getCurrentWatcher, onWatcherCleanup } from "vue";
+import { getCurrentWatcher, onWatcherCleanup } from 'vue'
 
 export default async function xFetch(url: string, options: RequestInit) {
-  const controller = new AbortController();
+  const controller = new AbortController()
   if (getCurrentWatcher()) {
     onWatcherCleanup(() => {
-      controller.abort();
-    });
+      controller.abort()
+    })
   }
 
   const res = await fetch(url, {
     ...options,
     signal: controller.signal,
-  });
+  })
 
-  let json;
+  let json
   try {
-    json = await res.json();
-  } catch (error) {
+    json = await res.json()
+  }
+  catch {
     json = {
       code: 500,
-      message: "JSON format error",
-    };
+      message: 'JSON format error',
+    }
   }
-  return json;
+  return json
 }

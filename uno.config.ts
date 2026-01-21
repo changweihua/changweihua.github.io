@@ -8,6 +8,7 @@ import {
   type Shortcut,
   transformerDirectives,
   transformerVariantGroup,
+  CSSObject,
 } from "unocss";
 import { FileSystemIconLoader } from "@iconify/utils/lib/loader/node-loaders";
 import { dataScreenPreset } from "./data-screen.preset";
@@ -51,6 +52,151 @@ const modernInputRule: Rule = [
   },
 ];
 
+// 类型安全的规则定义
+const iframeRules: Rule[] = [
+  // 基础 iframe 容器规则
+  [
+    'iframe-container',
+    {
+      'position': 'relative',
+      'padding-bottom': '56.25%',
+      'height': '0',
+      'overflow': 'hidden',
+    } as CSSObject
+  ],
+
+  // iframe 元素基础规则
+  [
+    'iframe-full',
+    {
+      'position': 'absolute',
+      'top': '0',
+      'left': '0',
+      'width': '100%',
+      'height': '100%',
+      'border': '0'
+    } as CSSObject
+  ],
+
+  // 动态宽高比规则
+  [
+    /^iframe-ratio-(\d+)-(\d+)$/,
+    (match): CSSObject => {
+      const width = parseInt(match[1], 10)
+      const height = parseInt(match[2], 10)
+
+      if (isNaN(width) || isNaN(height) || width <= 0 || height <= 0) {
+        return {} as CSSObject
+      }
+
+      const paddingPercent = (height / width) * 100
+
+      return {
+        'position': 'relative',
+        'padding-bottom': `${paddingPercent}%`,
+        'height': '0',
+        'overflow': 'hidden',
+      } as CSSObject
+    }
+  ],
+
+  // **修正：移除嵌套语法，使用独立规则**
+  [
+    'iframe-inner',
+    {
+      'position': 'absolute',
+      'top': '0',
+      'left': '0',
+      'width': '100%',
+      'height': '100%',
+      'border': '0'
+    } as CSSObject
+  ],
+
+  // **修正：使用 CSS 变量方法**
+  [
+    'iframe-var',
+    {
+      '--iframe-pos': 'absolute',
+      '--iframe-top': '0',
+      '--iframe-left': '0',
+      '--iframe-w': '100%',
+      '--iframe-h': '100%',
+      '--iframe-border': '0'
+    } as CSSObject
+  ],
+]
+
+// 类型安全的快捷方式定义
+const iframeShortcuts: Shortcut[] = [
+  // 基础组合
+  ['iframe-responsive', 'iframe-container iframe-full'],
+
+  // 常用比例容器
+  ['iframe-16-9', 'iframe-ratio-16-9'],
+  ['iframe-4-3', 'iframe-ratio-4-3'],
+  ['iframe-1-1', 'iframe-ratio-1-1'],
+  ['iframe-21-9', 'iframe-ratio-21-9'],
+
+  // **修正：使用字符串拼接而不是正则表达式**
+  ['iframe-complete-16-9', 'iframe-ratio-16-9 iframe-inner'],
+  ['iframe-complete-4-3', 'iframe-ratio-4-3 iframe-inner'],
+  ['iframe-complete-1-1', 'iframe-ratio-1-1 iframe-inner'],
+  ['iframe-complete-21-9', 'iframe-ratio-21-9 iframe-inner'],
+
+  // **添加 CSS 变量版本**
+  ['iframe-var-16-9', 'iframe-ratio-16-9 iframe-var'],
+]
+
+// 添加自定义预检规则（Preflight）来解决 "iframe" 问题
+const customPreflightRules: Rule[] = [
+  // 基础 iframe 重置规则
+  [
+    'iframe',
+    {
+      'border': '0',
+      'display': 'block',
+      'max-width': '100%'
+    } as CSSObject
+  ],
+
+  // 选择器形式的规则（正确语法）
+  [
+    '.iframe-wrapper iframe',
+    {
+      'position': 'absolute',
+      'top': '0',
+      'left': '0',
+      'width': '100%',
+      'height': '100%',
+      'border': '0'
+    } as CSSObject
+  ],
+
+  // 使用属性选择器
+  [
+    '[data-iframe]',
+    {
+      'position': 'relative',
+      'padding-bottom': '56.25%',
+      'height': '0',
+      'overflow': 'hidden'
+    } as CSSObject
+  ],
+
+  [
+    '[data-iframe] iframe',
+    {
+      'position': 'absolute',
+      'top': '0',
+      'left': '0',
+      'width': '100%',
+      'height': '100%',
+      'border': '0'
+    } as CSSObject
+  ],
+]
+
 // 将旧版规则转换为 Rule 类型
 const legacyFormRulesConverted: Rule[] = Object.entries(legacyFormRules).map(
   ([key, value]) => [key, { "@apply": value }]
@@ -75,6 +221,7 @@ export default defineConfig({
     "markup-card":
       "border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem",
     ...buttonShortcuts,
+    ...iframeShortcuts
   },
 
   presets: [
@@ -118,14 +265,60 @@ export default defineConfig({
     "text-center",
     "text-right",
     ...["normal", "flash", "presale"].map((type) => `price-tag-${type}`),
+    'iframe-container',
+    'iframe-full',
+    'iframe-inner',
+    'iframe-responsive',
+    'iframe-16-9',
+    'iframe-4-3',
+    'iframe-1-1',
+    'iframe-21-9',
+    'iframe-complete-16-9',
+    'iframe-complete-4-3',
+    'iframe-complete-1-1',
+    'iframe-complete-21-9',
+    'iframe-var',
+    'iframe-var-16-9',
   ],
+// **添加预检配置**
+  preflights: [
+    {
+      getCSS: () => `
+        /* 自定义 iframe 预检样式 */
+        iframe {
+          border: 0;
+          display: block;
+          max-width: 100%;
+          border-radius: 20px;
+        }
 
+        /* 响应式 iframe 容器 */
+        .iframe-wrapper {
+          position: relative;
+          padding-bottom: 56.25%;
+          height: 0;
+          overflow: hidden;
+        }
+
+        .iframe-wrapper iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+      `
+    }
+  ],
   // 类型安全的 rules 数组
   rules: [
     textTruncateRule,
     ...dynamicPriceTagRules,
     modernInputRule,
     ...legacyFormRulesConverted,
+    ...iframeRules,
+    ...customPreflightRules
   ],
 
   theme: {
@@ -156,6 +349,10 @@ export default defineConfig({
   transformers: [
     transformerDirectives({
       enforce: "pre", // 在 CSS 处理前转换
+      // 启用严格模式确保语法正确
+      // enforce: 'pre',
+      // 启用变量支持
+      varStyle: '--',
     }),
     transformerVariantGroup(),
   ],

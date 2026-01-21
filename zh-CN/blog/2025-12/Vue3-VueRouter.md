@@ -30,10 +30,8 @@ Vue Router 是 Vue.js 的官方路由管理器，用于构建单页面应用程�
 
 ### 安装与配置 ###
 
-```js
-npm install vue-router@4
-yarn add vue-router@4
-pnpm add vue-router@4
+```sh
+npm install install vue-router@4 // [!=npm auto]
 ```
 
 ### 新建 router/routes.ts ###

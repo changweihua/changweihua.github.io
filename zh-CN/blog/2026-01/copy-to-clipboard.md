@@ -88,13 +88,11 @@ copy-to-clipboard 支持多种引入方式，可根据项目类型（原生 JS �
 
 在 Vue、React、Angular 等模块化项目中，通过 npm 或 yarn 安装：
 
-```bash
-# npm 安装
-npm install copy-to-clipboard --save
 
-# yarn 安装
-yarn add copy-to-clipboard
+```sh
+npm install install copy-to-clipboard // [!=npm auto]
 ```
+
 
 安装后，在代码中通过 `import` 引入：
 
