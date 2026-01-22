@@ -11,11 +11,11 @@ head:
       content: changweihua.github.io 最新文章 CMONO.NET
 ---
 
-<t-loading :loading="spinning" size="large" :delay="delayTime">
+<n-spin :loading="spinning" size="large" :delay="delayTime">
   <div class="flex p-6 justify-center items-center">
     <LinkListView :categories="categories" />
   </div>
-</t-loading>
+</n-spin>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";

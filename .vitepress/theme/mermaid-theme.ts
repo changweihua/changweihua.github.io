@@ -1,7 +1,8 @@
 // .vitepress/theme/mermaid-theme.ts
+import { MermaidConfig } from 'mermaid'
 
 // 浅色主题配置
-export const lightMermaidConfig = {
+export const lightMermaidConfig: MermaidConfig = {
   theme: 'base',
   themeVariables: {
     primaryColor: '#ffffff',
@@ -32,7 +33,7 @@ export const lightMermaidConfig = {
 }
 
 // 深色主题配置
-export const darkMermaidConfig = {
+export const darkMermaidConfig: MermaidConfig = {
   theme: 'dark',
   themeVariables: {
     primaryColor: '#1a1a1a',

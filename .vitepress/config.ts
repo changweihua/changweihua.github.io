@@ -373,7 +373,6 @@ export default withMermaid(
       ssr: {
         external: [
           'vue3-next-qrcode',
-          'tdesign-vue-next',
           'vitepress-plugin-tabs',
           'vitepress-plugin-detype',
           'vitepress-plugin-npm-commands',
@@ -383,6 +382,9 @@ export default withMermaid(
           'vitepress-plugin-nprogress',
           'vitepress-component-medium-zoom',
           'vitepress-plugin-bprogress',
+          'naive-ui',
+          'date-fns',
+          'vueuc',
         ],
       },
       resolve: {
