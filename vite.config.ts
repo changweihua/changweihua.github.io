@@ -227,14 +227,14 @@ export default defineConfig(() => {
       ),
     },
     plugins: [
-      AutoImport({
+      /*AutoImport({
         imports: [
           'vue',
           {
             'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
           },
         ],
-      }),
+      }),*/
       Components({
         dirs: ['./src/components', '.vitepress/components'], // 配置需要自动导入的组件目录
         dts: 'typings/components.d.ts',
@@ -303,3 +303,4 @@ export default defineConfig(() => {
     // },
   }
 })
+
