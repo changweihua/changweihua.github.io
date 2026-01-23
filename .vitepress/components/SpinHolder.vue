@@ -337,7 +337,7 @@ watch(
 
 /* In global styles or component styles */
 :deep(.ticker) {
-  font-family: "MapleMono", monospace !important;
+  font-family: var(--vp-font-family-base) !important;
 }
 
 .spin-default {

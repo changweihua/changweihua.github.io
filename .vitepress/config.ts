@@ -359,6 +359,11 @@ export default withMermaid(
       },
       build: {
         cssMinify: 'lightningcss',
+        rolldownOptions: {
+          output: {
+            codeSplitting: true,
+          },
+        },
       },
       // 强制预构建
       optimizeDeps: {
@@ -475,9 +480,9 @@ export default withMermaid(
           /**
            * 打赏模块样式
            */
-          type: 'simple',
-          aliPayQR: 'your_image_link',
-          weChatQR: 'your_image_link',
+          type: 'drink',
+          aliPayQR: '/Alipay.svg',
+          weChatQR: '/wechat-pay.svg',
         }),
         llmstxtPlugin(),
         // DocAnalysis(docAnalysisOption),

@@ -187,3 +187,15 @@ h1 {
   // grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr) minmax(16rem, 2fr)) minmax(8rem, 1fr);
   gap: 16px;
 }
+
+#AliPay {
+  background-image: url(/Alipay.svg) !important;
+}
+
+#WeChat {
+  background-image: url(/wechat-pay.svg) !important;
+}
+
+#github {
+  display: none !important;
+}

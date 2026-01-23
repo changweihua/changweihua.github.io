@@ -8,43 +8,43 @@ export const legendOption = {
     fontSize: 12,
     lineHeight: 12,
     height: 12,
-    color: '#fff'
-  }
+    color: '#fff',
+  },
 }
 
 export const visualMapOption = {
   type: 'piecewise',
   textStyle: {
-    color: '#fff'
-  }
+    color: '#fff',
+  },
 }
 
 export const axisOption = {
   splitLine: {
-    show: false
+    show: false,
   },
   axisTick: {
     show: false,
-    alignWithLabel: true
+    alignWithLabel: true,
   },
   axisLine: {
     show: false,
     lineStyle: {
-      color: '#fff'
-    }
+      color: '#fff',
+    },
   },
   axisLabel: {
     color: 'rgb(255,255,255)',
     formatter: '{value}',
     interval: 0,
-    fontSize: 12
+    fontSize: 12,
   },
   splitArea: {
     show: false,
     areaStyle: {
-      color: ['rgba(250,250,250,0.0)', 'rgba(250,250,250,0.05)']
-    }
-  }
+      color: ['rgba(250,250,250,0.0)', 'rgba(250,250,250,0.05)'],
+    },
+  },
 }
 
 export const tooltipOption: echarts.TooltipComponentOption = {
@@ -52,7 +52,7 @@ export const tooltipOption: echarts.TooltipComponentOption = {
   confine: true,
   extraCssText: 'box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);',
   axisPointer: {
-    type: 'line'
+    type: 'line',
   },
   backgroundColor: 'rgba(255,255,255,1)',
   formatter(params: any) {
@@ -60,8 +60,7 @@ export const tooltipOption: echarts.TooltipComponentOption = {
 
     params.forEach((serie: any, index: number) => {
       if (serie.componentType === 'series') {
-        const color =
-          echartsJson.colorPalette[index % echartsJson.colorPalette.length]
+        const color = echartsJson.colorPalette[index % echartsJson.colorPalette.length]
         let value = (serie.value || '0' || 'N/A').toString()
         const bits = 8
         const identifier = '_'
@@ -79,18 +78,18 @@ export const tooltipOption: echarts.TooltipComponentOption = {
     const name = params[0] ? params[0].name : params.seriesName
     return stl
       ? '<div style="background:#fff;padding:5px 10px;color:#999;border-radius:5px;">' +
-      name +
-      stl +
-      '</div>'
+          name +
+          stl +
+          '</div>'
       : ''
-  }
+  },
 }
 
 export const titleOption = {
   textStyle: {
     color: '#fff',
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 }
 
 export const themeOption = {
@@ -101,13 +100,13 @@ export const themeOption = {
   title: titleOption,
   textStyle: {
     fontFamily: 'AlibabaPuHuiTi, JetBrainsMono, HYCuJianHeiJ',
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 }
 
 export const toolBoxOption = {
   tooltip: {
-    show: true // 必须引入 tooltip 组件
+    show: true, // 必须引入 tooltip 组件
   },
   toolbox: {
     show: true,
@@ -115,21 +114,22 @@ export const toolBoxOption = {
     feature: {
       saveAsImage: {
         show: true,
-        title: '保存为图片'
+        title: '保存为图片',
       },
     },
-    tooltip: { // 和 option.tooltip 的配置项相同
+    tooltip: {
+      // 和 option.tooltip 的配置项相同
       show: true,
       formatter: function (param: any) {
-        return '<div>' + param.title + '</div>'; // 自定义的 DOM 结构
+        return '<div>' + param.title + '</div>' // 自定义的 DOM 结构
       },
       backgroundColor: '#999',
       textStyle: {
         fontSize: 12,
       },
-      extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);' // 自定义的 CSS 样式
-    }
-  }
+      extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);', // 自定义的 CSS 样式
+    },
+  },
 }
 
 export const slientOption = {}
@@ -158,7 +158,7 @@ export enum paletteName {
   //多彩
   COLORFUL = 'COLORFUL',
   //简洁
-  SUCCINCT = 'SUCCINCT'
+  SUCCINCT = 'SUCCINCT',
 }
 
 export const colorPalettes: Record<string, Array<string>> = {
@@ -174,7 +174,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#009db2',
     '#024b51',
     '#0780cf',
-    '#765005'
+    '#765005',
   ],
   EXPERIENCE: [
     '#63b2ee',
@@ -188,7 +188,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#eddd86',
     '#9987ce',
     '#63b2ee',
-    '#76da91'
+    '#76da91',
   ],
   GRADIENT: [
     '#71ae46',
@@ -202,7 +202,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#ac2026',
     '#71ae46',
     '#96b744',
-    '#c4cc38'
+    '#c4cc38',
   ],
   FRESH: [
     '#00a8e1',
@@ -216,7 +216,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#db00c2',
     '#008080',
     '#0000ff',
-    '#c8cc00'
+    '#c8cc00',
   ],
   BUSINESS: [
     '#194f97',
@@ -230,7 +230,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#007f54',
     '#a195c5',
     '#103667',
-    '#f19272'
+    '#f19272',
   ],
   BRIGHT: [
     '#0e72cc',
@@ -244,7 +244,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#6ca30f',
     '#f59311',
     '#fa4343',
-    '#16afcc'
+    '#16afcc',
   ],
   ELEGANT: [
     '#95a2ff',
@@ -258,7 +258,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#434348',
     '#90ed7d',
     '#f7a35c',
-    '#8085e9'
+    '#8085e9',
   ],
   COOL: [
     '#bf19ff',
@@ -272,7 +272,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#009db2',
     '#024b51',
     '#0780cf',
-    '#765005'
+    '#765005',
   ],
   WARM: [
     '#9489fa',
@@ -286,7 +286,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#009db2',
     '#024b51',
     '#0780cf',
-    '#765005'
+    '#765005',
   ],
   TECHNOLOGY: [
     '#05f8d6',
@@ -300,7 +300,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#009db2',
     '#024b51',
     '#0780cf',
-    '#765005'
+    '#765005',
   ],
   COLORFUL: [
     '#ef4464',
@@ -314,7 +314,7 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#009db2',
     '#024b51',
     '#0780cf',
-    '#765005'
+    '#765005',
   ],
   SUCCINCT: [
     '#929fff',
@@ -328,19 +328,19 @@ export const colorPalettes: Record<string, Array<string>> = {
     '#009db2',
     '#024b51',
     '#0780cf',
-    '#765005'
-  ]
+    '#765005',
+  ],
 }
 
 export const baseThemeOption = {
-  animationEasing: "ElasticOut",
-  backgroundColor: "transparent",
-  color: colorPalettes["ELEGANT"],
+  animationEasing: 'ElasticOut',
+  backgroundColor: 'transparent',
+  color: colorPalettes['ELEGANT'],
   avoidLabelOverlap: true,
   textStyle: {
-    fontFamily: "JetBrainsMapleMono",
+    fontFamily: 'MapleMono',
   },
-};
+}
 
 export interface EChartsInstance {
   name: string
@@ -349,10 +349,10 @@ export interface EChartsInstance {
 }
 
 export const defaultLoadingOptions = {
-  text: "loading",
+  text: 'loading',
   // color: import.meta.env.VITE_APP_PRIMARY_COLOR,
-  textColor: "#000",
-  maskColor: "rgba(255, 255, 255, 0.8)",
+  textColor: '#000',
+  maskColor: 'rgba(255, 255, 255, 0.8)',
   zlevel: 0,
   // 字体大小。从 `v4.8.0` 开始支持。
   fontSize: 14,
@@ -363,9 +363,9 @@ export const defaultLoadingOptions = {
   // 旋转动画（spinner）的线宽。从 `v4.8.0` 开始支持。
   lineWidth: 5,
   // 字体粗细。从 `v5.0.1` 开始支持。
-  fontWeight: "normal",
+  fontWeight: 'normal',
   // 字体风格。从 `v5.0.1` 开始支持。
-  fontStyle: "normal",
+  fontStyle: 'normal',
   // 字体系列。从 `v5.0.1` 开始支持。
-  fontFamily: "JetBrainsMapleMono",
-};
+  fontFamily: 'MapleMono',
+}

@@ -43,6 +43,8 @@ import 'virtual:group-icons.css'
 import 'animate.css'
 
 import 'open-props/open-props.min.css'
+import '@fontsource-variable/noto-sans-sc'
+// import './styles/noto-sans.css'
 import './styles/vitepress-variables.scss'
 import './styles/maple-mono.scss'
 import './styles/index.scss'
@@ -134,7 +136,6 @@ import 'markdown-it-github-alerts/styles/github-base.css'
 
 import { initComponent as initMarkmapComponent } from 'vitepress-markmap-preview/component'
 import 'vitepress-markmap-preview/dist/index.css'
-import PageCursor from '../components/PageCursor.vue'
 
 import vitepressBprogress from 'vitepress-plugin-bprogress'
 // Import CSS styles (both imports work)
@@ -342,7 +343,7 @@ export default {
       //   h(NoticeBar, {
       //     name: "layout-top",
       //   }),
-      'layout-top': () => [h(PageCursor)],
+      // 'layout-top': () => [h(PageCursor)],
       // "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
       // "nav-bar-title-before": () =>
       //   h(PlaceHolder, {

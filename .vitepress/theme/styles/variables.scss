@@ -1,23 +1,36 @@
 $app-font-family:
-  MapleMono, 'JetBrains Maple Mono', JetBrainsMapleMono,
-  PingFangSC,
-  AlibabaPuHuiTi,
-  JetBrainsMono,
-  "HarmonyOS Sans",
-  -apple-system,
+  /* 1. 你的首选Web字体 */ 'Noto Sans SC Variable',
+  /* 2. 苹果系统（macOS, iOS）的优质中文字体 */ 'PingFang SC',
+  'Hiragino Sans GB',
+  /* 3. Windows系统的优质中文字体 */ 'Microsoft YaHei',
+  /* 4. 安卓及开源系统的中文字体 */ 'Droid Sans Fallback',
+  /* 5. 更通用的中文字体回退 */ 'WenQuanYi Micro Hei',
+  'Segoe UI',
+  /* 6. 跨平台的优质无衬线英文字体族 */ -apple-system,
   BlinkMacSystemFont,
-  "Segoe UI",
   Roboto,
-  "Helvetica Neue",
-  Arial,
-  "Noto Sans",
-  sans-serif,
-  "Apple Color Emoji",
-  "Segoe UI Emoji",
-  "Segoe UI Symbol",
-  "Noto Color Emoji";
-$mermaid-font-family: MapleMono, 'JetBrains Maple Mono', JetBrainsMapleMono, PingFangSC, AlibabaPuHuiTi,
-    JetBrainsMono, "HarmonyOS Sans";
+  'Helvetica Neue',
+  /* 7. 最终，通用的无衬线字体族 */ sans-serif;
+$mermaid-font-family:
+    /* 1. 你的首选Web字体 */
+    'Noto Sans SC Variable',
+    /* 2. 苹果系统（macOS, iOS）的优质中文字体 */
+    'PingFang SC',
+    'Hiragino Sans GB',
+    /* 3. Windows系统的优质中文字体 */
+    'Microsoft YaHei',
+    /* 4. 安卓及开源系统的中文字体 */
+    'Droid Sans Fallback',
+    /* 5. 更通用的中文字体回退 */
+    'WenQuanYi Micro Hei',
+    'Segoe UI',
+    /* 6. 跨平台的优质无衬线英文字体族 */
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    'Helvetica Neue',
+    /* 7. 最终，通用的无衬线字体族 */
+    sans-serif;
 $error-header-font-size: 32px;
 $app-font-weight: 400;
 $app-font-size-adjust: 0.5;
@@ -28,16 +41,14 @@ $app-font-size: 16px;
 $colors: (
   primary: #3eaf7c,
   secondary: #6c757d,
-  success: #28a745,
-  // ...
+  success: #28a745, // ...
 );
 
 // 间距系统
 $spacers: (
   sm: 8px,
   md: 16px,
-  lg: 24px,
-  // ...
+  lg: 24px, // ...
 );
 
 // 获取变量函数
