@@ -35,6 +35,7 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 - 产品经理、项目经理
 - 系统架构师
+- 全栈开发工程师
 
 :::
 
@@ -63,14 +64,14 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 ## 🥇 近期作品
 
 
-- [统一认证平台](/zh-CN/gallery/oidc.md)
-- [Envoy 智慧网关](/zh-CN/gallery/envoy.md)
-- [Ollama 大模型](/zh-CN/manual/ollama_anythingllm.md)
-- [Electron 跨平台](/zh-CN/gallery/electron_app.md)
-- [基于 iFrame 的微前端框架](/zh-CN/gallery/web_app.md)
-- [无锡硕放机场-新生产统计系统](/zh-CN/gallery/maui.md)
-- [无锡硕放机场-随身行李限额自助查询](/zh-CN/gallery/baggage_measurer.md)
-- [无锡硕放机场-阳光服务平台](/zh-CN/gallery/sunny-land.md)
+- [统一认证平台](/zh-CN/gallery/oidc)
+- [Envoy 智慧网关](/zh-CN/gallery/envoy)
+- [Ollama 大模型](/zh-CN/manual/ollama_anythingllm)
+- [Electron 跨平台](/zh-CN/gallery/electron_app)
+- [基于 iFrame 的微前端框架](/zh-CN/gallery/web_app)
+- [无锡硕放机场-新生产统计系统](/zh-CN/gallery/maui)
+- [无锡硕放机场-随身行李限额自助查询](/zh-CN/gallery/baggage_measurer)
+- [无锡硕放机场-阳光服务平台](/zh-CN/gallery/sunny-land)
 - [华东凯亚江苏分公司-持续开发交付平台](/pdfs/持续开发交付平台.pdf)
 - [敏捷开发-入门](/pdfs/敏捷开发-入门.pdf)
 - [敏捷开发-实战](/pdfs/敏捷开发-实战.pdf)
@@ -96,7 +97,6 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 <m-icon icon="logos:microsoft-windows" :width="96" :height="96" />
 <m-icon icon="logos:rabbitmq" :width="96" :height="96" />
 <m-icon icon="logos:stackoverflow" :width="96" :height="96" />
-<m-icon icon="logos:logos-mono" :width="96" :height="96" />
 <m-icon icon="logos:grafana" :width="96" :height="96" />
 <m-icon icon="logos:gravatar" :width="96" :height="96" />
 <m-icon icon="logos:gradle" :width="96" :height="96" />
@@ -171,14 +171,3 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 </div>
 
-o 又 o
-
-```diff
--foo
-+bar
-```
-
-```text
-<Sidebar collapsible="icon" variant="sidebar">  [!code --]
-<Sidebar collapsible="icon" variant="inset">   [!code ++]
-```

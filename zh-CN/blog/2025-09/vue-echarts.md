@@ -6,7 +6,7 @@ title: 基于Vue3封装 ECharts 的最佳实践
 description: 前端数据可视化：基于Vue3封装 ECharts 的最佳实践
 date: 2025-09-03 09:00:00 
 pageClass: blog-page-class
-cover: /covers/vue.svg
+cover: /covers/echarts.svg
 ---
 
 这是一个基于 Vue 3 和 ECharts 的可复用图表组件，支持常见的图表功能，包括动态配置、自动调整大小、加载状态、空数据提示等。

@@ -6,7 +6,7 @@ title: nginx 配置
 description: nginx 配置
 date: 2026-01-22 11:00:00
 pageClass: blog-page-class
-cover: /covers/platform.svg
+cover: /covers/nginx.svg
 ---
 
 > 从一份 server 到看懂整套路由规则

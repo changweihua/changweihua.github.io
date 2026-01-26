@@ -6,6 +6,7 @@ title: 处理 EventStream 不能流式返回的问题：Nginx 配置优化
 description: 处理 EventStream 不能流式返回的问题：Nginx 配置优化
 date: 2024-08-08 10:18:00
 pageClass: blog-page-class
+cover: /covers/nginx.svg
 ---
 
 # 处理 EventStream 不能流式返回的问题：Nginx 配置优化 #

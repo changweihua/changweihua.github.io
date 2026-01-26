@@ -1,5 +1,4 @@
 <template>
-  <!-- 3d粒子背景 -->
   <div class="three-container" v-element-size="onWindowResize" ref="containerRef"></div>
 </template>
 

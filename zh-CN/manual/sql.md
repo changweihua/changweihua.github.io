@@ -7,6 +7,7 @@ title: SQL优化完全指南
 description: 让你的数据库从"蜗牛"变"猎豹"！🐌➡️🐆
 category: 手册
 pageClass: manual-page-class
+cover: /covers/mysql.svgs
 ---
 
 > "天下武功，唯快不破！" —— SQL优化大师

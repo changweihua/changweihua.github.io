@@ -31,8 +31,6 @@ title: Envoy 网关
 
 <HtmlPreview src="/htmls/buti-tab.html" height="600px" class="iframe-responsive" />
 
-<HtmlPreview src="/htmls/facy-login.html" height="600px" class="iframe-responsive" />
-
 <style>
   .alarm-box {
     width: 200px;

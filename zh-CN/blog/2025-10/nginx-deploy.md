@@ -6,7 +6,7 @@ title: Nginx 灰度发布、容错与限流配置最佳实践
 description: Nginx 灰度发布、容错与限流配置最佳实践
 date: 2025-10-31 09:20:00 
 pageClass: blog-page-class
-cover: /covers/Nginx.svg
+cover: /covers/nginx.svg
 ---
 
 在生产环境中，Web 服务需要应对版本迭代、服务器故障、高并发请求等复杂情况。Nginx 作为轻量级高性能的反向代理和负载均衡服务器，在这些场景中发挥着关键作用。本文将结合实际案例，介绍如何使用 Nginx 实现：

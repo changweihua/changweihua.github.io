@@ -6,6 +6,7 @@ title: Docker + Nginx 零基础部署前端
 description: Docker + Nginx 零基础部署前端
 date: 2025-04-09 11:00:00
 pageClass: blog-page-class
+cover: /covers/nginx.svg
 ---
 
 # Docker + Nginx 零基础部署前端 #

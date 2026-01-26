@@ -1,4 +1,3 @@
-<!-- CursorShineCards.vue -->
 <template>
   <div
     class="cards-container w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-2 xl:grid-cols-3 "
@@ -59,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, PropType, ref } from "vue";
+import { onMounted, onUnmounted, PropType, ref, useTemplateRef } from "vue";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
@@ -87,7 +86,7 @@ defineProps({
     default: "rgba(0,193,106, 1)",
   },
 });
-const cardsRef = ref();
+const cardsRef = useTemplateRef<HTMLDivElement>('cardsRef');
 const cardListRef = ref<Array<HTMLElement>>([]);
 const setCardListRef = (e: HTMLElement) => {
   if (e) {

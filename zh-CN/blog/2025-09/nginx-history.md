@@ -6,7 +6,7 @@ title: Nginx 搭建支持多版本和前端路由的静态网站
 description: Nginx 搭建支持多版本和前端路由的静态网站
 date: 2025-09-19 10:00:00 
 pageClass: blog-page-class
-cover: /covers/Nginx.svg
+cover: /covers/nginx.svg
 ---
 
 在你的场景下，`history/` 目录是上一个版本，`main/` 目录是当前版本。你希望通过 Nginx 反向代理，并利用 `try_files` 机制，使页面刷新时仍能正常访问（避免 404），同时支持 SPA 前端路由，并且能够切换不同版本的资源。

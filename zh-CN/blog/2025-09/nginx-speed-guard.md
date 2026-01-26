@@ -6,7 +6,7 @@ title: Nginx 如何配置防止慢速攻击
 description: Nginx 如何配置防止慢速攻击
 date: 2025-09-18 14:00:00 
 pageClass: blog-page-class
-cover: /covers/Nginx.svg
+cover: /covers/nginx.svg
 ---
 
 慢速攻击是一类用很少带宽就能长期占用服务器连接/资源的攻击方式。攻击者通过非常慢地发送请求头或请求体，或极慢地读取服务器响应，让每个连接都“挂着不结束”，从而耗尽 Web 服务器（或上游应用、数据库、代理）的并发与缓冲资源。

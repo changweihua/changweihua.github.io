@@ -1,8 +1,4 @@
 <template>
-  <!-- <div v-if="frontmatter['commentabled']" style="width: 100%; min-height: 300px; margin: 0 auto"
-    class="justify-center items-center flex">
-    <UtterancesComment />
-  </div> -->
   <div v-if="frontmatter['tags'] && frontmatter['tags'].length > 0" style="width: 200px; height: 100px; margin: 0 auto"
     class="justify-center items-center flex">
   </div>

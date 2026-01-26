@@ -6,7 +6,7 @@ title: 用户访问到一个不存在的路由，如何重定向到404 Not Found
 description: 用户访问到一个不存在的路由，如何重定向到404 Not Found的页面
 date: 2025-09-22 14:00:00 
 pageClass: blog-page-class
-cover: /covers/Nginx.svg
+cover: /covers/nginx.svg
 ---
 
 在前端或服务端开发中，处理“用户访问不存在路由”的情况是必不可少的。它既影响用户体验，也关系到 SEO 与服务器正确返回状态。一般来说，SPA、SSR 和静态托管环境下的实现方式会有所不同，需要根据场景采用相应的策略。

@@ -6,6 +6,7 @@ title:  Nginx 常见配置优化及安全防范措施
 description: Nginx 常见配置优化及安全防范措施
 date: 2024-10-10 11:18:00
 pageClass: blog-page-class
+cover: /covers/nginx.svg
 ---
 
 # Nginx 常见配置优化及安全防范措施 #

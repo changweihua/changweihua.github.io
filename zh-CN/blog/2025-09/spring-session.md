@@ -6,7 +6,7 @@ title: Spring Web 会话管理巅峰对决
 description: Spring Web中Cookie-Session、JWT、Spring Session + Redis深度秘籍
 date: 2025-09-23 14:00:00 
 pageClass: blog-page-class
-cover: /covers/Nginx.svg
+cover: /covers/nginx.svg
 ---
 
 ## 一、 经典永流传：Cookie与Session的协作 ##

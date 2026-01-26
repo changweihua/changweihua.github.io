@@ -6,6 +6,7 @@ title:  解决Nginx出现“Too many open files”的问题
 description: 解决Nginx出现“Too many open files”的问题
 date: 2024-10-23 10:18:00
 pageClass: blog-page-class
+cover: /covers/nginx.svg
 ---
 
 # 解决Nginx出现“Too many open files”的问题 #

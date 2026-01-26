@@ -6,7 +6,7 @@ title: MySQL 脏读、不可重复读、幻读？
 description: 一张表+3个例子彻底讲清！
 date: 2025-12-30 13:30:00 
 pageClass: blog-page-class
-cover: /covers/platform.svg
+cover: /covers/mysql.svg
 ---
 
 ## 一句话说清楚 ##

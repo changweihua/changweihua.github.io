@@ -6,6 +6,7 @@ title: nginx配置域名转发、反向代理、负载均衡
 description: nginx配置域名转发、反向代理、负载均衡
 date: 2024-11-29 11:18:00
 pageClass: blog-page-class
+cover: /covers/nginx.svg
 ---
 
 # nginx配置域名转发、反向代理、负载均衡 #

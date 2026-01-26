@@ -6,7 +6,7 @@ title: VUE项目发版后用户访问的仍然是旧页面？
 description: 原因和解决方案都在这啦！
 date: 2025-09-19 09:30:00 
 pageClass: blog-page-class
-cover: /covers/vue.svg
+cover: /covers/nginx.svg
 ---
 
 A系统（VUE项目）在版本迭代中，有时会出现打包上线后，用户仍然访问的是旧版本页面的现象。这时，用户需手动刷新，才能访问到新版本页面，影响用户体验。

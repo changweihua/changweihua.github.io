@@ -6,7 +6,7 @@ title: 用 Nginx 搭建前端本地预览环境
 description: 用 Nginx 搭建前端本地预览环境
 date: 2025-09-30 11:00:00 
 pageClass: blog-page-class
-cover: /covers/vue.svg
+cover: /covers/nginx.svg
 ---
 
 很多前端同学平时只接触 `npm run dev` 的开发模式。但在一些场景下，我们需要用 Nginx 来本地模拟部署环境，比如：

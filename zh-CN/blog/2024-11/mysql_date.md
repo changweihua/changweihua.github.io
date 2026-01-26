@@ -6,6 +6,7 @@ title: MySQL 数据查询整理，查询今天、昨天、本周、本月等的�
 description: MySQL 数据查询整理，查询今天、昨天、本周、本月等的数据
 date: 2024-11-14 13:18:00
 pageClass: blog-page-class
+cover: /covers/mysql.svg
 ---
 
 # MySQL 数据查询整理，查询今天、昨天、本周、本月等的数据 #

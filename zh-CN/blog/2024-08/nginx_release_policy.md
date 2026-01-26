@@ -6,6 +6,7 @@ title: Nginx 中怎样实现灰度发布
 description: Nginx 中怎样实现灰度发布
 date: 2024-08-26 12:18:00
 pageClass: blog-page-class intersection-observer2-style
+cover: /covers/nginx.svg
 ---
 
 # Nginx 中怎样实现灰度发布 #

@@ -1,5 +1,4 @@
 <template>
-  <!-- 外层容器，负责监听鼠标移动和离开事件 -->
   <div class="logo-container" @mousemove="handleMouseMove" @mouseleave="resetEffect">
     <!-- 中心 Logo 容器，包含所有球体 -->
     <div class="logo" ref="logo">

@@ -6,7 +6,7 @@ title: 玩转 Nginx 配置，10 倍提升你的项目部署体验 🚀
 description: 玩转 Nginx 配置，10 倍提升你的项目部署体验 🚀
 date: 2025-07-09 11:05:00 
 pageClass: blog-page-class
-cover: /covers/platform.svg
+cover: /covers/nginx.svg
 ---
 
 > 你是否曾在部署前端项目时遭遇白屏、路由404、资源加载失败？别让 Nginx 成为你进阶路上的绊脚石！

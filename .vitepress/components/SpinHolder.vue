@@ -1,8 +1,7 @@
 <template>
-  <!-- 全屏模式 -->
   <teleport v-if="fullscreen && isVisible" to="body">
     <div
-      class="fixed inset-0 flex flex-col items-center justify-center z-9999 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm transition-opacity duration-300"
+      class="fixed inset-0 flex flex-col items-center justify-center z-9999 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm transition-opacity duration-300 spin-holder"
       :class="{ 'opacity-0': !spinning }"
     >
       <div
@@ -23,7 +22,6 @@
         <SpinAnimation :type="type" />
       </div>
 
-      <!-- 全屏提示文字 -->
       <div
         v-if="tip"
         class="mt-4 text-base font-medium text-gray-700 dark:text-gray-200"
@@ -42,14 +40,11 @@
     </div>
   </teleport>
 
-  <!-- 容器内模式 -->
-  <div v-else class="relative" :class="wrapperClass">
-    <!-- 内容区域 -->
+  <div v-else class="relative spin-holder" :class="wrapperClass">
     <div :class="{ 'opacity-50 pointer-events-none': spinning && !fullscreen }">
       <slot />
     </div>
 
-    <!-- 加载遮罩 -->
     <div
       v-if="spinning && !fullscreen"
       class="absolute inset-0 flex flex-col items-center justify-center z-10 transition-all duration-300"
@@ -70,7 +65,6 @@
         <SpinAnimation :type="type" />
       </div>
 
-      <!-- 提示文字 -->
       <div
         v-if="tip"
         class="mt-3 text-sm font-medium text-gray-600 dark:text-gray-300"
@@ -132,7 +126,7 @@ const props = withDefaults(defineProps<SpinProps>(), {
   fullscreen: false,
   showMask: true,
   delay: 0,
-  wrapperClass: "",
+  wrapperClass: "spin-holder",
 });
 const value = ref(props.tip || "加载中");
 
@@ -147,9 +141,7 @@ function startTimer() {
   const words = [
     "Smart Ticker",
     "Small Diff",
-    "哈基米 Dif@#$",
-    "硅基生命 %@#$",
-    "宇宙生命 Smart",
+    "CMONO.NET Dif@#$",
   ];
   let idx = 0;
   value.value = words[0];

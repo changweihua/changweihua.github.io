@@ -6,7 +6,7 @@ title: iframe 的 src 链接里带了参数（比如 token 或签名），想在
 description: iframe 的 src 链接里带了参数（比如 token 或签名），想在 Nginx 层做鉴权
 date: 2025-09-28 16:00:00 
 pageClass: blog-page-class
-cover: /covers/Nginx.svg
+cover: /covers/nginx.svg
 ---
 
 > 这类需求常见于：父页面给子 iframe 一个「临时授权链接」，Nginx 校验合法性后才允许访问。

@@ -6,6 +6,7 @@ title: nginx 反向代理后SSE连接无效的问题
 description: nginx 反向代理后SSE连接无效的问题
 date: 2025-04-09 10:00:00
 pageClass: blog-page-class
+cover: /covers/nginx.svg
 ---
 
 # nginx 反向代理后SSE连接无效的问题 #

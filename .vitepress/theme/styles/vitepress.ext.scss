@@ -1727,3 +1727,7 @@ figcaption {
   border-color: var(--vp-c-brand-1) !important;
   background-color: var(--vp-c-bg-soft) !important;
 }
+
+.spin-holder {
+  font-family: #{vars.$app-font-family} !important;
+}

@@ -6,6 +6,7 @@ title: 使用 Nginx 作为反向代理服务器详细配置指引
 description: 使用 Nginx 作为反向代理服务器详细配置指引
 date: 2024-11-29 12:18:00
 pageClass: blog-page-class
+cover: /covers/nginx.svg
 ---
 
 # 使用 Nginx 作为反向代理服务器详细配置指引使用 #

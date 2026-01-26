@@ -6,7 +6,7 @@ title: 什么？2025年了发版后还要手动清浏览器缓存？
 description: 破解浏览器缓存之谜：为何你的应用总是无法自动更新？
 date: 2025-09-30 12:00:00 
 pageClass: blog-page-class
-cover: /covers/Nginx.svg
+cover: /covers/nginx.svg
 ---
 
 
