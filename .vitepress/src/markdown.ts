@@ -65,6 +65,8 @@ const markdown: MarkdownOptions | undefined = {
     //     // Other MathJax options
     //   },
     // });
+    md.use(mathjax3);
+    /*
     md.use(mathjax3, {
       tex: {
         inlineMath: [
@@ -90,7 +92,7 @@ const markdown: MarkdownOptions | undefined = {
           'annotation-xml',
         ],
       },
-    })
+    })*/
 
     // // 自定义容器
     // md.use(require('markdown-it-container'), 'math', {
@@ -266,3 +268,4 @@ const markdown: MarkdownOptions | undefined = {
 }
 
 export { markdown }
+
