@@ -197,6 +197,7 @@
     "markdown-it-wordless": "^1.1.1",
     "markdown-to-txt": "^2.0.1",
     "marked": "^17.0.1",
+    "mathjax": "^3.2.2",
     "medium-zoom": "^1.1.0",
     "nanoid": "^5.1.6",
     "open-props": "^1.7.17",

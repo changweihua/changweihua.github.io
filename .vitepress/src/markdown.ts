@@ -65,7 +65,48 @@ const markdown: MarkdownOptions | undefined = {
     //     // Other MathJax options
     //   },
     // });
-    md.use(mathjax3)
+    md.use(mathjax3, {
+      tex: {
+        inlineMath: [
+          ['$', '$'],
+          ['\\(', '\\)'],
+        ],
+        displayMath: [
+          ['$$', '$$'],
+          ['\\[', '\\]'],
+        ],
+        processEscapes: true,
+        tags: 'ams',
+      },
+      options: {
+        skipHtmlTags: [
+          'script',
+          'noscript',
+          'style',
+          'textarea',
+          'pre',
+          'code',
+          'annotation',
+          'annotation-xml',
+        ],
+      },
+    })
+
+    // // 自定义容器
+    // md.use(require('markdown-it-container'), 'math', {
+    //   validate: function (params) {
+    //     return params.trim().match(/^math\s+(.*)$/)
+    //   },
+    //   render: function (tokens, idx) {
+    //     const m = tokens[idx].info.trim().match(/^math\s+(.*)$/)
+    //     if (tokens[idx].nesting === 1) {
+    //       return '<div class="math-container">\n'
+    //     } else {
+    //       return '</div>\n'
+    //     }
+    //   },
+    // })
+
     md.use<LinkToCardPluginOptions>(linkToCardPlugin, {
       // target: "_self" // if needed
     })

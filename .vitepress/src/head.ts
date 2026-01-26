@@ -1,92 +1,98 @@
-import type { HeadConfig } from "vitepress";
+import type { HeadConfig } from 'vitepress'
 
 export const head: HeadConfig[] = [
   [
-    "meta",
+    'meta',
     {
-      name: "viewport",
-      content: "width=device-width, initial-scale=1.0, viewport-fit=cover",
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1.0, viewport-fit=cover',
     },
   ],
-  ["meta", { name: "mobile-web-app-capable", content: "yes" }],
-  ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
-  ["meta", { name: "application-name", content: "CMONO.NET" }],
-  ["meta", { name: "apple-touch-icon-precomposed", content: "/favicon.svg" }],
+  ['meta', { name: 'mobile-web-app-capable', content: 'yes' }],
+  ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+  ['meta', { name: 'application-name', content: 'CMONO.NET' }],
+  ['meta', { name: 'apple-touch-icon-precomposed', content: '/favicon.svg' }],
   // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
-  [
-    "link",
-    { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: "any" },
-  ],
+  ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', sizes: 'any' }],
   // ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#ffffff' }],
   // ["link", { rel: "manifest", href: "/manifest.json" }],
-  ["link", { rel: "apple-touch-icon", href: "/favicon.svg", sizes: "180x180" }],
+  ['link', { rel: 'apple-touch-icon', href: '/favicon.svg', sizes: '180x180' }],
   [
-    "link",
+    'link',
     {
-      rel: "stylesheet",
-      href: "/Mermaid.css",
+      rel: 'stylesheet',
+      href: '/Mermaid.css',
     },
   ],
-  // [
-  //   "link",
-  //   {
-  //     rel: "stylesheet",
-  //     href: "/font.css",
-  //   },
-  // ],
-  ["meta", { name: "referrer", content: "no-referrer" }],
+  // 加载 MathJax
   [
-    "meta",
+    'script',
     {
-      name: "keywords",
-      content:
-        "CMONO.NET,changweihua,常伟华,Lance,changweihua.github.io,Vite,VitePress,AntDesign",
+      src: '/mathjax/es5/tex-mml-chtml.js',
+      id: 'MathJax-script',
+      async: true,
+      defer: true,
     },
   ],
   [
-    "meta",
+    'link',
     {
-      name: "description",
-      content: "CMONO.NET 官方站点，主要记录平时工作总结及项目经历",
+      rel: 'stylesheet',
+      href: '/mathjax.css',
+    },
+  ],
+  [('meta', { name: 'referrer', content: 'no-referrer' })],
+  [
+    'meta',
+    {
+      name: 'keywords',
+      content: 'CMONO.NET,changweihua,常伟华,Lance,changweihua.github.io,Vite,VitePress,AntDesign',
     },
   ],
   [
-    "meta",
+    'meta',
     {
-      name: "color-scheme",
-      content: "light dark",
+      name: 'description',
+      content: 'CMONO.NET 官方站点，主要记录平时工作总结及项目经历',
     },
   ],
   [
-    "meta",
+    'meta',
     {
-      name: "theme-color",
-      content: "#ffffff",
-      media: "(prefers-color-scheme: light)",
+      name: 'color-scheme',
+      content: 'light dark',
     },
   ],
   [
-    "meta",
+    'meta',
     {
-      name: "theme-color",
-      content: "#1e1e1e",
-      media: "(prefers-color-scheme: dark)",
+      name: 'theme-color',
+      content: '#ffffff',
+      media: '(prefers-color-scheme: light)',
     },
   ],
   [
-    "meta",
+    'meta',
     {
-      name: "apple-mobile-web-app-status-bar-style",
-      content: "default",
-      media: "(prefers-color-scheme: light)",
+      name: 'theme-color',
+      content: '#1e1e1e',
+      media: '(prefers-color-scheme: dark)',
     },
   ],
   [
-    "meta",
+    'meta',
     {
-      name: "apple-mobile-web-app-status-bar-style",
-      content: "black-translucent",
-      media: "(prefers-color-scheme: dark)",
+      name: 'apple-mobile-web-app-status-bar-style',
+      content: 'default',
+      media: '(prefers-color-scheme: light)',
+    },
+  ],
+  [
+    'meta',
+    {
+      name: 'apple-mobile-web-app-status-bar-style',
+      content: 'black-translucent',
+      media: '(prefers-color-scheme: dark)',
     },
   ],
   // [
@@ -115,12 +121,12 @@ export const head: HeadConfig[] = [
   //   },
   // ],
   [
-    "script",
+    'script',
     {
-      src: "https://hm.baidu.com/hm.js?9bdcf6f2112634d13223ef73de6fe9fa",
-      "data-site": "https://changweihua.github.io",
-      "data-spa": "auto",
-      defer: "true",
+      src: 'https://hm.baidu.com/hm.js?9bdcf6f2112634d13223ef73de6fe9fa',
+      'data-site': 'https://changweihua.github.io',
+      'data-spa': 'auto',
+      defer: 'true',
     },
   ],
   // [
@@ -140,21 +146,20 @@ export const head: HeadConfig[] = [
   //     `,
   // ],
   // 设置 描述 和 关键词
-  ["meta", { name: "author", content: "Lance Chang" }],
+  ['meta', { name: 'author', content: 'Lance Chang' }],
   [
-    "meta",
+    'meta',
     {
-      name: "keywords",
-      content:
-        "changweihua 常伟华 vitepress cmono.net changweihua.github.io 个人网站",
+      name: 'keywords',
+      content: 'changweihua 常伟华 vitepress cmono.net changweihua.github.io 个人网站',
     },
   ],
   [
-    "meta",
+    'meta',
     {
-      name: "description",
+      name: 'description',
       content:
-        "此系统基于vitepress二次开发，前端框架使用vuejs，UI框架使用ant-design，全局数据状态管理使用paina，ajax使用库为fetch。用于快速搭建个人网站和内容管理平台。",
+        '此系统基于vitepress二次开发，前端框架使用vuejs，UI框架使用ant-design，全局数据状态管理使用paina，ajax使用库为fetch。用于快速搭建个人网站和内容管理平台。',
     },
   ],
-];
+]
