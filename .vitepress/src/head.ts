@@ -22,6 +22,7 @@ export const head: HeadConfig[] = [
     },
   ],
   // 加载 MathJax
+  /*
   [
     'script',
     {
@@ -36,7 +37,7 @@ export const head: HeadConfig[] = [
       rel: 'stylesheet',
       href: '/mathjax.css',
     },
-  ],
+  ],*/
   [('meta', { name: 'referrer', content: 'no-referrer' })],
   [
     'meta',
@@ -159,3 +160,4 @@ export const head: HeadConfig[] = [
     },
   ],
 ]
+
