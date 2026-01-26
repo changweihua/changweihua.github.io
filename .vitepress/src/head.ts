@@ -12,10 +12,7 @@ export const head: HeadConfig[] = [
   ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
   ['meta', { name: 'application-name', content: 'CMONO.NET' }],
   ['meta', { name: 'apple-touch-icon-precomposed', content: '/favicon.svg' }],
-  // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
   ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', sizes: 'any' }],
-  // ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#ffffff' }],
-  // ["link", { rel: "manifest", href: "/manifest.json" }],
   ['link', { rel: 'apple-touch-icon', href: '/favicon.svg', sizes: '180x180' }],
   [
     'link',
@@ -29,9 +26,8 @@ export const head: HeadConfig[] = [
     'script',
     {
       src: '/mathjax/es5/tex-mml-chtml.js',
-      id: 'MathJax-script',
-      async: true,
-      defer: true,
+      async: 'true',
+      defer: 'true',
     },
   ],
   [
