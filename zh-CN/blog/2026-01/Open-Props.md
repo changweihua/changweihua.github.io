@@ -331,7 +331,7 @@ Open Props内置了一些响应式布局工具，能够让开发者更加轻松�
 <script setup>
 import "open-props/open-props.min.css";
 </script>
-<style lang="scss"  scoped>
+<style lang="scss" scoped>
     :root {
       --space-sm: 16px;
       --space-md: 32px;

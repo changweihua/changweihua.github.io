@@ -239,7 +239,7 @@
     "vitepress-plugin-tabs": "^0.7.3",
     "vitepress-protect-plugin": "^1.0.6",
     "vue3-next-qrcode": "^4.0.0",
-    "vue3-signature": "^0.4.2",
+    "vue3-signature": "^0.4.4",
     "vue3-simple-icons": "^15.6.0",
     "xlogs": "^0.1.0",
     "yuppie-ui": "^0.0.11"

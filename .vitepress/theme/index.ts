@@ -13,39 +13,11 @@ import CarouselCard from '../components/CarouselCard.vue'
 import MarkdownEChart from '#.vitepress/components/MarkdownEChart.vue'
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold' // import method
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
-import { createMermaidRenderer } from 'vitepress-mermaid-renderer'
 // @ts-ignore
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
 
-// 彩虹背景动画样式
-let homePageStyle: HTMLStyleElement | undefined
-
-// 彩虹背景动画样式
-function updateHomePageStyle(value: boolean) {
-  if (value) {
-    if (homePageStyle) return
-
-    homePageStyle = document.createElement('style')
-    homePageStyle.innerHTML = `
-    :root {
-      animation: rainbow 12s linear infinite;
-    }`
-    document.body.appendChild(homePageStyle)
-  } else {
-    if (!homePageStyle) return
-
-    homePageStyle.remove()
-    homePageStyle = undefined
-  }
-}
-
-import 'virtual:uno.css'
-import 'virtual:group-icons.css'
-import 'animate.css'
-
 import 'open-props/open-props.min.css'
 import '@fontsource-variable/noto-sans-sc'
-// import './styles/noto-sans.css'
 import './styles/vitepress-variables.scss'
 import './styles/maple-mono.scss'
 import './styles/index.scss'
@@ -57,9 +29,11 @@ import './styles/markdown.ext.css'
 import './styles/mermaid.ext.css'
 import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
 
+import 'virtual:uno.css'
+import 'virtual:group-icons.css'
+import 'animate.css'
+
 import directives from '../directives'
-// import vitepressNprogress from "vitepress-plugin-nprogress";
-// import "vitepress-plugin-nprogress/lib/css/index.css";
 
 import { NaiveUIContainer } from '@vitepress-demo-preview/component'
 import '@vitepress-demo-preview/component/dist/style.css'
@@ -84,19 +58,6 @@ mermaid.registerIconPacks([
     name: icons.prefix, // To use the prefix defined in the icon pack
     icons,
   },
-  // {
-  //   name: "devicon",
-  //   loader: () =>
-  //     import("@iconify-json/devicon").then((module) => module.icons),
-  // },
-  // {
-  //   name: skillIcons.prefix, // To use the prefix defined in the icon pack
-  //   icons: skillIcons,
-  // },
-  // {
-  //   name: devIcons.prefix, // To use the prefix defined in the icon pack
-  //   icons: devIcons,
-  // },
 ])
 import zenuml from '@mermaid-js/mermaid-zenuml'
 mermaid.registerExternalDiagrams([zenuml])
@@ -465,17 +426,6 @@ export default {
       app.component('m-icon', Icon)
       app.component('GlossaryTooltip', GlossaryTooltip)
       app.component('HtmlPreview', HtmlPreview)
-
-      // <HtmlPreview src="/demo/point-sketch.html" height="600px" />
-
-      // 彩虹背景动画样式
-      if (typeof window !== 'undefined') {
-        watch(
-          () => router.route.data.relativePath,
-          () => updateHomePageStyle(location.pathname === '/zh-CN/'),
-          { immediate: true }
-        )
-      }
 
       app.use(directives)
 

@@ -271,5 +271,17 @@
   "https://example.com?c=1769483344237": {
     "title": "Example Domain",
     "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769497963841": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769498965770": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769499540541": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
   }
 }

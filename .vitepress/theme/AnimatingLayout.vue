@@ -59,7 +59,6 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
 });
 
 const { route } = useRouter();
-const currentPage = ref("home");
 watch(
   () => route.path,
   () => {
@@ -92,7 +91,7 @@ router.onAfterPageLoad = function () {
 </script>
 
 <template>
-  <div :key="currentPage" class="page-content view-transition-container">
+  <div class="page-content view-transition-container">
     <DefaultTheme.Layout>
       <template
         v-for="(slotKey, slotIndex) in slots"
