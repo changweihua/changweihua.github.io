@@ -42,7 +42,7 @@ export const head: HeadConfig[] = [
   [
     'script',
     {
-      src: '/mathjax/es5/tex-mml-chtml.js',
+      src: '/mathjax/tex-chtml.js',
       async: 'true',
       defer: 'true',
     },
