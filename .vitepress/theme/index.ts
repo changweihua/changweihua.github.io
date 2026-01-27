@@ -14,6 +14,7 @@ import MarkdownEChart from '#.vitepress/components/MarkdownEChart.vue'
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold' // import method
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import { createMermaidRenderer } from 'vitepress-mermaid-renderer'
+// @ts-ignore
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
 
 // 彩虹背景动画样式
@@ -491,6 +492,14 @@ export default {
           }
 
           return true
+        }
+
+        router.onAfterRouteChange = () => {
+          nextTick(() => {
+            // 等待 DOM 更新后执行清理
+            const styleSheets = document.styleSheets
+            // 可能的清理操作
+          })
         }
 
         // 路由加载完成，在加载页面组件后（在更新页面组件之前）调用。

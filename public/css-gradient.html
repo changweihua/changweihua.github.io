@@ -1,313 +1,348 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>CSS3渐变效果大全</title>
     <style>
-        /* 基础样式重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      /* 基础样式重置 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-            color: #333;
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .gradient-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .gradient-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+      }
+
+      .gradient-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .gradient-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #2d3748;
+      }
+
+      .gradient-preview {
+        height: 150px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .code-snippet {
+        background: #f7fafc;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        border-left: 4px solid #667eea;
+        overflow-x: auto;
+      }
+
+      /* 1. 基础线性渐变 */
+      .linear-basic {
+        background: linear-gradient(#667eea, #764ba2);
+      }
+
+      /* 2. 角度线性渐变 */
+      .linear-angle {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      }
+
+      /* 3. 多色线性渐变 */
+      .linear-multi {
+        background: linear-gradient(to right, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+      }
+
+      /* 4. 径向渐变 */
+      .radial-basic {
+        background: radial-gradient(circle, #667eea, #764ba2);
+      }
+
+      /* 5. 椭圆形径向渐变 */
+      .radial-ellipse {
+        background: radial-gradient(ellipse at center, #ff6b6b, #4ecdc4);
+      }
+
+      /* 6. 位置径向渐变 */
+      .radial-position {
+        background:
+          radial-gradient(circle at top right, #667eea, transparent 50%),
+          radial-gradient(circle at bottom left, #764ba2, transparent 50%);
+      }
+
+      /* 7. 重复线性渐变 */
+      .repeating-linear {
+        background: repeating-linear-gradient(
+          45deg,
+          #667eea,
+          #667eea 10px,
+          #764ba2 10px,
+          #764ba2 20px
+        );
+      }
+
+      /* 8. 重复径向渐变 */
+      .repeating-radial {
+        background: repeating-radial-gradient(
+          circle,
+          #ff6b6b,
+          #ff6b6b 10px,
+          #4ecdc4 10px,
+          #4ecdc4 20px
+        );
+      }
+
+      /* 9. 锥形渐变 */
+      .conic-gradient {
+        background: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #45b7d1, #ff6b6b);
+      }
+
+      /* 10. 复杂渐变组合 */
+      .complex-gradient {
+        background:
+          linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%),
+          radial-gradient(circle at top left, rgba(255, 107, 107, 0.6) 0%, transparent 50%),
+          radial-gradient(circle at bottom right, rgba(78, 205, 196, 0.6) 0%, transparent 50%);
+      }
+
+      /* 11. 文字渐变效果 */
+      .text-gradient {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      /* 12. 边框渐变 */
+      .border-gradient {
+        border: 4px solid transparent;
+        background:
+          linear-gradient(white, white) padding-box,
+          linear-gradient(135deg, #667eea, #764ba2) border-box;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .gradient-grid {
+          grid-template-columns: 1fr;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+          padding: 0 10px;
         }
 
         h1 {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            font-size: 2.5rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+          font-size: 2rem;
         }
+      }
 
-        .gradient-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
+      /* 说明区域 */
+      .explanation {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-top: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
 
-        .gradient-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
+      .explanation h2 {
+        color: #2d3748;
+        margin-bottom: 20px;
+      }
 
-        .gradient-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .gradient-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #2d3748;
-        }
-
-        .gradient-preview {
-            height: 150px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .code-snippet {
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            border-left: 4px solid #667eea;
-            overflow-x: auto;
-        }
-
-        /* 1. 基础线性渐变 */
-        .linear-basic {
-            background: linear-gradient(#667eea, #764ba2);
-        }
-
-        /* 2. 角度线性渐变 */
-        .linear-angle {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-        }
-
-        /* 3. 多色线性渐变 */
-        .linear-multi {
-            background: linear-gradient(to right, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-        }
-
-        /* 4. 径向渐变 */
-        .radial-basic {
-            background: radial-gradient(circle, #667eea, #764ba2);
-        }
-
-        /* 5. 椭圆形径向渐变 */
-        .radial-ellipse {
-            background: radial-gradient(ellipse at center, #ff6b6b, #4ecdc4);
-        }
-
-        /* 6. 位置径向渐变 */
-        .radial-position {
-            background: radial-gradient(circle at top right, #667eea, transparent 50%),
-                        radial-gradient(circle at bottom left, #764ba2, transparent 50%);
-        }
-
-        /* 7. 重复线性渐变 */
-        .repeating-linear {
-            background: repeating-linear-gradient(45deg, #667eea, #667eea 10px, #764ba2 10px, #764ba2 20px);
-        }
-
-        /* 8. 重复径向渐变 */
-        .repeating-radial {
-            background: repeating-radial-gradient(circle, #ff6b6b, #ff6b6b 10px, #4ecdc4 10px, #4ecdc4 20px);
-        }
-
-        /* 9. 锥形渐变 */
-        .conic-gradient {
-            background: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #45b7d1, #ff6b6b);
-        }
-
-        /* 10. 复杂渐变组合 */
-        .complex-gradient {
-            background:
-                linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%),
-                radial-gradient(circle at top left, rgba(255, 107, 107, 0.6) 0%, transparent 50%),
-                radial-gradient(circle at bottom right, rgba(78, 205, 196, 0.6) 0%, transparent 50%);
-        }
-
-        /* 11. 文字渐变效果 */
-        .text-gradient {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        /* 12. 边框渐变 */
-        .border-gradient {
-            border: 4px solid transparent;
-            background:
-                linear-gradient(white, white) padding-box,
-                linear-gradient(135deg, #667eea, #764ba2) border-box;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .gradient-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 0 10px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-        }
-
-        /* 说明区域 */
-        .explanation {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .explanation h2 {
-            color: #2d3748;
-            margin-bottom: 20px;
-        }
-
-        .explanation p {
-            line-height: 1.6;
-            color: #4a5568;
-            margin-bottom: 15px;
-        }
+      .explanation p {
+        line-height: 1.6;
+        color: #4a5568;
+        margin-bottom: 15px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>CSS3渐变效果展示</h1>
+      <h1>CSS3渐变效果展示</h1>
 
-        <div class="gradient-grid">
-            <!-- 基础线性渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">1. 基础线性渐变</div>
-                <div class="gradient-preview linear-basic"></div>
-                <div class="code-snippet">background: linear-gradient(#667eea, #764ba2);</div>
-            </div>
+      <div class="gradient-grid">
+        <!-- 基础线性渐变 -->
+        <div class="gradient-card">
+          <div class="gradient-title">1. 基础线性渐变</div>
+          <div class="gradient-preview linear-basic"></div>
+          <div class="code-snippet">background: linear-gradient(#667eea, #764ba2);</div>
+        </div>
 
-            <!-- 角度线性渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">2. 45度角线性渐变</div>
-                <div class="gradient-preview linear-angle"></div>
-                <div class="code-snippet">background: linear-gradient(45deg, #ff6b6b, #4ecdc4);</div>
-            </div>
+        <!-- 角度线性渐变 -->
+        <div class="gradient-card">
+          <div class="gradient-title">2. 45度角线性渐变</div>
+          <div class="gradient-preview linear-angle"></div>
+          <div class="code-snippet">background: linear-gradient(45deg, #ff6b6b, #4ecdc4);</div>
+        </div>
 
-            <!-- 多色线性渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">3. 多色线性渐变</div>
-                <div class="gradient-preview linear-multi"></div>
-                <div class="code-snippet">background: linear-gradient(to right, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);</div>
-            </div>
+        <!-- 多色线性渐变 -->
+        <div class="gradient-card">
+          <div class="gradient-title">3. 多色线性渐变</div>
+          <div class="gradient-preview linear-multi"></div>
+          <div class="code-snippet">
+            background: linear-gradient(to right, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+          </div>
+        </div>
 
-            <!-- 径向渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">4. 基础径向渐变</div>
-                <div class="gradient-preview radial-basic"></div>
-                <div class="code-snippet">background: radial-gradient(circle, #667eea, #764ba2);</div>
-            </div>
+        <!-- 径向渐变 -->
+        <div class="gradient-card">
+          <div class="gradient-title">4. 基础径向渐变</div>
+          <div class="gradient-preview radial-basic"></div>
+          <div class="code-snippet">background: radial-gradient(circle, #667eea, #764ba2);</div>
+        </div>
 
-            <!-- 椭圆形径向渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">5. 椭圆形径向渐变</div>
-                <div class="gradient-preview radial-ellipse"></div>
-                <div class="code-snippet">background: radial-gradient(ellipse at center, #ff6b6b, #4ecdc4);</div>
-            </div>
+        <!-- 椭圆形径向渐变 -->
+        <div class="gradient-card">
+          <div class="gradient-title">5. 椭圆形径向渐变</div>
+          <div class="gradient-preview radial-ellipse"></div>
+          <div class="code-snippet">
+            background: radial-gradient(ellipse at center, #ff6b6b, #4ecdc4);
+          </div>
+        </div>
 
-            <!-- 位置径向渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">6. 位置径向渐变</div>
-                <div class="gradient-preview radial-position"></div>
-                <div class="code-snippet">
-background: radial-gradient(circle at top right, #667eea, transparent 50%),
+        <!-- 位置径向渐变 -->
+        <div class="gradient-card">
+          <div class="gradient-title">6. 位置径向渐变</div>
+          <div class="gradient-preview radial-position"></div>
+          <div class="code-snippet">
+            background: radial-gradient(circle at top right, #667eea, transparent 50%),
             radial-gradient(circle at bottom left, #764ba2, transparent 50%);
-                </div>
-            </div>
-
-            <!-- 重复线性渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">7. 重复线性渐变</div>
-                <div class="gradient-preview repeating-linear"></div>
-                <div class="code-snippet">background: repeating-linear-gradient(45deg, #667eea, #667eea 10px, #764ba2 10px, #764ba2 20px);</div>
-            </div>
-
-            <!-- 重复径向渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">8. 重复径向渐变</div>
-                <div class="gradient-preview repeating-radial"></div>
-                <div class="code-snippet">background: repeating-radial-gradient(circle, #ff6b6b, #ff6b6b 10px, #4ecdc4 10px, #4ecdc4 20px);</div>
-            </div>
-
-            <!-- 锥形渐变 -->
-            <div class="gradient-card">
-                <div class="gradient-title">9. 锥形渐变</div>
-                <div class="gradient-preview conic-gradient"></div>
-                <div class="code-snippet">background: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #45b7d1, #ff6b6b);</div>
-            </div>
-
-            <!-- 复杂渐变组合 -->
-            <div class="gradient-card">
-                <div class="gradient-title">10. 复杂渐变组合</div>
-                <div class="gradient-preview complex-gradient"></div>
-                <div class="code-snippet">
-background:
-    linear-gradient(135deg, rgba(102,126,234,0.8), rgba(118,75,162,0.8)),
-    radial-gradient(circle at top left, rgba(255,107,107,0.6), transparent 50%),
-    radial-gradient(circle at bottom right, rgba(78,205,196,0.6), transparent 50%);
-                </div>
-            </div>
+          </div>
         </div>
 
-        <!-- 文字渐变效果 -->
+        <!-- 重复线性渐变 -->
         <div class="gradient-card">
-            <div class="gradient-title">11. 文字渐变效果</div>
-            <div class="text-gradient">渐变文字效果</div>
-            <div class="code-snippet">
-background: linear-gradient(135deg, #667eea, #764ba2);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-            </div>
+          <div class="gradient-title">7. 重复线性渐变</div>
+          <div class="gradient-preview repeating-linear"></div>
+          <div class="code-snippet">
+            background: repeating-linear-gradient(45deg, #667eea, #667eea 10px, #764ba2 10px,
+            #764ba2 20px);
+          </div>
         </div>
 
-        <!-- 边框渐变 -->
+        <!-- 重复径向渐变 -->
         <div class="gradient-card">
-            <div class="gradient-title">12. 边框渐变效果</div>
-            <div class="gradient-preview border-gradient" style="height: 100px; display: flex; align-items: center; justify-content: center;">
-                渐变边框
-            </div>
-            <div class="code-snippet">
-border: 4px solid transparent;
-background:
-    linear-gradient(white, white) padding-box,
-    linear-gradient(135deg, #667eea, #764ba2) border-box;
-            </div>
+          <div class="gradient-title">8. 重复径向渐变</div>
+          <div class="gradient-preview repeating-radial"></div>
+          <div class="code-snippet">
+            background: repeating-radial-gradient(circle, #ff6b6b, #ff6b6b 10px, #4ecdc4 10px,
+            #4ecdc4 20px);
+          </div>
         </div>
 
-        <div class="explanation">
-            <h2>CSS3渐变核心语法</h2>
-            <p>CSS3渐变提供了丰富的颜色过渡效果，主要包括三种类型：</p>
-
-            <p><strong>线性渐变 (linear-gradient)</strong>：颜色沿着一条直线方向变化。可以指定方向（角度或关键词）和多个颜色停止点。</p>
-
-            <p><strong>径向渐变 (radial-gradient)</strong>：颜色从中心点向外辐射变化。可以定义形状（圆形或椭圆形）、大小和位置。</p>
-
-            <p><strong>锥形渐变 (conic-gradient)</strong>：颜色围绕中心点旋转变化。适合创建饼图、色轮等效果。</p>
-
-            <p>渐变可以叠加使用，创建复杂的视觉效果，并且支持透明度，可以实现更加丰富的设计。</p>
+        <!-- 锥形渐变 -->
+        <div class="gradient-card">
+          <div class="gradient-title">9. 锥形渐变</div>
+          <div class="gradient-preview conic-gradient"></div>
+          <div class="code-snippet">
+            background: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #45b7d1, #ff6b6b);
+          </div>
         </div>
+
+        <!-- 复杂渐变组合 -->
+        <div class="gradient-card">
+          <div class="gradient-title">10. 复杂渐变组合</div>
+          <div class="gradient-preview complex-gradient"></div>
+          <div class="code-snippet">
+            background: linear-gradient(135deg, rgba(102,126,234,0.8), rgba(118,75,162,0.8)),
+            radial-gradient(circle at top left, rgba(255,107,107,0.6), transparent 50%),
+            radial-gradient(circle at bottom right, rgba(78,205,196,0.6), transparent 50%);
+          </div>
+        </div>
+      </div>
+
+      <!-- 文字渐变效果 -->
+      <div class="gradient-card">
+        <div class="gradient-title">11. 文字渐变效果</div>
+        <div class="text-gradient">渐变文字效果</div>
+        <div class="code-snippet">
+          background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent; background-clip: text;
+        </div>
+      </div>
+
+      <!-- 边框渐变 -->
+      <div class="gradient-card">
+        <div class="gradient-title">12. 边框渐变效果</div>
+        <div
+          class="gradient-preview border-gradient"
+          style="height: 100px; display: flex; align-items: center; justify-content: center"
+        >
+          渐变边框
+        </div>
+        <div class="code-snippet">
+          border: 4px solid transparent; background: linear-gradient(white, white) padding-box,
+          linear-gradient(135deg, #667eea, #764ba2) border-box;
+        </div>
+      </div>
+
+      <div class="explanation">
+        <h2>CSS3渐变核心语法</h2>
+        <p>CSS3渐变提供了丰富的颜色过渡效果，主要包括三种类型：</p>
+
+        <p>
+          <strong>线性渐变 (linear-gradient)</strong
+          >：颜色沿着一条直线方向变化。可以指定方向（角度或关键词）和多个颜色停止点。
+        </p>
+
+        <p>
+          <strong>径向渐变 (radial-gradient)</strong
+          >：颜色从中心点向外辐射变化。可以定义形状（圆形或椭圆形）、大小和位置。
+        </p>
+
+        <p>
+          <strong>锥形渐变 (conic-gradient)</strong
+          >：颜色围绕中心点旋转变化。适合创建饼图、色轮等效果。
+        </p>
+
+        <p>渐变可以叠加使用，创建复杂的视觉效果，并且支持透明度，可以实现更加丰富的设计。</p>
+      </div>
     </div>
-</body>
+  </body>
 </html>

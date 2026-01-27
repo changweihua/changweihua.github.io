@@ -28,6 +28,7 @@ import type { LinkToCardPluginOptions } from 'vitepress-linkcard'
 import { markdownGlossaryPlugin } from 'vitepress-plugin-glossary'
 import glossary from './glossary.json'
 import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
+import { picturePlugin } from '../plugins/markdown/markdown-it-picture'
 
 const CONSTS = {
   __custom_variable__: 'your value',
@@ -65,7 +66,7 @@ const markdown: MarkdownOptions | undefined = {
     //     // Other MathJax options
     //   },
     // });
-    md.use(mathjax3);
+    md.use(mathjax3)
     /*
     md.use(mathjax3, {
       tex: {
@@ -96,10 +97,10 @@ const markdown: MarkdownOptions | undefined = {
 
     // // 自定义容器
     // md.use(require('markdown-it-container'), 'math', {
-    //   validate: function (params) {
+    //   validate: function (params: any) {
     //     return params.trim().match(/^math\s+(.*)$/)
     //   },
-    //   render: function (tokens, idx) {
+    //   render: function (tokens: any, idx: number) {
     //     const m = tokens[idx].info.trim().match(/^math\s+(.*)$/)
     //     if (tokens[idx].nesting === 1) {
     //       return '<div class="math-container">\n'
@@ -169,13 +170,14 @@ const markdown: MarkdownOptions | undefined = {
     // @ts-ignore
     codeBarPlugin(md)
 
-    md.use(imgLazyload)
-    md.use(tasklist, {
-      // your options, optional
-    })
+    // md.use(imgLazyload)
+    // md.use(tasklist, {
+    //   // your options, optional
+    // })
     md.use(figure, {
       // 你的选项，可选的
     })
+    // md.use(picturePlugin)
 
     // @ts-ignore
     vitepressMarkmapPreview(md, {
@@ -268,4 +270,3 @@ const markdown: MarkdownOptions | undefined = {
 }
 
 export { markdown }
-

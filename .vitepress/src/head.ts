@@ -21,8 +21,24 @@ export const head: HeadConfig[] = [
       href: '/Mermaid.css',
     },
   ],
-  // 加载 MathJax
-  /*
+  // MathJax 配置应该在 <script> 标签中，不是在插件里
+  [
+    'script',
+    {},
+    `
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          packages: ['base', 'ams', 'noerrors', 'noundefined']
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      };
+    `,
+  ],
   [
     'script',
     {
@@ -31,14 +47,32 @@ export const head: HeadConfig[] = [
       defer: 'true',
     },
   ],
+  // 一些自定义样式
   [
-    'link',
-    {
-      rel: 'stylesheet',
-      href: '/mathjax.css',
-    },
-  ],*/
-  [('meta', { name: 'referrer', content: 'no-referrer' })],
+    'style',
+    {},
+    `
+      /* 数学公式样式 */
+      .math {
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+
+      mjx-container {
+        outline: none;
+      }
+
+      /* 确保公式在移动设备上可滚动 */
+      @media (max-width: 768px) {
+        mjx-container[jax="CHTML"] {
+          overflow-x: auto;
+          overflow-y: hidden;
+          max-width: 100%;
+        }
+      }
+    `,
+  ],
+  ['meta', { name: 'referrer', content: 'no-referrer' }],
   [
     'meta',
     {
@@ -160,4 +194,3 @@ export const head: HeadConfig[] = [
     },
   ],
 ]
-
