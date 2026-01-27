@@ -242,7 +242,7 @@ export default defineConfig(() => {
         // 关键：让插件处理 .md 文件
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         resolvers: [
-          NaiveUiResolver(),
+          //NaiveUiResolver(),
           IconsResolver({
             // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
             prefix: 'icon',
@@ -324,3 +324,4 @@ export default defineConfig(() => {
     // },
   }
 })
+
