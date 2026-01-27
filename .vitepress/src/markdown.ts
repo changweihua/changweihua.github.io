@@ -148,11 +148,11 @@ const markdown: MarkdownOptions | undefined = {
       glossary: glossary,
       firstOccurrenceOnly: true,
     })
-
+/*
     md.use(vitepressEncrypt, [
       { pageType: 'default', password: 'p1' },
       { pageType: 'vip', password: 'p2' },
-    ])
+    ])*/
     // const original = md.renderer.rules.fence;
 
     // md.renderer.rules.fence = (tokens, idx, options, env, self) => {
@@ -170,7 +170,7 @@ const markdown: MarkdownOptions | undefined = {
     // @ts-ignore
     codeBarPlugin(md)
 
-    // md.use(imgLazyload)
+     md.use(imgLazyload)
     // md.use(tasklist, {
     //   // your options, optional
     // })
@@ -270,3 +270,4 @@ const markdown: MarkdownOptions | undefined = {
 }
 
 export { markdown }
+
