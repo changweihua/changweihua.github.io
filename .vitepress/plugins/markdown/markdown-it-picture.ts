@@ -1,177 +1,183 @@
-// .vitepress/plugins/markdown-it-picture.ts
 import type MarkdownIt from 'markdown-it'
-import { Token } from 'markdown-it/index.js'
+import fs from 'fs'
+import path from 'path'
 
-/**
- * 图片格式转换配置
- */
-interface PicturePluginOptions {
-  /**
-   * 支持的图片格式（会转换为 picture 元素）
-   */
-  supportedFormats: RegExp
-  /**
-   * 需要跳过的图片格式（不会转换）
-   */
-  skipFormats: RegExp
-  /**
-   * 是否添加 loading="lazy" 属性
-   */
-  lazyLoading: boolean
-  /**
-   * 图片的默认 alt 文本
-   */
-  defaultAlt: string
+interface ImageInfo {
+  src: string
+  alt: string
+  title?: string
+  width?: string
+  height?: string
 }
 
-/**
- * 默认配置
- */
-const defaultOptions: PicturePluginOptions = {
-  supportedFormats: /\.(jpg|jpeg|png|gif|bmp|tiff)$/i,
-  skipFormats: /\.(svg|webp)$/i,
-  lazyLoading: true,
-  defaultAlt: 'Image',
+const ROOT_DIR = process.cwd()
+const PUBLIC_DIR = path.join(ROOT_DIR, 'public')
+const formatCache = new Map<string, boolean>()
+
+function fileExistsSync(filePath: string): boolean {
+  if (formatCache.has(filePath)) {
+    return formatCache.get(filePath)!
+  }
+
+  try {
+    const exists = fs.existsSync(filePath)
+    formatCache.set(filePath, exists)
+    return exists
+  } catch {
+    formatCache.set(filePath, false)
+    return false
+  }
 }
 
-/**
- * 提取图片属性
- */
-function extractImageAttributes(token: Token) {
-  const attrs: Record<string, string> = {}
+function resolveImagePath(src: string, env: any): { fsPath: string; webPath: string } {
+  if (src.startsWith('http')) {
+    return { fsPath: src, webPath: src }
+  }
 
-  for (const [key, value] of token.attrs || []) {
-    if (key === 'src') {
-      attrs.src = value
-    } else if (key === 'alt') {
-      attrs.alt = value
-    } else if (key === 'title') {
-      attrs.title = value
-    } else if (key.startsWith('data-')) {
-      attrs[key] = value
+  if (src.startsWith('/')) {
+    const relativePath = src.slice(1)
+    const fsPath = path.join(PUBLIC_DIR, relativePath)
+    return { fsPath, webPath: src }
+  }
+
+  if (env.filePath) {
+    const markdownDir = path.dirname(env.filePath)
+    const resolvedPath = path.resolve(markdownDir, src)
+
+    if (resolvedPath.startsWith(PUBLIC_DIR)) {
+      const webPath = '/' + path.relative(PUBLIC_DIR, resolvedPath).replace(/\\/g, '/')
+      return { fsPath: resolvedPath, webPath }
     }
+
+    return { fsPath: resolvedPath, webPath: src }
   }
 
-  return attrs
+  const fsPath = path.join(PUBLIC_DIR, src)
+  const webPath = '/' + src
+  return { fsPath, webPath }
 }
 
-/**
- * 生成 WebP 图片路径
- */
-function generateWebpPath(originalSrc: string): string {
-  // 如果已经是 WebP 格式，直接返回
-  if (originalSrc.toLowerCase().endsWith('.webp')) {
-    return originalSrc
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
+function generatePictureHTML(info: ImageInfo, env: any): string {
+  const { fsPath, webPath } = resolveImagePath(info.src, env)
+  const isExternal = info.src.startsWith('http')
+
+  if (isExternal) {
+    return `<figure class="vp-image">
+  <img src="${info.src}" alt="${escapeHtml(info.alt)}" class="vp-img"
+    ${info.width ? `width="${info.width}"` : ''}
+    ${info.height ? `height="${info.height}"` : ''}
+    loading="lazy">
+  ${info.title ? `<figcaption>${escapeHtml(info.title)}</figcaption>` : ''}
+</figure>`
   }
 
-  // 如果已经有查询参数，在参数中添加 format=webp
-  if (originalSrc.includes('?')) {
-    const url = new URL(originalSrc, 'https://example.com')
-    url.searchParams.set('format', 'webp')
-    return url.pathname + url.search
+  const ext = path.extname(fsPath)
+  const baseName = fsPath.slice(0, -ext.length)
+
+  const formats: string[] = []
+  if (fileExistsSync(`${baseName}.webp`)) formats.push('webp')
+  if (fileExistsSync(`${baseName}.avif`)) formats.push('avif')
+
+  const webBasePath = webPath.slice(0, -path.extname(webPath).length)
+
+  const sources = formats
+    .map((format) => `<source srcset="${webBasePath}.${format}" type="image/${format}">`)
+    .join('\n    ')
+
+  const imgAttrs = [
+    `src="${webPath}"`,
+    `alt="${escapeHtml(info.alt)}"`,
+    'class="vp-img"',
+    info.width ? `width="${info.width}"` : '',
+    info.height ? `height="${info.height}"` : '',
+    'loading="lazy"',
+    'decoding="async"',
+    info.title ? `title="${escapeHtml(info.title)}"` : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  const imgTag = `<img ${imgAttrs}>`
+
+  // 关键：对于块级元素，返回时前面加两个换行，使其被识别为块级
+  if (formats.length > 0 || info.title) {
+    let content = imgTag
+
+    if (formats.length > 0) {
+      content = `<picture class="vp-picture">
+    ${sources}
+    ${imgTag}
+  </picture>`
+    }
+
+    if (info.title) {
+      return `\n\n<figure class="vp-image">
+  ${content}
+  <figcaption class="vp-figcaption">${escapeHtml(info.title)}</figcaption>
+</figure>\n\n`
+    }
+
+    return `\n\n<figure class="vp-image">
+  ${content}
+</figure>\n\n`
   }
 
-  // 否则替换扩展名
-  return originalSrc.replace(/\.(jpg|jpeg|png|gif|bmp|tiff)$/i, '.webp')
+  return imgTag
 }
 
-/**
- * 获取图片 MIME 类型
- */
-function getMimeType(src: string): string {
-  const ext = src.split('.').pop()?.toLowerCase() || ''
+export default function picturePlugin(md: MarkdownIt) {
+  // 保存原始渲染函数
+  const defaultRender = md.renderer.rules.image!
 
-  const mimeTypes: Record<string, string> = {
-    jpg: 'image/jpeg',
-    jpeg: 'image/jpeg',
-    png: 'image/png',
-    gif: 'image/gif',
-    webp: 'image/webp',
-    svg: 'image/svg+xml',
-    bmp: 'image/bmp',
-    tiff: 'image/tiff',
-  }
-
-  return mimeTypes[ext] || 'image/jpeg'
-}
-
-/**
- * 构建 picture 元素 HTML
- */
-function buildPictureElement(
-  originalSrc: string,
-  attrs: Record<string, string>,
-  options: PicturePluginOptions
-): string {
-  const webpSrc = generateWebpPath(originalSrc)
-  const alt = attrs.alt || options.defaultAlt
-  const title = attrs.title ? ` title="${attrs.title}"` : ''
-  const loadingAttr = options.lazyLoading ? ' loading="lazy"' : ''
-
-  // 提取自定义 data 属性
-  const dataAttrs = Object.entries(attrs)
-    .filter(([key]) => key.startsWith('data-'))
-    .map(([key, value]) => ` ${key}="${value}"`)
-    .join('')
-
-  // 构建完整的 picture 元素
-  return `
-<picture>
-  <!-- WebP 格式 -->
-  <source
-    srcset="${webpSrc}"
-    type="image/webp"${title}>
-
-  <!-- 原始格式 -->
-  <source
-    srcset="${originalSrc}"
-    type="${getMimeType(originalSrc)}"${title}>
-
-  <!-- 降级回退 -->
-  <img
-    src="${originalSrc}"
-    alt="${alt}"${title}${loadingAttr}${dataAttrs}>
-</picture>`
-}
-
-/**
- * markdown-it 图片转换插件
- */
-export function picturePlugin(
-  md: MarkdownIt,
-  userOptions: Partial<PicturePluginOptions> = {}
-): void {
-  const pOptions: PicturePluginOptions = { ...defaultOptions, ...userOptions }
-
-  // 保存默认的图片渲染函数
-  const defaultImageRender =
-    md.renderer.rules.image ||
-    ((tokens: Token[], idx: number, _options, _env, self) => {
-      return self.renderToken(tokens, idx, _options)
-    })
-
-  // 覆盖图片渲染规则
-  md.renderer.rules.image = (tokens: Token[], idx: number, options, env, self) => {
+  md.renderer.rules.image = (tokens, idx, options, env, self) => {
     const token = tokens[idx]
-    const attrs = extractImageAttributes(token)
-    const originalSrc = attrs.src
+    const info: ImageInfo = { src: '', alt: '' }
 
-    // 如果图片源为空，使用默认渲染
-    if (!originalSrc) {
-      return defaultImageRender(tokens, idx, options, env, self)
+    // 解析属性
+    if (token.attrs) {
+      for (const [key, value] of token.attrs) {
+        if (key === 'src') info.src = value
+        else if (key === 'alt') info.alt = value
+        else if (key === 'title') info.title = value
+        else if (key === 'width') info.width = value
+        else if (key === 'height') info.height = value
+      }
     }
 
-    // 跳过不需要转换的格式
-    if (pOptions.skipFormats.test(originalSrc)) {
-      return defaultImageRender(tokens, idx, options, env, self)
+    // 获取图片描述
+    if (!info.alt && token.content) {
+      info.alt = token.content
     }
 
-    // 只转换支持的格式
-    if (!pOptions.supportedFormats.test(originalSrc)) {
-      return defaultImageRender(tokens, idx, options, env, self)
-    }
+    // 关键：标记此token为块级，避免被<p>包裹
+    token.type = 'figure_block'
+    token.tag = 'figure'
 
-    // 构建 picture 元素
-    return buildPictureElement(originalSrc, attrs, pOptions)
+    return generatePictureHTML(info, env)
+  }
+
+  // 添加后处理：移除多余的<p>标签
+  const originalRender = md.render
+  md.render = function (...args) {
+    const result = originalRender.apply(this, args)
+
+    // 1. 移除包裹figure的p标签
+    const withoutP = result
+      .replace(/<p>\s*<figure/g, '<figure')
+      .replace(/<\/figure>\s*<\/p>/g, '</figure>')
+
+    // 2. 移除空的p标签（可能由上述替换产生）
+    const cleaned = withoutP.replace(/<p>\s*<\/p>/g, '')
+
+    return cleaned
   }
 }

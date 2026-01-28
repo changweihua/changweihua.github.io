@@ -9,16 +9,151 @@ mjx-container > svg {
 }
 
 .markdown-body blockquote {
-    position: relative;
-    text-size-adjust: 100%;
-    line-height: 25px;
-    font-weight: 400;
-    border-radius: 10px;
-    font-style: normal;
-    text-align: left;
-    box-sizing: inherit;
-    border: 1px solid #ffd87a;
-    background-color: rgba(189, 134, 0, .5);
-    margin: 20px 0;
-    padding: 20px;
+  position: relative;
+  text-size-adjust: 100%;
+  line-height: 25px;
+  font-weight: 400;
+  border-radius: 10px;
+  font-style: normal;
+  text-align: left;
+  box-sizing: inherit;
+  border: 1px solid #ffd87a;
+  background-color: rgba(189, 134, 0, 0.5);
+  margin: 20px 0;
+  padding: 20px;
+}
+
+/* 图片样式 */
+.custom-figure {
+  margin: 1.5rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.custom-picture {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.custom-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background-color: var(--vp-c-bg-soft);
+}
+
+.custom-img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.custom-figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--vp-c-text-2);
+  text-align: center;
+  font-style: italic;
+  line-height: 1.4;
+  max-width: 80ch;
+}
+
+/* 响应式图片容器 */
+.responsive-image {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 加载动画 */
+.custom-img.loading {
+  opacity: 0.7;
+  filter: blur(4px);
+}
+
+.custom-img.loaded {
+  opacity: 1;
+  filter: blur(0);
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
+}
+
+/* 暗色模式适配 */
+.dark .custom-img {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.dark .custom-img:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .custom-figure {
+    margin: 1rem 0;
+  }
+
+  .custom-img {
+    border-radius: 6px;
+  }
+
+  .custom-figcaption {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* 图片网格布局 */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.image-grid .custom-figure {
+  margin: 0;
+}
+
+/* 全宽图片 */
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.vp-image {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.vp-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.vp-img:hover {
+  transform: scale(1.01);
+}
+
+figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+
+picture {
+  display: block;
 }

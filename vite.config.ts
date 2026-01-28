@@ -24,7 +24,6 @@ import prefetchDnsPlugin from './plugins/vite-plugin-dns-prefetch'
 import vitePluginTryCatchConsole from './plugins/vite-plugin-try-catch-console'
 import spyPlugin from './plugins/vite-plugin-spy'
 import publicImagesPlugin from './plugins/vite-plugin-public-images'
-import viteImagemin from 'vite-plugin-imagemin'
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target]
@@ -273,26 +272,6 @@ export default defineConfig(() => {
       }),
       prefetchDnsPlugin(),
       versionInjector(),
-      viteImagemin({
-        // 核心：配置 WebP 转换
-        webp: {
-          quality: 100, // 调整WebP图片质量 (0-100)
-          lossless: false, // 是否使用无损压缩
-          method: 6, // 压缩方法 (0-6)
-        },
-        // 以下是其他格式的压缩配置，可保留或移除
-        gifsicle: { optimizationLevel: 3, interlaced: false },
-        optipng: { optimizationLevel: 7 },
-        mozjpeg: { quality: 100 },
-        pngquant: { quality: [0.8, 0.9], speed: 4 },
-        svgo: {
-          plugins: [{ name: 'removeViewBox' }, { name: 'removeEmptyAttrs', active: false }],
-        },
-        // 仅在构建生产包时启用插件
-        disable: true, //process.env.NODE_ENV === 'development',
-        // 在控制台输出处理结果
-        verbose: true,
-      }),
       publicImagesPlugin(),
     ],
     resolve: {
@@ -324,5 +303,3 @@ export default defineConfig(() => {
     // },
   }
 })
-
-

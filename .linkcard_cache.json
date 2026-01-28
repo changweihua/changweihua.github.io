@@ -283,5 +283,33 @@
   "https://example.com?c=1769499540541": {
     "title": "Example Domain",
     "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769566698332": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769567466407": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769567658478": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769571266489": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769576978259": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769577250956": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
   }
 }

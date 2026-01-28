@@ -417,7 +417,7 @@ export default {
       useComponents(app, DemoPreview)
 
       // 在 markdown 文件中使用，必须手动注册
-     // app.component('demo-preview', NaiveUIContainer)
+      app.component('demo-preview', NaiveUIContainer)
       app.component('HoverableText', HoverableText)
       app.component('CarouselGallery', CarouselGallery)
       app.component('ProjectLab', ProjectLab)
@@ -472,4 +472,3 @@ export default {
     })
   },
 } satisfies Theme
-

@@ -21,14 +21,13 @@ import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
 import { imgLazyload } from '@mdit/plugin-img-lazyload'
 import { figure } from '@mdit/plugin-figure'
-import { tasklist } from '@mdit/plugin-tasklist'
 import codeBarPlugin from '../plugins/markdown/codeBarPlugin'
 import { linkToCardPlugin } from 'vitepress-linkcard'
 import type { LinkToCardPluginOptions } from 'vitepress-linkcard'
 import { markdownGlossaryPlugin } from 'vitepress-plugin-glossary'
 import glossary from './glossary.json'
 import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
-import { picturePlugin } from '../plugins/markdown/markdown-it-picture'
+import picturePlugin from '../plugins/markdown/markdown-it-picture'
 
 const CONSTS = {
   __custom_variable__: 'your value',
@@ -56,59 +55,11 @@ const markdown: MarkdownOptions | undefined = {
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
   preConfig: async (md) => {},
   config: (md) => {
-    md.use(footnote)
-    // md.use(circleMarkdownPlugin);
-    // md.use(readerMarkdownPlugin);
-    // md.use(MarkdownItMathJaX3PRO, {
-    //   user_side: true,
-    //   mathjax_options: {
-    //     enableMenu: true,
-    //     // Other MathJax options
-    //   },
-    // });
-    md.use(mathjax3)
-    /*
-    md.use(mathjax3, {
-      tex: {
-        inlineMath: [
-          ['$', '$'],
-          ['\\(', '\\)'],
-        ],
-        displayMath: [
-          ['$$', '$$'],
-          ['\\[', '\\]'],
-        ],
-        processEscapes: true,
-        tags: 'ams',
-      },
-      options: {
-        skipHtmlTags: [
-          'script',
-          'noscript',
-          'style',
-          'textarea',
-          'pre',
-          'code',
-          'annotation',
-          'annotation-xml',
-        ],
-      },
-    })*/
+    md.use(picturePlugin)
 
-    // // 自定义容器
-    // md.use(require('markdown-it-container'), 'math', {
-    //   validate: function (params: any) {
-    //     return params.trim().match(/^math\s+(.*)$/)
-    //   },
-    //   render: function (tokens: any, idx: number) {
-    //     const m = tokens[idx].info.trim().match(/^math\s+(.*)$/)
-    //     if (tokens[idx].nesting === 1) {
-    //       return '<div class="math-container">\n'
-    //     } else {
-    //       return '</div>\n'
-    //     }
-    //   },
-    // })
+    md.use(footnote)
+
+    md.use(mathjax3)
 
     md.use<LinkToCardPluginOptions>(linkToCardPlugin, {
       // target: "_self" // if needed
@@ -148,48 +99,24 @@ const markdown: MarkdownOptions | undefined = {
       glossary: glossary,
       firstOccurrenceOnly: true,
     })
-/*
+
     md.use(vitepressEncrypt, [
       { pageType: 'default', password: 'p1' },
       { pageType: 'vip', password: 'p2' },
-    ])*/
-    // const original = md.renderer.rules.fence;
-
-    // md.renderer.rules.fence = (tokens, idx, options, env, self) => {
-    //   const result = original ? original(tokens, idx, options, env, self) : "";
-    //   const nextToken = tokens[idx + 1];
-
-    //   // 检查下一个令牌是否是标题
-    //   if (nextToken?.type === "heading_open") {
-    //     return result + '<div class="code-bar"></div>';
-    //   }
-
-    //   return result;
-    // };
+    ])
 
     // @ts-ignore
     codeBarPlugin(md)
 
-     md.use(imgLazyload)
-    // md.use(tasklist, {
-    //   // your options, optional
+    //  md.use(imgLazyload)
+    // md.use(figure, {
+    //   // 你的选项，可选的
     // })
-    md.use(figure, {
-      // 你的选项，可选的
-    })
-    // md.use(picturePlugin)
 
     // @ts-ignore
     vitepressMarkmapPreview(md, {
       showToolbar: false,
     })
-    // vitepressPluginLegend(md, {
-    //     markmap: {
-    //       showToolbar: true,
-    //       // Other markmap options
-    //     },
-    //     mermaid: false, // or false to disable
-    //   });
 
     md.use(vitepressDemoPlugin, {
       demoDir: resolve(__dirname, '../../src/demos'),
@@ -211,12 +138,12 @@ const markdown: MarkdownOptions | undefined = {
     //   relativePaths: ["/blog/"],
     // });
 
-    md.use(markdownItReplaceLink, {
-      processHTML: false, // defaults to false for backwards compatibility
-      replaceLink: function (link, env, token, htmlToken) {
-        return link + '?c=' + Date.now()
-      },
-    })
+    // md.use(markdownItReplaceLink, {
+    //   processHTML: false, // defaults to false for backwards compatibility
+    //   replaceLink: function (link, env, token, htmlToken) {
+    //     return link + '?c=' + Date.now()
+    //   },
+    // })
 
     // 修改表格的 HTML 结构
     md.renderer.rules.table_open = () =>
@@ -255,19 +182,9 @@ const markdown: MarkdownOptions | undefined = {
         }
       }
 
-      // if (
-      //   env["relativePath"] &&
-      //   env["relativePath"].includes("/blog/") &&
-      //   tokens[idx].tag === "h1"
-      // ) {
-      //   // console.log(env["relativePath"], env["frontmatter"]["layout"]);
-      //   htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`;
-      // }
-      // if (tokens[idx].tag === 'h1') htmlResult += `\n<ClientOnly><ArticleMetadata v-if="($frontmatter?.aside ?? true) && ($frontmatter?.showArticleMetadata ?? true)" :article="$frontmatter" /></ClientOnly>`;
       return htmlResult
     }
   },
 }
 
 export { markdown }
-

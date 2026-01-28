@@ -16,13 +16,21 @@
           data-zoomable
           @error="handleImageError"
         />
+        <!-- <figure data-zoomable class="vp-image medium-zoom-image">
+          <picture>
+            <source data-zoomable :srcset="`/images/${getFileNameWithoutExtension(image)}.webp`" type="image/webp">
+            <source data-zoomable :srcset="`/images/${getFileNameWithoutExtension(image)}.avif`" type="image/avif">
+            <img data-zoomable :src="`/images/${image}`" :alt="image">
+          </picture>
+          <figcaption>{{ image }}</figcaption>
+        </figure> -->
         <p class="filename">{{ image }}</p>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, onMounted } from "vue";
 
 const imageList = ref([]);
@@ -52,6 +60,14 @@ const getFallbackImages = () => {
   // 这里可以返回一个默认的图片列表
   return [];
 };
+
+// function getFileNameWithoutExtension(filePath: string) {
+//   const fileName = filePath.split(/[\\/]/).pop() || '';
+//   const lastDotIndex = fileName.lastIndexOf('.');
+
+//   if (lastDotIndex === -1) return fileName;
+//   return fileName.substring(0, lastDotIndex);
+// }
 </script>
 
 <style scoped>
