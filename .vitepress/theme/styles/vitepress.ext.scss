@@ -4,7 +4,9 @@
   --vp-nav-bg-color: transparent;
   --vp-font-family-base: #{vars.$app-font-family};
   --font-sans: #{vars.$app-font-family};
+  --font-mono: #{vars.$app-font-family};
   --vp-font-family-mono: #{vars.$app-font-family};
+  --default-monoFont-family: #{vars.$app-font-family};
   --td-font-family: #{vars.$app-font-family};
   --td-font-family-medium: #{vars.$app-font-family};
   /* --vp-header-anchor-symbol: "🔗"; */
@@ -46,7 +48,7 @@ body {
 }
 
 .medium-zoom-overlay::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -93,10 +95,10 @@ body {
 }
 
 .text-emphasis-fire {
-  text-emphasis: "🔥";
+  text-emphasis: '🔥';
 }
 
-.vp-doc div[class*="language-"],
+.vp-doc div[class*='language-'],
 .vp-block {
   border-radius: 8px;
 }
@@ -123,19 +125,19 @@ body {
 }
 
 :root {
-  --vp-code-copy-copied-text-content: "Copied";
+  --vp-code-copy-copied-text-content: 'Copied';
 }
 
 :lang(zh-CN) {
-  --vp-code-copy-copied-text-content: "已复制";
+  --vp-code-copy-copied-text-content: '已复制';
 }
 
 a.VPSkipLink {
-  content: "转至正文";
+  content: '转至正文';
 }
 
 a.VPSkipLink::after {
-  content: "转至正文";
+  content: '转至正文';
 }
 
 .nprogress .bar {
@@ -225,17 +227,7 @@ a.VPSkipLink::after {
   outline: none;
   background:
     linear-gradient(white, white) padding-box,
-    linear-gradient(
-        270deg,
-        #ff4d4d,
-        #ffa64d,
-        #ffff4d,
-        #4dff88,
-        #4dd2ff,
-        #b84dff,
-        #ff4da6,
-        #ff4d4d
-      )
+    linear-gradient(270deg, #ff4d4d, #ffa64d, #ffff4d, #4dff88, #4dd2ff, #b84dff, #ff4da6, #ff4d4d)
       border-box;
   background-size: 400% 100%;
   background-repeat: repeat;
@@ -461,11 +453,11 @@ a.VPSkipLink::after {
   }
 
   .vp-doc strong:before {
-    content: "「";
+    content: '「';
   }
 
   .vp-doc strong:after {
-    content: "」";
+    content: '」';
   }
 
   .text-bold,
@@ -602,7 +594,7 @@ a.VPSkipLink::after {
 .vp-doc h2::before {
   background-image: linear-gradient(var(--vp-c-brand-soft), transparent);
   border-radius: 2.5em;
-  content: "";
+  content: '';
   height: 2.5em;
   margin: -0.4em 0 0 -0.7em;
   position: absolute;
@@ -613,7 +605,7 @@ a.VPSkipLink::after {
 .vp-doc h3::after {
   background-color: var(--vp-c-brand-soft);
   bottom: 0;
-  content: "";
+  content: '';
   height: 0.7em;
   position: absolute;
   width: 0.4em;
@@ -632,21 +624,21 @@ a.VPSkipLink::after {
 }
 
 .vp-doc a {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
-    no-repeat center bottom / 100% 2px;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+    bottom / 100% 2px;
   text-decoration: none;
   transition: 0.2s;
 }
 
 .vp-doc a:hover {
   border-radius: 0.2em;
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
-    no-repeat center bottom / 100% 100%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+    bottom / 100% 100%;
 }
 
 .vp-doc strong {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
-    no-repeat center bottom / 100% 40%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+    bottom / 100% 40%;
 }
 
 .vp-doc s {
@@ -1091,7 +1083,7 @@ h3 {
 
 h1 {
   max-width: fit-content;
-  quotes: "《" "》";
+  quotes: '《' '》';
 }
 
 .VPHomeHero {
@@ -1113,7 +1105,7 @@ h1 {
   // }
 
   body::after {
-    content: "CMONO.NET";
+    content: 'CMONO.NET';
 
     color: var(--vp-c-text-3, rgba(255, 255, 255, 0.2));
     font-size: 1em;
@@ -1187,18 +1179,13 @@ h1 {
 
   /* 边框旋转发光效果 */
   .VPButton.brand::before {
-    content: "";
+    content: '';
     position: absolute;
     top: -3px;
     left: -3px;
     right: -3px;
     bottom: -3px;
-    background: linear-gradient(
-      45deg,
-      var(--color-1),
-      var(--color-2),
-      var(--color-1)
-    );
+    background: linear-gradient(45deg, var(--color-1), var(--color-2), var(--color-1));
     border-radius: 10px;
     z-index: -1;
     animation: rotate 2s linear infinite;
@@ -1207,18 +1194,13 @@ h1 {
   }
 
   .VPButton.brand::after {
-    content: "";
+    content: '';
     position: absolute;
     top: -3px;
     left: -3px;
     right: -3px;
     bottom: -3px;
-    background: linear-gradient(
-      45deg,
-      var(--color-1),
-      var(--color-2),
-      var(--color-1)
-    );
+    background: linear-gradient(45deg, var(--color-1), var(--color-2), var(--color-1));
     border-radius: 10px;
     z-index: -2;
     filter: blur(15px);
@@ -1299,17 +1281,11 @@ table {
 }
 
 .VPLocalSearchBox .result .excerpt-gradient-top {
-  background: linear-gradient(
-    var(--vp-c-bg-search-result),
-    transparent
-  ) !important;
+  background: linear-gradient(var(--vp-c-bg-search-result), transparent) !important;
 }
 
 .VPLocalSearchBox .result .excerpt-gradient-bottom {
-  background: linear-gradient(
-    transparent,
-    var(--vp-c-bg-search-result)
-  ) !important;
+  background: linear-gradient(transparent, var(--vp-c-bg-search-result)) !important;
 }
 
 .VPLocalSearchBox .title-icon {
@@ -1363,22 +1339,22 @@ table {
 }
 
 /* 针对代码块的滚动条 */
-.vp-doc div[class*="language-"] {
+.vp-doc div[class*='language-'] {
   scrollbar-width: thin;
   scrollbar-color: var(--vp-c-divider) transparent;
 }
 
-.vp-doc div[class*="language-"]::-webkit-scrollbar {
+.vp-doc div[class*='language-']::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
 
-.vp-doc div[class*="language-"]::-webkit-scrollbar-thumb {
+.vp-doc div[class*='language-']::-webkit-scrollbar-thumb {
   background: var(--vp-c-divider);
   border-radius: 2px;
 }
 
-.vp-doc div[class*="language-"]::-webkit-scrollbar-thumb:hover {
+.vp-doc div[class*='language-']::-webkit-scrollbar-thumb:hover {
   background: var(--vp-c-text-3);
 }
 
@@ -1401,7 +1377,7 @@ table {
 
 /* 下划线用伪元素实现 */
 .VPLink.link.VPNavBarMenuLink::before {
-  content: "";
+  content: '';
   /* 内容可自定义，也能为空 */
   position: absolute;
   bottom: 0;
@@ -1475,11 +1451,10 @@ table {
 }
 
 .VPContent.is-home::before {
-  content: "";
+  content: '';
   pointer-events: none;
   background-image:
-    linear-gradient(90deg, #3b82f61a 1px, #0000 1px),
-    linear-gradient(#3b82f61a 1px, #0000 1px);
+    linear-gradient(90deg, #3b82f61a 1px, #0000 1px), linear-gradient(#3b82f61a 1px, #0000 1px);
   background-position: 50%;
   background-size: 40px 40px;
   width: 80vw;
@@ -1555,31 +1530,31 @@ table {
 }
 
 @property --angle {
-  syntax: "<angle>";
+  syntax: '<angle>';
   inherits: false;
   initial-value: 94.57deg;
 }
 
 @property --start-color {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
   initial-value: #e0f2ff;
 }
 
 @property --start-percentage {
-  syntax: "<percentage>";
+  syntax: '<percentage>';
   inherits: false;
   initial-value: 7.66%;
 }
 
 @property --end-color {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
   initial-value: #b1deff;
 }
 
 @property --end-percentage {
-  syntax: "<percentage>";
+  syntax: '<percentage>';
   inherits: false;
   initial-value: 94.53%;
 }

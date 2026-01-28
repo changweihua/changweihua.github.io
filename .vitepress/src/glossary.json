@@ -1,5 +1,6 @@
 {
   "VitePress": "A Static Site Generator powered by Vite and Vue",
   "Vue": "A Progressive JavaScript Framework",
-  "Envoy": "智能网关"
+  "Envoy": "智能网关",
+  "ECMA": "ECMAScript 是一种由 Ecma 国际组织标准化的脚本语言规范，JavaScript 是其最著名的实现。"
 }

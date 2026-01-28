@@ -16,6 +16,10 @@ import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 // @ts-ignore
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
 
+import 'virtual:uno.css'
+import 'virtual:group-icons.css'
+import 'animate.css'
+
 import 'open-props/open-props.min.css'
 import '@fontsource-variable/noto-sans-sc'
 import './styles/vitepress-variables.scss'
@@ -28,10 +32,6 @@ import './styles/vitepress.code.css'
 import './styles/markdown.ext.css'
 import './styles/mermaid.ext.css'
 import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
-
-import 'virtual:uno.css'
-import 'virtual:group-icons.css'
-import 'animate.css'
 
 import directives from '../directives'
 

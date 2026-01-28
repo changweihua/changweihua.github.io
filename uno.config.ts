@@ -9,48 +9,48 @@ import {
   transformerDirectives,
   transformerVariantGroup,
   CSSObject,
-} from "unocss";
-import { FileSystemIconLoader } from "@iconify/utils/lib/loader/node-loaders";
-import { dataScreenPreset } from "./data-screen.preset";
+} from 'unocss'
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
+import { dataScreenPreset } from './data-screen.preset'
 
 // 类型安全的动态规则定义
 const dynamicPriceTagRules: DynamicRule[] = [
   [
     /^price-tag-(normal|flash|presale)$/,
     ([, type]) => ({
-      "border-width": "2px",
-      "border-style": type === "flash" ? "dashed" : "solid",
-      "border-color": `var(--color-${type})`,
+      'border-width': '2px',
+      'border-style': type === 'flash' ? 'dashed' : 'solid',
+      'border-color': `var(--color-${type})`,
       background: `linear-gradient(to bottom, var(--color-${type}-bg) 0%, #fff 100%)`,
     }),
   ],
-];
+]
 
 // 使用 Record 类型确保类型安全
 const legacyFormRules: Record<string, string> = {
-  "old-input": "border-1 border-gray-300 rounded-sm px-2 py-1",
-  "old-select": "bg-gray-50 border-1 border-gray-300 rounded-sm",
-};
+  'old-input': 'border-1 border-gray-300 rounded-sm px-2 py-1',
+  'old-select': 'bg-gray-50 border-1 border-gray-300 rounded-sm',
+}
 
 // 明确的规则定义
 const textTruncateRule: Rule = [
   /^text-truncate-(\d+)$/,
   ([, lines]) => ({
-    display: "-webkit-box",
-    "-webkit-line-clamp": lines,
-    "-webkit-box-orient": "vertical",
-    overflow: "hidden",
-    "text-overflow": "ellipsis",
+    display: '-webkit-box',
+    '-webkit-line-clamp': lines,
+    '-webkit-box-orient': 'vertical',
+    overflow: 'hidden',
+    'text-overflow': 'ellipsis',
   }),
-];
+]
 
 const modernInputRule: Rule = [
-  "modern-input",
+  'modern-input',
   {
-    "@apply": "border-2 border-primary rounded-md px-3 py-2",
-    transition: "all 0.2s ease-in",
+    '@apply': 'border-2 border-primary rounded-md px-3 py-2',
+    transition: 'all 0.2s ease-in',
   },
-];
+]
 
 // 类型安全的规则定义
 const iframeRules: Rule[] = [
@@ -58,24 +58,24 @@ const iframeRules: Rule[] = [
   [
     'iframe-container',
     {
-      'position': 'relative',
+      position: 'relative',
       'padding-bottom': '56.25%',
-      'height': '0',
-      'overflow': 'hidden',
-    } as CSSObject
+      height: '0',
+      overflow: 'hidden',
+    } as CSSObject,
   ],
 
   // iframe 元素基础规则
   [
     'iframe-full',
     {
-      'position': 'absolute',
-      'top': '0',
-      'left': '0',
-      'width': '100%',
-      'height': '100%',
-      'border': '0'
-    } as CSSObject
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      border: '0',
+    } as CSSObject,
   ],
 
   // 动态宽高比规则
@@ -92,25 +92,25 @@ const iframeRules: Rule[] = [
       const paddingPercent = (height / width) * 100
 
       return {
-        'position': 'relative',
+        position: 'relative',
         'padding-bottom': `${paddingPercent}%`,
-        'height': '0',
-        'overflow': 'hidden',
+        height: '0',
+        overflow: 'hidden',
       } as CSSObject
-    }
+    },
   ],
 
   // **修正：移除嵌套语法，使用独立规则**
   [
     'iframe-inner',
     {
-      'position': 'absolute',
-      'top': '0',
-      'left': '0',
-      'width': '100%',
-      'height': '100%',
-      'border': '0'
-    } as CSSObject
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      border: '0',
+    } as CSSObject,
   ],
 
   // **修正：使用 CSS 变量方法**
@@ -122,8 +122,8 @@ const iframeRules: Rule[] = [
       '--iframe-left': '0',
       '--iframe-w': '100%',
       '--iframe-h': '100%',
-      '--iframe-border': '0'
-    } as CSSObject
+      '--iframe-border': '0',
+    } as CSSObject,
   ],
 ]
 
@@ -154,117 +154,116 @@ const customPreflightRules: Rule[] = [
   [
     'iframe',
     {
-      'border': '0',
-      'display': 'block',
-      'max-width': '100%'
-    } as CSSObject
+      border: '0',
+      display: 'block',
+      'max-width': '100%',
+    } as CSSObject,
   ],
 
   // 选择器形式的规则（正确语法）
   [
     '.iframe-wrapper iframe',
     {
-      'position': 'absolute',
-      'top': '0',
-      'left': '0',
-      'width': '100%',
-      'height': '100%',
-      'border': '0'
-    } as CSSObject
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      border: '0',
+    } as CSSObject,
   ],
 
   // 使用属性选择器
   [
     '[data-iframe]',
     {
-      'position': 'relative',
+      position: 'relative',
       'padding-bottom': '56.25%',
-      'height': '0',
-      'overflow': 'hidden'
-    } as CSSObject
+      height: '0',
+      overflow: 'hidden',
+    } as CSSObject,
   ],
 
   [
     '[data-iframe] iframe',
     {
-      'position': 'absolute',
-      'top': '0',
-      'left': '0',
-      'width': '100%',
-      'height': '100%',
-      'border': '0'
-    } as CSSObject
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      border: '0',
+    } as CSSObject,
   ],
 ]
 
 // 将旧版规则转换为 Rule 类型
-const legacyFormRulesConverted: Rule[] = Object.entries(legacyFormRules).map(
-  ([key, value]) => [key, { "@apply": value }]
-) as Rule[];
+const legacyFormRulesConverted: Rule[] = Object.entries(legacyFormRules).map(([key, value]) => [
+  key,
+  { '@apply': value },
+]) as Rule[]
 
 // 按钮快捷方式 - 直接放在 shortcuts 对象中
 const buttonShortcuts = {
-  "btn-base": "font-sans transition-colors duration-150 focus:outline-none",
-  btn: "btn-base inline-flex items-center justify-center",
-  "btn-sm": "btn px-3 py-1.5 text-sm rounded-md",
-  "btn-md": "btn px-4 py-2 text-base rounded-lg",
-  "btn-primary": "bg-blue-600 hover:bg-blue-700 text-white",
-};
+  'btn-base': 'font-sans transition-colors duration-150 focus:outline-none',
+  btn: 'btn-base inline-flex items-center justify-center',
+  'btn-sm': 'btn px-3 py-1.5 text-sm rounded-md',
+  'btn-md': 'btn px-4 py-2 text-base rounded-lg',
+  'btn-primary': 'bg-blue-600 hover:bg-blue-700 text-white',
+}
 
 export default defineConfig({
   shortcuts: {
-    "border-main": "border-gray-400 border-opacity-30",
-    "bg-main": "bg-gray-400",
-    "bg-base": "bg-white dark:bg-hex-1a1a1a",
-    "uno-card":
-      "border-rd-30 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% mb-4vw p-2rem",
-    "markup-card":
-      "border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem",
+    'border-main': 'border-gray-400 border-opacity-30',
+    'bg-main': 'bg-gray-400',
+    'bg-base': 'bg-white dark:bg-hex-1a1a1a',
+    'uno-card':
+      'border-rd-30 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% mb-4vw p-2rem',
+    'markup-card':
+      'border-rd-2 bg-#FFFFFF shadow-[0px_6px_20px_0px_rgba(204,204,204,0.3)] w-100% p-0.5rem',
     ...buttonShortcuts,
-    ...iframeShortcuts
+    ...iframeShortcuts,
   },
 
   presets: [
     dataScreenPreset,
     presetWind4({
       reset: true,
-      dark: "class",
+      dark: 'class',
       // 禁用或自定义 :host 样式
       // ':host': false, // 完全禁用
       // 或者自定义
-      ":host": {
-        "font-family": "inherit", // 继承父级字体
+      ':host': {
+        'font-family': 'inherit', // 继承父级字体
       },
     }),
     presetAttributify(),
     presetIcons({
       scale: 1.2,
       warn: true,
-      prefix: ["i-"],
+      prefix: ['i-'],
       extraProperties: {
-        display: "inline-block",
-        "vertical-align": "middle",
+        display: 'inline-block',
+        'vertical-align': 'middle',
       },
       collections: {
-        mono: FileSystemIconLoader("src/assets/icons/mono"),
+        mono: FileSystemIconLoader('src/assets/icons/mono'),
         custom: {
-          circle:
-            '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50"></circle></svg>',
+          circle: '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50"></circle></svg>',
         },
-        ci: () =>
-          import("@opentiny/icons/json/icons.json").then((i) => i.default),
+        ci: () => import('@opentiny/icons/json/icons.json').then((i) => i.default),
       },
     }),
   ],
 
   safelist: [
-    "prose",
-    "prose-sm",
-    "mx-auto",
-    "text-left",
-    "text-center",
-    "text-right",
-    ...["normal", "flash", "presale"].map((type) => `price-tag-${type}`),
+    'prose',
+    'prose-sm',
+    'mx-auto',
+    'text-left',
+    'text-center',
+    'text-right',
+    ...['normal', 'flash', 'presale'].map((type) => `price-tag-${type}`),
     'iframe-container',
     'iframe-full',
     'iframe-inner',
@@ -280,7 +279,7 @@ export default defineConfig({
     'iframe-var',
     'iframe-var-16-9',
   ],
-// **添加预检配置**
+  // **添加预检配置**
   preflights: [
     {
       getCSS: () => `
@@ -308,8 +307,8 @@ export default defineConfig({
           height: 100%;
           border: 0;
         }
-      `
-    }
+      `,
+    },
   ],
   // 类型安全的 rules 数组
   rules: [
@@ -318,37 +317,36 @@ export default defineConfig({
     modernInputRule,
     ...legacyFormRulesConverted,
     ...iframeRules,
-    ...customPreflightRules
+    ...customPreflightRules,
   ],
 
   theme: {
     animation: {
       keyframes: {
-        "fade-in": "{0% {opacity:0;} 100% {opacity:1;}}",
-        "slide-in":
-          "{0% {transform:translateX(-100%);} 100% {transform:translateX(0);}}",
+        'fade-in': '{0% {opacity:0;} 100% {opacity:1;}}',
+        'slide-in': '{0% {transform:translateX(-100%);} 100% {transform:translateX(0);}}',
       },
       durations: {
-        "fade-in": "0.5s",
-        "slide-in": "0.8s",
+        'fade-in': '0.5s',
+        'slide-in': '0.8s',
       },
     },
     colors: {
       primary: {
-        dark: "#5eead4",
-        DEFAULT: "var(--vp-c-brand)",
+        dark: '#5eead4',
+        DEFAULT: 'var(--vp-c-brand)',
       },
     },
     fontFamily: {
-      sans: "var(--font-sans)",
-      mono: "var(--vp-font-family-mono)",
+      sans: 'var(--font-sans)',
+      mono: 'Noto Sans SC Variable',
     },
-    darkMode: "class",
+    darkMode: 'class',
   },
 
   transformers: [
     transformerDirectives({
-      enforce: "pre", // 在 CSS 处理前转换
+      enforce: 'pre', // 在 CSS 处理前转换
       // 启用严格模式确保语法正确
       // enforce: 'pre',
       // 启用变量支持
@@ -356,4 +354,4 @@ export default defineConfig({
     }),
     transformerVariantGroup(),
   ],
-});
+})
