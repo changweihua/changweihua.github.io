@@ -1655,6 +1655,14 @@ figcaption {
   margin: var(--size-2) 0;
 }
 
+
+/* 媒体查询调整 */
+@media (max-width: 768px) {
+  .back-to-top-button {
+    width: 30px !important;  /* 小屏幕上用较小宽度 */
+  }
+}
+
 .blog-page-class .vp-doc h1:first-child,
 .gallery-page-class .vp-doc h1:first-child,
 .manual-page-class .vp-doc h1:first-child {
@@ -1706,3 +1714,4 @@ figcaption {
 .spin-holder {
   font-family: #{vars.$app-font-family} !important;
 }
+
