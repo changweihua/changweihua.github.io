@@ -31,7 +31,7 @@ title: Envoy 网关
 
 <HtmlPreview src="/htmls/buti-tab.html" height="600px" class="iframe-responsive" />
 
-<style>
+<style scoped>
   .alarm-box {
     width: 200px;
     height: 60px;
@@ -73,3 +73,4 @@ title: Envoy 网关
 }
 
 </style>
+
