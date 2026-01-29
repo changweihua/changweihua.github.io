@@ -366,9 +366,21 @@ export default withMermaid(
         },
       },
       // 强制预构建
+      // Vite 的预构建会将 CommonJS / UMD 依赖转换为 ESM，并将多个内部模块合并为单个模块，减少 HTTP 请求数量。
       optimizeDeps: {
-        include: ['unocss'],
+        include: [
+          'vue',
+          'pinia',
+          'dayjs',
+          'unocss',
+          'vue-router',
+          'vue-i18n',
+          'lodash-es',
+          '@vueuse/core',
+          'markdown-it',
+        ],
         exclude: [
+          '@iconify/json',
           'vue3-next-qrcode',
           'vitepress-plugin-detype',
           'vitepress-plugin-tabs',

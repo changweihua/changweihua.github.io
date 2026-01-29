@@ -68,13 +68,7 @@
     return []
   }
 
-  // function getFileNameWithoutExtension(filePath: string) {
-  //   const fileName = filePath.split(/[\\/]/).pop() || '';
-  //   const lastDotIndex = fileName.lastIndexOf('.');
 
-  //   if (lastDotIndex === -1) return fileName;
-  //   return fileName.substring(0, lastDotIndex);
-  // }
 </script>
 
 <style scoped>

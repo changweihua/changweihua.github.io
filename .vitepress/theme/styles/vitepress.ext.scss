@@ -1655,11 +1655,16 @@ figcaption {
   margin: var(--size-2) 0;
 }
 
-
-/* 媒体查询调整 */
+/* 返回顶部按钮样式 媒体查询调整 */
 @media (max-width: 768px) {
   .back-to-top-button {
-    width: 30px !important;  /* 小屏幕上用较小宽度 */
+    --small-edge-size: 48px;
+    width: var(--small-edge-size) !important;
+    height: var(--small-edge-size) !important;
+    .progress-ring {
+      width: var(--small-edge-size) !important;
+      height: var(--small-edge-size) !important;
+    }
   }
 }
 
@@ -1714,4 +1719,3 @@ figcaption {
 .spin-holder {
   font-family: #{vars.$app-font-family} !important;
 }
-

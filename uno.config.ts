@@ -318,6 +318,15 @@ export default defineConfig({
     ...legacyFormRulesConverted,
     ...iframeRules,
     ...customPreflightRules,
+    [
+      /^theme-([a-z]+)-([a-z]+)$/, // 限制匹配格式
+      // @ts-ignore
+      ([, mode, color]) => ({
+        'background-color': `rgb(var(--theme-${mode}-bg-${color}))`,
+        color: `rgb(var(--theme-${mode}-text-${color}))`,
+      }),
+      { autocomplete: 'theme-(dark|light)-(primary|secondary)' }, // 增强 IDE 提示
+    ] as any,
   ],
 
   theme: {
