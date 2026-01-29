@@ -241,6 +241,7 @@
     "yuppie-ui": "^0.0.11"
   },
   "overrides": {
+    "@mermaid-js/layout-tidy-tree": "^0.2.1",
     "@zenuml/core": "^3.45.4",
     "dayjs": "^1.11.19",
     "highlight.js": "^11.11.1",
@@ -250,7 +251,7 @@
     "prismjs": "^1.30.0",
     "release-it": "^19.2.4",
     "svg-pan-zoom": "^3.6.2",
-    "vite": "8.0.0-beta.11",
+    "vite": "8.0.0-beta.10",
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.15",
     "vitest": "^4.0.18",
@@ -258,4 +259,5 @@
   },
   "version": "0.11.19"
 }
+
 
