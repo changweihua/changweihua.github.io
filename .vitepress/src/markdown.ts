@@ -71,7 +71,7 @@ const markdown: MarkdownOptions | undefined = {
       figcaptionClass: 'custom-figcaption',
 
       // 调试模式（开发时启用，生产时关闭）
-      debug: process.env.NODE_ENV === 'development',
+      debug: false,
     })
 
     md.use(footnote)

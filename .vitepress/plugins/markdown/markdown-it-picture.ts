@@ -6,7 +6,7 @@ import { Token } from 'markdown-it/index.js'
 // --- 配置接口 ---
 export interface PicturePluginOptions {
   // 核心路径配置
-  publicDir?: string // public目录的绝对路径，用于解析绝对路径图片 (/images/...)
+  publicDir?: string // public目录的绝对路径
 
   // 格式控制
   enableJXL?: boolean
@@ -40,7 +40,7 @@ const DEFAULT_OPTIONS: Required<PicturePluginOptions> = {
   pictureClass: 'vp-picture',
   imgClass: 'vp-img',
   figcaptionClass: 'vp-figcaption',
-  containerClasses: ['figure-list'], // 默认处理 figure-list 容器
+  containerClasses: ['figure-list', 'grid'], // 默认处理这些容器
   lazyLoading: true,
   decoding: 'async',
   debug: false,
@@ -55,11 +55,20 @@ interface ImageInfo {
   height?: string
   class?: string
   id?: string
+  // 动态属性支持
+  [key: `data-${string}`]: string | undefined
+  // 其他未知属性
+  [key: string]: string | undefined
+}
+
+interface ImageFormatInfo {
+  src: string
+  type: string
 }
 
 // --- 核心工具函数（带缓存）---
 const fileCache = new Map<string, boolean>()
-const formatCache = new Map<string, string[]>() // 缓存图片格式检测结果
+const formatCache = new Map<string, ImageFormatInfo[]>() // 缓存图片格式检测结果
 
 /**
  * 同步检查文件是否存在（带缓存）
@@ -80,14 +89,13 @@ function fileExistsSync(filePath: string): boolean {
 
 /**
  * 解析图片路径
- * 处理：外部URL、绝对路径(/开头)、相对路径
  */
 function resolveImagePaths(
   src: string,
   env: any,
   options: Required<PicturePluginOptions>
 ): { fsPath: string; webSrc: string; isExternal: boolean } {
-  // 外部URL直接返回
+  // 外部URL或数据URL直接返回
   if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
     return { fsPath: src, webSrc: src, isExternal: true }
   }
@@ -121,31 +129,64 @@ function resolveImagePaths(
 }
 
 /**
- * 检测图片可用的现代格式 (WebP, AVIF, JXL)
+ * 检测图片可用的现代格式
  */
-function detectAvailableFormats(fsPath: string, options: Required<PicturePluginOptions>): string[] {
+function detectAvailableFormats(
+  fsPath: string,
+  options: Required<PicturePluginOptions>
+): ImageFormatInfo[] {
   const cacheKey = `${fsPath}_${options.enableJXL}_${options.enableAVIF}_${options.enableWebP}`
 
   if (formatCache.has(cacheKey)) {
     return formatCache.get(cacheKey)!
   }
 
-  const formats: string[] = []
-  const basePath = fsPath.replace(/\.[^.]+$/, '')
+  const formats: ImageFormatInfo[] = []
+  const ext = path.extname(fsPath)
+  const basePath = fsPath.slice(0, -ext.length)
+  // console.log(basePath)
 
   // 检查各格式文件是否存在
   if (options.enableWebP && fileExistsSync(`${basePath}.webp`)) {
-    formats.push('webp')
+    formats.push({ src: `${basePath}.webp`, type: 'image/webp' })
   }
   if (options.enableAVIF && fileExistsSync(`${basePath}.avif`)) {
-    formats.push('avif')
+    formats.push({ src: `${basePath}.avif`, type: 'image/avif' })
   }
   if (options.enableJXL && fileExistsSync(`${basePath}.jxl`)) {
-    formats.push('jxl')
+    formats.push({ src: `${basePath}.jxl`, type: 'image/jxl' })
   }
 
   formatCache.set(cacheKey, formats)
   return formats
+}
+
+/**
+ * HTML转义
+ */
+function escapeHtml(text: string): string {
+  if (!text) return ''
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
+/**
+ * 将文件系统路径转换为web路径
+ */
+function fsPathToWebPath(fsPath: string, options: Required<PicturePluginOptions>): string {
+  try {
+    const relativeToPublic = path.relative(options.publicDir, fsPath)
+    if (!relativeToPublic.startsWith('..') && !path.isAbsolute(relativeToPublic)) {
+      return '/' + relativeToPublic.replace(/\\/g, '/')
+    }
+  } catch {
+    // 转换失败，返回原路径
+  }
+  return fsPath
 }
 
 /**
@@ -158,61 +199,35 @@ function generatePictureHTML(
 ): string {
   const { fsPath, webSrc, isExternal } = resolveImagePaths(imageInfo.src, env, options)
 
+  if (options.debug) {
+    console.log('[DEBUG] generatePictureHTML:', { imageInfo, fsPath, webSrc, isExternal })
+  }
+
   // 外部图片或数据URL，直接生成简单img标签
   if (isExternal) {
-    const imgAttrs = [
-      `src="${webSrc}"`,
-      `alt="${escapeHtml(imageInfo.alt)}"`,
-      options.imgClass ? `class="${options.imgClass}"` : '',
-      imageInfo.width ? `width="${imageInfo.width}"` : '',
-      imageInfo.height ? `height="${imageInfo.height}"` : '',
-      options.lazyLoading ? 'loading="lazy"' : '',
-      `decoding="${options.decoding}"`,
-      imageInfo.title ? `title="${escapeHtml(imageInfo.title)}"` : '',
-      imageInfo.class ? `class="${imageInfo.class}"` : '',
-    ]
-      .filter(Boolean)
-      .join(' ')
-
+    const imgAttrs = buildImgAttributes(imageInfo, webSrc, options, true)
     return `<img ${imgAttrs}>`
   }
 
   // 本地图片：检测可用格式
   const availableFormats = detectAvailableFormats(fsPath, options)
 
-  // 构建img标签属性
-  const imgAttrs = [
-    `src="${webSrc}"`,
-    `alt="${escapeHtml(imageInfo.alt)}"`,
-    options.imgClass ? `class="${options.imgClass}"` : '',
-    imageInfo.width ? `width="${imageInfo.width}"` : '',
-    imageInfo.height ? `height="${imageInfo.height}"` : '',
-    options.lazyLoading ? 'loading="lazy"' : '',
-    `decoding="${options.decoding}"`,
-    imageInfo.title ? `title="${escapeHtml(imageInfo.title)}"` : '',
-    imageInfo.class ? `class="${imageInfo.class}"` : '',
-  ]
-    .filter(Boolean)
-    .join(' ')
-
+  // 构建图片标签
+  const imgAttrs = buildImgAttributes(imageInfo, webSrc, options, false)
   const imgTag = `<img ${imgAttrs}>`
 
-  // 生成source标签
-  let sourcesHTML = ''
+  // 生成source标签（如果有可用格式）
+  let contentHTML = imgTag
   if (availableFormats.length > 0) {
     const sources = availableFormats
       .map((format) => {
-        const formatWebSrc = webSrc.replace(/\.[^.]+$/, `.${format}`)
-        const mimeType = `image/${format}`
-        return `<source srcset="${formatWebSrc}" type="${mimeType}">`
+        const formatWebSrc = fsPathToWebPath(format.src, options)
+        return `<source srcset="${formatWebSrc}" type="${format.type}">`
       })
       .join('\n    ')
 
-    sourcesHTML = `<picture class="${options.pictureClass}">\n    ${sources}\n    ${imgTag}\n</picture>`
+    contentHTML = `<picture class="${options.pictureClass}">\n    ${sources}\n    ${imgTag}\n</picture>`
   }
-
-  // 决定最终输出内容
-  let contentHTML = availableFormats.length > 0 ? sourcesHTML : imgTag
 
   // 如果有标题或总是需要figure包装，则添加figure
   const hasTitle = !!imageInfo.title
@@ -231,22 +246,72 @@ function generatePictureHTML(
       ? `\n  <figcaption class="${options.figcaptionClass}">${escapeHtml(imageInfo.title!)}</figcaption>`
       : ''
 
-    contentHTML = `<figure ${figureAttrs}>\n  ${contentHTML}${figcaptionHTML}\n</figure>`
+    // 关键：返回时前后加换行，确保被识别为块级元素
+    return `\n<figure ${figureAttrs}>\n  ${contentHTML}${figcaptionHTML}\n</figure>\n`
   }
 
   return contentHTML
 }
 
 /**
- * HTML转义
+ * 构建img标签属性（解决属性重复问题）
  */
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;')
+function buildImgAttributes(
+  imageInfo: ImageInfo,
+  src: string,
+  options: Required<PicturePluginOptions>,
+  isExternal: boolean
+): string {
+  // 使用对象收集属性，避免重复
+  const attrs: Record<string, string> = {}
+
+  // 1. 设置核心属性
+  attrs['src'] = src
+  attrs['alt'] = escapeHtml(imageInfo.alt || '')
+
+  // 2. 设置插件默认行为
+  if (options.lazyLoading && !isExternal) {
+    attrs['loading'] = 'lazy'
+  }
+  attrs['decoding'] = options.decoding
+
+  // 3. 合并来自Markdown的属性（解决 {data-zoomable} 等问题）
+  for (const [key, value] of Object.entries(imageInfo)) {
+    if (value === undefined || value === null || key === 'src' || key === 'alt') {
+      continue
+    }
+
+    const stringValue = String(value).trim()
+    if (!stringValue) continue
+
+    // 特殊处理某些属性
+    if (key === 'title') {
+      attrs[key] = escapeHtml(stringValue)
+    } else if (key === 'class') {
+      // 合并类名
+      const existingClass = attrs['class'] || ''
+      attrs['class'] = (existingClass + ' ' + stringValue).trim()
+    } else if (key === 'width' || key === 'height') {
+      // 直接使用数值属性
+      attrs[key] = stringValue
+    } else if (key.startsWith('data-')) {
+      // 处理 data-* 属性（包括 data-zoomable）
+      attrs[key] = escapeHtml(stringValue)
+    }
+    // 其他未知属性可以忽略或根据需要添加
+  }
+
+  // 4. 确保插件默认的imgClass被添加
+  if (options.imgClass) {
+    const existingClass = attrs['class'] || ''
+    attrs['class'] = (existingClass + ' ' + options.imgClass).trim()
+  }
+
+  // 5. 转换为属性字符串
+  return Object.entries(attrs)
+    .filter(([_, value]) => value.length > 0)
+    .map(([key, value]) => `${key}="${value}"`)
+    .join(' ')
 }
 
 // --- 后处理HTML的核心功能 ---
@@ -263,109 +328,103 @@ function convertImagesInContainer(
     return html
   }
 
-  // 为每个容器类名构建正则表达式
-  for (const className of options.containerClasses) {
-    // 匹配包含指定class的div开始标签
-    const containerStartRegex = new RegExp(
-      `<div\\s+[^>]*class="[^"]*\\b${className}\\b[^"]*"[^>]*>`,
-      'gi'
-    )
+  // 为每个容器类名构建处理逻辑
+  let result = html
+  const containerRegex = /<div\s+[^>]*class="[^"]*?(?:\b(?:figure-list|grid)\b)[^"]*?"[^>]*>/gi
 
-    let match
-    while ((match = containerStartRegex.exec(html)) !== null) {
-      const startIndex = match.index
-      const startTag = match[0]
+  let match
+  const containerMatches: Array<{ start: number; end: number }> = []
 
-      // 找到对应的闭合标签
-      const afterStart = html.substring(startIndex + startTag.length)
-      let depth = 1
-      let pos = 0
-      let endIndex = -1
+  // 第一阶段：找出所有匹配的容器
+  while ((match = containerRegex.exec(result)) !== null) {
+    const startIndex = match.index
+    const tag = match[0]
 
-      // 查找匹配的闭合</div>
-      while (pos < afterStart.length) {
-        const nextOpen = afterStart.indexOf('<div', pos)
-        const nextClose = afterStart.indexOf('</div>', pos)
+    // 查找对应的闭合标签
+    const afterStart = result.substring(startIndex + tag.length)
+    let depth = 1
+    let pos = 0
+    let endIndex = -1
 
-        // 如果先找到闭合标签
-        if (nextClose !== -1 && (nextOpen === -1 || nextClose < nextOpen)) {
-          depth--
-          pos = nextClose + 6 // 6是 '</div>'.length
-          if (depth === 0) {
-            endIndex = startIndex + startTag.length + nextClose
-            break
-          }
+    while (pos < afterStart.length) {
+      const nextOpen = afterStart.indexOf('<div', pos)
+      const nextClose = afterStart.indexOf('</div>', pos)
+
+      if (nextClose !== -1 && (nextOpen === -1 || nextClose < nextOpen)) {
+        depth--
+        pos = nextClose + 6
+        if (depth === 0) {
+          endIndex = startIndex + tag.length + nextClose
+          break
         }
-        // 如果先找到新的开始标签
-        else if (nextOpen !== -1 && (nextClose === -1 || nextOpen < nextClose)) {
-          depth++
-          pos = nextOpen + 4 // 4是 '<div'.length
-        } else {
-          break // 没有更多标签
-        }
+      } else if (nextOpen !== -1 && (nextClose === -1 || nextOpen < nextClose)) {
+        depth++
+        pos = nextOpen + 4
+      } else {
+        break
       }
+    }
 
-      if (endIndex === -1) {
-        continue // 没有找到闭合标签，跳过这个容器
-      }
-
-      // 提取容器内容
-      const beforeContainer = html.substring(0, startIndex)
-      const containerContent = html.substring(startIndex + startTag.length, endIndex)
-      const afterContainer = html.substring(endIndex + 6) // 6是 '</div>'.length
-
-      // 转换容器内容中的图片
-      const processedContent = processImgTagsInHTML(containerContent, env, options)
-
-      // 重新组合HTML
-      html = beforeContainer + startTag + processedContent + '</div>' + afterContainer
-
-      // 更新正则表达式搜索位置
-      containerStartRegex.lastIndex =
-        beforeContainer.length + startTag.length + processedContent.length + 7
+    if (endIndex !== -1) {
+      containerMatches.push({ start: startIndex, end: endIndex + 6 }) // +6 for </div>
     }
   }
 
-  return html
+  // 第二阶段：从后往前处理容器（避免位置偏移）
+  for (let i = containerMatches.length - 1; i >= 0; i--) {
+    const { start, end } = containerMatches[i]
+    const before = result.substring(0, start)
+    const containerContent = result.substring(start, end)
+    const after = result.substring(end)
+
+    // 处理容器内容
+    const processedContent = processImgTagsInHTML(containerContent, env, options)
+
+    // 重新组合
+    result = before + processedContent + after
+  }
+
+  return result
 }
 
 /**
- * 处理HTML片段中的普通<img>标签（修正版）
+ * 处理HTML片段中的普通<img>标签
  */
 function processImgTagsInHTML(
   htmlSegment: string,
   env: any,
   options: Required<PicturePluginOptions>
 ): string {
-  // 匹配普通的img标签，避免匹配已经在picture/figure内的img
+  // 匹配普通的img标签
   const imgTagRegex = /<img\s+([^>]*?)>/gi
 
-  // 使用一个变量来记录当前搜索的起始位置，以辅助判断“前面的字符”
-  let lastIndex = 0
-
   return htmlSegment.replace(imgTagRegex, (match, attributesStr, offset) => {
-    // `offset` 参数是当前匹配项在原始字符串中的索引
-    // 使用它来获取匹配前的文本，以判断是否已被处理
-    const precedingText = htmlSegment.substring(Math.max(0, offset - 100), offset)
-
-    // 跳过已经处理过的图片（在picture或figure内）
+    // 检查是否已经被处理过
+    const precedingText = htmlSegment.substring(Math.max(0, offset - 200), offset)
     if (precedingText.includes('<picture') || precedingText.includes('<figure')) {
       return match
     }
 
     // 解析属性
     const attrs: Record<string, string> = {}
-    const attrRegex = /(\w+)=["']([^"']+)["']/g
+    const attrRegex = /(\w[\w-]*)=["']([^"']*)["']/g
     let attrMatch
+
     while ((attrMatch = attrRegex.exec(attributesStr)) !== null) {
       attrs[attrMatch[1]] = attrMatch[2]
     }
 
-    // 如果没有src属性，保留原样
-    if (!attrs.src) {
-      if (options.debug) {
-        console.log(`[DEBUG] 跳过无src属性的img标签`)
+    // 处理无值的布尔属性（如 data-zoomable）
+    const boolAttrRegex = /(\w[\w-]*)(?=\s|>)/g
+    let boolMatch
+    while ((boolMatch = boolAttrRegex.exec(attributesStr)) !== null) {
+      const attrName = boolMatch[1]
+      if (!(attrName in attrs) && attrName.startsWith('data-')) {
+        attrs[attrName] = 'true' // 给布尔属性一个默认值
       }
+    }
+
+    if (!attrs.src) {
       return match
     }
 
@@ -380,13 +439,18 @@ function processImgTagsInHTML(
       id: attrs.id,
     }
 
+    // 添加所有data-*属性
+    for (const [key, value] of Object.entries(attrs)) {
+      if (key.startsWith('data-')) {
+        imageInfo[key as `data-${string}`] = value
+      }
+    }
+
     try {
       const newHTML = generatePictureHTML(imageInfo, env, options)
 
       if (options.debug) {
         console.log(`[DEBUG] 转换容器内图片: ${attrs.src}`)
-        console.log(`[DEBUG] 原标签: ${match}`)
-        console.log(`[DEBUG] 新HTML: ${newHTML.substring(0, 100)}...`)
       }
 
       return newHTML
@@ -394,9 +458,35 @@ function processImgTagsInHTML(
       if (options.debug) {
         console.warn(`[DEBUG] 转换容器内图片失败 (${attrs.src}):`, error)
       }
-      return match // 转换失败，保留原img标签
+      return match
     }
   })
+}
+
+/**
+ * 清理无效的HTML嵌套
+ */
+function cleanupInvalidNesting(html: string): string {
+  let result = html
+
+  // 1. 清理 <p><figure>...</figure></p>
+  const figureInPRegex = /<p(\s[^>]*)?>\s*<figure/g
+  const closeFigureInPRegex = /<\/figure>\s*<\/p>/g
+
+  result = result.replace(figureInPRegex, '<figure')
+  result = result.replace(closeFigureInPRegex, '</figure>')
+
+  // 2. 清理 <p><picture>...</picture></p>
+  const pictureInPRegex = /<p(\s[^>]*)?>\s*<picture/g
+  const closePictureInPRegex = /<\/picture>\s*<\/p>/g
+
+  result = result.replace(pictureInPRegex, '<picture')
+  result = result.replace(closePictureInPRegex, '</picture>')
+
+  // 3. 清理空的段落标签
+  result = result.replace(/<p[^>]*>\s*<\/p>/g, '')
+
+  return result
 }
 
 // --- Markdown-it 插件主体 ---
@@ -410,14 +500,14 @@ export default function picturePlugin(md: MarkdownIt, userOptions?: PicturePlugi
   // 1. 保存原始图片渲染函数
   const defaultImageRender = md.renderer.rules.image
 
-  // 2. 覆盖默认的图片渲染规则（处理标准的Markdown图片语法）
+  // 2. 覆盖默认的图片渲染规则
   md.renderer.rules.image = (tokens: Token[], idx: number, opts: any, env: any, self: any) => {
     const token = tokens[idx]
 
-    // 这通过修改token的`type`和`tag`属性实现
-    token.type = 'figure_block' // 自定义一个类型，使其不再是'image'或'inline'
-    token.tag = 'figure' // 暗示这是一个块级标签
-    token.block = true // 明确标记为块级
+    // 关键：标记为块级元素，避免被<p>包裹
+    token.type = 'figure_block'
+    token.tag = 'figure'
+    token.block = true
 
     const imageInfo: ImageInfo = { src: '', alt: '' }
 
@@ -431,16 +521,20 @@ export default function picturePlugin(md: MarkdownIt, userOptions?: PicturePlugi
         else if (key === 'height') imageInfo.height = value
         else if (key === 'class') imageInfo.class = value
         else if (key === 'id') imageInfo.id = value
+        else if (key.startsWith('data-')) {
+          // 处理data-*属性
+          imageInfo[key as `data-${string}`] = value
+        }
       }
     }
 
-    // 从token内容获取alt文本（如果属性中没有）
+    // 从token内容获取alt文本
     if (!imageInfo.alt && token.content) {
       imageInfo.alt = token.content
     }
 
     if (options.debug) {
-      console.log(`[DEBUG] 处理Markdown图片: src=${imageInfo.src}, alt=${imageInfo.alt}`)
+      console.log(`[DEBUG] 处理Markdown图片:`, imageInfo)
     }
 
     // 使用我们的函数生成HTML
@@ -450,31 +544,30 @@ export default function picturePlugin(md: MarkdownIt, userOptions?: PicturePlugi
   // 3. 保存原始的render函数用于后处理
   const originalRender = md.render.bind(md)
 
-  // 4. 覆盖render函数，注入后处理逻辑
+  // 4. 覆盖render函数，注入完整的处理逻辑
   md.render = function (src: string, env: any = {}) {
     // 调用原始render得到HTML
     const originalHtml = originalRender(src, env)
 
-    // 应用后处理：转换容器内的图片
-    const processedHtml = convertImagesInContainer(originalHtml, env, options)
-
-    // === 【新增清理步骤】===
-    // 清理无效的嵌套：将 <p><figure>...</figure></p> 替换为 <figure>...</figure>
-    let finalHtml = processedHtml.replace(
-      /<p[^>]*>\s*(<figure[\s\S]*?<\/figure>)\s*<\/p>/gi,
-      '$1' // 用捕获的figure标签替换整个p标签
-    )
-    // 同样清理 <p><picture>...</picture></p>
-    finalHtml = finalHtml.replace(/<p[^>]*>\s*(<picture[\s\S]*?<\/picture>)\s*<\/p>/gi, '$1')
-    // 清理可能产生的空段落标签
-    finalHtml = finalHtml.replace(/<p[^>]*>\s*<\/p>/gi, '')
-    // === 【清理步骤结束】===
-
-    if (options.debug && originalHtml !== finalHtml) {
-      console.log('[DEBUG] 后处理已修改HTML内容，并清理了无效的<p>包裹。')
+    if (options.debug) {
+      console.log('[DEBUG] 原始渲染HTML:', originalHtml.substring(0, 500))
     }
 
-    return processedHtml
+    // 第一步：转换容器内的图片
+    const withContainersProcessed = convertImagesInContainer(originalHtml, env, options)
+
+    // 第二步：清理无效的HTML嵌套
+    const cleanedHtml = cleanupInvalidNesting(withContainersProcessed)
+
+    // 第三步：最后清理可能产生的多余空白
+    const finalHtml = cleanedHtml.replace(/\n\s*\n\s*\n/g, '\n\n')
+
+    if (options.debug && originalHtml !== finalHtml) {
+      console.log('[DEBUG] HTML已被修改')
+      console.log('[DEBUG] 最终HTML预览:', finalHtml.substring(0, 500))
+    }
+
+    return finalHtml
   }
 
   // 5. 确保链式调用正常工作
