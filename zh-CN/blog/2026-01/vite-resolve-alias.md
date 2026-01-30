@@ -6,7 +6,7 @@ title: Vite中resolve.alias原理
 description: Vite中resolve.alias原理
 date: 2026-01-07 08:30:00 
 pageClass: blog-page-class
-cover: /covers/vue.svg
+cover: /covers/vite.svg
 ---
 
 Vite 的 `resolve.alias` 是现代前端项目中几乎必备的配置，它让我们可以用简洁的路径别名（如 `@/components/Button.vue`）取代繁琐的相对路径（如 `../../../components/Button.vue`）。

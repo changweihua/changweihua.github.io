@@ -55,7 +55,24 @@ const markdown: MarkdownOptions | undefined = {
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
   preConfig: async (md) => {},
   config: (md) => {
-    md.use(picturePlugin)
+    md.use(picturePlugin, {
+      // 容器配置：处理哪些容器内的图片
+      containerClasses: ['figure-list', 'image-gallery', 'custom-container'],
+
+      // 格式控制（根据您的转换脚本支持情况调整）
+      enableJXL: true,
+      enableAVIF: true,
+      enableWebP: true,
+
+      // 类名配置
+      figureClass: 'custom-figure',
+      pictureClass: 'custom-picture',
+      imgClass: 'custom-img',
+      figcaptionClass: 'custom-figcaption',
+
+      // 调试模式（开发时启用，生产时关闭）
+      debug: process.env.NODE_ENV === 'development',
+    })
 
     md.use(footnote)
 

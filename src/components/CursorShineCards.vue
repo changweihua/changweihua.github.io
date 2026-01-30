@@ -8,11 +8,11 @@
       v-memo="[item]"
       :class="`animate__animated animate__fadeIn animate__delay-${
         index * 2
-      } card animate-fade-in animate-duration-500 transform-gpu`"
+      } card rounded-2xl! animate-fade-in animate-duration-500 transform-gpu`"
       :key="index"
       :ref="e => setCardListRef(e as unknown as HTMLElement)"
     >
-      <div class="card-content px-2 sm:px-8">
+      <div class="card-content rounded-2xl! md:px-12 lg:px-8 px-6">
         <slot :item="item" :index="index">
           <div class="card-info w-full flex flex-col justify-center">
             <a
@@ -194,7 +194,6 @@ function handleCardElMouseProperty(e) {
   }
 
   .card {
-    border-radius: 10px;
     cursor: pointer;
     display: flex;
     min-height: 120px;

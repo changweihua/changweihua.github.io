@@ -60,6 +60,11 @@
       <!-- source 标签只配置资源选择相关属性 -->
       <source
         :ref="attachZoom"
+        :srcset="`/images/${getFileNameWithoutExtension(attrs['src'] as string)}.jxl`"
+        type="image/jxl"
+      />
+      <source
+        :ref="attachZoom"
         :srcset="`/images/${getFileNameWithoutExtension(attrs['src'] as string)}.webp`"
         type="image/webp"
       />

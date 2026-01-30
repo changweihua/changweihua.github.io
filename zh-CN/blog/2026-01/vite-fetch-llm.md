@@ -6,7 +6,7 @@ title: 前端调用大模型实战
 description: Vite 全栈配置 + Fetch 请求最佳实践
 date: 2026-01-08 10:30:00 
 pageClass: blog-page-class
-cover: /covers/vue.svg
+cover: /covers/vite.svg
 ---
 
 在 AI 原生应用开发中，前端直接调用大模型 API 已成为高频场景 —— 无需后端中转即可快速实现对话、生成等核心功能。本文结合工程化实践，从 Vite 全栈项目初始化到 Fetch 复杂请求封装，手把手教你搭建可落地的前端大模型调用方案，干货密集，新手也能直接复用！

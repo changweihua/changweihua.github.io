@@ -105,7 +105,7 @@ graph TB
 
 ## 功能页面 ##
 
-<div class="grid grid-cols-3 gap-4">
+<div class="figure-list grid grid-cols-3 gap-4">
 
 ![示例图](/images/cmono-QQ截图20240517084528.png)
 

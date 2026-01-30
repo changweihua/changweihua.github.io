@@ -14,7 +14,7 @@ title: 扬泰机场智能机器人
 
 ## 项目预览 ##
 
-<div class="grid grid-cols-3 gap-2">
+<div class="figure-list grid grid-cols-3 gap-2">
 
 ![示例图](/images/robot_welcome.png){data-zoomable}
 

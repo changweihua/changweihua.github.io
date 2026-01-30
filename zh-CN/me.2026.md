@@ -30,6 +30,10 @@ encrypt-storage: true
 
 <div class="grid md:grid-cols-2 lg:grid-cols-4 masonry-container">
 
+![示例图](/images/tgs-dashboard.jpeg){data-zoomable}
+
+![示例图](/images/tgs-list.jpeg){data-zoomable}
+
 ![示例图](/images/tgs-gateway1.jpeg){data-zoomable}
 
 ![示例图](/images/tgs-gateway2.jpeg){data-zoomable}

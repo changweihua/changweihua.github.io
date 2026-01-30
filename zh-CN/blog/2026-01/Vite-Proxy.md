@@ -6,7 +6,7 @@ title: Vite Proxy到底是咋个工作嘞？
 description: Vite Proxy到底是咋个工作嘞？
 date: 2026-01-04 10:30:00 
 pageClass: blog-page-class
-cover: /covers/vue.svg
+cover: /covers/vite.svg
 ---
 
 > `proxy` 要不要写、`rewrite` 要不要写、`axios` 的请求路径该怎么写？我好乱啊！！！
