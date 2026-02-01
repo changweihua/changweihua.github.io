@@ -220,7 +220,7 @@
     "ua-parser-js": "^2.0.8",
     "universal-waterfall-layout": "^1.1.0",
     "vite-plugin-inspect": "^11.3.3",
-    "vitepress": "^2.0.0-alpha.15",
+    "vitepress": "^2.0.0-alpha.16",
     "vitepress-component-medium-zoom": "^1.1.1",
     "vitepress-markdown-timeline": "^1.2.2",
     "vitepress-markmap-preview": "^0.2.0",
@@ -265,4 +265,5 @@
   },
   "version": "0.12.0"
 }
+
 
