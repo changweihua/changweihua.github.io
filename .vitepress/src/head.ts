@@ -47,13 +47,14 @@ export const head: HeadConfig[] = [
   //     defer: 'true',
   //   },
   // ],
+  /*
   [
     'script',
     {
       src: 'https://cdn.jsdmirror.com/npm/mathjax@4/tex-mml-chtml.js',
       async: 'true',
     },
-  ],
+  ],*/
   // 一些自定义样式
   [
     'style',
@@ -201,3 +202,4 @@ export const head: HeadConfig[] = [
     },
   ],
 ]
+
