@@ -61,16 +61,7 @@ jobs:
 
       # 3. 安装依赖（关键修复步骤）
       - name: Install dependencies
-        run: |
-          echo "安装核心依赖"
-          # 先强制安装导致问题的核心包
-          # npm install oxc-minify@latest --no-audit --no-fund --legacy-peer-deps
-          # echo "步骤2: 安装剩余依赖..."
-          # 再安装其余依赖，使用 --legacy-peer-deps 避免冲突
-          npm install --legacy-peer-deps
-          echo "✅ 依赖安装完成"
-        env:
-          HUSKY: 0
+        run: npm install --legacy-peer-deps
 
       # 4. 构建文档（解决内存溢出）
       - name: Build docs
