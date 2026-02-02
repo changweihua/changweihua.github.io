@@ -79,7 +79,7 @@ jobs:
       - name: Install dependencies
         run: |
           echo "🧹 清理旧依赖..."
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           
           echo "📦 安装核心依赖..."
           # 先安装 vitepress 和 oxc-minify
@@ -87,7 +87,7 @@ jobs:
           
           echo "📦 安装其他依赖..."
           # 使用 legacy-peer-deps 参数解决依赖冲突
-          npm install --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm install --legacy-peer-deps
           
           echo "✅ 验证安装..."
           npm list vitepress oxc-minify --depth=0
