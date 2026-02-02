@@ -1,195 +1,103 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy VitePress Documentation
 
-# 触发条件优化：只在main/master分支的push事件触发部署
 on:
   push:
-    branches:
-      - main
-      - master
-  # 支持手动触发
+    branches: [main]
   workflow_dispatch:
 
-# 设置环境变量
 env:
-  TZ: Asia/Shanghai
   NODE_ENV: production
-  # Vue/Vite相关环境变量
-  VITE_SSR: false
-  __VUE_PROD_DEVTOOLS__: false
-
-# 全局权限设置
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 并发控制：确保只有一个部署运行
-concurrency:
-  group: 'pages-${{ github.ref }}'
-  cancel-in-progress: true
+  HUSKY: 0
+  # 可选：如果在中国大陆，可以设置 npm 镜像加速
+  # npm_config_registry: https://registry.npmmirror.com/
 
 jobs:
-  # 构建作业
-  build:
-    name: Build Documentation
-    runs-on: ubuntu-latest
-
-    # 策略配置
-    strategy:
-      matrix:
-        node-version: [25] # 更新到Node.js 25 版本
-      fail-fast: false
-
-    # 缓存优化：缓存node_modules以提高构建速度
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          lfs: true # 启用Git LFS支持
-          submodules: true # 如果使用子模块，自动初始化
-
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-
-      # 缓存node_modules
-      - name: Cache node modules
-        id: cache-npm
-        uses: actions/cache@v4
-        with:
-          path: |
-            **/node_modules
-            ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      # 安装依赖
-      - name: Install dependencies
-        run: |
-          npm config set ignore-scripts true
-          npm install --legacy-peer-deps # 使用npm ci代替npm install，确保一致性
-        env:
-          HUSKY: 0
-
-      # 验证依赖安装
-      - name: Verify installation
-        run: |
-          npm list --depth=0
-          echo "Node version: $(node --version)"
-          echo "NPM version: $(npm --version)"
-
-      # 构建文档
-      - name: Build documentation
-        run: |
-          echo "Building from: ${{ github.workspace }}"
-          npm run docs:build
-        env:
-          CI: true
-          # 可以添加更多构建优化参数
-          NODE_OPTIONS: '--max-old-space-size=4096'
-
-      # 验证构建输出
-      - name: Verify build output
-        run: |
-          if [ -d ".vitepress/dist" ]; then
-            echo "Build directory exists"
-            ls -la .vitepress/dist/ | head -20
-          else
-            echo "Build directory not found!"
-            exit 1
-          fi
-
-      # 上传构建产物
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: documentation
-          path: .vitepress/dist
-          retention-days: 5 # 保留5天
-
-  # 部署作业
   deploy:
-    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
-    needs: build # 依赖build作业
-    if: github.event_name == 'push' # 仅在push事件时部署
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
+    
     permissions:
       pages: write
       id-token: write
-      contents: write # 如果需要commit到gh-pages分支
-
+    
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: documentation
-          path: ./dist
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup Pages
+      # 2. 设置 Node.js 环境（不使用缓存）
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '25'
+          # 明确禁用缓存
+          cache: 'none'
+
+      # 3. 清理并安装依赖（重点处理 oxc-minify）
+      - name: Install dependencies
+        run: |
+          echo "Cleaning up previous installations..."
+          rm -rf node_modules
+          
+          echo "Installing dependencies..."
+          # 使用完整安装，确保所有依赖都正确安装
+          npm install --legacy-peer-deps --no-audit --no-fund
+          
+          # 确保 oxc-minify 已安装
+          echo "Checking for oxc-minify..."
+          if ! npm list oxc-minify 2>/dev/null | grep -q "oxc-minify"; then
+            echo "oxc-minify not found, installing it..."
+            npm install oxc-minify@latest --save-dev
+          fi
+          
+          # 确保 rolldown 相关包已安装
+          echo "Checking for @rolldown/node-binding-wasm..."
+          if ! npm list @rolldown/node-binding-wasm 2>/dev/null | grep -q "@rolldown/node-binding-wasm"; then
+            echo "@rolldown/node-binding-wasm not found, installing it..."
+            npm install @rolldown/node-binding-wasm@latest --save-dev
+          fi
+          
+          echo "Verifying installation..."
+          npm list vitepress oxc-minify @rolldown/node-binding-wasm --depth=0
+          
+        env:
+          HUSKY: 0  # 禁用 husky
+
+      # 4. 构建 VitePress 文档
+      - name: Build documentation
+        run: |
+          echo "Building VitePress documentation..."
+          npm run docs:build
+          
+          # 验证构建输出
+          if [ -d ".vitepress/dist" ]; then
+            echo "Build successful! Output directory: .vitepress/dist"
+            echo "Files in dist:"
+            ls -la .vitepress/dist/ | head -10
+          else
+            echo "ERROR: Build output not found!"
+            exit 1
+          fi
+
+      # 5. 配置和部署到 GitHub Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
-      # 添加部署时间戳文件（可选）
-      - name: Create deployment info
-        run: |
-          echo "Deployment time: $(date)" > ./dist/deployment-info.txt
-          echo "Commit: ${{ github.sha }}" >> ./dist/deployment-info.txt
-          echo "Branch: ${{ github.ref_name }}" >> ./dist/deployment-info.txt
-          echo "Workflow: ${{ github.workflow }}" >> ./dist/deployment-info.txt
-
-      - name: Upload to Pages
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: .vitepress/dist
+          # 可选：设置保留时间
+          retention-days: 1
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-      # 部署后操作（可选）
-      - name: Deployment status
+      # 6. 显示部署结果
+      - name: Show deployment URL
         run: |
-          if [ "${{ steps.deployment.outcome }}" == "success" ]; then
-            echo "✅ Deployment successful!"
-            echo "🌐 URL: ${{ steps.deployment.outputs.page_url }}"
-          else
-            echo "❌ Deployment failed!"
-            exit 1
-          fi
-
-  # 通知作业（可选）
-  notify:
-    name: Send notification
-    runs-on: ubuntu-latest
-    needs: [build, deploy]
-    if: always() # 无论成功失败都运行
-
-    steps:
-      - name: Build status
-        run: |
-          echo "Build job status: ${{ needs.build.result }}"
-          echo "Deploy job status: ${{ needs.deploy.result }}"
-          echo "Overall status: ${{ job.status }}"
-
-      # 可以添加Slack、Discord、Email等通知
-      # - name: Send Slack notification
-      #   uses: 8398a7/action-slack@v3
-      #   if: always()
-      #   with:
-      #     status: ${{ job.status }}
-      #     channel: '#deployments'
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
+          echo "✅ Deployment completed!"
+          echo "🌐 Your site is live at: ${{ steps.deployment.outputs.page_url }}"
+          echo "📅 Deployment time: $(date)"
 
 
