@@ -83,7 +83,7 @@ jobs:
           
           echo "📦 安装核心依赖..."
           # 先安装 vitepress 和 oxc-minify
-          npm install vitepress oxc-minify @rolldown/node-binding-wasm --legacy-peer-deps --save-dev
+          # npm install vitepress oxc-minify @rolldown/node-binding-wasm --legacy-peer-deps --save-dev
           
           echo "📦 安装其他依赖..."
           # 使用 legacy-peer-deps 参数解决依赖冲突
