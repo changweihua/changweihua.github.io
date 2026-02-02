@@ -271,8 +271,7 @@ export default defineConfig(() => {
         },
       }),
       prefetchDnsPlugin(),
-      versionInjector(),
-      publicImagesPlugin(),
+      versionInjector()
     ],
     resolve: {
       alias: {
@@ -303,3 +302,4 @@ export default defineConfig(() => {
     // },
   }
 })
+
