@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: '25'
           # 明确禁用缓存
-          cache: 'none'
+          # cache: 'none'
 
       # 3. 清理并安装依赖（重点处理 oxc-minify）
       - name: Install dependencies
@@ -99,6 +99,7 @@ jobs:
           echo "✅ Deployment completed!"
           echo "🌐 Your site is live at: ${{ steps.deployment.outputs.page_url }}"
           echo "📅 Deployment time: $(date)"
+
 
 
 
