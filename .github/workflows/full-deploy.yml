@@ -55,12 +55,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          architecture: 'x64'
+          check-latest: true
           registry-url: 'https://registry.npmjs.org/'
 
       # 3. 安装依赖（关键修复步骤）
       - name: Install dependencies
         run: |
-          # echo "步骤1: 清理并优先安装核心依赖 oxc-minify..."
+          echo "安装核心依赖"
           # 先强制安装导致问题的核心包
           # npm install oxc-minify@latest --no-audit --no-fund --legacy-peer-deps
           # echo "步骤2: 安装剩余依赖..."
