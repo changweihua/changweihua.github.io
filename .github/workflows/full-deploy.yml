@@ -13,7 +13,6 @@ env:
   NODE_ENV: production
   VITE_SSR: false
   __VUE_PROD_DEVTOOLS__: false
-  HUSKY: 0 # 禁用husky
 
 permissions:
   contents: read
