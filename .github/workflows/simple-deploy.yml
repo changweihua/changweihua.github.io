@@ -3,7 +3,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-    branches: ['main', 'master']
+    branches: ['main1', 'master1']
   workflow_dispatch:
 
 # 设置时区
