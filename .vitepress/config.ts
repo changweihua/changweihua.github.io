@@ -301,7 +301,7 @@ export default withMermaid(
     vite: {
       css: {
         // 完全禁用 lightningcss 的转换，只用于压缩
-        transformer: 'postcss', // 使用 PostCSS
+        // transformer: 'postcss', // 使用 PostCSS
         // transformer: "lightningcss",
         lightningcss: {
           // 不报告未知规则为错误
@@ -392,7 +392,7 @@ export default withMermaid(
           'vitepress-plugin-tabs',
           'vitepress-plugin-detype',
           'vitepress-plugin-npm-commands',
-          'hover-tilt',
+          'hover-tilt'
         ], // Externalize Node.js modules
         noExternal: [
           'vitepress-plugin-nprogress',
@@ -554,3 +554,4 @@ export default withMermaid(
     ...vitePressOptions,
   })
 )
+
