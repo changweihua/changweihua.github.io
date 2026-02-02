@@ -2,7 +2,7 @@ name: Deploy VitePress Documentation
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 env:
@@ -99,5 +99,6 @@ jobs:
           echo "✅ Deployment completed!"
           echo "🌐 Your site is live at: ${{ steps.deployment.outputs.page_url }}"
           echo "📅 Deployment time: $(date)"
+
 
 
