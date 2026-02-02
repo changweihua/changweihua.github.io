@@ -279,7 +279,7 @@ jobs:
         if: failure()  # 只在失败时发送邮件
         run: |
           echo "部署失败通知" | mail -s "🚨 VitePress 部署失败 - ${{ github.repository }}" ${{ secrets.EMAIL_TO }}
-        env:
+        #env:
           # 需要在 Secrets 中配置 EMAIL_SERVER, EMAIL_USER, EMAIL_PASSWORD, EMAIL_TO
           # 或者使用 GitHub Actions 的内置邮件功能
 
