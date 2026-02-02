@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 # 触发条件，push到main分支或者pull request到main分支
 on:
   push:
-    branches: ['master']
+    branches: ['master1']
   pull_request:
     branches: [main]
 
