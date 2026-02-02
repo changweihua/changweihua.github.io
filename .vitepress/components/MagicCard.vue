@@ -97,14 +97,4 @@ a {
   margin-top: 2rem;
 }
 </style>
-<style>
-@keyframes spin {
-  0% {
-    --rotate: 0deg;
-  }
 
-  100% {
-    --rotate: 360deg;
-  }
-}
-</style>

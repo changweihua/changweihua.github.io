@@ -48,16 +48,4 @@
     inset 0px 0px 15px rgb(124, 124, 124);
 }
 
-@keyframes my-move {
-  0%,
-  100% {
-    transform: rotateX(70deg) translateZ(50px) translateY(0px);
-    filter: hue-rotate(0deg);
-  }
-
-  50% {
-    transform: rotateX(70deg) translateZ(50px) translateY(-50vmin);
-    filter: hue-rotate(180deg);
-  }
-}
 </style>

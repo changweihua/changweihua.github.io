@@ -79,12 +79,3 @@
   filter: blur(12px);
 }
 </style>
-<style>
-
-
-@keyframes spin {
-  100% {
-    transform: rotateY(360deg);
-  }
-}
-</style>

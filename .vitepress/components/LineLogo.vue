@@ -75,14 +75,3 @@ svg {
 
 </style>
 
-<style>
-
-@keyframes move {
-  0% {
-    stroke-dashoffset: 8;
-  }
-  100% {
-    stroke-dashoffset: -972;
-  }
-}
-</style>

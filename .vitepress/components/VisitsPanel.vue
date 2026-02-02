@@ -80,10 +80,3 @@ onMounted(function () {
   }
 }
 </style>
-<style>
-@keyframes pulse {
-  50% {
-    transform: scale(1.5);
-  }
-}
-</style>

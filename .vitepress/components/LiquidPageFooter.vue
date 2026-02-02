@@ -32,53 +32,7 @@ const copyright = `版权所有 © 2009- ${new Date().getFullYear()} CMONO.NET`;
 const { frontmatter } = useData();
 
 </script>
-<style>
-/* 液态层位置流动关键帧（无规则XY轴移动） */
-@keyframes liquid-flow {
-  0% {
-    transform: translate(0, 0);
-  }
 
-  25% {
-    transform: translate(40px, -30px);
-  }
-
-  50% {
-    transform: translate(-20px, 50px);
-  }
-
-  75% {
-    transform: translate(50px, 20px);
-  }
-
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-/* 液态层形态变化关键帧（不规则圆角） */
-@keyframes liquid-shape {
-  0% {
-    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-  }
-
-  25% {
-    border-radius: 38% 62% 50% 50% / 60% 30% 70% 40%;
-  }
-
-  50% {
-    border-radius: 55% 45% 35% 65% / 55% 60% 40% 45%;
-  }
-
-  75% {
-    border-radius: 60% 40% 70% 30% / 40% 55% 45% 60%;
-  }
-
-  100% {
-    border-radius: 48% 52% 65% 35% / 50% 40% 60% 50%;
-  }
-}
-</style>
 <style lang="scss" scoped>
 .liquid-page-footer {
   /* 液态背景核心变量 */

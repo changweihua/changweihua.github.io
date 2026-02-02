@@ -73,31 +73,6 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes waveFlow {
-  from {
-    background-position-x: -10px, 0;
-  }
-  to {
-    background-position-x: -30px, -20px;
-  }
-}
-</style>
-
 <style scoped>
 .name {
   background: -webkit-linear-gradient(

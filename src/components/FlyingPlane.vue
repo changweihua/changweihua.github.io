@@ -18,45 +18,4 @@
   animation: plane-move 4000ms infinite linear;
 }
 
-@keyframes plane-move {
-  0% {
-    offset-rotate: 90deg;
-    offset-distance: 0%;
-  }
-
-  18.7% {
-    offset-rotate: 90deg;
-    offset-distance: 18.7%;
-  }
-
-  25% {
-    offset-rotate: 45deg;
-    offset-distance: 25%;
-  }
-
-  31.2% {
-    offset-rotate: 0deg;
-    offset-distance: 31.2%;
-  }
-
-  68.7% {
-    offset-rotate: 0deg;
-    offset-distance: 68.7%;
-  }
-
-  75% {
-    offset-rotate: 45deg;
-    offset-distance: 75%;
-  }
-
-  81.2% {
-    offset-rotate: 90deg;
-    offset-distance: 81.2%;
-  }
-
-  100% {
-    offset-rotate: 90deg;
-    offset-distance: 100%;
-  }
-}
 </style>

@@ -42,7 +42,7 @@
     border-radius: 6px;
     position: absolute;
     left: calc(var(--logo-width) * var(--logo-count));
-    animation-name: scrollLeft;
+    animation-name: scrollLeft3;
     animation-duration: var(--duration);
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -51,10 +51,4 @@
   }
 }
 </style>
-<style>
-@keyframes scrollLeft {
-  to {
-    left: calc(var(--logo-width) * -1);
-  }
-}
-</style>
+

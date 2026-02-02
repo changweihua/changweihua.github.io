@@ -124,17 +124,6 @@ withDefaults(defineProps<Props>(), {
   }
 }
 
-/* 光泽流动关键帧 */
-@keyframes glow-flow {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(300%);
-  }
-}
-
 .liquid-meta-card {
   background-image: linear-gradient(
       to right,

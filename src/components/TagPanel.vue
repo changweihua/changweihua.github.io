@@ -102,15 +102,6 @@
   animation-play-state: running;
 }
 
-@keyframes rotating {
-  0% {
-    --rotate: 0deg;
-  }
-
-  100% {
-    --rotate: 360deg;
-  }
-}
 
 .box::after {
   content: "";

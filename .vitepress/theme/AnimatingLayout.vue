@@ -246,22 +246,6 @@ router.onAfterPageLoad = function () {
   animation: shadeAnimation 0.5s ease-in-out;
 }
 
-@keyframes shadeAnimation {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(100vh);
-  }
-}
-
 .VPSwitchAppearance {
   width: 22px !important;
 }
@@ -311,7 +295,7 @@ router.onAfterPageLoad = function () {
   animation-timeline: scroll();
 }
 </style>
-<style>
+<style scoped>
 .custom-tips {
   position: absolute;
   width: 1em;
@@ -358,39 +342,5 @@ router.onAfterPageLoad = function () {
   content: "+" attr(num);
   opacity: 0;
   animation: count-shark 1s var(--d, 0s);
-}
-@keyframes count-shark {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0.4);
-  }
-
-  30%,
-  70% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-/* x方向 */
-@keyframes custom-x {
-  0% {
-    opacity: 0;
-    transform: translateX(0%);
-  }
-  10%,
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(var(--x, 300%));
-  }
-}
-/* y方向 */
-@keyframes custom-y {
-  100% {
-    transform: translateY(50vh) rotate(1turn);
-  }
 }
 </style>

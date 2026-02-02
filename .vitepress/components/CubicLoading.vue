@@ -88,20 +88,3 @@
   }
 }
 </style>
-<style>
-
-@keyframes loading {
-    0%,
-    100% {
-      opacity: 0;
-      transform: scale(0);
-    }
-
-    35%,
-    65% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-</style>

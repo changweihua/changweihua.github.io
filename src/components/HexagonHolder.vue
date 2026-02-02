@@ -88,12 +88,4 @@ svg {
   animation: move 2.4s infinite linear;
 }
 
-@keyframes move {
-  0% {
-    stroke-dashoffset: 8;
-  }
-  100% {
-    stroke-dashoffset: -972;
-  }
-}
 </style>

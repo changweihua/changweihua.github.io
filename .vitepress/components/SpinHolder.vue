@@ -315,22 +315,7 @@ watch(
 );
 </script>
 
-<style>
-/* 默认动画：旋转圆点 */
-@keyframes spin-default {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.25;
-  }
-}
-
-/* In global styles or component styles */
-:deep(.ticker) {
-  font-family: var(--vp-font-family-base) !important;
-}
+<style scoped>
 
 .spin-default {
   animation: spin 1.2s linear infinite;
@@ -338,27 +323,6 @@ watch(
 
 .spin-default-item {
   animation: spin-default 1.2s linear infinite;
-}
-
-/* 轨道动画 */
-@keyframes spin-orbit-track {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spin-orbit-satellite {
-  0% {
-    transform: translateX(-50%) rotate(0deg) translateY(-180%);
-  }
-
-  100% {
-    transform: translateX(-50%) rotate(360deg) translateY(-180%);
-  }
 }
 
 .spin-orbit-track {
@@ -369,45 +333,10 @@ watch(
   animation: spin-orbit-satellite 2s linear infinite;
 }
 
-/* 脉冲动画 */
-@keyframes spin-pulse-wave {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
 .spin-pulse-wave {
   animation: spin-pulse-wave 1.5s ease-out infinite;
 }
 
-/* 翻转动画 */
-@keyframes spin-flip {
-  0% {
-    transform: rotateX(0) rotateY(0) rotateZ(0);
-  }
-
-  25% {
-    transform: rotateX(90deg) rotateY(90deg) rotateZ(90deg);
-  }
-
-  50% {
-    transform: rotateX(180deg) rotateY(180deg) rotateZ(180deg);
-  }
-
-  75% {
-    transform: rotateX(270deg) rotateY(270deg) rotateZ(270deg);
-  }
-
-  100% {
-    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-  }
-}
 
 .spin-flip-cube {
   transform-style: preserve-3d;
@@ -443,47 +372,11 @@ watch(
   transform: translateY(calc(var(--spin-size) * 0.5)) rotateX(-90deg);
 }
 
-/* 弹跳动画 */
-@keyframes spin-bounce {
-  0%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-
-  40% {
-    transform: translateY(-100%);
-  }
-}
 
 .spin-bounce-dot {
   animation: spin-bounce 1.4s ease-in-out infinite;
 }
 
-/* 神经动画 */
-@keyframes spin-neural-core {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
-}
-
-@keyframes spin-neural-node {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-
-  50% {
-    transform: scale(1.3);
-    opacity: 1;
-  }
-}
 
 .spin-neural-core {
   animation: spin-neural-core 2s ease-in-out infinite;
@@ -491,17 +384,6 @@ watch(
 
 .spin-neural-node {
   animation: spin-neural-node 2s ease-in-out infinite;
-}
-
-/* 通用旋转动画 */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 /* 高 z-index 确保全屏模式在最上层 */

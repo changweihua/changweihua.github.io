@@ -21,14 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: "标题",
 });
 </script>
-<style>
 
-@keyframes up-down {
-   50% {
-     transform: translateZ(calc(var(--size)));
-   }
- }
-</style>
 <style scoped>
  .cube-group {
    --size: 50px;

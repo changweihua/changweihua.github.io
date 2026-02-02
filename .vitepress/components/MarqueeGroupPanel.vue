@@ -115,15 +115,3 @@ const lineCount = computed(() => Math.round(props.icons ? props.icons.length / p
 
 </style>
 
-<style>
-
-@keyframes scrollLeft {
-  from {
-    transform: translateX(var(--scroll-start));
-  }
-
-  to {
-    transform: translateX(var(--scroll-end));
-  }
-}
-</style>

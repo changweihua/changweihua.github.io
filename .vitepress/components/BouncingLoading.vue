@@ -29,12 +29,6 @@
   animation: slide var(--duration) ease-in-out infinite alternate;
 }
 
-@keyframes slide {
-  to {
-    transform: translatex(calc(8em - (1em * 1.25)));
-    filter: brightness(1.45);
-  }
-}
 
 .boys {
   width: 6em;
@@ -63,53 +57,6 @@
   animation-name: jump-off-4;
 }
 
-@keyframes jump-off-1 {
-  0%,
-  15% {
-    transform: rotate(0deg);
-  }
-
-  35%,
-  100% {
-    transform: rotate(-180deg);
-  }
-}
-
-@keyframes jump-off-2 {
-  0%,
-  30% {
-    transform: rotate(0deg);
-  }
-
-  50%,
-  100% {
-    transform: rotate(-180deg);
-  }
-}
-
-@keyframes jump-off-3 {
-  0%,
-  45% {
-    transform: rotate(0deg);
-  }
-
-  65%,
-  100% {
-    transform: rotate(-180deg);
-  }
-}
-
-@keyframes jump-off-4 {
-  0%,
-  60% {
-    transform: rotate(0deg);
-  }
-
-  80%,
-  100% {
-    transform: rotate(-180deg);
-  }
-}
 
 .container span::before {
   content: "";
@@ -149,111 +96,4 @@
   animation-name: jump-down-4;
 }
 
-@keyframes jump-down-1 {
-  5% {
-    transform: scale(1, 1);
-  }
-
-  15% {
-    transform-origin: center bottom;
-    transform: scale(1.3, 0.7);
-  }
-
-  20%,
-  25% {
-    transform-origin: center bottom;
-    transform: scale(0.8, 1.4);
-  }
-
-  40% {
-    transform-origin: center top;
-    transform: scale(1.3, 0.7);
-  }
-
-  55%,
-  100% {
-    transform: scale(1, 1);
-  }
-}
-
-@keyframes jump-down-2 {
-  20% {
-    transform: scale(1, 1);
-  }
-
-  30% {
-    transform-origin: center bottom;
-    transform: scale(1.3, 0.7);
-  }
-
-  35%,
-  40% {
-    transform-origin: center bottom;
-    transform: scale(0.8, 1.4);
-  }
-
-  55% {
-    transform-origin: center top;
-    transform: scale(1.3, 0.7);
-  }
-
-  70%,
-  100% {
-    transform: scale(1, 1);
-  }
-}
-
-@keyframes jump-down-3 {
-  35% {
-    transform: scale(1, 1);
-  }
-
-  45% {
-    transform-origin: center bottom;
-    transform: scale(1.3, 0.7);
-  }
-
-  50%,
-  55% {
-    transform-origin: center bottom;
-    transform: scale(0.8, 1.4);
-  }
-
-  70% {
-    transform-origin: center top;
-    transform: scale(1.3, 0.7);
-  }
-
-  85%,
-  100% {
-    transform: scale(1, 1);
-  }
-}
-
-@keyframes jump-down-4 {
-  50% {
-    transform: scale(1, 1);
-  }
-
-  60% {
-    transform-origin: center bottom;
-    transform: scale(1.3, 0.7);
-  }
-
-  65%,
-  70% {
-    transform-origin: center bottom;
-    transform: scale(0.8, 1.4);
-  }
-
-  85% {
-    transform-origin: center top;
-    transform: scale(1.3, 0.7);
-  }
-
-  100%,
-  100% {
-    transform: scale(1, 1);
-  }
-}
 </style>

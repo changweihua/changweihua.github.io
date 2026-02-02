@@ -213,18 +213,6 @@ export default {
   animation: gradient-ripple 0.6s ease-out;
 }
 
-@keyframes gradient-ripple {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(3);
-    opacity: 0;
-  }
-}
-
 .glass-component {
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;

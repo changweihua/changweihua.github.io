@@ -51,13 +51,4 @@
   animation-play-state: paused;
 }
 
-@keyframes slideLeft {
-  0% {
-    left: 100%;
-  }
-
-  100% {
-    left: -100%;
-  }
-}
 </style>

@@ -392,19 +392,3 @@ function handleCardElMouseProperty(e) {
   }
 }
 </style>
-<style>
-@keyframes floating-points {
-  0% {
-    transform: translateY(0);
-  }
-
-  85% {
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(-55px);
-    opacity: 0;
-  }
-}
-</style>

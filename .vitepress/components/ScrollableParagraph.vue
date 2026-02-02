@@ -56,21 +56,4 @@ body {
   animation-timeline: --progress-scroller;
 }
 </style>
-<style>
-@keyframes color {
-  from {
-    color: red;
-  }
-  to {
-    color: blue;
-  }
-}
-@keyframes scale {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-</style>
+

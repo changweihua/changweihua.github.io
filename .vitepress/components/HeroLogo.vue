@@ -166,14 +166,4 @@ const pathTogether = function (angle: number) {
   animation: 2s dash both infinite;
 }
 
-@keyframes dash {
-  from {
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 </style>

@@ -83,7 +83,7 @@ import { useTemplateRef } from "vue";
 
 const tiltCardRef = useTemplateRef<HTMLDivElement>("tiltCard");
 
-function handleMouseMove(e) {
+function handleMouseMove(e: MouseEvent) {
   if (tiltCardRef.value) {
     const card = tiltCardRef.value;
     const rect = card.getBoundingClientRect();
@@ -259,17 +259,3 @@ function handleMouseLeave() {
 }
 </style>
 
-<style>
-
-
-@keyframes gradient-ripple {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(3);
-    opacity: 0;
-  }
-}
-</style>
