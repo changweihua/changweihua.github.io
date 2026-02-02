@@ -71,9 +71,11 @@ jobs:
 
       # 安装依赖
       - name: Install dependencies
-        run: npm install --legacy-peer-deps # 使用npm ci代替npm install，确保一致性
+        run: |
+          npm config set ignore-scripts true
+          npm install --legacy-peer-deps # 使用npm ci代替npm install，确保一致性
         env:
-          CI: true
+          HUSKY: 0
 
       # 验证依赖安装
       - name: Verify installation
@@ -188,5 +190,6 @@ jobs:
       #     channel: '#deployments'
       #   env:
       #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 
 
