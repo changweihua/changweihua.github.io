@@ -22,29 +22,36 @@ export const head: HeadConfig[] = [
     },
   ],
   // MathJax 配置应该在 <script> 标签中，不是在插件里
-  [
-    'script',
-    {},
-    `
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']],
-          processEscapes: true,
-          packages: ['base', 'ams', 'noerrors', 'noundefined']
-        },
-        options: {
-          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      };
-    `,
-  ],
+  // [
+  //   'script',
+  //   {},
+  //   `
+  //     window.MathJax = {
+  //       tex: {
+  //         inlineMath: [['$', '$'], ['\\(', '\\)']],
+  //         displayMath: [['$$', '$$'], ['\\[', '\\]']],
+  //         processEscapes: true,
+  //         packages: ['base', 'ams', 'noerrors', 'noundefined']
+  //       },
+  //       options: {
+  //         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  //       }
+  //     };
+  //   `,
+  // ],
+  // [
+  //   'script',
+  //   {
+  //     src: '/mathjax/tex-chtml.js',
+  //     async: 'true',
+  //     defer: 'true',
+  //   },
+  // ],
   [
     'script',
     {
-      src: '/mathjax/tex-chtml.js',
-      async: 'true',
-      defer: 'true',
+      src: 'https://cdn.jsdmirror.com/npm/mathjax@4/tex-mml-chtml.js',
+      async: true,
     },
   ],
   // 一些自定义样式

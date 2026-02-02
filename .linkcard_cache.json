@@ -311,5 +311,10 @@
   "https://example.com": {
     "title": "Example Domain",
     "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://changweihua.github.io": {
+    "title": "CMONO.NET",
+    "description": "此系统基于vitepress二次开发，前端框架使用vuejs，UI框架使用ant-design，全局数据状态管理使用paina，ajax使用库为fetch。用于快速搭建个人网站和内容管理平台。",
+    "logo": "https://changweihua.github.io/author.jpg"
   }
 }
