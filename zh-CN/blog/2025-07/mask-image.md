@@ -339,7 +339,7 @@ SVG 作为矢量图形，放大后不会失真，非常适合作为需要适配�
 
 #### 定义 SVG 遮罩 ####
 
-```xml
+```html
 <!-- mask.svg -->
 <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
  <!-- 定义一个ID为"text-mask"的遮罩 -->
@@ -369,8 +369,6 @@ SVG 作为矢量图形，放大后不会失真，非常适合作为需要适配�
 
 效果如下：
 
-:::demo
-
 ```vue
 <template>
   <div class="text-mask-element">CMONO.NET</div>
@@ -399,8 +397,6 @@ SVG 作为矢量图形，放大后不会失真，非常适合作为需要适配�
 }
 </style>
 ```
-
-:::
 
 效果：元素背景是渐变，但只在 SVG 文字 “MASK” 的区域显示，形成 “文字形状的渐变” 效果，且文字边缘清晰（矢量特性）。
 

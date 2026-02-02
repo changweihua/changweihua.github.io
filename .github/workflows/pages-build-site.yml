@@ -1,139 +1,190 @@
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
-# 触发条件，push到main分支或者pull request到main分支
+# 触发条件优化：只在main/master分支的push事件触发部署
 on:
   push:
-    branches: ["master"]
-  pull_request:
-    branches: [main]
-
-  # Allows you to run this workflow manually from the Actions tab
-  # 支持手动在工作流上触发
+    branches:
+      - main
+      - master
+  # 支持手动触发
   workflow_dispatch:
 
-# 设置时区
+# 设置环境变量
 env:
   TZ: Asia/Shanghai
+  NODE_ENV: production
+  # Vue/Vite相关环境变量
+  VITE_SSR: false
+  __VUE_PROD_DEVTOOLS__: false
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# 全局权限设置
 permissions:
-  # 允许读取仓库内容的权限。
   contents: read
-  # 允许写入 GitHub Pages 的权限。
   pages: write
-  # 允许写入 id-token 的权限。
   id-token: write
 
-# Allow one concurrent deployment
+# 并发控制：确保只有一个部署运行
 concurrency:
-  group: "pages"
+  group: 'pages-${{ github.ref }}'
   cancel-in-progress: true
 
-# env:
-#   # Hosted GitHub runners have 7 GB of memory available, let's use 6 GB
-#   NODE_OPTIONS: --max-old-space-size=6144
-
 jobs:
-  deploy:
+  # 构建作业
+  build:
+    name: Build Documentation
     runs-on: ubuntu-latest
 
-    # node v25 运行
+    # 策略配置
     strategy:
       matrix:
-        node-version: [25]
+        node-version: [25] # 更新到Node.js 25 版本
+      fail-fast: false
+
+    # 缓存优化：缓存node_modules以提高构建速度
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true # 启用Git LFS支持
+          submodules: true # 如果使用子模块，自动初始化
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      # 缓存node_modules
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        with:
+          path: |
+            **/node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # 安装依赖
+      - name: Install dependencies
+        run: npm ci # 使用npm ci代替npm install，确保一致性
+        env:
+          CI: true
+
+      # 验证依赖安装
+      - name: Verify installation
+        run: |
+          npm list --depth=0
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+
+      # 构建文档
+      - name: Build documentation
+        run: |
+          echo "Building from: ${{ github.workspace }}"
+          npm run docs:build
+        env:
+          CI: true
+          # 可以添加更多构建优化参数
+          NODE_OPTIONS: '--max-old-space-size=4096'
+
+      # 验证构建输出
+      - name: Verify build output
+        run: |
+          if [ -d ".vitepress/dist" ]; then
+            echo "Build directory exists"
+            ls -la .vitepress/dist/ | head -20
+          else
+            echo "Build directory not found!"
+            exit 1
+          fi
+
+      # 上传构建产物
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: .vitepress/dist
+          retention-days: 5 # 保留5天
+
+  # 部署作业
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build # 依赖build作业
+    if: github.event_name == 'push' # 仅在push事件时部署
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     permissions:
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write # 如果需要commit到gh-pages分支
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - name: Download artifact
+        uses: actions/download-artifact@v4
         with:
-          # 保留 Git 信息
-          fetch-depth: 0
-
-      # 设置使用 Node.js 版本
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
-        with:
-          # node-version: ${{ matrix.node-version }}
-          node-version-file: '.node-version'  # 支持.nvmrc、.node-version、package.json等
-          architecture: 'x64'         # 系统架构
-          check-latest: true         # 是否检查最新版本
-          cache: 'npm'                # 包管理器缓存
-          registry-url: https://registry.npmjs.org/ # 如果不配置将影响publish
-          # cache: npm
-        #env:
-          #NODE_OPTIONS: "--no-webstorage"
-
-      #   - uses: pnpm/action-setup@v2 // 配置使用pnpm
-      #     name: Install pnpm
-      #     id: pnpm-install
-      #     with:
-      #       version: 7
-      #       run_install: false
-
-      #   - name: Get pnpm store directory
-      #     id: pnpm-cache
-      #     shell: bash
-      #     run: |
-      #       echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      #   - uses: actions/cache@v3
-      #     name: Setup pnpm cache
-      #     with:
-      #       path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-      #       key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #       restore-keys: |
-      #         ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      # - name: Increase Memory
-      #   run: npm run fix-memory-limit
-
-      # - name: Set Swap Space
-      #   if: matrix.os == 'ubuntu-latest'
-      #   uses: pierotofy/set-swap-space@master
-      #   with:
-      #     swap-size-gb: 10
-
-      # - name: Build docs
-      #   run: npm run docs:build
-
-      # - name: Fix Memory
-      #   run: npm run fix-memory-limit
-
-      - name: Build docs
-        run: |
-          echo ${{ github.workspace }}
-          npm run docs:build
-        env:
-          NODE_ENV: production
-          # 添加以下环境变量
-          VITE_SSR: false
-          __VUE_PROD_DEVTOOLS__: false
+          name: documentation
+          path: ./dist
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v4
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+      # 添加部署时间戳文件（可选）
+      - name: Create deployment info
+        run: |
+          echo "Deployment time: $(date)" > ./dist/deployment-info.txt
+          echo "Commit: ${{ github.sha }}" >> ./dist/deployment-info.txt
+          echo "Branch: ${{ github.ref_name }}" >> ./dist/deployment-info.txt
+          echo "Workflow: ${{ github.workflow }}" >> ./dist/deployment-info.txt
+
+      - name: Upload to Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: .vitepress/dist
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-        #   - name: Deploy
-    #     uses: peaceiris/actions-gh-pages@v3
-    #     with:
-    #       github_token: ${{ secrets.RAN_ACTIONS_TOKEN }} // 配置在项目里的secrets
-    #       exclude_assets: ""
-    #       publish_dir: packages/docs/.vitepress/dist // 需要发布内容的路径
+      # 部署后操作（可选）
+      - name: Deployment status
+        run: |
+          if [ "${{ steps.deployment.outcome }}" == "success" ]; then
+            echo "✅ Deployment successful!"
+            echo "🌐 URL: ${{ steps.deployment.outputs.page_url }}"
+          else
+            echo "❌ Deployment failed!"
+            exit 1
+          fi
+
+  # 通知作业（可选）
+  notify:
+    name: Send notification
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    if: always() # 无论成功失败都运行
+
+    steps:
+      - name: Build status
+        run: |
+          echo "Build job status: ${{ needs.build.result }}"
+          echo "Deploy job status: ${{ needs.deploy.result }}"
+          echo "Overall status: ${{ job.status }}"
+
+      # 可以添加Slack、Discord、Email等通知
+      # - name: Send Slack notification
+      #   uses: 8398a7/action-slack@v3
+      #   if: always()
+      #   with:
+      #     status: ${{ job.status }}
+      #     channel: '#deployments'
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

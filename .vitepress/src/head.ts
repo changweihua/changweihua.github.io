@@ -51,7 +51,7 @@ export const head: HeadConfig[] = [
     'script',
     {
       src: 'https://cdn.jsdmirror.com/npm/mathjax@4/tex-mml-chtml.js',
-      async: true,
+      async: 'true',
     },
   ],
   // 一些自定义样式

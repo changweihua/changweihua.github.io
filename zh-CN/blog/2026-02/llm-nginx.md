@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: 私有化部署 LLM 时，别再用 Nginx 硬扛流式请求了
 description: 推荐一个专为 vLLM/TGI 设计的高性能网关
-date: 2026-02-01 09:45:00 
+date: 2026-02-02 09:45:00 
 pageClass: blog-page-class
 cover: /covers/nginx.svg
 ---
@@ -26,7 +26,7 @@ cover: /covers/nginx.svg
 
 - 异步用量计量：请求结束后，将 `prompt_tokens` + `completion_tokens` 通过 HTTP Webhook 推送给业务系统，便于实现配额或计费
 
-- 轻量无依赖：单 Go 二进制，镜像 < 20MB，配置仅需 YAML，不连接数据库，不影响主链路性能
+- 轻量无依赖：单 Go 二进制，镜像 `< 20MB`，配置仅需 YAML，不连接数据库，不影响主链路性能
 
 - 生产就绪：内置 Prometheus 指标、健康检查、多后端负载均衡（轮询/最少连接）
 
@@ -34,11 +34,11 @@ cover: /covers/nginx.svg
 | :-----------: | :----: | :----: |
 | 流式请求支持 |  需手动配置 `proxy_buffering off`、`proxy_cache off`、`proxy_http_version 1.1` 等，易出错  |  开箱即用：自动识别 `stream=true`，设置正确 SSE 头并透传流 |
 | 首 Token 延迟（TTFT） |  若配置不当，缓冲会导致显著延迟  |  零缓冲透传，TTFT ≈ 后端原生延迟 |
-| 协议理解能力 |  无语义感知，仅转发字节流  |  原生解析 OpenAI API，识别 /`v1/chat/completions` 和 `stream` 字段 |
+| 协议理解能力 |  无语义感知，仅转发字节流  |  原生解析 OpenAI API，识别 `/v1/chat/completions` 和 `stream` 字段 |
 | 用量计量（token 计数） |  需额外日志解析 + 离线处理，延迟高、易丢失  |  请求结束后异步上报 `prompt_tokens/completion_tokens` 到 Webhook，结构化、可靠 |
 | 多后端负载均衡 |  支持，但需手动配置 `upstream` + `health_check`  |  内置轮询/最少连接策略，自动剔除故障节点 |
 | 部署复杂度 |  配置文件冗长，调试困难（尤其 SSE）  |  单 YAML 文件，5 行配置即可运行 |
-| 镜像体积 |  官方镜像 ～150MB+  |  < 20MB（Alpine + Go 静态编译） |
+| 镜像体积 |  官方镜像 `～150MB+`  |  `< 20MB`（Alpine + Go 静态编译） |
 | 扩展性 |  需 Lua（OpenResty）才能实现高级逻辑  |  专注 LLM 场景，不追求通用性，避免过度设计 |
 | 监控集成 |  需额外模块（如 Prometheus Nginx Exporter）  |  内置 Prometheus 指标（请求量、延迟、Webhook 成功率等） |
 | 适用场景 |  通用 Web 服务、静态资源、API 网关  |  专为 vLLM / TGI / OpenAI 兼容后端设计 |

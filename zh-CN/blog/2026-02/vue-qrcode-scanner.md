@@ -44,9 +44,7 @@ npm install jsqr
 
 ## 🚀 快速开始（Composable 用法） ##
 
-最简集成方式：直接在组件里调用 useQRCodeScanner。
-
-:::demo
+最简集成方式：直接在组件里调用 `useQRCodeScanner`。
 
 ```vue
 <template>
@@ -92,8 +90,6 @@ const parseQRCode = async () => {
 };
 </script>
 ```
-
-:::
 
 ## 🌐 从 URL 解析 ##
 

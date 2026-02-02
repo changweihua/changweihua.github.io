@@ -300,8 +300,13 @@ export default withMermaid(
     },
     vite: {
       css: {
+        // 完全禁用 lightningcss 的转换，只用于压缩
+        transformer: 'postcss', // 使用 PostCSS
         // transformer: "lightningcss",
         lightningcss: {
+          // 不报告未知规则为错误
+          // 忽略未知的 CSS 规则
+          errorRecovery: true,
           // 将 browserslist 转换为 LightningCSS 的目标格式
           targets: browserslistToTargets(browserslist('>= 0.25%')),
           // 关键配置：标记 deep 为合法伪类
@@ -309,12 +314,8 @@ export default withMermaid(
             //deep: true,
             // deepSelectorCombinator: true
           },
-          // 禁用特定优化
-          // minify: true,
           drafts: {
-            // nesting: true, // 启用嵌套语法
             customMedia: true, // 启用媒体查询变量
-            // keyframes: true, // 启用实验性关键帧支持
           },
           // 解决 scoped 样式问题
           cssModules: {
@@ -323,8 +324,6 @@ export default withMermaid(
             // 配置CSS模块化
             // pattern: "[name]__[local]__[hash:base64:5]",
           },
-          // 不报告未知规则为错误
-          errorRecovery: true,
           // // 允许特殊规则
           // unrecognized: {
           //   pseudos: "ignore", // 忽略未知伪类错误
