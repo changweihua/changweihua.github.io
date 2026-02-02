@@ -257,7 +257,6 @@
     "highlight.js": "^11.11.1",
     "markdown-it-mathjax3": "^5.2.0",
     "mermaid": "^11.12.2",
-    "oxc-minify": "^0.112.0",
     "prismjs": "^1.30.0",
     "release-it": "^19.2.4",
     "svg-pan-zoom": "^3.6.2",
@@ -269,5 +268,6 @@
   },
   "version": "0.12.1"
 }
+
 
 
