@@ -262,7 +262,7 @@
     "prismjs": "^1.30.0",
     "release-it": "^19.2.4",
     "svg-pan-zoom": "^3.6.2",
-    "vite": "8.0.0-beta.11",
+    "vite": "8.0.0-beta.12",
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.16",
     "vitest": "^4.0.18",
