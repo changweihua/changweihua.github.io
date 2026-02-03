@@ -148,6 +148,8 @@ jobs:
         run: |
           echo "=== 验证下载的构建产物 ==="
           echo "当前目录：$(pwd)"
+          echo "_site 目录内容:"
+          ls -la ./_site/
           echo "下载的文件："
           find ./_site -type f -name "*.html" | head -5
 
