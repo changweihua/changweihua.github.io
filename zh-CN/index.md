@@ -9,8 +9,8 @@ docAnalysis: false
 description: CMONO.NET Official Page Site
 
 hero:
-  name: "常伟华"
-  text: "DOTNET Developer"
+  name: '常伟华'
+  text: 'DOTNET Developer'
   tagline: 阳光大男孩
   image:
     src: /cwh.svg
@@ -171,43 +171,15 @@ head:
       content: changweihua.github.io 首页 CMONO.NET
 ---
 
-<!--
-> [!提醒] 重要
-> 强调用户在快速浏览文档时也不应忽略的重要信息。
-
-> [!建议]
-> 有助于用户更顺利达成目标的建议性信息。
-
-> [!重要]
-> 对用户达成目标至关重要的信息。
-
-> [!警告]
-> 因为可能存在风险，所以需要用户立即关注的关键内容。
-
-> [!注意]
-> 行为可能带来的负面影响。 -->
-<!--
-* VitePress <Badge type="info" text="default" />
-* VitePress <Badge type="tip" text="^1.9.0" />
-* VitePress <Badge type="warning" text="beta" />
-* VitePress <Badge type="danger" text="caution" /> -->
-<!--
-```c [HelloWorld.c]
-#include <stdio.h>
-
-int main(){
-
-  printf("Hello World !!!");
-
-  return 0;
-}
-
-``` -->
-
-<!-- 在 .md 文件或 Vue 组件中 -->
-<div class="text-black hidden md:flex dark:text-white bg-gray-100 dark:bg-gray-800 items-center justify-center rd-2xl my-3 py-5
+<div class="text-black hidden md:flex flex-col gap-6 dark:text-white bg-gray-100 dark:bg-gray-800 items-center justify-center rd-2xl my-3 py-5
 ">
+  <div class="video-player-wrapper">
+    <video class="video-element" controls autoplay muted loop>
+      <source src="/videos/cover.mp4">
+    </video>
+    <div class="video-title text-center">
+      看看海
+    </div>
+  </div>
   <CarouselCard></CarouselCard>
 </div>
-
-<!-- <TransitionNavBar /> -->
