@@ -101,7 +101,7 @@ const markdown: MarkdownOptions | undefined = {
       multibody: false,
       autolabel: false,
     })
-    const docRoot = fileURLToPath(new URL('../../../', import.meta.url))
+    const docRoot = fileURLToPath(new URL('../../', import.meta.url))
     md.use(demoPreviewPlugin, {
       docRoot,
     })

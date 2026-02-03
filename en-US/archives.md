@@ -37,6 +37,6 @@ const computedYearMap = computed(()=> {
     </div>
   </div>
   <div class="flex items-center justify-center" v-else>
-    <a-empty></a-empty>
+    <n-empty></n-empty>
   </div>
 </div>

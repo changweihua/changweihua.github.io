@@ -65,7 +65,7 @@ pageClass: blog-page-class
         </a>
       </div>
     </div>
-    <a-empty v-else></a-empty>
+    <n-empty v-else></n-empty>
   </div>
 </template>
 
