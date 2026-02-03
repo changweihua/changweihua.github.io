@@ -93,11 +93,13 @@ jobs:
       # 6. 验证构建输出
       - name: Verify build output
         run: |
+          # 验证构建输出
+          echo "✅ 验证构建结果..."
           if [ -d ".vitepress/dist" ]; then
-            echo "Build directory exists"
-            ls -la .vitepress/dist/ | head -20
+            echo "构建成功！输出目录: .vitepress/dist"
+            echo "总文件数: $(find .vitepress/dist -type f | wc -l)"
           else
-            echo "Build directory not found!"
+            echo "❌ 构建失败: .vitepress/dist 目录不存在"
             exit 1
           fi
 
@@ -114,7 +116,7 @@ jobs:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: build # 依赖build作业
-    if: github.event_name == 'push' # 仅在push事件时部署
+    # if: github.event_name == 'push' # 仅在push事件时部署
 
     environment:
       name: github-pages
@@ -126,28 +128,51 @@ jobs:
       contents: write # 如果需要commit到gh-pages分支
 
     steps:
+      - name: Check workspace
+        run: |
+          echo "=== Workspace structure ==="
+          ls -la
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: documentation
-          path: ./dist
+          path: ./_site # 使用GitHub Pages推荐的标准路径
 
       # 设置和部署到 GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # 在 deploy 作业的 steps 中，添加验证步骤：
+      - name: Validate deployment files
+        run: |
+          echo "=== 验证下载的构建产物 ==="
+          echo "当前目录：$(pwd)"
+          echo "下载的文件："
+          find ./_site -type f -name "*.html" | head -5
+
+          # 检查是否有index.html
+          if [ ! -f "./_site/index.html" ]; then
+            echo "❌ 错误：没有找到 index.html"
+            echo "目录结构："
+            ls -la ./_site/
+            exit 1
+          fi
+
+          echo "✅ 找到 index.html，准备部署"
+
       # 添加部署时间戳文件（可选）
       - name: Create deployment info
         run: |
-          echo "Deployment time: $(date)" > ./dist/deployment-info.txt
-          echo "Commit: ${{ github.sha }}" >> ./dist/deployment-info.txt
-          echo "Branch: ${{ github.ref_name }}" >> ./dist/deployment-info.txt
-          echo "Workflow: ${{ github.workflow }}" >> ./dist/deployment-info.txt
+          echo "Deployment time: $(date)" > ./_site/deployment-info.txt
+          echo "Commit: ${{ github.sha }}" >> ./_site/deployment-info.txt
+          echo "Branch: ${{ github.ref_name }}" >> ./_site/deployment-info.txt
+          echo "Workflow: ${{ github.workflow }}" >> ./_site/deployment-info.txt
 
       - name: Upload to Pages
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./dist
+          path: ./_site # 使用标准的_site路径
 
       - name: Deploy to GitHub Pages
         id: deployment
