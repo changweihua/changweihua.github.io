@@ -1,14 +1,14 @@
 <template>
-  <div class="lizi-container">
+  <div
+    class="lizi-container"
+    ref="liziContainer"
+  >
     <div
       class="three-container"
       v-element-size="onWindowResize"
       ref="containerRef"
-    ></div>
-    <div
-      class="ripple-container"
-      id="rippleContainer"
-    ></div>
+    >
+    </div>
   </div>
 </template>
 
@@ -245,5 +245,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .ripple-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
   }
 </style>
