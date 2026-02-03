@@ -1757,3 +1757,96 @@ figcaption {
   backdrop-filter: blur(20px);
   overflow: hidden;
 }
+
+/* 为所有VP按钮添加平滑的过渡基础 */
+.VPButton {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  /* 使用平滑的缓动函数 */
+  transform-origin: center;
+  /* 确保缩放等变换从中心开始 */
+}
+
+/* 悬停效果：轻微上浮与阴影 */
+.VPButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* 激活（点击）效果：瞬时下压 */
+.VPButton:active {
+  transform: translateY(-1px);
+  /* 点击时回弹一点 */
+  transition-duration: 0.1s;
+  /* 点击动画更快 */
+  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* 焦点效果：优雅的轮廓光环 */
+.VPButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+// 悬停边框绘制效果
+/* HTML中需添加类名：vp-btn-hover-border */
+.vp-btn-hover-border {
+  position: relative;
+  background: transparent !important;
+  color: #3b82f6;
+  border: none !important;
+}
+
+.vp-btn-hover-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  transition: border-color 0.3s, border-width 0.2s;
+}
+
+.vp-btn-hover-border:hover::before {
+  border-color: #3b82f6;
+  border-width: 2px;
+}
+
+// 流光渐变背景效果
+/* HTML中需添加类名：vp-btn-shine */
+.vp-btn-shine {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6) !important;
+  background-size: 200% auto !important;
+  color: white;
+  border: none !important;
+}
+
+.vp-btn-shine:hover {
+  background-position: right center !important;
+  animation: vp-shine 1.5s linear infinite;
+}
+
+@keyframes vp-shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+// 图标微动效果（适用于带图标的按钮）
+/* 悬停时，按钮内的图标单独动画 */
+.VPButton:hover .VPIcon {
+  animation: vp-icon-bounce 0.6s ease;
+}
+
+@keyframes vp-icon-bounce {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+}

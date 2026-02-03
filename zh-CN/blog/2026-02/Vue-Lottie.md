@@ -183,13 +183,12 @@ onUnmounted(() => {
 
 ```vue
 <template>
-  <div class="demo-page">
+  <div class="flex flex-col gap-6 items-center">
     <h2>Lottie 基础使用示例</h2>
     <LottieAnimation
       path="/lottie/animation1.json"
       width="200px"
       height="200px"
-      :loop="false"
       :speed="1.2"
       @complete="handleAnimationComplete"
     />
@@ -210,14 +209,16 @@ const handleAnimationComplete = () => {
 
 如果将动画文件放在 `src/assets` 目录，需先导入 JSON 文件（Vue3 + Vite 无需额外配置，Webpack 需确保支持 JSON 导入）：
 
+:::demo
+
 ```vue
 <template>
-  <div class="demo-page">
+  <div class="flex flex-col gap-6 items-center">
     <LottieAnimation
       :animation-data="animationData"
       width="200px"
       height="200px"
-      :autoplay="false"
+      :autoplay="true"
       ref="lottieRef"
     />
     <button @click="playAnimation">播放动画</button>
@@ -226,24 +227,26 @@ const handleAnimationComplete = () => {
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, useTemplateRef} from 'vue';
 // 导入本地 JSON 动画文件
-import animationData from '@/assets/lottie/animation.json';
+import animationData from '/src/assets/lottie/animation2.json';
 
-const animationData = ref(animationData);
-const lottieRef = ref(null);
+const animationDataRef = ref(animationData);
+const lottieRef = ref();
 
 // 播放动画
 const playAnimation = () => {
-  lottieRef.value.lottieInstance.play();
+  lottieRef.value && lottieRef.value.lottieInstance.play();
 };
 
 // 暂停动画
 const pauseAnimation = () => {
-  lottieRef.value.lottieInstance.pause();
+  lottieRef.value && lottieRef.value.lottieInstance.pause();
 };
 </script>
 ```
+
+:::
 
 ## 四、高级配置与交互控制 ##
 
@@ -299,6 +302,7 @@ lottieInstance.setLoop(3); // 循环 3 次
 
 ```vue
 <template>
+<div class="flex flex-col gap-6 items-center">
   <LottieAnimation
     path="/lottie/animation2.json"
     @enterFrame="handleEnterFrame"
@@ -310,6 +314,7 @@ lottieInstance.setLoop(3); // 循环 3 次
     v-model="progress"
     @input="handleProgressChange"
   />
+</div>
 </template>
 
 <script setup>

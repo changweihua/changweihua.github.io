@@ -16,16 +16,17 @@ hero:
     src: /cwh.svg
     alt: 网页的logo图标
   actions:
-    - theme: brand
+    - theme: brand vp-btn-shine
       text: 作者简历
       link: /zh-CN/resume
-    - theme: alt
+    - theme: sponsor vp-btn-hover-border
       text: 我的2026
       link: /zh-CN/me.2026
-    - theme: alt
+    - theme: alt vp-icon-bounce
       text: 关于
       link: /zh-CN/about
       target: blank
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
 
 features:
   - title: 统一认证平台

@@ -9,9 +9,7 @@ import namedCode from 'markdown-it-named-code-blocks'
 import echartsMarkdownPlugin from '../plugins/markdown/echarts-markdown'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import mathjax3 from 'markdown-it-mathjax3'
-import { autoArticleTitlePlugin } from '../plugins/markdown/autoArticleTitle'
 import MarkdownItGitHubAlerts from 'markdown-it-github-alerts'
-import markdownItReplaceLink from 'markdown-it-replace-link'
 import markdownItTableExt from 'markdown-it-multimd-table-ext'
 import { vitepressMarkmapPreview } from 'vitepress-markmap-preview'
 import { containerPreview, componentPreview } from '@vitepress-demo-preview/plugin'
@@ -19,8 +17,6 @@ import { vitepressDemoPlugin } from 'vitepress-demo-plugin'
 import { resolve } from 'path'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
-import { imgLazyload } from '@mdit/plugin-img-lazyload'
-import { figure } from '@mdit/plugin-figure'
 import codeBarPlugin from '../plugins/markdown/codeBarPlugin'
 import { linkToCardPlugin } from 'vitepress-linkcard'
 import type { LinkToCardPluginOptions } from 'vitepress-linkcard'
@@ -29,12 +25,10 @@ import glossary from './glossary.json'
 import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
 import picturePlugin from '../plugins/markdown/markdown-it-picture'
 
-const CONSTS = {
-  __custom_variable__: 'your value',
-}
-
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
+  '@vp': resolve(__dirname, '../components'),
+  '@assets': resolve(__dirname, '../../src/assets'),
 }
 
 const markdown: MarkdownOptions | undefined = {
@@ -107,7 +101,7 @@ const markdown: MarkdownOptions | undefined = {
       multibody: false,
       autolabel: false,
     })
-    const docRoot = fileURLToPath(new URL('../../', import.meta.url))
+    const docRoot = fileURLToPath(new URL('../../../', import.meta.url))
     md.use(demoPreviewPlugin, {
       docRoot,
     })

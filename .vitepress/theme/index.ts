@@ -1,7 +1,7 @@
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme-without-fonts'
-import { h, watchEffect, watch, nextTick } from 'vue'
+import { h, watchEffect, nextTick } from 'vue'
 import AnimationTitle from '../components/AnimtedTitle.vue'
 import DocAfter from '../components/DocAfter.vue'
 import ArticleFooter from '../components/ArticleFooter.vue'
@@ -10,7 +10,8 @@ import HoverableText from '../components/HoverableText.vue'
 import CarouselGallery from '../components/CarouselGallery.vue'
 import ProjectLab from '../components/ProjectLab.vue'
 import CarouselCard from '../components/CarouselCard.vue'
-import MarkdownEChart from '#.vitepress/components/MarkdownEChart.vue'
+import MarkdownEChart from '../components/MarkdownEChart.vue'
+import LottieAnimation from '../components/LottieAnimation.vue'
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold' // import method
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 // @ts-ignore
@@ -429,6 +430,7 @@ export default {
       app.component('m-icon', Icon)
       app.component('GlossaryTooltip', GlossaryTooltip)
       app.component('HtmlPreview', HtmlPreview)
+      // app.component('LottieAnimation', LottieAnimation)
 
       app.use(directives)
 
