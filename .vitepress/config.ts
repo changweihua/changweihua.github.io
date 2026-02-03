@@ -3,36 +3,97 @@ import { docsConfig } from './src/docs'
 import { head } from './src/head'
 import { markdown } from './src/markdown'
 import { RSS } from './src/rss'
-import { HeadConfig, defineConfig } from 'vitepress'
+import { HeadConfig, type UserConfig } from 'vitepress'
 import { handleHeadMeta } from './utils/handleHeadMeta'
-import vitepressProtectPlugin from 'vitepress-protect-plugin'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind'
-import { type UserConfig } from 'vitepress'
-import { VitePressI18nOptions } from 'vitepress-i18n/types'
 import MdH1 from 'vitepress-plugin-md-h1'
 import AutoFrontmatter, { FileInfo } from 'vitepress-plugin-auto-frontmatter'
-import fs from 'fs-extra'
 import { RssPlugin } from 'vitepress-plugin-rss'
 import { resolve } from 'path'
 import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import browserslist from 'browserslist'
 import { browserslistToTargets } from 'lightningcss'
-import { ImagePreviewPlugin } from 'vitepress-plugin-image-preview'
 import { SponsorPlugin } from 'vitepress-plugin-sponsor'
 import llmstxtPlugin from 'vitepress-plugin-llmstxt'
-import DocAnalysis, { FilePathInfo } from 'vitepress-plugin-doc-analysis'
-import { statSync } from 'node:fs'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { lightMermaidConfig } from './theme/mermaid-theme'
 
-const docAnalysisOption = {
-  transformFile: (fileInfo: FilePathInfo) => {
-    // 获取文件的修改时间
-    const mtime = statSync(fileInfo.relativePath).mtime.toLocaleString()
-    return { mtime }
+import { Schema, ValidateEnv } from '@julr/vite-plugin-validate-env'
+import vueStyledPlugin from '@vue-styled-components/plugin'
+import colors from 'picocolors'
+import UnoCSS from 'unocss/vite'
+import Iconify from 'unplugin-iconify-generator/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
+import versionInjector from 'unplugin-version-injector/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import { defineConfig, type Plugin } from 'vite'
+import { envParse } from 'vite-plugin-env-parse'
+import { vitePluginFakeServer } from 'vite-plugin-fake-server'
+import Inspect from 'vite-plugin-inspect'
+import mkcert from 'vite-plugin-mkcert'
+import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
+import { qrcode } from 'vite-plugin-qrcode'
+
+// ♻️ 重构
+const yourPlugin: () => Plugin = () => ({
+  name: 'test-plugin',
+  config(config) {
+    // get version in vitePlugin if you open `ifGlobal`
+    console.log(config.define)
   },
+  configResolved(config) {
+    console.log('options', config.optimizeDeps, config.oxc)
+  },
+  resolveId() {
+    console.log(
+      colors.red(`viteVersion: ${colors.italic(this.meta.viteVersion)} `),
+      colors.green(` rollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `),
+      colors.blue(` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `)
+    )
+  },
+})
+
+function getDevPlugins() {
+  if (process.env.NODE_ENV === 'production') {
+    return []
+  }
+  return [
+    qrcode(),
+    ValidateEnv({
+      validator: 'builtin',
+      schema: {
+        VITE_APP_PRIMARY_COLOR: Schema.string(),
+      },
+    }),
+    mockDevServerPlugin(),
+    Inspect(),
+    envParse(),
+    yourPlugin(),
+    vitePluginFakeServer({
+      include: 'fake', // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
+      enableProd: false, // 是否在生产环境下设置mock
+    }),
+    // 开发环境错误提示优化
+    {
+      name: 'dev-error-handler',
+      configureServer(server: any) {
+        server.middlewares.use('/api', (req: any, _res: any, next: any) => {
+          // ✅ 开发环境API错误处理
+          console.log(`🔍 API Request: ${req.method} ${req.url}`)
+          next()
+        })
+      },
+    },
+    mkcert({
+      savePath: './certs', // save the generated certificate into certs directory
+      autoUpgrade: false,
+      force: false, // force generation of certs even without setting https property in the vite config
+    }),
+  ]
 }
 
 const customElements = [
@@ -189,18 +250,6 @@ const vitePressOptions: UserConfig = {
   },
 }
 
-const vitePressI18nOptions: Partial<VitePressI18nOptions> = {
-  locales: [
-    { path: 'en-US', locale: 'en' },
-    { path: 'zh-CN', locale: 'zhHans' },
-  ],
-  rootLocale: 'zhHans',
-  description: {
-    en: 'Hello',
-    zhHans: '你好',
-  },
-}
-
 // 转义Markdown中的尖括号，但保留代码块内容
 function escapeMarkdownBrackets(markdownContent: string) {
   // 正则表达式模式：匹配代码块
@@ -250,27 +299,6 @@ const createCategory = (fileInfo: FileInfo) => {
   return { categories: categories.length ? categories : [''] }
 }
 
-// Vite插件：在Markdown文件被处理前转义尖括号
-const markdownBracketEscaper = {
-  name: 'markdown-bracket-escaper',
-  enforce: 'pre',
-  async transform(code: string, id: string) {
-    // 只处理Markdown文件
-    if (!id.endsWith('.md')) return null
-
-    try {
-      // 读取原始文件内容
-      const rawContent = await fs.promises.readFile(id, 'utf-8')
-      // 转义尖括号
-      const escapedContent = escapeMarkdownBrackets(rawContent)
-      return escapedContent
-    } catch (err) {
-      console.error('Error processing Markdown file:', err)
-      return code
-    }
-  },
-}
-
 export default withMermaid(
   defineConfig({
     mermaid: {
@@ -300,9 +328,6 @@ export default withMermaid(
     },
     vite: {
       css: {
-        // 完全禁用 lightningcss 的转换，只用于压缩
-        // transformer: 'postcss', // 使用 PostCSS
-        // transformer: "lightningcss",
         lightningcss: {
           // 不报告未知规则为错误
           // 忽略未知的 CSS 规则
@@ -310,10 +335,7 @@ export default withMermaid(
           // 将 browserslist 转换为 LightningCSS 的目标格式
           targets: browserslistToTargets(browserslist('>= 0.25%')),
           // 关键配置：标记 deep 为合法伪类
-          pseudoClasses: {
-            //deep: true,
-            // deepSelectorCombinator: true
-          },
+          pseudoClasses: {},
           drafts: {
             customMedia: true, // 启用媒体查询变量
           },
@@ -324,17 +346,10 @@ export default withMermaid(
             // 配置CSS模块化
             // pattern: "[name]__[local]__[hash:base64:5]",
           },
-          // // 允许特殊规则
-          // unrecognized: {
-          //   pseudos: "ignore", // 忽略未知伪类错误
-          //   atRules: "ignore", // 忽略无法识别的规则（包括 @keyframes）
-          // },
         },
         // 同时使用 PostCSS 处理 @apply
         // postcss: true,
         devSourcemap: true,
-        // transformer: "postcss", // 使用 Rust 实现的 CSS 处理器
-        // codeSplit: false,
         /**
          * 如果启用了这个选项，那么 CSS 预处理器会尽可能在 worker 线程中运行；即通过多线程运行 CSS 预处理器，从而极大提高其处理速度
          * https://cn.vitejs.dev/config/shared-options#css-preprocessormaxworkers
@@ -364,35 +379,35 @@ export default withMermaid(
           },
         },
       },
-      // 强制预构建
-      // Vite 的预构建会将 CommonJS / UMD 依赖转换为 ESM，并将多个内部模块合并为单个模块，减少 HTTP 请求数量。
-      optimizeDeps: {
-        include: [
-          'vue',
-          'pinia',
-          'dayjs',
-          'unocss',
-          'vue-router',
-          'vue-i18n',
-          'lodash-es',
-          '@vueuse/core',
-          'markdown-it',
-        ],
-        exclude: [
-          '@iconify/json',
-          'vue3-next-qrcode',
-          'vitepress-plugin-detype',
-          'vitepress-plugin-tabs',
-          'vitepress-plugin-npm-commands',
-        ],
-      },
+      // // 强制预构建
+      // // Vite 的预构建会将 CommonJS / UMD 依赖转换为 ESM，并将多个内部模块合并为单个模块，减少 HTTP 请求数量。
+      // optimizeDeps: {
+      //   include: [
+      //     'vue',
+      //     'pinia',
+      //     'dayjs',
+      //     'unocss',
+      //     'vue-router',
+      //     'vue-i18n',
+      //     'lodash-es',
+      //     '@vueuse/core',
+      //     'markdown-it',
+      //   ],
+      //   exclude: [
+      //     '@iconify/json',
+      //     'vue3-next-qrcode',
+      //     'vitepress-plugin-detype',
+      //     'vitepress-plugin-tabs',
+      //     'vitepress-plugin-npm-commands',
+      //   ],
+      // },
       ssr: {
         external: [
           'vue3-next-qrcode',
           'vitepress-plugin-tabs',
           'vitepress-plugin-detype',
           'vitepress-plugin-npm-commands',
-          'hover-tilt'
+          'hover-tilt',
         ], // Externalize Node.js modules
         noExternal: [
           'vitepress-plugin-nprogress',
@@ -417,13 +432,38 @@ export default withMermaid(
       },
       logLevel: 'warn',
       plugins: [
-        {
-          name: 'custom:adjust-width',
-          transform: (code) => code.replaceAll('1280px', '1280px'),
-        },
-        viteDemoPreviewPlugin(),
         vueJsx(),
-        // ImagePreviewPlugin(),
+        ...getDevPlugins(),
+        viteDemoPreviewPlugin(),
+        Components({
+          dirs: ['./src/components', '.vitepress/components'], // 配置需要自动导入的组件目录
+          dts: 'typings/components.d.ts',
+          // 关键：让插件处理 .md 文件
+          include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+          resolvers: [
+            NaiveUiResolver(),
+            IconsResolver({
+              // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
+              prefix: 'icon',
+              strict: true,
+            }),
+          ],
+        }),
+        Icons({
+          compiler: 'vue3',
+          autoInstall: true,
+          scale: 1.2, // Scale of icons against 1em
+          defaultStyle: '', // Style apply to icons
+          defaultClass: '', // Class names apply to icons
+        }),
+        UnoCSS(),
+        vueStyledPlugin(),
+        Iconify({
+          collections: {
+            cmono: './src/assets/icons/mono',
+          },
+        }),
+        versionInjector(),
         groupIconVitePlugin({
           customIcon: {
             ae: 'logos:adobe-after-effects',
@@ -496,7 +536,6 @@ export default withMermaid(
           weChatQR: '/wechat-pay.svg',
         }),
         llmstxtPlugin(),
-        // DocAnalysis(docAnalysisOption),
         pagefindPlugin({
           forceLanguage: 'zh-CN',
           locales: {
@@ -552,6 +591,5 @@ export default withMermaid(
       },
     },
     ...vitePressOptions,
-  })
+  } satisfies UserConfig)
 )
-

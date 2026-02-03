@@ -3,18 +3,18 @@ lastUpdated: true
 commentabled: true
 recommended: true
 title: 私有化部署 LLM 时，别再用 Nginx 硬扛流式请求了
-description: 推荐一个专为 vLLM/TGI 设计的高性能网关
+description: 推荐一个专为 `vLLM/TGI` 设计的高性能网关
 date: 2026-02-02 09:45:00 
 pageClass: blog-page-class
 cover: /covers/nginx.svg
 ---
 
-在私有化部署开源大模型（如 Llama 3、Qwen、Mistral）时，很多团队会直接用 Nginx 作为反向代理，将流量转发给 vLLM 或 TGI 后端。这在非流式请求下工作良好，但一旦启用 `stream=true`，问题就来了：
+在私有化部署开源大模型（如 `Llama 3`、`Qwen`、`Mistral`）时，很多团队会直接用 `Nginx` 作为反向代理，将流量转发给 `vLLM` 或 `TGI` 后端。这在非流式请求下工作良好，但一旦启用 `stream=true`，问题就来了：
 
-- 需手动关闭 `proxy_buffering`，否则首 token 延迟显著增加
+- 需手动关闭 `proxy_buffering`，否则首 `token` 延迟显著增加
 - SSE 响应头（`Content-Type: text/event-stream`）需显式设置
 - 连接超时、chunk 丢失、代理缓冲等问题频发
-- 更不用说后续的 token 用量统计、多实例负载均衡等需求
+- 更不用说后续的 `token` 用量统计、多实例负载均衡等需求
 
 最近注意到一个新开源项目 [LLMProxy](https://github.com/aiyuekuang/LLMProxy)，它没有试图成为“另一个 Nginx”，而是*专注解决 LLM 流量调度这一具体问题*，设计非常克制：
 
@@ -28,7 +28,7 @@ cover: /covers/nginx.svg
 
 - 轻量无依赖：单 Go 二进制，镜像 `< 20MB`，配置仅需 YAML，不连接数据库，不影响主链路性能
 
-- 生产就绪：内置 Prometheus 指标、健康检查、多后端负载均衡（轮询/最少连接）
+- 生产就绪：内置 `Prometheus` 指标、健康检查、多后端负载均衡（轮询/最少连接）
 
 |  能力  |  Nginx（通用反向代理）  |   LLMProxy（LLM 专用网关）  |
 | :-----------: | :----: | :----: |
@@ -40,7 +40,7 @@ cover: /covers/nginx.svg
 | 部署复杂度 |  配置文件冗长，调试困难（尤其 SSE）  |  单 YAML 文件，5 行配置即可运行 |
 | 镜像体积 |  官方镜像 `～150MB+`  |  `< 20MB`（Alpine + Go 静态编译） |
 | 扩展性 |  需 Lua（OpenResty）才能实现高级逻辑  |  专注 LLM 场景，不追求通用性，避免过度设计 |
-| 监控集成 |  需额外模块（如 Prometheus Nginx Exporter）  |  内置 Prometheus 指标（请求量、延迟、Webhook 成功率等） |
+| 监控集成 |  需额外模块（如 Prometheus Nginx Exporter）  |  内置 `Prometheus` 指标（请求量、延迟、Webhook 成功率等） |
 | 适用场景 |  通用 Web 服务、静态资源、API 网关  |  专为 vLLM / TGI / OpenAI 兼容后端设计 |
 
 ## 🚀 快速体验 ##
