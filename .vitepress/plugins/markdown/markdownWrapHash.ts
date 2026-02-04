@@ -111,7 +111,7 @@ export function markdownWrapHashPlugin(md: MarkdownIt, options: MarkdownWrapHash
     // 构建包裹元素
     const wrapperAttrs = [
       `id="md-${hash}"`,
-      `v-hero="{ id: 'md-${hash}' }"`,
+      `data-hero-id="md-${hash}"`,
       `data-file-hash="${hash}"`,
       `data-file-path="${filePath}"`,
     ]
