@@ -27,7 +27,7 @@ import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { tasklist } from '@mdit/plugin-tasklist'
 import { markdownWrapHashPlugin } from '../plugins/markdown/markdownWrapHash'
 import { componentHeroWrapPlugin } from '../plugins/markdown/componentHeroWrap'
-import { pathHashWrapperPlugin } from './plugins/markdown/pathHashWrapper'
+import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -226,5 +226,6 @@ const markdown: MarkdownOptions | undefined = {
 }
 
 export { markdown }
+
 
 
