@@ -26,7 +26,7 @@ export function pathHashWrapperPlugin(md: MarkdownIt) {
     if (!env.frontmatter) {
       env.frontmatter = {}
     }
-    env.frontmatter.fileHash = currentFileHash
+    env.frontmatter.fileHash = hash
 
     // 返回包裹后的 HTML，使用 ClientOnly 包裹自定义组件
     return `<ClientOnly>
