@@ -43,6 +43,7 @@ let categories: ref<Array<{
     link: string;
     description?: string;
     icon: string;
+    hash: string
     cover?: string
     coverAlt?: string
   }>> = ref([]);
@@ -52,7 +53,8 @@ onMounted(() => {
       .slice(0, 30).map((p) => {
     return {
       link: p.url,
-      title: p.title ,
+      title: p.title,
+      hash: p.hash,
       description: p.date.string,// p.excerpt,
       // poster: '/images/cmono-4c0cf778e497ab206289099ce51db5f.png"',
       cover: p.cover

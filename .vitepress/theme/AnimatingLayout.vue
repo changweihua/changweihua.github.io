@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { inBrowser, useData, useRouter } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, provide, useSlots, onMounted } from "vue";
 import mediumZoom from "medium-zoom";
 import { MediumZoom } from "vitepress-component-medium-zoom";
 import "vitepress-component-medium-zoom/style.css";
+import DocWithHash from './components/DocWithHash.vue'
 
 const { isDark } = useData();
 const slots = Object.keys(useSlots());
@@ -88,6 +89,11 @@ router.onAfterPageLoad = function () {
     setupMediumZoom();
   });
 };
+
+// 提供内容 hash 给所有组件
+const { frontmatter } = useData()
+// 访问文件的 hash
+console.log('文件 Hash:', frontmatter.value.fileHash)
 </script>
 
 <template>

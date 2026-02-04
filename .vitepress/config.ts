@@ -37,6 +37,8 @@ import Inspect from 'vite-plugin-inspect'
 import mkcert from 'vite-plugin-mkcert'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { qrcode } from 'vite-plugin-qrcode'
+import { contentHashPlugin } from './plugins/contentHash'
+import frontmatterHashPlugin from './plugins/frontmatterHash'
 
 // ♻️ 重构
 const yourPlugin: () => Plugin = () => ({
@@ -185,6 +187,8 @@ const customElements = [
   'annotation',
   'annotation-xml',
   'hover-tilt',
+  'my-button',
+  'm-hero-logo',
 ]
 
 const vitePressOptions: UserConfig = {
@@ -433,6 +437,7 @@ export default withMermaid(
       logLevel: 'warn',
       plugins: [
         vueJsx(),
+        // frontmatterHashPlugin(),
         ...getDevPlugins(),
         viteDemoPreviewPlugin(),
         Components({

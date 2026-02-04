@@ -39,13 +39,15 @@ import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
 
 import directives from '../directives'
 
+import '../web-components'
+
 import { NaiveUIContainer } from '@vitepress-demo-preview/component'
 import '@vitepress-demo-preview/component/dist/style.css'
 
 import { defineClientComponentConfig } from '@vitepress-demo-preview/core'
 
 import '@catppuccin/vitepress/theme/frappe/lavender.css'
-
+import VueHero from 'vue-hero-cross'
 import PageLost from '../components/PageLost.vue'
 import ArticleQRCode from '../components/ArticleQRCode.vue'
 
@@ -206,7 +208,8 @@ export default {
             class: 'sm:hidden md:(visible flex h-full items-center justify-center)',
             style: 'position: relative;',
           },
-          [h(HeroLogo)]
+          [h('w-hero-logo')]
+          // [h(HeroLogo)]
         ),
       // "home-hero-image": () =>
       //   h(
@@ -419,6 +422,8 @@ export default {
       enhanceAppWithTabs(app)
 
       useComponents(app, DemoPreview)
+
+      app.use(VueHero)
 
       // 在 markdown 文件中使用，必须手动注册
       app.component('demo-preview', NaiveUIContainer)

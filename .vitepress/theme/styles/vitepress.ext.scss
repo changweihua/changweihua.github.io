@@ -227,7 +227,7 @@ a.VPSkipLink::after {
   outline: none;
   background:
     linear-gradient(white, white) padding-box,
-    linear-gradient(270deg, #ff4d4d, #ffa64d, #ffff4d, #4dff88, #4dd2ff, #b84dff, #ff4da6, #ff4d4d)
+    linear-gradient(270deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4), var(--color-5), var(--color-6), var(--color-7), var(--color-8))
       border-box;
   background-size: 400% 100%;
   background-repeat: repeat;
@@ -1178,35 +1178,35 @@ h1 {
   // }
 
   /* 边框旋转发光效果 */
-  .VPButton.brand::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: linear-gradient(45deg, var(--color-1), var(--color-2), var(--color-1));
-    border-radius: 10px;
-    z-index: -1;
-    animation: rotate 2s linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+  // .VPButton.brand::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: -3px;
+  //   left: -3px;
+  //   right: -3px;
+  //   bottom: -3px;
+  //   background: linear-gradient(45deg, var(--color-3), var(--color-4), var(--color-5));
+  //   border-radius: 10px;
+  //   z-index: -1;
+  //   animation: rotate 2s linear infinite;
+  //   opacity: 0;
+  //   transition: opacity 0.3s ease;
+  // }
 
-  .VPButton.brand::after {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: linear-gradient(45deg, var(--color-1), var(--color-2), var(--color-1));
-    border-radius: 10px;
-    z-index: -2;
-    filter: blur(15px);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+  // .VPButton.brand::after {
+  //   content: '';
+  //   position: absolute;
+  //   top: -3px;
+  //   left: -3px;
+  //   right: -3px;
+  //   bottom: -3px;
+  //   background: linear-gradient(45deg, var(--color-3), var(--color-4), var(--color-5));
+  //   border-radius: 10px;
+  //   z-index: -2;
+  //   filter: blur(15px);
+  //   opacity: 0;
+  //   transition: opacity 0.3s ease;
+  // }
 
   .VPButton.brand:hover::before,
   .VPButton.brand:hover::after {
@@ -1675,7 +1675,7 @@ figcaption {
   justify-content: center;
   align-items: center;
   font-size: 26px;
-  background: linear-gradient(45deg, #f9d423, #ff4e50, #7b4397, #00c6ff);
+  background: linear-gradient(45deg, var(--color-1), var(--color-3), var(--color-5), var(--color-7));
   background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -1787,12 +1787,16 @@ figcaption {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
 
+.VPButton.sponsor {
+  color: var(--vp-button-sponsor-text) !important;
+}
+
 // 悬停边框绘制效果
 /* HTML中需添加类名：vp-btn-hover-border */
 .vp-btn-hover-border {
   position: relative;
   background: transparent !important;
-  color: #3b82f6;
+  color: var(--color-3);
   border: none !important;
 }
 
@@ -1809,16 +1813,15 @@ figcaption {
 }
 
 .vp-btn-hover-border:hover::before {
-  border-color: #3b82f6;
+  border-color: var(--vp-c-brand-1);
   border-width: 2px;
 }
 
 // 流光渐变背景效果
 /* HTML中需添加类名：vp-btn-shine */
 .vp-btn-shine {
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6) !important;
+  background: linear-gradient(90deg, var(--color-8), var(--color-3), var(--color-1));
   background-size: 200% auto !important;
-  color: white;
   border: none !important;
 }
 
@@ -1848,5 +1851,57 @@ figcaption {
 
   50% {
     transform: translateX(3px);
+  }
+}
+
+/* .vitepress/theme/styles/wrap.css */
+
+/* 包裹容器的基本样式 */
+.markdown-content {
+  position: relative;
+}
+
+/* 开发模式下显示 hash */
+.markdown-content::before {
+  content: 'Hash: ' attr(data-file-hash);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(0, 150, 255, 0.1);
+  color: #0969da;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  border-radius: 3px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.markdown-content:hover::before {
+  opacity: 1;
+}
+
+/* 为不同的文件夹添加不同的边框颜色 */
+.markdown-content[data-file-path*="/blog/"] {
+  border-left: 3px solid #3fb950;
+}
+
+.markdown-content[data-file-path*="/manual/"] {
+  border-left: 3px solid #1f6feb;
+}
+
+.markdown-content[data-file-path*="/gallery/"] {
+  border-left: 3px solid #a371f7;
+}
+
+/* 打印时隐藏装饰 */
+@media print {
+  .markdown-content::before {
+    display: none;
+  }
+
+  .markdown-content {
+    border-left: none !important;
   }
 }

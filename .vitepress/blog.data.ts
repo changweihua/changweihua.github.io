@@ -5,11 +5,13 @@
 
 // Support i18n in contentLoader
 import { createContentLoader, type SiteConfig } from 'vitepress'
-import dayjs from "./hooks/useDayjs";
+import dayjs from './hooks/useDayjs'
+import { createHash } from 'crypto'
 
 export interface Post {
   title: string
   url: string
+  hash: string
   date: {
     time: number
     string: string
@@ -34,18 +36,19 @@ export declare const data: Data
 const config: SiteConfig = (globalThis as any).VITEPRESS_CONFIG
 const locales = Object.keys(config.userConfig.locales ?? {})
 
+function calculateHash(content: string): string {
+  return createHash('md5').update(content).digest('hex').slice(0, 8)
+}
+
 // or simply - const locales = ['root', 'fr']
 
-export default createContentLoader([
-    "**/blog/**/!(index|README).md",
-  ], {
-    includeSrc: true, // 包含原始 markdown 源?
-    render: true,     // 包含渲染的整页 HTML?
-    excerpt: true,    // 包含摘录?
+export default createContentLoader(['**/blog/**/!(index|README).md'], {
+  includeSrc: true, // 包含原始 markdown 源?
+  render: true, // 包含渲染的整页 HTML?
+  excerpt: true, // 包含摘录?
   transform(raws) {
-
     const grouped: Data = {}
-    const pattern = /!\[(.*?)\]\((.*?)\)/mg;
+    const pattern = /!\[(.*?)\]\((.*?)\)/gm
 
     raws.forEach((item) => {
       const { url, frontmatter, excerpt, src } = item
@@ -54,37 +57,37 @@ export default createContentLoader([
       // src?.match(/!\[(.*?)\]\((.*?)\)/)
 
       let cover = frontmatter['cover']
-      let matcher;
+      let matcher
 
       if (src) {
-        while (( matcher = pattern.exec(src)) !== null) {
+        while ((matcher = pattern.exec(src)) !== null) {
           cover = matcher[2]
-          break;
+          break
         }
       }
 
-      let locale = url.split('/')[1];
-      locale = locales.includes(locale) ? locale : 'root';
-      (grouped[locale] ??= []).push({
-          title: frontmatter.title,
-          url,
-          excerpt,
-          date: formatDate(frontmatter.date),
-          cover
+      let locale = url.split('/')[1]
+      locale = locales.includes(locale) ? locale : 'root'
+      ;(grouped[locale] ??= []).push({
+        title: frontmatter.title,
+        hash: calculateHash(src!),
+        url,
+        excerpt,
+        date: formatDate(frontmatter.date),
+        cover,
       })
     })
 
     return grouped
-  }
+  },
 })
 
 function formatDate(raw: string): Post['date'] {
   return {
-    time: dayjs.tz(`${raw}:00`, "Asia/Shanghai").valueOf(),
-    string: dayjs.tz(`${raw}:00`, "Asia/Shanghai").format("YYYY-MM-DD HH:mm"),
-  };
+    time: dayjs.tz(`${raw}:00`, 'Asia/Shanghai').valueOf(),
+    string: dayjs.tz(`${raw}:00`, 'Asia/Shanghai').format('YYYY-MM-DD HH:mm'),
+  }
 }
-
 
 // export default createContentLoader('**/blog/**/*.md', {
 //   transform(data) {

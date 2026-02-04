@@ -24,6 +24,8 @@ import { markdownGlossaryPlugin } from 'vitepress-plugin-glossary'
 import glossary from './glossary.json'
 import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
 import picturePlugin from '../plugins/markdown/markdown-it-picture'
+import { tasklist } from '@mdit/plugin-tasklist'
+import { markdownWrapHashPlugin } from '../plugins/markdown/markdownWrapHash'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -49,6 +51,20 @@ const markdown: MarkdownOptions | undefined = {
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
   preConfig: async (md) => {},
   config: (md) => {
+    md.use(tasklist, {
+      // your options, optional
+    })
+
+    // 使用完整插件
+    md.use(markdownWrapHashPlugin, {
+      targetFolders: ['blog', 'manual', 'gallery'],
+      algorithm: 'md5',
+      hashLength: 8,
+      wrapperTag: 'div',
+      wrapperClass: 'markdown-content',
+      debug: process.env.NODE_ENV !== 'production',
+    })
+
     md.use(picturePlugin, {
       // 容器配置：处理哪些容器内的图片
       containerClasses: ['figure-list', 'image-gallery', 'custom-container'],

@@ -19,7 +19,7 @@
         >
           <div class="card-info w-full flex flex-col justify-center">
             <a
-              :href="item.link"
+              :href="item.link" v-hero="{ id: item.hash || useId() }"
               class="card-link flex flex-row gap-5 md:gap-10"
             >
               <p class="description flex flex-col gap-3">
@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, onUnmounted, PropType, ref, useTemplateRef } from 'vue'
+  import { onMounted, onUnmounted, PropType, ref, useTemplateRef, useId } from 'vue'
   import { marked } from 'marked'
   import DOMPurify from 'dompurify'
 
@@ -71,6 +71,7 @@
   interface CategoryItem {
     title: string
     link: string
+    hash: string
     icon: string
     description?: string
     cover?: string

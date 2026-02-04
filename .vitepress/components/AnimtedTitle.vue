@@ -3,18 +3,8 @@
     <div>
       <h2 class="text-name font-bold text-shadow-xl">{{ name }}</h2>
     </div>
-    <!-- <div class="flex flex-col group transition-all duration-300
-           hover:(scale-105 shadow-lg p-3)
-           focus:(outline-none ring-2 ring-blue-500)
-           disabled:(opacity-50 cursor-not-allowed)">
-      <p class="text-slogon justify-center  lg:justify-start">{{ slogon }}</p>
-    </div> -->
-    <!-- <div
-      class="flex flex-col group transition-all duration-300 hover:(ring-2) focus:(outline-none ring-2 ring-blue-500) disabled:(opacity-50 cursor-not-allowed)"
-    >
-      <p class="text-slogon justify-center lg:justify-start">{{ slogon }}</p>
-    </div> -->
-    <div class="flex flex-col group transition-all duration-300 disabled:(opacity-50 cursor-not-allowed)">
+
+    <div class="flex flex-col justify-center items-center group  lg:justify-start lg:items-start transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
       <h3 :tooltip="slogon" class="text-slogon justify-center lg:justify-start">{{ slogon }}</h3>
     </div>
     <div class="hidden md:flex text-tagline justify-center lg:justify-start text-center flex-row">
