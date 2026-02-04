@@ -27,6 +27,7 @@ import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { tasklist } from '@mdit/plugin-tasklist'
 import { markdownWrapHashPlugin } from '../plugins/markdown/markdownWrapHash'
 import { componentHeroWrapPlugin } from '../plugins/markdown/componentHeroWrap'
+import { pathHashWrapperPlugin } from './plugins/pathHashWrapper'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -66,11 +67,14 @@ const markdown: MarkdownOptions | undefined = {
     //   debug: process.env.NODE_ENV !== 'production',
     // })
 
+    /*
     md.use(componentHeroWrapPlugin, {
       targetFolders: ['blog', 'manual', 'gallery'],
       enableHero: true,
       includeFilePath: true,
-    })
+    })*/
+
+    md.use(pathHashWrapperPlugin)
 
     md.use(picturePlugin, {
       // 容器配置：处理哪些容器内的图片
@@ -222,3 +226,4 @@ const markdown: MarkdownOptions | undefined = {
 }
 
 export { markdown }
+
