@@ -36,7 +36,7 @@ ${html}
 function isTargetFolder(filePath: string): boolean {
   if (!filePath) return false
   const path = filePath.replace(/\\/g, '/')
-  return path.includes('/blog/') || 
+  return path.includes('/blog/2026') || 
          path.includes('/manual/') || 
          path.includes('/gallery/')
 }
