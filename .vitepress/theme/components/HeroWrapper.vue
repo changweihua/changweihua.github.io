@@ -26,7 +26,7 @@ defineProps({
   width: 4px;
   border-radius: 2px;
 }
-
+/*
 .hero-folder-blog::before {
   background: linear-gradient(180deg, #3fb950, #2ea043);
 }
@@ -37,7 +37,8 @@ defineProps({
 
 .hero-folder-gallery::before {
   background: linear-gradient(180deg, #a371f7, #8957e5);
-}
+}*/
 </style>
+
 
 
