@@ -1,5 +1,5 @@
 <template>
-  <div :id="`md-${hash}`" :data-file-hash="`${hash}`" :data-file-path="`${filePath}`" v-hero="{ id: `md-${hash}` }" :class="`hero-simple hero-folder-${folder}`">
+  <div :id="`md-${hash}`" :data-file-hash="`${hash}`" :data-file-path="`${filePath}`" v-hero="{ id: `md-${hash}` }" :class="`hero-simple markdown-content hero-folder-${folder}`">
     <slot />
   </div>
 </template>
@@ -39,4 +39,5 @@ defineProps({
   background: linear-gradient(180deg, #a371f7, #8957e5);
 }
 </style>
+
 
