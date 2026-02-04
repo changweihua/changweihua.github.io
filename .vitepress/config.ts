@@ -420,6 +420,7 @@ export default withMermaid(
           'naive-ui',
           'date-fns',
           'vueuc',
+          '@vue/runtime-dom',
         ],
       },
       resolve: {

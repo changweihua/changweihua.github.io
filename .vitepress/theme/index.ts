@@ -16,7 +16,7 @@ import codeblocksFold from 'vitepress-plugin-codeblocks-fold' // import method
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 // @ts-ignore
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
-
+import HeroWrapper from './components/HeroWrapper.vue'
 import 'virtual:uno.css'
 import 'virtual:group-icons.css'
 import 'animate.css'
@@ -427,6 +427,7 @@ export default {
 
       // 在 markdown 文件中使用，必须手动注册
       app.component('demo-preview', NaiveUIContainer)
+      app.component('HeroWrapper', HeroWrapper)
       app.component('HoverableText', HoverableText)
       app.component('CarouselGallery', CarouselGallery)
       app.component('ProjectLab', ProjectLab)

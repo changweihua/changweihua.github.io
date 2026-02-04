@@ -26,6 +26,7 @@ import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
 import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { tasklist } from '@mdit/plugin-tasklist'
 import { markdownWrapHashPlugin } from '../plugins/markdown/markdownWrapHash'
+import { componentHeroWrapPlugin } from '../plugins/markdown/componentHeroWrap'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -55,14 +56,20 @@ const markdown: MarkdownOptions | undefined = {
       // your options, optional
     })
 
-    // 使用完整插件
-    md.use(markdownWrapHashPlugin, {
+    // // 使用完整插件
+    // md.use(markdownWrapHashPlugin, {
+    //   targetFolders: ['blog', 'manual', 'gallery'],
+    //   algorithm: 'md5',
+    //   hashLength: 8,
+    //   wrapperTag: 'div',
+    //   wrapperClass: 'markdown-content',
+    //   debug: process.env.NODE_ENV !== 'production',
+    // })
+
+    md.use(componentHeroWrapPlugin, {
       targetFolders: ['blog', 'manual', 'gallery'],
-      algorithm: 'md5',
-      hashLength: 8,
-      wrapperTag: 'div',
-      wrapperClass: 'markdown-content',
-      debug: process.env.NODE_ENV !== 'production',
+      enableHero: true,
+      includeFilePath: true,
     })
 
     md.use(picturePlugin, {
