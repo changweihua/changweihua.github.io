@@ -52,7 +52,7 @@ export default createContentLoader(['**/blog/**/!(index|README).md'], {
 
     raws.forEach((item) => {
       const { url, frontmatter, excerpt, src } = item
-      // console.log("frontmatter", frontmatter);
+      console.log('frontmatter', frontmatter)
 
       // src?.match(/!\[(.*?)\]\((.*?)\)/)
 
@@ -66,11 +66,21 @@ export default createContentLoader(['**/blog/**/!(index|README).md'], {
         }
       }
 
+      let filePath = url
+
+      // 移除开头的斜杠和 .html 后缀
+      // if (filePath.startsWith('/')) {
+      //   filePath = filePath.substring(1)
+      // }
+      if (filePath.endsWith('.html')) {
+        filePath = filePath.substring(0, filePath.length - 5) + '.md'
+      }
+
       let locale = url.split('/')[1]
       locale = locales.includes(locale) ? locale : 'root'
       ;(grouped[locale] ??= []).push({
         title: frontmatter.title,
-        hash: calculateHash(src!),
+        hash: calculateHash(filePath),
         url,
         excerpt,
         date: formatDate(frontmatter.date),

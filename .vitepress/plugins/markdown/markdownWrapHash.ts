@@ -36,7 +36,8 @@ export function markdownWrapHashPlugin(md: MarkdownIt, options: MarkdownWrapHash
 
   // 获取当前文件路径（从 env 中）
   function getFilePath(env: any): string {
-    return env?.path || env?.id || env?.filePath || currentFilePath
+    // console.log(env)
+    return env?.relativePath || env?.path || env?.id || env?.filePath || currentFilePath
   }
 
   // 检查文件是否在目标文件夹中
@@ -72,7 +73,8 @@ export function markdownWrapHashPlugin(md: MarkdownIt, options: MarkdownWrapHash
 
     // 如果是目标文件，计算 hash
     if (filePath && isTargetFile(filePath)) {
-      currentFileHash = calculateHash(state.src)
+      // currentFileHash = calculateHash(state.src)
+      currentFileHash = calculateHash(`/${filePath}`)
 
       // 保存 hash 到 frontmatter
       if (!state.env.frontmatter) {
