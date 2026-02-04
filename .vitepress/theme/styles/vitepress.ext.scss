@@ -1883,6 +1883,7 @@ figcaption {
 }
 
 /* 为不同的文件夹添加不同的边框颜色 */
+/*
 .markdown-content[data-file-path*="/blog/"] {
   border-left: 3px solid #3fb950;
 }
@@ -1893,7 +1894,7 @@ figcaption {
 
 .markdown-content[data-file-path*="/gallery/"] {
   border-left: 3px solid #a371f7;
-}
+}*/
 
 /* 打印时隐藏装饰 */
 @media print {
@@ -1905,3 +1906,4 @@ figcaption {
     border-left: none !important;
   }
 }
+
