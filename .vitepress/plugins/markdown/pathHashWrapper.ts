@@ -25,9 +25,9 @@ export function pathHashWrapperPlugin(md: MarkdownIt) {
     const hash = computePathHash(`/${filePath}`, hashCache)
     
     // 返回包裹后的 HTML，使用自定义组件
-    return `<HeroWrapper hash="${hash}" file-path="${filePath}">
+    return `<ClientOnly><HeroWrapper hash="${hash}" file-path="${filePath}">
 ${html}
-</HeroWrapper>`
+</HeroWrapper></ClientOnly>`
   }
 }
 
