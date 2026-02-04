@@ -21,7 +21,13 @@ export function pathHashWrapperPlugin(md: MarkdownIt) {
     
     // 计算路径 hash（使用 crypto 模块）
     const hash = computePathHash(filePath)
-    
+
+    // 保存 hash 到 frontmatter
+    if (!env.frontmatter) {
+      env.frontmatter = {}
+    }
+    env.frontmatter.fileHash = currentFileHash
+
     // 返回包裹后的 HTML，使用 ClientOnly 包裹自定义组件
     return `<ClientOnly>
   <HeroWrapper hash="${hash}" file-path="${filePath}">
