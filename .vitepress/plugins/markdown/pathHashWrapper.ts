@@ -6,9 +6,6 @@ import type MarkdownIt from 'markdown-it'
  * 只为 blog, manual, gallery 文件夹的 markdown 添加包裹
  */
 export function pathHashWrapperPlugin(md: MarkdownIt) {
-  // 缓存计算结果，提高性能
-  const hashCache = new Map<string, string>()
-  
   // 在渲染时处理
   const originalRender = md.renderer.render
   
@@ -22,12 +19,14 @@ export function pathHashWrapperPlugin(md: MarkdownIt) {
     }
     
     // 计算路径 hash
-    const hash = computePathHash(`/${filePath}`, hashCache)
+    const hash = computePathHash(filePath)
     
-    // 返回包裹后的 HTML，使用自定义组件
-    return `<ClientOnly><HeroWrapper hash="${hash}" file-path="${filePath}">
+    // 返回包裹后的 HTML，使用 ClientOnly 包裹自定义组件
+    return `<ClientOnly>
+  <HeroWrapper hash="${hash}" file-path="${filePath}">
 ${html}
-</HeroWrapper></ClientOnly>`
+  </HeroWrapper>
+</ClientOnly>`
   }
 }
 
@@ -45,23 +44,17 @@ function isTargetFolder(filePath: string): boolean {
 /**
  * 计算路径 hash（SSR 安全）
  */
-function computePathHash(path: string, cache: Map<string, string>): string {
-  // 检查缓存
-  if (cache.has(path)) {
-    return cache.get(path)!
-  }
+function computePathHash(path: string): string {
+  // 确保路径以 / 开头
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  const str = normalizedPath.replace(/\\/g, '/')
   
   // 简单的字符串 hash 函数
   let hash = 0
-  const str = path.replace(/\\/g, '/')
-  
   for (let i = 0; i < str.length; i++) {
     hash = ((hash << 5) - hash) + str.charCodeAt(i)
     hash = hash & hash
   }
   
-  const result = Math.abs(hash).toString(36).slice(0, 8)
-  cache.set(path, result)
-  
-  return result
+  return Math.abs(hash).toString(36).slice(0, 8)
 }
