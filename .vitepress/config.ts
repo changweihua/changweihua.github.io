@@ -533,14 +533,14 @@ export default withMermaid(
         }),
         RssPlugin(RSS),
         // 打赏插件
-        SponsorPlugin({
-          /**
-           * 打赏模块样式
-           */
-          type: 'drink',
-          aliPayQR: '/Alipay.svg',
-          weChatQR: '/wechat-pay.svg',
-        }),
+        // SponsorPlugin({
+        //   /**
+        //    * 打赏模块样式
+        //    */
+        //   type: 'drink',
+        //   aliPayQR: '/Alipay.svg',
+        //   weChatQR: '/wechat-pay.svg',
+        // }),
         llmstxtPlugin(),
         pagefindPlugin({
           forceLanguage: 'zh-CN',

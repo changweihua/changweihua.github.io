@@ -1,6 +1,7 @@
 // .vitepress/plugins/pathHashWrapper.ts
 import type MarkdownIt from 'markdown-it'
 import { createHash } from 'crypto'
+import dayjs from 'dayjs'
 
 /**
  * 基于相对路径生成 hash 的 markdown-it 插件
@@ -9,16 +10,16 @@ import { createHash } from 'crypto'
 export function pathHashWrapperPlugin(md: MarkdownIt) {
   // 在渲染时处理
   const originalRender = md.renderer.render
-  
-  md.renderer.render = function(tokens, options, env) {
+
+  md.renderer.render = function (tokens, options, env) {
     const filePath = env?.relativePath || ''
     const html = originalRender.call(this, tokens, options, env)
-    
+
     // 只处理目标文件夹
     if (!filePath || !isTargetFolder(filePath)) {
       return html
     }
-    
+
     // 计算路径 hash（使用 crypto 模块）
     const hash = computePathHash(filePath)
 
@@ -42,13 +43,15 @@ ${html}
  */
 function isTargetFolder(filePath: string): boolean {
   if (!filePath) return false
-  
+
   // 统一路径格式，确保以 / 开头
   const normalizedPath = ensureLeadingSlash(filePath).replace(/\\/g, '/')
-  
-  return normalizedPath.includes('/blog/2026') || 
-         normalizedPath.includes('/manual/') || 
-         normalizedPath.includes('/gallery/')
+
+  return (
+    normalizedPath.includes(`/blog/${dayjs().year()}`) ||
+    normalizedPath.includes('/manual/') ||
+    normalizedPath.includes('/gallery/')
+  )
 }
 
 /**
@@ -65,12 +68,9 @@ function computePathHash(path: string): string {
   // 确保路径以 / 开头
   const normalizedPath = ensureLeadingSlash(path)
   const normalized = normalizedPath.replace(/\\/g, '/')
-  
+
   // 使用 crypto 模块的 createHash 函数
-  const hash = createHash('md5')
-    .update(normalized)
-    .digest('hex')
-    .slice(0, 8) // 取前8位作为短哈希
-  
+  const hash = createHash('md5').update(normalized).digest('hex').slice(0, 8) // 取前8位作为短哈希
+
   return hash
 }

@@ -49,7 +49,6 @@ import { defineClientComponentConfig } from '@vitepress-demo-preview/core'
 import '@catppuccin/vitepress/theme/frappe/lavender.css'
 import VueHero from 'vue-hero-cross'
 import PageLost from '../components/PageLost.vue'
-import ArticleQRCode from '../components/ArticleQRCode.vue'
 
 import { Icon } from '@iconify/vue'
 
@@ -251,7 +250,7 @@ export default {
       //     name: "doc-top",
       //   }),
       // "doc-bottom": () => [h(ArticleQRCode), h(Recommend)],
-      'doc-footer-before': () => [h(ArticleQRCode), h(ArticleFooter)],
+      'doc-footer-before': () => [h(ArticleFooter)],
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
       //     name: "doc-footer-before",

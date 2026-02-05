@@ -211,7 +211,7 @@
     "medium-zoom": "^1.1.0",
     "nanoid": "^5.1.6",
     "open-props": "^1.7.23",
-    "ora": "^9.1.0",
+    "ora": "^9.2.0",
     "pagefind": "^1.4.0",
     "pinia": "^3.0.4",
     "pinyin-match": "^1.2.10",

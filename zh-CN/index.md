@@ -172,10 +172,11 @@ head:
       content: changweihua.github.io 首页 CMONO.NET
 ---
 
+<!--
 <div class="text-black hidden md:flex flex-col gap-6 dark:text-white bg-gray-100 dark:bg-gray-800 items-center justify-center rd-2xl my-3 py-5
 ">
   <div class="video-player-wrapper">
-    <video class="video-element" controls autoplay muted loop>
+    <video class="video-element" controls muted loop>
       <source src="/videos/cover.mp4">
     </video>
     <div class="video-title text-center">
@@ -184,6 +185,4 @@ head:
   </div>
   <CarouselCard></CarouselCard>
 </div>
-
-- [ ] 计划 A
-- [x] 计划 B
+-->
