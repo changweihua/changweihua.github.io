@@ -6,6 +6,8 @@ title: CMONO.NET
 titleTemplate: 首页
 docAnalysis: false
 
+pagefind-indexed: false
+
 description: CMONO.NET Official Page Site
 
 hero:
@@ -79,13 +81,12 @@ features:
       alt: AI & Yolo
     details: AI & Yolo，助理智慧安检
     link: /zh-CN/gallery/ai
-  # - title: 基于Yolo的对象检测、识别与研究
-  #   icon:
-  #     src: /yolo.svg
-  #     alt: Yolo
-  #   details: 支持Yolo8、9、10三大版本
-  #   link: /zh-CN/gallery/yolo_object_dection
-  # linkText: 更多详情
+  - title: 基于PoW的Cap验证码集成指南
+    icon:
+      src: /mfa.svg
+      alt: MFA
+    details: 干掉图形验证码！
+    link: /zh-CN/gallery/PowCap
   # - title: Yuppie 平台
   #   icon:
   #     src: /yuppie.svg
@@ -140,9 +141,9 @@ features:
   - title: maui-antdv
     details: 基于 Vue3 & Ant Design Vue 的自定义UI框架, 供项目使用。
     link: https://www.npmjs.com/package/maui-antdv
-  - title: rsbuild-config-preset
-    details: rsbuild-config-preset 功能集合。
-    link: https://www.npmjs.com/package/rsbuild-config-preset
+  # - title: rsbuild-config-preset
+  #   details: rsbuild-config-preset 功能集合。
+  #   link: https://www.npmjs.com/package/rsbuild-config-preset
   # - title: antdv-plus-table
   #   details: Ant Design Vue Table 扩展NPM包。
   #   link: https://www.npmjs.com/package/@changweihua/antdv-plus-table

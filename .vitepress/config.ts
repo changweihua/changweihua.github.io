@@ -254,6 +254,20 @@ const vitePressOptions: UserConfig = {
   },
 }
 
+/**
+ * 使用浏览器内置的分词API Intl.Segmenter
+ */
+function intlChineseSearchOptimize(input: string) {
+  const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' })
+  const result: string[] = []
+  for (const it of segmenter.segment(input)) {
+    if (it.isWordLike) {
+      result.push(it.segment)
+    }
+  }
+  return result.join(' ')
+}
+
 // 转义Markdown中的尖括号，但保留代码块内容
 function escapeMarkdownBrackets(markdownContent: string) {
   // 正则表达式模式：匹配代码块
@@ -575,7 +589,7 @@ export default withMermaid(
             },
           },
           excludeSelector: ['img', 'a.header-anchor'],
-          customSearchQuery: chineseSearchOptimize,
+          customSearchQuery: intlChineseSearchOptimize,
         }),
         {
           name: 'patch-sidebar',

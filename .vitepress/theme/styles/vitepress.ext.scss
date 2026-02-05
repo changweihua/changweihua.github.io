@@ -1668,6 +1668,18 @@ figcaption {
   }
 }
 
+@media (max-width: 1920px) {
+  .back-to-top-button {
+    --small-edge-size: 56px;
+    width: var(--small-edge-size) !important;
+    height: var(--small-edge-size) !important;
+    .progress-ring {
+      width: var(--small-edge-size) !important;
+      height: var(--small-edge-size) !important;
+    }
+  }
+}
+
 .blog-page-class .vp-doc h1:first-child,
 .gallery-page-class .vp-doc h1:first-child,
 .manual-page-class .vp-doc h1:first-child {
