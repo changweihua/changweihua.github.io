@@ -34,7 +34,8 @@ import * as THREE from 'three'
 import { ref, onMounted, onUnmounted, watch, useTemplateRef, computed } from 'vue'
 import { 
   useDocumentVisibility,
-  useRafFn
+  useRafFn,
+  useResizeObserver
 } from '@vueuse/core'
 
 interface Props {
@@ -67,6 +68,7 @@ let count = 0
 const isContextLost = ref(false)
 const showContextLostMessage = ref(false)
 const showWebGLNotSupported = ref(false)
+const containerSize = ref({ width: 0, height: 0 })
 
 // 计算属性
 const particleColor = computed(() => {
@@ -83,6 +85,15 @@ const particleColor = computed(() => {
 })
 
 const isPageVisible = computed(() => visibility.value === 'visible')
+
+// 监听容器尺寸变化
+useResizeObserver(containerRef, (entries) => {
+  const entry = entries[0]
+  const { width, height } = entry.contentRect
+  
+  containerSize.value = { width, height }
+  handleResize()
+})
 
 // 安全的材质销毁函数
 const disposeMaterial = (material: THREE.Material | THREE.Material[]) => {
@@ -148,20 +159,6 @@ const createParticlesMaterial = () => {
   })
 }
 
-// 获取canvas尺寸
-const getCanvasSize = () => {
-  if (!canvasRef.value) return { width: 0, height: 200 }
-  
-  // 获取canvas父容器的宽度
-  const containerWidth = containerRef.value?.clientWidth || 0
-  
-  // 固定高度为200px，宽度为容器宽度
-  return {
-    width: containerWidth,
-    height: 200
-  }
-}
-
 // 检查WebGL支持情况
 const checkWebGLSupport = (): boolean => {
   try {
@@ -178,6 +175,19 @@ const recoverContext = () => {
   if (isContextLost.value) {
     cleanup()
     init()
+  }
+}
+
+// 处理尺寸调整
+const handleResize = () => {
+  if (!camera || !renderer) return
+  
+  const { width, height } = containerSize.value
+  
+  if (width > 0 && height > 0) {
+    camera.aspect = width / height
+    camera.updateProjectionMatrix()
+    renderer.setSize(width, height)
   }
 }
 
@@ -211,10 +221,10 @@ const rebuildScene = () => {
     particles = null
   }
   
-  const size = getCanvasSize()
+  const { width, height } = containerSize.value
   
   if (!camera) {
-    camera = new THREE.PerspectiveCamera(75, size.width / size.height, 0.1, 10000)
+    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000)
     camera.position.z = 1000
   }
   
@@ -309,10 +319,10 @@ const init = () => {
   
   showWebGLNotSupported.value = false
   
-  const size = getCanvasSize()
+  const { width, height } = containerSize.value
   
   // 创建相机
-  camera = new THREE.PerspectiveCamera(75, size.width / size.height, 0.1, 10000)
+  camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000)
   camera.position.z = 1000
   
   // 创建场景
@@ -334,7 +344,7 @@ const init = () => {
   
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setClearAlpha(0)
-  renderer.setSize(size.width, size.height)
+  renderer.setSize(width, height)
   
   // 设置上下文监听器
   setupContextListeners()
@@ -379,6 +389,15 @@ watch(
 
 // 生命周期
 onMounted(() => {
+  // 初始化容器尺寸
+  if (containerRef.value) {
+    const rect = containerRef.value.getBoundingClientRect()
+    containerSize.value = {
+      width: rect.width,
+      height: rect.height
+    }
+  }
+  
   init()
 })
 
