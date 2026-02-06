@@ -26,13 +26,17 @@ encrypt-storage: true
 
 - 2026 年 1 月初完成项目试运行
 - 完成新版设计和开发
-- 接入流量分析和日志平台
+- 接入 NginxPulse 流量分析和日志平台
+- 接入无锡机场锡悦平台和工作人员小程序，完成功能顺滑迁移，达成预期目标
+- 2026 年 2 月，将图形验证码升级为基于 `cap.js` 的人机识别验证码，降低被暴力攻击的风险
 
 <div class="grid md:grid-cols-2 lg:grid-cols-4 masonry-container">
 
 ![示例图](/images/tgs-dashboard.jpeg){data-zoomable}
 
 ![示例图](/images/tgs-list.jpeg){data-zoomable}
+
+![示例图](/images/2026_15153_192.168.10.160.jpeg){data-zoomable}
 
 ![示例图](/images/tgs-gateway1.jpeg){data-zoomable}
 

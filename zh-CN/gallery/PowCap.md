@@ -4,6 +4,8 @@ pageClass: gallery-page-class
 title: 干掉图形验证码！基于PoW的Cap验证码集成指南
 ---
 
+![效果图](/images/2026_151322_192.168.10.160.jpeg){data-zoomable}
+
 ## Cap 是什么 ##
 
 > A modern, lightning-quick PoW captcha

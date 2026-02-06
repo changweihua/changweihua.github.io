@@ -5,13 +5,12 @@ import { h, watchEffect, nextTick } from 'vue'
 import AnimationTitle from '../components/AnimtedTitle.vue'
 import DocAfter from '../components/DocAfter.vue'
 import ArticleFooter from '../components/ArticleFooter.vue'
-import HeroLogo from '../components/HeroLogo.vue'
+import PlaceHolder from '../components/PlaceHolder.vue'
 import HoverableText from '../components/HoverableText.vue'
 import CarouselGallery from '../components/CarouselGallery.vue'
 import ProjectLab from '../components/ProjectLab.vue'
 import CarouselCard from '../components/CarouselCard.vue'
 import MarkdownEChart from '../components/MarkdownEChart.vue'
-import LottieAnimation from '../components/LottieAnimation.vue'
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold' // import method
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 // @ts-ignore
@@ -269,21 +268,21 @@ export default {
       //   h(PlaceHolder, {
       //     name: "sidebar-nav-after",
       //   }),
-      // "aside-top": () =>
+      'aside-top': () =>
+        h(PlaceHolder, {
+          name: '相关推荐',
+        }),
+      // 'aside-bottom': () =>
       //   h(PlaceHolder, {
-      //     name: "aside-top",
+      //     name: 'aside-bottom',
       //   }),
-      // "aside-bottom": () =>
+      // 'aside-outline-before': () =>
       //   h(PlaceHolder, {
-      //     name: "aside-bottom",
+      //     name: 'aside-outline-before',
       //   }),
-      // "aside-outline-before": () =>
+      // 'aside-outline-after': () =>
       //   h(PlaceHolder, {
-      //     name: "aside-outline-before",
-      //   }),
-      // "aside-outline-after": () =>
-      //   h(PlaceHolder, {
-      //     name: "aside-outline-after",
+      //     name: 'aside-outline-after',
       //   }),
       // "aside-ads-before": () =>
       //   h(PlaceHolder, {

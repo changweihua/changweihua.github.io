@@ -1668,7 +1668,35 @@ figcaption {
   }
 }
 
-@media (max-width: 1920px) {
+/* 仅在宽屏下应用 */
+@media (min-width: 960px) {
+  :root {
+    --vp-content-width: 980px;
+  }
+}
+
+/* 1. 调整主内容容器 */
+.vp-doc .container {
+  max-width: 100% !important;
+  /* 移除宽度限制 */
+}
+
+/* 或仅增加.content容器宽度 */
+.main-container .content {
+  flex: 1;
+  max-width: none !important;
+  /* 或设置为一个很大的固定值，如 1200px */
+}
+
+/* 2. 调整页面整体布局结构 */
+.VPContent.has-sidebar {
+  /* 调整主内容区与侧边栏的比例 */
+  grid-template-columns: minmax(0, 5fr) minmax(0, 2fr);
+  /* 默认更接近 3fr 1fr */
+}
+
+/* 仅在宽屏下应用 */
+@media (min-width: 960px) {
   .back-to-top-button {
     --small-edge-size: 56px;
     width: var(--small-edge-size) !important;
