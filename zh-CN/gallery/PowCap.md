@@ -237,9 +237,9 @@ app.MapPowCapServer();
 This will expose the following endpoints:
 
 - POST `/api/captcha/challenge` – Generate a new CAPTCHA challenge with default configuration.
-- POST `/api/captcha//challenge` – Generate a new CAPTCHA challenge with configuration specific to the use case.
+- POST `/api/captcha/{useCase}/challenge` – Generate a new CAPTCHA challenge with configuration specific to the use case.
 - POST `/api/captcha/redeem` – Redeem a solved CAPTCHA challenge with default configuration.
-- POST `/api/captcha//redeem` – Redeem a solved CAPTCHA challenge with configuration specific to the use case.
+- POST `/api/captcha/{useCase}/redeem` – Redeem a solved CAPTCHA challenge with configuration specific to the use case.
 
 ## 🗃️ Storage and Caching ##
 
@@ -290,6 +290,273 @@ Example for specific use case CAPTCHA (e.g. login):
 
 <cap-widget id="cap" data-cap-api-endpoint="/api/captcha/login/"></cap-widget>
 ```
+
+```vue
+<template>
+  <a-spin :spinning="spinning" class="login-form-body-spin" tip="登录中...">
+    <a-form scrolltofirsterror hiderequiredmark :layout="'vertical'">
+      <a-form-item name="username" :validateFirst="true" v-bind="validateInfos.username">
+        <a-input
+          autocomplete="off"
+          has-feedback
+          v-model:value="modelRef.username"
+          placeholder="登录用户名"
+        >
+          <template #prefix>
+            <user-outlined />
+          </template>
+          <template #addonAfter> </template>
+        </a-input>
+      </a-form-item>
+
+      <a-form-item has-feedback name="password" v-bind="validateInfos.password">
+        <a-input-password
+          autocomplete="off"
+          v-model:value="modelRef.password"
+          @paste.capture.prevent="false"
+          placeholder="登录密码"
+        >
+          <template #prefix>
+            <key-outlined />
+          </template>
+        </a-input-password>
+      </a-form-item>
+
+      <a-form-item has-feedback name="captchaCode" v-bind="validateInfos.captchaCode">
+        <a-input v-model:value="modelRef.captchaCode">
+          <template #addonAfter>
+            <captcha-code :client-id="modelRef.clientId" />
+          </template>
+          <template #prefix>
+            <safety-outlined />
+          </template>
+        </a-input>
+      </a-form-item>
+
+      <a-form-item has-feedback name="captchaCode" v-bind="validateInfos.captchaCode">
+        <a-input v-model:value="modelRef.captchaCode">
+          <template #addonAfter>
+            <cap-widget
+              ref="cap"
+              onsolve="console.log(`Token: ${event.detail.token}`)"
+              :data-cap-api-endpoint="capApi"
+              data-cap-i18n-verifying-label="验证中..."
+              data-cap-i18n-initial-state="点击验证"
+              data-cap-i18n-solved-label="验证通过"
+              data-cap-i18n-error-label="验证失败，请重试"
+            ></cap-widget>
+          </template>
+          <template #prefix>
+            <safety-outlined />
+          </template>
+        </a-input>
+      </a-form-item>
+
+      <a-form-item>
+        <a-space style="width: 100%" direction="vertical">
+          <a-button type="primary" block @click="onSubmit">登录</a-button>
+        </a-space>
+      </a-form-item>
+    </a-form>
+  </a-spin>
+</template>
+
+<script setup lang="ts">
+import { useForm } from 'ant-design-vue/lib/form'
+import { JSEncrypt } from 'jsencrypt'
+import { v4 as uuidv4 } from 'uuid'
+import { onMounted, reactive, ref, toRaw, useTemplateRef } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import useHotkey, { type HotKey } from 'vue3-hotkey'
+
+import { jwtAuth } from '@/apis/authentication/account.api'
+import { defaultHomePath } from '@/router'
+import { useAuthStore } from '@/stores/auth.store'
+import type { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
+
+const hotkeys = ref<HotKey[]>([
+  {
+    keys: ['enter'],
+    preventDefault: true,
+    handler(keys) {
+      console.log(keys)
+      onSubmit()
+    },
+  },
+])
+useHotkey(hotkeys.value)
+
+const capApi = ref(`http://localhost:5075/api/captcha/form`)
+
+interface LoginFormState {
+  username: string
+  password: string
+  captchaCode: string
+  clientId: string
+}
+
+const modelRef = reactive({
+  username: '',
+  password: '',
+  captchaCode: '',
+  clientId: uuidv4(),
+})
+const spinning = ref<boolean>(false)
+
+const rulesRef = reactive({
+  username: [
+    {
+      required: true,
+      trigger: ['blur', 'change'],
+      message: '请输入登录用户名',
+    },
+  ],
+  password: [
+    {
+      required: true,
+      message: '请输入登录密码',
+      trigger: ['blur', 'change'],
+    },
+  ],
+})
+
+const { validate, validateInfos } = useForm(modelRef, rulesRef)
+
+const router = useRouter()
+const route = useRoute()
+
+const captchaRef = ref()
+
+const onReady = (handle: any) => {
+  console.log('Captcha is ready', handle)
+}
+
+const onError = (error: any) => {
+  console.error('Captcha error:', error)
+}
+
+const capRef = useTemplateRef('cap')
+
+onMounted(() => {
+  console.log('cap', capRef.value)
+  capRef.value.addEventListener('solve', function (e: any) {
+    const token = e.detail.token
+    console.log('solve token', token)
+    // handle the token as needed
+  })
+  capRef.value.addEventListener('error', (e: any) => console.error('Cap错误:', e.detail))
+  capRef.value.addEventListener('progress', (e: any) => console.log('Cap progress:', e.detail))
+  capRef.value.addEventListener('reset', (e: any) => console.warn('Cap reset:', e.detail))
+})
+
+const onSubmit = async () => {
+  // const cap = new window.Cap({
+  //   apiEndpoint: 'http://localhost:5075/api/captcha/form/',
+  // })
+  // cap.addEventListener('solve', (e) => console.log('成功:', e.detail.token))
+  // cap.addEventListener('error', (e) => console.error('Cap错误:', e.detail))
+  // try {
+  //   const solution = await cap.solve()
+  //   alert(solution.token)
+  // } catch (e) {
+  //   console.error('调用失败:', e)
+  // }
+
+  validate()
+    .then(() => {
+      console.log(toRaw(modelRef))
+      data.spinning = true
+
+      // 新建一个JSEncrypt对象
+      const encryptor = new JSEncrypt()
+      // 设置公钥 （这是后端直接给我的，看你们项目情况是需要调接口获得，还是程序中直接写死）
+      const publicKey =
+        'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlOJu6TyygqxfWT7eLtGDwajtNFOb9I5XRb6khyfD1Yt3YiCgQWMNW649887VGJiGr/L5i2osbl8C9+WJTeucF+S76xFxdU6jE0NQ+Z+zEdhUTooNRaY5nZiu5PgDB0ED/ZKBUSLKL7eibMxZtMlUDHjm4gwQco1KRMDSmXSMkDwIDAQAB'
+
+      encryptor.setPublicKey(publicKey) // publicKey为公钥
+      // 加密数据
+      const password = encryptor.encrypt(modelRef.password)
+
+      jwtAuth({
+        platform: import.meta.env.VITE_APP_NAME,
+        username: modelRef.username,
+        password: password.toString(),
+        clientId: modelRef.clientId,
+        captchaCode: modelRef.captchaCode,
+      }).then((token) => {
+        console.log(token)
+        useAuthStore().setJsonWebToken(token)
+
+        Promise.all([useAuthStore().getProfile(), useAuthStore().getBehavior()]).then((jsons) => {
+          console.log(jsons)
+          let path = defaultHomePath
+
+          const { redirect } = route.query
+          console.log('redirect', redirect)
+          if (redirect && redirect !== '') {
+            path = redirect + ''
+          }
+
+          router.replace({
+            path: path,
+          })
+        })
+      })
+    })
+
+    .catch((error: ValidateErrorEntity<LoginFormState>) => {
+      console.log('error', error)
+    })
+  // .finally(() => { })
+}
+
+const data = reactive({
+  spinning: false,
+  verifyCodeLoading: false,
+  disableSendButton: true,
+  formattedCellPhone: '',
+})
+
+onMounted(() => {
+  const widget = document.querySelector('#cap')
+
+  widget?.addEventListener('solve', function (e) {
+    console.log(e)
+
+    // handle the token as needed
+  })
+})
+</script>
+
+<style lang="less">
+cap-widget {
+  --cap-background: transparent;
+  --cap-border-color: transparent;
+  --cap-border-radius: 14px;
+  --cap-widget-height: 30px;
+  --cap-widget-width: 200px;
+  --cap-widget-padding: 14px;
+  --cap-gap: 15px;
+  --cap-color: #212121;
+  --cap-checkbox-size: 25px;
+  --cap-checkbox-border: 1px solid #aaaaaad1;
+  --cap-checkbox-border-radius: 6px;
+  --cap-checkbox-background: #fafafa91;
+  --cap-checkbox-margin: 2px;
+  --cap-font:
+    AlibabaPuHuiTi, HYCuJianHeiJ, PingFangSC, HYZhongJianHeiJ, Georgia, Avenir, Helvetica,
+    'BlinkMacSystemFont', '.SFNSText-Regular', 'San Francisco', 'Roboto', 'Segoe UI',
+    'Helvetica Neue', 'Lucida Grande', 'Ubuntu', 'arial', sans-serif;
+  --cap-spinner-color: #000;
+  --cap-spinner-background-color: #eee;
+  --cap-spinner-thickness: 5px;
+  // --cap-checkmark: url('data:image/svg+xml,...);
+  // --cap-error-cross: url('data:image/svg+xml,...');
+}
+</style>
+```
+
+![效果预览](/images/QQ-20260206111410.png)
 
 You can listen to the solve event to obtain the generated token and proceed with your form submission or API calls.
 
@@ -342,3 +609,11 @@ public class LoginRequest
 - The `ICaptchaService` is injected via constructor injection.
 - The `ValidateCaptchaTokenAsync` method is used to verify the token submitted by the client.
 - This helps prevent bot abuse on critical endpoints such as login, registration, or form submission.
+
+## 📚 View Sample Project ##
+
+Please check the `samples/WebApplication1` folder in the source code. It includes:
+
+✅ A full ASP.NET Core web application integrated with PowCapServer
+✅ Frontend usage with the `@cap.js/widget`
+✅ Example controller usage for token validation
