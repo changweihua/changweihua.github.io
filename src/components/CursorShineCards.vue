@@ -35,12 +35,40 @@
               </p>
               <div class="logo">
                 <img
-                  class="rounded-sm object-cover transition-transform duration-500 group-hover:scale-105 svg-stroke-animation"
+                  class="rounded-sm object-cover transition-transform duration-500 group-hover:scale-105 svg-stroke svg-stroke-animation"
                   crossorigin="anonymous"
                   :src="`${item.cover || '/logo.png'}`"
                   :alt="item.coverAlt"
-                  :class="{ 'svg-stroke': isSVG(item.cover) }"
+                  v-if="isSVG(item.cover)"
                 />
+                <template v-else>
+                  <figure
+                    class="rounded-sm object-cover transition-transform duration-500 group-hover:scale-105"
+                  >
+                    <picture class="vp-picture">
+                      <!-- source 标签只配置资源选择相关属性 -->
+                      <source
+                        :srcset="`/images/${getFileNameWithoutExtension(`${item.cover || '/logo.png'}`)}.jxl`"
+                        type="image/jxl"
+                      />
+                      <source
+                        :srcset="`/images/${getFileNameWithoutExtension(`${item.cover || '/logo.png'}`)}.webp`"
+                        type="image/webp"
+                      />
+                      <source
+                        :srcset="`/images/${getFileNameWithoutExtension(`${item.cover || '/logo.png'}`)}.avif`"
+                        type="image/avif"
+                      />
+
+                      <!-- img 标签配置所有加载和性能相关属性 -->
+                      <img
+                        class="rounded-sm object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
+                  </figure>
+                </template>
               </div>
             </a>
 
@@ -100,6 +128,15 @@
       cardListRef.value.push(e)
     }
   }
+
+  function getFileNameWithoutExtension(filePath: string) {
+    const fileName = filePath.split(/[\\/]/).pop() || ''
+    const lastDotIndex = fileName.lastIndexOf('.')
+
+    if (lastDotIndex === -1) return fileName
+    return fileName.substring(0, lastDotIndex)
+  }
+
   function initCardMouseEvt() {
     if (cardsRef.value) {
       cardsRef.value.addEventListener('mousemove', handleCardElMouseProperty)
