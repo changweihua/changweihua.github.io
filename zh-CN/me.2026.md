@@ -36,7 +36,9 @@ encrypt-storage: true
 
 ![示例图](/images/tgs-list.jpeg){data-zoomable}
 
-![示例图](/images/2026_15153_192.168.10.160.jpeg){data-zoomable}
+![示例图](/images/11-2-2026_132732_192.168.10.160.jpeg){data-zoomable}
+
+![示例图](/images/11-2-2026_13284_192.168.10.160.jpeg){data-zoomable}
 
 ![示例图](/images/tgs-gateway1.jpeg){data-zoomable}
 

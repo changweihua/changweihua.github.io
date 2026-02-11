@@ -74,7 +74,7 @@
     }
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^7.4.2",
+    "@antfu/eslint-config": "^7.4.3",
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "@commitlint/cz-commitlint": "^20.4.1",
@@ -104,7 +104,7 @@
     "glob": "^13.0.2",
     "husky": "^9.1.7",
     "jszip": "^3.10.1",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^14.1.1",
     "mkcert": "^3.2.0",
     "naive-ui": "^2.43.2",
     "node-scp2": "^1.0.0",

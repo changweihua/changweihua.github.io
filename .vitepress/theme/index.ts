@@ -16,6 +16,7 @@ import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 // @ts-ignore
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
 import HeroWrapper from './components/HeroWrapper.vue'
+import RainbowAnimationSwitcher from '../components/RainbowAnimationSwitcher.vue'
 import 'virtual:uno.css'
 import 'virtual:group-icons.css'
 import 'animate.css'
@@ -434,7 +435,7 @@ export default {
       app.component('m-icon', Icon)
       app.component('GlossaryTooltip', GlossaryTooltip)
       app.component('HtmlPreview', HtmlPreview)
-      // app.component('LottieAnimation', LottieAnimation)
+      app.component('RainbowAnimationSwitcher', RainbowAnimationSwitcher)
 
       app.use(directives)
 
