@@ -4,7 +4,7 @@
   // 控制活动代码段是否阻止快速建议
   "editor.suggest.snippetsPreventQuickSuggestions": false,
   "window.dialogStyle": "custom",
-  // 除了 `Tab` 键以外， `Enter` 键是否同样可以接受建议
+  // 除了`Tab`键以外，`Enter`键是否同样可以接受建议
   // 这能减少“插入新行”和“接受建议”命令之间的歧义
   "editor.acceptSuggestionOnEnter": "smart",
   // 代码补全列表中，优先选择最近的建议
@@ -40,7 +40,7 @@
   },
   "apc.electron": {
     "frame": false,
-    "titleBarStyle": "hidden",
+    "titleBarStyle": "hidden"
   },
   "window.titleBarStyle": "native",
   "window.customTitleBarVisibility": "never",
@@ -97,8 +97,95 @@
 
   // add support for autocomplete in JS or JS like files
   "cssvar.extensions": [
-    "css", "postcss", "jsx", "tsx", "vue", "scss"
-  ]
+    "css",
+    "postcss",
+    "jsx",
+    "tsx",
+    "vue",
+    "scss"
+  ],
+
+  // 开启扁平化配置
+  "eslint.useFlatConfig": true,
+
+  // 关闭默认的配置，我们这里默认不开启prettier格式化
+  "prettier.enable": false,
+  // 关闭默认格式化
+  "editor.formatOnSave": false,
+
+  // 保存自动修复
+  "editor.codeActionsOnSave": {
+    // 我们这里是指定自定义的修复
+    "source.fixAll.eslint": "explicit",
+    // 来源导入我们不需要给关闭掉
+    "source.organizeImports": "never",
+    // 使用 stylelint 来修复样式问题
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.oxc": "always"
+  },
+
+  // 静默样式规则自动修复
+  "eslint.rules.customizations": [
+    { "rule": "style/*", "severity": "off", "fixable": true },
+    { "rule": "format/*", "severity": "off", "fixable": true },
+    { "rule": "*-indent", "severity": "off", "fixable": true },
+    { "rule": "*-spacing", "severity": "off", "fixable": true },
+    { "rule": "*-spaces", "severity": "off", "fixable": true },
+    { "rule": "*-order", "severity": "off", "fixable": true },
+    { "rule": "*-dangle", "severity": "off", "fixable": true },
+    { "rule": "*-newline", "severity": "off", "fixable": true },
+    { "rule": "*quotes", "severity": "off", "fixable": true },
+    { "rule": "*semi", "severity": "off", "fixable": true }
+  ],
+
+  // 在eslin中开启哪些语言的校验
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
+  ],
+  // ✅ 显式指定 Node.js 路径（解决 ENOENT 核心）
+  // "oxc.path.node": "C:\\Program Files\\nodejs\\node.exe", // Windows 典型路径
+  // 如果你不确定路径，可以直接写 "node"（前提是 PATH 里有）
+  // "oxc.path.node": "node",
+
+  // ✅ 指定语言服务器二进制路径（官方推荐）
+  "oxc.path.oxlint": "node_modules/oxlint/bin/oxc_language_server",
+
+  // ✅ 基础开关
+  "oxc.enable": false,
+  // "oxc.lint.run": "onSave",
+  "oxc.server.path": "npx",
+  "oxc.server.args": ["oxlint", "--lsp"],
+  "cSpell.words": [
+    "aeac",
+    "esno",
+    "radash",
+    "unplugin"
+  ],
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSaveMode": "file" // tell oxfmt to format the whole file, not only the modified lines
+  // Or enable it for specific file types:
+  // "[javascript]": {
+  //   "editor.defaultFormatter": "oxc.oxc-vscode"
+  // },
   //   // 拖拽行为
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
   //   // 粘贴行为

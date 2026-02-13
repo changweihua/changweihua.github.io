@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/editors/schemas/schema.json",
+  "rules": {
+    "vue": "error",
+    "no-console": "off",
+    "no-debugger": "warn",
+    "@typescript-eslint/no-explicit-any": "warn"
+  },
+  "ignorePatterns": ["dist/**", "node_modules/**"]
+}
