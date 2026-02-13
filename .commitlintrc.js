@@ -7,7 +7,7 @@ export default {
     'type-enum': [
       2,
       'always',
-      ['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'build', 'ci', 'chore', 'revert'],
+      ['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'build', 'ci', 'chore', 'revert', 'release'],
     ],
     'scope-enum': [2, 'always'],
     // 关闭无意义的大小写检查
