@@ -20,7 +20,6 @@ export default antfu({
     'new-cap': ['off', { newIsCap: true, capIsNew: false }],
     'no-console': 'off' // 忽略console
   },
-  ignores: ['dist/**', 'node_modules/**', '**/types/**', 'public/**', 'vite.config.ts', 'eslint.config.js']
+  ignores: ['dist/**', 'node_modules/**', '**/types/**','**/**.md', 'public/**', 'vite.config.ts', 'eslint.config.js']
 })
 
-// export default [{}]

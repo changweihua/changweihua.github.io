@@ -181,7 +181,13 @@
     "unplugin"
   ],
   "editor.defaultFormatter": "oxc.oxc-vscode",
-  "editor.formatOnSaveMode": "file" // tell oxfmt to format the whole file, not only the modified lines
+  "editor.formatOnSaveMode": "file",
+  "[javascript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  } // tell oxfmt to format the whole file, not only the modified lines
   // Or enable it for specific file types:
   // "[javascript]": {
   //   "editor.defaultFormatter": "oxc.oxc-vscode"

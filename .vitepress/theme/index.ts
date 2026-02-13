@@ -1,77 +1,68 @@
+import type { Theme } from 'vitepress'
+import { icons } from '@iconify-json/logos'
+import { Icon } from '@iconify/vue'
+import elkLayouts from '@mermaid-js/layout-elk'
+import zenuml from '@mermaid-js/mermaid-zenuml'
+import BackToTopButton from '@miletorix/vitepress-back-to-top-button'
+import { HtmlPreview } from '@miletorix/vitepress-html-preview'
+import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
+import { NaiveUIContainer } from '@vitepress-demo-preview/component'
+import { defineClientComponentConfig } from '@vitepress-demo-preview/core'
+import mermaid from 'mermaid'
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from 'vitepress'
-import DefaultTheme from 'vitepress/theme-without-fonts'
-import { h, watchEffect, nextTick } from 'vue'
-import AnimationTitle from '../components/AnimtedTitle.vue'
-import DocAfter from '../components/DocAfter.vue'
-import ArticleFooter from '../components/ArticleFooter.vue'
-import PlaceHolder from '../components/PlaceHolder.vue'
-import HoverableText from '../components/HoverableText.vue'
-import CarouselGallery from '../components/CarouselGallery.vue'
-import ProjectLab from '../components/ProjectLab.vue'
-import CarouselCard from '../components/CarouselCard.vue'
-import MarkdownEChart from '../components/MarkdownEChart.vue'
-import codeblocksFold from 'vitepress-plugin-codeblocks-fold' // import method
-import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
-// @ts-ignore
+import { initComponent as initMarkmapComponent } from 'vitepress-markmap-preview/component'
+import vitepressBprogress from 'vitepress-plugin-bprogress'
+import codeblocksFold from 'vitepress-plugin-codeblocks-fold'
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
-import HeroWrapper from './components/HeroWrapper.vue'
+import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
+import DefaultTheme from 'vitepress/theme-without-fonts'
+import { h, watchEffect } from 'vue'
+
+import VueHero from 'vue-hero-cross'
+import AnimationTitle from '../components/AnimtedTitle.vue'
+import ArticleFooter from '../components/ArticleFooter.vue'
+import CarouselCard from '../components/CarouselCard.vue'
+import CarouselGallery from '../components/CarouselGallery.vue'
+import DocAfter from '../components/DocAfter.vue'
+import HoverableText from '../components/HoverableText.vue'
+import MarkdownEChart from '../components/MarkdownEChart.vue'
+import PageLost from '../components/PageLost.vue'
+import PlaceHolder from '../components/PlaceHolder.vue'
+import ProjectLab from '../components/ProjectLab.vue'
 import RainbowAnimationSwitcher from '../components/RainbowAnimationSwitcher.vue'
+import directives from '../directives'
+// 导入hooks
+import useVisitData from '../hooks/useVisitData'
+import AnimatingLayout from './AnimatingLayout.vue'
+
+import HeroWrapper from './components/HeroWrapper.vue'
+
 import 'virtual:uno.css'
+
 import 'virtual:group-icons.css'
 import 'animate.css'
 
 import 'open-props/open-props.min.css'
+
 import '@fontsource-variable/noto-sans-sc'
 import './styles/vitepress-variables.scss'
 import './styles/maple-mono.scss'
+
 import './styles/animations1.css'
+
 import './styles/animations2.css'
+
 import './styles/animations3.css'
+
 import './styles/index.scss'
 import './styles/rainbow.scss'
 import './styles/vitepress.ext.scss'
+
 import './styles/vitepress.print.css'
+
 import './styles/vitepress.code.css'
 import './styles/markdown.ext.css'
-import './styles/mermaid.ext.css'
-import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
-
-import directives from '../directives'
-
-import '../web-components'
-
-import { NaiveUIContainer } from '@vitepress-demo-preview/component'
-import '@vitepress-demo-preview/component/dist/style.css'
-
-import { defineClientComponentConfig } from '@vitepress-demo-preview/core'
-
-import '@catppuccin/vitepress/theme/frappe/lavender.css'
-import VueHero from 'vue-hero-cross'
-import PageLost from '../components/PageLost.vue'
-
-import { Icon } from '@iconify/vue'
-
-import type { Theme } from 'vitepress'
-
-import AnimatingLayout from './AnimatingLayout.vue'
-
-import mermaid from 'mermaid'
-import { icons } from '@iconify-json/logos'
-mermaid.registerIconPacks([
-  {
-    name: icons.prefix, // To use the prefix defined in the icon pack
-    icons,
-  },
-])
-import zenuml from '@mermaid-js/mermaid-zenuml'
-mermaid.registerExternalDiagrams([zenuml])
-
-import elkLayouts from '@mermaid-js/layout-elk'
-mermaid.registerLayoutLoaders(elkLayouts)
-
-import BackToTopButton from '@miletorix/vitepress-back-to-top-button'
-import '@miletorix/vitepress-back-to-top-button/style.css'
 
 // mermaid.initialize({
 //   look: "handDrawn",
@@ -88,27 +79,36 @@ import '@miletorix/vitepress-back-to-top-button/style.css'
 //   // ... other Mermaid configuration options
 // });
 
+import './styles/mermaid.ext.css'
+import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
+
+import '../web-components'
+import '@vitepress-demo-preview/component/dist/style.css'
+
+import '@catppuccin/vitepress/theme/frappe/lavender.css'
+
+import '@miletorix/vitepress-back-to-top-button/style.css'
 import 'vitepress-markdown-timeline/dist/theme/index.css'
 import 'vitepress-markdown-it-stepper/theme'
 
-import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
 import '@vitepress-code-preview/container/dist/style.css'
-
-// 导入hooks
-import useVisitData from '../hooks/useVisitData'
-
 import 'markdown-it-github-alerts/styles/github-colors-light.css'
+
 import 'markdown-it-github-alerts/styles/github-colors-dark-media.css'
 import 'markdown-it-github-alerts/styles/github-base.css'
 
-import { initComponent as initMarkmapComponent } from 'vitepress-markmap-preview/component'
 import 'vitepress-markmap-preview/dist/index.css'
-
-import vitepressBprogress from 'vitepress-plugin-bprogress'
 // Import CSS styles (both imports work)
 import 'vitepress-plugin-bprogress/style.css'
 
-import { HtmlPreview } from '@miletorix/vitepress-html-preview'
+mermaid.registerIconPacks([
+  {
+    name: icons.prefix, // To use the prefix defined in the icon pack
+    icons,
+  },
+])
+mermaid.registerExternalDiagrams([zenuml])
+mermaid.registerLayoutLoaders(elkLayouts)
 
 export default {
   ...DefaultTheme,
@@ -207,7 +207,7 @@ export default {
             class: 'sm:hidden md:(visible flex h-full items-center justify-center)',
             style: 'position: relative;',
           },
-          [h('w-hero-logo')]
+          [h('w-hero-logo')],
           // [h(HeroLogo)]
         ),
       // "home-hero-image": () =>
@@ -381,13 +381,13 @@ export default {
     }
 
     BackToTopButton(ctx.app, {
-      progressColor: 'var(--vp-c-brand-1)', //"#2563eb", // default is #42b983
+      progressColor: 'var(--vp-c-brand-1)', // "#2563eb", // default is #42b983
       arrowSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-	<g fill="none" fill-rule="evenodd">
-		<path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path>
-		<path fill="currentColor" d="M11.293 8.293a1 1 0 0 1 1.414 0l5.657 5.657a1 1 0 0 1-1.414 1.414L12 10.414l-4.95 4.95a1 1 0 0 1-1.414-1.414z"></path>
-	</g>
-</svg>`, // only svg code
+        <g fill="none" fill-rule="evenodd">
+        <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path>
+        <path fill="currentColor" d="M11.293 8.293a1 1 0 0 1 1.414 0l5.657 5.657a1 1 0 0 1-1.414 1.414L12 10.414l-4.95 4.95a1 1 0 0 1-1.414-1.414z"></path>
+        </g>
+        </svg>`, // only svg code
     })
 
     // 定义国际化配置
@@ -442,7 +442,7 @@ export default {
       if (router) {
         router.onBeforeRouteChange = async (to) => {
           // Here you can set the routes you want to configure.
-          if (to == '/') {
+          if (to === '/') {
             await router.go('/zh-CN/', {
               initialLoad: true,
               smoothScroll: true,
@@ -454,13 +454,13 @@ export default {
           return true
         }
 
-        router.onAfterRouteChange = () => {
-          nextTick(() => {
-            // 等待 DOM 更新后执行清理
-            const styleSheets = document.styleSheets
-            // 可能的清理操作
-          })
-        }
+        // router.onAfterRouteChange = () => {
+        //   nextTick(() => {
+        //     // 等待 DOM 更新后执行清理
+        //     const styleSheets = document.styleSheets
+        //     // 可能的清理操作
+        //   })
+        // }
 
         // 路由加载完成，在加载页面组件后（在更新页面组件之前）调用。
         router.onAfterPageLoad = async () => {

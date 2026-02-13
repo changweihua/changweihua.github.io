@@ -918,7 +918,6 @@ h3 {
 @media (max-width: 768px) {
   .vp-table-container {
     border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   }
 
   .vp-table {
@@ -1894,3 +1893,24 @@ figcaption {
   }
 }
 
+q {
+  quotes: "「" "」";
+  color: var(--vp-c-brand-2);
+  font-style: italic;
+  /* 设置过渡效果，当属性值发生变化时，在0.3秒内平滑过渡 */
+  transition: all 0.3s ease;
+}
+
+q::before {
+  content: open-quote;
+}
+
+q::after {
+  content: close-quote;
+}
+
+q:hover::before,
+q:hover::after {
+  /* 鼠标悬停时，引号放大1.2倍 */
+  transform: scale(1.2);
+}
