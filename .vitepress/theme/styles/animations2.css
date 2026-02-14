@@ -232,23 +232,23 @@
 
 @keyframes gradient-ripple {
   0% {
-    transform: translate(-50%, -50%) scale(0);
+    transform: translate3d(-50%, -50%, 0) scale(0);
     opacity: 1;
   }
   100% {
-    transform: translate(-50%, -50%) scale(3);
+    transform: translate3d(-50%, -50%, 0) scale(3);
     opacity: 0;
   }
 }
 
 @keyframes gradient-ripple {
   0% {
-    transform: translate(-50%, -50%) scale(0);
+    transform: translate3d(-50%, -50%, 0) scale(0);
     opacity: 1;
   }
 
   100% {
-    transform: translate(-50%, -50%) scale(3);
+    transform: translate3d(-50%, -50%, 0) scale(3);
     opacity: 0;
   }
 }
@@ -267,23 +267,23 @@
 /* 液态层位置流动关键帧（无规则XY轴移动） */
 @keyframes liquid-flow {
   0% {
-    transform: translate(0, 0);
+    transform: translate3d(0, 0, 0);
   }
 
   25% {
-    transform: translate(40px, -30px);
+    transform: translate3d(40px, -30px, 0);
   }
 
   50% {
-    transform: translate(-20px, 50px);
+    transform: translate3d(-20px, 50px, 0);
   }
 
   75% {
-    transform: translate(50px, 20px);
+    transform: translate3d(50px, 20px, 0);
   }
 
   100% {
-    transform: translate(0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 

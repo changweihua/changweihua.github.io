@@ -1,43 +1,43 @@
 <template>
   <div class="box-container">
     <div class="box">
-      <div class="col">
+      <div class="flex flex-col">
         <div class="element">
           <div class="mask">
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="flex flex-col">
         <div class="element">
           <div class="mask"></div>
         </div>
       </div>
-      <div class="col">
+      <div class="flex flex-col">
         <div class="element">
           <div class="mask"></div>
         </div>
       </div>
-      <div class="col">
+      <div class="flex flex-col">
         <div class="element">
           <div class="mask"></div>
         </div>
       </div>
-      <div class="col">
+      <div class="flex flex-col">
         <div class="element">
           <div class="mask"></div>
         </div>
       </div>
-      <div class="col">
+      <div class="flex flex-col">
         <div class="element">
           <div class="mask"></div>
         </div>
       </div>
-      <div class="col">
+      <div class="flex flex-col">
         <div class="element">
           <div class="mask"></div>
         </div>
       </div>
-      <div class="col">
+      <div class="flex flex-col">
         <div class="element">
           <div class="mask"></div>
         </div>
@@ -109,7 +109,7 @@ document.addEventListener("mousemove", function (event) {
   height: calc(100% + 3px);
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   border-radius: 10px;
   background: radial-gradient(250px circle at var(--x) var(--y), var(--vp-c-brand) 0, transparent 100%);
   ;

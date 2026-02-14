@@ -8,7 +8,7 @@
       ref="containerRef"
     >
       <canvas ref="canvasRef"></canvas>
-      
+
       <!-- 上下文丢失时的提示信息 -->
       <div
         v-if="showContextLostMessage"
@@ -17,7 +17,7 @@
         <p>3D渲染上下文丢失</p>
         <button @click="recoverContext">恢复</button>
       </div>
-      
+
       <!-- WebGL不支持时的提示信息 -->
       <div
         v-if="showWebGLNotSupported"
@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import * as THREE from 'three'
 import { ref, onMounted, onUnmounted, watch, useTemplateRef, computed } from 'vue'
-import { 
+import {
   useDocumentVisibility,
   useRafFn,
   useResizeObserver
@@ -90,7 +90,7 @@ const isPageVisible = computed(() => visibility.value === 'visible')
 useResizeObserver(containerRef, (entries) => {
   const entry = entries[0]
   const { width, height } = entry.contentRect
-  
+
   containerSize.value = { width, height }
   handleResize()
 })
@@ -109,11 +109,11 @@ const createParticlesGeometry = () => {
   const numParticles = props.amountX * props.amountY
   const positions = new Float32Array(numParticles * 3)
   const scales = new Float32Array(numParticles)
-  
+
   const SEPARATION = 100
-  
+
   let i = 0, j = 0
-  
+
   for (let ix = 0; ix < props.amountX; ix++) {
     for (let iy = 0; iy < props.amountY; iy++) {
       positions[i] = ix * SEPARATION - (props.amountX * SEPARATION) / 2
@@ -124,7 +124,7 @@ const createParticlesGeometry = () => {
       j++
     }
   }
-  
+
   const geometry = new THREE.BufferGeometry()
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
   geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1))
@@ -181,9 +181,9 @@ const recoverContext = () => {
 // 处理尺寸调整
 const handleResize = () => {
   if (!camera || !renderer) return
-  
+
   const { width, height } = containerSize.value
-  
+
   if (width > 0 && height > 0) {
     camera.aspect = width / height
     camera.updateProjectionMatrix()
@@ -194,17 +194,17 @@ const handleResize = () => {
 // WebGL上下文事件处理
 const setupContextListeners = () => {
   if (!renderer || !canvasRef.value) return
-  
+
   canvasRef.value.addEventListener('webglcontextlost', (event) => {
     event.preventDefault()
     isContextLost.value = true
     showContextLostMessage.value = true
   })
-  
+
   canvasRef.value.addEventListener('webglcontextrestored', () => {
     isContextLost.value = false
     showContextLostMessage.value = false
-    
+
     if (renderer) {
       renderer.resetState()
       rebuildScene()
@@ -220,21 +220,21 @@ const rebuildScene = () => {
     disposeMaterial(particles.material)
     particles = null
   }
-  
+
   const { width, height } = containerSize.value
-  
+
   if (!camera) {
     camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000)
     camera.position.z = 1000
   }
-  
+
   if (!scene) {
     scene = new THREE.Scene()
   }
-  
+
   const geometry = createParticlesGeometry()
   const material = createParticlesMaterial()
-  
+
   particles = new THREE.Points(geometry, material)
   scene.add(particles)
 }
@@ -242,18 +242,18 @@ const rebuildScene = () => {
 // 渲染函数
 const render = () => {
   if (!camera || !scene || !renderer || !particles || isContextLost.value) return
-  
+
   if (!isPageVisible.value) {
     return
   }
-  
+
   camera.position.x = 100
   camera.position.y = 400
   camera.lookAt(scene.position)
-  
+
   const positions = particles.geometry.attributes.position.array as Float32Array
   const scales = particles.geometry.attributes.scale.array as Float32Array
-  
+
   let i = 0, j = 0
   for (let ix = 0; ix < props.amountX; ix++) {
     for (let iy = 0; iy < props.amountY; iy++) {
@@ -263,12 +263,12 @@ const render = () => {
       j++
     }
   }
-  
+
   particles.geometry.attributes.position.needsUpdate = true
   particles.geometry.attributes.scale.needsUpdate = true
-  
+
   renderer.render(scene, camera)
-  
+
   count += 0.1
 }
 
@@ -310,45 +310,45 @@ watch(isPageVisible, (visible) => {
 // 初始化
 const init = () => {
   if (!canvasRef.value) return
-  
+
   // 检查WebGL支持
   if (!checkWebGLSupport()) {
     showWebGLNotSupported.value = true
     return
   }
-  
+
   showWebGLNotSupported.value = false
-  
+
   const { width, height } = containerSize.value
-  
+
   // 创建相机
   camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000)
   camera.position.z = 1000
-  
+
   // 创建场景
   scene = new THREE.Scene()
-  
+
   // 创建粒子系统
   const geometry = createParticlesGeometry()
   const material = createParticlesMaterial()
-  
+
   particles = new THREE.Points(geometry, material)
   scene.add(particles)
-  
+
   // 创建渲染器
-  renderer = new THREE.WebGLRenderer({ 
+  renderer = new THREE.WebGLRenderer({
     canvas: canvasRef.value,
     antialias: true,
     alpha: true
   })
-  
+
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setClearAlpha(0)
   renderer.setSize(width, height)
-  
+
   // 设置上下文监听器
   setupContextListeners()
-  
+
   // 启动渲染
   startRendering()
 }
@@ -356,24 +356,24 @@ const init = () => {
 // 清理资源
 const cleanup = () => {
   pauseRendering()
-  
+
   if (scene && particles) {
     scene.remove(particles)
     particles.geometry.dispose()
     disposeMaterial(particles.material)
     particles = null
   }
-  
+
   if (renderer) {
     renderer.dispose()
     renderer = null
   }
-  
+
   if (scene) {
     scene.clear()
     scene = null
   }
-  
+
   camera = null
 }
 
@@ -397,7 +397,7 @@ onMounted(() => {
       height: rect.height
     }
   }
-  
+
   init()
 })
 
@@ -430,7 +430,7 @@ onUnmounted(() => {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 15px;
@@ -453,7 +453,7 @@ onUnmounted(() => {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   background: rgba(220, 53, 69, 0.8);
   color: white;
   padding: 15px;

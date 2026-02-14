@@ -84,7 +84,7 @@ function onAfterEnter() {
   top: 50%;
   left: 50%;
   width: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   font-size: 7vw;
   color: aliceblue;
   text-shadow: 2px 2px 16px black;
@@ -134,7 +134,7 @@ function onAfterEnter() {
 
 .msg-enter-from {
   opacity: 0;
-  transform: translate(-55%, -50%) !important;
+  transform: translate3d(-55%, -50%, 0) !important;
 }
 
 .msg-leave-to {

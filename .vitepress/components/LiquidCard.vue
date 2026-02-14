@@ -244,7 +244,7 @@ function handleMouseLeave() {
     rgba(100, 100, 255, 0.1) 70%,
     rgba(50, 50, 255, 0) 100%
   );
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate3d(-50%, -50%, 0) scale(0);
   opacity: 0;
   pointer-events: none;
   z-index: 4;

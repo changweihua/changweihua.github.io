@@ -216,7 +216,7 @@ onUnmounted(() => {
   border-radius: 50%;
   background: radial-gradient(circle, var(--vp-c-brand-light) 0%, var(--vp-c-brand-soft) 70%);
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate3d(-50%, -50%, 0) scale(0);
   opacity: 0.4;
   transition:
     transform 1800ms ease-out,

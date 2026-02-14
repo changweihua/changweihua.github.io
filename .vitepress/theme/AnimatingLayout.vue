@@ -323,7 +323,7 @@ console.log('文件 Hash:', frontmatter.value.fileHash)
   margin-top: -0.5em;
   left: 0;
   top: 0;
-  transform: translate(var(--left, 50%), var(--top, 50%));
+  transform: translate3d(var(--left, 50%), var(--top, 50%), 0);
 }
 .custom-tips-dot {
   position: absolute;
@@ -355,7 +355,7 @@ console.log('文件 Hash:', frontmatter.value.fileHash)
   margin-top: -2em;
   font-weight: bold;
   text-shadow: 4px 4px 0 var(--vp-c-brand-1, rgba(255, 0, 0));
-  transform: translate(var(--left), var(--top));
+  transform: translate3d(var(--left), var(--top), 0);
 }
 .custom-num::before {
   content: "+" attr(num);

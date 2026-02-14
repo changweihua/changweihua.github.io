@@ -144,7 +144,7 @@ onMounted(() => {
     background: linear-gradient(45deg, rgba(255, 213, 135, .9215686275), rgba(251, 0, 0, .2392156863));
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate3d(-50%, -50%, 0);
     animation: effect-btn-borderflow-rotation 6s linear infinite;
     z-index: 0;
   }

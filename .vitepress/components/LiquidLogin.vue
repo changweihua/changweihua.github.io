@@ -203,7 +203,7 @@ export default {
   position: absolute;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(180, 180, 255, 0.2) 40%, rgba(100, 100, 255, 0.1) 70%, rgba(50, 50, 255, 0) 100%);
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate3d(-50%, -50%, 0) scale(0);
   opacity: 0;
   pointer-events: none;
   z-index: 4;
