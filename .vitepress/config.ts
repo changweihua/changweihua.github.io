@@ -1,27 +1,13 @@
-import { themeConfig } from './src/theme'
-import { docsConfig } from './src/docs'
-import { head } from './src/head'
-import { markdown } from './src/markdown'
-import { RSS } from './src/rss'
-import { HeadConfig, type UserConfig } from 'vitepress'
-import { handleHeadMeta } from './utils/handleHeadMeta'
-import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import type { Plugin } from 'vite'
+import type { HeadConfig, UserConfig } from 'vitepress'
+import type { FileInfo } from 'vitepress-plugin-auto-frontmatter'
+import { resolve } from 'node:path'
+import { Schema, ValidateEnv } from '@julr/vite-plugin-validate-env'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind'
-import MdH1 from 'vitepress-plugin-md-h1'
-import AutoFrontmatter, { FileInfo } from 'vitepress-plugin-auto-frontmatter'
-import { RssPlugin } from 'vitepress-plugin-rss'
-import { resolve } from 'path'
 import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import vueStyledPlugin from '@vue-styled-components/plugin'
 import browserslist from 'browserslist'
 import { browserslistToTargets } from 'lightningcss'
-import { SponsorPlugin } from 'vitepress-plugin-sponsor'
-import llmstxtPlugin from 'vitepress-plugin-llmstxt'
-import { withMermaid } from 'vitepress-plugin-mermaid'
-import { lightMermaidConfig } from './theme/mermaid-theme'
-
-import { Schema, ValidateEnv } from '@julr/vite-plugin-validate-env'
-import vueStyledPlugin from '@vue-styled-components/plugin'
 import colors from 'picocolors'
 import UnoCSS from 'unocss/vite'
 import Iconify from 'unplugin-iconify-generator/vite'
@@ -30,15 +16,31 @@ import Icons from 'unplugin-icons/vite'
 import versionInjector from 'unplugin-version-injector/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig } from 'vite'
 import { envParse } from 'vite-plugin-env-parse'
 import { vitePluginFakeServer } from 'vite-plugin-fake-server'
 import Inspect from 'vite-plugin-inspect'
+
 import mkcert from 'vite-plugin-mkcert'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { qrcode } from 'vite-plugin-qrcode'
-import { contentHashPlugin } from './plugins/contentHash'
-import frontmatterHashPlugin from './plugins/frontmatterHash'
+import AutoFrontmatter from 'vitepress-plugin-auto-frontmatter'
+import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import llmstxtPlugin from 'vitepress-plugin-llmstxt'
+import MdH1 from 'vitepress-plugin-md-h1'
+import { withMermaid } from 'vitepress-plugin-mermaid'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+import { RssPlugin } from 'vitepress-plugin-rss'
+// import { SponsorPlugin } from 'vitepress-plugin-sponsor'
+// import { contentHashPlugin } from './plugins/contentHash'
+// import frontmatterHashPlugin from './plugins/frontmatterHash'
+import { docsConfig } from './src/docs'
+import { head } from './src/head'
+import { markdown } from './src/markdown'
+import { RSS } from './src/rss'
+import { themeConfig } from './src/theme'
+import { lightMermaidConfig } from './theme/mermaid-theme'
+import { handleHeadMeta } from './utils/handleHeadMeta'
 
 // ♻️ 重构
 const yourPlugin: () => Plugin = () => ({
@@ -54,7 +56,7 @@ const yourPlugin: () => Plugin = () => ({
     console.log(
       colors.red(`viteVersion: ${colors.italic(this.meta.viteVersion)} `),
       colors.green(` rollupVersionersion: ${colors.italic(this.meta.rollupVersion)} `),
-      colors.blue(` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `)
+      colors.blue(` rolldownVersion: ${colors.italic(this.meta.rolldownVersion)} `),
     )
   },
 })
@@ -240,7 +242,7 @@ const vitePressOptions: UserConfig = {
       pageData.titleTemplate = ':title | Blog'
     }
 
-    //inject for mathjax script
+    // inject for mathjax script
     const head = (pageData.frontmatter.head ??= [])
     const inject_content = pageData.frontmatter.inject_content
     if (inject_content && Array.isArray(inject_content)) {
@@ -268,31 +270,31 @@ function intlChineseSearchOptimize(input: string) {
   return result.join(' ')
 }
 
-// 转义Markdown中的尖括号，但保留代码块内容
-function escapeMarkdownBrackets(markdownContent: string) {
-  // 正则表达式模式：匹配代码块
-  const codeBlockPattern = /```[\s\S]*?```|`[\s\S]*?`/g
+// // 转义Markdown中的尖括号，但保留代码块内容
+// function escapeMarkdownBrackets(markdownContent: string) {
+//   // 正则表达式模式：匹配代码块
+//   const codeBlockPattern = /```[\s\S]*?```|`[\s\S]*?`/g
 
-  // 临时替换代码块为占位符
-  const codeBlocks: Array<any> = []
-  const contentWithoutCodeBlocks = markdownContent.replace(codeBlockPattern, (match) => {
-    codeBlocks.push(match)
-    return `__CODE_BLOCK_${codeBlocks.length - 1}__`
-  })
+//   // 临时替换代码块为占位符
+//   const codeBlocks: Array<any> = []
+//   const contentWithoutCodeBlocks = markdownContent.replace(codeBlockPattern, (match) => {
+//     codeBlocks.push(match)
+//     return `__CODE_BLOCK_${codeBlocks.length - 1}__`
+//   })
 
-  // 转义普通文本中的尖括号
-  const escapedContent = contentWithoutCodeBlocks.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+//   // 转义普通文本中的尖括号
+//   const escapedContent = contentWithoutCodeBlocks.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-  // 恢复代码块内容
-  return escapedContent.replace(/__CODE_BLOCK_(\d+)__/g, (match, index) => {
-    return codeBlocks[index]
-  })
-}
+//   // 恢复代码块内容
+//   return escapedContent.replace(/__CODE_BLOCK_(\d+)__/g, (match, index) => {
+//     return codeBlocks[index]
+//   })
+// }
 
 /**
  * 创建 permalink 永久链接
  */
-const createPermalink = () => {
+function createPermalink() {
   return {
     permalink: `/pages/${(Math.random() + Math.random()).toString(16).slice(2, 8)}`,
   }
@@ -303,14 +305,15 @@ const createPermalink = () => {
  *
  * @param fileInfo 文件信息
  */
-const createCategory = (fileInfo: FileInfo) => {
+function createCategory(fileInfo: FileInfo) {
   // relativePath 为基于 vp srcDir 的相对路径，默认是基于项目根目录，如 guide/vue/getting.md
   const relativePathArr = fileInfo.relativePath.split('/')
 
   const categories: string[] = []
   relativePathArr.forEach((filename, index) => {
     // 忽略文件名
-    if (index !== relativePathArr.length - 1) categories.push(filename)
+    if (index !== relativePathArr.length - 1)
+      categories.push(filename)
   })
 
   // [""] 表示添加一个为空的 categories
@@ -324,8 +327,8 @@ export default withMermaid(
       handDrawnSeed: 2,
       startOnLoad: false,
       layout: 'elk',
-      fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-      altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+      fontFamily: 'MapleMono, AlibabaPuHuiTi, \'阿里巴巴普惠体 3.0\'',
+      altFontFamily: 'MapleMono, AlibabaPuHuiTi, \'阿里巴巴普惠体 3.0\'',
       // 使用 CSS 变量
       ...lightMermaidConfig,
       securityLevel: 'loose',
@@ -338,7 +341,7 @@ export default withMermaid(
       },
       logLevel: 'error',
       suppressErrorRendering: true,
-      //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+      // mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
     },
     // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
     mermaidPlugin: {
@@ -383,7 +386,7 @@ export default withMermaid(
             // sourceMap: true,
             // 使用 sass-embedded 作为编译器
             // implementation: sassEmbedded,
-            //additionalData: `@use "${path.resolve(__dirname, 'src/assets/styles/variables.scss')}" as vars; @debug "SCSS config loaded";`, // 强制全局注入
+            // additionalData: `@use "${path.resolve(__dirname, 'src/assets/styles/variables.scss')}" as vars; @debug "SCSS config loaded";`, // 强制全局注入
             additionalData: `@use "@vp/theme/styles/variables.scss" as vars;`, // 强制全局注入
             // api: "modern-compiler",
           },
@@ -514,10 +517,12 @@ export default withMermaid(
         }),
         MdH1({
           ignoreList: ['/gallery/'],
-          beforeInject: (frontmatter, id, title) => {
+          beforeInject: (_frontmatter, id, _title) => {
             // 根据文档路径判断
-            if (id.includes('/resume')) return false
-            if (id.includes('/me.')) return false
+            if (id.includes('/resume'))
+              return false
+            if (id.includes('/me.'))
+              return false
           },
         }),
         AutoFrontmatter({
@@ -559,7 +564,7 @@ export default withMermaid(
         pagefindPlugin({
           forceLanguage: 'zh-CN',
           locales: {
-            root: {
+            'root': {
               btnPlaceholder: '搜索',
               placeholder: '搜索文档',
               emptyText: '空空如也',
@@ -591,25 +596,25 @@ export default withMermaid(
           excludeSelector: ['img', 'a.header-anchor'],
           customSearchQuery: intlChineseSearchOptimize,
         }),
-        {
-          name: 'patch-sidebar',
-          enforce: 'pre',
-          transform: (code, id) => {
-            if (id.includes('VPSidebarItem.vue')) {
-              return code.replaceAll(`:is="textTag"`, `is="p"`)
-            }
-          },
-        },
+        // {
+        //   name: 'patch-sidebar',
+        //   enforce: 'pre',
+        //   transform: (code, id) => {
+        //     if (id.includes('VPSidebarItem.vue')) {
+        //       return code.replaceAll(`:is="textTag"`, `is="p"`)
+        //     }
+        //   },
+        // },
       ],
     },
     vue: {
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => tag.includes('mjx-') || customElements.includes(tag),
+          isCustomElement: tag => tag.includes('mjx-') || customElements.includes(tag),
           // whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
         },
       },
     },
     ...vitePressOptions,
-  } satisfies UserConfig)
+  } satisfies UserConfig),
 )

@@ -1369,9 +1369,12 @@ table {
   position: relative; /* 伪元素依赖父元素定位 */
   display: inline-block;
   // background: #007bff;
-  // color: #fff;
   text-decoration: none;
   transition: all 0.3s ease; /* 整体过渡效果 */
+}
+
+.VPLink.link.VPNavBarMenuLink.active {
+  color: var(--vp-c-brand-3) !important;
 }
 
 /* 下划线用伪元素实现 */
