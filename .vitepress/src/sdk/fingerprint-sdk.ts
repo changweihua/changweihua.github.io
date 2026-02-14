@@ -336,7 +336,7 @@ function getFontSignal(): string {
       }
     }
 
-    return availableFonts.sort().join('|') || 'none'
+    return availableFonts.toSorted().join('|') || 'none'
   }
   catch (e) {
     const error = e instanceof Error ? e.message : String(e)
@@ -394,7 +394,7 @@ function getHardwareSignal(): HardwareSignalResult {
 // ----------------------------------------------------------------------
 
 function normalizeSignals(components: FingerprintComponents): string {
-  const keys = Object.keys(components).sort()
+  const keys = Object.keys(components).toSorted()
   return keys
     .map((key) => {
       const val = components[key]

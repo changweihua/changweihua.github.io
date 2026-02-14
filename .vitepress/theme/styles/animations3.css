@@ -149,3 +149,25 @@
     --rotate: 360deg;
   }
 }
+
+
+.svg-animation-0 {
+  animation: strokedash0 10s linear 0.1s 1 forwards;
+}
+@keyframes strokedash0 {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 实现流光 */
+.svg-animation-1 {
+  /* animation: name duration timing-function delay iteration-count direction fill-mode play-state; */
+  animation: strokedash1 0.1s linear 10.1s 1 forwards,
+              dash1 10s linear 10.2s infinite forwards;
+}
+@keyframes strokedash1 {
+  to {
+    stroke-opacity: 1;
+  }
+}

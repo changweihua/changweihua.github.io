@@ -1,6 +1,7 @@
 import { loadEnv, defineConfig, UserConfig } from 'vite'
 import path, { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import oxlintPlugin from 'vite-plugin-oxlint'
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target]
@@ -20,6 +21,11 @@ export default defineConfig(() => {
         // return Promise.all(environments.map((environment) => builder.build(environment)))
       },
     },
+    plugins: [
+      oxlintPlugin({
+        configFile: 'eslintrc.json'
+      })
+    ],
     server: {
       // ✅ 服务器基础配置
       host: '0.0.0.0', // 允许外部访问
