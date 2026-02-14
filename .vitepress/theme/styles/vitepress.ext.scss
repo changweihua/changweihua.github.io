@@ -1917,3 +1917,8 @@ q:hover::after {
   /* 鼠标悬停时，引号放大1.2倍 */
   transform: scale(1.2);
 }
+
+.glossary-term {
+  -webkit-text-fill-color: var(--vp-c-brand-3);
+  margin: 0 0.3em;
+}
