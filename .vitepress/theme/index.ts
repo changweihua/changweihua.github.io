@@ -67,7 +67,7 @@ import './styles/vitepress.print.css'
 import './styles/vitepress.code.css'
 import './styles/markdown.ext.css'
 
-import 'vitepress-plugin-mermaid-pan-zoom/dist/style.css'
+// import 'vitepress-plugin-mermaid-pan-zoom/dist/style.css'
 
 // mermaid.initialize({
 //   look: "handDrawn",
