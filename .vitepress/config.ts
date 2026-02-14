@@ -28,7 +28,7 @@ import AutoFrontmatter from 'vitepress-plugin-auto-frontmatter'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import llmstxtPlugin from 'vitepress-plugin-llmstxt'
 import MdH1 from 'vitepress-plugin-md-h1'
-import { withMermaid } from 'vitepress-plugin-mermaid'
+import { withMermaid } from "vitepress-mermaid";
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
 // import { SponsorPlugin } from 'vitepress-plugin-sponsor'
@@ -400,28 +400,26 @@ export default withMermaid(
           },
         },
       },
-      // // 强制预构建
-      // // Vite 的预构建会将 CommonJS / UMD 依赖转换为 ESM，并将多个内部模块合并为单个模块，减少 HTTP 请求数量。
-      // optimizeDeps: {
-      //   include: [
-      //     'vue',
-      //     'pinia',
-      //     'dayjs',
-      //     'unocss',
-      //     'vue-router',
-      //     'vue-i18n',
-      //     'lodash-es',
-      //     '@vueuse/core',
-      //     'markdown-it',
-      //   ],
-      //   exclude: [
-      //     '@iconify/json',
-      //     'vue3-next-qrcode',
-      //     'vitepress-plugin-detype',
-      //     'vitepress-plugin-tabs',
-      //     'vitepress-plugin-npm-commands',
-      //   ],
-      // },
+      // 强制预构建
+      // Vite 的预构建会将 CommonJS / UMD 依赖转换为 ESM，并将多个内部模块合并为单个模块，减少 HTTP 请求数量。
+      optimizeDeps: {
+        include: [
+          "mermaid",
+          "dayjs",
+          "debug",
+          "@braintree/sanitize-url",
+          "cytoscape",
+          "cytoscape-cose-bilkent",
+        ],
+        exclude: ["vitepress"],
+        // exclude: [
+        //   '@iconify/json',
+        //   'vue3-next-qrcode',
+        //   'vitepress-plugin-detype',
+        //   'vitepress-plugin-tabs',
+        //   'vitepress-plugin-npm-commands',
+        // ],
+      },
       ssr: {
         external: [
           'vue3-next-qrcode',

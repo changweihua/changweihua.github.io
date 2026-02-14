@@ -38,6 +38,9 @@ import AnimatingLayout from './AnimatingLayout.vue'
 
 import HeroWrapper from './components/HeroWrapper.vue'
 
+// import { useMermaidPanZoom } from 'vitepress-plugin-mermaid-pan-zoom'
+
+
 import 'virtual:uno.css'
 
 import 'virtual:group-icons.css'
@@ -63,6 +66,8 @@ import './styles/vitepress.print.css'
 
 import './styles/vitepress.code.css'
 import './styles/markdown.ext.css'
+
+import 'vitepress-plugin-mermaid-pan-zoom/dist/style.css'
 
 // mermaid.initialize({
 //   look: "handDrawn",
@@ -438,6 +443,8 @@ export default {
       app.component('RainbowAnimationSwitcher', RainbowAnimationSwitcher)
 
       app.use(directives)
+
+      // useMermaidPanZoom()
 
       if (router) {
         router.onBeforeRouteChange = async (to) => {

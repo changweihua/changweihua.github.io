@@ -59,7 +59,8 @@
     "optimize:clear": "tsx scripts/optimize-images.ts clear",
     "optimize:stats": "tsx scripts/optimize-images.ts stats",
     "optimize:test-jxl": "tsx scripts/optimize-images.ts test-jxl",
-    "lint": "oxlint . --fix && eslint . --fix"
+    "lint": "oxlint . --fix && eslint . --fix",
+    "olint": "oxlint && eslint"
   },
   "config": {
     "commitizen": {
@@ -163,6 +164,7 @@
     "vitepress-plugin-legend": "^1.3.0",
     "vitepress-plugin-llmstxt": "^0.5.1",
     "vitepress-plugin-md-h1": "^1.0.11",
+    "vitepress-plugin-mermaid-pan-zoom": "^1.0.2",
     "vitepress-plugin-pagefind": "^0.4.18",
     "vitepress-plugin-sponsor": "^0.2.0",
     "vitepress-plugin-tabs": "^0.7.3",
@@ -200,6 +202,7 @@
     "commitlint-config-git-commit-emoji": "^1.0.0",
     "cz-customizable": "^7.5.1",
     "cz-message-helper": "^2.0.0",
+    "eslint-plugin-oxlint": "^1.46.0",
     "feed": "^5.2.0",
     "font-spider": "^1.3.5",
     "glob": "^13.0.3",
@@ -241,10 +244,12 @@
     "vite-plugin-oxlint": "^1.6.0",
     "vite-plugin-qrcode": "^0.3.0",
     "vite-plugin-version-mark": "^0.2.2",
+    "vitepress-better-demo-plugin": "^0.6.2",
     "vitepress-demo-plugin": "^1.5.1",
     "vitepress-i18n": "^1.3.5",
     "vitepress-linkcard": "^2.2.1",
     "vitepress-markdown-it-stepper": "^0.1.1",
+    "vitepress-mermaid": "^2.1.2",
     "vitepress-plugin-llms": "^1.11.0",
     "vitepress-plugin-mermaid": "^2.0.17",
     "vitepress-plugin-npm-commands": "^0.8.1",

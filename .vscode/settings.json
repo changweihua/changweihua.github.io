@@ -170,7 +170,7 @@
   "oxc.path.oxlint": "node_modules/oxlint/bin/oxc_language_server",
 
   // ✅ 基础开关
-  "oxc.enable": true,
+  "oxc.enable": false,
   // "oxc.lint.run": "onSave",
   "oxc.server.path": "npx",
   "oxc.server.args": ["oxlint", "--lsp"],
