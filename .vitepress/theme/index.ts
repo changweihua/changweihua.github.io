@@ -14,6 +14,7 @@ import { inBrowser, useData, useRoute } from 'vitepress'
 import { initComponent as initMarkmapComponent } from 'vitepress-markmap-preview/component'
 import vitepressBprogress from 'vitepress-plugin-bprogress'
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'
+// @ts-ignore
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import DefaultTheme from 'vitepress/theme-without-fonts'
@@ -30,6 +31,7 @@ import MarkdownEChart from '../components/MarkdownEChart.vue'
 import PageLost from '../components/PageLost.vue'
 import PlaceHolder from '../components/PlaceHolder.vue'
 import ProjectLab from '../components/ProjectLab.vue'
+import SnakeTimeline from '../components/SnakeTimeline.vue'
 import RainbowAnimationSwitcher from '../components/RainbowAnimationSwitcher.vue'
 import directives from '../directives'
 // 导入hooks
@@ -441,6 +443,7 @@ export default {
       app.component('GlossaryTooltip', GlossaryTooltip)
       app.component('HtmlPreview', HtmlPreview)
       app.component('RainbowAnimationSwitcher', RainbowAnimationSwitcher)
+      app.component('SnakeTimeline', SnakeTimeline)
 
       app.use(directives)
 

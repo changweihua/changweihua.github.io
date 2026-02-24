@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, useTemplateRef } from "vue";
 const list = ref([
+  "Hello",
   "让心灵在青山绿水间悠然旅行",
   "带你领略大自然的鬼斧神工",
   "邂逅千年古城与浪漫小镇",
@@ -83,9 +84,10 @@ function onAfterEnter() {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 50%;
+  width: 85%;
   transform: translate3d(-50%, -50%, 0);
-  font-size: 7vw;
+  font-size: 7rem;
+  line-height: 7rem;
   color: aliceblue;
   text-shadow: 2px 2px 16px black;
 }
@@ -109,6 +111,10 @@ function onAfterEnter() {
 }
 
 .img2 {
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.img3 {
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 }
 

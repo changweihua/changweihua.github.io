@@ -14,6 +14,8 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 <ShadowLogo class="my-5" />
 
+<!-- <SnakeTimeline /> -->
+
 <LiquidMetaCard title="💥 简介" class="my-5">
   <template #title>
     <div class="flex items-center justify-center p-3">
