@@ -47,8 +47,11 @@ function isTargetFolder(filePath: string): boolean {
   // 统一路径格式，确保以 / 开头
   const normalizedPath = ensureLeadingSlash(filePath).replace(/\\/g, '/')
 
+  // normalizedPath.includes(`/blog/${dayjs().subtract(1, 'month').format('YYYY/MM')}/`) ||
+
   return (
-    normalizedPath.includes(`/blog/${dayjs().year()}`) ||
+    normalizedPath.includes(`/blog/${dayjs().format('YYYY-MM')}/`) ||
+    normalizedPath.includes(`/blog/${dayjs().subtract(1, 'month').format('YYYY-MM')}/`) ||
     normalizedPath.includes('/manual/') ||
     normalizedPath.includes('/gallery/')
   )

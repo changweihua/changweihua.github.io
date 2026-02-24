@@ -13,7 +13,7 @@ import { useData } from 'vitepress'
 const { lang } = useData()
 
 const { yearMap, postMap, localeMap } = data
-console.log('localeMap', localeMap[lang])
+// console.log('localeMap', localeMap[lang])
 const yearList = Object.keys(localeMap[lang] ?? []).sort((a, b) => b - a); // 按年份降序排序
 const computedYearMap = computed(()=> {
   let result = {}

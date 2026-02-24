@@ -26,10 +26,10 @@ import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { qrcode } from 'vite-plugin-qrcode'
 import AutoFrontmatter from 'vitepress-plugin-auto-frontmatter'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
-import llmstxtPlugin from 'vitepress-plugin-llmstxt'
+// import llmstxtPlugin from 'vitepress-plugin-llmstxt'
 import MdH1 from 'vitepress-plugin-md-h1'
 import { withMermaid } from "vitepress-mermaid";
-import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+// import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
 // import { SponsorPlugin } from 'vitepress-plugin-sponsor'
 // import { contentHashPlugin } from './plugins/contentHash'
@@ -43,8 +43,8 @@ import { lightMermaidConfig } from './theme/mermaid-theme'
 import { handleHeadMeta } from './utils/handleHeadMeta'
 
 // ♻️ 重构
-const yourPlugin: () => Plugin = () => ({
-  name: 'test-plugin',
+const versionPlugin: () => Plugin = () => ({
+  name: 'version-plugin',
   config(config) {
     // get version in vitePlugin if you open `ifGlobal`
     console.log(config.define)
@@ -76,7 +76,7 @@ function getDevPlugins() {
     mockDevServerPlugin(),
     Inspect(),
     envParse(),
-    yourPlugin(),
+    versionPlugin(),
     vitePluginFakeServer({
       include: 'fake', // 设置目标文件夹，将会引用该文件夹里包含xxx.fake.{ts,js,mjs,cjs,cts,mts}的文件
       enableProd: false, // 是否在生产环境下设置mock
@@ -558,42 +558,42 @@ export default withMermaid(
         //   aliPayQR: '/Alipay.svg',
         //   weChatQR: '/wechat-pay.svg',
         // }),
-        llmstxtPlugin(),
-        pagefindPlugin({
-          forceLanguage: 'zh-CN',
-          locales: {
-            'root': {
-              btnPlaceholder: '搜索',
-              placeholder: '搜索文档',
-              emptyText: '空空如也',
-              heading: '共: {{searchResult}} 条结果',
-              toSelect: '选择',
-              toNavigate: '切换',
-              toClose: '关闭',
-              searchBy: '',
-            },
-            'en-us': {
-              btnPlaceholder: 'Search',
-              placeholder: 'Search Docs...',
-              emptyText: 'No results',
-              heading: 'Total: {{searchResult}} search results.',
-              // 搜索结果不展示最后修改日期日期
-              showDate: false,
-            },
-            'zh-CN': {
-              btnPlaceholder: '搜索',
-              placeholder: '搜索文档',
-              emptyText: '空空如也',
-              heading: '共: {{searchResult}} 条结果',
-              toSelect: '选择',
-              toNavigate: '切换',
-              toClose: '关闭',
-              searchBy: '',
-            },
-          },
-          excludeSelector: ['img', 'a.header-anchor'],
-          customSearchQuery: intlChineseSearchOptimize,
-        }),
+        // llmstxtPlugin(),
+        // pagefindPlugin({
+        //   forceLanguage: 'zh-CN',
+        //   locales: {
+        //     'root': {
+        //       btnPlaceholder: '搜索',
+        //       placeholder: '搜索文档',
+        //       emptyText: '空空如也',
+        //       heading: '共: {{searchResult}} 条结果',
+        //       toSelect: '选择',
+        //       toNavigate: '切换',
+        //       toClose: '关闭',
+        //       searchBy: '',
+        //     },
+        //     'en-us': {
+        //       btnPlaceholder: 'Search',
+        //       placeholder: 'Search Docs...',
+        //       emptyText: 'No results',
+        //       heading: 'Total: {{searchResult}} search results.',
+        //       // 搜索结果不展示最后修改日期日期
+        //       showDate: false,
+        //     },
+        //     'zh-CN': {
+        //       btnPlaceholder: '搜索',
+        //       placeholder: '搜索文档',
+        //       emptyText: '空空如也',
+        //       heading: '共: {{searchResult}} 条结果',
+        //       toSelect: '选择',
+        //       toNavigate: '切换',
+        //       toClose: '关闭',
+        //       searchBy: '',
+        //     },
+        //   },
+        //   excludeSelector: ['img', 'a.header-anchor'],
+        //   customSearchQuery: intlChineseSearchOptimize,
+        // }),
         // {
         //   name: 'patch-sidebar',
         //   enforce: 'pre',

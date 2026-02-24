@@ -42,6 +42,30 @@ function calculateHash(content: string): string {
 
 // or simply - const locales = ['root', 'fr']
 
+/**
+ * 确保路径以 / 开头
+ */
+function ensureLeadingSlash(path: string): string {
+  return path.startsWith('/') ? path : `/${path}`
+}
+
+/**
+ * 检查是否为 target 文件夹
+ */
+function isTargetFile(filePath: string): boolean {
+  if (!filePath) return false
+
+  // 统一路径格式，确保以 / 开头
+  const normalizedPath = ensureLeadingSlash(filePath).replace(/\\/g, '/')
+
+  return normalizedPath.includes(`/blog/${dayjs().format('YYYY-MM')}/`)
+
+  // return (
+  //   normalizedPath.includes(`/blog/${dayjs().format('YYYY-MM')}/`) ||
+  //   normalizedPath.includes(`/blog/${dayjs().subtract(1, 'month').format('YYYY-MM')}/`)
+  // )
+}
+
 export default createContentLoader(['**/blog/**/!(index|README).md'], {
   includeSrc: true, // 包含原始 markdown 源?
   render: true, // 包含渲染的整页 HTML?
@@ -52,40 +76,44 @@ export default createContentLoader(['**/blog/**/!(index|README).md'], {
 
     raws.forEach((item) => {
       const { url, frontmatter, excerpt, src } = item
-      // console.log('frontmatter', frontmatter)
+      console.log('frontmatter', frontmatter)
 
       // src?.match(/!\[(.*?)\]\((.*?)\)/)
 
-      let cover = frontmatter['cover']
-      let matcher
 
-      if (src) {
-        while ((matcher = pattern.exec(src)) !== null) {
-          cover = matcher[2]
-          break
+      if (isTargetFile(url)) {
+
+        let cover = frontmatter['cover']
+        let matcher
+
+        if (src) {
+          while ((matcher = pattern.exec(src)) !== null) {
+            cover = matcher[2]
+            break
+          }
         }
+
+        let filePath = url
+
+        // 移除开头的斜杠和 .html 后缀
+        // if (filePath.startsWith('/')) {
+        //   filePath = filePath.substring(1)
+        // }
+        if (filePath.endsWith('.html')) {
+          filePath = filePath.substring(0, filePath.length - 5) + '.md'
+        }
+
+        let locale = url.split('/')[1]
+        locale = locales.includes(locale) ? locale : 'root'
+          ; (grouped[locale] ??= []).push({
+            title: frontmatter.title,
+            hash: calculateHash(filePath),
+            url,
+            excerpt,
+            date: formatDate(frontmatter.date),
+            cover,
+          })
       }
-
-      let filePath = url
-
-      // 移除开头的斜杠和 .html 后缀
-      // if (filePath.startsWith('/')) {
-      //   filePath = filePath.substring(1)
-      // }
-      if (filePath.endsWith('.html')) {
-        filePath = filePath.substring(0, filePath.length - 5) + '.md'
-      }
-
-      let locale = url.split('/')[1]
-      locale = locales.includes(locale) ? locale : 'root'
-      ;(grouped[locale] ??= []).push({
-        title: frontmatter.title,
-        hash: calculateHash(filePath),
-        url,
-        excerpt,
-        date: formatDate(frontmatter.date),
-        cover,
-      })
     })
 
     return grouped

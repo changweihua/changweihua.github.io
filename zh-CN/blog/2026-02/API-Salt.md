@@ -3,7 +3,7 @@ lastUpdated: true
 commentabled: true
 recommended: true
 title: API接口安全设计
-description: API接口安全设计
+description: 动态盐值与签名机制的实现与剖析
 date: 2026-02-02 13:00:00 
 pageClass: blog-page-class
 cover: /covers/platform.svg
