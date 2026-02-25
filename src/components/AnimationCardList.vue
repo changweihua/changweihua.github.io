@@ -112,8 +112,8 @@ onMounted(() => {
   justify-content: center;
   font-weight: 600;
   /* 初始状态：透明 + 下移（由 JS 控制是否播放动画） */
-  opacity: 0.01;
-  transform: translateY(2rem);
+  // opacity: 0.01;
+  // transform: translateY(2rem);
 }
 
 /* 动画仅在 prefers-reduced-motion: no-preference 时启用 */
