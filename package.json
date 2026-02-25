@@ -77,8 +77,9 @@
     "@fingerprintjs/fingerprintjs": "^5.0.1",
     "@fontsource-variable/noto-sans-sc": "^5.2.10",
     "@iconify/vue": "^5.0.0",
-    "@mdit/plugin-figure": "^0.22.3",
-    "@mdit/plugin-img-lazyload": "^0.22.2",
+    "@mdit/plugin-figure": "^0.23.0",
+    "@mdit/plugin-img-lazyload": "^0.23.0",
+    "@mdit/plugin-tasklist": "^0.22.3",
     "@mermaid-js/layout-elk": "^0.2.0",
     "@mermaid-js/mermaid-zenuml": "^0.2.2",
     "@miletorix/vitepress-back-to-top-button": "^1.0.3",
@@ -178,14 +179,13 @@
     "yuppie-ui": "^0.0.11"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^7.4.3",
+    "@antfu/eslint-config": "^7.6.0",
     "@commitlint/cli": "^20.4.2",
     "@commitlint/config-conventional": "^20.4.2",
     "@commitlint/cz-commitlint": "^20.4.1",
-    "@iconify/json": "^2.2.442",
+    "@iconify/json": "^2.2.443",
     "@iconify/utils": "^3.1.0",
     "@julr/vite-plugin-validate-env": "^2.2.0",
-    "@mdit/plugin-tasklist": "^0.22.3",
     "@release-it/conventional-changelog": "^10.0.5",
     "@svgfmt/cli": "^0.2.0",
     "@types/fs-extra": "^11.0.4",
@@ -239,7 +239,7 @@
     "vite-plugin-fake-server": "^2.2.2",
     "vite-plugin-html-config": "^2.0.2",
     "vite-plugin-image-preload": "^1.0.0",
-    "vite-plugin-mkcert": "^1.17.9",
+    "vite-plugin-mkcert": "^1.17.10",
     "vite-plugin-mock-dev-server": "^2.0.7",
     "vite-plugin-oxlint": "^1.6.0",
     "vite-plugin-qrcode": "^0.3.0",
@@ -273,7 +273,7 @@
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.16",
     "vitest": "^4.0.18",
-    "vue": "^3.5.28"
+    "vue": "^3.5.29"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,vue,html,css,scss}": [

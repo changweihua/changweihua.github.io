@@ -14,6 +14,10 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 <ShadowLogo class="my-5" />
 
+- [ ] 普通任务
+- [x] **已完成**任务 [链接](https://example.com)
+- [ ] 带有 `代码` 的任务
+
 <!-- <SnakeTimeline /> -->
 
 <LiquidMetaCard title="💥 简介" class="my-5">

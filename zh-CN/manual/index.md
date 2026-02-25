@@ -15,7 +15,7 @@ title: 手册列表
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { delay } from "lodash-es";
-import CardListView from '@/components/CardListView.vue';
+import CardListView from '@/components/AnimationCardList.vue';
 import { useData } from 'vitepress'
 import { data } from '@vp/manual.data'
 

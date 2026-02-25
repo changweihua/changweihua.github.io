@@ -25,10 +25,8 @@ import { markdownGlossaryPlugin } from 'vitepress-plugin-glossary'
 import glossary from './glossary.json'
 import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
 import picturePlugin from '../plugins/markdown/markdown-it-picture'
-import { tasklist } from '@mdit/plugin-tasklist'
-import { markdownWrapHashPlugin } from '../plugins/markdown/markdownWrapHash'
-import { componentHeroWrapPlugin } from '../plugins/markdown/componentHeroWrap'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
+import { tasklist } from "@mdit/plugin-tasklist";
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -37,43 +35,35 @@ const demoAlias = {
 }
 
 const markdown: MarkdownOptions | undefined = {
+  cache: false,
   lineNumbers: true,
-  // 直接启用 GitHub 风格列表
   breaks: true,
-  // 允许 HTML 渲染
-  html: true,
   linkify: true,
-  // 标记组件为行内
-  component: {
-    inlineTags: [],
-  },
   image: {
     lazyLoading: true,
   },
   math: true,
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
-  preConfig: async (md) => {},
+  languageLabel: {
+    'vue': 'Vue SFC'
+  },
+  codeCopyButtonTitle: '复制',
+  preConfig: async (md) => {
+  },
   config: (md) => {
+    // ---------- 打印所有块级规则（调试用）----------
+    const blockRules = md.block.ruler.getRules('').map(rule => rule.name);
+    console.log('All block rules:', blockRules);
+
+    md.block.ruler.getRules('').forEach(rule => {
+      if (rule.name.includes('task')) {
+        try { md.block.ruler.disable(rule.name); } catch (e) { }
+      }
+    });
+
     md.use(tasklist, {
       // your options, optional
-    })
-
-    // // 使用完整插件
-    // md.use(markdownWrapHashPlugin, {
-    //   targetFolders: ['blog', 'manual', 'gallery'],
-    //   algorithm: 'md5',
-    //   hashLength: 8,
-    //   wrapperTag: 'div',
-    //   wrapperClass: 'markdown-content',
-    //   debug: process.env.NODE_ENV !== 'production',
-    // })
-
-    /*
-    md.use(componentHeroWrapPlugin, {
-      targetFolders: ['blog', 'manual', 'gallery'],
-      enableHero: true,
-      includeFilePath: true,
-    })*/
+    });
 
     md.use(pathHashWrapperPlugin)
 
@@ -147,11 +137,6 @@ const markdown: MarkdownOptions | undefined = {
     // @ts-ignore
     codeBarPlugin(md)
 
-    //  md.use(imgLazyload)
-    // md.use(figure, {
-    //   // 你的选项，可选的
-    // })
-
     // @ts-ignore
     vitepressMarkmapPreview(md, {
       showToolbar: false,
@@ -172,17 +157,6 @@ const markdown: MarkdownOptions | undefined = {
         show: true,
       },
     })
-
-    // md.use(autoArticleTitlePlugin, {
-    //   relativePaths: ["/blog/"],
-    // });
-
-    // md.use(markdownItReplaceLink, {
-    //   processHTML: false, // defaults to false for backwards compatibility
-    //   replaceLink: function (link, env, token, htmlToken) {
-    //     return link + '?c=' + Date.now()
-    //   },
-    // })
 
     // 修改表格的 HTML 结构
     md.renderer.rules.table_open = () =>
@@ -223,6 +197,7 @@ const markdown: MarkdownOptions | undefined = {
 
       return htmlResult
     }
+
   },
 }
 
