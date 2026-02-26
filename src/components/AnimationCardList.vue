@@ -1,16 +1,9 @@
 <template>
-  <div
-    class="container"
-  >
-    <ul
-      v-if="items && items.length > 0"
-      class="w-full grid grid-cols-1 gap-4 px-1 md:px-8 py-8 md:grid-cols-2 lg:grid-cols-3 card-list"
-    >
-      <li
-        class="card scroll-trigger animate--slide-in" data-cascade :style="{ '--animation-order': i - 1 }"
-        v-for="(item, i) in items"
-        :key="item.link"
-      >
+  <div class="container" ref="containerRef">
+    <ul v-if="items && items.length > 0"
+      class="w-full grid grid-cols-1 gap-8 px-1 md:px-8 py-8 md:grid-cols-2 lg:grid-cols-3 card-list">
+      <li class="card scroll-trigger animate--slide-in" :class="{ 'in-view': inViewSet.has(item.link) }" data-cascade
+        :style="{ '--animation-order': i - 1 }" v-for="(item, i) in items" :key="item.link" :data-link="item.link">
         <article-card :item="item" />
       </li>
     </ul>
@@ -19,19 +12,23 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, nextTick } from 'vue'
-  import { CardListItem } from './ArticleCard.vue'
+import { ref, onMounted, onUnmounted, nextTick, useTemplateRef, watch } from 'vue'
+import { CardListItem } from './ArticleCard.vue'
 
-  withDefaults(
-    defineProps<{
-      items: Array<CardListItem>
-    }>(),
-    {
-      items: () => [],
-    }
+const props = withDefaults(
+  defineProps<{
+    items: Array<CardListItem>
+  }>(),
+  {
+    items: () => [],
+  }
 )
 
-  // 配置类名常量
+const containerRef = useTemplateRef<HTMLDivElement>('containerRef')
+// 存储已进入视口的元素标识（用于控制 visible 类）
+const inViewSet = ref<Set<string>>(new Set())
+
+// 配置类名常量
 const TRIGGER_CLASS = 'scroll-trigger';
 const OFFSCREEN_CLASS = 'scroll-trigger--offscreen';
 
@@ -59,7 +56,7 @@ function onIntersection(entries, observer) {
 }
 
 // 初始化滚动动画监听
-function initScrollAnimations(root = document) {
+function initScrollAnimations(root: HTMLElement) {
   const triggers = root.querySelectorAll(`.${TRIGGER_CLASS}`);
   if (!triggers.length) return;
 
@@ -75,23 +72,83 @@ function initScrollAnimations(root = document) {
   });
 }
 
-onMounted(() => {
-  nextTick(() => {
-    initScrollAnimations();
-  })
-})
+// onMounted(() => {
+//   nextTick(() => {
+//     if (containerRef.value) {
+//       initScrollAnimations(containerRef.value);
+//     }
+//   })
+// })
 
 // // 页面加载完成后启动
 // document.addEventListener('DOMContentLoaded', () => {
 
 // });
+
+let observer: IntersectionObserver | null = null
+
+// 初始化 Intersection Observer
+function initObserver() {
+  // 断开旧观察
+  if (observer) {
+    observer.disconnect()
+  }
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const link = entry.target.getAttribute('data-link')
+        if (!link) return
+
+        if (entry.isIntersecting) {
+          // 进入视口：添加到集合，触发动画类
+          inViewSet.value.add(link)
+          // 可选：停止观察该元素（如果只需要触发一次）
+          // observer?.unobserve(entry.target)
+        } else {
+          // 离开视口：从集合移除，恢复隐藏（下次进入再次播放动画）
+          inViewSet.value.delete(link)
+        }
+      })
+    },
+    {
+      rootMargin: '0px 0px -50px 0px', // 触发时机：元素进入视口后向下 50px
+    }
+  )
+
+  // 观察所有卡片
+  const cards = document.querySelectorAll('.card')
+  cards.forEach((el) => observer?.observe(el))
+}
+
+// 监听 items 变化，重新绑定观察
+watch(
+  () => props.items,
+  () => {
+    nextTick(() => {
+      initObserver()
+    })
+  },
+  { immediate: true, deep: false }
+)
+
+onMounted(() => {
+  nextTick(() => {
+    initObserver()
+  })
+})
+
+onUnmounted(() => {
+  observer?.disconnect()
+})
 </script>
 
 <style lang="scss" scoped>
-  :root {
-    --duration-extra-long: 600ms;
-    --ease-out-slow: cubic-bezier(0, 0, 0.3, 1);
+:root {
+  --duration-extra-long: 600ms;
+  --ease-out-slow: cubic-bezier(0, 0, 0.3, 1);
 }
+
 .container {
   margin: 0 auto;
   padding: 2rem;
@@ -104,30 +161,42 @@ onMounted(() => {
 
 .card {
   border-radius: 12px;
-  padding: 2rem 1rem;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   font-weight: 600;
-  /* 初始状态：透明 + 下移（由 JS 控制是否播放动画） */
-  // opacity: 0.01;
-  // transform: translateY(2rem);
 }
 
-/* 动画仅在 prefers-reduced-motion: no-preference 时启用 */
-@media (prefers-reduced-motion: no-preference) {
-  .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in {
-    animation: slideIn 600ms cubic-bezier(0, 0, 0.3, 1) forwards;
-    animation-delay: calc(var(--animation-order, 1) * 75ms);
-  }
+/* 动画类：当卡片进入视口时添加 .in-view */
+.card.in-view {
+  animation: articleSlideIn var(--duration-extra-long) var(--ease-out-slow) forwards;
+  animation-delay: calc(var(--animation-order, 0) * 75ms);
+}
 
-  @keyframes slideIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes articleSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in {
+  animation: articleSlideIn 600ms cubic-bezier(0, 0, 0.3, 1) forwards;
+  animation-delay: calc(var(--animation-order, 1) * 75ms);
+}
+
+@keyframes articleSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 如果用户开启“减少动画”，直接显示（可选） */
+@media (prefers-reduced-motion: reduce) {
+  .card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+    animation: none;
+    /* 禁用动画 */
   }
 }
 

@@ -157,14 +157,11 @@ a.VPSkipLink::after {
   border: none !important;
   background:
     linear-gradient(white, white) padding-box,
-    linear-gradient(
-        45deg,
-        var(--vp-c-brand-2),
-        var(--vp-c-brand-1),
-        var(--vp-c-brand),
-        var(--vp-c-brand-2)
-      )
-      border-box;
+    linear-gradient(45deg,
+      var(--vp-c-brand-2),
+      var(--vp-c-brand-1),
+      var(--vp-c-brand),
+      var(--vp-c-brand-2)) border-box;
   border-radius: 30px;
 
   /* 平滑过渡 */
@@ -180,14 +177,11 @@ a.VPSkipLink::after {
   border: none !important;
   background:
     linear-gradient(white, white) padding-box,
-    linear-gradient(
-        135deg,
-        var(--vp-c-brand-2),
-        var(--vp-c-brand-1),
-        var(--vp-c-brand),
-        var(--vp-c-brand-2)
-      )
-      border-box;
+    linear-gradient(135deg,
+      var(--vp-c-brand-2),
+      var(--vp-c-brand-1),
+      var(--vp-c-brand),
+      var(--vp-c-brand-2)) border-box;
   box-shadow:
     0 0 5px var(--vp-c-brand-1),
     0 0 20px var(--vp-c-brand);
@@ -199,14 +193,11 @@ a.VPSkipLink::after {
   border: none !important;
   background:
     linear-gradient(white, white) padding-box,
-    linear-gradient(
-        45deg,
-        var(--vp-c-brand-2),
-        var(--vp-c-brand-1),
-        var(--vp-c-brand),
-        var(--vp-c-brand-2)
-      )
-      border-box;
+    linear-gradient(45deg,
+      var(--vp-c-brand-2),
+      var(--vp-c-brand-1),
+      var(--vp-c-brand),
+      var(--vp-c-brand-2)) border-box;
   box-shadow:
     0 0 15px var(--vp-c-brand-1),
     0 0 25px var(--vp-c-brand);
@@ -227,8 +218,7 @@ a.VPSkipLink::after {
   outline: none;
   background:
     linear-gradient(white, white) padding-box,
-    linear-gradient(270deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4), var(--color-5), var(--color-6), var(--color-7), var(--color-8))
-      border-box;
+    linear-gradient(270deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4), var(--color-5), var(--color-6), var(--color-7), var(--color-8)) border-box;
   background-size: 400% 100%;
   background-repeat: repeat;
   background-position: 0 0;
@@ -281,17 +271,13 @@ a.VPSkipLink::after {
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    var(--vp-c-brand-1) 30%,
-    var(--vp-c-brand-3)
-  );
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg,
+      var(--vp-c-brand-1) 30%,
+      var(--vp-c-brand-3));
 
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    var(--vp-c-brand-1) 50%,
-    var(--vp-c-brand-3) 50%
-  );
+  --vp-home-hero-image-background-image: linear-gradient(-45deg,
+      var(--vp-c-brand-1) 50%,
+      var(--vp-c-brand-3) 50%);
   --vp-home-hero-image-filter: blur(40px);
 }
 
@@ -324,7 +310,7 @@ a.VPSkipLink::after {
     }
   }
 
-  .vp-doc > div > * {
+  .vp-doc>div>* {
     // transition: opacity 0.3s ease;
     // transition-delay: calc((sibling-index() - 1) * 100ms);
 
@@ -468,6 +454,7 @@ a.VPSkipLink::after {
 }
 
 :root {
+
   /* 首页导航 */
   .VPNavBar {
     backdrop-filter: saturate(0.3) contrast(3.5) blur(20px) saturate(1.2);
@@ -487,6 +474,7 @@ a.VPSkipLink::after {
   }
 
   @media (min-width: 960px) {
+
     /* 文档页导航两侧 */
     .VPNavBar:not(.home) {
       background-color: saturate(0.3) contrast(3.5) rgba(255, 255, 255, 0.3) !important;
@@ -529,6 +517,7 @@ a.VPSkipLink::after {
   /* 分割线 */
 
   @media (min-width: 960px) {
+
     /* 文档页分割线 */
     .VPNavBar:not(.home.top) .divider-line {
       background-color: rgba(255, 255, 255, 0.3) !important;
@@ -619,26 +608,23 @@ a.VPSkipLink::after {
   margin: 8px 0;
 }
 
-.VPMenuGroup > .title {
+.VPMenuGroup>.title {
   font-size: 0.7em;
 }
 
 .vp-doc a {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
-    bottom / 100% 2px;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 2px;
   text-decoration: none;
   transition: 0.2s;
 }
 
 .vp-doc a:hover {
   border-radius: 0.2em;
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
-    bottom / 100% 100%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 100%;
 }
 
 .vp-doc strong {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
-    bottom / 100% 40%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 40%;
 }
 
 .vp-doc s {
@@ -677,6 +663,7 @@ a.VPSkipLink::after {
 }
 
 .dark {
+
   .VPNavBar,
   .VPNavBar.screen-open {
     background-color: rgba(255, 255, 255, 0);
@@ -693,6 +680,7 @@ a.VPSkipLink::after {
   }
 
   @media (min-width: 960px) {
+
     /* 文档页导航两侧 */
     .VPNavBar:not(.home) {
       background-color: rgba(0, 0, 0, 0.03) !important;
@@ -707,6 +695,7 @@ a.VPSkipLink::after {
   /* 分割线 */
 
   @media (min-width: 960px) {
+
     /* 文档页分割线 */
     .VPNavBar:not(.home.top) .divider-line {
       background-color: rgba(0, 0, 0, 0.03) !important;
@@ -995,6 +984,7 @@ h3 {
   0% {
     border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
   }
+
   100% {
     border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
   }
@@ -1010,14 +1000,17 @@ h3 {
 }
 
 .VPImage.logo:hover {
-  transform-origin: 50% 50%; /* 设置旋转中心为元素中心 */
+  transform-origin: 50% 50%;
+  /* 设置旋转中心为元素中心 */
   transform: rotate(666turn);
   transition-duration: 59s;
   transition-timing-function: cubic-bezier(0.34, 0, 0.84, 1);
 }
 
 .VPFeature {
+  background-image: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%);
   transition: all 0.3s ease;
+  border: none !important;
 }
 
 .VPFeature:hover {
@@ -1026,6 +1019,13 @@ h3 {
   backdrop-filter: blur(8px);
   /* 悬停时模糊背后背景 */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background:
+    linear-gradient(to bottom, transparent, #fff 300px),
+    radial-gradient(20% 150px at 70% 230px, rgba(0, 210, 255, 0.2), transparent),
+    radial-gradient(40% 180px at 80% 50px, rgba(249, 167, 176, 0.3), transparent),
+    radial-gradient(50% 300px at 90% 100px, rgba(212, 230, 241, 0.8), transparent),
+    radial-gradient(20% 150px at 0px 0px, rgba(162, 213, 239, 0.5), transparent),
+    radial-gradient(30% 200px at 100px 50px, rgba(249, 167, 176, 0.5), transparent), #f5f5f5;
 }
 
 // h1 {
@@ -1246,7 +1246,7 @@ table {
   over scoped class data attribute.
 */
 .dark .vp-doc a,
-.dark .vp-doc a > code,
+.dark .vp-doc a>code,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink:hover,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink.active,
 .dark .link.link:hover,
@@ -1257,7 +1257,7 @@ table {
 }
 
 .dark .vp-doc a:hover,
-.dark .vp-doc a > code:hover {
+.dark .vp-doc a>code:hover {
   color: var(--vp-c-brand-lightest);
   opacity: 1;
 }
@@ -1305,6 +1305,7 @@ table {
 ::view-transition-old(root) {
   z-index: var(--view-transition-old-zindex);
 }
+
 ::view-transition-new(root) {
   z-index: var(--view-transition-new-zindex);
 }
@@ -1366,11 +1367,13 @@ table {
 }
 
 .VPLink.link.VPNavBarMenuLink {
-  position: relative; /* 伪元素依赖父元素定位 */
+  position: relative;
+  /* 伪元素依赖父元素定位 */
   display: inline-block;
   // background: #007bff;
   text-decoration: none;
-  transition: all 0.3s ease; /* 整体过渡效果 */
+  transition: all 0.3s ease;
+  /* 整体过渡效果 */
 }
 
 .VPLink.link.VPNavBarMenuLink.active {
@@ -1425,14 +1428,18 @@ table {
 
 /* 隐藏滚动条（Chrome/Safari/Edge） */
 .scroll-container::-webkit-scrollbar {
-  width: 0; /* 垂直滚动条宽度 */
-  height: 0; /* 水平滚动条高度 */
+  width: 0;
+  /* 垂直滚动条宽度 */
+  height: 0;
+  /* 水平滚动条高度 */
 }
 
 /* 鼠标移入时显示滚动条 */
 .scroll-container:hover::-webkit-scrollbar {
-  width: 8px; /* 自定义宽度 */
-  height: 8px; /* 自定义高度 */
+  width: 8px;
+  /* 自定义宽度 */
+  height: 8px;
+  /* 自定义高度 */
 }
 
 /* 滚动条轨道 */
@@ -1503,6 +1510,7 @@ table {
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 0 rgba(125, 211, 252, 0.4);
@@ -1514,6 +1522,7 @@ table {
 }
 
 @keyframes bounce {
+
   0%,
   100% {
     transform: translateY(0);
@@ -1561,28 +1570,28 @@ table {
   initial-value: 94.53%;
 }
 
-.VPHomeFeatures .VPFeature {
-  background: linear-gradient(
-    var(--angle),
-    var(--start-color) var(--start-percentage),
-    var(--end-color) var(--end-percentage)
-  );
-  border-radius: 12px;
-  transition:
-    --angle 0.8s,
-    --start-color 0.8s,
-    --start-percentage 0.8s,
-    --end-color 0.8s,
-    --end-percentage 0.8s;
-}
+// .VPHomeFeatures .VPFeature {
+//   background: linear-gradient(
+//     var(--angle),
+//     var(--start-color) var(--start-percentage),
+//     var(--end-color) var(--end-percentage)
+//   );
+//   border-radius: 12px;
+//   transition:
+//     --angle 0.8s,
+//     --start-color 0.8s,
+//     --start-percentage 0.8s,
+//     --end-color 0.8s,
+//     --end-percentage 0.8s;
+// }
 
-.VPHomeFeatures .VPFeature:hover {
-  --angle: 143.85deg;
-  --start-color: hsl(191, 50%, 90%);
-  --start-percentage: 14.66%;
-  --end-color: hsl(131, 80%, 80%);
-  --end-percentage: 85.95%;
-}
+// .VPHomeFeatures .VPFeature:hover {
+//   --angle: 143.85deg;
+//   --start-color: hsl(191, 50%, 90%);
+//   --start-percentage: 14.66%;
+//   --end-color: hsl(131, 80%, 80%);
+//   --end-percentage: 85.95%;
+// }
 
 .markmap-container .toolbar {
   z-index: 999 !important;
@@ -1663,6 +1672,7 @@ figcaption {
     --small-edge-size: 48px;
     width: var(--small-edge-size) !important;
     height: var(--small-edge-size) !important;
+
     .progress-ring {
       width: var(--small-edge-size) !important;
       height: var(--small-edge-size) !important;
@@ -1703,6 +1713,7 @@ figcaption {
     --small-edge-size: 56px;
     width: var(--small-edge-size) !important;
     height: var(--small-edge-size) !important;
+
     .progress-ring {
       width: var(--small-edge-size) !important;
       height: var(--small-edge-size) !important;
@@ -1731,9 +1742,11 @@ figcaption {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -1743,6 +1756,7 @@ figcaption {
   0% {
     transform: scale(1);
   }
+
   100% {
     transform: scale(1.05);
   }

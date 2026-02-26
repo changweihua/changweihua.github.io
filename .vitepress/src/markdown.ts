@@ -27,6 +27,7 @@ import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
 import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import { tasklist } from "@mdit/plugin-tasklist";
+import markdownItAnchor from 'markdown-it-anchor'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -34,11 +35,16 @@ const demoAlias = {
   '@assets': resolve(__dirname, '../../src/assets'),
 }
 
+const languageLabels: Record<string, string> = {
+  aulua: 'AviUtl2 Lua',
+};
+
 const markdown: MarkdownOptions | undefined = {
   cache: false,
   lineNumbers: true,
   breaks: true,
   linkify: true,
+  html: true,
   image: {
     lazyLoading: true,
   },
@@ -48,6 +54,21 @@ const markdown: MarkdownOptions | undefined = {
     'vue': 'Vue SFC'
   },
   codeCopyButtonTitle: '复制',
+  container: {
+    tipLabel: '提示',
+    warningLabel: '警告',
+    dangerLabel: '危险',
+    infoLabel: '信息',
+    detailsLabel: '详细信息'
+  },
+  // // markdown-it-anchor 的选项
+  // // https://github.com/valeriangalliat/markdown-it-anchor#usage
+  // anchor: {
+  //   permalink: markdownItAnchor.permalink.headerLink()
+  // },
+  // @mdit-vue/plugin-toc 的选项
+  // https://github.com/mdit-vue/mdit-vue/tree/main/packages/plugin-toc#options
+  toc: { level: [1, 2] },
   preConfig: async (md) => {
   },
   config: (md) => {
@@ -60,6 +81,14 @@ const markdown: MarkdownOptions | undefined = {
         try { md.block.ruler.disable(rule.name); } catch (e) { }
       }
     });
+
+    const fence = md.renderer.rules.fence!.bind(md.renderer.rules);
+    md.renderer.rules.fence = (...args) => {
+      return fence(...args).replace(
+        /(?<=class="lang">)([^<]*)/,
+        (_, p1) => languageLabels[p1] ?? p1
+      );
+    };
 
     md.use(tasklist, {
       // your options, optional

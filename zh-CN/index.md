@@ -187,3 +187,5 @@ head:
   <CarouselCard></CarouselCard>
 </div>
 -->
+
+<!--@include: ./index.footer.md-->

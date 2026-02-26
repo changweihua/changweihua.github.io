@@ -18,6 +18,12 @@
   margin: 0;
 }
 
+html[lang="foo"] button.copied::before {
+  content: "bar" !important;
+  left: -5ch !important;
+  width: calc(5ch - 1px) !important;
+}
+
 /* 代码块tab-顶部小圆点 */
 .vp-code-group .tabs::before {
   background: #fc625d;
