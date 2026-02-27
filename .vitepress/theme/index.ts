@@ -39,7 +39,7 @@ import useVisitData from '../hooks/useVisitData'
 import AnimatingLayout from './AnimatingLayout.vue'
 
 import HeroWrapper from './components/HeroWrapper.vue'
-
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 // import { useMermaidPanZoom } from 'vitepress-plugin-mermaid-pan-zoom'
 
 
@@ -52,6 +52,9 @@ import 'open-props/open-props.min.css'
 
 import '@fontsource-variable/noto-sans-sc'
 import './styles/vitepress-variables.scss'
+
+import '@shikijs/vitepress-twoslash/style.css'
+
 import './styles/maple-mono.scss'
 
 import './styles/animations1.css'
@@ -371,6 +374,8 @@ export default {
     DefaultTheme.enhanceApp(ctx)
 
     // vitepressNprogress(ctx);
+
+    app.use(TwoslashFloatingVue)
 
     const bProgress = vitepressBprogress(ctx)
 

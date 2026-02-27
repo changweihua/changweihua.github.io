@@ -26,7 +26,7 @@
             class="archive-article flex justify-between items-center py-1 relative after:absolute after:right-[-0.5rem] after:top-0 after:h-full after:w-px after:bg-gray-200"
           >
             <a
-              v-html="DOMPurify.sanitize(`${marked.parseInline(article.title)}`)"
+              v-html="DOMPurify.sanitize(`${marked.parseInline(article.title || '')}`)"
               :href="article.url"
               class="block overflow-hidden whitespace-nowrap text-ellipsis"
             ></a>
@@ -47,7 +47,6 @@
 </template>
 <script lang="ts" setup>
   import { computed, ref, onMounted } from 'vue'
-  // @ts-ignore
   import { data } from '@vp/post.data'
   import date from '@vp/hooks/useDayjs'
   import { marked } from 'marked'
@@ -61,13 +60,14 @@
     const { yearMap, postMap } = data
     let result = {}
     for (let key in yearMap) {
-      result[key] = yearMap[key].map((url) => postMap[url])
+      result[key] = (yearMap[key]).map((url) => postMap[url])
     }
     return result
   })
 
   onMounted(() => {
     const { yearMap } = data
+    console.log(yearMap)
     yearList.value = Object.keys(yearMap).sort((a, b) => parseInt(b) - parseInt(a)) // 按年份降序排序
 
     delay(function () {

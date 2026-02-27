@@ -28,6 +28,8 @@ import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import { tasklist } from "@mdit/plugin-tasklist";
 import markdownItAnchor from 'markdown-it-anchor'
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -71,6 +73,25 @@ const markdown: MarkdownOptions | undefined = {
   toc: { level: [1, 2] },
   preConfig: async (md) => {
   },
+  // 当指定语言无法高亮时，回退到 'plaintext' 或 'txt'
+  defaultHighlightLang: 'plaintext',
+  async shikiSetup(highlighter) {
+    // 示例1：加载特定语言，如 'jinja-html'
+    // 注意：它通常依赖 'html'，所以先加载 'html'
+    await highlighter.loadLanguage('html')
+    // 然后再加载 'jinja-html' 本身
+    // await highlighter.loadLanguage('jinja-html')
+
+    // 示例2：加载一个冷门的独立语言，比如 'brainfuck'
+    // await highlighter.loadLanguage('brainfuck')
+  },
+  codeTransformers: [
+    transformerTwoslash({
+      typesCache: createFileSystemTypesCache()
+    })
+  ],
+  // Explicitly load these languages for types highlighting
+  languages: ['js', 'jsx', 'ts', 'tsx'],
   config: (md) => {
     // ---------- 打印所有块级规则（调试用）----------
     const blockRules = md.block.ruler.getRules('').map(rule => rule.name);
