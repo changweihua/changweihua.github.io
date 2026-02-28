@@ -31,7 +31,7 @@ encrypt-storage: true
   - 接入无锡机场锡悦平台和工作人员小程序，完成功能顺滑迁移，达成预期目标
 - 2026 年 2 月
   - 将图形验证码升级为基于 `cap.js` 的人机识别验证码，降低被暴力攻击的风险
-  - API 接口增加随机解密功能，基于 AES & GCM 加密算法
+  - API 接口增加随机解密功能，基于 AES & GCM & CBC 加密算法
 
 <div class="grid md:grid-cols-2 lg:grid-cols-4 masonry-container">
 

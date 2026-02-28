@@ -90,3 +90,15 @@
     height: auto;
     min-height: 320px;
 } */
+
+.mermaid-fullscreen-btn {
+  padding: 2px !important;
+  border-radius: 10px !important;
+  min-height: 32px !important;
+  min-width: 32px !important;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
