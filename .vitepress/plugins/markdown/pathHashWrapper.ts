@@ -51,7 +51,7 @@ function isTargetFolder(filePath: string): boolean {
 
   return (
     normalizedPath.includes(`/blog/${dayjs().format('YYYY-MM')}/`) ||
-    normalizedPath.includes(`/blog/${dayjs().subtract(1, 'month').format('YYYY-MM')}/`) ||
+    // normalizedPath.includes(`/blog/${dayjs().subtract(1, 'month').format('YYYY-MM')}/`) ||
     normalizedPath.includes('/manual/') ||
     normalizedPath.includes('/gallery/')
   )

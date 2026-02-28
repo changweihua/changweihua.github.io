@@ -70,7 +70,7 @@ const markdown: MarkdownOptions | undefined = {
   // },
   // @mdit-vue/plugin-toc 的选项
   // https://github.com/mdit-vue/mdit-vue/tree/main/packages/plugin-toc#options
-  toc: { level: [1, 2] },
+  toc: { level: [1, 6] },
   preConfig: async (md) => {
   },
   // 当指定语言无法高亮时，回退到 'plaintext' 或 'txt'

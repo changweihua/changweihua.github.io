@@ -29,9 +29,11 @@ import DocAfter from '../components/DocAfter.vue'
 import HoverableText from '../components/HoverableText.vue'
 import MarkdownEChart from '../components/MarkdownEChart.vue'
 import PageLost from '../components/PageLost.vue'
-import PlaceHolder from '../components/PlaceHolder.vue'
 import ProjectLab from '../components/ProjectLab.vue'
 import SnakeTimeline from '../components/SnakeTimeline.vue'
+import RelatedPosts from './components/RelatedPosts.vue'
+import PrevNextByDate from './components/PrevNextByDate.vue'
+import PlaceHolder from '../components/PlaceHolder.vue'
 import RainbowAnimationSwitcher from '../components/RainbowAnimationSwitcher.vue'
 import directives from '../directives'
 // 导入hooks
@@ -40,8 +42,6 @@ import AnimatingLayout from './AnimatingLayout.vue'
 
 import HeroWrapper from './components/HeroWrapper.vue'
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
-// import { useMermaidPanZoom } from 'vitepress-plugin-mermaid-pan-zoom'
-
 
 import 'virtual:uno.css'
 
@@ -119,6 +119,8 @@ mermaid.registerIconPacks([
 ])
 mermaid.registerExternalDiagrams([zenuml])
 mermaid.registerLayoutLoaders(elkLayouts)
+
+
 
 export default {
   ...DefaultTheme,
@@ -260,7 +262,7 @@ export default {
       //     name: "doc-top",
       //   }),
       // "doc-bottom": () => [h(ArticleQRCode), h(Recommend)],
-      'doc-footer-before': () => [h(ArticleFooter)],
+      'doc-footer-before': () => h('div', {}, [h(PrevNextByDate), h(ArticleFooter)]),
       // "doc-footer-before": () =>
       //   h(PlaceHolder, {
       //     name: "doc-footer-before",
@@ -279,10 +281,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "sidebar-nav-after",
       //   }),
-      'aside-top': () =>
-        h(PlaceHolder, {
-          name: '相关推荐',
-        }),
+      'aside-top': () => h(RelatedPosts),
       // 'aside-bottom': () =>
       //   h(PlaceHolder, {
       //     name: 'aside-bottom',
@@ -369,7 +368,7 @@ export default {
       // ],
     })
   },
-  enhanceApp: (ctx) => {
+  enhanceApp: async (ctx) => {
     const { app, router } = ctx
     DefaultTheme.enhanceApp(ctx)
 

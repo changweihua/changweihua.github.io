@@ -68,7 +68,7 @@ export default defineConfig(() => {
         '*': fileURLToPath(new URL('.', import.meta.url)),
         '@': fileURLToPath(new URL('./src', import.meta.url)),
         public: fileURLToPath(new URL('./public', import.meta.url)),
-        '@vp': path.resolve(__dirname, '.vitepress'),
+        '@vp':  fileURLToPath(new URL('.vitepress', import.meta.url))
       },
     },
   } satisfies UserConfig

@@ -3,6 +3,7 @@
 /// <reference types="./shims-vue.d.ts" />
 /// <reference types="../components.d.ts" />
 /// <reference types="./axios.d.ts" />
+/// <reference types="./data.d.ts" />
 /// <reference types="./shims-module.d.ts" />
 /// <reference types="./shims-tree.d.ts" />
 /// <reference types="./shims-directive.d.ts" />
