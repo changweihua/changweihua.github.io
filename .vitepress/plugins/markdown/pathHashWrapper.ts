@@ -30,11 +30,7 @@ export function pathHashWrapperPlugin(md: MarkdownIt) {
     env.frontmatter.fileHash = hash
 
     // 返回包裹后的 HTML，使用 ClientOnly 包裹自定义组件
-    return `<ClientOnly>
-  <HeroWrapper hash="${hash}" file-path="${filePath}">
-${html}
-  </HeroWrapper>
-</ClientOnly>`
+    return `<HeroWrapper hash="${hash}" file-path="${filePath}">${html}</HeroWrapper>`
   }
 }
 

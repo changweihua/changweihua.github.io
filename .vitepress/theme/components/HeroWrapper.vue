@@ -7,6 +7,12 @@
     :class="`markdown-content hero-folder-${folder}`"
   >
     <slot />
+    <!-- 遍历所有插槽并渲染 -->
+    <!-- <template v-for="(_, name) in $slots" :key="name">
+      <div>
+        <slot :name="name" />
+      </div>
+    </template> -->
   </div>
 </template>
 

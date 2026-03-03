@@ -281,7 +281,7 @@ export default {
       //   h(PlaceHolder, {
       //     name: "sidebar-nav-after",
       //   }),
-      'aside-top': () => h(RelatedPosts),
+      'aside-bottom': () => h(RelatedPosts),
       // 'aside-bottom': () =>
       //   h(PlaceHolder, {
       //     name: 'aside-bottom',

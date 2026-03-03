@@ -32,6 +32,9 @@ encrypt-storage: true
 - 2026 年 2 月
   - 将图形验证码升级为基于 `cap.js` 的人机识别验证码，降低被暴力攻击的风险
   - API 接口增加随机解密功能，基于 AES & GCM & CBC 加密算法
+- 2026 年 3 月
+  - 升级 Ant Design Vue 4.* 至 Ant Design Vue Next
+  - 本地化 `cap.js` 组件
 
 <div class="grid md:grid-cols-2 lg:grid-cols-4 masonry-container">
 

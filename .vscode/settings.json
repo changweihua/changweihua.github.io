@@ -190,7 +190,7 @@
   },
   "[json]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  } // tell oxfmt to format the whole file, not only the modified lines
+  }, // tell oxfmt to format the whole file, not only the modified lines
   // Or enable it for specific file types:
   // "[javascript]": {
   //   "editor.defaultFormatter": "oxc.oxc-vscode"
