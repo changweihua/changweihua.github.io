@@ -147,6 +147,7 @@
     "scp2": "^0.5.0",
     "screenfull": "^6.0.2",
     "simple-git": "^3.33.0",
+    "smart-unit": "^1.0.4",
     "three": "^0.183.2",
     "ua-parser-js": "^2.0.9",
     "universal-waterfall-layout": "^1.1.0",

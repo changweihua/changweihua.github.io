@@ -49,7 +49,6 @@ export default defineConfig(() => {
     experimental: {
       importGlobRestoreExtension: true,
       hmrPartialAccept: true,
-      enableNativePlugin: true,
     },
     // The fields defined here can also be used in mock.
     define: {
@@ -63,7 +62,11 @@ export default defineConfig(() => {
         `${getEnvValue(process.env.NODE_ENV || 'github', 'VITE_APP_RSS_BASE_URL')}`
       ),
     },
+    devtools: {
+      enabled: true
+    },
     resolve: {
+      tsconfigPaths: true,
       alias: {
         '*': fileURLToPath(new URL('.', import.meta.url)),
         '@': fileURLToPath(new URL('./src', import.meta.url)),
