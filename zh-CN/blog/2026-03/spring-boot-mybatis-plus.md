@@ -9,6 +9,51 @@ pageClass: blog-page-class
 cover: /covers/springboot.svg
 ---
 
+```mermaid
+flowchart TB
+    A["MyBatis-Spring-Boot-Starter 依赖"] --> B["自动配置模块<br/>mybatis-spring-boot-autoconfigure"]
+    B --> C["MybatisAutoConfiguration 自动配置类"]
+    
+    %% 数据源依赖
+    D["Spring 数据源自动配置<br/>(HikariCP/Druid等)"] --> C
+    
+    %% MybatisAutoConfiguration 构建核心组件
+    C --> E["SqlSessionFactory<br/>(存储全局配置/创建SqlSession)"]
+    C --> F["SqlSessionTemplate<br/>(线程安全的Sql执行器)"]
+    E --> F["SqlSessionTemplate"]
+    
+    %% 事务整合
+    G["SpringManagedTransactionFactory"] --> E["SqlSessionFactory"]
+    H["Spring 事务管理器<br/>(@Transactional)"] --> G
+    
+    %% Mapper扫描与代理
+    I["@MapperScan 注解"] --> J["MapperScannerRegistrar"]
+    J --> K["MapperScannerConfigurer<br/>(扫描Mapper接口)"]
+    K --> L["Mapper接口<br/>(com.test.core.mapper)"]
+    F --> M["Mapper代理对象<br/>(MyBatis动态代理)"]
+    L --> M
+    
+    %% 配置文件关联
+    N["application.yml<br/>(mybatis前缀配置)"] --> C
+    O["mybatis-config.xml<br/>(全局配置)"] --> E
+    P["Mapper XML映射文件<br/>(mapper/**/*.xml)"] --> E
+    
+    %% 业务层调用
+    M --> Q["Service层<br/>(@Autowired注入Mapper)"]
+    
+    %% 样式优化
+    classDef config fill:#f0f8ff,stroke:#4169e1,stroke-width:2px
+    classDef core fill:#fdf2f8,stroke:#9c27b0,stroke-width:2px
+    classDef scan fill:#e8f4f8,stroke:#00bcd4,stroke-width:2px
+    classDef business fill:#f5f5f5,stroke:#666,stroke-width:2px
+    
+    class B,C,N,O config
+    class E,F,G,H core
+    class I,J,K,L,M scan
+    class Q business
+
+```
+
 ## 一、前言 ##
 
 作为一名有多年 Java 后端开发经验的工程师，我经历了从原始 JDBC 到 Hibernate，再到 MyBatis 的演进。而在 MyBatis 的基础上，MyBatis Plus（MP） 的出现无疑大大提升了我们的开发效率，尤其是在中后台管理系统、BFF 层接口、快速迭代项目中表现尤为突出。

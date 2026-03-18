@@ -18,8 +18,8 @@ import codeblocksFold from 'vitepress-plugin-codeblocks-fold'
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import DefaultTheme from 'vitepress/theme-without-fonts'
-import { h, watchEffect } from 'vue'
-
+import { h, onMounted, watchEffect } from 'vue'
+import { initHoverCard } from 'markdown-it-github-mention-card'
 import VueHero from 'vue-hero-cross'
 import AnimationTitle from '../components/AnimtedTitle.vue'
 import ArticleFooter from '../components/ArticleFooter.vue'
@@ -494,5 +494,11 @@ export default {
         document.cookie = `nf_lang=${lang.value}; expires=${new Date().toUTCString()}; path=/`
       }
     })
+
+    if (typeof window !== 'undefined') {
+      onMounted(() => {
+        initHoverCard()
+      })
+    }
   },
 } satisfies Theme

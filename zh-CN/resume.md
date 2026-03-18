@@ -14,6 +14,8 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 <ShadowLogo class="my-5" />
 
+{@changweihua|Changweihua|https://changweihua.github.io} 是 Vue 核心团队成员
+
 - [ ] 普通任务
 - [x] **已完成**任务 [链接](https://example.com)
 - [ ] 带有 `代码` 的任务

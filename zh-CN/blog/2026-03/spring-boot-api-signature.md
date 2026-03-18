@@ -396,3 +396,267 @@ public class ApiSignatureTest {
                  })
                  .block();
 ```
+
+> Spring Boot拦截器结合HMAC-SHA256实现API安全验证
+
+## 前言 ##
+
+在开放平台和第三方集成的项目中，如何确保 API 调用的安全性和可靠性是一个重要课题。特别是对于没有用户登录场景的系统间调用，传统的session或token认证方式并不适用，数字签名技术就成为了一种理想的选择。
+
+这种验证方式在开放平台、SaaS服务、微服务间调用等场景下特别实用，能够有效验证请求来源的合法性，防止参数被篡改和重放攻击。
+
+本文将详细介绍如何基于 Spring Boot 拦截器和 HMAC-SHA256 算法，构建一套轻量级但足够安全的 API 验签机制。
+
+## 什么是数字签名？ ##
+
+数字签名是一种用于验证数据完整性和真实性的技术手段。在 API 调用中，数字签名通过以下方式保障安全：
+
+1. 身份验证：确认请求方身份的合法性
+2. 数据完整性：确保请求参数在传输过程中未被篡改
+3. 防止重放攻击：通过时间戳等机制防止请求被重复使用
+
+## 整体设计 ##
+
+### 设计思路 ###
+
+我们的验签机制基于以下核心思想：
+
+- 无侵入性：通过 Spring Boot 拦截器实现，业务代码无需改动
+- 算法安全性：采用业界成熟的 HMAC-SHA256 算法
+- 配置灵活：支持多客户端、多密钥管理
+
+### 架构流程图 ###
+
+```txt
+  客户端请求 → 生成签名 → 发送请求 → 拦截器验证 → 业务处理
+     ↓              ↓           ↓           ↓           ↓
+  [参数整理]    [HMAC加密]  [携带签名头]  [验签逻辑]  [通过/拒绝]
+     ↓              ↓           ↓           ↓           ↓
+   参数排序    +时间戳加密   X-API-Key    密钥匹配    正常响应
+     ↓              ↓           ↓           ↓           ↓
+   拼接参数    Base64编码   X-Timestamp  时间戳验证   或返回401
+     ↓              ↓           ↓           ↓
+   待签字符串    完整签名     X-Signature  签名对比
+```
+
+## HMAC-SHA256 签名原理 ##
+
+HMAC（Hash-based Message Authentication Code，基于哈希的消息认证码）结合了哈希函数和密钥，提供了一种安全高效的消息认证方式。
+
+### 签名生成算法 ###
+
+```txt
+签名 = Base64(HMAC-SHA256(时间戳 + 排序后的请求参数, 密钥))
+```
+
+### 算法步骤 ###
+
+1. 参数标准化：将所有请求参数按字典序排序
+2. 数据拼接：将时间戳和排序后的参数按规则拼接
+3. 签名运算：使用密钥对拼接字符串进行 HMAC-SHA256 运输
+4. 编码转换：对加密结果进行 Base64 编码生成最终签名
+
+## 核心组件实现 ##
+
+### 签名工具类 ###
+
+签名工具类是整个机制的核心，负责签名的生成和验证逻辑
+
+```java
+public class SignatureUtil {
+
+    /**
+     * 生成签名
+     * 签名算法：Base64(HMAC-SHA256(timestamp + sortedParams, secret))
+     */
+    public static String generateSignature(Map<String, Object> params,
+                                         String timestamp, String secret) {
+        // 参数排序并拼接
+        String sortedParams = sortParams(params);
+        String dataToSign = timestamp + sortedParams;
+
+        // HMAC-SHA256加密并Base64编码
+        HMac hmac = new HMac(HmacAlgorithm.HmacSHA256, secret.getBytes(StandardCharsets.UTF_8));
+        byte[] digest = hmac.digest(dataToSign);
+        return Base64.getEncoder().encodeToString(digest);
+    }
+
+    /**
+     * 验证时间戳有效性（防重放攻击）
+     */
+    public static boolean validateTimestamp(String timestamp, long tolerance) {
+        long requestTime = Long.parseLong(timestamp);
+        long currentTime = System.currentTimeMillis() / 1000;
+        return Math.abs(currentTime - requestTime) <= tolerance;
+    }
+}
+```
+
+### 拦截器 ###
+
+拦截器负责对所有受保护接口进行统一的签名验证
+
+```java
+@Component
+public class SignatureValidationInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        // 1. 获取签名头信息
+        String timestamp = request.getHeader("X-Timestamp");
+        String signature = request.getHeader("X-Signature");
+        String apiKey = request.getHeader("X-Api-Key");
+
+        // 2. 验证必要参数
+        if (!StringUtils.hasText(timestamp) || !StringUtils.hasText(signature) || !StringUtils.hasText(apiKey)) {
+            return writeErrorResponse(response, "Missing required signature headers");
+        }
+
+        // 3. 验证时间戳（防重放攻击）
+        if (!SignatureUtil.validateTimestamp(timestamp, timeTolerance)) {
+            return writeErrorResponse(response, "Invalid timestamp");
+        }
+
+        // 4. 获取密钥并验证签名
+        String secret = securityProperties.getApiSecret(apiKey);
+        if (secret == null || !SignatureUtil.verifySignature(extractParams(request), timestamp, secret, signature)) {
+            return writeErrorResponse(response, "Invalid signature");
+        }
+
+        return true; // 验证通过，继续处理请求
+    }
+}
+```
+
+### 配置类（WebMvcConfig） ###
+
+配置类负责将拦截器集成到 Spring Boot 的请求处理链中：
+
+```java
+@Configuration
+public class WebMvcConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(signatureValidationInterceptor)
+                .addPathPatterns("/api/**")              // 拦截所有API请求
+                .excludePathPatterns("/api/public/**");  // 排除公开接口
+    }
+}
+```
+
+## 客户端调用示例 ##
+
+### 请求头设置 ###
+
+客户端需要在请求头中包含三个必要字段：
+
+- X-Api-Key：客户端标识
+- X-Timestamp：当前时间戳（秒级）
+- X-Signature：生成的签名
+
+### 完整调用流程 ###
+
+```java
+// 1. 准备请求参数
+Map<String, Object> params = new HashMap<>();
+params.put("userId", "12345");
+params.put("type", "profile");
+
+// 2. 生成签名
+String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
+String signature = SignatureUtil.generateSignature(params, timestamp, "your-secret");
+
+// 3. 设置请求头并发送请求
+Headers headers = new Headers();
+headers.set("X-Api-Key", "client1");
+headers.set("X-Timestamp", timestamp);
+headers.set("X-Signature", signature);
+
+// GET /api/protected/data?userId=12345&type=profile
+```
+
+## 安全性设计要点 ##
+
+### 防重放攻击 ###
+
+- 时间戳验证：服务端验证时间戳的有效性（默认容忍度5分钟）
+- 唯一性保证：相同参数在不同时间戳下生成不同签名
+- 配置灵活：可根据业务需求调整容忍时间
+
+### 密钥管理 ###
+
+- 多客户端支持：每个客户端使用独立的 API Key 和密钥
+- 配置化管理：通过配置文件或其他存储组件统一管理密钥映射
+- 定期轮换：建议定期更换密钥以提升安全性
+
+### 日志审计 ###
+
+- 请求日志：记录验证失败的关键信息（不包含完整签名）
+- IP追踪：记录客户端真实IP地址
+- 安全预警：异常签名验证触发告警机制
+
+## 安全性增强建议 ##
+
+### 传输层安全 ###
+
+- HTTPS强制：所有API请求必须通过HTTPS传输
+- 证书验证：启用双向证书认证增加安全性
+- 协议升级：及时更新SSL/TLS协议版本
+
+### 密钥管理优化 ###
+
+```java
+// 生成安全密钥（32位随机字符串）
+public static String generateSecureKey() {
+    String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    SecureRandom random = SecureRandom.getInstanceStrong();
+    StringBuilder sb = new StringBuilder();
+
+    for (int i = 0; i < 32; i++) {
+        sb.append(chars.charAt(random.nextInt(chars.length())));
+    }
+
+    return sb.toString();
+}
+```
+
+### 请求限流 ###
+
+建议结合 Redis 实现请求限流，防止暴力破解：
+
+```java
+// 简限流逻辑示例
+String rateLimitKey = "api_limit:" + apiKey;
+long count = redisTemplate.opsForValue().increment(rateLimitKey);
+if (count > 100) { // 每分钟限制100次请求
+    return writeErrorResponse(response, "Too many requests");
+}
+```
+
+## 测试验证 ##
+
+### 正常流程测试 ###
+
+```bash
+# 使用curl测试（需要先根据参数生成签名）
+timestamp=$(date +%s)
+signature=$(生成签名逻辑)
+curl -X GET "http://localhost:8080/api/protected/data?userId=12345" \
+  -H "X-Api-Key: client1" \
+  -H "X-Timestamp: $timestamp" \
+  -H "X-Signature: $signature"
+```
+
+### 异常场景测试 ###
+
+- 签名错误：修改参数但不更新签名
+- 时间戳过期：使用过期的时间戳
+- 密钥错误：使用错误的API Key
+- 缺少头信息：缺少必要的请求头
+
+## 总结 ##
+
+通过 Spring Boot 拦截器和 HMAC-SHA256 算法，我们实现了一套完整且实用的 API 签名验证方案。这套机制有效解决了系统间调用的安全问题，而且对现有代码几乎零侵入，直接复用即可。
+
+在实际项目中，你可以根据具体需求调整时间戳容忍度、密钥管理策略等配置，实现灵活的安全控制。

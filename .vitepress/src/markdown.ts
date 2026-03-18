@@ -31,6 +31,8 @@ import markdownItAnchor from 'markdown-it-anchor'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 
+import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
+
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
   '@vp': resolve(__dirname, '../components'),
@@ -102,6 +104,8 @@ const markdown: MarkdownOptions | undefined = {
         try { md.block.ruler.disable(rule.name); } catch (e) { }
       }
     });
+
+    md.use(MarkdownItGitHubMentionCard)
 
     const fence = md.renderer.rules.fence!.bind(md.renderer.rules);
     md.renderer.rules.fence = (...args) => {
