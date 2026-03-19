@@ -20,7 +20,7 @@ import { defineConfig } from 'vite'
 import { envParse } from 'vite-plugin-env-parse'
 import { vitePluginFakeServer } from 'vite-plugin-fake-server'
 import Inspect from 'vite-plugin-inspect'
-
+import withDrawio from '@dhlx/vitepress-plugin-drawio'
 import mkcert from 'vite-plugin-mkcert'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { qrcode } from 'vite-plugin-qrcode'
@@ -320,7 +320,7 @@ function createCategory(fileInfo: FileInfo) {
   return { categories: categories.length ? categories : [''] }
 }
 
-export default withMermaid(
+export default withDrawio(withMermaid(
   defineConfig({
     mermaid: {
       look: 'handDrawn',
@@ -615,4 +615,35 @@ export default withMermaid(
     },
     ...vitePressOptions,
   } satisfies UserConfig),
-)
+), {
+  // 默认页面配置
+  // 设置默认宽度（默认：100%）
+  width: "100%",
+  // 设置默认高度（默认：600px）
+  height: "600px",
+  // 起始页码（默认：0）
+  page: 0,
+  // 设置页面标题
+  // 暗色模式（默认：auto，选项：light, dark, auto）
+  "darkMode": "auto",
+
+  // 启用工具栏调整大小功能（默认：false）
+  resize: true,
+
+  // 启用工具栏页面切换功能（默认：false）
+  pages: true,
+  // 启用工具栏缩放功能（默认：false）
+  zoom: true,
+
+  // 启用工具栏图层功能（默认：false）
+  layers: true,
+
+  // 启用工具栏灯箱功能（默认：false）
+  lightbox: true,
+
+  // 设置高亮颜色（默认：#0000FF）
+  highlight: "#0000ff",
+
+  // 设置透明背景（默认：false）
+  transparent: true,
+})

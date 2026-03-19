@@ -42,6 +42,7 @@ import AnimatingLayout from './AnimatingLayout.vue'
 
 import HeroWrapper from './components/HeroWrapper.vue'
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
+import GitHubCorner from './components/GitHubCorner.vue'
 
 import 'virtual:uno.css'
 
@@ -316,10 +317,10 @@ export default {
       'not-found': () => h(PageLost),
 
       //  Always
-      // "layout-top": () =>
-      //   h(NoticeBar, {
-      //     name: "layout-top",
-      //   }),
+      // 在 layout-top 插槽中添加 GitHub Corner
+      'layout-top': () => h(GitHubCorner, {
+        repoUrl: 'https://github.com/changweihua/changweihua.github.io'
+      }),
       // 'layout-top': () => [h(PageCursor)],
       // "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
       // "nav-bar-title-before": () =>

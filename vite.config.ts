@@ -1,6 +1,7 @@
 import { loadEnv, defineConfig, UserConfig } from 'vite'
 import path, { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { DevTools } from '@vitejs/devtools'
 // import oxlintPlugin from 'vite-plugin-oxlint'
 
 function getEnvValue(mode: string, target: string) {
@@ -22,6 +23,7 @@ export default defineConfig(() => {
       },
     },
     plugins: [
+      DevTools(),
       // oxlintPlugin({
       //   configFile: 'eslintrc.json'
       // })
@@ -42,9 +44,13 @@ export default defineConfig(() => {
     clearScreen: false, // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     build: {
       sourcemap: false, // Seems to cause JavaScript heap out of memory errors on build
-      chunkSizeWarningLimit: 20 * 1000 * 1000, // 设置 chunk 大小警告的限制为 2000 KiB
+      chunkSizeWarningLimit: 20 * 1000 * 1000, // 设置 chunk 大小警告的限制为 2000 KiBs
       emptyOutDir: true,
       reportCompressedSize: true,
+      rolldownOptions: {
+        devtools: {
+        }, // enable devtools mode
+      },
     },
     experimental: {
       importGlobRestoreExtension: true,

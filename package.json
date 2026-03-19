@@ -73,6 +73,7 @@
   "dependencies": {
     "@catppuccin/vitepress": "^0.1.2",
     "@dgreenheck/ez-tree": "^1.1.0",
+    "@dhlx/vitepress-plugin-drawio": "^0.0.10",
     "@faker-js/faker": "^10.3.0",
     "@fingerprintjs/fingerprintjs": "^5.1.0",
     "@fontsource-variable/noto-sans-sc": "^5.2.10",
@@ -196,6 +197,7 @@
     "@types/markdown-it-footnote": "^3.0.4",
     "@types/node": "^25.5.0",
     "@types/three": "^0.183.1",
+    "@vitejs/devtools": "^0.0.0-alpha.34",
     "@vitejs/plugin-vue-jsx": "^5.1.5",
     "archiver": "^7.0.1",
     "chalk": "^5.6.2",

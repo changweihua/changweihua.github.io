@@ -190,6 +190,9 @@
   },
   "[json]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   }, // tell oxfmt to format the whole file, not only the modified lines
   // Or enable it for specific file types:
   // "[javascript]": {
