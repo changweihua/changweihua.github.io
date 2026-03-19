@@ -2,7 +2,7 @@
 lastUpdated: true
 commentabled: true
 recommended: true
-title: Vavr：让Java拥抱函数式编程的利器k
+title: Vavr：让Java拥抱函数式编程的利器
 description: Vavr：让Java拥抱函数式编程的利器
 date: 2026-03-19 11:54:00 
 pageClass: blog-page-class
