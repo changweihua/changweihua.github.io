@@ -49,6 +49,12 @@ defineProps<{
 }
 
 @media (max-width: 500px) {
+  /* 移动端隐藏整个 GitHub 角标 */
+  .github-corner {
+    display: none;
+  }
+
+  /* 以下原有移动端样式保留（隐藏后不生效，但无副作用） */
   .github-corner:hover .octo-arm {
     animation: none;
   }
@@ -57,7 +63,6 @@ defineProps<{
     animation: octocat-wave 560ms ease-in-out;
   }
 
-  /* 在移动端可以调整大小 */
   .github-corner svg {
     width: 60px;
     height: 60px;

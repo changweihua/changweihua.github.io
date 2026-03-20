@@ -10,8 +10,6 @@ pageClass: blog-page-class
 
 # iframe 使用 #
 
-<!--@include: ../../../src/templates/ShareLink.md-->
-
 ## 自适应高度 ##
 
 使用iframe嵌入页面很方便，但必须在父页面指定iframe的高度。如果iframe页面内容的高度超过了指定高度，会出现滚动条，很难看。

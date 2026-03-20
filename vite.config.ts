@@ -2,7 +2,7 @@ import { loadEnv, defineConfig, UserConfig } from 'vite'
 import path, { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DevTools } from '@vitejs/devtools'
-// import oxlintPlugin from 'vite-plugin-oxlint'
+import oxlintPlugin from 'vite-plugin-oxlint'
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target]
@@ -24,9 +24,9 @@ export default defineConfig(() => {
     },
     plugins: [
       DevTools(),
-      // oxlintPlugin({
-      //   configFile: 'eslintrc.json'
-      // })
+      oxlintPlugin({
+        configFile: 'eslintrc.json'
+      })
     ],
     server: {
       // ✅ 服务器基础配置
@@ -77,7 +77,7 @@ export default defineConfig(() => {
         '*': fileURLToPath(new URL('.', import.meta.url)),
         '@': fileURLToPath(new URL('./src', import.meta.url)),
         public: fileURLToPath(new URL('./public', import.meta.url)),
-        '@vp':  fileURLToPath(new URL('.vitepress', import.meta.url))
+        '@vp': fileURLToPath(new URL('.vitepress', import.meta.url))
       },
     },
   } satisfies UserConfig
