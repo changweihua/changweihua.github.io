@@ -450,7 +450,7 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
 
 创建 .dockerignore 文件：
 
-```ignore
+```plaintext
 # 忽略所有以 . 开头的文件
 .*
 # 忽略 IDE 配置文件
