@@ -530,7 +530,7 @@ acme.smart.monitor.enabled=true
 
 ### 翻车 4：启动顺序问题 ###
 
-```javaa
+```java
 // 错误：A 依赖 B，但 A 先配置
 @AutoConfigureBefore(BConfiguration.class)  // 但 A 需要 B 的 Bean
 public class AConfiguration { }
