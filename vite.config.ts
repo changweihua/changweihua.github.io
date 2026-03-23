@@ -1,8 +1,9 @@
 import { loadEnv, defineConfig, UserConfig } from 'vite'
-import path, { resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DevTools } from '@vitejs/devtools'
 import oxlintPlugin from 'vite-plugin-oxlint'
+import versionPlugin from './plugins/vite-plugin-version';
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target]
@@ -26,6 +27,16 @@ export default defineConfig(() => {
       DevTools(),
       oxlintPlugin({
         configFile: 'eslintrc.json'
+      }),
+      versionPlugin({
+        versionKey: 'my_app_version',
+        timeKey: 'my_build_time',
+        generateVersionJson: true,
+        gitCommand: 'git describe --tags --always', // 使用 tag 作为版本
+        onBuildComplete: (info) => {
+          // 可以在这里上报版本信息到监控系统
+          console.log('构建完成，版本:', info.version);
+        }
       })
     ],
     server: {
