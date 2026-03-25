@@ -9,21 +9,21 @@ pageClass: blog-page-class
 cover: /covers/springboot.svg
 ---
 
-在企业级应用开发中，权限控制是绕不开的核心需求。从简单的“管理员/普通用户”角色区分，到复杂的“部门+岗位+资源+操作”多维权限模型，传统硬编码方式（如大量 if-else 或 switch）不仅难以维护，还极易引入安全漏洞。
+在企业级应用开发中，权限控制是绕不开的核心需求。从简单的“管理员/普通用户”角色区分，到复杂的“部门+岗位+资源+操作”多维权限模型，传统硬编码方式（如大量 `if-else` 或 `switch`）不仅难以维护，还极易引入安全漏洞。
 
 而 Spring Boot 结合 SpEL（Spring Expression Language） ，提供了一种声明式、可读性强、高度灵活的权限控制方案——只需一行注解，就能实现动态、细粒度的访问控制，真正做到了“代码即策略”。
 
-本文将带你深入实战，看如何用 @PreAuthorize + SpEL 轻松搞定复杂权限场景。
+本文将带你深入实战，看如何用 `@PreAuthorize` + `SpEL` 轻松搞定复杂权限场景。
 
 ## 一、为什么 SpEL 是权限控制的“天选之子”？ ##
 
 SpEL 是 Spring 框架内嵌的表达式语言，支持：
 
-- 访问方法参数（#userId）
-- 调用 Bean 方法（@authService.canEdit(#docId)）
-- 逻辑运算（and / or / !）
-- 集合操作（hasRole('ADMIN')）
-- 安全上下文（authentication.principal）
+- 访问方法参数（`#userId`）
+- 调用 Bean 方法（`@authService.canEdit(#docId)`）
+- 逻辑运算（`and` / `or` / `!`）
+- 集合操作（`hasRole('ADMIN')`）
+- 安全上下文（`authentication.principal`）
 
 这些能力，恰好覆盖了权限判断所需的全部要素：谁（Who） 、对什么（What） 、能不能做（Can/Cannot） 。
 
@@ -41,7 +41,7 @@ public class UserController {
 }
 ```
 
-开启方法级安全只需在启动类加 @EnableMethodSecurity（Spring Security 6+）：
+开启方法级安全只需在启动类加 `@EnableMethodSecurity`（Spring Security 6+）：
 
 ```java
 @SpringBootApplication
@@ -139,17 +139,17 @@ public class SecurityConfig {
 
 比如你想根据某个字段的值来决定另一个字段要不要校验，或者校验一个枚举值是不是合法的，再或者校验的时候需要查一下数据库……
 
-遇到这种情况怎么办？要么在 Service 层写一堆 if/else，要么自定义 ConstraintValidator，代码散落在各处，改起来还容易漏。
+遇到这种情况怎么办？要么在 `Service` 层写一堆 `if/else`，要么自定义 ConstraintValidator，代码散落在各处，改起来还容易漏。
 
-所以今天来给大家安利一个我一直在维护的开源参数校验组件——SpEL Validator，基于 Spring 表达式，把校验规则直接写在注解里，而且最近还推出了配套的 IDEA 插件，开发体验直接拉满。
+所以今天来给大家安利一个一直在维护的开源参数校验组件——SpEL Validator，基于 Spring 表达式，把校验规则直接写在注解里，而且最近还推出了配套的 IDEA 插件，开发体验直接拉满。
 
 ## SpEL Validator 是什么？ ##
 
-简单来说，SpEL Validator 是一个基于 Spring Expression Language 的参数校验框架，它不是要替代你熟悉的那些 @NotNull、@NotBlank，而是在 Jakarta Validation 的基础上做增强，把原来搞不定的那些场景给补上。
+简单来说，SpEL Validator 是一个基于 Spring Expression Language 的参数校验框架，它不是要替代你熟悉的那些 `@NotNull`、`@NotBlank`，而是在 Jakarta Validation 的基础上做增强，把原来搞不定的那些场景给补上。
 
 用过 `@NotNull` 的同学，上手 SpEL Validator 几乎零成本。直接看几个例子感受下：
 
-*条件式校验*：根据 switchAudio 的值决定是否校验 audioContent，只有当 condition 的表达式返回true时才会开启校验
+*条件式校验*：根据 `switchAudio` 的值决定是否校验 `audioContent`，只有当 `condition` 的表达式返回`true`时才会开启校验
 
 ```java
 @NotNull
@@ -159,7 +159,7 @@ private Boolean switchAudio;
 private Object audioContent;
 ```
 
-*枚举值校验*：调用静态方法判断枚举值是否存在，这里是个断言条件，当 assertTrue 的表达式返回false时校验不通过
+*枚举值校验*：调用静态方法判断枚举值是否存在，这里是个断言条件，当 `assertTrue` 的表达式返回`false`时校验不通过
 
 ```java
 @SpelAssert(assertTrue = " T(cn.sticki.enums.ExampleEnum).getByCode(#this.testEnum) != null ",
@@ -184,7 +184,7 @@ private Integer userId;
 
 > 安装方式：打开 IDEA → Settings → Plugins → 搜索 "SpEL Validator Support" → Install
 
-下面我用 spel-validator-example 项目来演示框架 + 插件的完整开发体验。
+下面我用 `spel-validator-example` 项目来演示框架 + 插件的完整开发体验。
 
 ## 实战演示 ##
 
@@ -200,9 +200,9 @@ private Integer userId;
 </dependency>
 ```
 
-Spring Boot 2.x 的同学把 jakarta 换成 javax 就行。
+Spring Boot 2.x 的同学把 `jakarta` 换成 `javax` 就行。
 
-然后去 IDEA 的 Plugins 里搜索安装 SpEL Validator Support 插件，重启 IDEA。
+然后去 IDEA 的 Plugins 里搜索安装 `SpEL Validator Support` 插件，重启 IDEA。
 
 ### 案例一：条件式校验 + 智能补全 ###
 
