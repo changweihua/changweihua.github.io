@@ -93,8 +93,8 @@
     "@vitepress-code-preview/plugin": "^1.0.6",
     "@vitepress-demo-preview/component": "^2.6.2",
     "@vitepress-demo-preview/plugin": "^1.4.1",
-    "@vitest/coverage-v8": "^4.1.1",
-    "@vitest/ui": "^4.1.1",
+    "@vitest/coverage-v8": "^4.1.2",
+    "@vitest/ui": "^4.1.2",
     "@vue-styled-components/core": "^1.13.3",
     "@vue-styled-components/plugin": "^1.0.1",
     "@vueuse/core": "^14.2.1",
@@ -166,7 +166,7 @@
     "vitepress-plugin-doc-analysis": "^1.0.13",
     "vitepress-plugin-frontmatter": "^2.0.1",
     "vitepress-plugin-glossary": "^1.0.6",
-    "vitepress-plugin-group-icons": "^1.7.2",
+    "vitepress-plugin-group-icons": "^1.7.3",
     "vitepress-plugin-image-preview": "^0.1.1",
     "vitepress-plugin-legend": "^1.3.0",
     "vitepress-plugin-llmstxt": "^0.5.1",
@@ -268,7 +268,7 @@
   "overrides": {
     "@mermaid-js/layout-tidy-tree": "^0.2.1",
     "@vitejs/devtools": "^0.1.11",
-    "@zenuml/core": "^3.46.0",
+    "@zenuml/core": "^3.46.2",
     "dayjs": "^1.11.20",
     "eslint": "^10.1.0",
     "highlight.js": "^11.11.1",
@@ -283,7 +283,7 @@
     "vite": "8.0.0",
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.17",
-    "vitest": "^4.1.1",
+    "vitest": "^4.1.2",
     "vue": "^3.5.31"
   },
   "lint-staged": {
