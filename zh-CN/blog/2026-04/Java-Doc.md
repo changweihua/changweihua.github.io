@@ -88,7 +88,7 @@ public void processUsers(List<User> users, ProcessOptions options) {
 public List<User> getActiveUsers() {
     return userDAO.findByStatus("active");
 }
-​```
+```
 
 ### `@throws` / `@exception` 异常说明 ###
 
