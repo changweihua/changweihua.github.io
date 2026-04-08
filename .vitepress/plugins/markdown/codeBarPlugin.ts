@@ -20,7 +20,7 @@ export default function codeBarPlugin(md: MarkdownIt, options: CodeBarOptions = 
 
   const originalFence = md.renderer.rules.fence
 
-  md.renderer.rules.fence = function(tokens: Token[], idx: number, options: any, env: any, self: any) {
+  md.renderer.rules.fence = function (tokens: Token[], idx: number, options: any, env: any, self: any) {
     const original = originalFence
       ? originalFence(tokens, idx, options, env, self)
       : self.renderToken(tokens, idx, options)

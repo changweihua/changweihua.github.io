@@ -1,5 +1,6 @@
 <template>
   <a
+    v-show="showCorner"
     :href="repoUrl"
     class="github-corner"
     aria-label="View source on GitHub"
@@ -32,36 +33,61 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-defineOptions({
-  name: 'GitHubCorner'
-})
+defineOptions({ name: 'GitHubCorner' })
 
 const props = defineProps<{
   repoUrl: string
 }>()
 
-const svgSize = ref(80) // 默认大小，避免 SSR 闪烁
+const svgSize = ref(64)          // 默认高度，避免 SSR 闪烁
+const showCorner = ref(true)     // 默认显示，客户端会立刻修正
 
-const updateSize = () => {
-  // 尝试获取 VitePress 导航栏元素
-  const navBar = document.querySelector('.VPNavBar')
-  if (navBar) {
-    const height = navBar.getBoundingClientRect().height
-    // 设置 SVG 大小与导航栏高度一致（可适当调整偏移量）
-    svgSize.value = height
-  } else {
-    // 若导航栏不存在，则回退到默认值（例如 64px）
-    svgSize.value = 64
+let resizeObserver: ResizeObserver | null = null
+
+// 检测汉堡菜单是否真正可见（基于 DOM 实际样式）
+function isHamburgerVisible(): boolean {
+  const hamburger = document.querySelector('.VPNavBarHamburger.hamburger') as HTMLElement | null
+  if (!hamburger) return false
+  const style = window.getComputedStyle(hamburger)
+  return hamburger.offsetParent !== null && style.display !== 'none' && style.visibility !== 'hidden'
+}
+
+// 更新角标显示状态和尺寸
+function update() {
+  const hamburgerVisible = isHamburgerVisible()
+  showCorner.value = !hamburgerVisible
+
+  // 只有当角标应该显示时才去获取导航栏高度（性能优化）
+  if (!hamburgerVisible) {
+    const navBar = document.querySelector('.VPNavBar')
+    if (navBar) {
+      const height = navBar.getBoundingClientRect().height
+      // 避免高度为 0 或过小
+      svgSize.value = height > 20 ? height : 64
+    } else {
+      svgSize.value = 64
+    }
   }
 }
 
+// 设置监听器：ResizeObserver 捕捉所有可能影响布局的变化（侧边栏展开、字体加载等）
+function setupObservers() {
+  // 监听 body 尺寸变化，比单纯 resize 更全面
+  resizeObserver = new ResizeObserver(() => update())
+  resizeObserver.observe(document.body)
+
+  // 同时监听窗口大小变化（作为 fallback 和即时响应）
+  window.addEventListener('resize', update)
+}
+
 onMounted(() => {
-  updateSize()
-  window.addEventListener('resize', updateSize)
+  update()
+  setupObservers()
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateSize)
+  resizeObserver?.disconnect()
+  window.removeEventListener('resize', update)
 })
 </script>
 
@@ -71,24 +97,8 @@ onBeforeUnmount(() => {
 }
 
 @keyframes octocat-wave {
-  0%,
-  100% {
-    transform: rotate(0);
-  }
-  20%,
-  60% {
-    transform: rotate(-25deg);
-  }
-  40%,
-  80% {
-    transform: rotate(10deg);
-  }
-}
-
-@media (max-width: 500px) {
-  /* 移动端隐藏 GitHub 角标 */
-  .github-corner {
-    display: none;
-  }
+  0%, 100% { transform: rotate(0); }
+  20%, 60% { transform: rotate(-25deg); }
+  40%, 80% { transform: rotate(10deg); }
 }
 </style>

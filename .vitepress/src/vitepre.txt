@@ -186,9 +186,9 @@ const markdown: MarkdownOptions | undefined = {
     }
 
     // ========== 5. 表格和文字样式增强（无冲突） ==========
-    // ---------- 5. 表格与文本样式 ----------
-    md.renderer.rules.table_open = () => '<div class="vp-table-container"><table class="vp-table striped">'
-    md.renderer.rules.table_close = () => '</table></div>'
+    md.renderer.rules.table_open = () =>
+      `<div class="vp-table-container"><table class="vp-table striped ">`
+    md.renderer.rules.table_close = () => '<tr></div>'
     md.renderer.rules.strong_open = () => '<strong class="font-bold">'
     md.renderer.rules.strong_close = () => '</strong>'
     md.renderer.rules.em_open = () => '<em class="italic">'

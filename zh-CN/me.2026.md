@@ -22,6 +22,13 @@ encrypt-storage: true
 
 <br />
 
+### TGS-SOLUTION
+
+- 2026 年 3 月
+  - 搭建项目框架，学习 SpringBoot 技术栈
+- 2026 年 4 月
+  - 深入功能开发，完成 .NET 功能迁移
+
 ### 无锡硕放机场团体旅客保障系统
 
 - 2026 年 1 月
@@ -35,6 +42,8 @@ encrypt-storage: true
 - 2026 年 3 月
   - 升级 Ant Design Vue 4.* 至 Ant Design Vue Next
   - 本地化 `cap.js` 组件
+- 2026 年 4 月
+  - 部署系统至生产环境，待测试通过后上线
 
 <div class="grid md:grid-cols-2 lg:grid-cols-4 masonry-container">
 
@@ -76,6 +85,7 @@ encrypt-storage: true
 - 无锡硕放机场进出港查询系统
 ## Q2
 - 无锡硕放机场团体旅客保障系统
+- 基于 SpringBoot 4 的后端架构，与 .NET 功能一比一复原
 ## Q3
 - ???
 ## Q4
