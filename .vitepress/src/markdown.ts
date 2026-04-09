@@ -128,7 +128,7 @@ const markdown: MarkdownOptions | undefined = {
     })
     md.use(vitepressEncrypt, [
       { pageType: 'default', password: 'p1' },
-      { pageType: 'vip', password: 'p2' },
+      { pageType: 'vip', password: 'p11' },
     ])
 
     // ========== 2. Demo 插件共存方案 ==========

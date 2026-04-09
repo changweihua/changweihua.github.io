@@ -626,24 +626,18 @@ export default withDrawio(withMermaid(
   // 设置页面标题
   // 暗色模式（默认：auto，选项：light, dark, auto）
   "darkMode": "auto",
-
   // 启用工具栏调整大小功能（默认：false）
-  resize: true,
-
+  resize: false,
   // 启用工具栏页面切换功能（默认：false）
-  pages: true,
+  pages: false,
   // 启用工具栏缩放功能（默认：false）
-  zoom: true,
-
+  zoom: false,
   // 启用工具栏图层功能（默认：false）
-  layers: true,
-
+  layers: false,
   // 启用工具栏灯箱功能（默认：false）
-  lightbox: true,
-
+  lightbox: false,
   // 设置高亮颜色（默认：#0000FF）
   highlight: "#0000ff",
-
   // 设置透明背景（默认：false）
   transparent: true,
 })

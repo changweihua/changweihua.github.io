@@ -39,59 +39,89 @@ const props = defineProps<{
   repoUrl: string
 }>()
 
-const svgSize = ref(64)          // 默认高度，避免 SSR 闪烁
-const showCorner = ref(true)     // 默认显示，客户端会立刻修正
+const svgSize = ref(64)       // 默认值，避免 SSR 闪烁
+const showCorner = ref(true)  // 默认显示，客户端会立即修正
 
-let resizeObserver: ResizeObserver | null = null
+let mediaQuery: MediaQueryList | null = null
+let resizeTimer: number | null = null
 
-// 检测汉堡菜单是否真正可见（基于 DOM 实际样式）
-function isHamburgerVisible(): boolean {
-  const hamburger = document.querySelector('.VPNavBarHamburger.hamburger') as HTMLElement | null
-  if (!hamburger) return false
-  const style = window.getComputedStyle(hamburger)
-  return hamburger.offsetParent !== null && style.display !== 'none' && style.visibility !== 'hidden'
-}
-
-// 更新角标显示状态和尺寸
-function update() {
-  const hamburgerVisible = isHamburgerVisible()
-  showCorner.value = !hamburgerVisible
-
-  // 只有当角标应该显示时才去获取导航栏高度（性能优化）
-  if (!hamburgerVisible) {
-    const navBar = document.querySelector('.VPNavBar')
-    if (navBar) {
-      const height = navBar.getBoundingClientRect().height
-      // 避免高度为 0 或过小
-      svgSize.value = height > 20 ? height : 64
-    } else {
-      svgSize.value = 64
-    }
+// 更新角标尺寸（仅在 PC 端调用）
+function updateSize() {
+  // 只有显示角标时才去获取高度，提升性能
+  if (!showCorner.value) return
+  const navBar = document.querySelector('.VPNavBar') as HTMLElement | null
+  if (navBar) {
+    const height = navBar.getBoundingClientRect().height
+    // 防止高度为 0 或异常值
+    svgSize.value = height > 20 ? height : 64
+  } else {
+    svgSize.value = 64
   }
 }
 
-// 设置监听器：ResizeObserver 捕捉所有可能影响布局的变化（侧边栏展开、字体加载等）
-function setupObservers() {
-  // 监听 body 尺寸变化，比单纯 resize 更全面
-  resizeObserver = new ResizeObserver(() => update())
-  resizeObserver.observe(document.body)
+// 处理移动端/PC 切换
+function handleMediaChange(e: MediaQueryListEvent | MediaQueryList) {
+  const isMobile = e.matches
+  showCorner.value = !isMobile
+  if (!isMobile) {
+    // 切换到 PC 端，重新获取导航栏高度
+    updateSize()
+  }
+}
 
-  // 同时监听窗口大小变化（作为 fallback 和即时响应）
-  window.addEventListener('resize', update)
+// 防抖处理 resize 事件，避免频繁调用
+function onResize() {
+  if (resizeTimer) clearTimeout(resizeTimer)
+  resizeTimer = window.setTimeout(() => {
+    // 只有在 PC 端且角标可见时才更新尺寸
+    if (showCorner.value) {
+      updateSize()
+    }
+  }, 100)
 }
 
 onMounted(() => {
-  update()
-  setupObservers()
+  // 使用 VitePress 默认断点 960px，兼容性好
+  mediaQuery = window.matchMedia('(max-width: 960px)')
+  // 初始状态
+  const isMobile = mediaQuery.matches
+  showCorner.value = !isMobile
+  if (!isMobile) {
+    updateSize()
+  }
+  // 监听媒体变化
+  if (mediaQuery.addEventListener) {
+    mediaQuery.addEventListener('change', handleMediaChange)
+  } else {
+    // 兼容旧版 Safari/Chrome（addListener 已废弃但仍可用）
+    mediaQuery.addListener(handleMediaChange)
+  }
+  // 监听窗口 resize
+  window.addEventListener('resize', onResize)
 })
 
 onBeforeUnmount(() => {
-  resizeObserver?.disconnect()
-  window.removeEventListener('resize', update)
+  if (mediaQuery) {
+    if (mediaQuery.removeEventListener) {
+      mediaQuery.removeEventListener('change', handleMediaChange)
+    } else {
+      mediaQuery.removeListener(handleMediaChange)
+    }
+  }
+  window.removeEventListener('resize', onResize)
+  if (resizeTimer) clearTimeout(resizeTimer)
 })
 </script>
 
 <style scoped>
+/* 后备 CSS：保证移动端绝对隐藏（即使 JS 未执行） */
+@media (max-width: 960px) {
+  .github-corner {
+    display: none !important;
+  }
+}
+
+/* PC 端悬浮动画 */
 .github-corner:hover .octo-arm {
   animation: octocat-wave 560ms ease-in-out;
 }
