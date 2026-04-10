@@ -397,6 +397,11 @@ export default withDrawio(withMermaid(
         rolldownOptions: {
           output: {
             codeSplitting: true,
+            minify: {
+              compress: {
+                dropConsole: true,
+              },
+            },
           },
         },
       },
