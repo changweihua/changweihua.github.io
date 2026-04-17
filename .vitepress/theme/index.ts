@@ -121,6 +121,7 @@ mermaid.registerIconPacks([
 mermaid.registerExternalDiagrams([zenuml])
 mermaid.registerLayoutLoaders(elkLayouts)
 
+import Vue3TouchEvents, { type Vue3TouchEventsOptions } from 'vue3-touch-events'
 
 
 export default {
@@ -376,6 +377,10 @@ export default {
     // vitepressNprogress(ctx);
 
     app.use(TwoslashFloatingVue)
+
+    app.use<Vue3TouchEventsOptions>(Vue3TouchEvents, {
+      disableClick: false
+    })
 
     const bProgress = vitepressBprogress(ctx)
 
