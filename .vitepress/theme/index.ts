@@ -11,7 +11,6 @@ import { defineClientComponentConfig } from '@vitepress-demo-preview/core'
 import mermaid from 'mermaid'
 // .vitepress/theme/index.ts
 import { inBrowser, useData, useRoute } from 'vitepress'
-import { initComponent as initMarkmapComponent } from 'vitepress-markmap-preview/component'
 import vitepressBprogress from 'vitepress-plugin-bprogress'
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'
 // @ts-ignore
@@ -73,22 +72,9 @@ import './styles/vitepress.print.css'
 import './styles/vitepress.code.css'
 import './styles/markdown.ext.css'
 
-// import 'vitepress-plugin-mermaid-pan-zoom/dist/style.css'
-
-// mermaid.initialize({
-//   look: "handDrawn",
-//   handDrawnSeed: 2,
-//   fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-//   altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
-//   theme: "neutral",
-//   flowchart: { curve: "basis" },
-//   securityLevel: "loose",
-//   logLevel: "error",
-//   suppressErrorRendering: false,
-//   startOnLoad: true,
-//   maxTextSize: 100000, // 防止大文本出错
-//   // ... other Mermaid configuration options
-// });
+import { initComponent } from 'vitepress-plugin-legend/component';
+// Import CSS
+import 'vitepress-plugin-legend/dist/index.css';
 
 import './styles/mermaid.ext.css'
 import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
@@ -434,7 +420,7 @@ export default {
     })
 
     if (inBrowser) {
-      initMarkmapComponent(app)
+      initComponent(app)
       enhanceAppWithTabs(app)
 
       useComponents(app, DemoPreview)

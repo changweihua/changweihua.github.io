@@ -13,7 +13,7 @@ import MarkdownItGitHubAlerts from 'markdown-it-github-alerts'
 import markdownItTableExt from 'markdown-it-multimd-table-ext'
 import { vitepressMarkmapPreview } from 'vitepress-markmap-preview'
 import { containerPreview, componentPreview } from '@vitepress-demo-preview/plugin'
-// import { vitepressDemoPlugin } from 'vitepress-demo-plugin'
+import { vitepressPluginLegend } from 'vitepress-plugin-legend';
 import { vitepressDemoPlugin } from 'vitepress-better-demo-plugin'
 import { resolve } from 'path'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
@@ -78,8 +78,18 @@ const markdown: MarkdownOptions | undefined = {
   ],
   languages: ['js', 'jsx', 'ts', 'tsx'],
   config: (md) => {
-    // ========== 移除冲突：不再暴力禁用所有带 'task' 的规则 ==========
-    // 原先的错误代码已删除，保证 tasklist 正常工作
+    // @ts-ignore
+    vitepressPluginLegend(md, {
+      markmap: {
+        showToolbar: false,
+        // Other markmap options
+      },
+      mermaid: true, // or false to disable
+      infographic: {
+        showToolbar: false,
+        // Other infographic options
+      },
+    });
 
     // ========== 1. 基础插件（无冲突） ==========
     md.use(MarkdownItGitHubMentionCard)

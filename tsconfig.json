@@ -18,9 +18,24 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": false,
-    "lib": ["ESNext", "ES2015.Promise", "dom","DOM", "es5", "es2015.promise" ,"es2015", "es2017","es2018","es2018.promise"],
+    "lib": [
+      "ESNext",
+      "ES2015.Promise",
+      "dom",
+      "DOM",
+      "es5",
+      "es2015.promise",
+      "es2015",
+      "es2017",
+      "es2018",
+      "es2018.promise"
+    ],
     "downlevelIteration": true,
     "baseUrl": ".",
+    "types": [
+      "vite/client",
+      "typings"
+    ],
     "paths": {
       "@/*": [
         "./src/*"
@@ -36,8 +51,15 @@
     "outDir": "dist"
   },
   "diagnostics": true,
-  "types": ["vite/client", "typings"],
-  "include": [".", "src", ".vitepress", "./typings", "env.d.ts", "package.json"],
+  "include": [
+    ".",
+    "src",
+    ".vitepress",
+    "./typings",
+    "typings/**/*.d.ts",
+    "env.d.ts",
+    "package.json"
+  ],
   "exclude": [
     "node_modules",
     ".vitepress/cache",

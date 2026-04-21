@@ -197,6 +197,9 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   }, // tell oxfmt to format the whole file, not only the modified lines
   // Or enable it for specific file types:
   // "[javascript]": {

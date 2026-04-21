@@ -20,7 +20,6 @@ import { defineConfig } from 'vite'
 import { envParse } from 'vite-plugin-env-parse'
 import { vitePluginFakeServer } from 'vite-plugin-fake-server'
 import Inspect from 'vite-plugin-inspect'
-import withDrawio from '@dhlx/vitepress-plugin-drawio'
 import mkcert from 'vite-plugin-mkcert'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { qrcode } from 'vite-plugin-qrcode'
@@ -28,7 +27,6 @@ import AutoFrontmatter from 'vitepress-plugin-auto-frontmatter'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 // import llmstxtPlugin from 'vitepress-plugin-llmstxt'
 import MdH1 from 'vitepress-plugin-md-h1'
-import { withMermaid } from "vitepress-mermaid";
 // import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
 // import { SponsorPlugin } from 'vitepress-plugin-sponsor'
@@ -320,329 +318,277 @@ function createCategory(fileInfo: FileInfo) {
   return { categories: categories.length ? categories : [''] }
 }
 
-export default withDrawio(withMermaid(
-  defineConfig({
-    mermaid: {
-      look: 'handDrawn',
-      handDrawnSeed: 2,
-      startOnLoad: false,
-      layout: 'elk',
-      fontFamily: 'MapleMono, AlibabaPuHuiTi, \'阿里巴巴普惠体 3.0\'',
-      altFontFamily: 'MapleMono, AlibabaPuHuiTi, \'阿里巴巴普惠体 3.0\'',
-      // 使用 CSS 变量
-      ...lightMermaidConfig,
-      securityLevel: 'loose',
-      flowchart: { curve: 'basis', defaultRenderer: 'elk' },
-      class: {
-        defaultRenderer: 'elk',
-      },
-      state: {
-        defaultRenderer: 'elk',
-      },
-      logLevel: 'error',
-      suppressErrorRendering: true,
-      // mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
-    },
-    // 可选地使用MermaidPluginConfig为插件本身设置额外的配置
-    mermaidPlugin: {
-      class: 'mermaid styled-mermaid', // 为父容器设置额外的CSS类
-    },
-    vite: {
-      css: {
-        lightningcss: {
-          // 不报告未知规则为错误
-          // 忽略未知的 CSS 规则
-          errorRecovery: true,
-          // 将 browserslist 转换为 LightningCSS 的目标格式
-          targets: browserslistToTargets(browserslist('>= 0.25%')),
-          // 关键配置：标记 deep 为合法伪类
-          pseudoClasses: {},
-          drafts: {
-            customMedia: true, // 启用媒体查询变量
-          },
-          // 解决 scoped 样式问题
-          cssModules: {
-            // 禁用对 scoped 样式的命名转换
-            pattern: '[name]__[local]___[hash]',
-            // 配置CSS模块化
-            // pattern: "[name]__[local]__[hash:base64:5]",
-          },
+export default {
+  vite: {
+    css: {
+      lightningcss: {
+        // 不报告未知规则为错误
+        // 忽略未知的 CSS 规则
+        errorRecovery: true,
+        // 将 browserslist 转换为 LightningCSS 的目标格式
+        targets: browserslistToTargets(browserslist('>= 0.25%')),
+        // 关键配置：标记 deep 为合法伪类
+        pseudoClasses: {},
+        drafts: {
+          customMedia: true, // 启用媒体查询变量
         },
-        // 同时使用 PostCSS 处理 @apply
-        // postcss: true,
-        devSourcemap: true,
-        /**
-         * 如果启用了这个选项，那么 CSS 预处理器会尽可能在 worker 线程中运行；即通过多线程运行 CSS 预处理器，从而极大提高其处理速度
-         * https://cn.vitejs.dev/config/shared-options#css-preprocessormaxworkers
-         */
-        preprocessorMaxWorkers: 3,
-        /**
-         * 建议只用来嵌入 SCSS 的变量声明文件，嵌入后全局可用
-         * 该选项可以用来为每一段样式内容添加额外的代码。但是要注意，如果你添加的是实际的样式而不仅仅是变量，那这些样式在最终的产物中会重复
-         * https://cn.vitejs.dev/config/shared-options.html#css-preprocessoroptions-extension-additionaldata
-         */
-        preprocessorOptions: {
-          scss: {
-            // sourceMap: true,
-            // 使用 sass-embedded 作为编译器
-            // implementation: sassEmbedded,
-            // additionalData: `@use "${path.resolve(__dirname, 'src/assets/styles/variables.scss')}" as vars; @debug "SCSS config loaded";`, // 强制全局注入
-            additionalData: `@use "@vp/theme/styles/variables.scss" as vars;`, // 强制全局注入
-            // api: "modern-compiler",
-          },
+        // 解决 scoped 样式问题
+        cssModules: {
+          // 禁用对 scoped 样式的命名转换
+          pattern: '[name]__[local]___[hash]',
+          // 配置CSS模块化
+          // pattern: "[name]__[local]__[hash:base64:5]",
         },
       },
-      build: {
-        cssMinify: 'lightningcss',
-        rolldownOptions: {
-          output: {
-            codeSplitting: true,
-            minify: {
-              compress: {
-                dropConsole: true,
-              },
+      // 同时使用 PostCSS 处理 @apply
+      // postcss: true,
+      devSourcemap: true,
+      /**
+       * 如果启用了这个选项，那么 CSS 预处理器会尽可能在 worker 线程中运行；即通过多线程运行 CSS 预处理器，从而极大提高其处理速度
+       * https://cn.vitejs.dev/config/shared-options#css-preprocessormaxworkers
+       */
+      preprocessorMaxWorkers: 3,
+      /**
+       * 建议只用来嵌入 SCSS 的变量声明文件，嵌入后全局可用
+       * 该选项可以用来为每一段样式内容添加额外的代码。但是要注意，如果你添加的是实际的样式而不仅仅是变量，那这些样式在最终的产物中会重复
+       * https://cn.vitejs.dev/config/shared-options.html#css-preprocessoroptions-extension-additionaldata
+       */
+      preprocessorOptions: {
+        scss: {
+          // sourceMap: true,
+          // 使用 sass-embedded 作为编译器
+          // implementation: sassEmbedded,
+          // additionalData: `@use "${path.resolve(__dirname, 'src/assets/styles/variables.scss')}" as vars; @debug "SCSS config loaded";`, // 强制全局注入
+          additionalData: `@use "@vp/theme/styles/variables.scss" as vars;`, // 强制全局注入
+          // api: "modern-compiler",
+        },
+      },
+    },
+    build: {
+      cssMinify: 'lightningcss',
+      rolldownOptions: {
+        output: {
+          codeSplitting: true,
+          minify: {
+            compress: {
+              dropConsole: true,
             },
           },
         },
       },
-      // 强制预构建
-      // Vite 的预构建会将 CommonJS / UMD 依赖转换为 ESM，并将多个内部模块合并为单个模块，减少 HTTP 请求数量。
-      optimizeDeps: {
-        include: [
-          "mermaid",
-          "dayjs",
-          "debug",
-          "@braintree/sanitize-url",
-          "cytoscape",
-          "cytoscape-cose-bilkent",
-        ],
-        exclude: ["vitepress"],
-        // exclude: [
-        //   '@iconify/json',
-        //   'vue3-next-qrcode',
-        //   'vitepress-plugin-detype',
-        //   'vitepress-plugin-tabs',
-        //   'vitepress-plugin-npm-commands',
-        // ],
-      },
-      ssr: {
-        external: [
-          'vue3-next-qrcode',
-          'vitepress-plugin-tabs',
-          'vitepress-plugin-detype',
-          'vitepress-plugin-npm-commands',
-          'hover-tilt',
-        ], // Externalize Node.js modules
-        noExternal: [
-          'vitepress-plugin-nprogress',
-          'vitepress-component-medium-zoom',
-          'vitepress-plugin-bprogress',
-          'naive-ui',
-          'date-fns',
-          'vueuc',
-          '@vue/runtime-dom',
-        ],
-      },
-      resolve: {
-        alias: [
-          { find: 'vite', replacement: 'rolldown-vite' },
-          { find: 'mermaid', replacement: 'mermaid' },
-          { find: '@demo', replacement: resolve(__dirname, '../src/demos') },
-          {
-            find: /^.*\/VPFooter\.vue$/,
-            replacement: resolve(__dirname, './components/LiquidPageFooter.vue'),
-          },
-          // { find: 'dep', replacement: '@vitejs/test-resolve-linked' },
-        ],
-      },
-      logLevel: 'warn',
-      plugins: [
-        vueJsx(),
-        // frontmatterHashPlugin(),
-        ...getDevPlugins(),
-        viteDemoPreviewPlugin(),
-        Components({
-          dirs: ['./src/components', '.vitepress/components'], // 配置需要自动导入的组件目录
-          dts: 'typings/components.d.ts',
-          // 关键：让插件处理 .md 文件
-          include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-          resolvers: [
-            NaiveUiResolver(),
-            IconsResolver({
-              // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
-              prefix: 'icon',
-              strict: true,
-            }),
-          ],
-        }),
-        Icons({
-          compiler: 'vue3',
-          autoInstall: true,
-          scale: 1.2, // Scale of icons against 1em
-          defaultStyle: '', // Style apply to icons
-          defaultClass: '', // Class names apply to icons
-        }),
-        UnoCSS(),
-        vueStyledPlugin(),
-        Iconify({
-          collections: {
-            cmono: './src/assets/icons/mono',
-          },
-        }),
-        versionInjector(),
-        groupIconVitePlugin({
-          customIcon: {
-            ae: 'logos:adobe-after-effects',
-            ai: 'logos:adobe-illustrator',
-            ps: 'logos:adobe-photoshop',
-            mts: 'vscode-icons:file-type-typescript',
-            cts: 'vscode-icons:file-type-typescript',
-            ts: 'vscode-icons:file-type-typescript',
-            tsx: 'vscode-icons:file-type-typescript',
-            mjs: 'vscode-icons:file-type-js',
-            cjs: 'vscode-icons:file-type-js',
-            json: 'vscode-icons:file-type-json',
-            js: 'vscode-icons:file-type-js',
-            jsx: 'vscode-icons:file-type-js',
-            md: 'vscode-icons:file-type-markdown',
-            py: 'vscode-icons:file-type-python',
-            ico: 'vscode-icons:file-type-favicon',
-            html: 'vscode-icons:file-type-html',
-            css: 'vscode-icons:file-type-css',
-            scss: 'vscode-icons:file-type-scss',
-            yml: 'vscode-icons:file-type-light-yaml',
-            yaml: 'vscode-icons:file-type-light-yaml',
-            php: 'vscode-icons:file-type-php',
-            less: 'vscode-icons:file-type-less',
-            // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
-            // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
-          },
-        }),
-        MdH1({
-          ignoreList: ['/gallery/'],
-          beforeInject: (_frontmatter, id, _title) => {
-            // 根据文档路径判断
-            if (id.includes('/resume'))
-              return false
-            if (id.includes('/me.'))
-              return false
-          },
-        }),
-        AutoFrontmatter({
-          pattern: '**/*.md',
-          exclude: { tag: true }, // 排除 tag: true 的 MD 文件，支持多个配置
-          include: { tag: true }, // 支持多个配置
-          // ✨ 通过 transform 函数来添加一个唯一的永久链接
-          transform: (frontmatter, fileInfo) => {
-            let transformResult = {}
-
-            // 如果文件本身存在了 permalink，则不生成
-            if (!frontmatter.permalink) {
-              transformResult = { ...frontmatter, ...createPermalink() }
-            }
-
-            // 如果文件本身存在了 categories，则不生成
-            if (!frontmatter.categories) {
-              transformResult = {
-                ...frontmatter,
-                ...createCategory(fileInfo),
-              }
-            }
-
-            // 确保返回值存在，如果返回 {} 将会清空文件本身的 frontmatter，返回 undefined 则告诉插件不使用 transform 返回的数据
-            return Object.keys(transformResult).length ? transformResult : undefined
-          },
-        }),
-        RssPlugin(RSS),
-        // 打赏插件
-        // SponsorPlugin({
-        //   /**
-        //    * 打赏模块样式
-        //    */
-        //   type: 'drink',
-        //   aliPayQR: '/Alipay.svg',
-        //   weChatQR: '/wechat-pay.svg',
-        // }),
-        // llmstxtPlugin(),
-        // pagefindPlugin({
-        //   forceLanguage: 'zh-CN',
-        //   locales: {
-        //     'root': {
-        //       btnPlaceholder: '搜索',
-        //       placeholder: '搜索文档',
-        //       emptyText: '空空如也',
-        //       heading: '共: {{searchResult}} 条结果',
-        //       toSelect: '选择',
-        //       toNavigate: '切换',
-        //       toClose: '关闭',
-        //       searchBy: '',
-        //     },
-        //     'en-us': {
-        //       btnPlaceholder: 'Search',
-        //       placeholder: 'Search Docs...',
-        //       emptyText: 'No results',
-        //       heading: 'Total: {{searchResult}} search results.',
-        //       // 搜索结果不展示最后修改日期日期
-        //       showDate: false,
-        //     },
-        //     'zh-CN': {
-        //       btnPlaceholder: '搜索',
-        //       placeholder: '搜索文档',
-        //       emptyText: '空空如也',
-        //       heading: '共: {{searchResult}} 条结果',
-        //       toSelect: '选择',
-        //       toNavigate: '切换',
-        //       toClose: '关闭',
-        //       searchBy: '',
-        //     },
-        //   },
-        //   excludeSelector: ['img', 'a.header-anchor'],
-        //   customSearchQuery: intlChineseSearchOptimize,
-        // }),
-        // {
-        //   name: 'patch-sidebar',
-        //   enforce: 'pre',
-        //   transform: (code, id) => {
-        //     if (id.includes('VPSidebarItem.vue')) {
-        //       return code.replaceAll(`:is="textTag"`, `is="p"`)
-        //     }
-        //   },
-        // },
+    },
+    // 强制预构建
+    // Vite 的预构建会将 CommonJS / UMD 依赖转换为 ESM，并将多个内部模块合并为单个模块，减少 HTTP 请求数量。
+    optimizeDeps: {
+      include: [
+        "mermaid",
+        "dayjs",
+        "debug",
+        "@braintree/sanitize-url",
+        "cytoscape",
+        "cytoscape-cose-bilkent",
+      ],
+      exclude: ["vitepress"],
+      // exclude: [
+      //   '@iconify/json',
+      //   'vue3-next-qrcode',
+      //   'vitepress-plugin-detype',
+      //   'vitepress-plugin-tabs',
+      //   'vitepress-plugin-npm-commands',
+      // ],
+    },
+    ssr: {
+      external: [
+        'vue3-next-qrcode',
+        'vitepress-plugin-tabs',
+        'vitepress-plugin-detype',
+        'vitepress-plugin-npm-commands',
+        'hover-tilt',
+      ], // Externalize Node.js modules
+      noExternal: [
+        'vitepress-plugin-nprogress',
+        'vitepress-component-medium-zoom',
+        'vitepress-plugin-bprogress',
+        'naive-ui',
+        'date-fns',
+        'vueuc',
+        '@vue/runtime-dom',
       ],
     },
-    vue: {
-      template: {
-        compilerOptions: {
-          isCustomElement: tag => tag.includes('mjx-') || customElements.includes(tag),
-          // whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
+    resolve: {
+      alias: [
+        { find: 'vite', replacement: 'rolldown-vite' },
+        { find: 'mermaid', replacement: 'mermaid' },
+        { find: '@demo', replacement: resolve(__dirname, '../src/demos') },
+        {
+          find: /^.*\/VPFooter\.vue$/,
+          replacement: resolve(__dirname, './components/LiquidPageFooter.vue'),
         },
+        // { find: 'dep', replacement: '@vitejs/test-resolve-linked' },
+      ],
+    },
+    logLevel: 'warn',
+    plugins: [
+      vueJsx(),
+      // frontmatterHashPlugin(),
+      ...getDevPlugins(),
+      viteDemoPreviewPlugin(),
+      Components({
+        dirs: ['./src/components', '.vitepress/components'], // 配置需要自动导入的组件目录
+        dts: 'typings/components.d.ts',
+        // 关键：让插件处理 .md 文件
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        resolvers: [
+          NaiveUiResolver(),
+          IconsResolver({
+            // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
+            prefix: 'icon',
+            strict: true,
+          }),
+        ],
+      }),
+      Icons({
+        compiler: 'vue3',
+        autoInstall: true,
+        scale: 1.2, // Scale of icons against 1em
+        defaultStyle: '', // Style apply to icons
+        defaultClass: '', // Class names apply to icons
+      }),
+      UnoCSS(),
+      vueStyledPlugin(),
+      Iconify({
+        collections: {
+          cmono: './src/assets/icons/mono',
+        },
+      }),
+      versionInjector(),
+      groupIconVitePlugin({
+        customIcon: {
+          ae: 'logos:adobe-after-effects',
+          ai: 'logos:adobe-illustrator',
+          ps: 'logos:adobe-photoshop',
+          mts: 'vscode-icons:file-type-typescript',
+          cts: 'vscode-icons:file-type-typescript',
+          ts: 'vscode-icons:file-type-typescript',
+          tsx: 'vscode-icons:file-type-typescript',
+          mjs: 'vscode-icons:file-type-js',
+          cjs: 'vscode-icons:file-type-js',
+          json: 'vscode-icons:file-type-json',
+          js: 'vscode-icons:file-type-js',
+          jsx: 'vscode-icons:file-type-js',
+          md: 'vscode-icons:file-type-markdown',
+          py: 'vscode-icons:file-type-python',
+          ico: 'vscode-icons:file-type-favicon',
+          html: 'vscode-icons:file-type-html',
+          css: 'vscode-icons:file-type-css',
+          scss: 'vscode-icons:file-type-scss',
+          yml: 'vscode-icons:file-type-light-yaml',
+          yaml: 'vscode-icons:file-type-light-yaml',
+          php: 'vscode-icons:file-type-php',
+          less: 'vscode-icons:file-type-less',
+          // rspack: localIconLoader(import.meta.url, '../assets/rspack.svg'),
+          // farm: localIconLoader(import.meta.url, '../assets/farm.svg'),
+        },
+      }),
+      MdH1({
+        ignoreList: ['/gallery/'],
+        beforeInject: (_frontmatter, id, _title) => {
+          // 根据文档路径判断
+          if (id.includes('/resume'))
+            return false
+          if (id.includes('/me.'))
+            return false
+        },
+      }),
+      AutoFrontmatter({
+        pattern: '**/*.md',
+        exclude: { tag: true }, // 排除 tag: true 的 MD 文件，支持多个配置
+        include: { tag: true }, // 支持多个配置
+        // ✨ 通过 transform 函数来添加一个唯一的永久链接
+        transform: (frontmatter, fileInfo) => {
+          let transformResult = {}
+
+          // 如果文件本身存在了 permalink，则不生成
+          if (!frontmatter.permalink) {
+            transformResult = { ...frontmatter, ...createPermalink() }
+          }
+
+          // 如果文件本身存在了 categories，则不生成
+          if (!frontmatter.categories) {
+            transformResult = {
+              ...frontmatter,
+              ...createCategory(fileInfo),
+            }
+          }
+
+          // 确保返回值存在，如果返回 {} 将会清空文件本身的 frontmatter，返回 undefined 则告诉插件不使用 transform 返回的数据
+          return Object.keys(transformResult).length ? transformResult : undefined
+        },
+      }),
+      RssPlugin(RSS),
+      // 打赏插件
+      // SponsorPlugin({
+      //   /**
+      //    * 打赏模块样式
+      //    */
+      //   type: 'drink',
+      //   aliPayQR: '/Alipay.svg',
+      //   weChatQR: '/wechat-pay.svg',
+      // }),
+      // llmstxtPlugin(),
+      // pagefindPlugin({
+      //   forceLanguage: 'zh-CN',
+      //   locales: {
+      //     'root': {
+      //       btnPlaceholder: '搜索',
+      //       placeholder: '搜索文档',
+      //       emptyText: '空空如也',
+      //       heading: '共: {{searchResult}} 条结果',
+      //       toSelect: '选择',
+      //       toNavigate: '切换',
+      //       toClose: '关闭',
+      //       searchBy: '',
+      //     },
+      //     'en-us': {
+      //       btnPlaceholder: 'Search',
+      //       placeholder: 'Search Docs...',
+      //       emptyText: 'No results',
+      //       heading: 'Total: {{searchResult}} search results.',
+      //       // 搜索结果不展示最后修改日期日期
+      //       showDate: false,
+      //     },
+      //     'zh-CN': {
+      //       btnPlaceholder: '搜索',
+      //       placeholder: '搜索文档',
+      //       emptyText: '空空如也',
+      //       heading: '共: {{searchResult}} 条结果',
+      //       toSelect: '选择',
+      //       toNavigate: '切换',
+      //       toClose: '关闭',
+      //       searchBy: '',
+      //     },
+      //   },
+      //   excludeSelector: ['img', 'a.header-anchor'],
+      //   customSearchQuery: intlChineseSearchOptimize,
+      // }),
+      // {
+      //   name: 'patch-sidebar',
+      //   enforce: 'pre',
+      //   transform: (code, id) => {
+      //     if (id.includes('VPSidebarItem.vue')) {
+      //       return code.replaceAll(`:is="textTag"`, `is="p"`)
+      //     }
+      //   },
+      // },
+    ],
+  },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: tag => tag.includes('mjx-') || customElements.includes(tag),
+        // whitespace: "preserve", // [!code ++] 重点:设置whitespace: 'preserve'是为了保留Markdown中的空格，以便LiteTree可以正确解析lite格式的树数据。
       },
     },
-    ...vitePressOptions,
-  } satisfies UserConfig),
-), {
-  // 默认页面配置
-  // 设置默认宽度（默认：100%）
-  width: "100%",
-  // 设置默认高度（默认：600px）
-  height: "600px",
-  // 起始页码（默认：0）
-  page: 0,
-  // 设置页面标题
-  // 暗色模式（默认：auto，选项：light, dark, auto）
-  "darkMode": "auto",
-  // 启用工具栏调整大小功能（默认：false）
-  resize: false,
-  // 启用工具栏页面切换功能（默认：false）
-  pages: false,
-  // 启用工具栏缩放功能（默认：false）
-  zoom: false,
-  // 启用工具栏图层功能（默认：false）
-  layers: false,
-  // 启用工具栏灯箱功能（默认：false）
-  lightbox: false,
-  // 设置高亮颜色（默认：#0000FF）
-  highlight: "#0000ff",
-  // 设置透明背景（默认：false）
-  transparent: true,
-})
+  },
+  ...vitePressOptions,
+} satisfies UserConfig
