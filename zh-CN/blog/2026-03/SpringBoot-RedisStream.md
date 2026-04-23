@@ -60,12 +60,13 @@ Stream相比List的核心优势：
 
 消费组是Redis Stream最强大的特性：
 
-```txt
-生产者 → Stream → 消费组 → 消费者A
-                    ↓
-                  消费者B
-                    ↓
-                  消费者C
+```mermaid
+graph TD
+    A[生产者] --> B[Stream]
+    B --> C[消费组]
+    C --> D[消费者A]
+    C --> E[消费者B]
+    C --> F[消费者C]
 ```
 
 每个消费者组维护自己的消费进度，组内消费者共享消息负载。
@@ -74,18 +75,20 @@ Stream相比List的核心优势：
 
 我们的Redis Stream消息队列架构：
 
-```java
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   消息生产者     │───▶│   Redis Stream   │───▶│   消费组管理     │
-│  (SpringBoot)   │    │     (存储)       │    │  (进度跟踪)     │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                              │
-        ┌─────────────────────┼─────────────────────┐
-        ▼                     ▼                     ▼
-┌─────────────┐      ┌─────────────┐      ┌─────────────┐
-│  消费者A     │      │  消费者B     │      │  消费者C     │
-│ (订单处理)   │      │ (库存处理)   │      │ (通知处理)   │
-└─────────────┘      └─────────────┘      └─────────────┘
+```mermaid
+graph TD
+    A[消息生产者<br/>SpringBoot] --> B[Redis Stream<br/>存储]
+    B --> C[消费组管理<br/>进度跟踪]
+    B --> D[消费者A<br/>订单处理]
+    B --> E[消费者B<br/>库存处理]
+    B --> F[消费者C<br/>通知处理]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#9cf,stroke:#333,stroke-width:2px
+    style C fill:#9fc,stroke:#333,stroke-width:2px
+    style D fill:#ff9,stroke:#333,stroke-width:2px
+    style E fill:#f99,stroke:#333,stroke-width:2px
+    style F fill:#9f9,stroke:#333,stroke-width:2px
 ```
 
 ## 核心设计要点 ##
