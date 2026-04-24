@@ -310,12 +310,12 @@ public partial class UserMapper
 ```mermaid
 flowchart TD
     subgraph A [开发阶段]
-        A1["开发者编写业务代码<br>包含 Partial Class 和 &#91;Mapper&#93; 特性"]
+        A1["开发者编写业务代码<br>包含 Partial Class 和 Mapper 特性"]
     end
 
     subgraph B [编译阶段 - 源生成器执行]
         direction LR
-        B1["Roslyn 编译器<br>分析代码"] --> B2{"发现 &#91;Mapper&#93;<br>等源生成器特性"}
+        B1["Roslyn 编译器<br>分析代码"] --> B2{"发现 Mapper<br>等源生成器特性"}
         B2 -- 是 --> B3["调用 Mapperly 源生成器"]
         B3 --> B4["分析源/目标类型<br>映射方法签名/配置"]
         B4 --> B5["生成 .g.cs 映射实现文件"]

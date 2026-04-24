@@ -98,7 +98,7 @@
     "@vue-styled-components/core": "^1.13.3",
     "@vue-styled-components/plugin": "^1.0.1",
     "@vueuse/core": "^14.2.1",
-    "@zumer/snapdom": "^2.8.0",
+    "@zumer/snapdom": "^2.9.0",
     "animate.css": "^4.1.1",
     "animejs": "4.3.6",
     "browserslist": "^4.28.2",

@@ -170,7 +170,7 @@ Spring Boot提供了两种主要的方式来管理项目依赖和配置，理解
 
 #### 基础流水线配置 ####
 
-```jenkinsflie
+```txt
 // Jenkinsfile
 pipeline {
     agent any
@@ -251,7 +251,7 @@ pipeline {
 
 #### 多模块项目优化配置 ####
 
-```jenkinsflie
+```txt
 // 针对多模块项目的优化流水线
 pipeline {
     agent any

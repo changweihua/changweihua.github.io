@@ -50,7 +50,7 @@ services:
 
 #### 配置文件 redis.conf ####
 
-```conf
+```txt
 # Redis 服务器的端口号（默认：6379）
 port 6379
 

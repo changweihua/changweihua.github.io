@@ -65,7 +65,7 @@ Mockito 的架构分为四个主要层次：
 </dependency>
 ```
 
-```gradle
+```txt
 // Gradle
 testImplementation 'org.mockito:mockito-core:5.8.0'
 testImplementation 'org.mockito:mockito-junit-jupiter:5.8.0'
