@@ -141,6 +141,7 @@
     "marked": "^18.0.2",
     "mathjax": "^4.1.1",
     "medium-zoom": "^1.1.0",
+    "mermaid": "^11.14.0",
     "nanoid": "^5.1.9",
     "open-props": "^1.7.23",
     "ora": "^9.4.0",
