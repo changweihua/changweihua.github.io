@@ -13,7 +13,6 @@ import MarkdownItGitHubAlerts from 'markdown-it-github-alerts'
 import markdownItTableExt from 'markdown-it-multimd-table-ext'
 import { vitepressMarkmapPreview } from 'vitepress-markmap-preview'
 import { containerPreview, componentPreview } from '@vitepress-demo-preview/plugin'
-import { vitepressPluginLegend } from 'vitepress-plugin-legend';
 import { vitepressDemoPlugin } from 'vitepress-better-demo-plugin'
 import { resolve } from 'path'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
@@ -26,8 +25,6 @@ import glossary from './glossary.json'
 import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
 import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
-import { tasklist } from "@mdit/plugin-tasklist"
-import markdownItAnchor from 'markdown-it-anchor'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
@@ -78,19 +75,6 @@ const markdown: MarkdownOptions | undefined = {
   ],
   languages: ['js', 'jsx', 'ts', 'tsx'],
   config: (md) => {
-    // @ts-ignore
-    vitepressPluginLegend(md, {
-      markmap: {
-        showToolbar: false,
-        // Other markmap options
-      },
-      mermaid: true, // or false to disable
-      infographic: {
-        showToolbar: false,
-        // Other infographic options
-      },
-    });
-
     // ========== 1. 基础插件（无冲突） ==========
     md.use(MarkdownItGitHubMentionCard)
 
@@ -98,7 +82,6 @@ const markdown: MarkdownOptions | undefined = {
     // 先保存原始 fence 渲染器
     const originalFence = md.renderer.rules.fence!.bind(md.renderer.rules)
 
-    md.use(tasklist)
     md.use(pathHashWrapperPlugin)
     md.use(picturePlugin, {
       containerClasses: ['figure-list', 'image-gallery', 'custom-container'],

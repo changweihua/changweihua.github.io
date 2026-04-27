@@ -32,7 +32,6 @@ import ProjectLab from '../components/ProjectLab.vue'
 import SnakeTimeline from '../components/SnakeTimeline.vue'
 import RelatedPosts from './components/RelatedPosts.vue'
 import PrevNextByDate from './components/PrevNextByDate.vue'
-import PlaceHolder from '../components/PlaceHolder.vue'
 import RainbowAnimationSwitcher from '../components/RainbowAnimationSwitcher.vue'
 import directives from '../directives'
 // 导入hooks
@@ -71,10 +70,6 @@ import './styles/vitepress.print.css'
 
 import './styles/vitepress.code.css'
 import './styles/markdown.ext.css'
-
-import { initComponent } from 'vitepress-plugin-legend/component';
-// Import CSS
-import 'vitepress-plugin-legend/dist/index.css';
 
 import './styles/mermaid.ext.css'
 import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
@@ -420,7 +415,6 @@ export default {
     })
 
     if (inBrowser) {
-      initComponent(app)
       enhanceAppWithTabs(app)
 
       useComponents(app, DemoPreview)
