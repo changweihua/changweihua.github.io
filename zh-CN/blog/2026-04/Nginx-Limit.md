@@ -6,7 +6,7 @@ title: Nginx 限流实战全指南
 description: 从原理到生产级配置详解
 date: 2026-04-09 11:00:00 
 pageClass: blog-page-class
-cover: /covers/typescript.svg
+cover: /covers/nginx.svg
 ---
 
 在高并发场景下，服务器的资源（CPU、内存、数据库连接）总是有限的。当面临恶意攻击、爬虫抓取或突发的流量洪峰时，如果不加以限制，服务很容易被压垮，导致雪崩效应。

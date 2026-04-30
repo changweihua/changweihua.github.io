@@ -1,88 +1,88 @@
 <script setup lang="ts">
-  import { watch, type ComponentPublicInstance, useAttrs } from 'vue'
-  import mediumZoom, { type Zoom, type ZoomOptions } from 'medium-zoom'
+import { computed, useAttrs, watch } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+import mediumZoom, { type Zoom, type ZoomOptions } from 'medium-zoom'
 
-  interface Props {
-    options?: ZoomOptions
-  }
+interface Props {
+  options?: ZoomOptions
+  widths?: number[]
+}
 
-  const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  widths: () => [400, 800, 1200, 1600]
+})
 
-  // withDefaults(defineProps<Props>(), {
-  //   options: () => ({}),
-  // });
+const attrs = useAttrs()
 
-  let zoom: Zoom | null = null
+let zoom: Zoom | null = null
+function getZoom() {
+  if (!zoom) zoom = mediumZoom(props.options)
+  return zoom
+}
 
-  function getZoom() {
-    if (zoom === null) {
-      zoom = mediumZoom(props.options)
-    }
-    return zoom
-  }
+function attachZoom(ref: Element | ComponentPublicInstance | null) {
+  const img = ref as HTMLImageElement | null
+  const zoom = getZoom()
+  if (img) zoom.attach(img)
+  else zoom.detach()
+}
 
-  function attachZoom(ref: Element | ComponentPublicInstance | null) {
-    const image = ref as HTMLImageElement | null
-    const zoom = getZoom()
+watch(
+  () => props.options,
+  (options) => getZoom().update(options || {})
+)
 
-    if (image) {
-      zoom.attach(image)
-    } else {
-      zoom.detach()
-    }
-  }
+// ✅ 显式类型提取（也可在模板中直接用 as string）
+const src = computed(() => attrs.src as string | undefined)
+const alt = computed(() => attrs.alt as string | undefined)
+const sizes = computed(() => (attrs.sizes as string | undefined) || '100vw')
 
-  watch(
-    () => props.options,
-    (options) => {
-      const zoom = getZoom()
-      zoom.update(options || {})
-    }
-  )
+function buildSrcset(baseName: string, format: string, widths: number[]): string {
+  return widths.map(w => `/images/${baseName}-${w}w.${format} ${w}w`).join(', ')
+}
 
-  const attrs = useAttrs() // 获取所有透传的属性
+const baseName = computed(() => {
+  if (!src.value) return ''
+  const fileName = src.value.split(/[\\/]/).pop() || ''
+  const dotIndex = fileName.lastIndexOf('.')
+  return dotIndex === -1 ? fileName : fileName.substring(0, dotIndex)
+})
 
-  function getFileNameWithoutExtension(filePath: string) {
-    const fileName = filePath.split(/[\\/]/).pop() || ''
-    const lastDotIndex = fileName.lastIndexOf('.')
-
-    if (lastDotIndex === -1) return fileName
-    return fileName.substring(0, lastDotIndex)
-  }
+// 原始格式扩展名
+const originalExt = computed(() => {
+  if (!src.value) return 'jpg'
+  return src.value.split('.').pop() || 'jpg'
+})
 </script>
 
 <template>
-  <figure
-    class="vp-image medium-zoom-image"
-    data-zoomable
-  >
+  <figure class="vp-image medium-zoom-image" data-zoomable>
     <picture class="vp-picture">
-      <!-- source 标签只配置资源选择相关属性 -->
       <source
         :ref="attachZoom"
-        :srcset="`/images/${getFileNameWithoutExtension(attrs['src'] as string)}.jxl`"
+        :srcset="baseName ? buildSrcset(baseName, 'jxl', props.widths) : undefined"
         type="image/jxl"
       />
       <source
         :ref="attachZoom"
-        :srcset="`/images/${getFileNameWithoutExtension(attrs['src'] as string)}.webp`"
+        :srcset="baseName ? buildSrcset(baseName, 'webp', props.widths) : undefined"
         type="image/webp"
       />
       <source
         :ref="attachZoom"
-        :srcset="`/images/${getFileNameWithoutExtension(attrs['src'] as string)}.avif`"
+        :srcset="baseName ? buildSrcset(baseName, 'avif', props.widths) : undefined"
         type="image/avif"
       />
-
-      <!-- img 标签配置所有加载和性能相关属性 -->
       <img
         :ref="attachZoom"
-        :src="`${attrs['src']}`"
-        :alt="`${attrs['alt']}`"
-        data-zoomable
+        :src="src"
+        :alt="alt"
+        :srcset="baseName ? buildSrcset(baseName, originalExt, props.widths) : undefined"
+        :sizes="sizes"
         class="vp-img medium-zoom-image"
         loading="lazy"
         decoding="async"
+        data-zoomable
       />
     </picture>
   </figure>

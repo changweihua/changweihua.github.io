@@ -3,9 +3,10 @@ import type MarkdownIt from 'markdown-it';
 import fs from 'fs';
 import path from 'path';
 import { parseDocument } from 'htmlparser2';
-import { findAll, isTag, getOuterHTML } from 'domutils';
+import { findAll, isTag } from 'domutils';
 import type { Element } from 'domhandler';
 import Token from 'markdown-it/lib/token.mjs';
+import render from 'dom-serializer';
 
 // --------------------- 配置类型 ---------------------
 export interface PicturePluginOptions {
@@ -66,10 +67,45 @@ function escapeHtml(s: string): string {
     .replace(/'/g, '&#039;');
 }
 
-function toWebPath(fsPath: string, publicDir: string): string {
-  const rel = path.relative(publicDir, fsPath).replace(/\\/g, '/');
-  if (rel.startsWith('..') || path.isAbsolute(rel)) return fsPath;
-  return '/' + rel;
+/**
+ * 解析图片路径，返回文件系统路径和 web 路径
+ */
+function resolveImagePaths(
+  src: string,
+  env: any,
+  options: Required<PicturePluginOptions>
+): { fsPath: string; webSrc: string; isExternal: boolean } {
+  // 外部URL或数据URL直接返回
+  if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
+    return { fsPath: src, webSrc: src, isExternal: true }
+  }
+
+  // 绝对路径 (/images/xxx.jpg)
+  if (src.startsWith('/')) {
+    const fsPath = path.join(options.publicDir, src.slice(1))
+    return { fsPath, webSrc: src, isExternal: false }
+  }
+
+  // 相对路径
+  let baseDir = process.cwd()
+  if (env?.filePath) {
+    baseDir = path.dirname(env.filePath)
+  }
+
+  const fsPath = path.resolve(baseDir, src)
+
+  // 尝试将路径转换为相对于public目录的web路径
+  let webSrc = src
+  try {
+    const relativeToPublic = path.relative(options.publicDir, fsPath)
+    if (!relativeToPublic.startsWith('..') && !path.isAbsolute(relativeToPublic)) {
+      webSrc = '/' + relativeToPublic.replace(/\\/g, '/')
+    }
+  } catch {
+    // 保持原样
+  }
+
+  return { fsPath, webSrc, isExternal: false }
 }
 
 function buildSrcset(
@@ -82,8 +118,8 @@ function buildSrcset(
   for (const w of widths) {
     const filePath = `${fsBase}-${w}w.${formatExt}`;
     if (fileExists(filePath)) {
-      const webPath = toWebPath(filePath, publicDir);
-      parts.push(`${webPath} ${w}w`);
+      const webPath = path.relative(publicDir, filePath).replace(/\\/g, '/');
+      parts.push(`/${webPath} ${w}w`);
     }
   }
   return parts.length > 0 ? parts.join(', ') : null;
@@ -96,13 +132,13 @@ function getOriginalExt(fsPath: string): string {
 
 // --------------------- HTML 片段生成 ---------------------
 function buildPicture(
-  webSrc: string,
+  fsPath: string,          // ✅ 文件系统路径
+  webSrc: string,          // ✅ web 访问路径（以 / 开头）
   alt: string,
   title: string | undefined,
   sizes: string,
   opts: ResolvedOptions
 ): string {
-  const fsPath = path.join(opts.publicDir, webSrc.replace(/^\//, ''));
   const baseName = fsPath.replace(/\.[^.]+$/, '');
 
   // 现代格式 <source> 列表
@@ -156,31 +192,33 @@ function buildPicture(
 
 // --------------------- htmlparser2 后处理 ---------------------
 function transformHtml(imgHtml: string, opts: ResolvedOptions, env: any): string {
-  // 解析整个 HTML 文档
-  const doc = parseDocument(imgHtml, { decodeEntities: false, lowerCaseAttributeNames: false });
+  // 🔧 保留原始标签大小写，避免破坏 Vue 组件名
+  const doc = parseDocument(imgHtml, {
+    decodeEntities: false,
+    lowerCaseAttributeNames: false,
+    lowerCaseTags: false,
+  });
 
-  // 查找所有 <img> 元素
+  // 查找所有 <img>（兼容大小写）
   const images = findAll(
-    (n): n is Element => isTag(n) && n.tagName === 'img',
+    (n): n is Element => isTag(n) && n.tagName.toLowerCase() === 'img',
     doc
   );
 
   for (const imgNode of images) {
     const src = imgNode.attribs.src;
-    if (!src || /^(https?:)?\/\//.test(src) || src.startsWith('data:')) continue;
+    if (!src) continue;
+
+    // ✅ 使用统一路径解析
+    const { fsPath, webSrc, isExternal } = resolveImagePaths(src, env, opts);
+    if (isExternal) continue; // 外部图片不处理
 
     const alt = imgNode.attribs.alt || '';
     const title = imgNode.attribs.title || undefined;
     const sizes = imgNode.attribs.sizes || opts.defaultSizes;
 
-    let webSrc = src;
-    if (!webSrc.startsWith('/')) {
-      const mdDir = env.filePath ? path.dirname(env.filePath) : process.cwd();
-      webSrc = toWebPath(path.resolve(mdDir, src), opts.publicDir);
-    }
-
     // 生成替换的 HTML
-    const replacementHtml = buildPicture(webSrc, alt, title, sizes, opts);
+    const replacementHtml = buildPicture(fsPath, webSrc, alt, title, sizes, opts);
     const replacementNodes = parseDocument(replacementHtml, { decodeEntities: false }).children;
 
     // 在 DOM 中替换
@@ -191,8 +229,8 @@ function transformHtml(imgHtml: string, opts: ResolvedOptions, env: any): string
     }
   }
 
-  // 序列化为 HTML 字符串
-  let result = getOuterHTML(doc, { decodeEntities: false });
+  // 使用 dom-serializer 序列化
+  let result = render(doc, { decodeEntities: false });
 
   // 清理 Markdown 可能产生的无效嵌套 <p><picture>...</picture></p>
   result = result
@@ -220,7 +258,11 @@ export default function picturePlugin(
     }
 
     const src = attrs.src;
-    if (!src || /^(https?:)?\/\//.test(src) || src.startsWith('data:')) {
+    if (!src) return defaultImageRender(tokens, idx, _options, env, self);
+
+    // ✅ 使用统一路径解析
+    const { fsPath, webSrc, isExternal } = resolveImagePaths(src, env, opts);
+    if (isExternal) {
       return defaultImageRender(tokens, idx, _options, env, self);
     }
 
@@ -228,13 +270,7 @@ export default function picturePlugin(
     const title = attrs.title || undefined;
     const sizes = attrs.sizes || opts.defaultSizes;
 
-    let webSrc = src;
-    if (!webSrc.startsWith('/')) {
-      const mdDir = env.filePath ? path.dirname(env.filePath) : process.cwd();
-      webSrc = toWebPath(path.resolve(mdDir, src), opts.publicDir);
-    }
-
-    return buildPicture(webSrc, alt, title, sizes, opts);
+    return buildPicture(fsPath, webSrc, alt, title, sizes, opts);
   };
 
   // 2. 后处理 HTML 块中的 <img>（例如容器内）

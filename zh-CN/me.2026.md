@@ -26,8 +26,10 @@ encrypt-storage: true
 
 - 2026 年 4 月
   - 基于 MAF 和 Skill 调用 DeepSeek 大模型，实现航班动态查询
+  - 完成 MiniataD 框架更新，.NET 版本升级至 .NET 10
 
-![基于MAF](maf-ds-skill-1.png)maf-ds-skill-1.png
+![基于MAF](/images/maf-ds-skill-1.png){data-zoomable}
+![基于MAF](/images/deepseek-api-agent.jpg){data-zoomable}
 
 ### TGS-SOLUTION
 

@@ -108,6 +108,7 @@
     "cross-env": "^10.1.0",
     "crypto-js": "^4.2.0",
     "deepmerge-ts": "^7.1.5",
+    "dom-serializer": "^3.0.0",
     "driver.js": "^1.4.0",
     "echarts": "^6.0.0",
     "emittery": "^2.0.0",
