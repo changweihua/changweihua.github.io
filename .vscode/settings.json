@@ -91,10 +91,8 @@
     // you can add it in this array of files
     "assets/styles/variables.css"
   ],
-
   // Do not ignore node_modules css files, which is ignored by default
   "cssvar.ignore": [],
-
   // add support for autocomplete in JS or JS like files
   "cssvar.extensions": [
     "css",
@@ -104,13 +102,10 @@
     "vue",
     "scss"
   ],
-
   // 开启扁平化配置
   "eslint.useFlatConfig": true,
-
   // 关闭默认的配置，我们这里默认不开启prettier格式化
   "prettier.enable": false,
-
   // 保存自动修复
   "editor.codeActionsOnSave": {
     // 我们这里是指定自定义的修复
@@ -121,21 +116,59 @@
     "source.fixAll.stylelint": "explicit",
     "source.fixAll.oxc": "always"
   },
-
   // 静默样式规则自动修复
   "eslint.rules.customizations": [
-    { "rule": "style/*", "severity": "off", "fixable": true },
-    { "rule": "format/*", "severity": "off", "fixable": true },
-    { "rule": "*-indent", "severity": "off", "fixable": true },
-    { "rule": "*-spacing", "severity": "off", "fixable": true },
-    { "rule": "*-spaces", "severity": "off", "fixable": true },
-    { "rule": "*-order", "severity": "off", "fixable": true },
-    { "rule": "*-dangle", "severity": "off", "fixable": true },
-    { "rule": "*-newline", "severity": "off", "fixable": true },
-    { "rule": "*quotes", "severity": "off", "fixable": true },
-    { "rule": "*semi", "severity": "off", "fixable": true }
+    {
+      "rule": "style/*",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "format/*",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-indent",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-spacing",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-spaces",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-order",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-dangle",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-newline",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*quotes",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*semi",
+      "severity": "off",
+      "fixable": true
+    }
   ],
-
   // 在eslin中开启哪些语言的校验
   "eslint.validate": [
     "javascript",
@@ -163,10 +196,8 @@
   // "oxc.path.node": "C:\\Program Files\\nodejs\\node.exe", // Windows 典型路径
   // 如果你不确定路径，可以直接写 "node"（前提是 PATH 里有）
   // "oxc.path.node": "node",
-
   // ✅ 指定语言服务器二进制路径（官方推荐）
   "oxc.path.oxlint": "node_modules/oxlint/bin/oxc_language_server",
-
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file", // tell oxfmt to format the whole file, not only the modified lines
@@ -174,12 +205,14 @@
   // "[javascript]": {
   //   "editor.defaultFormatter": "oxc.oxc-vscode"
   // },
-
   // ✅ 基础开关
   "oxc.enable": true,
   // "oxc.lint.run": "onSave",
   "oxc.server.path": "npx",
-  "oxc.server.args": ["oxlint", "--lsp"],
+  "oxc.server.args": [
+    "oxlint",
+    "--lsp"
+  ],
   "cSpell.words": [
     "aeac",
     "esno",
@@ -209,4 +242,7 @@
   //   "markdown.editor.drop.copyIntoWorkspace": "never",
   //   // 粘贴行为
   //   "markdown.editor.filePaste.copyIntoWorkspace": "never"
+  "vscode_custom_css.imports": [
+    "file:///C:/Users/Changweihua/Documents/neovide-cursor.js"
+  ]
 }

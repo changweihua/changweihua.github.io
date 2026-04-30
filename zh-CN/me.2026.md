@@ -22,6 +22,13 @@ encrypt-storage: true
 
 <br />
 
+### AI
+
+- 2026 年 4 月
+  - 基于 MAF 和 Skill 调用 DeepSeek 大模型，实现航班动态查询
+
+![基于MAF](maf-ds-skill-1.png)maf-ds-skill-1.png
+
 ### TGS-SOLUTION
 
 - 2026 年 3 月
@@ -87,6 +94,7 @@ encrypt-storage: true
 ## Q2
 - 无锡硕放机场团体旅客保障系统
 - 基于 SpringBoot 4 的后端架构，与 .NET 功能一比一复原
+- AI 学习，基于 MAF 1.* 
 ## Q3
 - ???
 ## Q4
