@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: 解决 Jackson 反序列化字段名不匹配问题
 description: 解决 Jackson 反序列化字段名不匹配问题
-date: 2026-04-330 11:34:00 
+date: 2026-04-30 11:34:00 
 pageClass: blog-page-class
 cover: /covers/java.svg
 ---
