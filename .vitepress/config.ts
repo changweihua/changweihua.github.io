@@ -25,7 +25,7 @@ import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { qrcode } from 'vite-plugin-qrcode'
 import AutoFrontmatter from 'vitepress-plugin-auto-frontmatter'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
-//import llmstxt from 'vitepress-plugin-llms'
+import llmstxt from 'vitepress-plugin-llms'
 import MdH1 from 'vitepress-plugin-md-h1'
 // import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
@@ -553,6 +553,18 @@ export default (withMermaid(
           },
         }),
         RssPlugin(RSS),
+        llmstxt({
+  // 关闭所有默认排除项
+  excludeUnnecessaryFiles:true,
+  excludeIndexPage:true,
+  excludeBlog: false,
+  excludeTeam: false,
+  // 再用 ignoreFiles 手动排除不需要的目录
+  ignoreFiles: [
+    '2023-*/**/*.md',
+    '2024-*/**/*.md',
+  ]
+}),
         //llmstxt(),
         // 打赏插件
         // SponsorPlugin({
