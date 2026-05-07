@@ -93,6 +93,8 @@ import 'vitepress-markmap-preview/dist/index.css'
 // Import CSS styles (both imports work)
 import 'vitepress-plugin-bprogress/style.css'
 
+import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue'
+
 mermaid.registerIconPacks([
   {
     name: icons.prefix, // To use the prefix defined in the icon pack
@@ -362,6 +364,8 @@ export default {
     app.use<Vue3TouchEventsOptions>(Vue3TouchEvents, {
       disableClick: false
     })
+
+    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
     const bProgress = vitepressBprogress(ctx)
 

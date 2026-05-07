@@ -25,7 +25,7 @@ import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { qrcode } from 'vite-plugin-qrcode'
 import AutoFrontmatter from 'vitepress-plugin-auto-frontmatter'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
-// import llmstxtPlugin from 'vitepress-plugin-llmstxt'
+import llmstxt from 'vitepress-plugin-llms'
 import MdH1 from 'vitepress-plugin-md-h1'
 // import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
@@ -553,6 +553,7 @@ export default (withMermaid(
           },
         }),
         RssPlugin(RSS),
+        llmstxt(),
         // 打赏插件
         // SponsorPlugin({
         //   /**
@@ -562,7 +563,6 @@ export default (withMermaid(
         //   aliPayQR: '/Alipay.svg',
         //   weChatQR: '/wechat-pay.svg',
         // }),
-        // llmstxtPlugin(),
         // pagefindPlugin({
         //   forceLanguage: 'zh-CN',
         //   locales: {

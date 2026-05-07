@@ -2,7 +2,6 @@ import { loadEnv, defineConfig, UserConfig } from 'vite'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DevTools } from '@vitejs/devtools'
-import oxlintPlugin from 'vite-plugin-oxlint'
 import versionPlugin from './plugins/vite-plugin-version';
 
 function getEnvValue(mode: string, target: string) {
@@ -25,9 +24,6 @@ export default defineConfig(() => {
     },
     plugins: [
       DevTools(),
-      oxlintPlugin({
-        configFile: 'eslintrc.json'
-      }),
       versionPlugin({
         versionKey: 'my_app_version',
         timeKey: 'my_build_time',

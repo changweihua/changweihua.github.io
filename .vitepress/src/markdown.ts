@@ -28,6 +28,7 @@ import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
+import { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -81,7 +82,7 @@ const markdown: MarkdownOptions | undefined = {
     // 自定义 fence 保留 language label，但后续会被包装，需放到最后再重新覆盖
     // 先保存原始 fence 渲染器
     const originalFence = md.renderer.rules.fence!.bind(md.renderer.rules)
-
+    md.use(copyOrDownloadAsMarkdownButtons)
     md.use(pathHashWrapperPlugin)
     md.use(picturePlugin, {
       containerClasses: ['figure-list', 'image-gallery', 'custom-container'],

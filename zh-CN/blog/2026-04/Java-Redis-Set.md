@@ -215,7 +215,7 @@ Date: Fri, 13 Mar 2026 08:56:28 GMT
 ```
 
 
-```infographic
+```txt
 infographic list-row-simple-horizontal-arrow
 data
   title Example Flow
