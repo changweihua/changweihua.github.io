@@ -559,6 +559,8 @@ export default (withMermaid(
   excludeIndexPage:true,
   excludeBlog: false,
   excludeTeam: false,
+          generateLLMsFullTxt: false,
+          apply: 'build',
   // 再用 ignoreFiles 手动排除不需要的目录
   ignoreFiles: [
   '**/blog/2023-*/**/*.md',
