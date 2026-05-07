@@ -561,9 +561,10 @@ export default (withMermaid(
   excludeTeam: false,
   // 再用 ignoreFiles 手动排除不需要的目录
   ignoreFiles: [
-    '2023-*/**/*.md',
-    '2024-*/**/*.md',
-  ]
+  '**/blog/2023-*/**/*.md',
+  '**/blog/2024-*/**/*.md',
+  '**/blog/2025-*/**/*.md',
+]
 }),
         //llmstxt(),
         // 打赏插件
