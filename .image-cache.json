@@ -18014,5 +18014,48 @@
         }
       }
     ]
+  },
+  "D:\\Github\\changweihua.github.io\\public\\images\\maf-000.png": {
+    "hash": "f27554fba9af0fa93df69e6797360228",
+    "mtimeMs": 1778206707351.8145,
+    "size": 128267,
+    "widths": [
+      {
+        "width": 400,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 800,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1200,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1600,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      }
+    ]
   }
 }

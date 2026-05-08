@@ -25,7 +25,6 @@ import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { qrcode } from 'vite-plugin-qrcode'
 import AutoFrontmatter from 'vitepress-plugin-auto-frontmatter'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
-import llmstxt from 'vitepress-plugin-llms'
 import MdH1 from 'vitepress-plugin-md-h1'
 // import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
@@ -40,6 +39,7 @@ import { themeConfig } from './src/theme'
 import { lightMermaidConfig } from './theme/mermaid-theme'
 import { handleHeadMeta } from './utils/handleHeadMeta'
 import { withMermaid } from "vitepress-plugin-mermaid";
+import llmstxtPlugin from 'vitepress-plugin-llmstxt';
 
 // ♻️ 重构
 const versionPlugin: () => Plugin = () => ({
@@ -527,6 +527,14 @@ export default (withMermaid(
               return false
           },
         }),
+        // llmstxtPlugin({
+        //   hostname: 'https://changweihua.github.io',
+        //   ignore: ['**/blog/2023-*/**/*.md',
+        //     '**/blog/2024-*/**/*.md',
+        //     '**/blog/2025-*/**/*.md',],
+        //   llmsFullFile: false,
+        //   watch: true
+        // }),
         AutoFrontmatter({
           pattern: '**/*.md',
           exclude: { tag: true }, // 排除 tag: true 的 MD 文件，支持多个配置
@@ -553,22 +561,7 @@ export default (withMermaid(
           },
         }),
         RssPlugin(RSS),
-        llmstxt({
-  // 关闭所有默认排除项
-  excludeUnnecessaryFiles:true,
-  excludeIndexPage:true,
-  excludeBlog: false,
-  excludeTeam: false,
-          generateLLMsFullTxt: false,
-          apply: 'build',
-  // 再用 ignoreFiles 手动排除不需要的目录
-  ignoreFiles: [
-  '**/blog/2023-*/**/*.md',
-  '**/blog/2024-*/**/*.md',
-  '**/blog/2025-*/**/*.md',
-]
-}),
-        //llmstxt(),
+
         // 打赏插件
         // SponsorPlugin({
         //   /**

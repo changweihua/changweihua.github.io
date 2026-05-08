@@ -41,6 +41,7 @@ import AnimatingLayout from './AnimatingLayout.vue'
 import HeroWrapper from './components/HeroWrapper.vue'
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 import GitHubCorner from './components/GitHubCorner.vue'
+import Llmstxt from './components/llmstxt.vue'
 
 import 'virtual:uno.css'
 
@@ -49,7 +50,6 @@ import 'animate.css'
 
 import 'open-props/open-props.min.css'
 
-import '@fontsource-variable/noto-sans-sc'
 import './styles/vitepress-variables.scss'
 
 import '@shikijs/vitepress-twoslash/style.css'
@@ -81,7 +81,6 @@ import '@catppuccin/vitepress/theme/frappe/lavender.css'
 
 import '@miletorix/vitepress-back-to-top-button/style.css'
 import 'vitepress-markdown-timeline/dist/theme/index.css'
-import 'vitepress-markdown-it-stepper/theme'
 
 import '@vitepress-code-preview/container/dist/style.css'
 import 'markdown-it-github-alerts/styles/github-colors-light.css'
@@ -92,8 +91,6 @@ import 'markdown-it-github-alerts/styles/github-base.css'
 import 'vitepress-markmap-preview/dist/index.css'
 // Import CSS styles (both imports work)
 import 'vitepress-plugin-bprogress/style.css'
-
-import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue'
 
 mermaid.registerIconPacks([
   {
@@ -299,7 +296,7 @@ export default {
       //   }),
 
       'not-found': () => h(PageLost),
-
+      'aside-outline-after': () => h(Llmstxt),
       //  Always
       // 在 layout-top 插槽中添加 GitHub Corner
       'layout-top': () => h(GitHubCorner, {
@@ -364,8 +361,6 @@ export default {
     app.use<Vue3TouchEventsOptions>(Vue3TouchEvents, {
       disableClick: false
     })
-
-    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
     const bProgress = vitepressBprogress(ctx)
 

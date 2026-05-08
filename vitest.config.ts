@@ -1,37 +1,20 @@
-/// <reference types="vitest" />
-/// <reference types="vitest/config" />
-import { defineConfig } from "vite";
-import os from 'node:os';
-import path from 'node:path';
-import process from 'node:process';
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    environment: 'jsdom',
-    execArgv: [
-      '--localstorage-file',
-      path.resolve(os.tmpdir(), `vitest-${process.pid}.localstorage`),
-    ],
-    // includeSource: ["src/**tests/*.{js,ts}"],
-    coverage: {
-      enabled: true,
-      reporter: ["html"],
+    environment: 'web-ext',
+    environmentOptions: {
+      'web-ext': {
+        path: './dist',
+        compiler: 'npm run build',
+        autoLaunch: true,
+        targetUrl: 'https://www.example.com',
+        playwright: {
+          userDataDir: './.playwright',
+          devtools: true,
+          slowMo: 100,
+        },
+      },
     },
   },
-});
-
-// import { defineConfig, mergeConfig } from "vitest/config";
-// import viteConfig from "./vite.config.ts";
-
-// export default mergeConfig(
-//   viteConfig,
-//   defineConfig({
-//     test: {
-//       includeSource: ["src/**/*.{js,ts}"],
-//       coverage: {
-//         enabled: true,
-//         reporter: ["html"],
-//       },
-//     },
-//   }),
-// );
+})
