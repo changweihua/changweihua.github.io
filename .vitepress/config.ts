@@ -527,14 +527,14 @@ export default (withMermaid(
               return false
           },
         }),
-        // llmstxtPlugin({
-        //   hostname: 'https://changweihua.github.io',
-        //   ignore: ['**/blog/2023-*/**/*.md',
-        //     '**/blog/2024-*/**/*.md',
-        //     '**/blog/2025-*/**/*.md',],
-        //   llmsFullFile: false,
-        //   watch: true
-        // }),
+        llmstxtPlugin({
+          hostname: 'https://changweihua.github.io',
+          ignore: ['**/blog/2023-*/**/*.md',
+            '**/blog/2024-*/**/*.md',
+            '**/blog/2025-*/**/*.md',],
+          llmsFullFile: false,
+          watch: true
+        }),
         AutoFrontmatter({
           pattern: '**/*.md',
           exclude: { tag: true }, // 排除 tag: true 的 MD 文件，支持多个配置
