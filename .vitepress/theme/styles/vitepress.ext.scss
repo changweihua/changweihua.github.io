@@ -1785,11 +1785,13 @@ figcaption {
 }
 
 .vitepress-linkcard-container {
+  align-content: center !important;
   border-color: #00000000 !important;
   background-color: var(--vp-c-bg-soft) !important;
 }
 
 .vitepress-linkcard-container:hover {
+  align-content: center !important;
   border-color: var(--vp-c-brand-1) !important;
   background-color: var(--vp-c-bg-soft) !important;
 }

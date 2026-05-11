@@ -50,6 +50,12 @@ features:
     details: 前端包
     link: /zh-CN/gallery/frontend
     linkText: 更多详情
+  - title: 无锡硕放机场个性化登机牌
+    icon:
+      src: /airplane-tickets.svg
+      alt: 无锡硕放机场个性化登机牌
+    details: 无锡硕放机场个性化登机牌
+    link: /zh-CN/gallery/bpp
   - title: 🍃扬泰机场智能机器人
     icon:
       src: /robot.svg
