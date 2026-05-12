@@ -1,0 +1,61 @@
+name: Issue Auto Reply
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Greet new issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const labels = issue.labels.map(l => l.name);
+            const title = issue.title.toLowerCase();
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: author,
+              state: 'all'
+            });
+            const isFirstIssue = issues.length === 1;
+
+            const isBug = labels.includes('bug') || title.includes('[bug]');
+            const isFeature = labels.includes('enhancement') || title.includes('[feature]');
+
+            let lines = [];
+            if (isFirstIssue) {
+              lines.push(`👋 Hi @${author}, welcome! Thanks for your first issue!`);
+            } else {
+              lines.push(`👋 Thanks @${author} for the feedback!`);
+            }
+            lines.push('');
+            if (isBug) {
+              lines.push(
+                `To help us investigate faster, please include:`,
+                `- BrowserWing version`,
+                `- OS & environment`,
+                `- Steps to reproduce`,
+                `- Logs or error messages`,
+                ``,
+                `> Try the latest beta release first — your issue may already be fixed.`
+              );
+            } else if (isFeature) {
+              lines.push(
+                `We appreciate the suggestion! PRs are welcome if you'd like to contribute.`
+              );
+            }
+            lines.push(`⏱ We typically respond within 1-2 business days.`);
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: lines.join('\n')
+            });

@@ -197,7 +197,7 @@
   // 如果你不确定路径，可以直接写 "node"（前提是 PATH 里有）
   // "oxc.path.node": "node",
   // ✅ 指定语言服务器二进制路径（官方推荐）
-  "oxc.path.oxlint": "node_modules/oxlint/bin/oxc_language_server",
+  // "oxc.path.oxlint": "node_modules/oxlint/bin/oxc_language_server",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file", // tell oxfmt to format the whole file, not only the modified lines
@@ -244,5 +244,11 @@
   //   "markdown.editor.filePaste.copyIntoWorkspace": "never"
   "vscode_custom_css.imports": [
     "file:///C:/Users/Changweihua/Documents/neovide-cursor.js"
-  ]
+  ],
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
 }
