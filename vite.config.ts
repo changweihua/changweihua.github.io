@@ -105,17 +105,6 @@ export default defineConfig(() => {
   ]
 
   return {
-    vitepress: {
-      configFile: './.vitepress/config.ts'  // 明确指向 VitePress 配置文件
-    },   // 新增这一行，启用 VitePress 模式
-    // VitePlus 特有配置
-    staged: {
-      '*.{js,ts,tsx,vue,svelte}': 'vp check --fix',
-      '*.{css,scss,json,md}': 'vp fmt --write'
-    },
-    fmt: {
-      printWidth: 120
-    },
 
     // 所有 Vite 插件
     plugins: [
@@ -218,7 +207,7 @@ export default defineConfig(() => {
       alias: [
         { find: 'vite', replacement: 'rolldown-vite' },
         { find: 'mermaid', replacement: 'mermaid' },
-        { find: '@demo', replacement: resolve(__dirname, '../src/demos') },
+        { find: '@demo', replacement: resolve(__dirname, './src/demos') },
         {
           find: /^.*\/VPFooter\.vue$/,
           replacement: resolve(__dirname, '.vitepress/components/LiquidPageFooter.vue'),
