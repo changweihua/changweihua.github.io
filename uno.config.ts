@@ -10,6 +10,15 @@ import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 import { dataScreenPreset } from './data-screen.preset'
 
 export default defineConfig({
+  content: {
+    pipeline: {
+      // 排除可能存在的无关目录（如 docs/public、tests 等）
+      exclude: [
+        'public/**',               // 图片、静态文件无需提取类名
+        '**/node_modules/**',           // 保险起见再次排除
+      ]
+    }
+  },
   // 核心优化：减少预置和规则
   presets: [
     // 只保留必需的预设
