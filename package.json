@@ -24,7 +24,7 @@
     "docs:prepare": "esno scripts/prepare.ts",
     "docs:build": "vitepress build",
     "build:debug": "node --inspect --max_old_space_size=4096 ./node_modules/vitepress/bin/vitepress.js build .",
-    "docs:test": "vitest --ui",
+    "docs:test": "vp test --ui",
     "docker:build": "docker build -t changweihua-github:latest . -f Dockerfile",
     "docs:preview": "vitepress preview --host",
     "docs:pdf": "npm run docs:build && node generate-pdf.js",
@@ -45,8 +45,8 @@
     "prepare": "husky",
     "license:checker": "license-checker --trace-deprecation --json > ./licenses.json",
     "license:checker:csv": "license-checker --csv > ./licenses.csv",
-    "test:unit": "vitest --ui",
-    "test": "vitest",
+    "test:unit": "vp test --ui",
+    "test": "vp test",
     "mkcert:install": "mkcert -install",
     "mkcert:uninstall": "mkcert -uninstall",
     "export-pdf": "press-export-pdf export ./zh-CN/gallery",
@@ -60,9 +60,7 @@
     "optimize": "tsx scripts/optimize-images.ts",
     "optimize:clear": "tsx scripts/optimize-images.ts clear",
     "optimize:stats": "tsx scripts/optimize-images.ts stats",
-    "optimize:test-jxl": "tsx scripts/optimize-images.ts test-jxl",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check"
+    "optimize:test-jxl": "tsx scripts/optimize-images.ts test-jxl"
   },
   "config": {
     "commitizen": {
@@ -227,7 +225,6 @@
     "naive-ui": "^2.44.1",
     "node-scp2": "^1.0.0",
     "oxc-minify": "^0.130.0",
-    "oxfmt": "^0.49.0",
     "picocolors": "^1.1.1",
     "playwright": "^1.60.0",
     "postcss": "^8.5.14",
@@ -265,11 +262,12 @@
     "vitepress-plugin-nprogress": "^0.1.1",
     "vitepress-plugin-rss": "^0.4.4",
     "vitepress-plugin-setfrontmatter": "^1.2.3",
-    "vitest-environment-web-ext": "^0.0.3"
+    "vitest-environment-web-ext": "^0.0.3",
+    "vite-plus": "latest",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
   },
   "overrides": {
     "@mermaid-js/layout-tidy-tree": "^0.2.2",
-    "@vitejs/devtools": "^0.1.22",
     "@zenuml/core": "^3.48.3",
     "dayjs": "^1.11.20",
     "eslint": "^10.3.0",
@@ -282,18 +280,19 @@
     "shiki": "^3.23.0",
     "svg-pan-zoom": "^3.6.2",
     "typescript": "^6.0.3",
-    "vite": "^8.0.12",
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.17",
     "vitepress-plugin-mermaid": {
       "vitepress": "$vitepress"
     },
-    "vitest": "^4.1.6",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@latest",
     "vue": "^3.5.34"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,vue,html,css,scss}": [
       "eslint --fix"
     ]
-  }
+  },
+  "packageManager": "npm@11.14.1"
 }
