@@ -219,12 +219,12 @@ export default withMermaid(
           // 但通常 VitePress 不会直接引用 vite，移除也无妨。为保证原样，可添加：
           // { find: 'vite', replacement: 'rolldown-vite' },
           { find: 'vite', replacement: 'rolldown-vite' },
--          { find: 'mermaid', replacement: 'mermaid' },
--          { find: '@demo', replacement: resolve(__dirname, '../src/demos') },
--          {
--            find: /^.*\/VPFooter\.vue$/,
--            replacement: resolve(__dirname, './components/LiquidPageFooter.vue'),
--          },
+          { find: 'mermaid', replacement: 'mermaid' },
+          { find: '@demo', replacement: resolve(__dirname, '../src/demos') },
+          {
+            find: /^.*\/VPFooter\.vue$/,
+            replacement: resolve(__dirname, './components/LiquidPageFooter.vue'),
+          },
         ],
       },
     },
