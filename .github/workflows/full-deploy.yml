@@ -31,7 +31,7 @@ jobs:
   # 构建作业
   build:
     name: Build Documentation
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     # 策略配置
     strategy:
@@ -82,10 +82,10 @@ jobs:
           echo "Building from: ${{ github.workspace }}"
           echo "工作空间: ${{ github.workspace }}"
           # 关键：增加 Node.js 内存限制以防止堆内存溢出
-          NODE_OPTIONS="--max-old-space-size=6144" npm run docs:build
+          NODE_OPTIONS="--max-old-space-size=10240" npm run docs:build
         env:
           # 可以添加更多构建优化参数
-          NODE_OPTIONS: '--max-old-space-size=6144'
+          NODE_OPTIONS: '--max-old-space-size=10240'
           NODE_ENV: production
           VITE_SSR: false
           __VUE_PROD_DEVTOOLS__: false
