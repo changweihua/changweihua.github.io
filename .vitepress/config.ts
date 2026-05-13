@@ -1,4 +1,5 @@
 // .vitepress/config.ts
+// .vitepress/config.ts
 import type { HeadConfig, UserConfig } from 'vitepress'
 import type { FileInfo } from 'vitepress-plugin-auto-frontmatter'
 import { resolve } from 'node:path'
@@ -23,8 +24,7 @@ import { handleHeadMeta } from './utils/handleHeadMeta'
 const __dirname = new URL('.', import.meta.url).pathname
 
 const customElements = [
-  // ... 保持你原来的 customElements 列表不变 ...
-  'mjx-container', 'mjx-assistive-mml', 'math', /* ... 省略，保持原样 ... */
+  'mjx-container', 'mjx-assistive-mml', 'math',
   'hover-tilt', 'my-button', 'm-hero-logo',
 ]
 
@@ -67,9 +67,6 @@ const vitePressOptions: UserConfig = {
       return items
     },
   },
-  router: {
-    // 自定义路由类名等
-  },
   rewrites: {
     '^/index.md': '/zh-CN/index.md',
   },
@@ -105,8 +102,8 @@ export default withMermaid(
       handDrawnSeed: 2,
       startOnLoad: false,
       layout: 'elk',
-      fontFamily: 'MapleMono, AlibabaPuHuiTi, \'阿里巴巴普惠体 3.0\'',
-      altFontFamily: 'MapleMono, AlibabaPuHuiTi, \'阿里巴巴普惠体 3.0\'',
+      fontFamily: 'MapleMono, AlibabaPuHuiTi',
+      altFontFamily: 'MapleMono, AlibabaPuHuiTi',
       ...lightMermaidConfig,
       securityLevel: 'loose',
       flowchart: { curve: 'basis', defaultRenderer: 'elk' },
@@ -118,8 +115,9 @@ export default withMermaid(
     mermaidPlugin: {
       class: 'mermaid styled-mermaid',
     },
-    // vite 中只保留 VitePress 专属插件
+    // ============== 原 vite.config.ts 中的构建配置移回此处 ==============
     vite: {
+      // 原有 VitePress 专属插件（保持不变）
       plugins: [
         groupIconVitePlugin({
           customIcon: {
@@ -154,7 +152,76 @@ export default withMermaid(
         }),
         RssPlugin(RSS),
       ],
+
+      // 以下是从 vite.config.ts 迁移回来的构建配置
+      build: {
+        sourcemap: false,
+        chunkSizeWarningLimit: 20 * 1000,
+        emptyOutDir: true,
+        reportCompressedSize: true,
+        cssMinify: 'lightningcss',
+        rollupOptions: {
+          output: {
+            // 原 vite.config.ts 中的 rolldownOptions 实际应为 rollupOptions
+            codeSplitting: true,
+            minifyInternalExports: true,
+            compact: true,
+            manualChunks: undefined, // 如无特殊设置可忽略
+          },
+        },
+      },
+      css: {
+        lightningcss: {
+          errorRecovery: true,
+          targets: (await import('lightningcss')).browserslistToTargets(
+            (await import('browserslist')).default('>= 0.25%')
+          ),
+          pseudoClasses: {},
+          drafts: {
+            customMedia: true,
+          },
+          cssModules: {
+            pattern: '[name]__[local]___[hash]',
+          },
+        },
+        devSourcemap: true,
+        preprocessorMaxWorkers: 3,
+        preprocessorOptions: {
+          scss: {
+            additionalData: `@use "@vp/theme/styles/variables.scss" as vars;`,
+          },
+        },
+      },
+      ssr: {
+        external: [
+          'vue3-next-qrcode',
+          'vitepress-plugin-tabs',
+          'vitepress-plugin-detype',
+          'vitepress-plugin-npm-commands',
+          'hover-tilt',
+        ],
+        noExternal: [
+          'vitepress-plugin-nprogress',
+          'vitepress-component-medium-zoom',
+          'vitepress-plugin-bprogress',
+          'naive-ui',
+          'date-fns',
+          'vueuc',
+          '@vue/runtime-dom',
+        ],
+      },
+      resolve: {
+        alias: [
+          { find: '@', replacement: fileURLToPath(new URL('../src', import.meta.url)) },
+          { find: 'public', replacement: fileURLToPath(new URL('../public', import.meta.url)) },
+          { find: '@vp', replacement: fileURLToPath(new URL('../.vitepress', import.meta.url)) },
+          // 注意：之前 vite.config.ts 中还有 'vite' -> 'rolldown-vite' 的别名，如果 VitePress 需要可保留，
+          // 但通常 VitePress 不会直接引用 vite，移除也无妨。为保证原样，可添加：
+          { find: 'vite', replacement: 'rolldown-vite' },
+        ],
+      },
     },
+    // ============== 结束迁移 ==============
     vue: {
       template: {
         compilerOptions: {
