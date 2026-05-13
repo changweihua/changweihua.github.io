@@ -217,7 +217,14 @@ export default withMermaid(
           { find: '@vp', replacement: fileURLToPath(new URL('../.vitepress', import.meta.url)) },
           // 注意：之前 vite.config.ts 中还有 'vite' -> 'rolldown-vite' 的别名，如果 VitePress 需要可保留，
           // 但通常 VitePress 不会直接引用 vite，移除也无妨。为保证原样，可添加：
+          // { find: 'vite', replacement: 'rolldown-vite' },
           { find: 'vite', replacement: 'rolldown-vite' },
+-          { find: 'mermaid', replacement: 'mermaid' },
+-          { find: '@demo', replacement: resolve(__dirname, '../src/demos') },
+-          {
+-            find: /^.*\/VPFooter\.vue$/,
+-            replacement: resolve(__dirname, './components/LiquidPageFooter.vue'),
+-          },
         ],
       },
     },
