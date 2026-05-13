@@ -8,7 +8,7 @@ import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import MdH1 from 'vitepress-plugin-md-h1'
 import { RssPlugin } from 'vitepress-plugin-rss'
 import { withMermaid } from "vitepress-plugin-mermaid"
-import llmstxtPlugin from 'vitepress-plugin-llmstxt'
+// import llmstxtPlugin from 'vitepress-plugin-llmstxt'
 
 // 你的站点子配置
 import { docsConfig } from './src/docs'
@@ -133,16 +133,6 @@ export default withMermaid(
             if (id.includes('/resume')) return false
             if (id.includes('/me.')) return false
           },
-        }),
-        llmstxtPlugin({
-          hostname: 'https://changweihua.github.io',
-          ignore: [
-            '**/blog/2023-*/**/*.md',
-            '**/blog/2024-*/**/*.md',
-            '**/blog/2025-*/**/*.md',
-          ],
-          llmsFullFile: false,
-          watch: true,
         }),
         AutoFrontmatter({
           pattern: '**/*.md',
