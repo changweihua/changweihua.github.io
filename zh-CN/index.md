@@ -56,6 +56,12 @@ features:
       alt: 无锡硕放机场个性化登机牌
     details: 无锡硕放机场个性化登机牌
     link: /zh-CN/gallery/bpp
+  - title: 无锡硕放机场团队旅客保障平台
+    icon:
+      src: /tgs.svg
+      alt: 无锡硕放机场团队旅客保障平台
+    details: 无锡硕放机场团队旅客保障平台
+    link: /zh-CN/gallery/tgs
   - title: 🍃扬泰机场智能机器人
     icon:
       src: /robot.svg
