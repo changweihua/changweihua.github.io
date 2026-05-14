@@ -107,6 +107,32 @@ export default defineConfig(({ mode }) => {
       },
     },
 
+    build: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [
+              {
+                name: 'vendor',
+                test: /node_modules/,
+                entriesAware: true,
+                entriesAwareMergeThreshold: 20000, // 合并 <20KB 的微小 chunk
+              },
+            ],
+          },
+
+          chunkFileNames: 'assets/js/[name]-[hash:8].js',
+          entryFileNames: 'assets/js/entry-[name]-[hash:8].js',
+          assetFileNames: 'assets/[ext]/[name]-[hash:8].[ext]',
+
+          minifyInternalExports: true, // 启用内部导出重命名，可增强压缩效果
+
+          legalComments: 'none', // 去除许可证注释，减小体积
+        },
+      },
+      cssMinify: 'lightningcss',
+    },
+
     clearScreen: false,
 
     // 注意：以下构建配置已全部移至 .vitepress/config.ts，此处不再保留
