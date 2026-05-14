@@ -1,5 +1,4 @@
 // vite.config.ts
-// vite.config.ts
 import { defineConfig } from 'vite'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -7,7 +6,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import vueStyledPlugin from '@vue-styled-components/plugin'
 import UnoCSS from 'unocss/vite'
-import Iconify from 'unplugin-iconify-generator/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
@@ -18,6 +16,7 @@ import mkcert from 'vite-plugin-mkcert'
 import { Schema, ValidateEnv } from '@julr/vite-plugin-validate-env'
 import { envParse } from 'vite-plugin-env-parse'
 import { loadEnv } from 'vite'
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -44,6 +43,7 @@ export default defineConfig(({ mode }) => {
         IconsResolver({
           prefix: 'icon',
           strict: true,
+          customCollections: ['cmono'], // 需要注册你的集合名
         }),
       ],
     }),
@@ -53,14 +53,12 @@ export default defineConfig(({ mode }) => {
       scale: 1.2,
       defaultStyle: '',
       defaultClass: '',
+      customCollections: {
+        cmono: FileSystemIconLoader('./src/assets/icons/mono'),
+      },
     }),
     UnoCSS(),
     vueStyledPlugin(),
-    Iconify({
-      collections: {
-        cmono: './src/assets/icons/mono',
-      },
-    }),
     versionInjector(),
     versionPlugin({
       versionKey: 'my_app_version',
@@ -110,9 +108,6 @@ export default defineConfig(({ mode }) => {
       open: true,
       hmr: {
         overlay: true,
-      },
-      fs: {
-        allow: [resolve(__dirname, '..')],
       },
     },
 

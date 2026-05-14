@@ -1,7 +1,7 @@
 # 静态内容部署到 GitHub Pages 的完整工作流
 name: Deploy VitePress & Notify
 
-# 触发条件：推送至 main/master 分支或手动触发
+# 触发条件：推送至 master/main 分支或手动触发
 on:
   push:
     branches: ['master', 'main']
@@ -9,20 +9,17 @@ on:
     branches: ['master', 'main']
   workflow_dispatch:
 
-# 全局环境变量与权限
+# 全局环境变量
 env:
   TZ: Asia/Shanghai
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# 权限配置
 permissions:
-  # 允许读取仓库内容的权限。
   contents: read
-  # 允许写入 GitHub Pages 的权限。
   pages: write
-  # 允许写入 id-token 的权限。
   id-token: write
 
-# 并发控制：只允许一个部署进行
+# 并发控制
 concurrency:
   group: 'pages-${{ github.ref }}'
   cancel-in-progress: true
@@ -33,13 +30,11 @@ jobs:
     name: Build Documentation
     runs-on: macos-latest
 
-    # 策略配置
     strategy:
       matrix:
-        node-version: [25] # 按您的要求使用 Node 25
+        node-version: [25]
       fail-fast: false
 
-    # 环境与权限
     permissions:
       pages: write
       id-token: write
@@ -58,14 +53,13 @@ jobs:
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v6
         with:
-          # node-version: ${{ matrix.node-version }}
-          node-version-file: '.node-version' # 支持.nvmrc、.node-version、package.json等
-          architecture: 'x64' # 系统架构
-          check-latest: true # 是否检查最新版本
-          cache: 'npm' # 包管理器缓存
-          registry-url: https://registry.npmjs.org/ # 如果不配置将影响publish
+          node-version-file: '.node-version'
+          architecture: 'x64'
+          check-latest: true
+          cache: 'npm'
+          registry-url: https://registry.npmjs.org
 
-      # 3. 安装依赖（关键修复步骤）
+      # 3. 安装依赖
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
@@ -76,47 +70,46 @@ jobs:
           echo "Node version: $(node --version)"
           echo "NPM version: $(npm --version)"
 
-      # 5. 构建文档（解决内存溢出）
+      # 5. 构建文档（增加内存限制）
       - name: Build docs
-        run: |
-          echo "Building from: ${{ github.workspace }}"
-          echo "工作空间: ${{ github.workspace }}"
-          # 关键：增加 Node.js 内存限制以防止堆内存溢出
-          NODE_OPTIONS="--max-old-space-size=10240" npm run docs:build
+        run: npm run docs:build
         env:
-          # 可以添加更多构建优化参数
           NODE_OPTIONS: '--max-old-space-size=10240'
           NODE_ENV: production
-          VITE_SSR: false
-          __VUE_PROD_DEVTOOLS__: false
 
-      # 6. 验证构建输出
+      # 6. 生成部署信息文件（可选，可删除）
+      - name: Add deployment info
+        run: |
+          mkdir -p .vitepress/dist
+          echo "Deployment time: $(date)" >> .vitepress/dist/deployment-info.txt
+          echo "Commit: ${{ github.sha }}" >> .vitepress/dist/deployment-info.txt
+          echo "Branch: ${{ github.ref_name }}" >> .vitepress/dist/deployment-info.txt
+          echo "Workflow: ${{ github.workflow }}" >> .vitepress/dist/deployment-info.txt
+
+      # 7. 验证构建输出
       - name: Verify build output
         run: |
-          # 验证构建输出
-          echo "✅ 验证构建结果..."
           if [ -d ".vitepress/dist" ]; then
-            echo "构建成功！输出目录: .vitepress/dist"
+            echo "✅ 构建成功！输出目录: .vitepress/dist"
             echo "总文件数: $(find .vitepress/dist -type f | wc -l)"
           else
             echo "❌ 构建失败: .vitepress/dist 目录不存在"
             exit 1
           fi
 
-      # 7. 上传构建产物
+      # 8. 上传构建产物（v5）
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
-          name: documentation
+          artifact-name: documentation
           path: .vitepress/dist
-          retention-days: 5 # 保留5天
+          retention-days: 5
 
   # 部署作业
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
-    needs: build # 依赖build作业
-    # if: github.event_name == 'push' # 仅在push事件时部署
+    needs: build
 
     environment:
       name: github-pages
@@ -125,7 +118,7 @@ jobs:
     permissions:
       pages: write
       id-token: write
-      contents: write # 如果需要commit到gh-pages分支
+      contents: write
 
     steps:
       - name: Check workspace
@@ -134,16 +127,14 @@ jobs:
           ls -la
 
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
-          name: documentation
-          path: ./_site # 使用GitHub Pages推荐的标准路径
+          artifact-name: documentation
+          path: ./_site
 
-      # 设置和部署到 GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 在 deploy 作业的 steps 中，添加验证步骤：
       - name: Validate deployment files
         run: |
           echo "=== 验证下载的构建产物 ==="
@@ -153,7 +144,6 @@ jobs:
           echo "下载的文件："
           find ./_site -type f -name "*.html" | head -5
 
-          # 检查是否有index.html
           if [ ! -f "./_site/index.html" ]; then
             echo "❌ 错误：没有找到 index.html"
             echo "目录结构："
@@ -163,24 +153,15 @@ jobs:
 
           echo "✅ 找到 index.html，准备部署"
 
-      # 添加部署时间戳文件（可选）
-      - name: Create deployment info
-        run: |
-          echo "Deployment time: $(date)" > ./_site/deployment-info.txt
-          echo "Commit: ${{ github.sha }}" >> ./_site/deployment-info.txt
-          echo "Branch: ${{ github.ref_name }}" >> ./_site/deployment-info.txt
-          echo "Workflow: ${{ github.workflow }}" >> ./_site/deployment-info.txt
-
       - name: Upload to Pages
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./_site # 使用标准的_site路径
+          path: ./_site
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-      # 6. 输出部署信息供后续通知使用
       - name: Prepare deployment output
         if: success()
         run: |
@@ -193,26 +174,22 @@ jobs:
           echo "DEPLOY_STATUS=failure" >> $GITHUB_ENV
           echo "PAGE_URL=" >> $GITHUB_ENV
 
-  # 作业二：通知（依赖 deploy 作业）
+  # 通知作业
   notify:
     name: 📢 Send Deployment Notification
     runs-on: ubuntu-latest
-    needs: [deploy] # 依赖 deploy 作业
-    # 无论部署成功或失败都发送通知
+    needs: [deploy]
     if: always()
 
     steps:
-      # 1. 准备通知数据
       - name: Prepare notification data
         id: prepare-notification
         run: |
           DEPLOY_RESULT="${{ needs.deploy.result }}"
           COMMIT_SHA_SHORT="${{ github.sha }}" && COMMIT_SHA_SHORT=${COMMIT_SHA_SHORT:0:7}
           COMMIT_MSG="${{ github.event.head_commit.message }}"
-          # 处理可能的多行提交信息
           SINGLE_LINE_MSG=$(echo "$COMMIT_MSG" | head -n1 | sed 's/"/\\"/g')
 
-          # 确定状态和表情
           case $DEPLOY_RESULT in
             success)
               EMOJI="✅"
@@ -236,7 +213,6 @@ jobs:
               ;;
           esac
 
-          # 写入输出变量
           echo "emoji=$EMOJI" >> $GITHUB_OUTPUT
           echo "status_color=$STATUS_COLOR" >> $GITHUB_OUTPUT
           echo "status_text=$STATUS_TEXT" >> $GITHUB_OUTPUT
@@ -244,7 +220,6 @@ jobs:
           echo "commit_msg=$SINGLE_LINE_MSG" >> $GITHUB_OUTPUT
           echo "deploy_result=$DEPLOY_RESULT" >> $GITHUB_OUTPUT
 
-      # 2. 生成 GitHub Actions 作业摘要（总在运行界面显示）
       - name: Create GitHub Summary
         run: |
           echo "## ${{ steps.prepare-notification.outputs.emoji }} 部署通知" >> $GITHUB_STEP_SUMMARY
@@ -269,9 +244,8 @@ jobs:
             echo "请检查 **deploy** 作业的日志以排查错误。" >> $GITHUB_STEP_SUMMARY
           fi
 
-      # 3. (可选) Slack 通知
       - name: Send Slack Notification
-        if: env.SLACK_WEBHOOK_URL != ''
+        if: ${{ secrets.SLACK_WEBHOOK_URL != '' }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
@@ -319,9 +293,8 @@ jobs:
             ]
           }' $SLACK_WEBHOOK_URL
 
-      # 4. (可选) Discord 通知
       - name: Send Discord Notification
-        if: env.DISCORD_WEBHOOK_URL != ''
+        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
@@ -358,15 +331,13 @@ jobs:
             }]
           }' $DISCORD_WEBHOOK_URL
 
-      # 5. (可选) 邮件通知（仅失败时）
       - name: Send Email on Failure
-        if: failure() && env.EMAIL_TO != ''
+        if: failure() && secrets.EMAIL_TO != ''
         run: |
           echo -e "主题：${{ steps.prepare-notification.outputs.emoji }} VitePress 部署失败 - ${{ github.repository }}\n\n部署工作流失败。\n\n仓库：${{ github.repository }}\n分支：${{ github.ref_name }}\n提交：${{ steps.prepare-notification.outputs.commit_sha_short }}\n触发者：${{ github.actor }}\n工作流链接：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" | mail -s "${{ steps.prepare-notification.outputs.emoji }} VitePress 部署失败 - ${{ github.repository }}" $EMAIL_TO
         env:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
 
-      # 6. 最终状态输出
       - name: Final notification status
         run: |
           echo "========================================"

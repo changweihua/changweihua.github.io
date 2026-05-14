@@ -106,7 +106,7 @@ import Vue3TouchEvents, { type Vue3TouchEventsOptions } from 'vue3-touch-events'
 
 export default {
   ...DefaultTheme,
-  NotFound: PageLost, // <- this is a Vue 3 functional component
+  NotFound: () => h('ClientOnly', null, () => h(PageLost)), // <- this is a Vue 3 functional component
   // extends: DefaultTheme,
   // 使用注入插槽的包装组件覆盖 Layout
   // Layout: MyLayout,

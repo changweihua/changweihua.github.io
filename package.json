@@ -246,12 +246,9 @@
     "vite-plugin-checker": "^0.13.0",
     "vite-plugin-compression2": "^2.5.3",
     "vite-plugin-env-parse": "^1.0.15",
-    "vite-plugin-fake-server": "^2.2.4",
     "vite-plugin-html-config": "^2.0.2",
     "vite-plugin-image-preload": "^1.0.0",
     "vite-plugin-mkcert": "^2.0.0",
-    "vite-plugin-mock-dev-server": "^2.2.1",
-    "vite-plugin-qrcode": "^0.4.1",
     "vite-plugin-version-mark": "^0.2.2",
     "vitepress-better-demo-plugin": "^0.6.2",
     "vitepress-demo-plugin": "^1.5.1",
@@ -262,9 +259,7 @@
     "vitepress-plugin-nprogress": "^0.1.1",
     "vitepress-plugin-rss": "^0.4.4",
     "vitepress-plugin-setfrontmatter": "^1.2.3",
-    "vitest-environment-web-ext": "^0.0.3",
-    "vite-plus": "latest",
-    "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
+    "vitest-environment-web-ext": "^0.0.3"
   },
   "overrides": {
     "@mermaid-js/layout-tidy-tree": "^0.2.2",
@@ -280,13 +275,13 @@
     "shiki": "^3.23.0",
     "svg-pan-zoom": "^3.6.2",
     "typescript": "^6.0.3",
-    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vite": "^8.0.12",
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.17",
     "vitepress-plugin-mermaid": {
       "vitepress": "$vitepress"
     },
-    "vitest": "npm:@voidzero-dev/vite-plus-test@latest",
+    "vitest": "^4.1.6",
     "vue": "^3.5.34"
   },
   "lint-staged": {

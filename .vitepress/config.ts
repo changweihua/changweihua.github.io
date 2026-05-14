@@ -1,5 +1,4 @@
 // .vitepress/config.ts
-// .vitepress/config.ts
 import type { HeadConfig, UserConfig } from 'vitepress'
 import type { FileInfo } from 'vitepress-plugin-auto-frontmatter'
 import { resolve } from 'node:path'
@@ -157,15 +156,70 @@ export default withMermaid(
       build: {
         sourcemap: false,
         chunkSizeWarningLimit: 20 * 1000,
-        emptyOutDir: true,
-        reportCompressedSize: true,
         cssMinify: 'lightningcss',
-        rollupOptions: {
+        rolldownOptions: {
           output: {
-            // 原 vite.config.ts 中的 rolldownOptions 实际应为 rollupOptions
+            // 代码分割产生的 chunk 文件命名
+            chunkFileNames: 'assets/js/[name]-[hash:8].js',
+            // 入口文件命名
+            entryFileNames: 'assets/js/entry-[name]-[hash:8].js',
+            // 静态资源文件命名
+            assetFileNames: 'assets/[ext]/[name]-[hash:8].[ext]',
+            // codeSplitting: {
+            //   groups: [
+            //     {
+            //       name: 'vendor-common',
+            //       test: /node_modules\/(vitepress|vue)/,
+            //       priority: 30,
+            //       // 单个 chunk 最大不超过 200KB
+            //       maxSize: 200 * 1024,
+            //     },
+            //     {
+            //       name: 'vendor-utils',
+            //       test: (moduleId) => {
+            //         // 自定义函数逻辑：匹配 node_modules 下除了 vue 和 vitepress 之外的库
+            //         if (moduleId.includes('node_modules') &&
+            //           !moduleId.includes('vue')) {
+            //           return true;
+            //         }
+            //         return false;
+            //       },
+            //       // 最小共享次数，模块被引用至少2次才被分割
+            //       minShareCount: 2,
+            //       priority: 10,
+            //     },
+            //     {
+            //       name: 'vendor-precise',
+            //       test: /node_modules/,
+            //       // 按入口感知，自动为不同的页面入口生成独立的 vendor chunk
+            //       entriesAware: true,
+            //       priority: 20,
+            //     },
+            //     // ✅ 第二层：处理 VueUse 等已内联的按需函数
+            //     // 此时不需要 entriesAware，改用 minShareCount
+            //     {
+            //       name: 'vueuse-shared',
+            //       test: (moduleId) => {
+            //         // 匹配已经被内联进项目的 VueUse 函数
+            //         return moduleId.includes('@vueuse/') ||
+            //           moduleId.includes('.vueuse.') ||
+            //           // 如果你的 autoImport 有自定义前缀，也加入
+            //           moduleId.includes('useStorage') ||
+            //           moduleId.includes('useDark')
+            //       },
+            //       // 核心：函数至少被 3 个页面引用，才提取为公共 chunk
+            //       minShareCount: 3,
+            //       // 控制 chunk 数量，避免太多请求
+            //       priority: 10
+            //     }
+            //   ],
+            // },
             codeSplitting: true,
+            // 控制 chunk 的哈希字符集
+            hashCharacters: 'base64',
+            // 严格保证模块的执行顺序，可能对代码分割有轻微影响
+            strictExecutionOrder: true,
             minifyInternalExports: true,
-            compact: true,
             manualChunks: undefined, // 如无特殊设置可忽略
           },
         },
@@ -212,19 +266,17 @@ export default withMermaid(
       },
       resolve: {
         alias: [
+          {
+            find: /^.*\/VPFooter\.vue$/,
+            replacement: fileURLToPath(new URL('./components/LiquidPageFooter.vue', import.meta.url)),
+          },
           { find: '@', replacement: fileURLToPath(new URL('../src', import.meta.url)) },
           { find: 'public', replacement: fileURLToPath(new URL('../public', import.meta.url)) },
           { find: '@vp', replacement: fileURLToPath(new URL('../.vitepress', import.meta.url)) },
-          // 注意：之前 vite.config.ts 中还有 'vite' -> 'rolldown-vite' 的别名，如果 VitePress 需要可保留，
-          // 但通常 VitePress 不会直接引用 vite，移除也无妨。为保证原样，可添加：
+          // 通常 VitePress 不会直接引用 vite，移除也无妨。为保证原样，可添加：
           // { find: 'vite', replacement: 'rolldown-vite' },
-          { find: 'vite', replacement: 'rolldown-vite' },
           { find: 'mermaid', replacement: 'mermaid' },
           { find: '@demo', replacement: resolve(__dirname, '../src/demos') },
-          {
-            find: /^.*\/VPFooter\.vue$/,
-            replacement: resolve(__dirname, './components/LiquidPageFooter.vue'),
-          },
         ],
       },
     },
