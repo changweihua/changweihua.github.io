@@ -178,6 +178,7 @@ export default withMermaid(
       },
       ssr: {
         external: [
+          'mark.js',
           'vue3-next-qrcode',
           'vitepress-plugin-tabs',
           'vitepress-plugin-detype',
