@@ -70,14 +70,14 @@ jobs:
           echo "Node version: $(node --version)"
           echo "NPM version: $(npm --version)"
 
-      # 5. 构建文档（增加内存限制）
+      # 5. 构建文档
       - name: Build docs
         run: npm run docs:build
         env:
           NODE_OPTIONS: '--max-old-space-size=10240'
           NODE_ENV: production
 
-      # 6. 生成部署信息文件（可选，可删除）
+      # 6. 生成部署信息文件（可选，无需可删除整个步骤）
       - name: Add deployment info
         run: |
           mkdir -p .vitepress/dist
@@ -97,7 +97,7 @@ jobs:
             exit 1
           fi
 
-      # 8. 上传构建产物（v5）
+      # 8. 上传构建产物 (v5)
       - name: Upload artifact
         uses: actions/upload-artifact@v5
         with:
@@ -245,10 +245,13 @@ jobs:
           fi
 
       - name: Send Slack Notification
-        if: ${{ secrets.SLACK_WEBHOOK_URL != '' }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL 未设置，跳过通知"
+            exit 0
+          fi
           curl -X POST -H 'Content-type: application/json' --data '{
             "attachments": [
               {
@@ -294,10 +297,13 @@ jobs:
           }' $SLACK_WEBHOOK_URL
 
       - name: Send Discord Notification
-        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "DISCORD_WEBHOOK_URL 未设置，跳过通知"
+            exit 0
+          fi
           COLOR_NUM=$(echo "${{ steps.prepare-notification.outputs.status_color }}" | sed 's/#//g')
           COLOR_DEC=$((16#$COLOR_NUM))
 
@@ -332,11 +338,15 @@ jobs:
           }' $DISCORD_WEBHOOK_URL
 
       - name: Send Email on Failure
-        if: failure() && secrets.EMAIL_TO != ''
-        run: |
-          echo -e "主题：${{ steps.prepare-notification.outputs.emoji }} VitePress 部署失败 - ${{ github.repository }}\n\n部署工作流失败。\n\n仓库：${{ github.repository }}\n分支：${{ github.ref_name }}\n提交：${{ steps.prepare-notification.outputs.commit_sha_short }}\n触发者：${{ github.actor }}\n工作流链接：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" | mail -s "${{ steps.prepare-notification.outputs.emoji }} VitePress 部署失败 - ${{ github.repository }}" $EMAIL_TO
+        if: failure()
         env:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: |
+          if [ -z "$EMAIL_TO" ]; then
+            echo "EMAIL_TO 未设置，跳过邮件通知"
+            exit 0
+          fi
+          echo -e "主题：${{ steps.prepare-notification.outputs.emoji }} VitePress 部署失败 - ${{ github.repository }}\n\n部署工作流失败。\n\n仓库：${{ github.repository }}\n分支：${{ github.ref_name }}\n提交：${{ steps.prepare-notification.outputs.commit_sha_short }}\n触发者：${{ github.actor }}\n工作流链接：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" | mail -s "${{ steps.prepare-notification.outputs.emoji }} VitePress 部署失败 - ${{ github.repository }}" $EMAIL_TO
 
       - name: Final notification status
         run: |
