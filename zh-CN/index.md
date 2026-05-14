@@ -60,7 +60,12 @@ features:
     icon:
       src: /tgs.svg
       alt: 无锡硕放机场团队旅客保障平台
-    details: 无锡硕放机场团队旅客保障平台
+    details: |
+      <span role="list">
+      <span role="listitem">无锡硕放机场团队旅客保障平台</span>
+      <span role="listitem">detail 2</span>
+      <span role="listitem">detail 3</span>
+      </span>
     link: /zh-CN/gallery/tgs
   - title: 🍃扬泰机场智能机器人
     icon:

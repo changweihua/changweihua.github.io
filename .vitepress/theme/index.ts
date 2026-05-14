@@ -17,7 +17,7 @@ import codeblocksFold from 'vitepress-plugin-codeblocks-fold'
 import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import DefaultTheme from 'vitepress/theme-without-fonts'
-import { h, onMounted, watchEffect } from 'vue'
+import { h, onMounted, resolveComponent, watchEffect } from 'vue'
 import { initHoverCard } from 'markdown-it-github-mention-card'
 import VueHero from 'vue-hero-cross'
 import AnimationTitle from '../components/AnimtedTitle.vue'
@@ -106,7 +106,7 @@ import Vue3TouchEvents, { type Vue3TouchEventsOptions } from 'vue3-touch-events'
 
 export default {
   ...DefaultTheme,
-  NotFound: () => h('ClientOnly', null, () => h(PageLost)), // <- this is a Vue 3 functional component
+  NotFound: () => h(PageLost), // <- this is a Vue 3 functional component
   // extends: DefaultTheme,
   // 使用注入插槽的包装组件覆盖 Layout
   // Layout: MyLayout,
@@ -177,6 +177,8 @@ export default {
     //     initMermaid();
     //   },
     // );
+
+    const ClientOnly = resolveComponent('ClientOnly')
 
     return h(AnimatingLayout, null, {
       // "home-hero-before": () => h(NoticeBar),
@@ -295,7 +297,7 @@ export default {
       //     name: "page-bottom",
       //   }),
 
-      'not-found': () => h(PageLost),
+      'not-found': () => h(ClientOnly, null, () => h(PageLost)),
       'aside-outline-after': () => h(Llmstxt),
       //  Always
       // 在 layout-top 插槽中添加 GitHub Corner

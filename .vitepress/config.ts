@@ -1,7 +1,6 @@
 // .vitepress/config.ts
 import type { HeadConfig, UserConfig } from 'vitepress'
 import type { FileInfo } from 'vitepress-plugin-auto-frontmatter'
-import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import AutoFrontmatter from 'vitepress-plugin-auto-frontmatter'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
@@ -18,9 +17,6 @@ import { RSS } from './src/rss'
 import { themeConfig } from './src/theme'
 import { lightMermaidConfig } from './theme/mermaid-theme'
 import { handleHeadMeta } from './utils/handleHeadMeta'
-
-// 解决 __dirname 问题（兼容 ESM 环境）
-const __dirname = new URL('.', import.meta.url).pathname
 
 const customElements = [
   'mjx-container', 'mjx-assistive-mml', 'math',
@@ -156,73 +152,29 @@ export default withMermaid(
       build: {
         sourcemap: false,
         chunkSizeWarningLimit: 20 * 1000,
-        cssMinify: 'lightningcss',
         rolldownOptions: {
           output: {
-            // 代码分割产生的 chunk 文件命名
+            codeSplitting: {
+              groups: [
+                {
+                  name: 'vendor',
+                  test: /node_modules/,
+                  entriesAware: true,
+                  entriesAwareMergeThreshold: 20000, // 合并 <20KB 的微小 chunk
+                },
+              ],
+            },
+
             chunkFileNames: 'assets/js/[name]-[hash:8].js',
-            // 入口文件命名
             entryFileNames: 'assets/js/entry-[name]-[hash:8].js',
-            // 静态资源文件命名
             assetFileNames: 'assets/[ext]/[name]-[hash:8].[ext]',
-            // codeSplitting: {
-            //   groups: [
-            //     {
-            //       name: 'vendor-common',
-            //       test: /node_modules\/(vitepress|vue)/,
-            //       priority: 30,
-            //       // 单个 chunk 最大不超过 200KB
-            //       maxSize: 200 * 1024,
-            //     },
-            //     {
-            //       name: 'vendor-utils',
-            //       test: (moduleId) => {
-            //         // 自定义函数逻辑：匹配 node_modules 下除了 vue 和 vitepress 之外的库
-            //         if (moduleId.includes('node_modules') &&
-            //           !moduleId.includes('vue')) {
-            //           return true;
-            //         }
-            //         return false;
-            //       },
-            //       // 最小共享次数，模块被引用至少2次才被分割
-            //       minShareCount: 2,
-            //       priority: 10,
-            //     },
-            //     {
-            //       name: 'vendor-precise',
-            //       test: /node_modules/,
-            //       // 按入口感知，自动为不同的页面入口生成独立的 vendor chunk
-            //       entriesAware: true,
-            //       priority: 20,
-            //     },
-            //     // ✅ 第二层：处理 VueUse 等已内联的按需函数
-            //     // 此时不需要 entriesAware，改用 minShareCount
-            //     {
-            //       name: 'vueuse-shared',
-            //       test: (moduleId) => {
-            //         // 匹配已经被内联进项目的 VueUse 函数
-            //         return moduleId.includes('@vueuse/') ||
-            //           moduleId.includes('.vueuse.') ||
-            //           // 如果你的 autoImport 有自定义前缀，也加入
-            //           moduleId.includes('useStorage') ||
-            //           moduleId.includes('useDark')
-            //       },
-            //       // 核心：函数至少被 3 个页面引用，才提取为公共 chunk
-            //       minShareCount: 3,
-            //       // 控制 chunk 数量，避免太多请求
-            //       priority: 10
-            //     }
-            //   ],
-            // },
-            codeSplitting: true,
-            // 控制 chunk 的哈希字符集
-            hashCharacters: 'base64',
-            // 严格保证模块的执行顺序，可能对代码分割有轻微影响
-            strictExecutionOrder: true,
-            minifyInternalExports: true,
-            manualChunks: undefined, // 如无特殊设置可忽略
+
+            minifyInternalExports: true, // 启用内部导出重命名，可增强压缩效果
+
+            legalComments: 'none', // 去除许可证注释，减小体积
           },
         },
+        cssMinify: 'lightningcss',
       },
       css: {
         lightningcss: {
@@ -273,10 +225,8 @@ export default withMermaid(
           { find: '@', replacement: fileURLToPath(new URL('../src', import.meta.url)) },
           { find: 'public', replacement: fileURLToPath(new URL('../public', import.meta.url)) },
           { find: '@vp', replacement: fileURLToPath(new URL('../.vitepress', import.meta.url)) },
-          // 通常 VitePress 不会直接引用 vite，移除也无妨。为保证原样，可添加：
-          // { find: 'vite', replacement: 'rolldown-vite' },
           { find: 'mermaid', replacement: 'mermaid' },
-          { find: '@demo', replacement: resolve(__dirname, '../src/demos') },
+          { find: '@demo', replacement: fileURLToPath(new URL('../src/demos', import.meta.url)) },
         ],
       },
     },

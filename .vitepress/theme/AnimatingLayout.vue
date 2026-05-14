@@ -102,11 +102,6 @@ router.onAfterPageLoad = function () {
     setupMediumZoom();
   });
 };
-
-// 提供内容 hash 给所有组件
-const { frontmatter } = useData()
-// 访问文件的 hash
-console.log('文件 Hash:', frontmatter.value.fileHash)
 </script>
 
 <template>

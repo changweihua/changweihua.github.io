@@ -84,7 +84,7 @@
   "vue.server.maxOldSpaceSize": 4096,
   "vitest.shellType": "terminal",
   "commentTranslate.targetLanguage": "zh-CN",
-  "commentTranslate.hover.enabled": true,
+  "commentTranslate.hover.enabled": false,
   "cssvar.files": [
     "./node_modules/open-props/open-props.min.css",
     // if you have an alternative path to where your styles are located

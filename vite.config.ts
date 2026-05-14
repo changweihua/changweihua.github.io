@@ -1,7 +1,5 @@
 // vite.config.ts
 import { defineConfig } from 'vite'
-import { resolve, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import vueStyledPlugin from '@vue-styled-components/plugin'
@@ -16,9 +14,7 @@ import mkcert from 'vite-plugin-mkcert'
 import { Schema, ValidateEnv } from '@julr/vite-plugin-validate-env'
 import { envParse } from 'vite-plugin-env-parse'
 import { loadEnv } from 'vite'
-import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target]

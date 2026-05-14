@@ -1,4 +1,5 @@
 <template>
+  <ClientOnly>
   <Container>
     <template v-for="blot in inkBlots" :key="blot.id">
       <InkBlot
@@ -32,7 +33,7 @@
       <br />
       <Title class="animate-(ping delay-300 duration-1000)">未寻得</Title>
       <Subtitle>
-        <div class="dark:( border-gray-500) transition-colors">
+        <div class="dark: dark:border-gray-500 transition-colors">
           <p class="dark:text-gray-300">
             所觅之页，如墨入水，散于无形<br />
             或返首页，或观他处，皆可随心
@@ -41,7 +42,7 @@
       </Subtitle>
 
       <Button
-        class="group transition-all duration-300 my-3 hover:(scale-105 shadow-lg) focus:(outline-none ring-2 ring-blue-500) disabled:(opacity-50 cursor-not-allowed)"
+        class="group transition-all duration-300 my-3 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
         :style="{ border: theme.buttonBorder, color: theme.buttonColor }"
         @click="goHome"
       >
@@ -49,6 +50,7 @@
       </Button>
     </Content>
   </Container>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">

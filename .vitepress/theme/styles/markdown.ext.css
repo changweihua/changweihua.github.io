@@ -157,3 +157,17 @@ figure figcaption {
 picture {
   display: block;
 }
+
+.VPFeatures span[role=list] {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.VPFeatures span[role=listitem]:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--vp-c-text-1);
+}

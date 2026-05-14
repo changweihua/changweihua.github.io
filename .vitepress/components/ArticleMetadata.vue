@@ -64,9 +64,6 @@ onMounted(() => {
 
       if (readTime > 1) {
         readCost.value = readTime
-        console.log('预计阅读时长：' + readTime + '分钟');
-      } else {
-        console.log('预计阅读时长：1分钟');
       }
     }
   })

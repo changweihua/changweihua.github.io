@@ -15,7 +15,6 @@ const contentHash = computed(() => {
 
 // 为 VP-Doc 添加 ID
 onMounted(() => {
-  console.log(toRaw(vpDocRef.value))
   if (vpDocRef.value) {
     const docElement = vpDocRef.value.querySelector('.vp-doc') ||
                       vpDocRef.value

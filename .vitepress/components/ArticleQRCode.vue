@@ -6,14 +6,6 @@ import { UseQRCodeReturnType } from "vue3-next-qrcode";
 
 const baseUrl = "https://changweihua.github.io";
 
-// const { page, frontmatter } = useData();
-
-// // 获取页面相关信息
-// console.log(page.value.filePath); // 页面路径
-// console.log(page.value.relativePath); // 相对路径
-// console.log(page.value.title); // 页面标题
-// console.log(frontmatter.value); // 页面 Frontmatter
-
 const router = useRouter();
 
 const shareUrl = computed(() => {

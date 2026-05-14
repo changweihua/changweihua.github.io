@@ -67,7 +67,6 @@
 
   onMounted(() => {
     const { yearMap } = data
-    console.log(yearMap)
     yearList.value = Object.keys(yearMap).sort((a, b) => parseInt(b) - parseInt(a)) // 按年份降序排序
 
     delay(function () {
