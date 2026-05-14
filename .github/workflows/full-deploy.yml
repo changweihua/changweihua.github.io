@@ -32,7 +32,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [26]
+        node-version: [24]
       fail-fast: false
 
     permissions:
