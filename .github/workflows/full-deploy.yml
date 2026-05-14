@@ -32,7 +32,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [25]
+        node-version: [26]
       fail-fast: false
 
     permissions:
@@ -69,6 +69,10 @@ jobs:
           npm list --depth=0
           echo "Node version: $(node --version)"
           echo "NPM version: $(npm --version)"
+
+      # 放在 build 作业的 steps 中
+      - name: Clean previous build artifacts
+        run: rm -rf .vitepress/.temp .vitepress/dist node_modules/.vite
 
       # 5. 构建文档
       - name: Build docs
