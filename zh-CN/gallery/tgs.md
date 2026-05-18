@@ -6,7 +6,11 @@ pageClass: gallery-page-class
 title: 无锡硕放机场团体旅客保障平台
 ---
 
-## 项目背景 
+## 项目背景
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
 
 应机场和部分航司要求，希望可以在登机牌上给旅客输出相关个性化内容。
 
