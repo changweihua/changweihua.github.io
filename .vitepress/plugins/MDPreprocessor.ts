@@ -3,6 +3,7 @@ import type { Plugin } from 'vite'
 export function MDPreprocessor(): Plugin {
   return {
     name: 'md-preprocessor',
+    enforce: 'pre',
     transform(code, id) {
       if (!id.endsWith('.md')) return null
       const [filename, i] = id.split('/').slice(-2)

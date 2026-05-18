@@ -15,6 +15,7 @@ import { Schema, ValidateEnv } from '@julr/vite-plugin-validate-env'
 import { envParse } from 'vite-plugin-env-parse'
 import { loadEnv } from 'vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
+import packOrchestrator from 'unplugin-pack-orchestrator/vite'
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target]
@@ -96,6 +97,21 @@ export default defineConfig(({ mode }) => {
     plugins: [
       ...sharedPlugins,
       ...devPlugins,
+      packOrchestrator({
+        pack: {
+          outDir: 'dist',
+          fileName: 'release-[name]-v[version]',
+          format: 'zip',
+          archiveOutDir: './releases',
+          exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**'],
+        },
+        hooks: {
+          // 归档后自动追加 SHA1 哈希
+          onAfterBuild: (path, format, checksums) =>
+            path.replace(/(.(?:zip|tar.gz|tar|7z))$/, `-${checksums.sha1.slice(0, 8)}$1`),
+          onError: (err) => console.error('打包失败:', err.message),
+        },
+      }),
     ],
 
     server: {
@@ -111,8 +127,8 @@ export default defineConfig(({ mode }) => {
       rolldownOptions: {
         output: {
           codeSplitting: true,
-         // chunkFileNames: 'assets/js/[name]-[hash:8].js',
-       //   entryFileNames: 'assets/js/entry-[name]-[hash:8].js',
+          // chunkFileNames: 'assets/js/[name]-[hash:8].js',
+          //   entryFileNames: 'assets/js/entry-[name]-[hash:8].js',
           //assetFileNames: 'assets/[ext]/[name]-[hash:8].[ext]',
 
           //minifyInternalExports: true, // 启用内部导出重命名，可增强压缩效果
@@ -138,6 +154,12 @@ export default defineConfig(({ mode }) => {
     },
 
     optimizeDeps: {
+      entries: [
+        'zh-CN/**/*.md',
+        'zh-CN/**/*.vue',
+        '.vitepress/**/*.ts',
+        '.vitepress/**/*.vue'
+      ],
       include: [
         "mermaid",
         "dayjs",
@@ -145,8 +167,24 @@ export default defineConfig(({ mode }) => {
         "@braintree/sanitize-url",
         "cytoscape",
         "cytoscape-cose-bilkent",
+        // 第一次已构建的（可省略，但列出能加快扫描）
+        'echarts',
+        'naive-ui',
+        'lodash-es',
+        'three',
+        'animejs',
+        'medium-zoom',
+        '@vueuse/components',
+        'deepmerge-ts',
+        'random',
+        'vitepress-component-medium-zoom',
+        'vitepress-plugin-llmstxt/client',
+        // 第二次才发现的，强制提前构建
+        '@tombcato/smart-ticker/vue',
+        'dompurify',
+        'marked'
       ],
-      exclude: ["vitepress"],
+      exclude: ["vitepress", 'echarts', 'three', 'naive-ui'],
     },
 
     experimental: {

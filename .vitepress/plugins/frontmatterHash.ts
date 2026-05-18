@@ -20,7 +20,7 @@ export default function frontmatterHashPlugin(options: FrontmatterHashOptions = 
 
   return {
     name: 'vitepress-frontmatter-hash',
-
+    enforce: 'pre',
     // 处理 markdown 文件
     transform(code: string, id: string) {
       if (!id.endsWith('.md')) {

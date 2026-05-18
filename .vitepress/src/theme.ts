@@ -83,33 +83,17 @@ export const themeConfig: DefaultTheme.Config = {
           },
         },
       },
-      // _render(src, env, md) {
-      //   const html = md.render(src, env);
-      //   if (env.frontmatter?.search === false) return "";
-      //   // 从搜索中排除页面
-      //   if (env.relativePath.startsWith("some/path")) return "";
-      //   // 转换内容——添加锚点
-      //   if (env.frontmatter?.title)
-      //     return md.render(`# ${env.frontmatter.title}`) + html;
-      //   return html;
-      // },
-      // // 搜索配置
-      // miniSearch: {
-      //   /**
-      //    * @type {Pick<import('minisearch').Options, 'extractField' | 'tokenize' | 'processTerm'>}
-      //    */
-      //   options: {
-      //     /* ... */
-      //   },
-      //   /**
-      //    * @type {import('minisearch').SearchOptions}
-      //    * @default
-      //    * { fuzzy: 0.2, prefix: true, boost: { title: 4, text: 2, titles: 1 } }
-      //    */
-      //   searchOptions: {
-      //     /* ... */
-      //   },
-      // },
+      async _render(src, env, md) {
+        const html = md.render(src, env)
+
+        // // filter files which you do not want to transform
+        // if (filterPath(env.relativePath))
+        //   return html
+
+        // any other things you want to do
+
+        return await md.renderAsync(`# Title Here`) + html
+      },
     },
   },
   // sidebar,

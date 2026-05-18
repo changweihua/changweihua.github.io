@@ -5,7 +5,7 @@ import { createHash } from 'crypto'
 export default function simpleFrontmatterHashPlugin(): Plugin {
   return {
     name: 'vitepress-simple-frontmatter-hash',
-
+    enforce: 'pre',
     // 处理 markdown 文件
     transform(code: string, id: string) {
       if (!id.endsWith('.md')) {

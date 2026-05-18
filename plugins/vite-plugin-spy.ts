@@ -4,6 +4,7 @@ import { Plugin } from "vite";
 export default function spyPlugin(): Plugin {
   return {
     name: 'vite-plugin-spy',
+    enforce: 'pre',
     // 1. 修改配置阶段
     config(config) {
       console.log('🟢 [Config] 配置开始合并...');

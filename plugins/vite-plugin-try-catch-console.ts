@@ -1,11 +1,11 @@
 import { Plugin } from "vite";
-import * as babel from "@babel/core";
 import { parse } from "@babel/core";
 import _traverse from "@babel/traverse";
 const traverse =
   typeof _traverse === "function" ? _traverse : (_traverse as any).default;
 import { generate } from "@babel/generator";
 import * as t from "@babel/types";
+import NodePath from "@babel/traverse/lib/path";
 
 const vitePluginTryCatchConsole = (): Plugin => {
   return {
@@ -35,7 +35,7 @@ const vitePluginTryCatchConsole = (): Plugin => {
 
       // 3. 遍历 AST，找到 CatchClause 节点并修改
       traverse(ast, {
-        CatchClause(path: babel.NodePath<t.CatchClause>) {
+        CatchClause(path: NodePath) {
           const block = path.node.body; // 获取 catch 块的函数体
 
           // 检查 catch 块中是否已经有 console.error(error) 了
