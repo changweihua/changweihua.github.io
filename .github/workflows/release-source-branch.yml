@@ -1,0 +1,123 @@
+name: Create Source Branch on Tag
+
+# ----- 触发条件 -----
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]*'          # 仅匹配语义版本标签，如 v1.0.0、v2.1.0
+  workflow_dispatch:                     # 允许手动触发
+    inputs:
+      version:
+        description: '手动指定版本号 (如 v1.0.0)'
+        required: true
+        default: ''
+
+# ----- 全局配置 -----
+env:
+  TZ: Asia/Shanghai
+
+permissions:
+  contents: write                         # 创建分支所需权限
+
+# 防止同一分支并发推送
+concurrency:
+  group: source-branch-${{ github.ref_name || github.event.inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  create-source-branch:
+    name: Create source branch for ${{ github.ref_name || github.event.inputs.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine tag version
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            TAG="${{ github.event.inputs.version }}"
+          else
+            TAG="${{ github.ref_name }}"
+          fi
+          # 校验版本号格式
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "❌ 版本号格式错误，必须为 vX.Y.Z 形式"
+            exit 1
+          fi
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "branch=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ steps.version.outputs.tag }}
+          fetch-depth: 1
+
+      - name: Prepare source snapshot
+        run: |
+          mkdir -p /tmp/release-src
+
+          # 复制源码，排除所有非源码文件
+          rsync -av \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='.vitepress/dist' \
+            --exclude='.vitepress/cache' \
+            --exclude='dist' \
+            --exclude='build' \
+            --exclude='.DS_Store' \
+            --exclude='Thumbs.db' \
+            --exclude='*.log' \
+            --exclude='*.tsbuildinfo' \
+            --exclude='.idea' \
+            --exclude='.vscode' \
+            --exclude='coverage' \
+            --exclude='.nyc_output' \
+            --exclude='.env*' \
+            --exclude='!.env.example' \
+            ./ /tmp/release-src/
+
+          # 生成详细的版本信息文件
+          cat > /tmp/release-src/RELEASE.txt <<EOF
+          repository: ${{ github.repository }}
+          version: ${{ steps.version.outputs.tag }}
+          commit: ${{ github.sha }}
+          branch: ${{ github.ref_name }}
+          workflow: ${{ github.workflow }}
+          run_id: ${{ github.run_id }}
+          built_at: $(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          triggered_by: ${{ github.actor }}
+          EOF
+
+      - name: Check if target branch already exists
+        id: check-branch
+        run: |
+          BRANCH="${{ steps.version.outputs.branch }}"
+          if git ls-remote --heads origin "refs/heads/$BRANCH" | grep -q "$BRANCH"; then
+            echo "⚠️ 分支 '$BRANCH' 已存在，将被覆盖。"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "✅ 分支 '$BRANCH' 不存在，即将创建。"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Push source to branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /tmp/release-src
+          publish_branch: ${{ steps.version.outputs.branch }}
+          force_orphan: true                     # 只保留一个提交，历史简洁
+          commit_message: "Source snapshot for ${{ steps.version.outputs.tag }} [skip ci]"
+
+      - name: Summary
+        run: |
+          echo "## ✅ 源码分支已创建/更新" >> $GITHUB_STEP_SUMMARY
+          echo "- **分支名称**: \`${{ steps.version.outputs.branch }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **关联标签**: ${{ steps.version.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **分支链接**: [查看分支](${{ github.server_url }}/${{ github.repository }}/tree/${{ steps.version.outputs.branch }})" >> $GITHUB_STEP_SUMMARY
+          echo "- **分支状态**: ${{ steps.check-branch.outputs.exists == 'true' && '已覆盖' || '全新创建' }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "## ❌ 创建源码分支失败" >> $GITHUB_STEP_SUMMARY
+          echo "请检查日志排查问题。" >> $GITHUB_STEP_SUMMARY
