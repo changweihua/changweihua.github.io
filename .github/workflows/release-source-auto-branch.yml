@@ -1,0 +1,130 @@
+name: Create Source Branch on Release Commit
+
+# ----- 触发条件 -----
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:                     # 手动触发
+    inputs:
+      version:
+        description: '版本号 (如 v1.0.0)'
+        required: true
+        default: ''
+
+env:
+  TZ: Asia/Shanghai
+
+permissions:
+  contents: write
+
+concurrency:
+  group: source-branch-${{ github.ref_name }}-${{ github.event.inputs.version || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  create-source-branch:
+    name: Create source branch from commit message
+    runs-on: ubuntu-latest
+    # 仅当满足以下任一条件时才运行：
+    # 1. 手动触发且版本号非空
+    # 2. 推送且最新提交信息匹配 :bookmark: release: vX.Y.Z
+    if: |
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.version != '') ||
+      (github.event_name == 'push' && contains(github.event.head_commit.message, ':bookmark: release:'))
+    steps:
+      - name: Extract version
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            TAG="${{ github.event.inputs.version }}"
+          else
+            # 从提交信息中提取版本号，例如 ":bookmark: release: v1.2.3"
+            TAG=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=:bookmark: release: )v[0-9]+\.[0-9]+\.[0-9]+')
+            if [ -z "$TAG" ]; then
+              echo "❌ 提交信息中未找到有效的版本号，格式需为 :bookmark: release: vX.Y.Z"
+              exit 1
+            fi
+          fi
+          # 二次验证格式
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ 版本号格式错误，必须为 vX.Y.Z 形式"
+            exit 1
+          fi
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "branch=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+
+      - name: Prepare source snapshot
+        run: |
+          mkdir -p /tmp/release-src
+          rsync -av \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='.vitepress/dist' \
+            --exclude='.vitepress/cache' \
+            --exclude='dist' \
+            --exclude='build' \
+            --exclude='.DS_Store' \
+            --exclude='Thumbs.db' \
+            --exclude='*.log' \
+            --exclude='*.tsbuildinfo' \
+            --exclude='.idea' \
+            --exclude='.vscode' \
+            --exclude='coverage' \
+            --exclude='.nyc_output' \
+            --exclude='.env*' \
+            --exclude='!.env.example' \
+            ./ /tmp/release-src/
+
+          cat > /tmp/release-src/RELEASE.txt <<EOF
+          repository: ${{ github.repository }}
+          version: ${{ steps.version.outputs.tag }}
+          commit: ${{ github.sha }}
+          branch: ${{ github.ref_name }}
+          workflow: ${{ github.workflow }}
+          run_id: ${{ github.run_id }}
+          built_at: $(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          triggered_by: ${{ github.actor }}
+          EOF
+
+      - name: Check if target branch exists
+        id: check-branch
+        run: |
+          BRANCH="${{ steps.version.outputs.branch }}"
+          if git ls-remote --heads origin "refs/heads/$BRANCH" | grep -q "$BRANCH"; then
+            echo "⚠️ 分支 '$BRANCH' 已存在，将被覆盖。"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "✅ 分支 '$BRANCH' 不存在，即将创建。"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Push source to branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /tmp/release-src
+          publish_branch: ${{ steps.version.outputs.branch }}
+          force_orphan: true
+          commit_message: "Source snapshot for ${{ steps.version.outputs.tag }} [skip ci]"
+
+      - name: Summary
+        run: |
+          echo "## ✅ 源码分支已创建/更新" >> $GITHUB_STEP_SUMMARY
+          echo "- **分支名称**: \`${{ steps.version.outputs.branch }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **版本号**: ${{ steps.version.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **触发方式**: ${{ github.event_name == 'workflow_dispatch' && '手动' || '提交信息匹配' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **分支链接**: [查看分支](${{ github.server_url }}/${{ github.repository }}/tree/${{ steps.version.outputs.branch }})" >> $GITHUB_STEP_SUMMARY
+
+      - name: Failure notification
+        if: failure()
+        run: |
+          echo "## ❌ 创建源码分支失败" >> $GITHUB_STEP_SUMMARY
+          echo "请确认提交信息格式或检查日志。" >> $GITHUB_STEP_SUMMARY
