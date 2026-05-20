@@ -75,6 +75,12 @@
       "config": "./.cz-config.cjs"
     }
   },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": { "name": "angular" },
+      "infile": "CHANGELOG.md"
+    }
+  },
   "dependencies": {
     "@catppuccin/vitepress": "^0.1.2",
     "@dgreenheck/ez-tree": "^1.1.0",
