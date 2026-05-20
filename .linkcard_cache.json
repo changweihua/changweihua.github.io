@@ -1,0 +1,320 @@
+{
+  "https://example.com/": {
+    "description": "Example Website",
+    "logo": "https://example.com/example.png",
+    "title": "Example Title"
+  },
+  "https://example.com?c=1768874583880": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768875692368": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768875922786": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768876108435": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768876572326": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768877260793": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768877289496": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768877464535": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768877604656": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768891155469": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768891451681": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768891678834": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768895665891": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768895869203": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768896028993": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768960473268": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768960737645": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768965634652": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768971982671": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768972117243": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768972210488": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768972638114": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768972801242": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768973199711": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768973292041": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768974957331": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768977751610": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768978195224": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768978419451": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768978663171": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768979622587": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768980580631": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768982486762": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768982660502": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768982929614": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1768983139461": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769044584986": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769071763476": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769072061403": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769130345041": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769130610720": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769130816828": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769131253900": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769131538426": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769131859115": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769138525024": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769390503533": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769396509113": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769407302735": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769416462907": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769416702228": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769416876524": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769417172137": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769417174548": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769417310306": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769417395366": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769417579454": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769417718054": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769417899538": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769476077415": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769476579269": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769477404282": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769478737274": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769479193532": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769482419622": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769482944142": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769483344237": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769497963841": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769498965770": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769499540541": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769566698332": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769567466407": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769567658478": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769571266489": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769576978259": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com?c=1769577250956": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://example.com": {
+    "title": "Example Domain",
+    "logo": "https://resources.whatwg.org/logo-url.svg"
+  },
+  "https://changweihua.github.io": {
+    "title": "CMONO.NET",
+    "description": "此系统基于vitepress二次开发，前端框架使用vuejs，UI框架使用ant-design，全局数据状态管理使用paina，ajax使用库为fetch。用于快速搭建个人网站和内容管理平台。",
+    "logo": "https://changweihua.github.io/author.jpg"
+  }
+}

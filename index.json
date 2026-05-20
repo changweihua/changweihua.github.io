@@ -1,0 +1,8 @@
+{
+  "title": "title",
+  "name": "name",
+  "permissions": [{
+    "label": "A",
+    "value": "A"
+  }]
+}
