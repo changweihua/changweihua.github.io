@@ -14,7 +14,7 @@ title: 无锡硕放机场个性化登机牌
 
 结合现场环境(同时兼容 Windows 7、10、11 操作系统)，采用基于 .NET Framework 4.8 和 Windows Service 的项目架构。
 
-基于 Pack 流配置的特殊性
+基于 Pec 流配置的特殊性
 
 ## 数据流程
 
