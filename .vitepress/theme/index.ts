@@ -1,0 +1,491 @@
+import type { Theme } from 'vitepress'
+import { icons } from '@iconify-json/logos'
+import { Icon } from '@iconify/vue'
+import elkLayouts from '@mermaid-js/layout-elk'
+import zenuml from '@mermaid-js/mermaid-zenuml'
+import BackToTopButton from '@miletorix/vitepress-back-to-top-button'
+import { HtmlPreview } from '@miletorix/vitepress-html-preview'
+import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
+import { NaiveUIContainer } from '@vitepress-demo-preview/component'
+import { defineClientComponentConfig } from '@vitepress-demo-preview/core'
+import mermaid from 'mermaid'
+// .vitepress/theme/index.ts
+import { inBrowser, useData, useRoute } from 'vitepress'
+import vitepressBprogress from 'vitepress-plugin-bprogress'
+import codeblocksFold from 'vitepress-plugin-codeblocks-fold'
+// @ts-ignore
+import GlossaryTooltip from 'vitepress-plugin-glossary/vue'
+import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
+import DefaultTheme from 'vitepress/theme-without-fonts'
+import { h, onMounted, resolveComponent, watchEffect } from 'vue'
+import { initHoverCard } from 'markdown-it-github-mention-card'
+import VueHero from 'vue-hero-cross'
+import AnimationTitle from '../components/AnimtedTitle.vue'
+import ArticleFooter from '../components/ArticleFooter.vue'
+import CarouselCard from '../components/CarouselCard.vue'
+import CarouselGallery from '../components/CarouselGallery.vue'
+import DocAfter from '../components/DocAfter.vue'
+import HoverableText from '../components/HoverableText.vue'
+import MarkdownEChart from '../components/MarkdownEChart.vue'
+import PageLost from '../components/PageLost.vue'
+import ProjectLab from '../components/ProjectLab.vue'
+import SnakeTimeline from '../components/SnakeTimeline.vue'
+import RelatedPosts from './components/RelatedPosts.vue'
+import PrevNextByDate from './components/PrevNextByDate.vue'
+import RainbowAnimationSwitcher from '../components/RainbowAnimationSwitcher.vue'
+import directives from '../directives'
+// 导入hooks
+import useVisitData from '../hooks/useVisitData'
+import AnimatingLayout from './AnimatingLayout.vue'
+
+import HeroWrapper from './components/HeroWrapper.vue'
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
+import GitHubCorner from './components/GitHubCorner.vue'
+import Llmstxt from './components/llmstxt.vue'
+
+import 'virtual:uno.css'
+
+import 'virtual:group-icons.css'
+import 'animate.css'
+
+import 'open-props/open-props.min.css'
+
+import './styles/vitepress-variables.scss'
+
+import '@shikijs/vitepress-twoslash/style.css'
+
+import './styles/maple-mono.scss'
+
+import './styles/animations1.css'
+
+import './styles/animations2.css'
+
+import './styles/animations3.css'
+
+import './styles/index.scss'
+import './styles/rainbow.scss'
+import './styles/vitepress.ext.scss'
+
+import './styles/vitepress.print.css'
+
+import './styles/vitepress.code.css'
+import './styles/markdown.ext.css'
+
+import './styles/mermaid.ext.css'
+import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
+
+import '../web-components'
+import '@vitepress-demo-preview/component/dist/style.css'
+
+import '@catppuccin/vitepress/theme/frappe/lavender.css'
+
+import '@miletorix/vitepress-back-to-top-button/style.css'
+import 'vitepress-markdown-timeline/dist/theme/index.css'
+
+import '@vitepress-code-preview/container/dist/style.css'
+import 'markdown-it-github-alerts/styles/github-colors-light.css'
+
+import 'markdown-it-github-alerts/styles/github-colors-dark-media.css'
+import 'markdown-it-github-alerts/styles/github-base.css'
+
+import 'vitepress-markmap-preview/dist/index.css'
+// Import CSS styles (both imports work)
+import 'vitepress-plugin-bprogress/style.css'
+
+mermaid.registerIconPacks([
+  {
+    name: icons.prefix, // To use the prefix defined in the icon pack
+    icons,
+  },
+])
+mermaid.registerExternalDiagrams([zenuml])
+mermaid.registerLayoutLoaders(elkLayouts)
+
+import Vue3TouchEvents, { type Vue3TouchEventsOptions } from 'vue3-touch-events'
+
+
+export default {
+  ...DefaultTheme,
+  NotFound: () => h(PageLost), // <- this is a Vue 3 functional component
+  // extends: DefaultTheme,
+  // 使用注入插槽的包装组件覆盖 Layout
+  // Layout: MyLayout,
+  Layout() {
+    const props: Record<string, any> = {}
+    // 获取 frontmatter
+    const { frontmatter } = useData()
+
+    /* 添加自定义 class */
+    if (frontmatter.value?.layoutClass) {
+      props.class = frontmatter.value.layoutClass
+    }
+
+    // const { isDark } = useData();
+
+    // const initMermaid = () => {
+    //   const mermaidRenderer = createMermaidRenderer({
+    //     theme: isDark.value ? "dark" : "neutral",
+    //     layout: "elk",
+    //     startOnLoad: false,
+    //     sequence: {
+    //       diagramMarginX: 50,
+    //       diagramMarginY: 10,
+    //     },
+    //     look: "handDrawn",
+    //     handDrawnSeed: 3,
+    //     fontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    //     altFontFamily: "MapleMono, AlibabaPuHuiTi, '阿里巴巴普惠体 3.0'",
+    //     flowchart: {
+    //       useMaxWidth: true,
+    //       htmlLabels: true,curve: "basis", defaultRenderer: "elk" },
+    //     class: {
+    //       defaultRenderer: "elk",
+    //     },
+    //     state: {
+    //       defaultRenderer: "elk",
+    //     },
+    //     securityLevel: "loose",
+    //     logLevel: "error",
+    //     suppressErrorRendering: true,
+    //   });
+
+    //   // mermaidRenderer.setToolbar({
+    //   //   showLanguageLabel: true,
+    //   //   desktop: {
+    //   //     zoomIn: "disabled",
+    //   //     zoomLevel: "enabled",
+    //   //     positions: { vertical: "top", horizontal: "left" },
+    //   //   },
+    //   //   mobile: {
+    //   //     zoomLevel: "disabled",
+    //   //     positions: { vertical: "bottom", horizontal: "left" },
+    //   //   },
+    //   //   fullscreen: {
+    //   //     zoomLevel: "enabled",
+    //   //     positions: { vertical: "top", horizontal: "right" },
+    //   //   },
+    //   // });
+    // };
+
+    // // initial mermaid setup
+    // nextTick(() => initMermaid());
+
+    // // on theme change, re-render mermaid charts
+    // watch(
+    //   () => isDark.value,
+    //   () => {
+    //     initMermaid();
+    //   },
+    // );
+
+    const ClientOnly = resolveComponent('ClientOnly')
+
+    return h(AnimatingLayout, null, {
+      // "home-hero-before": () => h(NoticeBar),
+      // "home-hero-after": () => h(AnimationTitle),
+      // "home-features-after": () =>
+      //   h(AnimationTitle, {
+      //     name: "常伟华",
+      //     text: "DOTNET Developer",
+      //     tagline: "阳光大男孩",
+      //   }),
+      // layout: 'home'
+      'home-hero-info': () =>
+        h(AnimationTitle, {
+          name: 'CMONO.NET',
+          slogon: '知识汪洋只此一瓢',
+          tagline: '伪前端+伪后端+伪需求=真全栈',
+        }),
+      'home-hero-image': () =>
+        h(
+          'div',
+          {
+            class: 'sm:hidden md:(visible flex h-full items-center justify-center)',
+            style: 'position: relative;',
+          },
+          [h('w-hero-logo')],
+          // [h(HeroLogo)]
+        ),
+      // "home-hero-image": () =>
+      //   h(
+      //     "div",
+      //     {
+      //       class:
+      //         "hidden lg:(visible flex w-full h-full items-center justify-center)",
+      //       style: "position: relative;",
+      //     },
+      //     [
+      //       h(HeroLogo),
+      //       // h(ColorfulWord),
+      //       // h('div', [
+      //       //   h(AnimatedLogo),
+      //       // ])
+      //       h("img", {
+      //         src: "/cwh.svg",
+      //         class: "VPImage image-src",
+      //       }),
+      //     ]
+      //   ),
+      // "home-hero-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "home-hero-after",
+      //   }),
+      // "home-features-before": () =>
+      //   h(NoticeBar, {
+      //     name: "home-features-before",
+      //   }),
+      // "home-features-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "home-features-after",
+      //   }),
+      // https://vitepress.dev/guide/extending-default-theme#layout-slots
+
+      // layout: 'doc'
+      // "doc-top": () =>
+      //   h(PlaceHolder, {
+      //     name: "doc-top",
+      //   }),
+      // "doc-bottom": () => [h(ArticleQRCode), h(Recommend)],
+      'doc-footer-before': () => h('div', {}, [h(PrevNextByDate), h(ArticleFooter)]),
+      // "doc-footer-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "doc-footer-before",
+      //   }),
+      // "doc-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "doc-before",
+      //   }),
+      // "doc-before": () => h(Breadcrumb, { breadcrumb: true }),
+      'doc-after': () => h(DocAfter),
+      // "sidebar-nav-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "sidebar-nav-before",
+      //   }),
+      // "sidebar-nav-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "sidebar-nav-after",
+      //   }),
+      'aside-bottom': () => h(RelatedPosts),
+      // 'aside-bottom': () =>
+      //   h(PlaceHolder, {
+      //     name: 'aside-bottom',
+      //   }),
+      // 'aside-outline-before': () =>
+      //   h(PlaceHolder, {
+      //     name: 'aside-outline-before',
+      //   }),
+      // 'aside-outline-after': () =>
+      //   h(PlaceHolder, {
+      //     name: 'aside-outline-after',
+      //   }),
+      // "aside-ads-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "aside-ads-before",
+      //   }),
+      // "aside-ads-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "aside-ads-after",
+      //   }),
+
+      // layout: 'page'
+      // "page-top": () =>
+      //   h(PlaceHolder, {
+      //     name: "page-top",
+      //   }),
+      // "page-bottom": () =>
+      //   h(PlaceHolder, {
+      //     name: "page-bottom",
+      //   }),
+
+      'not-found': () => h(ClientOnly, null, () => h(PageLost)),
+      'aside-outline-after': () => h(Llmstxt),
+      //  Always
+      // 在 layout-top 插槽中添加 GitHub Corner
+      'layout-top': () => h(GitHubCorner, {
+        repoUrl: 'https://github.com/changweihua/changweihua.github.io'
+      }),
+      // 'layout-top': () => [h(PageCursor)],
+      // "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
+      // "nav-bar-title-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-bar-title-before",
+      //   }),
+      // "nav-bar-title-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-bar-title-after",
+      //   }),
+      // "nav-bar-content-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-bar-content-before",
+      //   }),
+      // "nav-bar-content-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-bar-content-after",
+      //   }),
+      // "nav-screen-content-before": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-screen-content-before",
+      //   }),
+      // "nav-screen-content-after": () =>
+      //   h(PlaceHolder, {
+      //     name: "nav-screen-content-after",
+      //   }),
+
+      // // 为较宽的屏幕的导航栏添加阅读增强菜单
+      // 'nav-bar-content-after': () => h(NolebaseEnhancedReadabilitiesMenu),
+      // // 为较窄的屏幕（通常是小于 iPad Mini）添加阅读增强菜单
+      // 'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
+
+      // 'layout-top': () => [
+      //   h(NolebaseHighlightTargetedHeading),
+      // ],
+
+      // 'nav-bar-content-after': () => h(OtherComponent), // 你的其他导航栏组件
+      // 'nav-bar-content-after': () => [
+      //   h(OtherComponent), // 你的其他导航栏组件
+      //   h(NolebaseEnhancedReadabilitiesMenu), // 阅读增强菜单
+      // ],
+      // 'nav-screen-content-after': () => h(OtherComponent), // 你的其他导航栏组件
+      // 'nav-screen-content-after': () => [
+      //   h(OtherComponent), // 你的其他导航栏组件
+      //   h(NolebaseEnhancedReadabilitiesScreenMenu), // 阅读增强移动端菜单
+      // ],
+    })
+  },
+  enhanceApp: async (ctx) => {
+    const { app, router } = ctx
+    DefaultTheme.enhanceApp(ctx)
+
+    // vitepressNprogress(ctx);
+
+    app.use(TwoslashFloatingVue)
+
+    app.use<Vue3TouchEventsOptions>(Vue3TouchEvents, {
+      disableClick: false
+    })
+
+    const bProgress = vitepressBprogress(ctx)
+
+    // Custom configuration (optional)
+    if (bProgress) {
+      bProgress.configure({
+        showSpinner: false, // Show loading spinner
+        speed: 300, // Animation speed in ms
+        easing: 'ease-out', // CSS easing function
+        minimum: 0.1, // Minimum progress (0-1)
+        trickle: true, // Auto increment
+        trickleSpeed: 200, // Trickle speed
+        direction: 'ltr', // Progress direction
+      })
+    }
+
+    BackToTopButton(ctx.app, {
+      progressColor: 'var(--vp-c-brand-1)', // "#2563eb", // default is #42b983
+      arrowSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <g fill="none" fill-rule="evenodd">
+        <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path>
+        <path fill="currentColor" d="M11.293 8.293a1 1 0 0 1 1.414 0l5.657 5.657a1 1 0 0 1-1.414 1.414L12 10.414l-4.95 4.95a1 1 0 0 1-1.414-1.414z"></path>
+        </g>
+        </svg>`, // only svg code
+    })
+
+    // 定义国际化配置
+    defineClientComponentConfig({
+      // 保持向后兼容
+      copySuccessText: '代码已复制到剪贴板！',
+      vueApp: app,
+      // 国际化配置
+      i18n: {
+        zh: {
+          copySuccessText: '代码已复制到剪贴板！',
+          copyCode: '复制代码',
+          foldCode: '折叠代码',
+          expandCode: '展开代码',
+          hideSourceCode: '隐藏源代码',
+        },
+        en: {
+          copySuccessText: 'Code copied to clipboard!',
+          copyCode: 'Copy code',
+          foldCode: 'Fold code',
+          expandCode: 'Expand code',
+          hideSourceCode: 'Hide source code',
+        },
+      },
+      // 设置默认语言为中文
+      defaultLanguage: 'zh',
+    })
+
+    if (inBrowser) {
+      enhanceAppWithTabs(app)
+
+      useComponents(app, DemoPreview)
+
+      app.use(VueHero)
+
+      // 在 markdown 文件中使用，必须手动注册
+      app.component('demo-preview', NaiveUIContainer)
+      app.component('HeroWrapper', HeroWrapper)
+      app.component('HoverableText', HoverableText)
+      app.component('CarouselGallery', CarouselGallery)
+      app.component('ProjectLab', ProjectLab)
+      app.component('CarouselCard', CarouselCard)
+      app.component('MarkdownEChart', MarkdownEChart)
+      app.component('m-icon', Icon)
+      app.component('GlossaryTooltip', GlossaryTooltip)
+      app.component('HtmlPreview', HtmlPreview)
+      app.component('RainbowAnimationSwitcher', RainbowAnimationSwitcher)
+      app.component('SnakeTimeline', SnakeTimeline)
+
+      app.use(directives)
+
+      // useMermaidPanZoom()
+
+      if (router) {
+        router.onBeforeRouteChange = async (to) => {
+          // Here you can set the routes you want to configure.
+          if (to === '/') {
+            await router.go('/zh-CN/', {
+              initialLoad: true,
+              smoothScroll: true,
+              replace: true,
+            })
+            return false
+          }
+
+          return true
+        }
+
+        // router.onAfterRouteChange = () => {
+        //   nextTick(() => {
+        //     // 等待 DOM 更新后执行清理
+        //     const styleSheets = document.styleSheets
+        //     // 可能的清理操作
+        //   })
+        // }
+
+        // 路由加载完成，在加载页面组件后（在更新页面组件之前）调用。
+        router.onAfterPageLoad = async () => {
+          useVisitData()
+        }
+      }
+    }
+  },
+  setup() {
+    // get frontmatter and route
+    const { lang, frontmatter } = useData() //
+    const route = useRoute()
+    // basic use
+    codeblocksFold({ route, frontmatter }, true, 400)
+    watchEffect(() => {
+      if (inBrowser) {
+        document.cookie = `nf_lang=${lang.value}; expires=${new Date().toUTCString()}; path=/`
+      }
+    })
+
+    if (typeof window !== 'undefined') {
+      onMounted(() => {
+        initHoverCard()
+      })
+    }
+  },
+} satisfies Theme

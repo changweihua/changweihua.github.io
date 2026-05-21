@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue文字转语音功能</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .description {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+        }
+        .input-section {
+            margin-bottom: 25px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .control-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-play {
+            background: #2ecc71;
+            color: white;
+        }
+        .btn-play:hover {
+            background: #27ae60;
+        }
+        .btn-pause {
+            background: #f39c12;
+            color: white;
+        }
+        .btn-pause:hover {
+            background: #d35400;
+        }
+        .btn-resume {
+            background: #3498db;
+            color: white;
+        }
+        .btn-resume:hover {
+            background: #2980b9;
+        }
+        .btn-stop {
+            background: #e74c3c;
+            color: white;
+        }
+        .btn-stop:hover {
+            background: #c0392b;
+        }
+        button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        .speaking {
+            background: rgba(46, 204, 113, 0.1);
+            color: #27ae60;
+        }
+        .paused {
+            background: rgba(243, 156, 18, 0.1);
+            color: #d35400;
+        }
+        .stopped {
+            background: rgba(231, 76, 60, 0.1);
+            color: #c0392b;
+        }
+        .value-display {
+            font-size: 14px;
+            color: #7f8c8d;
+            text-align: right;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>Vue文字转语音功能</h1>
+        <p class="description">使用Web Speech API将文本转换为自然语音</p>
+
+        <div class="input-section">
+            <textarea v-model="text" placeholder="请输入要转换为语音的文字..."></textarea>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="rate">语速: {{ rate }}</label>
+                <input type="range" id="rate" min="0.5" max="2" step="0.1" v-model="rate">
+                <div class="value-display">慢 ← → 快</div>
+            </div>
+
+            <div class="control-group">
+                <label for="pitch">音调: {{ pitch }}</label>
+                <input type="range" id="pitch" min="0.5" max="2" step="0.1" v-model="pitch">
+                <div class="value-display">低 ← → 高</div>
+            </div>
+
+            <div class="control-group">
+                <label for="volume">音量: {{ volume }}</label>
+                <input type="range" id="volume" min="0" max="1" step="0.1" v-model="volume">
+                <div class="value-display">小 ← → 大</div>
+            </div>
+
+            <div class="control-group">
+                <label for="voice">声音</label>
+                <select id="voice" v-model="selectedVoice">
+                    <option v-for="(voice, index) in voices" :value="index">
+                        {{ voice.name }} ({{ voice.lang }})
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-play" @click="speak" :disabled="isSpeaking || !text">播放</button>
+            <button class="btn-pause" @click="pause" :disabled="!isSpeaking || isPaused">暂停</button>
+            <button class="btn-resume" @click="resume" :disabled="!isPaused">继续</button>
+            <button class="btn-stop" @click="stop" :disabled="!isSpeaking && !isPaused">停止</button>
+        </div>
+
+        <div class="status" :class="statusClass">
+            {{ statusMessage }}
+        </div>
+
+        <footer>
+            <p>基于Web Speech API的语音合成功能 | 浏览器兼容性: Chrome, Edge, Safari</p>
+        </footer>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                text: '欢迎使用文字转语音功能！这是一个基于Vue和Web Speech API的示例。您可以输入任何文字，然后点击播放按钮进行语音合成。',
+                rate: 1,
+                pitch: 1,
+                volume: 1,
+                voices: [],
+                selectedVoice: 0,
+                isSpeaking: false,
+                isPaused: false,
+                synthesis: null
+            },
+            computed: {
+                statusMessage() {
+                    if (this.isSpeaking && !this.isPaused) {
+                        return '正在播放语音...';
+                    } else if (this.isPaused) {
+                        return '语音已暂停';
+                    } else {
+                        return '准备就绪';
+                    }
+                },
+                statusClass() {
+                    if (this.isSpeaking && !this.isPaused) {
+                        return 'speaking';
+                    } else if (this.isPaused) {
+                        return 'paused';
+                    } else {
+                        return 'stopped';
+                    }
+                }
+            },
+            mounted() {
+                // 初始化语音合成
+                this.initSpeechSynthesis();
+            },
+            methods: {
+                initSpeechSynthesis() {
+                    if ('speechSynthesis' in window) {
+                        this.synthesis = window.speechSynthesis;
+
+                        // 获取可用的语音列表
+                        const loadVoices = () => {
+                            this.voices = this.synthesis.getVoices();
+                            // 尝试选择中文语音
+                            const chineseVoice = this.voices.find(voice =>
+                                voice.lang.includes('zh') || voice.lang.includes('CN'));
+                            if (chineseVoice) {
+                                this.selectedVoice = this.voices.indexOf(chineseVoice);
+                            }
+                        };
+
+                        // 语音列表可能异步加载
+                        if (this.synthesis.getVoices().length) {
+                            loadVoices();
+                        } else {
+                            this.synthesis.addEventListener('voiceschanged', loadVoices);
+                        }
+                    } else {
+                        alert('很抱歉，您的浏览器不支持语音合成功能！请使用Chrome、Edge或Safari浏览器。');
+                    }
+                },
+                speak() {
+                    if (!this.text) return;
+
+                    // 停止当前正在播放的语音
+                    this.stop();
+
+                    // 创建新的语音实例
+                    const utterance = new SpeechSynthesisUtterance(this.text);
+                    utterance.rate = this.rate;
+                    utterance.pitch = this.pitch;
+                    utterance.volume = this.volume;
+
+                    if (this.voices[this.selectedVoice]) {
+                        utterance.voice = this.voices[this.selectedVoice];
+                    }
+
+                    // 设置事件监听
+                    utterance.onstart = () => {
+                        this.isSpeaking = true;
+                        this.isPaused = false;
+                    };
+
+                    utterance.onend = () => {
+                        this.isSpeaking = false;
+                        this.isPaused = false;
+                    };
+
+                    utterance.onerror = (event) => {
+                        console.error('语音合成错误:', event);
+                        this.isSpeaking = false;
+                        this.isPaused = false;
+                    };
+
+                    // 开始播放
+                    this.synthesis.speak(utterance);
+                },
+                pause() {
+                    if (this.synthesis && this.isSpeaking) {
+                        this.synthesis.pause();
+                        this.isPaused = true;
+                    }
+                },
+                resume() {
+                    if (this.synthesis && this.isPaused) {
+                        this.synthesis.resume();
+                        this.isPaused = false;
+                    }
+                },
+                stop() {
+                    if (this.synthesis) {
+                        this.synthesis.cancel();
+                        this.isSpeaking = false;
+                        this.isPaused = false;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
