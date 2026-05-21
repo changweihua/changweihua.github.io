@@ -22,8 +22,8 @@ title: 无锡硕放机场个性化登机牌
 
 ```mermaid
 graph LR
-    A[航信] --> B[COM1]
-    B --> C[COM2]
+    A[航信] --> B[登机牌打印程序]
+    B --> C[COM1]
     C --> D[打印机]
 ```
 
@@ -31,13 +31,13 @@ graph LR
 
 ```mermaid
 graph LR
-    A[航信] --> B[COM1]
-    B --> C[COM3]
+    A[航信] --> B[登机牌打印程序]
+    B --> C[COM4]
     subgraph 本程序
         C --> G[VPSD]
-        G --> D[COM4]
+        G --> D[COM5]
     end
-    D --> E[COM2]
+    D --> E[COM1]
     E --> F[打印机]
 ```
 
@@ -47,18 +47,18 @@ graph LR
 graph TB
     subgraph original [原始流程]
         direction LR
-        A[航信] --> B[COM1] --> C[COM2] --> D[打印机]
+        A[航信] --> B[登机牌打印程序] --> C[COM1] --> D[打印机]
     end
 
     subgraph modified [修改后流程]
         direction LR
-        A1[航信] --> B1[COM1]
-        subgraph highlight [COM3-COM4 重点区域]
+        A1[航信] --> B1[登机牌打印程序]
+        subgraph highlight [COM4-COM5 重点区域]
             direction LR
-            C1[COM3] --> D1[数据流修改] --> E1[COM4]
+            C1[COM4] --> D1[数据流修改] --> E1[COM1]
         end
         B1 --> C1
-        E1 --> F1[COM2] --> G1[打印机]
+        E1 --> F1[COM1] --> G1[打印机]
     end
 
     original ~~~ modified
@@ -81,48 +81,48 @@ graph TB
 ```mermaid
 sequenceDiagram
     actor 航信
-    participant COM1
-    participant COM3
-    participant 登机牌个性化程序
+    participant 登机牌打印程序
     participant COM4
-    participant COM2
+    participant 登机牌个性化程序
+    participant COM5
+    participant COM1
     participant 打印机
 
-    航信->>COM1: 发送票务数据
-    activate COM1
-    COM1->>COM3: 转发至 COM3
-    activate COM3
-
-    COM3->>登机牌个性化程序: 数据流修改
-    activate 登机牌个性化程序
-    登机牌个性化程序-->>COM3: 返回修改后数据
-    deactivate 登机牌个性化程序
-
-    COM3->>COM4: 传递至 COM4
-    deactivate COM3
+    航信->>登机牌打印程序: 发送票务数据
+    activate 登机牌打印程序
+    登机牌打印程序->>COM4: 转发至 COM4
     activate COM4
 
-    COM4->>COM2: 输出到 COM2
-    activate COM2
-    deactivate COM4
+    COM4->>登机牌个性化程序: 数据流修改
+    activate 登机牌个性化程序
+    登机牌个性化程序-->>COM4: 返回修改后数据
+    deactivate 登机牌个性化程序
 
-    COM2->>打印机: 发送打印指令
+    COM4->>COM5: 传递至 COM5
+    deactivate COM4
+    activate COM5
+
+    COM5->>COM1: 输出到 COM1
+    activate COM1
+    deactivate COM5
+
+    COM1->>打印机: 发送打印指令
     activate 打印机
-    打印机-->>COM2: 返回打印结果
+    打印机-->>COM1: 返回打印结果
     deactivate 打印机
 
-    COM2->>登机牌个性化程序: 打印结果
+    COM1->>登机牌个性化程序: 打印结果
     activate 登机牌个性化程序
-    deactivate COM2
+    deactivate COM1
 
     alt 打印成功
-        登机牌个性化程序-->>COM1: 打印成功
+        登机牌个性化程序-->>登机牌打印程序: 打印成功
     else 打印失败
-        登机牌个性化程序->>COM1: 打印失败通知
+        登机牌个性化程序->>登机牌打印程序: 打印失败通知
     end
 
     deactivate 登机牌个性化程序
-    deactivate COM1
+    deactivate 登机牌打印程序
 ```
 
 ## 系统架构
@@ -146,31 +146,33 @@ graph TD
     subgraph 核心服务层
         WinSvc[Windows Service]
         subgraph VSerialBox[虚拟串口软件：模拟一对串联串口]
-            COM3[虚拟串口 COM3]
             COM4[虚拟串口 COM4]
-            COM3 ---|串联直通| COM4
+            COM5[虚拟串口 COM5]
+            COM4 ---|串联直通| COM5
         end
         Modify[串口数据修改<br/>登机牌个性化程序]
         Printer[打印机]
 
         WinSvc -->|调用/配置| VSerialBox
-        COM3 --> Modify
-        Modify --> COM4
+        COM4 --> Modify
+        Modify --> COM5
     end
     class WinSvc service
-    class COM3,COM4 vserial
+    class COM4,COM5 vserial
     class Modify modify
     class Printer printer
 
     subgraph 物理驱动层
-        COM1[物理串口 COM1<br/>航信数据入口]
-        COM2[物理串口 COM2<br/>连接打印机]
+        TravelSky[登机牌打印程序<br/>航信数据入口]
+        COM1[物理串口 COM1<br/>连接打印机]
     end
-    class COM1,COM2 physical
+    class TravelSky,COM1 physical
 
     %% 连接
     Monitor -->|监控控制| WinSvc
-    COM1 -->|原始数据| COM3
-    COM4 -->|修改后数据| COM2
-    COM2 -->|物理线缆| Printer
+    TravelSky -->|原始数据| COM4
+    COM4 -->|修改后数据| COM1
+    COM1 -->|物理线缆| Printer
 ```
+
+- [测试用例](/zh-CN/gallery/bpp_test)
