@@ -1,3 +1,7 @@
+# Changelog
+
+## [0.13.2](https://github.com/changweihua/changweihua/compare/0.13.1...0.13.2) (2026-05-21)
+
 ## <small>0.0.38 (2024-08-23)</small>
 
 * style(custom):  Update RoughMermaid.vue ([f5a7119](https://github.com/commit/f5a7119))
@@ -73,6 +77,3 @@
 * refactor(custom): 优化整体结构 ([cc15363](https://github.com/commit/cc15363))
 *  style(custom):  Update DocAfter.vue ([dd7cbf1](https://github.com/commit/dd7cbf1))
 *  style(custom):  Update web_app.md ([7151f27](https://github.com/commit/7151f27))
-
-
-
