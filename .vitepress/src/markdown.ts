@@ -29,6 +29,7 @@ import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
 import { tasklist } from '@mdit/plugin-tasklist';
+import { aliasMap } from './langAlias'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -65,10 +66,23 @@ const markdown: MarkdownOptions | undefined = {
   toc: { level: [1, 6] },
   preConfig: async (md) => {
   },
-  defaultHighlightLang: 'plaintext',
-  async shikiSetup(highlighter) {
-    await highlighter.loadLanguage('html')
-  },
+  defaultHighlightLang: 'txt',
+  // async shikiSetup(highlighter) {
+  //   const highlighterAny = highlighter as any  // 类型断言
+
+  //   // 保存原始的 getLangIdFromAlias 方法（如果存在）
+  //   const original = highlighterAny.getLangIdFromAlias?.bind(highlighter)
+
+  //   // 自定义别名解析函数
+  //   highlighterAny.getLangIdFromAlias = (alias: string) => {
+  //     // 先检查我们自定义的别名映射
+  //     if (aliasMap[alias]) {
+  //       return aliasMap[alias]
+  //     }
+  //     // 否则回退到原始解析逻辑
+  //     return original ? original(alias) : alias
+  //   }
+  // },
   codeTransformers: [
     transformerTwoslash({
       typesCache: createFileSystemTypesCache()

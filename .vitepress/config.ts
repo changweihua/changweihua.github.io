@@ -17,6 +17,7 @@ import { RSS } from './src/rss'
 import { themeConfig } from './src/theme'
 import { lightMermaidConfig } from './theme/mermaid-theme'
 import { handleHeadMeta } from './utils/handleHeadMeta'
+import { aliasLangPlugin } from './plugins/aliasLangPlugin'
 
 const customElements = [
   'mjx-container', 'mjx-assistive-mml', 'math',
@@ -114,6 +115,9 @@ export default withMermaid(
     vite: {
       // 原有 VitePress 专属插件（保持不变）
       plugins: [
+        aliasLangPlugin({
+          gitignore: 'txt',
+        }),
         groupIconVitePlugin({
           customIcon: {
             ae: 'logos:adobe-after-effects',

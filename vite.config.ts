@@ -93,25 +93,27 @@ export default defineConfig(({ mode }) => {
     }),
   ]
 
+  const prodPlugins = isProduction ? [packOrchestrator({
+    pack: {
+      outDir: 'dist',
+      fileName: 'release-[name]-v[version]',
+      format: 'zip',
+      archiveOutDir: './releases',
+      exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**'],
+    },
+    hooks: {
+      // 归档后自动追加 SHA1 哈希
+      onAfterBuild: (path, format, checksums) =>
+        path.replace(/(.(?:zip|tar.gz|tar|7z))$/, `-${checksums.sha1.slice(0, 8)}$1`),
+      onError: (err) => console.error('打包失败:', err.message),
+    },
+  }),] : []
+
   return {
     plugins: [
       ...sharedPlugins,
       ...devPlugins,
-      packOrchestrator({
-        pack: {
-          outDir: 'dist',
-          fileName: 'release-[name]-v[version]',
-          format: 'zip',
-          archiveOutDir: './releases',
-          exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**'],
-        },
-        hooks: {
-          // 归档后自动追加 SHA1 哈希
-          onAfterBuild: (path, format, checksums) =>
-            path.replace(/(.(?:zip|tar.gz|tar|7z))$/, `-${checksums.sha1.slice(0, 8)}$1`),
-          onError: (err) => console.error('打包失败:', err.message),
-        },
-      }),
+      ...prodPlugins
     ],
 
     server: {
