@@ -30,6 +30,7 @@ import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
 import { tasklist } from '@mdit/plugin-tasklist';
 import { aliasMap } from './langAlias'
+import { createMarkdownExit } from 'markdown-exit'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -64,7 +65,21 @@ const markdown: MarkdownOptions | undefined = {
     detailsLabel: '详细信息'
   },
   toc: { level: [1, 6] },
-  preConfig: async (md) => {
+  // HACK: replace vitepress markdown-it instance with markdown-exit
+  // reference: https://github.com/vuejs/vitepress/blob/be260fda6efc1d6c4b56219d7a17a19ab7a4ba76/src/node/markdown/markdown.ts#L263-L266
+  preConfig: (md) => {
+    const exit = createMarkdownExit(md.options)
+    exit.linkify.set({ fuzzyLink: false })
+
+    // use restoreEntities plugin from vitepress
+    const textJoinRule = md.core.ruler.getRules('').find(r => r.name === 'text_join')
+    const textRenderRule = md.renderer.rules.text
+    if (!textJoinRule || !textRenderRule)
+      throw new Error('Cannot find restoreEntities plugin from vitepress ')
+    exit.core.ruler.at('text_join', textJoinRule as any)
+    exit.renderer.rules.text = textRenderRule as any
+
+    Object.assign(md, exit)
   },
   defaultHighlightLang: 'txt',
   // async shikiSetup(highlighter) {
