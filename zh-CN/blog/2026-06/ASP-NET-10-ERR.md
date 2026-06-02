@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: ASP.NET Core .NET 10 错误响应体系全景
 description: 从 BadRequest 到编译器基础设施
-date: 2026-06-01 11:35:00 
+date: 2026-06-01 11:35:00
 pageClass: blog-page-class
 cover: /covers/dotnet.svg
 ---
@@ -373,7 +373,7 @@ builder.Services.AddProblemDetails(options =>
 `AddProblemDetails()` 注册三项核心内容：
 
 - IProblemDetailsService（DefaultProblemDetailsService）：统一写入接口
-- IProblemDetailsWriter（DefaultProblemDetailsWriter）：负责序列化并设置 Content-Type: application/problem+json
+- IProblemDetailsWriter（DefaultProblemDetailsWriter）：负责序列化并设置 `Content-Type: application/problem+json`
 - ProblemDetailsOptions：持有 CustomizeProblemDetails 委托
 
 ### CustomizeProblemDetails 的执行链路 ###
@@ -589,7 +589,7 @@ flowchart LR
 
 ### 框架自动验证后 OpenAPI 的缺口 ###
 
-启用 `AddValidation()` 后，400 响应由框架在过滤器层生成，不经过处理器返回类型。此时端点的返回类型中没有 BadRequest<T>，OpenAPI 文档看不到 400：
+启用 `AddValidation()` 后，400 响应由框架在过滤器层生成，不经过处理器返回类型。此时端点的返回类型中没有 `BadRequest<T>`，OpenAPI 文档看不到 400：
 
 ```cs
 // 返回类型只有 Created<ProductDto>，OpenAPI 只生成 201 的文档
@@ -708,7 +708,7 @@ namespace Microsoft.AspNetCore.Http.Validation
 </PropertyGroup>
 ```
 
-Interceptor 是实验性特性，Roslyn 默认不启用。这个 MSBuild 属性作为白名单，告诉编译器：“允许 Microsoft.AspNetCore.Http.Validation 命名空间中的代码使用 `[InterceptsLocation]`”。
+Interceptor 是实验性特性，Roslyn 默认不启用。这个 MSBuild 属性作为白名单，告诉编译器：“允许 `Microsoft.AspNetCore.Http.Validation` 命名空间中的代码使用 `[InterceptsLocation]`”。
 
 执行流程：
 
@@ -726,7 +726,7 @@ flowchart TD
 
 ### 在编译流水线中的位置 ###
 
-Source Generator 是 Roslyn 编译器流水线中的扩展点，在 IL 生成之前运行，检查语法树和语义模型，向编译注入新的 .cs 文件：
+Source Generator 是 Roslyn 编译器流水线中的扩展点，在 IL 生成之前运行，检查语法树和语义模型，向编译注入新的 `.cs` 文件：
 
 ```mermaid
 flowchart TD
@@ -1045,4 +1045,4 @@ flowchart TB
 
 理解这个分层的意义在于：当 `AddValidation()` 的"一行代码"背后出现问题时，你知道去哪一层查找原因——是 DataAnnotations 写错了（应用层），是 `AddValidation()` 未注册（框架服务层），是 `InterceptorsNamespaces` 未配置（编译器基础设施层），还是 Source Generator 未能识别到你的端点参数（同样是编译器层）。
 
-这套体系的演进方向同样清晰：从运行时反射到编译期代码生成，从手写样板代码到框架托管，从类型不安全的 IResult 到编译期约束的 Results<T1,T2>——每一步都是将"运行时发现的问题"前移到"编译时发现"，这是整个 .NET 平台在 NativeAOT 压力下演进的核心逻辑。
+这套体系的演进方向同样清晰：从运行时反射到编译期代码生成，从手写样板代码到框架托管，从类型不安全的 IResult 到编译期约束的 Results`<T1,T2>`——每一步都是将"运行时发现的问题"前移到"编译时发现"，这是整个 .NET 平台在 NativeAOT 压力下演进的核心逻辑。
