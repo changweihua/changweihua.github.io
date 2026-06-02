@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: ASP.NET Core .NET 10 错误响应体系全景
 description: 从 BadRequest 到编译器基础设施
-date: 2026-06-01 11:35:00
+date: 2026-06-01 10:35:00
 pageClass: blog-page-class
 cover: /covers/dotnet.svg
 ---
