@@ -20,7 +20,7 @@ cover: /covers/html5.svg
 
 当这 5 个并发请求几乎同时到达服务器时：
 
-!(/images/web-page-lock-1.jpg)[并发请求]
+![并发请求](/images/web-page-lock-1.jpg)
 
 > 请求 A 先到达，后端刷新成功，返回了新的双 Token，并将旧的 Token 拉黑；
 > 请求 B、C、D、E 紧随其后，拿着已经被拉黑的旧 Token 去刷新，后端判定为凭证被盗用，直接执行了安全熔断，把该用户名下的所有 Session 全部强制踢下线。
@@ -52,7 +52,7 @@ cover: /covers/html5.svg
 
 不需要写任何跨页面通信，不需要写任何 storage 监听。直接看处理流程👇：
 
-!(/images/web-page-lock-2.jpg)[处理流程]
+![处理流程](/images/web-page-lock-2.jpg)
 
 核心伪源码👇:
 
@@ -108,7 +108,7 @@ async function getValidToken() {
 
 为了防范 网络卡死 导致的所有页面陷入无尽等待，我们必须利用 AbortSignal 给锁加上一个 超时自动断开 的防御机制：
 
-!(/images/web-page-lock-3.jpg)[防御机制]
+![防御机制](/images/web-page-lock-3.jpg)
 
 ```typescript
 // 带超时控制的 Web 锁
