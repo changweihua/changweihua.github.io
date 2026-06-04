@@ -1,0 +1,8 @@
+repository: changweihua/changweihua.github.io
+version: v0.13.3
+commit: 45b61c736a1a4ca58df143be47385c04ddcb4416
+branch: master
+workflow: Create Source Branch on Release Commit
+run_id: 26937233586
+built_at: 2026-06-04T07:24:23Z
+triggered_by: changweihua

@@ -1,0 +1,27 @@
+.math-container {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+  border-left: 4px solid #1890ff;
+}
+
+mjx-container {
+  outline: none;
+}
+
+.math-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .math-container {
+    background-color: #2d2d2d;
+  }
+}
+
+.vp-dark .math-container {
+  background-color: #2d2d2d;
+}

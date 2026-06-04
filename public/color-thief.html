@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color-Thief图片配色提取工具</title>
+  <script src="https://unpkg.com/colorthief@2.6.0/dist/color-thief.umd.js"></script>
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    #imgPreview {
+      max-width: 100%;
+      height: auto;
+      margin: 20px 0;
+      border: 1px solid #eee;
+      display: none;
+    }
+    .palette-block {
+      width: 80px;
+      height: 80px;
+      display: inline-block;
+      margin: 10px 15px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .color-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 5px 0;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 12px;
+      text-align: center;
+    }
+    #extractBtn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background: #ccc;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 20px;
+      display: none;
+    }
+    #extractBtn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>图片配色提取工具</h1>
+    <!-- 图片上传控件 -->
+    <input type="file" id="imgUpload" accept="image/*">
+    <!-- 图片预览 -->
+    <img id="imgPreview" alt="图片预览">
+    <!-- 提取按钮 -->
+    <button id="extractBtn">提取配色方案</button>
+    <!-- 调色板容器 -->
+    <div id="paletteContainer" style="margin-top: 30px;"></div>
+  </div>
+
+  <script>
+    // 初始化元素
+    const imgUpload = document.getElementById('imgUpload');
+    const imgPreview = document.getElementById('imgPreview');
+    const extractBtn = document.getElementById('extractBtn');
+    const paletteContainer = document.getElementById('paletteContainer');
+    const colorThief = new ColorThief();
+
+    // 1. 图片上传后预览
+    imgUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file || !file.type.match('image.*')) return;
+
+      // 生成图片预览URL
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        imgPreview.src = event.target.result;
+        imgPreview.style.display = 'block';
+        extractBtn.style.display = 'inline-block';
+        // 清空之前的调色板
+        paletteContainer.innerHTML = '';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // 2. 点击按钮提取配色
+    extractBtn.addEventListener('click', function() {
+      // 确保图片已加载完成（本地预览图无需担心跨域）
+      imgPreview.onload = function() {
+        try {
+          // 提取主色调（用于按钮背景）
+          const dominantColor = colorThief.getColor(imgPreview, 5);
+          extractBtn.style.backgroundColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+
+          // 提取6色调色板
+          const palette = colorThief.getPalette(imgPreview, 6, 8);
+
+          // 渲染调色板到页面
+          palette.forEach(color => {
+            const [r, g, b] = color;
+            // 转换RGB为十六进制（如rgb(103,201,152) → #67C998）
+            const hexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+
+            const colorBlock = document.createElement('div');
+            colorBlock.className = 'palette-block';
+            colorBlock.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+            const colorInfo = document.createElement('div');
+            colorInfo.className = 'color-info';
+            colorInfo.innerHTML = `RGB: ${r},${g},${b}<br>HEX: ${hexColor}`;
+
+            colorBlock.appendChild(colorInfo);
+            paletteContainer.appendChild(colorBlock);
+          });
+        } catch (err) {
+          console.error('颜色提取失败：', err);
+          alert('提取失败，请尝试重新上传图片！');
+        }
+      };
+      // 若图片已加载，手动触发onload事件
+      if (imgPreview.complete) imgPreview.onload();
+    });
+  </script>
+</body>
+</html>
