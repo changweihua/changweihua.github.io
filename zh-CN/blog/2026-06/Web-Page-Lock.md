@@ -3,7 +3,7 @@ lastUpdated: true
 commentabled: true
 recommended: true
 title: 多标签页并发请求导致 Token 刷新失败？
-description: 只有 15行代码就能解决 !
+description: 只有 15 行代码就能解决 !
 date: 2026-06-02 11:35:00
 pageClass: blog-page-class
 cover: /covers/html5.svg

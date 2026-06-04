@@ -6,7 +6,7 @@ title: 不仅仅是 Mock 服务
 description: mock-h3，让前端也能优雅拥有后端能力
 date: 2026-06-03 13:35:00
 pageClass: blog-page-class
-cover: /covers/dotnet.svg
+cover: /covers/html5.svg
 ---
 
 在前端开发中，Mock 服务几乎是不可或缺的：
