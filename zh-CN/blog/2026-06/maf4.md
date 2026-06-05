@@ -395,6 +395,6 @@ public static ChatClientBuilder UseRequestLogging(this ChatClientBuilder builder
 
 ## 八、小结 ##
 
-前几篇让 Agent 能说、能做、能记；本篇 `AsBuilder().Use(...)` 在 对话入口 和 工具入口 两处叠加横切逻辑，让 Agent 更易观测、更易管控，更适合往生产环境推进。
+前几篇让 Agent 能说、能做、能记；本篇 `AsBuilder().Use(...)` 在 *对话入口* 和 *工具入口* 两处叠加横切逻辑，让 Agent 更易观测、更易管控，更适合往生产环境推进。
 
 
