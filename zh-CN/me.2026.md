@@ -26,18 +26,26 @@ encrypt-storage: true
 ### 无锡硕放机场登机牌个性化系统
 
 - 2026 年 5 月
-  - 明确方案，基于.NET Framework 4.8 开发
+  - 明确方案，基于.NET Framework 4.8 开发和虚拟串口开发
   - 适配多种打印机：富士通、爱普生
   - 完成全部功能开发和测试
 
 
 - 2026 年 6 月
-  - 试yun
+  - 登机牌个性化程序试运行中
+  - 调研自助值机个性化打印登机牌(基于虚拟打印机)，目前已完成和通过单体测试
+
+
 ### AI
 
 - 2026 年 4 月
   - 基于 MAF 和 Skill 调用 DeepSeek 大模型，实现航班动态查询
   - 完成 MiniataD 框架更新，.NET 版本升级至 .NET 10
+
+- 2026 年 5 月
+  - 实现聊天记录持久化
+  - 实现 MCP Tool 调研
+  - 实现 RAG 服务集成
 
 ![基于MAF](/images/maf-000.png){data-zoomable}
 ![基于MAF](/images/maf-ds-skill-1.png){data-zoomable}
@@ -66,6 +74,8 @@ encrypt-storage: true
   - 本地化 `cap.js` 组件
 - 2026 年 4 月
   - 部署系统至生产环境，待测试通过后上线
+- 2026 年 5 月
+  - 与携程对接，实现数据互通
 
 <div class="grid md:grid-cols-2 lg:grid-cols-4 masonry-container">
 

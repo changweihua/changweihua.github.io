@@ -18229,5 +18229,134 @@
         }
       }
     ]
+  },
+  "D:\\Github\\changweihua.github.io\\public\\images\\codewhale-1.png": {
+    "hash": "9c9f6d68a9a2eab2a0f395443a3a7b53",
+    "mtimeMs": 1781154527920.7842,
+    "size": 106212,
+    "widths": [
+      {
+        "width": 400,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 800,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1200,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1600,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      }
+    ]
+  },
+  "D:\\Github\\changweihua.github.io\\public\\images\\codewhale-2.png": {
+    "hash": "d3a81893f082ee978900c384433c9cfe",
+    "mtimeMs": 1781154570470.8425,
+    "size": 139674,
+    "widths": [
+      {
+        "width": 400,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 800,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1200,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1600,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      }
+    ]
+  },
+  "D:\\Github\\changweihua.github.io\\public\\images\\codewhale-3.png": {
+    "hash": "27cc2744f45b8981460cdcb603e660b8",
+    "mtimeMs": 1781154608399.2322,
+    "size": 151954,
+    "widths": [
+      {
+        "width": 400,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 800,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1200,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1600,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      }
+    ]
   }
 }
