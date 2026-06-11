@@ -7333,9 +7333,9 @@
     ]
   },
   "D:\\Github\\changweihua.github.io\\public\\images\\cmono-image.png": {
-    "hash": "7156439c6e58ac903cb1227d687d9e9c",
-    "mtimeMs": 1750055763488.13,
-    "size": 22222,
+    "hash": "da50c8cff131a83fa4342d3119431ca6",
+    "mtimeMs": 1780646481241.0083,
+    "size": 44573,
     "widths": [
       {
         "width": 400,
@@ -18148,6 +18148,49 @@
     "hash": "9eaef6024839a7b1bffb7367a3fbfeb0",
     "mtimeMs": 1780383351926.4915,
     "size": 273599,
+    "widths": [
+      {
+        "width": 400,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 800,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1200,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1600,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      }
+    ]
+  },
+  "D:\\Github\\changweihua.github.io\\public\\images\\codewhale-tui.png": {
+    "hash": "0f1a657285124aa56a69bb1b28805048",
+    "mtimeMs": 1781147298344.281,
+    "size": 35843,
     "widths": [
       {
         "width": 400,

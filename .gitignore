@@ -19,3 +19,6 @@ fonts-spider/*
 dev-dist
 certs
 .idea
+.codewhale/*
+codewhale-windows-x64.exe
+codewhale-tui-windows-x64.exe

@@ -5,7 +5,9 @@ $primary-font: "MapleMono";
 @mixin font-face($name, $filename, $weight: normal, $style: normal) {
   @font-face {
     font-family: $name;
-    src: url("#{$font-path}MapleMono-NF-CN-#{$filename}.woff2") format("woff2");
+    src: url("#{$font-path}/woff2/MapleMono-NF-CN-#{$filename}.woff2") format("woff2"),
+    url("#{$font-path}/woff/MapleMono-NF-CN-#{$filename}.woff") format("woff"),
+    url("#{$font-path}/ttf/MapleMono-NF-CN-#{$filename}.ttf") format("truetype");
     font-weight: $weight;
     font-style: $style;
     font-display: swap;
@@ -14,84 +16,67 @@ $primary-font: "MapleMono";
 
 // 建立完整字体族体系
 $font-stack: (
-  "MapleMono": (
-    (
-      weight: 100,
+  "MapleMono": ((weight: 100,
       style: normal,
       file: "Thin",
     ),
-    (
-      weight: 100,
+    (weight: 100,
       style: italic,
       file: "ThinItalic",
     ),
-    (
-      weight: 200,
+    (weight: 200,
       style: normal,
       file: "ExtraLight",
     ),
-    (
-      weight: 200,
+    (weight: 200,
       style: italic,
       file: "ExtraLightItalic",
     ),
-    (
-      weight: 300,
+    (weight: 300,
       style: normal,
       file: "Light",
     ),
-    (
-      weight: 300,
+    (weight: 300,
       style: italic,
       file: "LightItalic",
     ),
-    (
-      weight: 400,
+    (weight: 400,
       style: normal,
       file: "Regular",
     ),
-    (
-      weight: 400,
+    (weight: 400,
       style: italic,
       file: "Italic",
     ),
-    (
-      weight: 500,
+    (weight: 500,
       style: normal,
       file: "Medium",
     ),
-    (
-      weight: 500,
+    (weight: 500,
       style: italic,
       file: "MediumItalic",
     ),
-    (
-      weight: 600,
+    (weight: 600,
       style: normal,
       file: "SemiBold",
     ),
-    (
-      weight: 600,
+    (weight: 600,
       style: italic,
       file: "SemiBoldItalic",
     ),
-    (
-      weight: 700,
+    (weight: 700,
       style: normal,
       file: "Bold",
     ),
-    (
-      weight: 700,
+    (weight: 700,
       style: italic,
       file: "BoldItalic",
     ),
-    (
-      weight: 800,
+    (weight: 800,
       style: normal,
       file: "ExtraBold",
     ),
-    (
-      weight: 800,
+    (weight: 800,
       style: italic,
       file: "ExtraBoldItalic",
     ),
@@ -101,11 +86,9 @@ $font-stack: (
 @each $family, $variants in $font-stack {
   @each $v in $variants {
     // 使用map-get函数访问map中的值
-    @include font-face(
-      $family,
+    @include font-face($family,
       map.get($v, file),
       map.get($v, weight),
-      map.get($v, style)
-    );
+      map.get($v, style));
   }
 }
