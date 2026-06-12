@@ -148,7 +148,85 @@ cargo install deepseek-tui --locked
 # Dockerfile 已包含在仓库中
 ```
 
-> C:\Users\UserName\.codewhale
+在项目的 Release 页面下载到的 Windows 可执行文件，并不是 `codewhale.exe`。正确的文件名是 `codewhale-windows-x64.exe` 和 `codewhale-tui-windows-x64.exe`。
+
+这是安装步骤，你可以一步步来操作。
+
+#### ✅ 第一步：找到并重命名二进制文件 ####
+
+在 GitHub Releases 页面找到并下载这两个文件：
+
+- `codewhale-windows-x64.exe`
+
+- `cododewhale-tui-windows-x64.exe`
+
+在你电脑上创建一个文件夹，比如 D:\CodeWhale，把这两个文件都放进去。
+
+关键一步：*对这两个文件进行重命名*：
+
+- 将 `codewhale-windows-x64.exe` 重命名为 `codewhale.exe`。
+
+- 将 `cododewhale-tui-windows-x64.exe` 重命名为 `codewhale-tui.exe`。
+
+#### ⚙️ 第二步：正确配置环境变量 ####
+
+为了让系统在任何目录下都能识别 `codewhale` 命令，需要把 `D:\CodeWhale` 这个文件夹路径添加到系统环境变量 PATH 中。
+
+1. 按下 `Win + R` 键，输入 `sysdm.cpl` 并回车。
+
+2. 在弹出的“系统属性”窗口中，切换到“高级”选项卡，然后点击“环境变量(N)...”按钮。
+
+3. 在“系统变量”列表中找到 Path 变量，选中它并点击“编辑(I)...”按钮。
+
+4. 在弹出的“编辑环境变量”窗口中，点击“新建(N)”，然后输入 `D:\CodeWhale`（即你存放两个 `.exe` 文件的文件夹路径）。
+
+5. 一路点击“确定”保存所有窗口。
+
+#### 🚀 第三步：完成安装与配置 ####
+
+重新打开一个命令提示符或 PowerShell 窗口。
+
+*验证环境变量*：
+
+在新打开的终端输入 `codewhale --version`。如果能正常显示版本信息，说明环境变量配置成功。
+
+*登录认证*：
+
+你需要使用 API Key 进行登录，参考命令如下：
+
+```bash
+codewhale login --api-key "你的_DeepSeek_API_密钥"
+```
+
+如果没有 API Key，可以登录 DeepSeek 平台 获取。
+
+*进行健康检查（可选）*：
+
+可以运行诊断命令，确保一切就绪：
+
+```bash
+codewhale doctor
+```
+
+#### 📌 额外提醒 ####
+
+你可以把这个 `D:\CodeWhale` 理解成一个“搬运工具”，通过 PATH 路径随时调用。而你的项目文件夹才是这个工具真正要处理和管理的“工作室”。
+
+为了以后管理方便，你可以直接把 `D:\CodeWhale` 这个文件夹备份起来。以后重装系统后，只要把这个文件夹重新放回原位置，并把路径再添加到 PATH 里就能直接用了，不用再去下载。
+
+#### 🧰 附：你的错误排查步骤 ####
+
+如果操作后遇到问题，可以按这个步骤检查一下：
+
+- 确认两个 `.exe` 文件都已下载且放在了同一个文件夹里。
+
+- 确认已经完成了重命名步骤，这是命令能被识别的关键。
+
+- 确认已将正确的文件夹路径添加到系统的 PATH 变量中。
+
+- 务必重新打开一个新的终端窗口，然后再执行 codewhale 命令。
+
+> 全局配置目录 `C:\Users\{UserName}\.codewhale`
 
 ### 认证配置 ###
 
