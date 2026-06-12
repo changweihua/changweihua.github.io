@@ -9,10 +9,10 @@ aside: false
 <script lang="ts" setup>
 import { SuperellipseAvatar } from '@/components/SuperellipseAvatar.tsx'
 import ShadowLogo from '@vp/components/ShadowLogo.vue'
-import FlyingPlane from '@/components/FlyingPlane.vue'
+import LiquidMetaCard from '@vp/components/LiquidMetaCard.vue'
 </script>
 
-<ShadowLogo class="my-5" />
+<ShadowLogo class="my-5" ></ShadowLogo>
 
 <LiquidMetaCard title="💥 简介" class="my-5">
   <template #title>
@@ -64,7 +64,6 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 ## 🥇 近期作品
 
-
 - [统一认证平台](/zh-CN/gallery/oidc)
 - [Envoy 智慧网关](/zh-CN/gallery/envoy)
 - [Ollama 大模型](/zh-CN/manual/ollama_anythingllm)
@@ -87,88 +86,79 @@ import FlyingPlane from '@/components/FlyingPlane.vue'
 
 ### 🧮 工具
 
-
-<div class="flex flex-wrap gap-2">
-
-<m-icon icon="logos:centos-icon" :width="96" :height="96" />
-<m-icon icon="logos:docker-icon" :width="96" :height="96" />
-<m-icon icon="logos:docker" :width="96" :height="96" />
-<m-icon icon="logos:kubernetes" :width="96" :height="96" />
-<m-icon icon="logos:letsencrypt" :width="96" :height="96" />
-<m-icon icon="logos:microsoft-windows" :width="96" :height="96" />
-<m-icon icon="logos:rabbitmq" :width="96" :height="96" />
-<m-icon icon="logos:stackoverflow" :width="96" :height="96" />
-<m-icon icon="logos:grafana" :width="96" :height="96" />
-<m-icon icon="logos:gravatar" :width="96" :height="96" />
-<m-icon icon="logos:gradle" :width="96" :height="96" />
-<m-icon icon="logos:postman" :width="96" :height="96" />
-<m-icon icon="logos:jenkins" :width="96" :height="96" />
-<m-icon icon="logos:github-octocat" :width="96" :height="96" />
-<m-icon icon="logos:gitlab" :width="96" :height="96" />
-<m-icon icon="logos:git" :width="96" :height="96" />
-<m-icon icon="logos:github-actions" :width="96" :height="96" />
-
+<!-- 使用 UnoCSS 类名优化 -->
+<div class="flex flex-wrap justify-center gap-4 md:gap-6 p-4 max-w-screen-xl mx-auto">
+    <m-icon icon="logos:centos-icon" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:docker-icon" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:docker" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:kubernetes" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:letsencrypt" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:microsoft-windows" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:rabbitmq" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:stackoverflow" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:grafana" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:gravatar" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:gradle" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:postman" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:jenkins" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:github-octocat" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:gitlab" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:git" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:github-actions" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
 </div>
-
 
 ### 🌸 后端
 
-<div class="flex flex-wrap gap-2">
-
-<m-icon icon="logos:bash" :width="96" :height="96" />
-<m-icon icon="logos:bing" :width="96" :height="96" />
-<m-icon icon="logos:c-sharp" :width="96" :height="96" />
-<m-icon icon="logos:codeigniter-icon" :width="96" :height="96" />
-<m-icon icon="logos:editorconfig" :width="96" :height="96" />
-<m-icon icon="logos:kotlin" :width="96" :height="96" />
-<m-icon icon="logos:markdown" :width="96" :height="96" />
-<m-icon icon="logos:lua" :width="96" :height="96" />
-<m-icon icon="logos:mariadb" :width="96" :height="96" />
-<m-icon icon="logos:microsoft" :width="96" :height="96" />
-<m-icon icon="logos:microsoft-onedrive" :width="96" :height="96" />
-<m-icon icon="logos:mongodb" :width="96" :height="96" />
-<m-icon icon="logos:mysql" :width="96" :height="96" />
-<m-icon icon="logos:nginx" :width="96" :height="96" />
-<m-icon icon="logos:nodejs" :width="96" :height="96" />
-<m-icon icon="logos:npm" :width="96" :height="96" />
-<m-icon icon="logos:oracle" :width="96" :height="96" />
-<m-icon icon="logos:python" :width="96" :height="96" />
-<m-icon icon="logos:redis" :width="96" :height="96" />
-<m-icon icon="logos:sqlite" :width="96" :height="96" />
-<m-icon icon="logos:visual-studio" :width="96" :height="96" />
-<m-icon icon="logos:visual-studio-code" :width="96" :height="96" />
-
+<div class="flex flex-wrap justify-center gap-4 md:gap-6 p-4 max-w-screen-xl mx-auto">
+    <m-icon icon="logos:bash" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:bing" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:c-sharp" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:codeigniter-icon" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:editorconfig" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:kotlin" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:markdown" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:lua" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:mariadb" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:microsoft" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:microsoft-onedrive" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:mongodb" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:mysql" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:nginx" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:nodejs" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:npm" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:oracle" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:python" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:redis" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:sqlite" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:visual-studio" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:visual-studio-code" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
 </div>
 
-### 🌸 前端
-
-<div class="flex flex-wrap gap-2">
-
-<m-icon icon="logos:ant-design" :width="96" :height="96" />
-<m-icon icon="logos:angular-icon" :width="96" :height="96" />
-<m-icon icon="logos:axios" :width="96" :height="96" />
-<m-icon icon="logos:babel" :width="96" :height="96" />
-<m-icon icon="logos:bootstrap" :width="96" :height="96" />
-<m-icon icon="logos:chrome" :width="96" :height="96" />
-<m-icon icon="logos:css-3" :width="96" :height="96" />
-<m-icon icon="logos:dojo-toolkit" :width="96" :height="96" />
-<m-icon icon="logos:element" :width="96" :height="96" />
-<m-icon icon="logos:electron" :width="96" :height="96" />
-<m-icon icon="logos:flutter" :width="96" :height="96" />
-<m-icon icon="logos:html-5" :width="96" :height="96" />
-<m-icon icon="logos:mdn" :width="96" :height="96" />
-<m-icon icon="logos:hugo" :width="96" :height="96" />
-<m-icon icon="logos:ionic" :width="96" :height="96" />
-<m-icon icon="logos:jquery" :width="96" :height="96" />
-<m-icon icon="logos:jquery-mobile" :width="96" :height="96" />
-<m-icon icon="logos:less" :width="96" :height="96" />
-<m-icon icon="logos:pinia" :width="96" :height="96" />
-<m-icon icon="logos:react" :width="96" :height="96" />
-<m-icon icon="logos:tailwindcss" :width="96" :height="96" />
-<m-icon icon="logos:tsnode" :width="96" :height="96" />
-<m-icon icon="logos:typescript" :width="96" :height="96" />
-<m-icon icon="logos:vitejs" :width="96" :height="96" />
-<m-icon icon="logos:vue" :width="96" :height="96" />
-
+<h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mt-8 mb-4 px-4">🌸 前端</h3>
+<div class="flex flex-wrap justify-center gap-4 md:gap-6 p-4 max-w-screen-xl mx-auto">
+    <m-icon icon="logos:ant-design" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:angular-icon" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:axios" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:babel" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:bootstrap" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:chrome" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:css-3" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:dojo-toolkit" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:element" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:electron" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:flutter" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:html-5" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:mdn" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:hugo" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:ionic" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:jquery" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:jquery-mobile" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:less" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:pinia" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:react" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:tailwindcss" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:tsnode" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:typescript" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:vitejs" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
+    <m-icon icon="logos:vue" class="w-12 h-12 md:w-16 md:h-16"></m-icon>
 </div>
-

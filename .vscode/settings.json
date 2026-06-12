@@ -55,7 +55,8 @@
   "terminal.integrated.fontLigatures": true,
   "files.trimTrailingWhitespace": true,
   "[markdown]": {
-    "files.trimTrailingWhitespace": false
+    "files.trimTrailingWhitespace": false,
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "js.suggest.autoImports": true,
   "ts.suggest.autoImports": true,
@@ -78,9 +79,9 @@
   "terminal.integrated.smoothScrolling": true,
   "workbench.list.smoothScrolling": true,
   "workbench.editor.wrapTabs": true,
-  "iconify.customCollectionJsonPaths": [
-    "node_modules/.unplugin-iconify-generator/cmono.json"
-  ],
+  // "iconify.customCollectionJsonPaths": [
+  //   "node_modules/.unplugin-iconify-generator/cmono.json"
+  // ],
   "vue.server.maxOldSpaceSize": 4096,
   "vitest.shellType": "terminal",
   "commentTranslate.targetLanguage": "zh-CN",
@@ -198,6 +199,12 @@
   // "oxc.path.node": "node",
   // ✅ 指定语言服务器二进制路径（官方推荐）
   // "oxc.path.oxlint": "node_modules/oxlint/bin/oxc_language_server",
+  "iconify.excludes": [
+    "el"
+  ],
+  "iconify.customCollectionJsonPaths": [
+    "./.vscode/icons.json"
+  ],
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file", // tell oxfmt to format the whole file, not only the modified lines
