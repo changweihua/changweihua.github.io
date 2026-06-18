@@ -18358,5 +18358,91 @@
         }
       }
     ]
+  },
+  "D:\\Github\\changweihua.github.io\\public\\images\\ds-1.png": {
+    "hash": "c3c081587f894f8267ad93cc4f5bc32e",
+    "mtimeMs": 1781745914386.1826,
+    "size": 101774,
+    "widths": [
+      {
+        "width": 400,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 800,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1200,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1600,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      }
+    ]
+  },
+  "D:\\Github\\changweihua.github.io\\public\\images\\ds-2.png": {
+    "hash": "40c0f1abc49b34553e35fb02d0ac7264",
+    "mtimeMs": 1781745954841.8762,
+    "size": 176110,
+    "widths": [
+      {
+        "width": 400,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 800,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1200,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      },
+      {
+        "width": 1600,
+        "generated": {
+          "webp": true,
+          "avif": true,
+          "jxl": true,
+          "original": true
+        }
+      }
+    ]
   }
 }

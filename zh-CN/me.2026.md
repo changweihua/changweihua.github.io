@@ -7,7 +7,6 @@ encrypt-pageType: default
 encrypt-storage: true
 ---
 
-
 > [!IMPORTANT] 年度关键词
 > 如果还在。
 >
@@ -30,11 +29,9 @@ encrypt-storage: true
   - 适配多种打印机：富士通、爱普生
   - 完成全部功能开发和测试
 
-
 - 2026 年 6 月
   - 登机牌个性化程序试运行中
   - 调研自助值机个性化打印登机牌(基于虚拟打印机)，目前已完成和通过单体测试
-
 
 ### AI
 
@@ -50,6 +47,12 @@ encrypt-storage: true
 ![基于MAF](/images/maf-000.png){data-zoomable}
 ![基于MAF](/images/maf-ds-skill-1.png){data-zoomable}
 ![基于MAF](/images/deepseek-api-agent.jpg){data-zoomable}
+
+- 2026 年 6 月
+  - 优化图形化界面，增加 Token 统计
+
+![查询窗口](/images/ds-1.png){data-zoomable}
+![结果窗口](/images/ds-2.png){data-zoomable}
 
 ### TGS-SOLUTION
 
@@ -70,7 +73,7 @@ encrypt-storage: true
   - 将图形验证码升级为基于 `cap.js` 的人机识别验证码，降低被暴力攻击的风险
   - API 接口增加随机解密功能，基于 AES & GCM & CBC 加密算法
 - 2026 年 3 月
-  - 升级 Ant Design Vue 4.* 至 Ant Design Vue Next
+  - 升级 Ant Design Vue 4.\* 至 Ant Design Vue Next
   - 本地化 `cap.js` 组件
 - 2026 年 4 月
   - 部署系统至生产环境，待测试通过后上线
