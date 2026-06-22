@@ -1,0 +1,76 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "allowJs": true,
+    "useDefineForClassFields": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false,
+    "lib": [
+      "ESNext",
+      "ES2015.Promise",
+      "dom",
+      "DOM",
+      "es5",
+      "es2015.promise",
+      "es2015",
+      "es2017",
+      "es2018",
+      "es2018.promise"
+    ],
+    "types": [
+      "vite/client",
+      "./typings",
+      "vitest-environment-web-ext/types"
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "~/*": [
+        "./*"
+      ],
+      "@vp/*": [
+        "./.vitepress/*"
+      ]
+    },
+    //提示无法覆盖文件时，需要考虑设置此项
+    "outDir": "dist"
+  },
+  "diagnostics": true,
+  "include": [
+    ".",
+    "src",
+    ".vitepress",
+    "./typings",
+    "typings/**/*.d.ts",
+    "env.d.ts",
+    "package.json"
+  ],
+  "exclude": [
+    "node_modules",
+    ".vitepress/cache",
+    ".vitepress/assets",
+    ".vitepress/dist",
+    "dist",
+    "fonts-spider"
+  ],
+  "typedocOptions": {
+    "entryPoints": [
+      "src/index.ts"
+    ],
+    "out": "docs"
+  }
+}
