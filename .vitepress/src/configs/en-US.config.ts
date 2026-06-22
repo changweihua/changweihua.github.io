@@ -4,7 +4,6 @@ import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 import { getEnUSNav } from "../navs";
 import { getEnUSSidebar } from "../sidebars";
 
-import dayjs from '../../hooks/useDayjs'
 
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: "CMONO.NET HomePage",
@@ -24,7 +23,7 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     },
     footer: {
       message: "MIT Licensed",
-      copyright: `Copyright © 2009-${dayjs().year()} CMONO.NET`,
+      copyright: `版权所有 © 2009-${new Date().getFullYear()} CMONO.NET`,
     },
     //   editLink: {
     //     pattern: '路径地址',
