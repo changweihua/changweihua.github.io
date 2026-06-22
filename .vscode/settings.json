@@ -193,6 +193,7 @@
     "pcss",
     "postcss"
   ],
+  "js/ts.experimental.useTsgo": true,
   // ✅ 显式指定 Node.js 路径（解决 ENOENT 核心）
   // "oxc.path.node": "C:\\Program Files\\nodejs\\node.exe", // Windows 典型路径
   // 如果你不确定路径，可以直接写 "node"（前提是 PATH 里有）
@@ -257,5 +258,6 @@
   },
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "typescript.native-preview.tsdk": "node_modules\\@typescript\\native-preview"
 }
