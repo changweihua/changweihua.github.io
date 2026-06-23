@@ -39,7 +39,6 @@ import useVisitData from '../hooks/useVisitData'
 import AnimatingLayout from './AnimatingLayout.vue'
 
 import HeroWrapper from './components/HeroWrapper.vue'
-import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 import GitHubCorner from './components/GitHubCorner.vue'
 import Llmstxt from './components/llmstxt.vue'
 
@@ -48,11 +47,7 @@ import 'virtual:uno.css'
 import 'virtual:group-icons.css'
 import 'animate.css'
 
-import 'open-props/open-props.min.css'
-
 import './styles/vitepress-variables.scss'
-
-import '@shikijs/vitepress-twoslash/style.css'
 
 import './styles/maple-mono.scss'
 
@@ -357,8 +352,6 @@ export default {
     DefaultTheme.enhanceApp(ctx)
 
     // vitepressNprogress(ctx);
-
-    app.use(TwoslashFloatingVue)
 
     app.use<Vue3TouchEventsOptions>(Vue3TouchEvents, {
       disableClick: false

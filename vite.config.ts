@@ -16,6 +16,7 @@ import { envParse } from 'vite-plugin-env-parse'
 import { loadEnv } from 'vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import packOrchestrator from 'unplugin-pack-orchestrator/vite'
+import { fileURLToPath } from 'node:url'
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target]
@@ -40,9 +41,9 @@ export default defineConfig(({ mode }) => {
         IconsResolver({
           prefix: 'icon',
           strict: true,
-          customCollections: ['cmono'], // 需要注册你的集合名
-        }),
-      ],
+          customCollections: ['cmono'] // 需要注册你的集合名
+        })
+      ]
     }),
     Icons({
       compiler: 'vue3',
@@ -51,8 +52,8 @@ export default defineConfig(({ mode }) => {
       defaultStyle: '',
       defaultClass: '',
       customCollections: {
-        cmono: FileSystemIconLoader('./src/assets/icons/mono'),
-      },
+        cmono: FileSystemIconLoader('./src/assets/icons/mono')
+      }
     }),
     UnoCSS(),
     vueStyledPlugin(),
@@ -65,70 +66,81 @@ export default defineConfig(({ mode }) => {
       onBuildComplete: (info) => {
         console.log('构建完成，版本:', info.version)
       }
-    }),
+    })
   ]
 
   // 仅开发环境启用的插件
-  const devPlugins = isProduction ? [] : [
-    ValidateEnv({
-      validator: 'builtin',
-      schema: {
-        VITE_APP_PRIMARY_COLOR: Schema.string(),
-      },
-    }),
-    envParse(),
-    {
-      name: 'dev-error-handler',
-      configureServer(server: any) {
-        server.middlewares.use('/api', (req: any, _res: any, next: any) => {
-          console.log(`🔍 API Request: ${req.method} ${req.url}`)
-          next()
+  const devPlugins = isProduction
+    ? []
+    : [
+        ValidateEnv({
+          validator: 'builtin',
+          schema: {
+            VITE_APP_PRIMARY_COLOR: Schema.string()
+          }
+        }),
+        envParse(),
+        {
+          name: 'dev-error-handler',
+          configureServer(server: any) {
+            server.middlewares.use('/api', (req: any, _res: any, next: any) => {
+              console.log(`🔍 API Request: ${req.method} ${req.url}`)
+              next()
+            })
+          }
+        },
+        mkcert({
+          savePath: './certs',
+          autoUpgrade: false,
+          force: false
         })
-      },
-    },
-    mkcert({
-      savePath: './certs',
-      autoUpgrade: false,
-      force: false,
-    }),
-  ]
+      ]
 
-  const prodPlugins = isProduction ? [packOrchestrator({
-    pack: {
-      outDir: 'dist',
-      fileName: 'release-[name]-v[version]',
-      format: 'zip',
-      archiveOutDir: './releases',
-      exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**'],
-    },
-    hooks: {
-      // 归档后自动追加 SHA1 哈希
-      onAfterBuild: (path, format, checksums) =>
-        path.replace(/(.(?:zip|tar.gz|tar|7z))$/, `-${checksums.sha1.slice(0, 8)}$1`),
-      onError: (err) => console.error('打包失败:', err.message),
-    },
-  }),] : []
+  const prodPlugins = isProduction
+    ? [
+        packOrchestrator({
+          pack: {
+            outDir: 'dist',
+            fileName: 'release-[name]-v[version]',
+            format: 'zip',
+            archiveOutDir: './releases',
+            exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**']
+          },
+          hooks: {
+            // 归档后自动追加 SHA1 哈希
+            onAfterBuild: (path, format, checksums) =>
+              path.replace(/(.(?:zip|tar.gz|tar|7z))$/, `-${checksums.sha1.slice(0, 8)}$1`),
+            onError: (err) => console.error('打包失败:', err.message)
+          }
+        })
+      ]
+    : []
 
   return {
-    plugins: [
-      ...sharedPlugins,
-      ...devPlugins,
-      ...prodPlugins
-    ],
+    plugins: [...sharedPlugins, ...devPlugins, ...prodPlugins],
+
+    resolve: {
+      alias: [
+        { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
+        { find: 'public', replacement: fileURLToPath(new URL('./public', import.meta.url)) },
+        { find: '@vp', replacement: fileURLToPath(new URL('./.vitepress', import.meta.url)) },
+        { find: '@demo', replacement: fileURLToPath(new URL('./src/demos', import.meta.url)) }
+      ]
+    },
 
     server: {
       host: '0.0.0.0',
       port: 4200,
       open: true,
       hmr: {
-        overlay: true,
-      },
+        overlay: true
+      }
     },
 
     build: {
       rolldownOptions: {
         output: {
-          codeSplitting: true,
+          codeSplitting: true
           // chunkFileNames: 'assets/js/[name]-[hash:8].js',
           //   entryFileNames: 'assets/js/entry-[name]-[hash:8].js',
           //assetFileNames: 'assets/[ext]/[name]-[hash:8].[ext]',
@@ -136,9 +148,9 @@ export default defineConfig(({ mode }) => {
           //minifyInternalExports: true, // 启用内部导出重命名，可增强压缩效果
 
           //legalComments: 'none', // 去除许可证注释，减小体积
-        },
+        }
       },
-      cssMinify: 'lightningcss',
+      cssMinify: 'lightningcss'
     },
 
     clearScreen: false,
@@ -150,25 +162,18 @@ export default defineConfig(({ mode }) => {
       __VUE_PROD_DEVTOOLS__: false,
       __VUE_OPTIONS_API__: true,
       'process.env': {},
-      'process.env.RSS_BASE': JSON.stringify(
-        `${getEnvValue(mode, 'VITE_APP_RSS_BASE_URL')}`
-      ),
+      'process.env.RSS_BASE': JSON.stringify(`${getEnvValue(mode, 'VITE_APP_RSS_BASE_URL')}`)
     },
 
     optimizeDeps: {
-      entries: [
-        'zh-CN/**/*.md',
-        'zh-CN/**/*.vue',
-        '.vitepress/**/*.ts',
-        '.vitepress/**/*.vue'
-      ],
+      entries: ['zh-CN/**/*.md', 'zh-CN/**/*.vue', '.vitepress/**/*.ts', '.vitepress/**/*.vue'],
       include: [
-        "mermaid",
-        "dayjs",
-        "debug",
-        "@braintree/sanitize-url",
-        "cytoscape",
-        "cytoscape-cose-bilkent",
+        'mermaid',
+        'dayjs',
+        'debug',
+        '@braintree/sanitize-url',
+        'cytoscape',
+        'cytoscape-cose-bilkent',
         // 第一次已构建的（可省略，但列出能加快扫描）
         'echarts',
         'naive-ui',
@@ -186,16 +191,16 @@ export default defineConfig(({ mode }) => {
         'dompurify',
         'marked'
       ],
-      exclude: ["vitepress", 'echarts', 'three', 'naive-ui'],
+      exclude: ['vitepress', 'echarts', 'three', 'naive-ui']
     },
 
     experimental: {
       importGlobRestoreExtension: true,
-      hmrPartialAccept: true,
+      hmrPartialAccept: true
     },
 
     devtools: {
       enabled: true
-    },
+    }
   }
 })

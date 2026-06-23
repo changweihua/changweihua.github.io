@@ -31,6 +31,7 @@
       "es2018.promise"
     ],
     "types": [
+      "node",
       "vite/client",
       "./typings",
       "vitest-environment-web-ext/types"
@@ -52,24 +53,24 @@
   "diagnostics": true,
   "include": [
     ".",
-    "src",
-    ".vitepress",
+    "./src",
+    "./.vitepress",
     "./typings",
-    "typings/**/*.d.ts",
-    "env.d.ts",
-    "package.json"
+    "./typings/**/*.d.ts",
+    "./env.d.ts",
+    "./package.json"
   ],
   "exclude": [
-    "node_modules",
-    ".vitepress/cache",
-    ".vitepress/assets",
-    ".vitepress/dist",
-    "dist",
-    "fonts-spider"
+    "./node_modules",
+    "./.vitepress/cache",
+    "./.vitepress/assets",
+    "./.vitepress/dist",
+    "./dist",
+    "./fonts-spider"
   ],
   "typedocOptions": {
     "entryPoints": [
-      "src/index.ts"
+      "./src/index.ts"
     ],
     "out": "docs"
   }

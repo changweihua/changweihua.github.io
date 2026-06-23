@@ -25,11 +25,7 @@ import glossary from './glossary.json'
 import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
 import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
-import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
-import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
-import { tasklist } from '@mdit/plugin-tasklist';
-import { aliasMap } from './langAlias'
 import { createMarkdownExit } from 'markdown-exit'
 
 const demoAlias = {
@@ -99,14 +95,10 @@ const markdown: MarkdownOptions | undefined = {
   //   }
   // },
   codeTransformers: [
-    transformerTwoslash({
-      typesCache: createFileSystemTypesCache()
-    })
+
   ],
   languages: ['js', 'jsx', 'ts', 'tsx'],
   config: (md) => {
-    md.use(tasklist);
-
     // ========== 1. 基础插件（无冲突） ==========
     md.use(MarkdownItGitHubMentionCard)
 
