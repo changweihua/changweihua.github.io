@@ -16,6 +16,7 @@ import { envParse } from 'vite-plugin-env-parse'
 import { loadEnv } from 'vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import packOrchestrator from 'unplugin-pack-orchestrator/vite'
+import buildTimePlugin from '@zppo/vite-plugin-build-time';
 import { fileURLToPath } from 'node:url'
 
 function getEnvValue(mode: string, target: string) {
@@ -32,6 +33,14 @@ export default defineConfig(({ mode }) => {
     vueJsx(),
     // 代码预览插件保留，但根据原配置始终启用（如有需要可自行条件禁用）
     viteDemoPreviewPlugin(),
+    buildTimePlugin({
+      // 使用 ISO 格式时间
+      format: 'ISO',
+      // 自定义 meta 标签的 name
+      metaName: 'app-release-time',
+      // 仅在生产环境构建时启用
+      enabled: process.env.NODE_ENV === 'production'
+    }),
     Components({
       dirs: ['./src/components', '.vitepress/components'],
       dts: 'typings/components.d.ts',
@@ -73,51 +82,71 @@ export default defineConfig(({ mode }) => {
   const devPlugins = isProduction
     ? []
     : [
-        ValidateEnv({
-          validator: 'builtin',
-          schema: {
-            VITE_APP_PRIMARY_COLOR: Schema.string()
-          }
-        }),
-        envParse(),
-        {
-          name: 'dev-error-handler',
-          configureServer(server: any) {
-            server.middlewares.use('/api', (req: any, _res: any, next: any) => {
-              console.log(`🔍 API Request: ${req.method} ${req.url}`)
-              next()
-            })
-          }
-        },
-        mkcert({
-          savePath: './certs',
-          autoUpgrade: false,
-          force: false
-        })
-      ]
+      ValidateEnv({
+        validator: 'builtin',
+        schema: {
+          VITE_APP_PRIMARY_COLOR: Schema.string()
+        }
+      }),
+      envParse(),
+      {
+        name: 'dev-error-handler',
+        configureServer(server: any) {
+          server.middlewares.use('/api', (req: any, _res: any, next: any) => {
+            console.log(`🔍 API Request: ${req.method} ${req.url}`)
+            next()
+          })
+        }
+      },
+      mkcert({
+        savePath: './certs',
+        autoUpgrade: false,
+        force: false
+      })
+    ]
 
   const prodPlugins = isProduction
     ? [
-        packOrchestrator({
-          pack: {
-            outDir: 'dist',
-            fileName: 'release-[name]-v[version]',
-            format: 'zip',
-            archiveOutDir: './releases',
-            exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**']
-          },
-          hooks: {
-            // 归档后自动追加 SHA1 哈希
-            onAfterBuild: (path, format, checksums) =>
-              path.replace(/(.(?:zip|tar.gz|tar|7z))$/, `-${checksums.sha1.slice(0, 8)}$1`),
-            onError: (err) => console.error('打包失败:', err.message)
-          }
-        })
-      ]
+      packOrchestrator({
+        pack: {
+          outDir: 'dist',
+          fileName: 'release-[name]-v[version]',
+          format: 'zip',
+          archiveOutDir: './releases',
+          exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**']
+        },
+        hooks: {
+          // 归档后自动追加 SHA1 哈希
+          onAfterBuild: (path, format, checksums) =>
+            path.replace(/(.(?:zip|tar.gz|tar|7z))$/, `-${checksums.sha1.slice(0, 8)}$1`),
+          onError: (err) => console.error('打包失败:', err.message)
+        }
+      })
+    ]
     : []
 
   return {
     plugins: [...sharedPlugins, ...devPlugins, ...prodPlugins],
+
+    experimental: {
+      // bundledDev: true,
+      importGlobRestoreExtension: true,
+      hmrPartialAccept: true
+    },
+
+    html: {
+      additionalAssetSources: {
+        "html-import": {
+          srcAttributes: ["src"]
+        },
+        img: {
+          srcAttributes: [
+            "data-src-dark",
+            "data-src-light"
+          ]
+        }
+      }
+    },
 
     resolve: {
       alias: [
@@ -136,6 +165,8 @@ export default defineConfig(({ mode }) => {
         overlay: true
       }
     },
+
+
 
     build: {
       rolldownOptions: {
@@ -194,10 +225,6 @@ export default defineConfig(({ mode }) => {
       exclude: ['vitepress', 'echarts', 'three', 'naive-ui']
     },
 
-    experimental: {
-      importGlobRestoreExtension: true,
-      hmrPartialAccept: true
-    },
 
     devtools: {
       enabled: true

@@ -55,38 +55,25 @@
 
   // ============ 原生日期工具（替代 dayjs） ============
 
-  /**
-   * 格式化时间戳为 "YYYY-MM-DD HH:mm"（Asia/Shanghai 时区）
-   */
+  // 显示具体时间
   function formatDateTime(timestamp: number): string {
-    const date = new Date(timestamp)
-    const formatter = new Intl.DateTimeFormat('en-CA', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-      timeZone: 'Asia/Shanghai'
-    })
-    const parts = formatter.formatToParts(date)
-    const map = Object.fromEntries(parts.map((p) => [p.type, p.value]))
-    return `${map.year}-${map.month}-${map.day} ${map.hour}:${map.minute}`
+    const localMs = timestamp + 8 * 60 * 60 * 1000
+    const d = new Date(localMs)
+    const year = d.getUTCFullYear()
+    const month = String(d.getUTCMonth() + 1).padStart(2, '0')
+    const day = String(d.getUTCDate()).padStart(2, '0')
+    const hour = String(d.getUTCHours()).padStart(2, '0')
+    const minute = String(d.getUTCMinutes()).padStart(2, '0')
+    return `${year}-${month}-${day} ${hour}:${minute}`
   }
 
-  /**
-   * 计算相对时间（中文），例如 "3天前"、"2小时后"
-   * 与 dayjs().fromNow() 行为一致
-   */
+  // 显示相对时间（fromNow）
   function fromNow(timestamp: number): string {
     const now = Date.now()
     const diffMs = timestamp - now
     const diffSec = Math.round(diffMs / 1000)
     const absSec = Math.abs(diffSec)
-
-    let unit: Intl.RelativeTimeFormatUnit
-    let value: number
-
+    let unit: Intl.RelativeTimeFormatUnit, value: number
     if (absSec < 60) {
       unit = 'second'
       value = diffSec
@@ -97,18 +84,15 @@
       unit = 'hour'
       value = Math.round(diffSec / 3600)
     } else if (absSec < 2592000) {
-      // 30天
       unit = 'day'
       value = Math.round(diffSec / 86400)
     } else if (absSec < 31536000) {
-      // 365天
       unit = 'month'
       value = Math.round(diffSec / 2592000)
     } else {
       unit = 'year'
       value = Math.round(diffSec / 31536000)
     }
-
     const rtf = new Intl.RelativeTimeFormat('zh-CN', { numeric: 'auto' })
     return rtf.format(value, unit)
   }
