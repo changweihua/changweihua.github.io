@@ -170,6 +170,9 @@ export default defineConfig(({ mode }) => {
 
     build: {
       rolldownOptions: {
+        checks: {
+          invalidAnnotation: false
+        },
         output: {
           codeSplitting: true
           // chunkFileNames: 'assets/js/[name]-[hash:8].js',

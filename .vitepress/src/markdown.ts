@@ -27,6 +27,7 @@ import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
 import { createMarkdownExit } from 'markdown-exit'
+import { tasklist } from "@mdit/plugin-tasklist";
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -200,6 +201,10 @@ const markdown: MarkdownOptions | undefined = {
       )
       return result
     }
+
+    md.use(tasklist, {
+      // your options, optional
+    });
 
     // ========== 5. 表格和文字样式增强（无冲突） ==========
     // ---------- 5. 表格与文本样式 ----------
