@@ -5,34 +5,102 @@
     to="body"
   >
     <div
-      class="fixed inset-0 flex flex-col items-center justify-center z-9999 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm transition-opacity duration-300"
-      :class="{ 'opacity-0': !displaySpinning }"
+      class="spin-overlay"
+      :class="{ 'spin-overlay-hidden': !displaySpinning }"
     >
       <div
-        class="relative"
-        :class="containerSizeClass"
+        class="spin-container"
+        :class="sizeClass"
         :style="containerStyle"
       >
-        <SpinAnimation
-          :type="type"
-          :color="computedColor"
-        />
+        <div
+          class="spin-animation"
+          :class="`spin-${type}`"
+        >
+          <!-- 不同动画类型 -->
+          <template v-if="type === 'default'">
+            <div
+              v-for="n in 12"
+              :key="n"
+              class="spin-default-item"
+              :style="{
+                transform: `rotate(${(n - 1) * 30}deg) translateY(-180%)`,
+                animationDelay: `${(n - 1) * 0.083}s`,
+                opacity: 1 - (n - 1) * 0.08,
+                background: color
+              }"
+            ></div>
+          </template>
+          <template v-else-if="type === 'orbit'">
+            <div
+              class="orbit-core"
+              :style="{ borderColor: color }"
+            ></div>
+            <div
+              class="orbit-track"
+              :style="{ borderTopColor: color }"
+            ></div>
+            <div
+              class="orbit-satellite"
+              :style="{ background: color }"
+            ></div>
+          </template>
+          <template v-else-if="type === 'pulse'">
+            <div
+              class="pulse-core"
+              :style="{ background: color }"
+            ></div>
+            <div
+              v-for="n in 3"
+              :key="n"
+              class="pulse-wave"
+              :style="{ borderColor: color, animationDelay: `${(n - 1) * 0.5}s` }"
+            ></div>
+          </template>
+          <template v-else-if="type === 'flip'">
+            <div class="flip-cube">
+              <div
+                v-for="face in ['front', 'back', 'left', 'right', 'top', 'bottom']"
+                :key="face"
+                class="flip-face"
+                :class="`flip-${face}`"
+                :style="{ background: color }"
+              ></div>
+            </div>
+          </template>
+          <template v-else-if="type === 'bounce'">
+            <div
+              v-for="n in 3"
+              :key="n"
+              class="bounce-dot"
+              :style="{ background: color, animationDelay: `${(n - 1) * 0.15}s` }"
+            ></div>
+          </template>
+          <template v-else-if="type === 'neural'">
+            <div
+              class="neural-core"
+              :style="{ background: color }"
+            ></div>
+            <div
+              v-for="n in 6"
+              :key="n"
+              class="neural-node"
+              :style="{
+                background: color,
+                top: `${50 + 40 * Math.sin(((n - 1) * 60 * Math.PI) / 180)}%`,
+                left: `${50 + 40 * Math.cos(((n - 1) * 60 * Math.PI) / 180)}%`,
+                animationDelay: `${(n - 1) * 0.2}s`
+              }"
+            ></div>
+          </template>
+        </div>
       </div>
 
       <div
         v-if="tip"
-        class="mt-4 text-base font-medium text-gray-700 dark:text-gray-200"
+        class="spin-tip"
       >
-        <Ticker
-          :value="tickerValue"
-          :duration="800"
-          easing="easeOutCubic"
-          :charWidth="1.2"
-          direction="ANY"
-          :characterLists="[Presets.ALPHANUMERIC]"
-          autoScale
-          fadingEdge
-        />
+        {{ tip }}
       </div>
     </div>
   </teleport>
@@ -49,23 +117,100 @@
 
     <div
       v-if="displaySpinning && !fullscreen"
-      class="absolute inset-0 flex flex-col items-center justify-center z-10 transition-all duration-300"
-      :class="['bg-white/80 dark:bg-gray-900/80', showMask ? 'backdrop-blur-sm' : '']"
+      class="spin-mask"
+      :class="showMask ? 'backdrop-blur-sm' : ''"
     >
       <div
-        class="relative"
-        :class="sizeClasses"
+        class="spin-container"
+        :class="sizeClass"
         :style="containerStyle"
       >
-        <SpinAnimation
-          :type="type"
-          :color="computedColor"
-        />
+        <div
+          class="spin-animation"
+          :class="`spin-${type}`"
+        >
+          <!-- 同上，复用动画内容 -->
+          <template v-if="type === 'default'">
+            <div
+              v-for="n in 12"
+              :key="n"
+              class="spin-default-item"
+              :style="{
+                transform: `rotate(${(n - 1) * 30}deg) translateY(-180%)`,
+                animationDelay: `${(n - 1) * 0.083}s`,
+                opacity: 1 - (n - 1) * 0.08,
+                background: color
+              }"
+            ></div>
+          </template>
+          <template v-else-if="type === 'orbit'">
+            <div
+              class="orbit-core"
+              :style="{ borderColor: color }"
+            ></div>
+            <div
+              class="orbit-track"
+              :style="{ borderTopColor: color }"
+            ></div>
+            <div
+              class="orbit-satellite"
+              :style="{ background: color }"
+            ></div>
+          </template>
+          <template v-else-if="type === 'pulse'">
+            <div
+              class="pulse-core"
+              :style="{ background: color }"
+            ></div>
+            <div
+              v-for="n in 3"
+              :key="n"
+              class="pulse-wave"
+              :style="{ borderColor: color, animationDelay: `${(n - 1) * 0.5}s` }"
+            ></div>
+          </template>
+          <template v-else-if="type === 'flip'">
+            <div class="flip-cube">
+              <div
+                v-for="face in ['front', 'back', 'left', 'right', 'top', 'bottom']"
+                :key="face"
+                class="flip-face"
+                :class="`flip-${face}`"
+                :style="{ background: color }"
+              ></div>
+            </div>
+          </template>
+          <template v-else-if="type === 'bounce'">
+            <div
+              v-for="n in 3"
+              :key="n"
+              class="bounce-dot"
+              :style="{ background: color, animationDelay: `${(n - 1) * 0.15}s` }"
+            ></div>
+          </template>
+          <template v-else-if="type === 'neural'">
+            <div
+              class="neural-core"
+              :style="{ background: color }"
+            ></div>
+            <div
+              v-for="n in 6"
+              :key="n"
+              class="neural-node"
+              :style="{
+                background: color,
+                top: `${50 + 40 * Math.sin(((n - 1) * 60 * Math.PI) / 180)}%`,
+                left: `${50 + 40 * Math.cos(((n - 1) * 60 * Math.PI) / 180)}%`,
+                animationDelay: `${(n - 1) * 0.2}s`
+              }"
+            ></div>
+          </template>
+        </div>
       </div>
 
       <div
         v-if="tip"
-        class="mt-3 text-sm font-medium text-gray-600 dark:text-gray-300"
+        class="spin-tip"
         :class="tipSizeClass"
       >
         {{ tip }}
@@ -75,10 +220,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, watch, onUnmounted, watchEffect } from 'vue'
-  import { Ticker, Presets } from '@tombcato/smart-ticker/vue'
-  import '@tombcato/smart-ticker/style.css'
-  import SpinAnimation from './SpinAnimation.vue'
+  import { computed, ref, watch, onUnmounted } from 'vue'
 
   interface SpinProps {
     spinning?: boolean
@@ -102,15 +244,11 @@
     wrapperClass: 'spin-holder'
   })
 
-  // ---------- 响应式 ----------
   const displaySpinning = ref(props.spinning)
   const isVisible = ref(false)
-  const tickerValue = ref(props.tip || '加载中')
-
   let delayTimer: ReturnType<typeof setTimeout> | null = null
-  let tickerTimer: ReturnType<typeof setInterval> | null = null
 
-  // ---------- 延迟逻辑 ----------
+  // 延迟逻辑
   watch(
     () => props.spinning,
     (newVal) => {
@@ -130,7 +268,7 @@
     { immediate: true }
   )
 
-  // ---------- 全屏可见性 ----------
+  // 全屏可见性（淡出）
   watch(
     () => displaySpinning.value,
     (newVal) => {
@@ -146,57 +284,286 @@
     }
   )
 
-  // ---------- Ticker 文本轮换 ----------
-  function startTickerTimer() {
-    if (tickerTimer) clearInterval(tickerTimer)
-    if (!props.tip) {
-      tickerValue.value = ''
-      return
-    }
-    const words = ['Smart Ticker', 'Small Diff', 'CMONO.NET Dif@#$']
-    let idx = 0
-    tickerValue.value = words[0]
-    tickerTimer = setInterval(() => {
-      idx = (idx + 1) % words.length
-      tickerValue.value = words[idx]
-    }, 1200)
-  }
-
-  watchEffect(() => {
-    startTickerTimer()
+  onUnmounted(() => {
+    if (delayTimer) clearTimeout(delayTimer)
   })
 
-  // ---------- 计算属性 ----------
-  const computedColor = computed(() => props.color || '#3b82f6')
-
-  const containerSizeClass = computed(() => {
-    const map = { small: 'w-12 h-12', default: 'w-16 h-16', large: 'w-20 h-20' }
+  const color = computed(() => props.color || '#3b82f6')
+  const sizeClass = computed(() => {
+    const map = { small: 'spin-size-small', default: 'spin-size-default', large: 'spin-size-large' }
     return map[props.size]
   })
-
-  const sizeClasses = computed(() => {
-    const map = { small: 'w-6 h-6', default: 'w-9 h-9', large: 'w-12 h-12' }
-    return map[props.size]
-  })
-
   const tipSizeClass = computed(() => {
     const map = { small: 'text-xs', default: 'text-sm', large: 'text-base' }
     return map[props.size]
   })
-
   const containerStyle = computed(() => ({
     '--spin-size': props.size === 'small' ? '1.5rem' : props.size === 'large' ? '3rem' : '2.25rem'
   }))
-
-  // ---------- 清理 ----------
-  onUnmounted(() => {
-    if (delayTimer) clearTimeout(delayTimer)
-    if (tickerTimer) clearInterval(tickerTimer)
-  })
 </script>
 
 <style scoped>
-  .z-9999 {
+  /* ===== 全局遮罩 ===== */
+  .spin-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
     z-index: 9999;
+    transition: opacity 0.3s;
+  }
+  .spin-overlay-hidden {
+    opacity: 0;
+  }
+  .spin-mask {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+  }
+  .spin-tip {
+    margin-top: 1rem;
+    font-weight: 500;
+    color: #4b5563;
+  }
+  .spin-holder {
+    position: relative;
+  }
+
+  /* ===== 容器尺寸 ===== */
+  .spin-size-small .spin-container {
+    width: 3rem;
+    height: 3rem;
+  }
+  .spin-size-default .spin-container {
+    width: 4rem;
+    height: 4rem;
+  }
+  .spin-size-large .spin-container {
+    width: 5rem;
+    height: 5rem;
+  }
+  .spin-container {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .spin-animation {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== 通用样式 ===== */
+  .spin-default-item,
+  .orbit-core,
+  .orbit-track,
+  .orbit-satellite,
+  .pulse-core,
+  .pulse-wave,
+  .flip-face,
+  .bounce-dot,
+  .neural-core,
+  .neural-node {
+    position: absolute;
+    border-radius: 9999px;
+  }
+
+  /* ===== default ===== */
+  .spin-default {
+    animation: spin-rotate 1.2s linear infinite;
+  }
+  @keyframes spin-rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .spin-default-item {
+    top: 0;
+    left: 50%;
+    width: 8%;
+    height: 25%;
+    transform-origin: center bottom;
+    animation: spin-fade 1.2s linear infinite;
+  }
+  @keyframes spin-fade {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
+
+  /* ===== orbit ===== */
+  .orbit-core {
+    inset: 0;
+    border: 2px solid;
+    opacity: 0.2;
+  }
+  .orbit-track {
+    inset: 0;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    animation: orbit-spin 2s linear infinite;
+  }
+  @keyframes orbit-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .orbit-satellite {
+    top: 0;
+    left: 50%;
+    width: 25%;
+    height: 25%;
+    transform: translateX(-50%);
+    animation: orbit-bob 2s linear infinite;
+  }
+  @keyframes orbit-bob {
+    0% {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-50%) scale(1.3);
+    }
+    100% {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+  }
+
+  /* ===== pulse ===== */
+  .pulse-core {
+    inset: 0;
+  }
+  .pulse-wave {
+    inset: 0;
+    border: 2px solid;
+    animation: pulse-expand 1.5s ease-out infinite;
+  }
+  @keyframes pulse-expand {
+    0% {
+      transform: scale(0.5);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+
+  /* ===== flip ===== */
+  .flip-cube {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: flip-rotate 3s ease-in-out infinite;
+  }
+  @keyframes flip-rotate {
+    0% {
+      transform: rotateX(0) rotateY(0);
+    }
+    25% {
+      transform: rotateX(90deg) rotateY(0);
+    }
+    50% {
+      transform: rotateX(90deg) rotateY(90deg);
+    }
+    75% {
+      transform: rotateX(180deg) rotateY(90deg);
+    }
+    100% {
+      transform: rotateX(180deg) rotateY(180deg);
+    }
+  }
+  .flip-face {
+    inset: 0;
+    border-radius: 0.5rem;
+    opacity: 0.8;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  .flip-front {
+    transform: translateZ(calc(var(--spin-size) * 0.5));
+  }
+  .flip-back {
+    transform: translateZ(calc(var(--spin-size) * -0.5)) rotateY(180deg);
+  }
+  .flip-left {
+    transform: translateX(calc(var(--spin-size) * -0.5)) rotateY(-90deg);
+  }
+  .flip-right {
+    transform: translateX(calc(var(--spin-size) * 0.5)) rotateY(90deg);
+  }
+  .flip-top {
+    transform: translateY(calc(var(--spin-size) * -0.5)) rotateX(90deg);
+  }
+  .flip-bottom {
+    transform: translateY(calc(var(--spin-size) * 0.5)) rotateX(-90deg);
+  }
+
+  /* ===== bounce ===== */
+  .spin-bounce {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.125rem;
+  }
+  .bounce-dot {
+    width: 25%;
+    height: 25%;
+    border-radius: 9999px;
+    animation: bounce 1.4s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%,
+    80%,
+    100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+
+  /* ===== neural ===== */
+  .neural-core {
+    inset: 0;
+    animation: neural-pulse 2s ease-in-out infinite;
+  }
+  @keyframes neural-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0.3;
+    }
+  }
+  .neural-node {
+    width: 25%;
+    height: 25%;
+    border-radius: 9999px;
+    animation: neural-node-pulse 2s ease-in-out infinite;
+  }
+  @keyframes neural-node-pulse {
+    0%,
+    100% {
+      transform: scale(0.8);
+      opacity: 0.6;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
   }
 </style>

@@ -52,6 +52,7 @@
   import { marked } from 'marked'
   import DOMPurify from 'dompurify'
   import { delay } from 'lodash-es'
+  import SpinHolder from '@vp/components/SpinHolder.vue'
 
   // ============ 原生日期工具（替代 dayjs） ============
 
