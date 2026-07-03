@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sticky Sidebar with Bottom Alignment</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f9f9f9;
+        padding: 40px 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .sticky-sidebar {
+        display: block;
+        width: 100%;
+      }
+
+      .sticky-sidebar__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: flex-start; /* 👈 关键！避免子项被 stretch */
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      /* 加深 .sticky-sidebar__content 的阴影 */
+      .sticky-sidebar__content {
+        background-color: #ffffff;
+        padding: 24px;
+        border-radius: 12px;
+        /* 增加阴影的垂直偏移、模糊半径、扩散半径和颜色，使边缘更明显 */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      }
+
+      /* 👇 核心：sticky 行为 */
+      .sticky-sidebar__sticky {
+        position: sticky;
+        top: 20px;
+        z-index: 10;
+      }
+
+      .image-placeholder {
+        width: 150px;
+        height: 150px;
+        background-color: #e0e0e0;
+        color: #000000;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        text-align: center;
+        padding: 10px;
+      }
+
+      @media screen and (max-width: 989px) {
+        .sticky-sidebar__container {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .sticky-sidebar__sticky {
+          position: static !important;
+        }
+      }
+
+      /* 推荐商品区域 */
+      .recommended-products {
+        max-width: 1200px;
+        margin: 80px auto 0;
+        padding: 0 20px;
+      }
+
+      .recommended-products h2 {
+        text-align: center;
+        margin-bottom: 32px;
+        font-size: 28px;
+        color: #111;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 24px;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s;
+      }
+
+      .product-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: #eee;
+      }
+
+      .product-card .info {
+        padding: 16px;
+      }
+
+      .product-card .info h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+
+      .product-card .info .price {
+        color: #e53935;
+        font-weight: bold;
+      }
+
+      /* 滚动提示 */
+      .scroll-hint {
+        text-align: center;
+        margin-top: 40px;
+        color: #888;
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 主 Sticky 区域 -->
+    <sticky-sidebar class="sticky-sidebar" data-sticky-offset="20">
+      <div class="sticky-sidebar__container">
+        <!-- 左侧：短内容 -->
+        <div class="sticky-sidebar__left" data-sidebar-side="left">
+          <div class="sticky-sidebar__content">
+            <h2>🏃‍♂️ Product Media</h2>
+            <p>This is the product image/video gallery area.</p>
+            <div
+              style="
+                background: #eee;
+                height: 300px;
+                margin-top: 16px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              [Product Image]
+            </div>
+            <p style="margin-top: 16px; font-size: 14px; color: #666">
+              (Short content — will stick while scrolling)
+            </p>
+
+            <!-- 动态内容：可展开的图片库 -->
+            <details
+              style="
+                margin-top: 20px;
+                padding: 12px;
+                background: #f0f0f0;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              <summary style="font-weight: bold; user-select: none">
+                🖼️ More Images (Click to expand)
+              </summary>
+              <div
+                style="
+                  margin-top: 12px;
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 8px;
+                "
+              >
+                <div class="image-placeholder">[image 1]</div>
+                <div class="image-placeholder">[image 2]</div>
+                <div class="image-placeholder">[image 3]</div>
+                <div class="image-placeholder">[image 4]</div>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 右侧：超长内容 -->
+        <div class="sticky-sidebar__right" data-sidebar-side="right">
+          <div class="sticky-sidebar__content">
+            <h2>🛒 Variants & Add to Cart</h2>
+            <p>Select your size, color, and add to cart below.</p>
+
+            <div style="margin: 20px 0">
+              <label><strong>Size:</strong></label>
+              <select
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin-top: 6px;
+                  border: 1px solid #ddd;
+                  border-radius: 6px;
+                "
+              >
+                <option>US 7</option>
+                <option>US 8</option>
+                <option>US 9</option>
+                <option>US 10</option>
+                <option>US 11</option>
+                <option>US 12</option>
+              </select>
+            </div>
+
+            <button
+              style="
+                background: #1a73e8;
+                color: white;
+                border: none;
+                padding: 14px 24px;
+                font-size: 18px;
+                border-radius: 8px;
+                width: 100%;
+                margin: 20px 0;
+              "
+            >
+              Add to Cart
+            </button>
+
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee" />
+
+            <h3>📝 Product Description</h3>
+            <p>
+              This premium running shoe features lightweight mesh, responsive
+              foam, and durable outsole.
+            </p>
+
+            <!-- 动态内容：可展开的详细介绍 -->
+            <details
+              style="
+                margin-top: 30px;
+                padding: 16px;
+                background: #f9f9f9;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              <summary
+                style="font-weight: bold; font-size: 16px; user-select: none"
+              >
+                📖 Detailed Features & Benefits
+              </summary>
+              <div style="margin-top: 16px; line-height: 1.8; color: #555">
+                <h4 style="margin-top: 16px; margin-bottom: 8px; color: #333">
+                  Advanced Cushioning Technology
+                </h4>
+                <p>
+                  Our premium running shoes feature cutting-edge cushioning
+                  technology that provides exceptional comfort and support. The
+                  multi-layer foam construction absorbs impact while maintaining
+                  responsiveness, allowing you to run longer with less fatigue.
+                </p>
+
+                <h4 style="margin-top: 16px; margin-bottom: 8px; color: #333">
+                  Breathable Mesh Upper
+                </h4>
+                <p>
+                  The engineered mesh upper ensures maximum breathability,
+                  keeping your feet cool and dry during intense workouts. The
+                  strategic ventilation zones allow air to flow freely,
+                  preventing moisture buildup and odor formation even during
+                  extended running sessions.
+                </p>
+
+                <h4 style="margin-top: 16px; margin-bottom: 8px; color: #333">
+                  Durable Outsole
+                </h4>
+                <p>
+                  The reinforced rubber outsole is designed to withstand
+                  rigorous use on various terrains. With our proprietary grip
+                  pattern, you'll experience superior traction on both wet and
+                  dry surfaces, ensuring safety and confidence with every
+                  stride.
+                </p>
+
+                <h4 style="margin-top: 16px; margin-bottom: 8px; color: #333">
+                  Lightweight Design
+                </h4>
+                <p>
+                  Weighing just 7.2 ounces per shoe, our design minimizes energy
+                  expenditure while maintaining structural integrity. The
+                  lightweight construction allows for faster acceleration and
+                  smoother transitions, making it ideal for both casual joggers
+                  and competitive runners.
+                </p>
+
+                <h4 style="margin-top: 16px; margin-bottom: 8px; color: #333">
+                  Sustainability
+                </h4>
+                <p>
+                  We're committed to environmental responsibility. Our shoes are
+                  crafted using 30% recycled materials, reducing waste without
+                  compromising performance. The eco-friendly manufacturing
+                  process minimizes water usage and carbon emissions, making
+                  this a responsible choice for conscious consumers.
+                </p>
+
+                <h4 style="margin-top: 16px; margin-bottom: 8px; color: #333">
+                  Fit & Comfort
+                </h4>
+                <p>
+                  Designed with an ergonomic fit, these shoes conform to your
+                  foot's natural shape. The padded collar and tongue provide
+                  additional comfort, while the secure lacing system ensures a
+                  snug fit that reduces slippage and blisters during extended
+                  wear.
+                </p>
+
+                <h4 style="margin-top: 16px; margin-bottom: 8px; color: #333">
+                  Performance Metrics
+                </h4>
+                <p>Testing by professional athletes has shown:</p>
+                <ul style="margin-left: 20px; margin-top: 8px">
+                  <li>15% improvement in running efficiency</li>
+                  <li>25% reduction in impact-related fatigue</li>
+                  <li>40% increase in comfort rating vs. competitors</li>
+                  <li>99% durability over 300+ miles of running</li>
+                </ul>
+
+                <h4 style="margin-top: 16px; margin-bottom: 8px; color: #333">
+                  Care Instructions
+                </h4>
+                <p>
+                  To maintain optimal performance, hand wash with mild soap and
+                  cool water. Air dry naturally away from direct heat sources.
+                  Regular cleaning helps preserve the breathable mesh and
+                  extends the lifespan of your shoes.
+                </p>
+              </div>
+            </details>
+
+            <!-- 另一个可展开的动态内容 -->
+            <details
+              style="
+                margin-top: 20px;
+                padding: 16px;
+                background: #f9f9f9;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              <summary
+                style="font-weight: bold; font-size: 16px; user-select: none"
+              >
+                ⭐ Customer Reviews
+              </summary>
+              <div style="margin-top: 16px">
+                <div
+                  style="
+                    margin-bottom: 16px;
+                    padding: 12px;
+                    background: white;
+                    border-left: 4px solid #ffc107;
+                    border-radius: 4px;
+                  "
+                >
+                  <p style="font-weight: bold; margin-bottom: 4px">
+                    John D. ⭐⭐⭐⭐⭐
+                  </p>
+                  <p>
+                    "Best shoes I've ever owned! The comfort is incredible, and
+                    they last forever. Highly recommend for anyone serious about
+                    running."
+                  </p>
+                </div>
+                <div
+                  style="
+                    margin-bottom: 16px;
+                    padding: 12px;
+                    background: white;
+                    border-left: 4px solid #ffc107;
+                    border-radius: 4px;
+                  "
+                >
+                  <p style="font-weight: bold; margin-bottom: 4px">
+                    Sarah M. ⭐⭐⭐⭐⭐
+                  </p>
+                  <p>
+                    "I've tried many brands, but these are my favorite. The
+                    support and cushioning are perfect. My feet feel amazing
+                    after long runs."
+                  </p>
+                </div>
+                <div
+                  style="
+                    margin-bottom: 16px;
+                    padding: 12px;
+                    background: white;
+                    border-left: 4px solid #ffc107;
+                    border-radius: 4px;
+                  "
+                >
+                  <p style="font-weight: bold; margin-bottom: 4px">
+                    Mike T. ⭐⭐⭐⭐
+                  </p>
+                  <p>
+                    "Great shoes! True to size, very comfortable. Only minor
+                    issue with sizing guide, but overall fantastic product."
+                  </p>
+                </div>
+                <div
+                  style="
+                    margin-bottom: 16px;
+                    padding: 12px;
+                    background: white;
+                    border-left: 4px solid #ffc107;
+                    border-radius: 4px;
+                  "
+                >
+                  <p style="font-weight: bold; margin-bottom: 4px">
+                    Emma L. ⭐⭐⭐⭐⭐
+                  </p>
+                  <p>
+                    "Perfect fit, amazing comfort level. These shoes transformed
+                    my running experience. Will definitely buy again!"
+                  </p>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </sticky-sidebar>
+
+    <!-- 👇 新增：推荐商品区域（让页面更长，并展示 sticky 自然结束） -->
+    <div class="recommended-products">
+      <h2>You May Also Like</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img
+            src="https://via.placeholder.com/300x200/e0e0e0/000000?text=Trail+Shoe"
+            alt="Trail Shoe"
+          />
+          <div class="info">
+            <h3>Trail Running Shoe</h3>
+            <div class="price">$119.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://via.placeholder.com/300x200/e0e0e0/000000?text=Gym+Shoe"
+            alt="Gym Shoe"
+          />
+          <div class="info">
+            <h3>Gym Training Shoe</h3>
+            <div class="price">$99.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://via.placeholder.com/300x200/e0e0e0/000000?text=Running+Socks"
+            alt="Socks"
+          />
+          <div class="info">
+            <h3>Performance Socks (3-Pack)</h3>
+            <div class="price">$19.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://via.placeholder.com/300x200/e0e0e0/000000?text=Water+Bottle"
+            alt="Bottle"
+          />
+          <div class="info">
+            <h3>Insulated Water Bottle</h3>
+            <div class="price">$29.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://via.placeholder.com/300x200/e0e0e0/000000?text=Trail+Shoe"
+            alt="Trail Shoe"
+          />
+          <div class="info">
+            <h3>Trail Running Shoe</h3>
+            <div class="price">$119.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://via.placeholder.com/300x200/e0e0e0/000000?text=Gym+Shoe"
+            alt="Gym Shoe"
+          />
+          <div class="info">
+            <h3>Gym Training Shoe</h3>
+            <div class="price">$99.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://via.placeholder.com/300x200/e0e0e0/000000?text=Running+Socks"
+            alt="Socks"
+          />
+          <div class="info">
+            <h3>Performance Socks (3-Pack)</h3>
+            <div class="price">$19.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://via.placeholder.com/300x200/e0e0e0/000000?text=Water+Bottle"
+            alt="Bottle"
+          />
+          <div class="info">
+            <h3>Insulated Water Bottle</h3>
+            <div class="price">$29.99</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      ✅ 尝试以下操作来观察 ResizeObserver 的实时效果：<br />
+      1️⃣ 展开左侧 "More Images" → 左侧变高<br />
+      2️⃣ 展开右侧 "Detailed Features & Benefits" → 右侧变高<br />
+      3️⃣ 观察 sticky 策略是否动态调整（哪一侧保持固定）<br />
+      4️⃣ 滚动到底部，观察 sticky 在容器结束时自然结束（不会穿透父容器）
+    </div>
+
+    <script>
+      (function () {
+        class StickySidebar extends HTMLElement {
+          constructor() {
+            super();
+            this.leftSide = null;
+            this.rightSide = null;
+            this.stickyOffset = 20;
+            this.resizeObserver = null;
+            this.isDesktop = window.innerWidth > 989;
+          }
+
+          connectedCallback() {
+            this.leftSide = this.querySelector('[data-sidebar-side="left"]');
+            this.rightSide = this.querySelector('[data-sidebar-side="right"]');
+            this.stickyOffset = parseInt(this.dataset.stickyOffset) || 20;
+
+            this.setupStickyBehavior();
+            this.setupResizeObserver();
+
+            window.addEventListener("resize", () => {
+              const wasDesktop = this.isDesktop;
+              this.isDesktop = window.innerWidth > 989;
+              if (wasDesktop !== this.isDesktop) {
+                this.setupStickyBehavior();
+              }
+            });
+          }
+
+          setupResizeObserver() {
+            if (!window.ResizeObserver) return;
+
+            this.resizeObserver = new ResizeObserver(() => {
+              if (this.isDesktop) {
+                setTimeout(() => this.setupStickyBehavior(), 50);
+              }
+            });
+
+            this.resizeObserver.observe(this.leftSide);
+            this.resizeObserver.observe(this.rightSide);
+          }
+
+          setupStickyBehavior() {
+            if (!this.isDesktop) {
+              this.leftSide.classList.remove("sticky-sidebar__sticky");
+              this.rightSide.classList.remove("sticky-sidebar__sticky");
+              return;
+            }
+
+            const leftHeight = this.leftSide.offsetHeight;
+            const rightHeight = this.rightSide.offsetHeight;
+
+            this.leftSide.classList.remove("sticky-sidebar__sticky");
+            this.rightSide.classList.remove("sticky-sidebar__sticky");
+
+            if (leftHeight < rightHeight) {
+              this.leftSide.classList.add("sticky-sidebar__sticky");
+              this.leftSide.style.top = this.stickyOffset + "px";
+            } else if (rightHeight < leftHeight) {
+              this.rightSide.classList.add("sticky-sidebar__sticky");
+              this.rightSide.style.top = this.stickyOffset + "px";
+            }
+          }
+        }
+
+        customElements.define("sticky-sidebar", StickySidebar);
+      })();
+    </script>
+  </body>
+</html>

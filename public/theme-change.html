@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深色模式切换动画（修正版）</title>
+
+    <!-- Element Plus 样式与暗色变量 -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-plus/dist/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-plus/theme-chalk/dark/css-vars.css"
+    />
+
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--el-bg-color);
+        color: var(--el-text-color-primary);
+        transition: color 300ms ease, background-color 300ms ease;
+        font-family: var(--el-font-family), -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+          "Apple Color Emoji", "Segoe UI Emoji";
+      }
+
+      .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        padding: 12px 16px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: rgba(127, 127, 127, 0.05);
+        backdrop-filter: saturate(180%) blur(8px);
+        border-bottom: 1px solid var(--el-border-color);
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+    </style>
+
+    <style>
+      ::view-transition-new(root),
+      ::view-transition-old(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+
+      ::view-transition-old(root) {
+        z-index: 1;
+      }
+
+      ::view-transition-new(root) {
+        z-index: 2147483646;
+      }
+
+      html.dark::view-transition-old(root) {
+        z-index: 2147483646;
+      }
+
+      html.dark::view-transition-new(root) {
+        z-index: 1;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        opacity: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="toolbar">
+        <el-switch
+          class="theme-switch"
+          :model-value="isDark"
+          @click="onToggleClick"
+          :active-icon="Moon"
+          :inactive-icon="Sunny"
+          active-text="深色"
+          inactive-text="浅色"
+        ></el-switch>
+      </div>
+
+      <div class="container">
+        <el-space direction="vertical" size="large" style="width: 100%">
+          <el-card shadow="hover">
+            <template #header>
+              <span>示例卡片</span>
+            </template>
+            <div>当前主题：{{ isDark ? '深色' : '浅色' }}</div>
+            <el-divider></el-divider>
+            <el-space wrap>
+              <el-button type="primary">主要按钮</el-button>
+              <el-button type="success">成功按钮</el-button>
+              <el-button type="warning">警告按钮</el-button>
+              <el-button type="danger">危险按钮</el-button>
+              <el-button>默认按钮</el-button>
+            </el-space>
+          </el-card>
+
+          <el-alert
+            title="这是一条成功提示"
+            type="success"
+            show-icon
+          ></el-alert>
+          <el-alert title="这是一条信息提示" type="info" show-icon></el-alert>
+          <el-alert
+            title="这是一条警告提示"
+            type="warning"
+            show-icon
+          ></el-alert>
+          <el-alert title="这是一条错误提示" type="error" show-icon></el-alert>
+        </el-space>
+      </div>
+    </div>
+
+    <!-- Vue 3 & Element Plus CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/element-plus/dist/index.full.min.js"></script>
+    <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+
+    <script>
+      const { createApp, ref, onMounted, nextTick } = Vue;
+
+      function setupThemeClass(isDark) {
+        document.documentElement.classList.toggle("dark", isDark);
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      }
+
+      function computeMaxRadius(x, y) {
+        const maxX = Math.max(x, window.innerWidth - x);
+        const maxY = Math.max(y, window.innerHeight - y);
+        return Math.hypot(maxX, maxY);
+      }
+
+      const app = createApp({
+        setup() {
+          const isDark = ref(false);
+          let tempViewStyle = null; // 保存临时注入的 style 元素引用，方便清理
+
+          const initTheme = () => {
+            const saved = localStorage.getItem("theme");
+            const preferDark =
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const next = saved ? saved === "dark" : preferDark;
+            isDark.value = next;
+            setupThemeClass(next);
+          };
+
+          const cleanTempStyle = () => {
+            if (tempViewStyle && tempViewStyle.parentNode) {
+              tempViewStyle.parentNode.removeChild(tempViewStyle);
+              tempViewStyle = null;
+            }
+          };
+
+          function onToggleClick(event) {
+            const isAppearanceTransition =
+              document.startViewTransition &&
+              !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (!isAppearanceTransition || !event) {
+              isDark.value = !isDark.value;
+              return;
+            }
+            const x = event.clientX;
+            const y = event.clientY;
+            const endRadius = computeMaxRadius(x, y);
+            const transition = document.startViewTransition(async () => {
+              isDark.value = !isDark.value;
+              setupThemeClass(isDark.value);
+              await nextTick();
+            });
+            console.log(endRadius, "🎈");
+
+            transition.ready.then(() => {
+              const clipPath = [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`,
+              ];
+              document.documentElement.animate(
+                {
+                  clipPath: isDark.value ? [...clipPath].reverse() : clipPath,
+                },
+                {
+                  duration: 450,
+                  easing: "ease-in",
+                  fill: "both",
+                  pseudoElement: isDark.value
+                    ? "::view-transition-old(root)"
+                    : "::view-transition-new(root)",
+                }
+              );
+            });
+          }
+
+          onMounted(initTheme);
+
+          const { Moon, Sunny } = ElementPlusIconsVue;
+
+          return { isDark, onToggleClick, Moon, Sunny };
+        },
+      });
+
+      // 全局注册 Element Plus 与图标（可选）
+      Object.entries(ElementPlusIconsVue).forEach(([key, component]) => {
+        app.component(key, component);
+      });
+      app.use(ElementPlus);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
