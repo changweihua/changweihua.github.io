@@ -6,7 +6,7 @@ title: 前端二进制数组完全指南
 description: ArrayBuffer、TypedArray、DataView 一次讲透
 date: 2026-07-02 08:25:00
 pageClass: blog-page-class
-cover: /covers/springboot.svg
+cover: /covers/typescript.svg
 ---
 
 二进制数组是 JavaScript 操作二进制数据的接口，分别有 `ArrayBuffer` 对象、`TypedArray` 视图和 `DataView` 视图，它们都以数组的语法处理二进制数据。

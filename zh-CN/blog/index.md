@@ -26,7 +26,7 @@ import { delay } from "lodash-es";
 import LinkListView from '@/components/LinkListView.vue';
 import CursorShineCards from '@/components/CursorShineCards.vue';
 import BlogIndex from "@vp/components/BlogIndex.vue"
-import SpinHolder from "@vp/components/SpinHolder.vue"
+import SpinHolder from "@vp/components/CubeSpin.vue"
 import { useData } from 'vitepress'
 import { data } from '@vp/blog.data'
 import { getDateTime } from  "@vp/hooks/useDayjs";

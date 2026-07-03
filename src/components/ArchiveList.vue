@@ -1,7 +1,7 @@
 <template>
   <SpinHolder
     :spinning="spinning"
-    type="orbit"
+    type="bounce"
     :fullscreen="spinning"
     tip="正在处理..."
   >
