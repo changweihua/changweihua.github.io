@@ -439,7 +439,6 @@ export default {
           if (to === '/') {
             await router.go('/zh-CN/', {
               initialLoad: true,
-              smoothScroll: true,
               replace: true,
             })
             return false
