@@ -259,5 +259,4 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "typescript.native-preview.tsdk": "node_modules\\@typescript\\native-preview"
 }

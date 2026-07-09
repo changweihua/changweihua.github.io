@@ -1,11 +1,43 @@
 <template>
   <div class="like-dislike-container my-3">
-    <p class="text-content">您觉得这篇文章<br />怎么样?</p>
+    <p class="text-content">
+      <DiceBearAvatar
+        seed="my-user"
+        :size="200"
+      /><br />您觉得这篇文章<br />怎么样?
+      <!-- 基础用法：只需传入 seed -->
+      <!-- <Multiavatar seed="my-username" /> -->
+
+      <!-- 移除圆形背景 -->
+      <!-- <Multiavatar
+        seed="another-user"
+        :sans-env="true"
+      /> -->
+
+      <!-- 指定性别（仅生成男性或女性风格） -->
+      <!-- <Multiavatar
+        seed="alice"
+        gender="female"
+      /> -->
+
+      <!-- 强制指定特定版本 -->
+      <!-- <Multiavatar
+        seed="bob"
+        :ver="{ part: '01', theme: 'A' }"
+      /> -->
+    </p>
     <div class="icons-box">
       <div class="icons transition-transform duration-300 hover:scale-110">
-        <label class="btn-label" for="like-checkbox">
+        <label
+          class="btn-label"
+          for="like-checkbox"
+        >
           <span class="like-text-content">支持</span>
-          <input class="input-box" id="like-checkbox" type="checkbox" />
+          <input
+            class="input-box"
+            id="like-checkbox"
+            type="checkbox"
+          />
           <svg
             class="svgs"
             id="icon-like-solid"
@@ -17,7 +49,7 @@
             ></path>
           </svg>
           <svg
-            class="svgs  animate-bounce"
+            class="svgs animate-bounce"
             id="icon-like-regular"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -32,8 +64,15 @@
         </label>
       </div>
       <div class="icons transition-transform duration-300 hover:scale-110">
-        <label class="btn-label" for="dislike-checkbox">
-          <input class="input-box" id="dislike-checkbox" type="checkbox" />
+        <label
+          class="btn-label"
+          for="dislike-checkbox"
+        >
+          <input
+            class="input-box"
+            id="dislike-checkbox"
+            type="checkbox"
+          />
           <div class="fireworks">
             <div class="checked-dislike-fx"></div>
           </div>
@@ -64,252 +103,347 @@
   </div>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
+  .like-dislike-container {
+    --dark-grey: var(--vp-c-text-1);
+    --middle-grey: var(--vp-c-text-1);
+    --lightest-grey: linear-gradient(#fafafa, #ebebeb);
+    --shadow: 0 5px 5px 0 #00000026;
+    --shadow-active: 0 5px 5px 0 #00000026;
+    --border-radius-main: 10px;
+    --border-radius-icon: 50px;
+    position: relative;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+    color: var(--dark-grey);
+    opacity: 0.9;
+    padding: 1.5rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-main);
+    transition: 0.2s ease all;
+    width: 100%;
+  }
 
-.like-dislike-container {
-  --dark-grey: var(--vp-c-text-1);
-  --middle-grey: var(--vp-c-text-1);
-  --lightest-grey: linear-gradient(#fafafa, #ebebeb);
-  --shadow: 0 5px 5px 0 #00000026;
-  --shadow-active: 0 5px 5px 0 #00000026;
-  --border-radius-main: 10px;
-  --border-radius-icon: 50px;
-  position: relative;
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  align-items: center;
-  cursor: default;
-  color: var(--dark-grey);
-  opacity: 0.9;
-  padding: 1.5rem;
-  font-weight: 600;
-  border-radius: var(--border-radius-main);
-  transition: 0.2s ease all;
-  width: 100%;
-}
+  .like-dislike-container .tool-box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 0;
+    right: 0;
+    border-radius: var(--border-radius-main);
+  }
 
-.like-dislike-container .tool-box {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  top: 0;
-  right: 0;
-  border-radius: var(--border-radius-main);
-}
+  .like-dislike-container .btn-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 0.8rem;
+    height: 0.8rem;
+    color: transparent;
+    font-size: 0;
+    cursor: pointer;
+    background-color: #ff000080;
+    border: none;
+    border-radius: var(--border-radius-main);
+    transition: 0.2s ease all;
+  }
 
-.like-dislike-container .btn-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 0.8rem;
-  height: 0.8rem;
-  color: transparent;
-  font-size: 0;
-  cursor: pointer;
-  background-color: #ff000080;
-  border: none;
-  border-radius: var(--border-radius-main);
-  transition: 0.2s ease all;
-}
+  .like-dislike-container .btn-close:hover {
+    width: 1rem;
+    height: 1rem;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #ff0000cc;
+    box-shadow: var(--shadow-active);
+  }
 
-.like-dislike-container .btn-close:hover {
-  width: 1rem;
-  height: 1rem;
-  font-size: 1rem;
-  color: #ffffff;
-  background-color: #ff0000cc;
-  box-shadow: var(--shadow-active);
-}
+  .like-dislike-container .btn-close:active {
+    width: 0.9rem;
+    height: 0.9rem;
+    font-size: 0.9rem;
+    color: #ffffffde;
+    --shadow-btn-close: 0 3px 3px 0 #00000026;
+    box-shadow: var(--shadow-btn-close);
+  }
 
-.like-dislike-container .btn-close:active {
-  width: 0.9rem;
-  height: 0.9rem;
-  font-size: 0.9rem;
-  color: #ffffffde;
-  --shadow-btn-close: 0 3px 3px 0 #00000026;
-  box-shadow: var(--shadow-btn-close);
-}
+  .like-dislike-container .text-content {
+    margin-bottom: 1rem;
+    font-size: 15px;
+    line-height: 1.6;
+    cursor: default;
+  }
 
-.like-dislike-container .text-content {
-  margin-bottom: 1rem;
-  font-size: 15px;
-  line-height: 1.6;
-  cursor: default;
-}
+  .like-dislike-container .icons-box {
+    display: flex;
+    gap: 30px;
+  }
 
-.like-dislike-container .icons-box {
-  display: flex;
-  gap: 30px;
-}
+  .like-dislike-container .icons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid var(--middle-grey);
+    border-radius: var(--border-radius-icon);
+    transition: 0.2s ease all;
+    min-width: 120px;
+  }
 
-.like-dislike-container .icons {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.6;
-  margin: 0 0.5rem;
-  cursor: pointer;
-  user-select: none;
-  border: 1px solid var(--middle-grey);
-  border-radius: var(--border-radius-icon);
-  transition: 0.2s ease all;
-  min-width: 120px;
-}
+  .like-dislike-container .icons:hover {
+    opacity: 0.9;
+  }
 
-.like-dislike-container .icons:hover {
-  opacity: 0.9;
-}
+  .like-dislike-container .icons:active {
+    opacity: 0.9;
+  }
 
-.like-dislike-container .icons:active {
-  opacity: 0.9;
-}
+  .like-dislike-container .icons .btn-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem;
+    cursor: pointer;
+    position: relative;
+  }
 
-.like-dislike-container .icons .btn-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 0.5rem;
-  cursor: pointer;
-  position: relative;
-}
+  .like-dislike-container .like-text-content {
+    border-right: 0.1rem solid var(--dark-grey);
+    padding: 0 0.6rem 0 0.5rem;
+    pointer-events: none;
+  }
 
-.like-dislike-container .like-text-content {
-  border-right: 0.1rem solid var(--dark-grey);
-  padding: 0 0.6rem 0 0.5rem;
-  pointer-events: none;
-}
+  .like-dislike-container .dislike-text-content {
+    border-left: 0.1rem solid var(--dark-grey);
+    padding: 0 0.5rem 0 0.6rem;
+    pointer-events: none;
+  }
 
-.like-dislike-container .dislike-text-content {
-  border-left: 0.1rem solid var(--dark-grey);
-  padding: 0 0.5rem 0 0.6rem;
-  pointer-events: none;
-}
+  .like-dislike-container .icons .svgs {
+    width: 1.3rem;
+    fill: var(--vp-c-text-1);
+    box-sizing: content-box;
+    padding: 10px 10px;
+    transition: 0.2s ease all;
+  }
 
-.like-dislike-container .icons .svgs {
-  width: 1.3rem;
-  fill:var(--vp-c-text-1);
-  box-sizing: content-box;
-  padding: 10px 10px;
-  transition: 0.2s ease all;
-}
+  .like-dislike-container .icons .input-box {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
 
-.like-dislike-container .icons .input-box {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
+  .like-dislike-container .icons #icon-like-regular {
+    display: block;
+  }
 
-.like-dislike-container .icons #icon-like-regular {
-  display: block;
-}
+  .like-dislike-container .icons #icon-like-solid {
+    display: none;
+  }
 
-.like-dislike-container .icons #icon-like-solid {
-  display: none;
-}
+  .like-dislike-container .icons:hover :is(#icon-like-solid, #icon-like-regular) {
+    animation: rotate-icon-like 0.7s ease-in-out both;
+  }
 
-.like-dislike-container .icons:hover :is(#icon-like-solid, #icon-like-regular) {
-  animation: rotate-icon-like 0.7s ease-in-out both;
-}
+  .like-dislike-container .icons #like-checkbox:checked ~ #icon-like-regular {
+    display: none;
+    animation: checked-icon-like 0.5s;
+  }
 
-.like-dislike-container .icons #like-checkbox:checked ~ #icon-like-regular {
-  display: none;
-  animation: checked-icon-like 0.5s;
-}
+  .like-dislike-container .icons #like-checkbox:checked ~ #icon-like-solid {
+    display: block;
+    animation: checked-icon-like 0.5s;
+  }
 
-.like-dislike-container .icons #like-checkbox:checked ~ #icon-like-solid {
-  display: block;
-  animation: checked-icon-like 0.5s;
-}
+  .like-dislike-container .icons #icon-dislike-regular {
+    display: block;
+    transform: rotate(180deg);
+  }
 
-.like-dislike-container .icons #icon-dislike-regular {
-  display: block;
-  transform: rotate(180deg);
-}
+  .like-dislike-container .icons #icon-dislike-solid {
+    display: none;
+    transform: rotate(180deg);
+  }
 
-.like-dislike-container .icons #icon-dislike-solid {
-  display: none;
-  transform: rotate(180deg);
-}
+  .like-dislike-container .icons:hover :is(#icon-dislike-solid, #icon-dislike-regular) {
+    animation: rotate-icon-dislike 0.7s ease-in-out both;
+  }
 
-.like-dislike-container
-  .icons:hover
-  :is(#icon-dislike-solid, #icon-dislike-regular) {
-  animation: rotate-icon-dislike 0.7s ease-in-out both;
-}
+  .like-dislike-container .icons #dislike-checkbox:checked ~ #icon-dislike-regular {
+    display: none;
+    animation: checked-icon-dislike 0.5s;
+  }
 
-.like-dislike-container
-  .icons
-  #dislike-checkbox:checked
-  ~ #icon-dislike-regular {
-  display: none;
-  animation: checked-icon-dislike 0.5s;
-}
+  .like-dislike-container .icons #dislike-checkbox:checked ~ #icon-dislike-solid {
+    display: block;
+    animation: checked-icon-dislike 0.5s;
+  }
 
-.like-dislike-container .icons #dislike-checkbox:checked ~ #icon-dislike-solid {
-  display: block;
-  animation: checked-icon-dislike 0.5s;
-}
+  .like-dislike-container .icons .fireworks {
+    transform: scale(0.4);
+  }
 
-.like-dislike-container .icons .fireworks {
-  transform: scale(0.4);
-}
+  .like-dislike-container .icons #like-checkbox:checked ~ .fireworks > .checked-like-fx {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 40px;
+    border-radius: 50%;
+    box-shadow:
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff;
+    animation:
+      1s fireworks-bang ease-out forwards,
+      1s fireworks-gravity ease-in forwards,
+      5s fireworks-position linear forwards;
+    animation-duration: 1.25s, 1.25s, 6.25s;
+  }
 
-.like-dislike-container
-  .icons
-  #like-checkbox:checked
-  ~ .fireworks
-  > .checked-like-fx {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  right: 40px;
-  border-radius: 50%;
-  box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
-  animation: 1s fireworks-bang ease-out forwards,
-    1s fireworks-gravity ease-in forwards, 5s fireworks-position linear forwards;
-  animation-duration: 1.25s, 1.25s, 6.25s;
-}
-
-.like-dislike-container
-  .icons
-  #dislike-checkbox:checked
-  ~ .fireworks
-  > .checked-dislike-fx {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  left: 40px;
-  border-radius: 50%;
-  box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
-    0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
-  animation: 1s fireworks-bang ease-out forwards,
-    1s fireworks-gravity ease-in forwards, 5s fireworks-position linear forwards;
-  animation-duration: 1.25s, 1.25s, 6.25s;
-}
+  .like-dislike-container .icons #dislike-checkbox:checked ~ .fireworks > .checked-dislike-fx {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 40px;
+    border-radius: 50%;
+    box-shadow:
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff;
+    animation:
+      1s fireworks-bang ease-out forwards,
+      1s fireworks-gravity ease-in forwards,
+      5s fireworks-position linear forwards;
+    animation-duration: 1.25s, 1.25s, 6.25s;
+  }
 </style>
