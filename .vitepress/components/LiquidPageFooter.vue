@@ -30,7 +30,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { toRaw } from 'vue'
+  import { toRaw, onMounted } from 'vue'
   import { useData } from 'vitepress'
   import { version } from '../../package.json'
 

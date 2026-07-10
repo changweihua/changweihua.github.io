@@ -49,7 +49,7 @@ interface FingerprintOptions {
   hardware?: boolean
 }
 
-interface FingerprintResult {
+export interface FingerprintResult {
   deviceId: string
   entropyScore: number
   generationTimeMs: number

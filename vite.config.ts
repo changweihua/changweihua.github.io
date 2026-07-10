@@ -15,7 +15,6 @@ import { Schema, ValidateEnv } from '@julr/vite-plugin-validate-env'
 import { envParse } from 'vite-plugin-env-parse'
 import { loadEnv } from 'vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
-import packOrchestrator from 'unplugin-pack-orchestrator/vite'
 import buildTimePlugin from '@zppo/vite-plugin-build-time';
 import { fileURLToPath } from 'node:url'
 
@@ -107,21 +106,6 @@ export default defineConfig(({ mode }) => {
 
   const prodPlugins = isProduction
     ? [
-      packOrchestrator({
-        pack: {
-          outDir: 'dist',
-          fileName: 'release-[name]-v[version]',
-          format: 'zip',
-          archiveOutDir: './releases',
-          exclude: ['**/*.map', '**/*.d.ts', 'node_modules/**']
-        },
-        hooks: {
-          // 归档后自动追加 SHA1 哈希
-          onAfterBuild: (path, format, checksums) =>
-            path.replace(/(.(?:zip|tar.gz|tar|7z))$/, `-${checksums.sha1.slice(0, 8)}$1`),
-          onError: (err) => console.error('打包失败:', err.message)
-        }
-      })
     ]
     : []
 

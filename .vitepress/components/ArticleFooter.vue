@@ -1,10 +1,13 @@
 <template>
   <div class="like-dislike-container my-3">
-    <p class="text-content">
+    <div class="text-content flex flex-col items-center justify-center gap-3">
       <DiceBearAvatar
-        seed="my-user"
-        :size="200"
-      /><br />您觉得这篇文章<br />怎么样?
+        :seed="fingerprintResult.deviceId"
+        v-if="fingerprintResult"
+        :size="96"
+      />
+      <div>您觉得这篇文章</div>
+      <div>怎么样?</div>
       <!-- 基础用法：只需传入 seed -->
       <!-- <Multiavatar seed="my-username" /> -->
 
@@ -25,7 +28,7 @@
         seed="bob"
         :ver="{ part: '01', theme: 'A' }"
       /> -->
-    </p>
+    </div>
     <div class="icons-box">
       <div class="icons transition-transform duration-300 hover:scale-110">
         <label
@@ -103,7 +106,23 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { toRaw, onMounted, ref } from 'vue'
+  import { generateFingerprint, type FingerprintResult } from '../src/sdk/fingerprint-sdk.ts'
+
+  // 生成指纹
+  const fingerprintResult = ref<FingerprintResult | null>(null)
+
+  onMounted(async () => {
+    fingerprintResult.value = await generateFingerprint({
+      canvas: true, // 启用 Canvas 指纹
+      audio: true, // 启用 Audio 指纹
+      webgl: true, // 启用 WebGL 指纹 (新增)
+      fonts: true, // 启用字体检测 (新增)
+      hardware: true // 启用硬件特征
+    })
+  })
+</script>
 
 <style scoped>
   .like-dislike-container {
