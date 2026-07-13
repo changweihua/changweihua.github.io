@@ -2,8 +2,8 @@
   <div class="like-dislike-container my-3">
     <div class="text-content flex flex-col items-center justify-center gap-3">
       <DiceBearAvatar
-        :seed="fingerprintResult.deviceId"
-        v-if="fingerprintResult"
+        :seed="route.path"
+        v-if="route.path"
         :size="96"
       />
       <div>您觉得这篇文章</div>
@@ -107,7 +107,8 @@
 </template>
 
 <script setup lang="ts">
-  import { toRaw, onMounted, ref } from 'vue'
+  import { toRaw, onMounted, ref, watch } from 'vue'
+  import { useRoute } from 'vitepress'
   import { generateFingerprint, type FingerprintResult } from '../src/sdk/fingerprint-sdk.ts'
 
   // 生成指纹
@@ -122,6 +123,16 @@
       hardware: true // 启用硬件特征
     })
   })
+
+  const route = useRoute()
+
+  // // 就这一句，监听当前页面的路径变化（比如 query 变了也会触发）
+  // watch(() => route.path, (newPath) => {
+  //   console.log('当前页面是：', newPath)
+  //   // 比如在这里埋点统计
+  // }, {
+  //   im
+  // })
 </script>
 
 <style scoped>
