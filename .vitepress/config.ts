@@ -7,7 +7,7 @@ import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import MdH1 from 'vitepress-plugin-md-h1'
 import { RssPlugin } from 'vitepress-plugin-rss'
 import { withMermaid } from "vitepress-plugin-mermaid"
-// import llmstxtPlugin from 'vitepress-plugin-llmstxt'
+import llmstxtPlugin from 'vitepress-plugin-llmstxt'
 
 // 你的站点子配置
 import { docsConfig } from './src/docs'
@@ -150,6 +150,7 @@ export default withMermaid(
           },
         }),
         RssPlugin(RSS),
+        llmstxtPlugin()
       ],
 
       // 以下是从 vite.config.ts 迁移回来的构建配置
