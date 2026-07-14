@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.9](https://github.com/changweihua/changweihua/compare/0.13.8...0.13.9) (2026-07-14)
+
+
+### Bug Fixes
+
+* Update package.json ([3271db7](https://github.com/changweihua/changweihua/commit/3271db76f057581a4635272586a218f0abc03d8d))
+
 ## [0.13.8](https://github.com/changweihua/changweihua/compare/0.13.7...0.13.8) (2026-07-10)
 
 ## [0.13.7](https://github.com/changweihua/changweihua/compare/0.13.6...0.13.7) (2026-07-07)
