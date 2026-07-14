@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3动画选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        .tabs-wrapper {
+            width: 100%;
+            max-width: 700px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .tab-input {
+            display: none;
+        }
+
+        .tab-labels {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .tab-label {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+            font-weight: 500;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-label:hover {
+            color: #495057;
+            background: #e9ecef;
+        }
+
+        .tab-label i {
+            font-size: 18px;
+        }
+
+        /* 激活状态指示器 */
+        .tab-label::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: #3498db;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .tab-input:checked + .tab-label {
+            color: #3498db;
+            background: white;
+        }
+
+        .tab-input:checked + .tab-label::after {
+            width: 80%;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+            animation: slideUp 0.4s ease;
+        }
+
+        #tab1:checked ~ #content1,
+        #tab2:checked ~ #content2,
+        #tab3:checked ~ #content3,
+        #tab4:checked ~ #content4 {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .content-icon {
+            width: 50px;
+            height: 50px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        p {
+            color: #7f8c8d;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            color: #5a6c7d;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+    <!-- 使用Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="tabs-wrapper">
+        <input type="radio" name="tabs" id="tab1" class="tab-input" checked>
+        <label for="tab1" class="tab-label">
+            <i class="fas fa-home"></i>
+            首页
+        </label>
+
+        <input type="radio" name="tabs" id="tab2" class="tab-input">
+        <label for="tab2" class="tab-label">
+            <i class="fas fa-box"></i>
+            产品
+        </label>
+
+        <input type="radio" name="tabs" id="tab3" class="tab-input">
+        <label for="tab3" class="tab-label">
+            <i class="fas fa-info-circle"></i>
+            关于
+        </label>
+
+        <input type="radio" name="tabs" id="tab4" class="tab-input">
+        <label for="tab4" class="tab-label">
+            <i class="fas fa-envelope"></i>
+            联系
+        </label>
+
+        <div id="content1" class="tab-content">
+            <div class="content-header">
+                <div class="content-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h2>欢迎页面</h2>
+            </div>
+            <p>欢迎使用我们的CSS3选项卡组件。这个实现完全基于纯CSS，无需任何JavaScript代码。</p>
+            <p>通过利用CSS3的:checked伪类和兄弟选择器，我们创建了流畅的内容切换效果。</p>
+            <ul class="feature-list">
+                <li>纯CSS实现，无JavaScript依赖</li>
+                <li>流畅的切换动画效果</li>
+                <li>响应式设计，适配各种屏幕</li>
+                <li>易于自定义样式</li>
+            </ul>
+        </div>
+
+        <div id="content2" class="tab-content">
+            <div class="content-header">
+                <div class="content-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <h2>产品特性</h2>
+            </div>
+            <p>我们的产品提供了多种强大功能，旨在提升用户体验和开发效率。</p>
+            <ul class="feature-list">
+                <li>高性能内容切换</li>
+                <li>优雅的交互动画</li>
+                <li>可访问性优化</li>
+                <li>跨浏览器兼容</li>
+                <li>移动端友好</li>
+            </ul>
+        </div>
+
+        <div id="content3" class="tab-content">
+            <div class="content-header">
+                <div class="content-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h2>关于我们</h2>
+            </div>
+            <p>我们是一支专注于前端技术的团队，致力于创建优雅且高效的Web解决方案。</p>
+            <p>通过利用现代CSS特性，我们能够实现以前需要JavaScript才能完成的功能。</p>
+        </div>
+
+        <div id="content4" class="tab-content">
+            <div class="content-header">
+                <div class="content-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h2>联系我们</h2>
+            </div>
+            <p>如果您对我们的实现有任何疑问或建议，欢迎通过以下方式联系我们：</p>
+            <ul class="feature-list">
+                <li>邮箱: contact@example.com</li>
+                <li>电话: +86 123 4567 8900</li>
+                <li>地址: 北京市朝阳区某某街道123号</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
