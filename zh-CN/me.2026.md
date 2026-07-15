@@ -12,6 +12,14 @@ encrypt-storage: true
 >
 > 2026 笃行。
 
+<div class="bg-mc-rose-445 c-mc-blue-187 border border-mc-neutral-733">
+  Arbitrary depth colors
+</div>
+
+<button class="bg-mc-primary-457 c-white ring ring-mc-brand-630 hover:bg-mc-primary-620">
+  Semantic color
+</button>
+
 <div class="grid grid-cols-2 gap-4">
 
 ![圌山](/images/微信图片_20260116145503_19_67.jpg){data-zoomable}
@@ -53,6 +61,10 @@ encrypt-storage: true
 
 ![查询窗口](/images/ds-1.png){data-zoomable}
 ![结果窗口](/images/ds-2.png){data-zoomable}
+
+- 2026 年 7 月
+  - 实现多 Agent 切换
+  - 实现会话存储
 
 ### TGS-SOLUTION
 
@@ -124,7 +136,8 @@ encrypt-storage: true
 - AI 学习，基于 MAF 1.*
 - 无锡硕放机场登机牌个性化系统
 ## Q3
-- ???
+- 搭建自研的 Clean Arch 的 Spring Boot 4.1 项目目标，包含单模块和多模块两种
+- 自研 WorkPulse 工作日志平台
 ## Q4
 - ???
 ```

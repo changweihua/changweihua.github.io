@@ -8,6 +8,7 @@ import {
 } from 'unocss'
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 import { dataScreenPreset } from './data-screen.preset'
+import { presetMagicolor } from 'unocss-preset-magicolor';
 
 export default defineConfig({
   content: {
@@ -36,6 +37,16 @@ export default defineConfig({
       prefix: ['i-'],
       collections: {
         mono: FileSystemIconLoader('src/assets/icons/mono'),
+      },
+    }),
+    presetMagicolor({
+      colors: {
+        primary: { color: 'rose', lightnessReverse: true },
+        brand: '#4f7bff',
+      },
+      dark: {
+        primary: { color: 'blue', lightnessReverse: true },
+        brand: '#8ab4ff',
       },
     }),
   ],
