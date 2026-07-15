@@ -240,6 +240,7 @@
     "tsx": "^4.23.1",
     "typescript": "^7.0.2",
     "unocss": "^66.7.5",
+    "unocss-preset-magicolor": "^0.6.1",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-iconify-generator": "^0.7.3",
     "unplugin-icons": "^23.0.1",
