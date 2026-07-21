@@ -28,8 +28,8 @@ import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
 import { createMarkdownExit } from 'markdown-exit'
 import { tasklist } from '@mdit/plugin-tasklist'
-import markmapPlugin from '@vitepress-plugin/markmap'
-// import { markmapPlugin } from '../plugins/markdown/markdownMarkmap'
+// import markmapPlugin from '@vitepress-plugin/markmap'
+import { markmapPlugin } from '../plugins/markdown/markdownMarkmap'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -102,7 +102,7 @@ const markdown: MarkdownOptions | undefined = {
     // ========== 1. 基础插件（无冲突） ==========
     md.use(MarkdownItGitHubMentionCard)
     // 使用类型断言将 md 断言为 any
-    // markmapPlugin(md as any)
+    markmapPlugin(md as any)
     // 自定义 fence 保留 language label，但后续会被包装，需放到最后再重新覆盖
     // 先保存原始 fence 渲染器
     const originalFence = md.renderer.rules.fence!.bind(md.renderer.rules)
@@ -118,7 +118,7 @@ const markdown: MarkdownOptions | undefined = {
       figcaptionClass: 'custom-figcaption',
       debug: false
     })
-    markmapPlugin()
+    // markmapPlugin()
     md.use(footnote)
     md.use(mathjax3)
     md.use<LinkToCardPluginOptions>(linkToCardPlugin, {})
