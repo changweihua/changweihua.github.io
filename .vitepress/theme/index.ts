@@ -37,7 +37,6 @@ import directives from '../directives'
 // 导入hooks
 import useVisitData from '../hooks/useVisitData'
 import AnimatingLayout from './AnimatingLayout.vue'
-import Markmap from './components/Markmap.vue'
 import HeroWrapper from './components/HeroWrapper.vue'
 import GitHubCorner from './components/GitHubCorner.vue'
 import Llmstxt from './components/llmstxt.vue'
@@ -414,7 +413,7 @@ export default {
       useComponents(app, DemoPreview)
 
       app.use(VueHero)
-      app.component('Markmap', Markmap)
+
       // 在 markdown 文件中使用，必须手动注册
       app.component('demo-preview', NaiveUIContainer)
       app.component('HeroWrapper', HeroWrapper)
