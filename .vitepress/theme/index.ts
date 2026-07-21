@@ -32,6 +32,7 @@ import ProjectLab from '../components/ProjectLab.vue'
 import SnakeTimeline from '../components/SnakeTimeline.vue'
 import RelatedPosts from './components/RelatedPosts.vue'
 import PrevNextByDate from './components/PrevNextByDate.vue'
+import Markmap from './components/Markmap.vue'
 import RainbowAnimationSwitcher from '../components/RainbowAnimationSwitcher.vue'
 import directives from '../directives'
 // 导入hooks
@@ -413,7 +414,7 @@ export default {
       useComponents(app, DemoPreview)
 
       app.use(VueHero)
-
+app.component('Markmap', Markmap)
       // 在 markdown 文件中使用，必须手动注册
       app.component('demo-preview', NaiveUIContainer)
       app.component('HeroWrapper', HeroWrapper)
