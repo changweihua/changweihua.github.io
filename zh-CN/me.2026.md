@@ -125,15 +125,6 @@ encrypt-storage: true
 [CMONO.NET](@:https://changweihua.github.io)
 
 :::markmap
----
-
-containerHeight: 500
-markmap:
-color: red
-maxInitialScale: 2
-spacingVertical: 16
-spacingHorizontal: 50
----
 
 # 2026
 
@@ -158,7 +149,4 @@ spacingHorizontal: 50
 ## Q4
 
 - ???
-
-```
-
-```
+  :::
