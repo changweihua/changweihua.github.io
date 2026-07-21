@@ -291,7 +291,7 @@
       "vitepress": "$vitepress"
     },
     "vitest": "^4.1.10",
-    "vue": "3.5.40"
+    "vue": "^3.5.40"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,vue,html,css,scss}": [
