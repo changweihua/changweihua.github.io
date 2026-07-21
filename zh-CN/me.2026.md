@@ -124,7 +124,7 @@ encrypt-storage: true
 
 [CMONO.NET](@:https://changweihua.github.io)
 
-:::markmap
+```markmap
 
 # 2026
 
@@ -149,4 +149,4 @@ encrypt-storage: true
 ## Q4
 
 - ???
-  :::
+```
