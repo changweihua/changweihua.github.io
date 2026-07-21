@@ -37,7 +37,7 @@ import directives from '../directives'
 // 导入hooks
 import useVisitData from '../hooks/useVisitData'
 import AnimatingLayout from './AnimatingLayout.vue'
-
+import Markmap from './components/Markmap.vue'
 import HeroWrapper from './components/HeroWrapper.vue'
 import GitHubCorner from './components/GitHubCorner.vue'
 import Llmstxt from './components/llmstxt.vue'
@@ -90,14 +90,13 @@ import 'vitepress-plugin-bprogress/style.css'
 mermaid.registerIconPacks([
   {
     name: icons.prefix, // To use the prefix defined in the icon pack
-    icons,
-  },
+    icons
+  }
 ])
 mermaid.registerExternalDiagrams([zenuml])
 mermaid.registerLayoutLoaders(elkLayouts)
 
 import Vue3TouchEvents, { type Vue3TouchEventsOptions } from 'vue3-touch-events'
-
 
 export default {
   ...DefaultTheme,
@@ -189,16 +188,16 @@ export default {
         h(AnimationTitle, {
           name: 'CMONO.NET',
           slogon: '知识汪洋只此一瓢',
-          tagline: '伪前端+伪后端+伪需求=真全栈',
+          tagline: '伪前端+伪后端+伪需求=真全栈'
         }),
       'home-hero-image': () =>
         h(
           'div',
           {
             class: 'sm:hidden md:(visible flex h-full items-center justify-center)',
-            style: 'position: relative;',
+            style: 'position: relative;'
           },
-          [h('w-hero-logo')],
+          [h('w-hero-logo')]
           // [h(HeroLogo)]
         ),
       // "home-hero-image": () =>
@@ -296,9 +295,10 @@ export default {
       'aside-outline-after': () => h(Llmstxt),
       //  Always
       // 在 layout-top 插槽中添加 GitHub Corner
-      'layout-top': () => h(GitHubCorner, {
-        repoUrl: 'https://github.com/changweihua/changweihua.github.io'
-      }),
+      'layout-top': () =>
+        h(GitHubCorner, {
+          repoUrl: 'https://github.com/changweihua/changweihua.github.io'
+        })
       // 'layout-top': () => [h(PageCursor)],
       // "layout-bottom": () => [h(PageFooter)], //, h(RegisterSW)
       // "nav-bar-title-before": () =>
@@ -368,7 +368,7 @@ export default {
         minimum: 0.1, // Minimum progress (0-1)
         trickle: true, // Auto increment
         trickleSpeed: 200, // Trickle speed
-        direction: 'ltr', // Progress direction
+        direction: 'ltr' // Progress direction
       })
     }
 
@@ -379,7 +379,7 @@ export default {
         <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path>
         <path fill="currentColor" d="M11.293 8.293a1 1 0 0 1 1.414 0l5.657 5.657a1 1 0 0 1-1.414 1.414L12 10.414l-4.95 4.95a1 1 0 0 1-1.414-1.414z"></path>
         </g>
-        </svg>`, // only svg code
+        </svg>` // only svg code
     })
 
     // 定义国际化配置
@@ -394,18 +394,18 @@ export default {
           copyCode: '复制代码',
           foldCode: '折叠代码',
           expandCode: '展开代码',
-          hideSourceCode: '隐藏源代码',
+          hideSourceCode: '隐藏源代码'
         },
         en: {
           copySuccessText: 'Code copied to clipboard!',
           copyCode: 'Copy code',
           foldCode: 'Fold code',
           expandCode: 'Expand code',
-          hideSourceCode: 'Hide source code',
-        },
+          hideSourceCode: 'Hide source code'
+        }
       },
       // 设置默认语言为中文
-      defaultLanguage: 'zh',
+      defaultLanguage: 'zh'
     })
 
     if (inBrowser) {
@@ -414,7 +414,7 @@ export default {
       useComponents(app, DemoPreview)
 
       app.use(VueHero)
-
+      app.component('Markmap', Markmap)
       // 在 markdown 文件中使用，必须手动注册
       app.component('demo-preview', NaiveUIContainer)
       app.component('HeroWrapper', HeroWrapper)
@@ -439,7 +439,7 @@ export default {
           if (to === '/') {
             await router.go('/zh-CN/', {
               initialLoad: true,
-              replace: true,
+              replace: true
             })
             return false
           }
@@ -479,5 +479,5 @@ export default {
         initHoverCard()
       })
     }
-  },
+  }
 } satisfies Theme

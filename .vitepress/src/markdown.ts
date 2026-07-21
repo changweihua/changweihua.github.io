@@ -27,16 +27,18 @@ import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
 import { createMarkdownExit } from 'markdown-exit'
-import { tasklist } from "@mdit/plugin-tasklist";
+import { tasklist } from '@mdit/plugin-tasklist'
+import markmapPlugin from '@vitepress-plugin/markmap'
+// import { markmapPlugin } from '../plugins/markdown/markdownMarkmap'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
   '@vp': resolve(__dirname, '../components'),
-  '@assets': resolve(__dirname, '../../src/assets'),
+  '@assets': resolve(__dirname, '../../src/assets')
 }
 
 const languageLabels: Record<string, string> = {
-  aulua: 'AviUtl2 Lua',
+  aulua: 'AviUtl2 Lua'
 }
 
 const markdown: MarkdownOptions | undefined = {
@@ -46,12 +48,12 @@ const markdown: MarkdownOptions | undefined = {
   linkify: true,
   html: true,
   image: {
-    lazyLoading: true,
+    lazyLoading: true
   },
   math: true,
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
   languageLabel: {
-    'vue': 'Vue SFC'
+    vue: 'Vue SFC'
   },
   codeCopyButtonTitle: '复制',
   container: {
@@ -69,10 +71,9 @@ const markdown: MarkdownOptions | undefined = {
     exit.linkify.set({ fuzzyLink: false })
 
     // use restoreEntities plugin from vitepress
-    const textJoinRule = md.core.ruler.getRules('').find(r => r.name === 'text_join')
+    const textJoinRule = md.core.ruler.getRules('').find((r) => r.name === 'text_join')
     const textRenderRule = md.renderer.rules.text
-    if (!textJoinRule || !textRenderRule)
-      throw new Error('Cannot find restoreEntities plugin from vitepress ')
+    if (!textJoinRule || !textRenderRule) throw new Error('Cannot find restoreEntities plugin from vitepress ')
     exit.core.ruler.at('text_join', textJoinRule as any)
     exit.renderer.rules.text = textRenderRule as any
 
@@ -95,14 +96,13 @@ const markdown: MarkdownOptions | undefined = {
   //     return original ? original(alias) : alias
   //   }
   // },
-  codeTransformers: [
-
-  ],
+  codeTransformers: [],
   languages: ['js', 'jsx', 'ts', 'tsx'],
   config: (md) => {
     // ========== 1. 基础插件（无冲突） ==========
     md.use(MarkdownItGitHubMentionCard)
-
+    // 使用类型断言将 md 断言为 any
+    // markmapPlugin(md as any)
     // 自定义 fence 保留 language label，但后续会被包装，需放到最后再重新覆盖
     // 先保存原始 fence 渲染器
     const originalFence = md.renderer.rules.fence!.bind(md.renderer.rules)
@@ -116,8 +116,9 @@ const markdown: MarkdownOptions | undefined = {
       pictureClass: 'custom-picture',
       imgClass: 'custom-img',
       figcaptionClass: 'custom-figcaption',
-      debug: false,
+      debug: false
     })
+    markmapPlugin()
     md.use(footnote)
     md.use(mathjax3)
     md.use<LinkToCardPluginOptions>(linkToCardPlugin, {})
@@ -135,17 +136,17 @@ const markdown: MarkdownOptions | undefined = {
       rowspan: false,
       headerless: false,
       multibody: false,
-      autolabel: false,
+      autolabel: false
     })
     const docRoot = fileURLToPath(new URL('../../', import.meta.url))
     md.use(demoPreviewPlugin, { docRoot })
     md.use(markdownGlossaryPlugin, {
       glossary: glossary,
-      firstOccurrenceOnly: true,
+      firstOccurrenceOnly: true
     })
     md.use(vitepressEncrypt, [
       { pageType: 'default', password: 'p1' },
-      { pageType: 'vip', password: 'p11' },
+      { pageType: 'vip', password: 'p11' }
     ])
 
     // ========== 2. Demo 插件共存方案 ==========
@@ -170,7 +171,7 @@ const markdown: MarkdownOptions | undefined = {
       stackblitz: { show: true },
       codesandbox: { show: true },
       // 自定义容器名（需要插件支持）
-      demoBlockReg: /^better-demo\s*(.*)$/,   // 使用时语法：::: better-demo
+      demoBlockReg: /^better-demo\s*(.*)$/, // 使用时语法：::: better-demo
       demoBlockConfig: {
         // 其他配置...
       }
@@ -180,7 +181,7 @@ const markdown: MarkdownOptions | undefined = {
     // 该插件默认 demoBlockReg 为 /^demo\s*(.*)$/，可通过 options 覆盖
     md.use(demoPreviewPlugin, {
       docRoot,
-      demoBlockReg: /^code-demo\s*(.*)$/,   // 使用时语法：::: code-demo
+      demoBlockReg: /^code-demo\s*(.*)$/ // 使用时语法：::: code-demo
     })
 
     // ========== 3. 其他插件（无冲突或已调整） ==========
@@ -195,16 +196,13 @@ const markdown: MarkdownOptions | undefined = {
     md.renderer.rules.fence = (...args) => {
       let result = finalFence ? finalFence(...args) : originalFence(...args)
       // 应用自定义语言标签
-      result = result.replace(
-        /(?<=class="lang">)([^<]*)/,
-        (_, p1) => languageLabels[p1] ?? p1
-      )
+      result = result.replace(/(?<=class="lang">)([^<]*)/, (_, p1) => languageLabels[p1] ?? p1)
       return result
     }
 
     md.use(tasklist, {
       // your options, optional
-    });
+    })
 
     // ========== 5. 表格和文字样式增强（无冲突） ==========
     // ---------- 5. 表格与文本样式 ----------
@@ -229,7 +227,7 @@ const markdown: MarkdownOptions | undefined = {
       }
       return htmlResult
     }
-  },
+  }
 }
 
 export { markdown }
