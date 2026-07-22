@@ -125,28 +125,19 @@ encrypt-storage: true
 [CMONO.NET](@:https://changweihua.github.io)
 
 ```markmap
-
 # 2026
-
 ## Q1
-
 - 无锡硕放机场团体旅客保障系统
 - 无锡硕放机场携带工具审批系统
 - 无锡硕放机场进出港查询系统
-
 ## Q2
-
 - 无锡硕放机场团体旅客保障系统
 - 基于 SpringBoot 4 的后端架构，与 .NET 功能一比一复原
 - AI 学习，基于 MAF 1.*
 - 无锡硕放机场登机牌个性化系统
-
 ## Q3
-
 - 搭建自研的 Clean Arch 的 Spring Boot 4.1 项目目标，包含单模块和多模块两种
 - 自研 WorkPulse 工作日志平台
-
 ## Q4
-
 - ???
 ```
