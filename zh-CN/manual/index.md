@@ -6,11 +6,13 @@ pageClass: manual-index-page
 title: 手册列表
 ---
 
-<n-spin :show="spinning" size="large" :delay="delayTime">
-  <div class="flex p-6 justify-center items-center">
-    <CardListView :items="categories" />
-  </div>
-</n-spin>
+<ClientOnly>
+  <n-spin :show="spinning" size="large" :delay="delayTime">
+    <div class="flex p-6 justify-center items-center">
+      <CardListView :items="categories" />
+    </div>
+  </n-spin>
+</ClientOnly>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
