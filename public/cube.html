@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ss</title>
+    <style>
+        cube {
+            --s: 243px;
+            --hs: calc(var(--s) / 2);
+            display: block;
+            width: var(--s);
+            height: var(--s);
+            transform-style: preserve-3d;
+            will-change: transform;
+            animation: r 15s linear infinite;
+        }
+
+        side {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            --sq: conic-gradient(from 270deg at calc(100% / 3) calc(100% / 3),
+                    #fff 90deg, transparent 0);
+
+            background:
+                var(--sq) calc(var(--s) / 3) calc(var(--s) / 3) / 100% 100%,
+                var(--sq) calc(100% / 6) calc(100% / 6) / calc(100% / 3) calc(100% / 3),
+                var(--sq) calc(100% / 6) calc(100% / 6) / calc(100% / 9) calc(100% / 9),
+                var(--sq) calc(100% / 6) calc(100% / 6) / calc(100% / 27) calc(100% / 27),
+                var(--sq) calc(100% / 6) calc(100% / 6) / calc(100% / 81) calc(100% / 81);
+
+            background-color: #000;
+            background-blend-mode: difference;
+        }
+
+        side:nth-child(1) {
+            transform: translateZ(var(--hs))
+        }
+
+        side:nth-child(2) {
+            transform: translateZ(calc(-1 * var(--hs)));
+        }
+
+        side:nth-child(3) {
+            transform: rotateY(90deg) translateZ(var(--hs))
+        }
+
+        side:nth-child(4) {
+            transform: rotateY(-90deg) translateZ(var(--hs))
+        }
+
+        side:nth-child(5) {
+            transform: rotateX(90deg) translateZ(var(--hs))
+        }
+
+        side:nth-child(6) {
+            transform: rotateX(-90deg) translateZ(var(--hs))
+        }
+
+        @keyframes r {
+            100% {
+                transform: rotateX(1turn)rotateY(1turn) rotateZ(1turn)
+            }
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background: #000;
+            perspective: 1000px;
+        }
+
+        body:after {
+            content: '';
+            position: absolute;
+            background: #212121;/* radial-gradient(circle at 50% 50%, #FF9800 1%, #673AB7); */
+            width: 100%;
+            height: 100%;
+            mix-blend-mode: lighten;
+        }
+    </style>
+</head>
+
+<body>
+    <cube>
+        <side></side>
+        <side></side>
+        <side></side>
+        <side></side>
+        <side></side>
+        <side></side>
+    </cube>
+</body>
+
+</html>
+

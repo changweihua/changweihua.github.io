@@ -1,0 +1,16 @@
+[production]
+> 0.5%                 # 全球市场份额 > 0.5% 的浏览器
+last 2 versions         # 所有浏览器的最新两个版本
+not dead                # 排除官方停止维护的浏览器（如 IE11）
+not op_mini all         # 排除 Opera Mini
+not IE 11               # 明确排除 IE11
+
+# PC端主流浏览器
+Chrome >= 120           # Chrome 最新稳定版
+Firefox >= 115          # Firefox 最新 ESR 版
+Edge >= 120             # Edge 基于 Chromium 的版本
+Safari >= 16            # macOS Safari 16+
+
+# 移动端主流浏览器
+ios_saf >= 16           # iOS Safari 16+（对应 iOS 16+）
+and_chr >= 120          # Android Chrome 最新版
