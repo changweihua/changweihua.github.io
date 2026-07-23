@@ -41,7 +41,7 @@ import AnimatingLayout from './AnimatingLayout.vue'
 import HeroWrapper from './components/HeroWrapper.vue'
 import GitHubCorner from './components/GitHubCorner.vue'
 import Llmstxt from './components/llmstxt.vue'
-
+import { initComponent } from 'vitepress-markmap-preview/component'
 import 'virtual:uno.css'
 
 import 'virtual:group-icons.css'
@@ -49,7 +49,7 @@ import 'animate.css'
 
 import './styles/vitepress-variables.scss'
 
-import './styles/maple-mono.scss'
+// import './styles/maple-mono.scss'
 
 import './styles/animations1.css'
 
@@ -356,7 +356,7 @@ export default {
     app.use<Vue3TouchEventsOptions>(Vue3TouchEvents, {
       disableClick: false
     })
-
+    initComponent(app)
     const bProgress = vitepressBprogress(ctx)
 
     // Custom configuration (optional)
@@ -414,7 +414,7 @@ export default {
       useComponents(app, DemoPreview)
 
       app.use(VueHero)
-app.component('Markmap', Markmap)
+      app.component('Markmap', Markmap)
       // 在 markdown 文件中使用，必须手动注册
       app.component('demo-preview', NaiveUIContainer)
       app.component('HeroWrapper', HeroWrapper)

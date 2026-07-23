@@ -54,10 +54,6 @@
   "git.blame.editorDecoration.template": "${subject}, ${authorName} (${authorDateAgo})",
   "terminal.integrated.fontLigatures": true,
   "files.trimTrailingWhitespace": true,
-  "[markdown]": {
-    "files.trimTrailingWhitespace": false,
-    "editor.defaultFormatter": "oxc.oxc-vscode"
-  },
   "js.suggest.autoImports": true,
   "ts.suggest.autoImports": true,
   "js.updateImportsOnFileMove.enabled": "prompt",
@@ -178,7 +174,6 @@
     "typescriptreact",
     "",
     "html",
-    "markdown",
     "json",
     "jsonc",
     "yaml",
@@ -259,4 +254,7 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  }
 }

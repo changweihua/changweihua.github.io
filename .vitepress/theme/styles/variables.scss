@@ -1,4 +1,7 @@
-$app-font-family: MapleMono,
+$app-font-family: 'JetBrains Maple Mono',
+  'Maple Mono NF CN',
+  'Source Han Serif SC',
+  '思源宋体', MapleMono,
   /* 1. 你的首选Web字体 */
   'Noto Sans SC Variable',
   /* 2. 苹果系统（macOS, iOS）的优质中文字体 */
@@ -18,7 +21,10 @@ $app-font-family: MapleMono,
   'Helvetica Neue',
   /* 7. 最终，通用的无衬线字体族 */
   sans-serif;
-$mermaid-font-family:
+$mermaid-font-family: 'JetBrains Maple Mono',
+  'Maple Mono NF CN',
+  'Source Han Serif SC',
+  '思源宋体',
   /* 1. 你的首选Web字体 */
   'Noto Sans SC Variable',
   /* 2. 苹果系统（macOS, iOS）的优质中文字体 */

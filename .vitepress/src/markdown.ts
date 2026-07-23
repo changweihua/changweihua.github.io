@@ -28,7 +28,6 @@ import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
 import { createMarkdownExit } from 'markdown-exit'
 import { tasklist } from '@mdit/plugin-tasklist'
-// import markmapPlugin from '@vitepress-plugin/markmap'
 import { markdownMarkmap } from '../plugins/markdown/markdownMarkmap'
 
 const demoAlias = {
@@ -118,7 +117,6 @@ const markdown: MarkdownOptions | undefined = {
       figcaptionClass: 'custom-figcaption',
       debug: false
     })
-    // markmapPlugin()
     md.use(footnote)
     md.use(mathjax3)
     md.use<LinkToCardPluginOptions>(linkToCardPlugin, {})

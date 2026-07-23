@@ -30,6 +30,12 @@ encrypt-storage: true
 
 <br />
 
+### 无锡硕放机场安检答题系统 ###
+
+- 2026 年 7 月
+  - 需求跟进
+  - 使用 AI 进行功能开发和测试
+
 ### 无锡硕放机场登机牌个性化系统
 
 - 2026 年 5 月
@@ -65,6 +71,7 @@ encrypt-storage: true
 - 2026 年 7 月
   - 实现多 Agent 切换
   - 实现会话存储
+  - 使用 AI 持续优化
 
 ### TGS-SOLUTION
 
@@ -124,6 +131,8 @@ encrypt-storage: true
 
 [CMONO.NET](@:https://changweihua.github.io)
 
+## 年度概览
+
 ```markmap
 # 2026
 ## Q1
@@ -138,6 +147,7 @@ encrypt-storage: true
 ## Q3
 - 搭建自研的 Clean Arch 的 Spring Boot 4.1 项目目标，包含单模块和多模块两种
 - 自研 WorkPulse 工作日志平台
+- 借助 AI ，编写安检答题系统，包含(后台管理系统、小程序H5端)
 ## Q4
 - ???
 ```
