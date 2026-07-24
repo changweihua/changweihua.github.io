@@ -133,7 +133,32 @@ export default defineConfig({
       }
     },
     fontFamily: {
-      sans: ['JetBrains Maple Mono', 'Maple Mono NF CN', 'Source Han Serif SC', '思源宋体', 'sans-serif']
+      sans: [
+        'JetBrains Maple Mono',
+        'Maple Mono NF CN',
+        'Source Han Serif SC',
+        '思源宋体',
+        'MapleMono',
+        /* 1. 你的首选Web字体 */
+        'Noto Sans SC Variable',
+        /* 2. 苹果系统（macOS, iOS）的优质中文字体 */
+        'PingFang SC',
+        'Hiragino Sans GB',
+        /* 3. Windows系统的优质中文字体 */
+        'Microsoft YaHei',
+        /* 4. 安卓及开源系统的中文字体 */
+        'Droid Sans Fallback',
+        /* 5. 更通用的中文字体回退 */
+        'WenQuanYi Micro Hei',
+        'Segoe UI',
+        /* 6. 跨平台的优质无衬线英文字体族 */
+        '-apple-system',
+        'BlinkMacSystemFont',
+        'Roboto',
+        'Helvetica Neue',
+        /* 7. 最终，通用的无衬线字体族 */
+        'sans-serif'
+      ]
     }
   },
 

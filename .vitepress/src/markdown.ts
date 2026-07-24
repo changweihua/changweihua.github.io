@@ -27,7 +27,6 @@ import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
 import { createMarkdownExit } from 'markdown-exit'
-import { tasklist } from '@mdit/plugin-tasklist'
 import { markdownMarkmap } from '../plugins/markdown/markdownMarkmap'
 
 const demoAlias = {
@@ -118,7 +117,13 @@ const markdown: MarkdownOptions | undefined = {
       debug: false
     })
     md.use(footnote)
-    md.use(mathjax3)
+    md.use(mathjax3, {
+      tex: {
+        macros: {
+          RR: '{\\mathbb{R}}'
+        }
+      }
+    })
     md.use<LinkToCardPluginOptions>(linkToCardPlugin, {})
     md.use(tabsMarkdownPlugin)
     md.use(npmCommandsMarkdownPlugin)
@@ -197,10 +202,6 @@ const markdown: MarkdownOptions | undefined = {
       result = result.replace(/(?<=class="lang">)([^<]*)/, (_, p1) => languageLabels[p1] ?? p1)
       return result
     }
-
-    md.use(tasklist, {
-      // your options, optional
-    })
 
     // ========== 5. 表格和文字样式增强（无冲突） ==========
     // ---------- 5. 表格与文本样式 ----------

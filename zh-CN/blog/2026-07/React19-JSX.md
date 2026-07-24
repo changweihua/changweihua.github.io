@@ -21,7 +21,7 @@ React 本质上是一个解决"怎么构建用户界面"的 UI 库，不是全�
 
 React 提出了一个公式：
 
-\( UI = f(\text{State}) \)
+\\( UI = f(\\text{State}) \\)
 
 UI=f(State)UI = f(State)UI=f(State)
 
