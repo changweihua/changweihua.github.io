@@ -6,7 +6,7 @@ import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 import { wordless, chineseAndJapanese, Options } from 'markdown-it-wordless'
 import MarkdownItCollapsible from 'markdown-it-collapsible'
 import namedCode from 'markdown-it-named-code-blocks'
-import echartsMarkdownPlugin from '../plugins/markdown/echarts-markdown'
+import { renderEchartsBlock } from '../plugins/markdown/echarts-markdown'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import mathjax3 from 'markdown-it-mathjax3'
 import MarkdownItGitHubAlerts from 'markdown-it-github-alerts'
@@ -17,7 +17,7 @@ import { vitepressDemoPlugin } from 'vitepress-better-demo-plugin'
 import { resolve } from 'path'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
-import codeBarPlugin from '../plugins/markdown/codeBarPlugin'
+import { hasHeadingAfter } from '../plugins/markdown/codeBarPlugin'
 import { linkToCardPlugin } from 'vitepress-linkcard'
 import type { LinkToCardPluginOptions } from 'vitepress-linkcard'
 import { markdownGlossaryPlugin } from 'vitepress-plugin-glossary'
@@ -27,7 +27,7 @@ import picturePlugin from '../plugins/markdown/markdown-it-picture'
 import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
 import { createMarkdownExit } from 'markdown-exit'
-import { markdownMarkmap } from '../plugins/markdown/markdownMarkmap'
+import { renderMarkmapBlock } from '../plugins/markdown/markdownMarkmap'
 
 const demoAlias = {
   '@demo': resolve(__dirname, '../../src/demos'),
@@ -38,6 +38,8 @@ const demoAlias = {
 const languageLabels: Record<string, string> = {
   aulua: 'AviUtl2 Lua'
 }
+
+const HAS_ADDED_METADATA = Symbol('hasAddedMetadata')
 
 const markdown: MarkdownOptions | undefined = {
   cache: false,
@@ -99,11 +101,6 @@ const markdown: MarkdownOptions | undefined = {
   config: (md) => {
     // ========== 1. 基础插件（无冲突） ==========
     md.use(MarkdownItGitHubMentionCard)
-    // 使用类型断言将 md 断言为 any
-    markdownMarkmap(md as any)
-    // 自定义 fence 保留 language label，但后续会被包装，需放到最后再重新覆盖
-    // 先保存原始 fence 渲染器
-    const originalFence = md.renderer.rules.fence!.bind(md.renderer.rules)
     md.use(pathHashWrapperPlugin)
     md.use(picturePlugin, {
       containerClasses: ['figure-list', 'image-gallery', 'custom-container'],
@@ -131,7 +128,6 @@ const markdown: MarkdownOptions | undefined = {
     md.use(namedCode, { isEnableInlineCss: true })
     md.use(timeline)
     md.use(groupIconMdPlugin)
-    md.use(echartsMarkdownPlugin)
     md.use(MarkdownItCollapsible)
     md.use(MarkdownItGitHubAlerts, { markers: '*' })
     md.use(markdownItTableExt, {
@@ -142,7 +138,6 @@ const markdown: MarkdownOptions | undefined = {
       autolabel: false
     })
     const docRoot = fileURLToPath(new URL('../../', import.meta.url))
-    md.use(demoPreviewPlugin, { docRoot })
     md.use(markdownGlossaryPlugin, {
       glossary: glossary,
       firstOccurrenceOnly: true
@@ -187,24 +182,38 @@ const markdown: MarkdownOptions | undefined = {
       demoBlockReg: /^code-demo\s*(.*)$/ // 使用时语法：::: code-demo
     })
 
-    // ========== 3. 其他插件（无冲突或已调整） ==========
-    // @ts-ignore
-    codeBarPlugin(md)
-    // @ts-ignore
-    vitepressMarkmapPreview(md, { showToolbar: false })
+    // ========== 3. 其他插件 ==========
+    vitepressMarkmapPreview(md as any, { showToolbar: false })
 
-    // ========== 4. 最后重新包装 fence 渲染器，确保 language label 生效 ==========
-    // 注意：上述插件可能已经修改了 fence 规则，这里用包装模式保留所有增强功能
-    const finalFence = md.renderer.rules.fence
-    md.renderer.rules.fence = (...args) => {
-      let result = finalFence ? finalFence(...args) : originalFence(...args)
-      // 应用自定义语言标签
+    // ========== 4. 集中式 fence 分发器 ==========
+    // 所有 fence 相关处理统一在此处，避免多个插件链式覆写 fence 的脆弱性
+    const originalFence = md.renderer.rules.fence!.bind(md.renderer.rules)
+    md.renderer.rules.fence = (tokens: any[], idx: number, options: any, env: any, self: any) => {
+      const token = tokens[idx]
+
+      // 4.1 特殊语言：markmap
+      const markmapResult = renderMarkmapBlock(tokens, idx)
+      if (markmapResult !== null) return markmapResult
+
+      // 4.2 特殊语言：echarts
+      const echartsResult = renderEchartsBlock(tokens, idx)
+      if (echartsResult !== null) return echartsResult
+
+      // 4.3 默认渲染
+      let result = originalFence(tokens, idx, options, env, self)
+
+      // 4.4 codeBar：若代码块后有标题则添加分隔条
+      if (hasHeadingAfter(tokens, idx)) {
+        result += `<div class="code-bar"></div>`
+      }
+
+      // 4.5 自定义语言标签替换
       result = result.replace(/(?<=class="lang">)([^<]*)/, (_, p1) => languageLabels[p1] ?? p1)
+
       return result
     }
 
     // ========== 5. 表格和文字样式增强（无冲突） ==========
-    // ---------- 5. 表格与文本样式 ----------
     md.renderer.rules.table_open = () => '<div class="vp-table-container"><table class="vp-table striped">'
     md.renderer.rules.table_close = () => '</table></div>'
     md.renderer.rules.strong_open = () => '<strong class="font-bold">'
@@ -219,9 +228,9 @@ const markdown: MarkdownOptions | undefined = {
         tokens[idx].tag === 'h1' &&
         env['relativePath'] &&
         env['relativePath'].includes('/blog/') &&
-        !env._hasAddedMetadata
+        !env[HAS_ADDED_METADATA]
       ) {
-        env._hasAddedMetadata = true
+        env[HAS_ADDED_METADATA] = true
         htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`
       }
       return htmlResult

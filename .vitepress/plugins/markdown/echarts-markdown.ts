@@ -1,18 +1,13 @@
 import type MarkdownIt from 'markdown-it'
 
-export default function echartsMarkdownPlugin(md: MarkdownIt): void {
-  // 保存原有的 fence 函数
-  const fence = md.renderer.rules.fence?.bind(md.renderer.rules)
-  // 定义我们自己的 fence 函数
-  md.renderer.rules.fence = (tokens, idx, options, env, self) => {
-    // 通过token上的 info 获取代码块的语言
-    const token = tokens[idx];
-    const language = token.info.trim();
-    // 此处判断是否为 echarts 代码块
-    if (language.startsWith("echarts")) {
-      // eChartOption.value = JSON.parse(tokens[idx].content); //此处表示将内容存起来，存到当前页面的变量去
-      // 将代码块渲染成 html，这里替换成我们自己定义的vue组件
-      return `
+/**
+ * 检查 token 是否为 echarts 代码块，是则返回渲染后的 HTML，否则返回 null
+ */
+export function renderEchartsBlock(tokens: any[], idx: number): string | null {
+  const token = tokens[idx]
+  const language = token.info.trim()
+  if (language.startsWith('echarts')) {
+    return `
         <Suspense>
           <template #default>
             <ClientOnly>
@@ -23,10 +18,16 @@ export default function echartsMarkdownPlugin(md: MarkdownIt): void {
           <template #fallback>
             Loading...
           </template>
-        </Suspense>`;
-    }
-
-    // 对不是我们需要的代码块的直接调用原有的函数
-    return fence!(tokens, idx, options, env, self)
+        </Suspense>`
   }
+  return null
+}
+
+/**
+ * markdown-it 插件（不覆写 fence，由集中式 dispatcher 调用 renderEchartsBlock）
+ * 保留以兼容 md.use() 调用，但 fence 处理改为推荐方式
+ */
+export default function echartsMarkdownPlugin(md: MarkdownIt): void {
+  // fence 处理已迁移至 markdown.ts 的集中式 dispatcher
+  // 此插件保留为占位符，供未来可能需要的 md 扩展使用
 }

@@ -152,8 +152,54 @@ export default withMermaid({
     // 以下是从 vite.config.ts 迁移回来的构建配置
     build: {
       sourcemap: false,
-      chunkSizeWarningLimit: 20 * 1000,
-      cssMinify: 'lightningcss'
+      chunkSizeWarningLimit: 1000,
+      cssMinify: 'lightningcss',
+      rolldownOptions: {
+        output: {
+          manualChunks(id) {
+            // ===== 可视化 & 3D =====
+            if (id.includes('/node_modules/echarts')) return 'chunk-echarts'
+            if (id.includes('/node_modules/three')) return 'chunk-three'
+            if (id.includes('/node_modules/mermaid')) return 'chunk-mermaid'
+            if (id.includes('/node_modules/@mermaid-js/')) return 'chunk-mermaid'
+
+            // ===== UI 库 =====
+            if (id.includes('/node_modules/naive-ui')) return 'chunk-naive-ui'
+            if (id.includes('/node_modules/vueuc')) return 'chunk-naive-ui'
+
+            // ===== 动画库 =====
+            if (id.includes('/node_modules/gsap')) return 'chunk-animation'
+            if (id.includes('/node_modules/animejs')) return 'chunk-animation'
+            if (id.includes('/node_modules/lottie-web')) return 'chunk-animation'
+
+            // ===== 思维导图 markmap =====
+            if (id.includes('/node_modules/markmap-')) return 'chunk-markmap'
+            if (id.includes('/node_modules/vitepress-markmap-')) return 'chunk-markmap'
+            if (id.includes('/node_modules/@vitepress-plugin/markmap')) return 'chunk-markmap'
+
+            // ===== 图标 =====
+            if (id.includes('/node_modules/@iconify/')) return 'chunk-icons'
+
+            // ===== 数学公式 =====
+            if (id.includes('/node_modules/mathjax')) return 'chunk-math'
+            if (id.includes('/node_modules/markdown-it-mathjax3')) return 'chunk-math'
+
+            // ===== 搜索 =====
+            if (id.includes('/node_modules/pagefind')) return 'chunk-search'
+            if (id.includes('/node_modules/vitepress-plugin-pagefind')) return 'chunk-search'
+
+            // ===== 其他大型库 =====
+            if (id.includes('/node_modules/crypto-js')) return 'chunk-crypto'
+            if (id.includes('/node_modules/@fingerprintjs/')) return 'chunk-fingerprint'
+            if (id.includes('/node_modules/pinia')) return 'chunk-pinia'
+
+            // ===== 兜底：其余 node_modules =====
+            // 注意：VitePress 已按页面做自动 code splitting，
+            // 这里只拆分大型库，不拆分业务代码
+            return null
+          }
+        }
+      }
     },
     css: {
       lightningcss: {

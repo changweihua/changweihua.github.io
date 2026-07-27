@@ -33,7 +33,12 @@ function extractDateFromSrc(src: string | undefined): string {
 function parseEast8Date(dateStr: string): { time: number; string: string } {
   if (!dateStr) return { time: 0, string: '' }
 
-  const match = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})(?::(\d{2}))?/)
+  // 支持格式（所有数值段不要求补零）:
+  //   YYYY-MM-DD HH:mm:ss
+  //   YYYY-MM-DD HH:mm
+  //   YYYY-MM-DD           → 默认 00:00:00
+  //   YYYY-MM               → 默认 01 日 00:00:00
+  const match = dateStr.match(/^(\d{4})-(\d{1,2})(?:-(\d{1,2})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?)?$/)
   if (!match) {
     console.warn(`[blog.data] 无法解析日期: "${dateStr}"，已忽略`)
     return { time: 0, string: '' }
@@ -41,9 +46,9 @@ function parseEast8Date(dateStr: string): { time: number; string: string } {
 
   const year = parseInt(match[1])
   const month = parseInt(match[2])
-  const day = parseInt(match[3])
-  const hour = parseInt(match[4])
-  const minute = parseInt(match[5])
+  const day = match[3] ? parseInt(match[3]) : 1
+  const hour = match[4] ? parseInt(match[4]) : 0
+  const minute = match[5] ? parseInt(match[5]) : 0
   const second = match[6] ? parseInt(match[6]) : 0
 
   // 东八区 → UTC 时间戳

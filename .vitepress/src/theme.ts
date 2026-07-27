@@ -14,7 +14,7 @@ export const themeConfig: DefaultTheme.Config = {
       timeStyle: 'medium',
     },
   },
-  siteTitle: ':title - Custom Suffix',
+  siteTitle: 'CMONO.NET',
   outline: {
     level: [2, 4], // 显示级别
     label: '本页目录', // 自定义大纲标题文字

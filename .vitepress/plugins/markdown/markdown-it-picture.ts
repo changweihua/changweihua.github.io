@@ -209,6 +209,13 @@ function transformHtml(imgHtml: string, opts: ResolvedOptions, env: any): string
     const src = imgNode.attribs.src;
     if (!src) continue;
 
+    // 跳过已被 image 规则处理过的图片（已在 <picture> 或 <figure> 内）
+    if (imgNode.parent && isTag(imgNode.parent) &&
+        (imgNode.parent.tagName.toLowerCase() === 'picture' ||
+         imgNode.parent.tagName.toLowerCase() === 'figure')) {
+      continue
+    }
+
     // ✅ 使用统一路径解析
     const { fsPath, webSrc, isExternal } = resolveImagePaths(src, env, opts);
     if (isExternal) continue; // 外部图片不处理

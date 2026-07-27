@@ -4,9 +4,10 @@ import { enConfig, zhConfig } from "./configs";
 const docsConfig: UserConfig<DefaultTheme.Config> = {
   base: "/",
   title: "CMONO.NET",
+  titleTemplate: ':title | CMONO.NET',
   description: "个人在线",
   appearance: true,
-  lang: "zhHans",
+  lang: "zh-CN",
   head: [
     // ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
     ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
