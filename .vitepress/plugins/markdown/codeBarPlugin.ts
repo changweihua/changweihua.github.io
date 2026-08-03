@@ -1,4 +1,4 @@
-import { Token } from 'markdown-exit'
+import type { Token } from 'markdown-it'
 
 interface CodeBarOptions {
   enabled?: boolean
