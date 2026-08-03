@@ -725,7 +725,7 @@ fetchEventSource(url, {
 | 自定义 Header | ✗ 仅 Cookie       | ✅                     | ✅                              |
 | SSE 协议解析  | ✅ 浏览器原生     | ✗ 需手动实现           | ✅ 自动处理                     |
 | 自动重连      | ✅ 浏览器原生     | ✗ 需手动实现           | ✅ 内置                         |
-| 手动中断      | ✅ `close()`      | ✅ Abort`Controller    | ✅ `AbortController` + `throw`  |
+| 手动中断      | ✅ `close()`      | ✅ `AbortController`    | ✅ `AbortController` + `throw`  |
 | 代码复杂度    | 低（~30行）       | 高（~50行）            | 中（~10行）                     |
 | 外部依赖      | 零依赖            | 零依赖                 | ~2KB                            |
 | 浏览器兼容性  | IE 10+            | 现代浏览器             | 现代浏览器                      |
