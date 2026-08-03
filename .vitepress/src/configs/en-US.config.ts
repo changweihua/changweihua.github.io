@@ -14,7 +14,7 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     logo: "/logo.png",
     // 隐藏logo右边的标题
     siteTitle: false,
-    lastUpdatedText: "Last Updated",
+    lastUpdated: { text: "Last Updated" },
     returnToTopLabel: "TOP",
     // 文档页脚文本配置
     docFooter: {

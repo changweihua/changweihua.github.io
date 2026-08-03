@@ -1,6 +1,5 @@
 import { MarkdownOptions } from 'vitepress'
 import timeline from 'vitepress-markdown-timeline'
-import footnote from 'markdown-it-footnote'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 import { wordless, chineseAndJapanese, Options } from 'markdown-it-wordless'
@@ -48,14 +47,16 @@ const markdown: MarkdownOptions | undefined = {
   linkify: true,
   html: true,
   image: {
-    lazyLoading: true
+    lazyLoad: true
   },
   math: true,
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
   languageLabel: {
     vue: 'Vue SFC'
   },
-  codeCopyButtonTitle: '复制',
+  codeCopyButton: {
+    tooltipText: '复制'
+  },
   container: {
     tipLabel: '提示',
     warningLabel: '警告',
@@ -113,7 +114,6 @@ const markdown: MarkdownOptions | undefined = {
       figcaptionClass: 'custom-figcaption',
       debug: false
     })
-    md.use(footnote)
     md.use(mathjax3, {
       tex: {
         macros: {

@@ -48,7 +48,6 @@ const vitePressOptions: UserConfig = {
   head,
   themeConfig,
   markdown,
-  metaChunk: true,
   sitemap: {
     hostname: 'https://changweihua.github.io',
     lastmodDateOnly: false,

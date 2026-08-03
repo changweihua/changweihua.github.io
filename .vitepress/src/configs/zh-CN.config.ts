@@ -14,7 +14,7 @@ export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     logo: "/logo.png",
     // 隐藏logo右边的标题
     siteTitle: false,//'CMONO.NET',
-    lastUpdatedText: "上次更新",
+    lastUpdated: { text: "上次更新" },
     returnToTopLabel: "返回顶部",
     skipToContentLabel: "返回正文",
     // 文档页脚文本配置
