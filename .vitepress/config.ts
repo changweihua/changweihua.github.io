@@ -11,14 +11,14 @@ import llmstxtPlugin from 'vitepress-plugin-llmstxt'
 import markmapPlugin from '@vitepress-plugin/markmap'
 
 // 你的站点子配置
-import { docsConfig } from './src/docs'
-import { head } from './src/head'
-import { markdown } from './src/markdown'
-import { RSS } from './src/rss'
-import { themeConfig } from './src/theme'
-import { lightMermaidConfig } from './theme/mermaid-theme'
-import { handleHeadMeta } from './utils/handleHeadMeta'
-import { aliasLangPlugin } from './plugins/aliasLangPlugin'
+import { docsConfig } from './src/docs.ts'
+import { head } from './src/head.ts'
+import { markdown } from './src/markdown.ts'
+import { RSS } from './src/rss.ts'
+import { themeConfig } from './src/theme.ts'
+import { lightMermaidConfig } from './theme/mermaid-theme.ts'
+import { handleHeadMeta } from './utils/handleHeadMeta.ts'
+import { aliasLangPlugin } from './plugins/aliasLangPlugin.ts'
 
 const customElements = ['mjx-container', 'mjx-assistive-mml', 'math', 'hover-tilt', 'my-button', 'm-hero-logo']
 

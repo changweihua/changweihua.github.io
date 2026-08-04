@@ -1,7 +1,7 @@
 
 import { expect, it } from 'vitest'
 import { nextTick, ref } from 'vue'
-import { useLastChange } from '../useLastChange'
+import { useLastChange } from '../useLastChange.ts'
 
 it('update lastChange when source changes', async () => {
   const source = ref('')

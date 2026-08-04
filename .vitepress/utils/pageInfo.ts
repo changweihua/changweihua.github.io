@@ -1,4 +1,4 @@
-import type { PageInfo } from '../types'
+import type { PageInfo } from '../types/index.ts'
 
 export function getWords(content: string): RegExpMatchArray | null {
   return content.match(/[\w\d\s,.\u00C0-\u024F\u0400-\u04FF]+/giu)

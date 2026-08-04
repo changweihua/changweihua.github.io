@@ -1,2 +1,2 @@
-export * from "./zh-CN.sidebar";
-export * from "./en-US.sidebar";
+export * from './zh-CN.sidebar.ts'
+export * from './en-US.sidebar.ts'

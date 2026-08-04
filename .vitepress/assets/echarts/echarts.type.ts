@@ -1,4 +1,5 @@
-import echartsJson from './echarts.json'
+import echartsJson from './echarts.json' with {
+}
 
 export interface TooltipFormatterParamsModel {
   componentType: string

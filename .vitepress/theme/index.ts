@@ -34,9 +34,9 @@ import RelatedPosts from './components/RelatedPosts.vue'
 import PrevNextByDate from './components/PrevNextByDate.vue'
 import Markmap from './components/Markmap.vue'
 import RainbowAnimationSwitcher from '../components/RainbowAnimationSwitcher.vue'
-import directives from '../directives'
+import directives from '../directives/index.ts'
 // 导入hooks
-import useVisitData from '../hooks/useVisitData'
+import useVisitData from '../hooks/useVisitData.ts'
 import AnimatingLayout from './AnimatingLayout.vue'
 import HeroWrapper from './components/HeroWrapper.vue'
 import GitHubCorner from './components/GitHubCorner.vue'
@@ -69,7 +69,7 @@ import './styles/markdown.ext.css'
 import './styles/mermaid.ext.css'
 import 'vitepress-plugin-codeblocks-fold/style/index.css' // import style
 
-import '../web-components'
+import '../web-components/index.ts'
 import '@vitepress-demo-preview/component/dist/style.css'
 
 import '@catppuccin/vitepress/theme/frappe/lavender.css'

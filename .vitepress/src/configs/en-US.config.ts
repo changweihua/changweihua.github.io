@@ -1,29 +1,28 @@
-import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
+import type { DefaultTheme, LocaleSpecificConfig } from 'vitepress'
 
 //引入以上配置 是英文界面需要修改zh为en
-import { getEnUSNav } from "../navs";
-import { getEnUSSidebar } from "../sidebars";
-
+import { getEnUSNav } from '../navs/index.ts'
+import { getEnUSSidebar } from '../sidebars/index.ts'
 
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
-  description: "CMONO.NET HomePage",
-  title: "CMONO.NET",
-  lang: "en-US",
+  description: 'CMONO.NET HomePage',
+  title: 'CMONO.NET',
+  lang: 'en-US',
   themeConfig: {
     // 导航上的logo
-    logo: "/logo.png",
+    logo: '/logo.png',
     // 隐藏logo右边的标题
     siteTitle: false,
-    lastUpdated: { text: "Last Updated" },
-    returnToTopLabel: "TOP",
+    lastUpdated: { text: 'Last Updated' },
+    returnToTopLabel: 'TOP',
     // 文档页脚文本配置
     docFooter: {
-      prev: "Prev",
-      next: "Next",
+      prev: 'Prev',
+      next: 'Next'
     },
     footer: {
-      message: "MIT Licensed",
-      copyright: `版权所有 © 2009-${new Date().getFullYear()} CMONO.NET`,
+      message: 'MIT Licensed',
+      copyright: `版权所有 © 2009-${new Date().getFullYear()} CMONO.NET`
     },
     //   editLink: {
     //     pattern: '路径地址',
@@ -32,8 +31,8 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     nav: getEnUSNav(),
     sidebar: getEnUSSidebar(),
     outline: {
-      level: "deep", // 右侧大纲标题层级
-      label: "目录", // 右侧大纲标题文本配置
-    },
-  },
-};
+      level: 'deep', // 右侧大纲标题层级
+      label: '目录' // 右侧大纲标题文本配置
+    }
+  }
+}

@@ -1,2 +1,2 @@
-export * from "./zh-CN.nav";
-export * from "./en-US.nav";
+export * from './zh-CN.nav.ts'
+export * from './en-US.nav.ts'

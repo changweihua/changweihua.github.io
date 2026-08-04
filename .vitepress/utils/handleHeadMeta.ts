@@ -1,6 +1,6 @@
 import { type HeadConfig, type TransformContext } from "vitepress";
 
-import { head } from '../src/head'
+import { head } from '../src/head.ts'
 
 // 处理每个页面的元数据
 export function handleHeadMeta(context: TransformContext) {

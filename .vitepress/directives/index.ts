@@ -1,7 +1,7 @@
 // directives/index.ts
 import { App } from 'vue'
-import debounce from './v-debounce'
-import throttle from './v-throttle'
+import debounce from './v-debounce.ts'
+import throttle from './v-throttle.ts'
 
 const directivesList: any = {
   debounce,

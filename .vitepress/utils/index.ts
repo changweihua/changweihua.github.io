@@ -1,3 +1,3 @@
-export * from './md'
+export * from './md.ts'
 export * from './date'
-export * from './pageInfo'
+export * from './pageInfo.ts'

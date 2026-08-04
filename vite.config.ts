@@ -8,15 +8,15 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
-import versionPlugin from './plugins/vite-plugin-version'
 import versionInjector from 'unplugin-version-injector/vite'
 import mkcert from 'vite-plugin-mkcert'
 import { Schema, ValidateEnv } from '@julr/vite-plugin-validate-env'
 import { envParse } from 'vite-plugin-env-parse'
 import { loadEnv } from 'vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
-import buildTimePlugin from '@zppo/vite-plugin-build-time';
+import buildTimePlugin from '@zppo/vite-plugin-build-time'
 import { fileURLToPath } from 'node:url'
+import versionPlugin from './plugins/vite-plugin-version.ts'
 
 function getEnvValue(mode: string, target: string) {
   const value = loadEnv(mode, process.cwd())[target]
@@ -81,33 +81,30 @@ export default defineConfig(({ mode }) => {
   const devPlugins = isProduction
     ? []
     : [
-      ValidateEnv({
-        validator: 'builtin',
-        schema: {
-          VITE_APP_PRIMARY_COLOR: Schema.string()
-        }
-      }),
-      envParse(),
-      {
-        name: 'dev-error-handler',
-        configureServer(server: any) {
-          server.middlewares.use('/api', (req: any, _res: any, next: any) => {
-            console.log(`🔍 API Request: ${req.method} ${req.url}`)
-            next()
-          })
-        }
-      },
-      mkcert({
-        savePath: './certs',
-        autoUpgrade: false,
-        force: false
-      })
-    ]
+        ValidateEnv({
+          validator: 'builtin',
+          schema: {
+            VITE_APP_PRIMARY_COLOR: Schema.string()
+          }
+        }),
+        envParse(),
+        {
+          name: 'dev-error-handler',
+          configureServer(server: any) {
+            server.middlewares.use('/api', (req: any, _res: any, next: any) => {
+              console.log(`🔍 API Request: ${req.method} ${req.url}`)
+              next()
+            })
+          }
+        },
+        mkcert({
+          savePath: './certs',
+          autoUpgrade: false,
+          force: false
+        })
+      ]
 
-  const prodPlugins = isProduction
-    ? [
-    ]
-    : []
+  const prodPlugins = isProduction ? [] : []
 
   return {
     plugins: [...sharedPlugins, ...devPlugins, ...prodPlugins],
@@ -120,14 +117,11 @@ export default defineConfig(({ mode }) => {
 
     html: {
       additionalAssetSources: {
-        "html-import": {
-          srcAttributes: ["src"]
+        'html-import': {
+          srcAttributes: ['src']
         },
         img: {
-          srcAttributes: [
-            "data-src-dark",
-            "data-src-light"
-          ]
+          srcAttributes: ['data-src-dark', 'data-src-light']
         }
       }
     },
@@ -149,8 +143,6 @@ export default defineConfig(({ mode }) => {
         overlay: true
       }
     },
-
-
 
     build: {
       rolldownOptions: {
@@ -211,7 +203,6 @@ export default defineConfig(({ mode }) => {
       ],
       exclude: ['vitepress', 'echarts', 'three', 'naive-ui']
     },
-
 
     devtools: {
       enabled: true

@@ -1,2 +1,2 @@
-export * from './zh-CN.config'
-export * from './en-US.config'
+export * from './zh-CN.config.ts'
+export * from './en-US.config.ts'

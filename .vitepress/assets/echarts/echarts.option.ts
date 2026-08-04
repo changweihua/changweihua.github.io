@@ -1,6 +1,7 @@
 import * as echarts from 'echarts'
 
-import echartsJson from './echarts.json'
+import echartsJson from './echarts.json' with {
+}
 import { easingFuncs } from './echarts.type'
 
 export const legendOption = {

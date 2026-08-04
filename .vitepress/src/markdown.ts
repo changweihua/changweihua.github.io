@@ -4,10 +4,7 @@ import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
 import { wordless, chineseAndJapanese, Options } from 'markdown-it-wordless'
 import MarkdownItCollapsible from 'markdown-it-collapsible'
-import namedCode from 'markdown-it-named-code-blocks'
-import { renderEchartsBlock } from '../plugins/markdown/echarts-markdown'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
-import mathjax3 from 'markdown-it-mathjax3'
 import MarkdownItGitHubAlerts from 'markdown-it-github-alerts'
 import markdownItTableExt from 'markdown-it-multimd-table-ext'
 import { vitepressMarkmapPreview } from 'vitepress-markmap-preview'
@@ -16,21 +13,22 @@ import { vitepressDemoPlugin } from 'vitepress-better-demo-plugin'
 import { resolve } from 'path'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { fileURLToPath, URL } from 'node:url'
-import { hasHeadingAfter } from '../plugins/markdown/codeBarPlugin'
 import { linkToCardPlugin } from 'vitepress-linkcard'
 import type { LinkToCardPluginOptions } from 'vitepress-linkcard'
 import { markdownGlossaryPlugin } from 'vitepress-plugin-glossary'
-import glossary from './glossary.json'
+import { renderEchartsBlock } from '../plugins/markdown/echarts-markdown.ts'
 import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
-import picturePlugin from '../plugins/markdown/markdown-it-picture'
-import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper'
 import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
-import { renderMarkmapBlock } from '../plugins/markdown/markdownMarkmap'
+import picturePlugin from '../plugins/markdown/markdown-it-picture.ts'
+import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper.ts'
+import { renderMarkmapBlock } from '../plugins/markdown/markdownMarkmap.ts'
+import { hasHeadingAfter } from '../plugins/markdown/codeBarPlugin.ts'
+import glossary from './glossary.json' with { type: 'json' }
 
 const demoAlias = {
-  '@demo': resolve(__dirname, '../../src/demos'),
-  '@vp': resolve(__dirname, '../components'),
-  '@assets': resolve(__dirname, '../../src/assets')
+  '@demo': resolve(import.meta.dirname, '../../src/demos'),
+  '@vp': resolve(import.meta.dirname, '../components'),
+  '@assets': resolve(import.meta.dirname, '../../src/assets')
 }
 
 const languageLabels: Record<string, string> = {
@@ -98,18 +96,10 @@ const markdown: MarkdownOptions | undefined = {
       figcaptionClass: 'custom-figcaption',
       debug: false
     })
-    md.use(mathjax3, {
-      tex: {
-        macros: {
-          RR: '{\\mathbb{R}}'
-        }
-      }
-    })
     md.use<LinkToCardPluginOptions>(linkToCardPlugin, {})
     md.use(tabsMarkdownPlugin)
     md.use(npmCommandsMarkdownPlugin)
     md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] })
-    md.use(namedCode, { isEnableInlineCss: true })
     md.use(timeline)
     md.use(groupIconMdPlugin)
     md.use(MarkdownItCollapsible)
@@ -146,7 +136,7 @@ const markdown: MarkdownOptions | undefined = {
     // 如果支持，可传递 demoBlockReg: /^better-demo\s*(.*)$/
     // 若不支持，请自行修改插件源码或使用 markdown-it-container 包装。
     md.use(vitepressDemoPlugin, {
-      demoDir: resolve(__dirname, '../../src/demos'),
+      demoDir: resolve(import.meta.dirname, '../../src/demos'),
       lightTheme: 'catppuccin-latte',
       darkTheme: 'catppuccin-frappe',
       tabs: { order: 'html,vue,react', select: 'vue' },
@@ -173,7 +163,7 @@ const markdown: MarkdownOptions | undefined = {
     // 所有 fence 相关处理统一在此处，避免多个插件链式覆写 fence 的脆弱性
     const originalFence = md.renderer.rules.fence!.bind(md.renderer.rules)
     md.renderer.rules.fence = (tokens: any[], idx: number, options: any, env: any, self: any) => {
-      const token = tokens[idx]
+      const _token = tokens[idx]
 
       // 4.1 特殊语言：markmap
       const markmapResult = renderMarkmapBlock(tokens, idx)
@@ -210,7 +200,9 @@ const markdown: MarkdownOptions | undefined = {
       let htmlResult = render.renderToken(tokens, idx, options)
       if (
         tokens[idx].tag === 'h1' &&
+        env &&
         env['relativePath'] &&
+        // @ts-expect-error A
         env['relativePath'].includes('/blog/') &&
         !env[HAS_ADDED_METADATA]
       ) {

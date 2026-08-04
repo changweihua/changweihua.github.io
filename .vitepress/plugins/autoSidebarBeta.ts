@@ -9,7 +9,7 @@ export interface Options {
   collapsed?: boolean
 }
 
-export const DIR_ROOT = resolve(__dirname, '../../../../')
+export const DIR_ROOT = resolve(import.meta.dirname, '../../../../')
 export const DIR_SRC = resolve(DIR_ROOT, 'docs')
 
 export function fastGlobSync(type: string, dir: string, ignore: string[] = []) {

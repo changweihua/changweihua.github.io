@@ -1,2 +1,2 @@
-export * from './en-US.footer'
-export * from './zh-CN.footer'
+export * from './en-US.footer.ts'
+export * from './zh-CN.footer.ts'

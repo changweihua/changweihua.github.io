@@ -1,9 +1,9 @@
 import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 
 //引入以上配置 是英文界面需要修改zh为en
-import { getZhCNNav } from "../navs";
-import { getZhCNSidebar } from "../sidebars";
-import { getZhCNFooter } from "../footers"
+import { getZhCNNav } from "../navs/index.ts";
+import { getZhCNSidebar } from "../sidebars/index.ts";
+import { getZhCNFooter } from "../footers/index.ts"
 
 export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: "CMONO.NET 之家",
