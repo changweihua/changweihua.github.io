@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.13.12](https://github.com/changweihua/changweihua/compare/0.13.11...0.13.12) (2026-08-04)
+
 ## [0.13.11](https://github.com/changweihua/changweihua/compare/0.13.10...0.13.11) (2026-07-27)
 
 ## [0.13.10](https://github.com/changweihua/changweihua/compare/0.13.9...0.13.10) (2026-07-23)
