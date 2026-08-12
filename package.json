@@ -104,7 +104,7 @@
     "copy-to-clipboard": "^4.0.2",
     "cross-env": "^10.1.0",
     "crypto-js": "^4.2.0",
-    "deepmerge-ts": "^7.1.5",
+    "deepmerge-ts": "^7.1.6",
     "dom-serializer": "^3.1.1",
     "driver.js": "^1.8.0",
     "echarts": "^6.1.0",
@@ -264,22 +264,22 @@
     "@vitejs/devtools": "^0.4.12",
     "@zenuml/core": "^4.2.0",
     "dayjs": "^1.11.21",
-    "eslint": "^10.8.0",
-    "highlight.js": "^11.11.1",
+    "eslint": "^10.8.1",
+    "highlight.js": "^11.11.2",
     "mermaid": "^11.16.1",
     "prismjs": "^1.30.0",
     "release-it": "^19.2.4",
     "shiki": "^3.23.0",
     "svg-pan-zoom": "^3.6.2",
     "typescript": "^7.0.2",
-    "vite": "^8.2.0",
+    "vite": "^8.2.1",
     "vite-plugin-html": "^3.2.2",
     "vitepress": "^2.0.0-alpha.19",
     "vitepress-plugin-mermaid": {
       "vitepress": "$vitepress"
     },
     "vitest": "^4.1.10",
-    "vue": "^3.6.0-rc.2"
+    "vue": "^3.6.0-rc.3"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,vue,html,css,scss}": [
