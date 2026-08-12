@@ -24,6 +24,7 @@ import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper.ts'
 import { renderMarkmapBlock } from '../plugins/markdown/markdownMarkmap.ts'
 import { hasHeadingAfter } from '../plugins/markdown/codeBarPlugin.ts'
 import glossary from './glossary.json' with { type: 'json' }
+import MarkdownItMathJaX3PRO from 'markdown-it-mathjax3-pro'
 
 const demoAlias = {
   '@demo': resolve(import.meta.dirname, '../../src/demos'),
@@ -46,7 +47,7 @@ const markdown: MarkdownOptions | undefined = {
   image: {
     lazyLoad: true
   },
-  math: true,
+  math: false,
   theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
   languageLabel: {
     vue: 'Vue SFC'
@@ -83,6 +84,7 @@ const markdown: MarkdownOptions | undefined = {
   languages: ['js', 'jsx', 'ts', 'tsx'],
   config: (md) => {
     // ========== 1. 基础插件（无冲突） ==========
+    md.use(MarkdownItMathJaX3PRO)
     md.use(MarkdownItGitHubMentionCard)
     md.use(pathHashWrapperPlugin)
     md.use(picturePlugin, {

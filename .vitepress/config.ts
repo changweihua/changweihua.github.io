@@ -182,6 +182,7 @@ export default withMermaid({
             // ===== 数学公式 =====
             if (id.includes('/node_modules/mathjax')) return 'chunk-math'
             if (id.includes('/node_modules/markdown-it-mathjax3')) return 'chunk-math'
+            if (id.includes('/node_modules/markdown-it-mathjax3-pro')) return 'chunk-math'
 
             // ===== 搜索 =====
             if (id.includes('/node_modules/pagefind')) return 'chunk-search'
