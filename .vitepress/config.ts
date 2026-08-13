@@ -155,48 +155,123 @@ export default withMermaid({
       cssMinify: 'lightningcss',
       rolldownOptions: {
         output: {
-          manualChunks(id) {
-            // ===== 可视化 & 3D =====
-            if (id.includes('/node_modules/echarts')) return 'chunk-echarts'
-            if (id.includes('/node_modules/three')) return 'chunk-three'
-            if (id.includes('/node_modules/mermaid')) return 'chunk-mermaid'
-            if (id.includes('/node_modules/@mermaid-js/')) return 'chunk-mermaid'
+          codeSplitting: {
+            groups: [
+              // =============================================
+              // 1. 可视化 & 图表库 (体积巨大，独立拆分)
+              // =============================================
+              {
+                name: 'vendor-echarts',
+                test: (id) => id.includes('/node_modules/echarts/')
+              },
+              {
+                name: 'vendor-three',
+                test: (id) => id.includes('/node_modules/three/')
+              },
+              {
+                name: 'vendor-mermaid',
+                test: (id) => id.includes('/node_modules/mermaid/') || id.includes('/node_modules/@mermaid-js/')
+              },
 
-            // ===== UI 库 =====
-            if (id.includes('/node_modules/naive-ui')) return 'chunk-naive-ui'
-            if (id.includes('/node_modules/vueuc')) return 'chunk-naive-ui'
+              // =============================================
+              // 2. UI 组件库 (Naive UI 体积大，独立拆分)
+              // =============================================
+              {
+                name: 'vendor-naive-ui',
+                test: (id) => id.includes('/node_modules/naive-ui/') || id.includes('/node_modules/vueuc/') // naive-ui 依赖
+              },
 
-            // ===== 动画库 =====
-            if (id.includes('/node_modules/gsap')) return 'chunk-animation'
-            if (id.includes('/node_modules/animejs')) return 'chunk-animation'
-            if (id.includes('/node_modules/lottie-web')) return 'chunk-animation'
+              // =============================================
+              // 3. 动画库 (lottie, gsap, animejs 等)
+              // =============================================
+              {
+                name: 'vendor-animation',
+                test: (id) =>
+                  id.includes('/node_modules/lottie-web/') ||
+                  id.includes('/node_modules/gsap/') ||
+                  id.includes('/node_modules/animejs/')
+              },
 
-            // ===== 思维导图 markmap =====
-            if (id.includes('/node_modules/markmap-')) return 'chunk-markmap'
-            if (id.includes('/node_modules/vitepress-markmap-')) return 'chunk-markmap'
-            if (id.includes('/node_modules/@vitepress-plugin/markmap')) return 'chunk-markmap'
+              // =============================================
+              // 4. 思维导图 markmap (体积较大)
+              // =============================================
+              {
+                name: 'vendor-markmap',
+                test: (id) =>
+                  id.includes('/node_modules/markmap-') ||
+                  id.includes('/node_modules/vitepress-markmap-') ||
+                  id.includes('/node_modules/@vitepress-plugin/markmap')
+              },
 
-            // ===== 图标 =====
-            if (id.includes('/node_modules/@iconify/')) return 'chunk-icons'
+              // =============================================
+              // 5. 图标库 (Iconify 包含大量图标数据)
+              // =============================================
+              {
+                name: 'vendor-icons',
+                test: (id) => id.includes('/node_modules/@iconify/')
+              },
 
-            // ===== 数学公式 =====
-            if (id.includes('/node_modules/mathjax')) return 'chunk-math'
-            if (id.includes('/node_modules/markdown-it-mathjax3')) return 'chunk-math'
-            if (id.includes('/node_modules/markdown-it-mathjax3-pro')) return 'chunk-math'
+              // =============================================
+              // 6. 数学公式 (MathJax, markdown-it-mathjax3)
+              // =============================================
+              {
+                name: 'vendor-math',
+                test: (id) =>
+                  id.includes('/node_modules/mathjax/') ||
+                  id.includes('/node_modules/markdown-it-mathjax3') ||
+                  id.includes('/node_modules/markdown-it-mathjax3-pro')
+              },
 
-            // ===== 搜索 =====
-            if (id.includes('/node_modules/pagefind')) return 'chunk-search'
-            if (id.includes('/node_modules/vitepress-plugin-pagefind')) return 'chunk-search'
+              // =============================================
+              // 7. 搜索 (Pagefind)
+              // =============================================
+              {
+                name: 'vendor-search',
+                test: (id) =>
+                  id.includes('/node_modules/pagefind/') || id.includes('/node_modules/vitepress-plugin-pagefind/')
+              },
 
-            // ===== 其他大型库 =====
-            if (id.includes('/node_modules/crypto-js')) return 'chunk-crypto'
-            if (id.includes('/node_modules/@fingerprintjs/')) return 'chunk-fingerprint'
-            if (id.includes('/node_modules/pinia')) return 'chunk-pinia'
+              // =============================================
+              // 8. 实用工具库 (lodash, date-fns, crypto-js 等)
+              // =============================================
+              {
+                name: 'vendor-utils',
+                test: (id) =>
+                  id.includes('/node_modules/lodash-es/') ||
+                  id.includes('/node_modules/date-fns/') ||
+                  id.includes('/node_modules/crypto-js/') ||
+                  id.includes('/node_modules/@fingerprintjs/')
+              },
 
-            // ===== 兜底：其余 node_modules =====
-            // 注意：VitePress 已按页面做自动 code splitting，
-            // 这里只拆分大型库，不拆分业务代码
-            return null
+              // =============================================
+              // 9. Vue 生态 (Pinia, Vue Router, VueUse 等)
+              // =============================================
+              {
+                name: 'vendor-vue',
+                test: (id) =>
+                  id.includes('/node_modules/pinia/') ||
+                  id.includes('/node_modules/vue-router/') ||
+                  id.includes('/node_modules/@vueuse/')
+              }
+
+              // =============================================
+              // 10. 浏览器端专用库 (只在客户端使用，避免 SSR 问题)
+              // 这些库我们已经 external 了，但如果你需要打包，可以放在这里
+              // =============================================
+              // {
+              //   name: 'vendor-client-only',
+              //   test: (id) =>
+              //     id.includes('/node_modules/mark.js/') ||
+              //     id.includes('/node_modules/vue3-next-qrcode/') ||
+              //     id.includes('/node_modules/hover-tilt/'),
+              // },
+
+              // =============================================
+              // 11. 其余所有 node_modules 依赖 (兜底)
+              // 注意：未匹配的会按 Rolldown 默认策略拆分
+              // =============================================
+              // 实际上不需要写兜底，因为未匹配的会保持默认
+            ]
           }
         }
       }
@@ -231,16 +306,10 @@ export default withMermaid({
         'vitepress-plugin-detype',
         'vitepress-plugin-npm-commands',
         'hover-tilt'
+        // 如果你发现还有其他纯 DOM 库，继续加在这里
       ],
-      noExternal: [
-        'vitepress-plugin-nprogress',
-        'vitepress-component-medium-zoom',
-        'vitepress-plugin-bprogress',
-        'naive-ui',
-        'date-fns',
-        'vueuc',
-        '@vue/runtime-dom'
-      ]
+      // noExternal 直接删除或设为空数组即可
+      noExternal: []
     },
     resolve: {
       alias: [

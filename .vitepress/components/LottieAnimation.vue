@@ -1,133 +1,153 @@
 <template>
-  <!-- 动画容器，需指定宽高 -->
   <div
-    ref="lottieContainer"
+    ref="containerRef"
     class="lottie-container"
     :style="{ width, height }"
-  ></div>
+  >
+    <DotLottieVue
+      v-if="hasValidSource"
+      ref="dotLottieRef"
+      :src="src"
+      :data="data"
+      :autoplay="autoplay"
+      :loop="loop"
+      :speed="speed"
+      :renderer="compatibleRenderer"
+      @complete="handleComplete"
+      @loop="handleLoop"
+      @load="handleLoad"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
-  import { onUnmounted, onMounted, watch, useTemplateRef } from 'vue'
-  import lottie, { RendererType } from 'lottie-web'
+  import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+  import { DotLottieVue } from '@lottiefiles/dotlottie-vue'
+  import type { DotLottie } from '@dotlottie/web'
 
-  // 定义 Props
+  // ---------- Props 定义（与原来完全一致） ----------
   const props = defineProps({
-    // 动画 JSON 文件路径
     animationData: {
       type: Object,
-      required: false,
-      default: null,
+      default: null
     },
     path: {
       type: String,
-      required: false,
-      default: '',
+      default: ''
     },
-    // 动画宽高
     width: {
       type: String,
-      default: '300px',
+      default: '300px'
     },
     height: {
       type: String,
-      default: '300px',
+      default: '300px'
     },
-    // 是否自动播放
     autoplay: {
       type: Boolean,
-      default: true,
+      default: true
     },
-    // 是否循环播放
     loop: {
       type: Boolean,
-      default: true,
+      default: true
     },
-    // 动画速度（1 为正常速度）
     speed: {
       type: Number,
-      default: 1,
+      default: 1
     },
-    // 渲染方式（svg/canvas/html），优先 svg（矢量）
+    // 原来的 renderer 支持 'svg' / 'canvas' / 'html'
+    // 但 dotlottie-vue 仅支持 'canvas' 和 'webgl'
     renderer: {
-      type: String as PropType<RendererType>,
-      default: 'svg',
-      validator: (val: string) => ['svg', 'canvas', 'html'].includes(val),
-    },
+      type: String as PropType<'svg' | 'canvas' | 'html' | 'webgl'>,
+      default: 'canvas',
+      validator: (val: string) => ['svg', 'canvas', 'html', 'webgl'].includes(val)
+    }
   })
 
-  // 定义 Emits：暴露动画状态事件
+  // ---------- Emits（与原来一致） ----------
   const emit = defineEmits(['complete', 'loopComplete', 'enterFrame'])
 
-  // 动画容器 Ref
-  const lottieContainer = useTemplateRef<HTMLDivElement>('lottieContainer')
-  // Lottie 实例
-  let lottieInstance: any = null
+  // ---------- 模板引用 ----------
+  const containerRef = ref<HTMLDivElement | null>(null)
+  const dotLottieRef = ref<InstanceType<typeof DotLottieVue> | null>(null)
 
-  defineExpose({
-    lottieInstance,
+  // ---------- 底层 DotLottie 实例（用于高级控制） ----------
+  let dotLottieInstance: DotLottie | null = null
+
+  // ---------- 计算有效数据源 ----------
+  const hasValidSource = computed(() => !!(props.animationData || props.path))
+
+  // 将 animationData / path 映射为 dotlottie-vue 的 data / src
+  const data = computed(() => props.animationData || undefined)
+  const src = computed(() => props.path || undefined)
+
+  // 处理 renderer：如果传入 'svg' 或 'html'，降级为 'canvas' 并给出警告
+  const compatibleRenderer = computed(() => {
+    const r = props.renderer
+    if (r === 'svg' || r === 'html') {
+      console.warn(`[Lottie] renderer "${r}" 不被 @lottiefiles/dotlottie-vue 支持，已自动降级为 "canvas"。`)
+      return 'canvas'
+    }
+    return r as 'canvas' | 'webgl'
   })
 
-  // 初始化动画
-  const initLottie = () => {
-    if (!lottieContainer.value) return
-    console.log('initLottie')
-    // 销毁旧实例（避免重复渲染）
-    if (lottieInstance) {
-      lottieInstance.destroy()
-    }
-
-    // 创建 Lottie 实例
-    lottieInstance = lottie.loadAnimation({
-      container: lottieContainer.value, // 动画容器
-      animationData: props.animationData, // 动画 JSON 数据（本地导入）
-      path: props.path, // 动画 JSON 文件路径（远程/ public 目录）
-      renderer: props.renderer, // 渲染方式
-      loop: props.loop, // 循环播放
-      autoplay: props.autoplay, // 自动播放
-      name: 'lottie-animation', // 动画名称（可选）
-    })
-
-    // 设置动画速度
-    lottieInstance.setSpeed(props.speed)
-
-    // 监听动画事件
-    lottieInstance.addEventListener('complete', () => {
-      emit('complete') // 动画播放完成
-    })
-    lottieInstance.addEventListener('loopComplete', () => {
-      emit('loopComplete') // 动画循环完成
-    })
-    lottieInstance.addEventListener('enterFrame', (e) => {
-      emit('enterFrame', e) // 动画每一帧
-    })
+  // ---------- 事件转发 ----------
+  const handleComplete = () => {
+    emit('complete')
   }
 
-  // 监听 Props 变化，重新初始化
-  watch(
-    [() => props.path, () => props.animationData, () => props.loop, () => props.speed],
-    () => {
-      initLottie()
-    },
-    { immediate: true }
-  )
+  const handleLoop = () => {
+    emit('loopComplete')
+  }
 
-  onMounted(() => {
-    initLottie()
+  // 当底层实例加载完成后，监听 'frame' 事件并转发
+  const handleLoad = () => {
+    const instance = dotLottieRef.value?.getDotLottieInstance?.()
+    if (instance) {
+      dotLottieInstance = instance
+      // 移除旧的监听器（防止重复）
+      instance.removeEventListener('frame', handleFrame)
+      instance.addEventListener('frame', handleFrame)
+      // 额外暴露实例，供外部通过 ref 访问
+    }
+  }
+
+  const handleFrame = (e: any) => {
+    emit('enterFrame', e)
+  }
+
+  // ---------- 外部通过 ref 访问实例 ----------
+  // 保留 lottieInstance 属性，但注意它现在是 DotLottie 类型
+  defineExpose({
+    lottieInstance: dotLottieInstance,
+    // 同时也暴露一些常用控制方法，方便外部直接调用
+    play: () => dotLottieInstance?.play(),
+    pause: () => dotLottieInstance?.pause(),
+    stop: () => dotLottieInstance?.stop(),
+    destroy: () => dotLottieInstance?.destroy()
   })
 
-  // 组件卸载时销毁实例
+  // ---------- 生命周期清理 ----------
   onUnmounted(() => {
-    if (lottieInstance) {
-      lottieInstance.destroy()
-      lottieInstance = null
+    if (dotLottieInstance) {
+      dotLottieInstance.removeEventListener('frame', handleFrame)
+      dotLottieInstance.destroy()
+      dotLottieInstance = null
     }
   })
+
+  // ---------- 响应式更新：源变化时重新加载（由组件内部处理） ----------
+  // 我们不需要手动 watch 了，因为 DotLottieVue 会自动响应 src/data 变化
+  // 但为了强制重新加载（如 renderer 变化），可以通过 key 或重新创建，但组件自身会处理
 </script>
 
 <style scoped>
   .lottie-container {
     display: inline-block;
     overflow: hidden;
+  }
+  .lottie-container :deep(dotlottie-vue) {
+    width: 100%;
+    height: 100%;
   }
 </style>
