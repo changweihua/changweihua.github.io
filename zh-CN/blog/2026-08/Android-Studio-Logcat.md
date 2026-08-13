@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: Android Studio 新版 Logcat
 description: Android Studio 新版 Logcat
-date: 2026-08-07 09:15:00
+date: 2026-08-13 09:15:00
 pageClass: blog-page-class
 cover: /covers/android.svg
 ---
