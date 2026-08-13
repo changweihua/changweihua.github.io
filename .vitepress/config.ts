@@ -309,7 +309,15 @@ export default withMermaid({
         // 如果你发现还有其他纯 DOM 库，继续加在这里
       ],
       // noExternal 直接删除或设为空数组即可
-      noExternal: []
+      noExternal: [
+        'vitepress-plugin-nprogress',
+        'vitepress-component-medium-zoom',
+        'vitepress-plugin-bprogress',
+        'naive-ui',
+        'date-fns',
+        'vueuc',
+        '@vue/runtime-dom'
+      ]
     },
     resolve: {
       alias: [
