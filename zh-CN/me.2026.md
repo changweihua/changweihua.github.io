@@ -118,14 +118,6 @@ encrypt-storage: true
 
 ![示例图](/images/11-2-2026_13284_192.168.10.160.jpeg){data-zoomable}
 
-![示例图](/images/tgs-gateway1.jpeg){data-zoomable}
-
-![示例图](/images/tgs-gateway2.jpeg){data-zoomable}
-
-![示例图](/images/tgs-gateway3.jpeg){data-zoomable}
-
-![示例图](/images/tgs-gateway4.jpeg){data-zoomable}
-
 </div>
 
 ### 无锡硕放机场携带工具审批系统
