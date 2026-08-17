@@ -456,7 +456,7 @@ const ProtectRoute = ({ children }) => {
 
 `localStorage` 保存的是字符串，因此代码比较的是 `'true'`，而不是布尔值 `true`。它属于浏览器本地存储，并且按域隔离。HTTP 本身是无状态的，这个小例子用本地状态模拟“用户已经登录”。
 
-`state={{ from: location.pathname }}` 给本次导航附带一个状态对象，用来记录用户原本想访问的地址。比如用户从 /pay 被拦截，登录页就能知道成功后应该回到 `/pay`。
+<code>state={{ from: location.pathname }}</code> 给本次导航附带一个状态对象，用来记录用户原本想访问的地址。比如用户从 /pay 被拦截，登录页就能知道成功后应该回到 `/pay`。
 
 为了让路由相关数据的来源更明确，这里可以用 useLocation 代替直接读取浏览器全局变量：
 
