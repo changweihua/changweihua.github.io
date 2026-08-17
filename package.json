@@ -262,7 +262,7 @@
     "@nuxt/kit": "3.21.7",
     "@vitejs/devtools": "^0.4.12",
     "@zenuml/core": "^4.2.0",
-    "date-fns": "^4.4.0",
+    "date-fns": "3.6.0",
     "dayjs": "^1.11.22",
     "eslint": "^10.8.1",
     "highlight.js": "^11.12.0",
