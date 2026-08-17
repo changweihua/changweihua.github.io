@@ -239,6 +239,7 @@ export default withMermaid({
                 test: (id) =>
                   id.includes('/node_modules/lodash-es/') ||
                   id.includes('/node_modules/date-fns/') ||
+                  id.includes('/node_modules/date-fns-tz/') ||
                   id.includes('/node_modules/crypto-js/') ||
                   id.includes('/node_modules/@fingerprintjs/')
               },
@@ -313,8 +314,6 @@ export default withMermaid({
         'vitepress-plugin-nprogress',
         'vitepress-component-medium-zoom',
         'vitepress-plugin-bprogress',
-        'naive-ui',
-        'date-fns',
         'vueuc',
         '@vue/runtime-dom'
       ]
