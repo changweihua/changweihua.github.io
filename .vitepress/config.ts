@@ -314,6 +314,8 @@ export default withMermaid({
         'vitepress-plugin-nprogress',
         'vitepress-component-medium-zoom',
         'vitepress-plugin-bprogress',
+        'naive-ui',
+        'date-fns',
         'vueuc',
         '@vue/runtime-dom'
       ]
