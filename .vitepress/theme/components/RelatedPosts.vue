@@ -4,6 +4,10 @@ import { computed } from 'vue'
 import { type Post } from '../../posts.data'
 import { data } from '../../posts.data'
 import { shuffle } from 'lodash-es'
+import CPerformantEllipsis from '../components/CPerformantEllipsis.vue'
+import CGradientText from '../components/CGradientText.vue'
+import CSpace from '../components/CSpace.vue'
+import CSkeleton from '../components/CSkeleton.vue'
 
 const allPosts = data as unknown as Post[]
 
@@ -29,17 +33,17 @@ const related = computed<Post[]>(() => {
     <h2>随便看看</h2>
     <ul class="post-list">
       <li v-for="post in related" :key="post.url" class="post-item">
-        <a :href="post.url"><n-performant-ellipsis><n-gradient-text type="info">{{ post.title
-              }}</n-gradient-text></n-performant-ellipsis></a>
+        <a :href="post.url"><CPerformantEllipsis><CGradientText type="info">{{ post.title
+              }}</CGradientText></CPerformantEllipsis></a>
       </li>
     </ul>
   </div>
-  <n-space v-else vertical>
-    <n-skeleton height="40px" width="33%" />
-    <n-skeleton height="40px" width="66%" :sharp="false" />
-    <n-skeleton height="40px" round />
-    <n-skeleton height="40px" circle />
-  </n-space>
+  <CSpace v-else vertical>
+    <CSkeleton height="40px" width="33%" />
+    <CSkeleton height="40px" width="66%" :round="false" />
+    <CSkeleton height="40px" round />
+    <CSkeleton height="40px" circle />
+  </CSpace>
 </template>
 
 <style scoped>

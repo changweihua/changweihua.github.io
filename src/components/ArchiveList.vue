@@ -30,7 +30,7 @@
               :href="article.url"
               class="block overflow-hidden whitespace-nowrap text-ellipsis"
             ></a>
-            <n-tooltip trigger="hover">
+            <CTooltip trigger="hover">
               <template #trigger>
                 <span
                   v-text="fromNow(article.date.time)"
@@ -38,7 +38,7 @@
                 ></span>
               </template>
               {{ formatDateTime(article.date.time) }}
-            </n-tooltip>
+            </CTooltip>
           </div>
         </div>
       </div>
@@ -53,6 +53,7 @@
   import DOMPurify from 'dompurify'
   import { delay } from 'lodash-es'
   import SpinHolder from '@vp/components/SpinHolder.vue'
+  import CTooltip from '@vp/components/CTooltip.vue'
 
   // ============ 原生日期工具（替代 dayjs） ============
 

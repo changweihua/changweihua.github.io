@@ -15,12 +15,13 @@
         <article-card :item="item" />
       </div>
     </div>
-    <n-empty v-else></n-empty>
+    <CEmpty v-else />
   </div>
 </template>
 
 <script setup lang="ts">
   import { CardListItem } from './ArticleCard.vue'
+  import CEmpty from '@vp/components/CEmpty.vue'
 
   withDefaults(
     defineProps<{

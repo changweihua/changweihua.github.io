@@ -174,14 +174,6 @@ export default withMermaid({
               },
 
               // =============================================
-              // 2. UI 组件库 (Naive UI 体积大，独立拆分)
-              // =============================================
-              {
-                name: 'vendor-naive-ui',
-                test: (id) => id.includes('/node_modules/naive-ui/') || id.includes('/node_modules/vueuc/') // naive-ui 依赖
-              },
-
-              // =============================================
               // 3. 动画库 (lottie, gsap, animejs 等)
               // =============================================
               {
@@ -314,9 +306,7 @@ export default withMermaid({
         'vitepress-plugin-nprogress',
         'vitepress-component-medium-zoom',
         'vitepress-plugin-bprogress',
-        'naive-ui',
         'date-fns',
-        'vueuc',
         '@vue/runtime-dom'
       ]
     },

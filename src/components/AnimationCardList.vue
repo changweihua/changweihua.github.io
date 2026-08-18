@@ -7,13 +7,14 @@
         <article-card :item="item" />
       </li>
     </ul>
-    <n-empty v-else></n-empty>
+    <CEmpty v-else />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick, useTemplateRef, watch } from 'vue'
 import { CardListItem } from './ArticleCard.vue'
+import CEmpty from '@vp/components/CEmpty.vue'
 
 const props = withDefaults(
   defineProps<{

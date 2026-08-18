@@ -213,7 +213,6 @@
     "markdown-it": "^15.0.0",
     "markmap-lib": "^0.18.12",
     "mkcert": "^3.2.0",
-    "naive-ui": "^2.45.0",
     "node-modules-inspector": "^2.3.3",
     "node-scp2": "^1.0.0",
     "oxc-minify": "^0.144.0",

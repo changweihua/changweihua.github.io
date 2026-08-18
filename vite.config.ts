@@ -6,7 +6,6 @@ import vueStyledPlugin from '@vue-styled-components/plugin'
 import UnoCSS from 'unocss/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import versionInjector from 'unplugin-version-injector/vite'
 import mkcert from 'vite-plugin-mkcert'
@@ -45,7 +44,6 @@ export default defineConfig(({ mode }) => {
       dts: 'typings/components.d.ts',
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       resolvers: [
-        NaiveUiResolver(),
         IconsResolver({
           prefix: 'icon',
           strict: true,
@@ -186,7 +184,6 @@ export default defineConfig(({ mode }) => {
         'cytoscape-cose-bilkent',
         // 第一次已构建的（可省略，但列出能加快扫描）
         'echarts',
-        'naive-ui',
         'lodash-es',
         'three',
         'animejs',
@@ -201,7 +198,7 @@ export default defineConfig(({ mode }) => {
         'dompurify',
         'marked'
       ],
-      exclude: ['vitepress', 'echarts', 'three', 'naive-ui']
+      exclude: ['vitepress', 'echarts', 'three']
     },
 
     devtools: {

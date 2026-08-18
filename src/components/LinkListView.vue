@@ -27,12 +27,13 @@
         </div>
       </div>
     </div>
-    <n-empty v-else></n-empty>
+    <CEmpty v-else />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useTemplateRef } from "vue";
+import CEmpty from '@vp/components/CEmpty.vue';
 
 const palette = useTemplateRef<HTMLDivElement>("palette");
 
