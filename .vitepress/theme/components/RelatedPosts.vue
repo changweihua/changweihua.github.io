@@ -4,10 +4,10 @@ import { computed } from 'vue'
 import { type Post } from '../../posts.data'
 import { data } from '../../posts.data'
 import { shuffle } from 'lodash-es'
-import CPerformantEllipsis from '../components/CPerformantEllipsis.vue'
-import CGradientText from '../components/CGradientText.vue'
-import CSpace from '../components/CSpace.vue'
-import CSkeleton from '../components/CSkeleton.vue'
+import CPerformantEllipsis from '../../components/CPerformantEllipsis.vue'
+import CGradientText from '../../components/CGradientText.vue'
+import CSpace from '../../components/CSpace.vue'
+import CSkeleton from '../../components/CSkeleton.vue'
 
 const allPosts = data as unknown as Post[]
 
