@@ -269,7 +269,7 @@ Kotlin 的空安全分为两个阶段：
 
 ### 编译期空安全（主要） ###
 
-```kotkin
+```kotlin
 var name: String = "张三"
 // name = null  // ❌ 编译直接报错，从源头杜绝空指针
 
