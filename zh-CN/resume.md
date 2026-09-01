@@ -45,12 +45,13 @@ import LiquidMetaCard from '@vp/components/LiquidMetaCard.vue'
 - 研究机器视觉，自学 Yolo 目标检测算法，基于 Yolo8、Yolo10 训练行李识别模型。
 - AI 大模型方向，MCP ONNX Ollama Dify 等。
 - 学习 Java Spring 框架，向大全栈出发。
+- 参与 RFID Android 项目
 
 :::
 
 ## 📋 主要履历
 
-::: timeline 2019-07 ~ Now
+::: timeline 2019-07 ~ 至今
 
 - **上海民航华东凯亚系统集成有限公司江苏分公司**
 - 高级开发经理

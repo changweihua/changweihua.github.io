@@ -35,7 +35,7 @@ encrypt-storage: true
 - 2026 年 7 月
   - 项目沟通和环境搭建
 - 2026 年 8 月
-  - 全面参与
+  - 全面参与，完成消息通知模块、超规行李提取和接收模块
 
 
 
@@ -44,6 +44,9 @@ encrypt-storage: true
 - 2026 年 7 月
   - 需求跟进
   - 使用 AI 进行功能开发和测试
+
+- 2026 年 8 月
+  - 持续迭代优化，打造 QUIZ 平台
 
 ### 无锡硕放机场登机牌个性化系统
 
@@ -66,6 +69,7 @@ encrypt-storage: true
   - 实现聊天记录持久化
   - 实现 MCP Tool 调研
   - 实现 RAG 服务集成
+  - 实现 TUI 版本
 
 ![基于MAF](/images/maf-000.png){data-zoomable}
 ![基于MAF](/images/maf-ds-skill-1.png){data-zoomable}
@@ -81,6 +85,10 @@ encrypt-storage: true
   - 实现多 Agent 切换
   - 实现会话存储
   - 使用 AI 持续优化
+
+- 2026 年 8 月
+  - 适配最新的 MAF 版本，优化功能
+
 
 ### TGS-SOLUTION
 
@@ -119,6 +127,10 @@ encrypt-storage: true
 ![示例图](/images/11-2-2026_13284_192.168.10.160.jpeg){data-zoomable}
 
 </div>
+
+### WorkPulse ##
+
+- 基于开源项目，二次开发
 
 ### 无锡硕放机场携带工具审批系统
 
