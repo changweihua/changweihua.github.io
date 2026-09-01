@@ -1,0 +1,2 @@
+[permissions]
+allow = ["Bash=cd \"D:\\Github\\changweihua.github.io\" && node _scan_backticks.cjs", "Bash=cd \"D:\\Github\\changweihua.github.io\" && node _render_scan.mjs 2>&1 | Select-Object -Last 25", "Bash=cd \"D:\\Github\\changweihua.github.io\" && npx tsx _render_scan.mjs 2>&1 | Select-Object -Last 25", "Bash=cd \"D:\\Github\\changweihua.github.io\" && npx tsx _render_one.mjs 2>&1 | Select-Object -Last 10", "Bash=cd \"D:\\Github\\changweihua.github.io\" && npx tsx _render_tables.mjs 2>&1 | Select-Object -Last 25"]

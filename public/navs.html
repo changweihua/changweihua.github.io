@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>公众号关注：前端Hardy</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #075985;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      nav {
+        --_width: 50px;
+        --_padding: 1rem;
+        --_speed: 300ms;
+        --_f-size: 1.5rem;
+        --_clr-border: rgba(255, 255, 255, 0.3);
+        --_clr-bg-rgb: 2, 6, 23;
+        --_clr-f: rgb(255, 255, 255);
+
+        display: flex;
+        border: 1px solid var(--_clr-border);
+        border-radius: 20px;
+        padding-inline: var(--_padding);
+        background-color: rgb(var(--_clr-bg-rgb));
+        position: relative;
+        isolation: isolate;
+      }
+
+      @media (min-width: 600px) {
+        nav {
+          --_width: 100px;
+          --_f-size: 2rem;
+        }
+      }
+
+      button {
+        border: none;
+        padding: none;
+        background: transparent;
+        color: var(--_clr-f);
+        cursor: pointer;
+        font-size: var(--_f-size) !important;
+        width: var(--_width);
+        aspect-ratio: 3/2;
+        opacity: 0.5;
+        transition: opacity var(--_speed) ease-in-out,
+          width var(--_speed) ease-in-out;
+        display: grid;
+        place-content: center;
+      }
+
+      button > span {
+        scale: var(--_speed) ease-in-out;
+        font-size: 14px;
+      }
+
+      button.active,
+      button:hover {
+        opacity: 1;
+      }
+
+      button.active > span,
+      button:hover > span {
+        scale: 1.15;
+        pointer-events: none;
+      }
+
+      nav::before,
+      nav::after {
+        content: "";
+        position: absolute;
+        top: -25%;
+        left: var(--_padding);
+        width: var(--_width);
+        aspect-ratio: 1;
+        z-index: -1;
+        border-top: 1px solid var(--_clr-border);
+        border-bottom: 1px solid var(--_clr-border);
+        border-radius: 999px;
+        transform: translateX(calc(var(--_x, 2) * 100%));
+        transition: transform var(--_speed) ease-in-out,
+          width var(--_speed) ease-in-out, opacity var(--_speed) ease-in-out;
+      }
+
+      nav::before {
+        --_x: var(--_x-active);
+        background-color: rgb(var(--_clr-bg-rgb));
+      }
+
+      nav::after {
+        --_x: var(--_x-hover);
+        background-color: rgba(var(--_clr-bg-rgb), 0.4);
+        opacity: 0;
+      }
+
+      nav:has(button:nth-child(1).active)::before {
+        --_x-active: 0;
+      }
+
+      nav:has(button:nth-child(2).active)::before {
+        --_x-active: 1;
+      }
+
+      nav:has(button:nth-child(3).active)::before {
+        --_x-active: 2;
+      }
+
+      nav:has(button:nth-child(4).active)::before {
+        --_x-active: 3;
+      }
+
+      nav:has(button:nth-child(5).active)::before {
+        --_x-active: 4;
+      }
+
+      nav:has(button:nth-child(1):hover)::after {
+        --_x-hover: 0;
+        opacity: 1;
+      }
+
+      nav:has(button:nth-child(2):hover)::after {
+        --_x-hover: 1;
+        opacity: 1;
+      }
+
+      nav:has(button:nth-child(3):hover)::after {
+        --_x-hover: 2;
+        opacity: 1;
+      }
+
+      nav:has(button:nth-child(4):hover)::after {
+        --_x-hover: 3;
+        opacity: 1;
+      }
+
+      nav:has(button:nth-child(5):hover)::after {
+        --_x-hover: 4;
+        opacity: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <button type="button"><span class="">首页</span></button>
+      <button type="button"><span class="">钱包</span></button>
+      <button type="button"><span class="active">金融</span></button>
+      <button type="button"><span class="">商城</span></button>
+      <button type="button"><span class="">我的</span></button>
+    </nav>
+    <script>
+      document.querySelector("nav").addEventListener("click", (e) => {
+        if (e.target.tagName == "BUTTON") {
+          document.querySelector("nav .active").classList.remove("active");
+          e.target.classList.add("active");
+        }
+      });
+    </script>
+  </body>
+</html>

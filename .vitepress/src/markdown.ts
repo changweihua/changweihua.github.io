@@ -1,0 +1,219 @@
+import { MarkdownOptions } from 'vitepress'
+import timeline from 'vitepress-markdown-timeline'
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
+import { npmCommandsMarkdownPlugin } from 'vitepress-plugin-npm-commands'
+import { wordless, chineseAndJapanese, Options } from 'markdown-it-wordless'
+import MarkdownItCollapsible from 'markdown-it-collapsible'
+import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
+import MarkdownItGitHubAlerts from 'markdown-it-github-alerts'
+import markdownItTableExt from 'markdown-it-multimd-table-ext'
+import { vitepressMarkmapPreview } from 'vitepress-markmap-preview'
+import { containerPreview, componentPreview } from '@vitepress-demo-preview/plugin'
+import { vitepressDemoPlugin } from 'vitepress-better-demo-plugin'
+import { resolve } from 'path'
+import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import { fileURLToPath, URL } from 'node:url'
+import { linkToCardPlugin } from 'vitepress-linkcard'
+import type { LinkToCardPluginOptions } from 'vitepress-linkcard'
+import { markdownGlossaryPlugin } from 'vitepress-plugin-glossary'
+import { renderEchartsBlock } from '../plugins/markdown/echarts-markdown.ts'
+import vitepressEncrypt from 'markdown-it-vitepress-encrypt'
+import MarkdownItGitHubMentionCard from 'markdown-it-github-mention-card'
+import picturePlugin from '../plugins/markdown/markdown-it-picture.ts'
+import { pathHashWrapperPlugin } from '../plugins/markdown/pathHashWrapper.ts'
+import { renderMarkmapBlock } from '../plugins/markdown/markdownMarkmap.ts'
+import { hasHeadingAfter } from '../plugins/markdown/codeBarPlugin.ts'
+import glossary from './glossary.json' with { type: 'json' }
+import MarkdownItMathJaX3PRO from 'markdown-it-mathjax3-pro'
+
+const demoAlias = {
+  '@demo': resolve(import.meta.dirname, '../../src/demos'),
+  '@vp': resolve(import.meta.dirname, '../components'),
+  '@assets': resolve(import.meta.dirname, '../../src/assets')
+}
+
+const languageLabels: Record<string, string> = {
+  aulua: 'AviUtl2 Lua'
+}
+
+const HAS_ADDED_METADATA = Symbol('hasAddedMetadata')
+
+const markdown: MarkdownOptions | undefined = {
+  cache: false,
+  lineNumbers: true,
+  breaks: true,
+  linkify: true,
+  html: true,
+  image: {
+    lazyLoad: true
+  },
+  math: false,
+  theme: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
+  languageLabel: {
+    vue: 'Vue SFC'
+  },
+  codeCopyButton: {
+    tooltipText: '复制'
+  },
+  container: {
+    tipLabel: '提示',
+    warningLabel: '警告',
+    dangerLabel: '危险',
+    infoLabel: '信息',
+    detailsLabel: '详细信息'
+  },
+  toc: { level: [1, 6] },
+  defaultHighlightLang: 'txt',
+  // async shikiSetup(highlighter) {
+  //   const highlighterAny = highlighter as any  // 类型断言
+
+  //   // 保存原始的 getLangIdFromAlias 方法（如果存在）
+  //   const original = highlighterAny.getLangIdFromAlias?.bind(highlighter)
+
+  //   // 自定义别名解析函数
+  //   highlighterAny.getLangIdFromAlias = (alias: string) => {
+  //     // 先检查我们自定义的别名映射
+  //     if (aliasMap[alias]) {
+  //       return aliasMap[alias]
+  //     }
+  //     // 否则回退到原始解析逻辑
+  //     return original ? original(alias) : alias
+  //   }
+  // },
+  codeTransformers: [],
+  languages: ['js', 'jsx', 'ts', 'tsx'],
+  config: (md) => {
+    // ========== 1. 基础插件（无冲突） ==========
+    md.use(MarkdownItMathJaX3PRO)
+    md.use(MarkdownItGitHubMentionCard)
+    md.use(pathHashWrapperPlugin)
+    md.use(picturePlugin, {
+      containerClasses: ['figure-list', 'image-gallery', 'custom-container'],
+      enableJXL: true,
+      enableAVIF: true,
+      enableWebP: true,
+      figureClass: 'custom-figure',
+      pictureClass: 'custom-picture',
+      imgClass: 'custom-img',
+      figcaptionClass: 'custom-figcaption',
+      debug: false
+    })
+    md.use<LinkToCardPluginOptions>(linkToCardPlugin, {})
+    md.use(tabsMarkdownPlugin)
+    md.use(npmCommandsMarkdownPlugin)
+    md.use<Options>(wordless, { supportWordless: [chineseAndJapanese] })
+    md.use(timeline)
+    md.use(groupIconMdPlugin)
+    md.use(MarkdownItCollapsible)
+    md.use(MarkdownItGitHubAlerts, { markers: '*' })
+    md.use(markdownItTableExt, {
+      multiline: true,
+      rowspan: false,
+      headerless: false,
+      multibody: false,
+      autolabel: false
+    })
+    const docRoot = fileURLToPath(new URL('../../', import.meta.url))
+    md.use(markdownGlossaryPlugin, {
+      glossary: glossary,
+      firstOccurrenceOnly: true
+    })
+    md.use(vitepressEncrypt, [
+      { pageType: 'default', password: 'p1' },
+      { pageType: 'vip', password: 'p11' }
+    ])
+
+    // ========== 2. Demo 插件共存方案 ==========
+    // 由于三个 Demo 插件默认都使用 '::: demo' 容器，会导致冲突。
+    // 解决方案：让其中两个插件使用不同的容器名称。
+    // 这里假设插件的配置项支持自定义容器名（若实际不支持，需手动修改插件源码或使用包装器）。
+    // 以下配置仅为示例，请根据实际插件版本调整。
+
+    // 2.1 @vitepress-demo-preview/plugin：保留默认 'demo' 和 'component' 容器
+    md.use(containerPreview, { clientOnly: true, alias: demoAlias })
+    md.use(componentPreview, { clientOnly: true, alias: demoAlias })
+
+    // 2.2 vitepress-better-demo-plugin：修改为使用 'better-demo' 容器（假设插件支持 demoBlockReg 选项）
+    // 查阅其文档：https://github.com/FriendlyUser/vitepress-better-demo-plugin
+    // 如果支持，可传递 demoBlockReg: /^better-demo\s*(.*)$/
+    // 若不支持，请自行修改插件源码或使用 markdown-it-container 包装。
+    md.use(vitepressDemoPlugin, {
+      demoDir: resolve(import.meta.dirname, '../../src/demos'),
+      lightTheme: 'catppuccin-latte',
+      darkTheme: 'catppuccin-frappe',
+      tabs: { order: 'html,vue,react', select: 'vue' },
+      stackblitz: { show: true },
+      codesandbox: { show: true },
+      // 自定义容器名（需要插件支持）
+      demoBlockReg: /^better-demo\s*(.*)$/, // 使用时语法：::: better-demo
+      demoBlockConfig: {
+        // 其他配置...
+      }
+    })
+
+    // 2.3 @vitepress-code-preview/plugin：修改为使用 'code-demo' 容器（同样需插件支持）
+    // 该插件默认 demoBlockReg 为 /^demo\s*(.*)$/，可通过 options 覆盖
+    md.use(demoPreviewPlugin, {
+      docRoot,
+      demoBlockReg: /^code-demo\s*(.*)$/ // 使用时语法：::: code-demo
+    })
+
+    // ========== 3. 其他插件 ==========
+    vitepressMarkmapPreview(md as any, { showToolbar: false })
+
+    // ========== 4. 集中式 fence 分发器 ==========
+    // 所有 fence 相关处理统一在此处，避免多个插件链式覆写 fence 的脆弱性
+    const originalFence = md.renderer.rules.fence!.bind(md.renderer.rules)
+    md.renderer.rules.fence = (tokens: any[], idx: number, options: any, env: any, self: any) => {
+      const _token = tokens[idx]
+
+      // 4.1 特殊语言：markmap
+      const markmapResult = renderMarkmapBlock(tokens, idx)
+      if (markmapResult !== null) return markmapResult
+
+      // 4.2 特殊语言：echarts
+      const echartsResult = renderEchartsBlock(tokens, idx)
+      if (echartsResult !== null) return echartsResult
+
+      // 4.3 默认渲染
+      let result = originalFence(tokens, idx, options, env, self)
+
+      // 4.4 codeBar：若代码块后有标题则添加分隔条
+      if (hasHeadingAfter(tokens, idx)) {
+        result += `<div class="code-bar"></div>`
+      }
+
+      // 4.5 自定义语言标签替换
+      result = result.replace(/(?<=class="lang">)([^<]*)/, (_, p1) => languageLabels[p1] ?? p1)
+
+      return result
+    }
+
+    // ========== 5. 表格和文字样式增强（无冲突） ==========
+    md.renderer.rules.table_open = () => '<div class="vp-table-container"><table class="vp-table striped">'
+    md.renderer.rules.table_close = () => '</table></div>'
+    md.renderer.rules.strong_open = () => '<strong class="font-bold">'
+    md.renderer.rules.strong_close = () => '</strong>'
+    md.renderer.rules.em_open = () => '<em class="italic">'
+    md.renderer.rules.em_close = () => '</em>'
+
+    // ========== 6. 文章元数据组件注入 ==========
+    md.renderer.rules.heading_close = (tokens, idx, options, env, render) => {
+      let htmlResult = render.renderToken(tokens, idx, options)
+      if (
+        tokens[idx].tag === 'h1' &&
+        env &&
+        env['relativePath'] &&
+        // @ts-expect-error A
+        env['relativePath'].includes('/blog/') &&
+        !env[HAS_ADDED_METADATA]
+      ) {
+        env[HAS_ADDED_METADATA] = true
+        htmlResult += `\n<ClientOnly><ArticleMetadata :frontmatter="$frontmatter"/></ClientOnly>`
+      }
+      return htmlResult
+    }
+  }
+}
+
+export { markdown }
