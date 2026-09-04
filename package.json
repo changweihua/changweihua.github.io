@@ -151,7 +151,7 @@
     "ua-parser-js": "^2.0.10",
     "universal-waterfall-layout": "^1.2.0",
     "vite-plugin-inspect": "^12.0.2",
-    "vitepress": "^2.0.0-alpha.19",
+    "vitepress": "^2.0.0-alpha.20",
     "vitepress-component-medium-zoom": "^1.1.1",
     "vitepress-markdown-timeline": "^1.2.2",
     "vitepress-markmap-preview": "^0.2.1",
@@ -274,7 +274,7 @@
     "typescript": "^7.0.2",
     "vite": "^8.2.2",
     "vite-plugin-html": "^3.2.2",
-    "vitepress": "^2.0.0-alpha.19",
+    "vitepress": "^2.0.0-alpha.20",
     "vitepress-plugin-mermaid": {
       "vitepress": "$vitepress"
     },
