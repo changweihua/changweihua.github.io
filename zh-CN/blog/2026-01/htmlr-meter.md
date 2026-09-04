@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: HTML `<meter>` 标签
 description: 原生度量衡指示器，直观展示百分比、评分等量化数据
-date: 2026-01-12 08:30:00 
+date: 2026-01-12 08:30:00
 pageClass: blog-page-class
 cover: /covers/html5.svg
 ---
@@ -861,29 +861,84 @@ cover: /covers/html5.svg
   <span>65%</span>
 </div>
 </template>
+<template>
+  <div>
+    <!-- 原生 meter，不支持时隐藏 -->
+    <meter
+      ref="meterRef"
+      :value="diskUsage"
+      :max="100"
+      style="width: 200px; height: 20px;"
+    />
+
+    <!-- 降级自定义进度条，默认隐藏 -->
+    <div
+      ref="fallbackRef"
+      class="fallback-progress"
+      style="display: none; align-items: center; gap: 8px;"
+    >
+      <div class="fallback-track" style="width: 200px; height: 20px; background: #eee; border-radius: 10px; overflow: hidden;">
+        <div
+          ref="fallbackFillRef"
+          class="fallback-fill"
+          style="height: 100%; background: #007bff; width: 0%; transition: width 0.3s;"
+        />
+      </div>
+      <span>{{ Math.round(diskUsage) }}%</span>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
-  // 检测浏览器是否支持meter标签
-  function isMeterSupported() {
-    return "value" in document.createElement("meter");
+import { ref, onMounted, watch } from 'vue';
+
+// 磁盘使用率（可改为 props 或从父组件传入）
+const diskUsage = ref(65); // 示例数据
+
+// 模板引用
+const meterRef = ref<HTMLMeterElement | null>(null);
+const fallbackRef = ref<HTMLElement | null>(null);
+const fallbackFillRef = ref<HTMLElement | null>(null);
+
+// 检测是否支持 <meter>
+function isMeterSupported(): boolean {
+  if (typeof document === 'undefined') return false; // SSR 安全
+  return 'value' in document.createElement('meter');
+}
+
+// 更新降级进度条宽度
+function updateFallback() {
+  const fill = fallbackFillRef.value;
+  if (!fill) return;
+  const percent = Math.min(Math.max(diskUsage.value, 0), 100);
+  fill.style.width = `${percent}%`;
+}
+
+// 切换显示：若支持 meter 则显示 meter，否则显示降级组件
+function applyFallbackIfNeeded() {
+  const meter = meterRef.value;
+  const fallback = fallbackRef.value;
+  if (!meter || !fallback) return;
+
+  const supported = isMeterSupported();
+  meter.style.display = supported ? '' : 'none';
+  fallback.style.display = supported ? 'none' : 'inline-flex';
+
+  if (!supported) {
+    updateFallback();
   }
+}
 
-  // 初始化降级逻辑
-  const meterElement = document.getElementById("diskMeter");
-  const fallbackElement = document.getElementById("diskMeterFallback");
-
+// 监听 diskUsage 变化，更新降级进度
+watch(diskUsage, () => {
   if (!isMeterSupported()) {
-    // 不支持：隐藏meter，显示自定义div
-    meterElement.style.display = "none";
-    fallbackElement.style.display = "inline-flex";
-    fallbackElement.style.alignItems = "center";
-    fallbackElement.style.gap = "8px";
-
-    // 获取meter的value和max，同步到fallback的宽度
-    const value = parseFloat(meterElement.value) || 0;
-    const max = parseFloat(meterElement.max) || 100;
-    const percent = (value / max) * 100;
-    fallbackElement.querySelector(".fallback-fill").style.width = `${percent}%`;
+    updateFallback();
   }
+});
+
+onMounted(() => {
+  applyFallbackIfNeeded();
+});
 </script>
 
 <style scoped>
@@ -965,24 +1020,64 @@ cover: /covers/html5.svg
 下载进度：<meter id="downloadMeter" value="0" max="100"></meter>
 <span id="downloadPercent">0%</span>
 </template>
-<script setup>
-  // 模拟下载进度更新（实际项目中替换为真实进度事件）
-  let progress = 0;
-  const meter = document.getElementById("downloadMeter");
-  const percentText = document.getElementById("downloadPercent");
+<template>
+  <div>
+    <!-- 进度条 -->
+    <meter
+      ref="meterRef"
+      :value="progress"
+      :max="100"
+      style="width: 200px; height: 20px;"
+    />
+    <!-- 百分比文本 -->
+    <span ref="percentRef">{{ progress }}%</span>
+  </div>
+</template>
 
-  const interval = setInterval(() => {
-    progress += 10;
-    if (progress > 100) {
-      progress = 100;
-      clearInterval(interval);
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
+
+// 响应式进度值
+const progress = ref(0);
+// 模板引用（可选，如果不需要直接操作DOM元素，甚至可以省略）
+const meterRef = ref<HTMLMeterElement | null>(null);
+const percentRef = ref<HTMLElement | null>(null);
+
+// 定时器引用，用于清理
+let timer: ReturnType<typeof setInterval> | null = null;
+
+// 模拟进度更新（实际项目可替换为真实事件）
+function startProgressSimulation() {
+  if (timer) clearInterval(timer); // 防止重复启动
+
+  timer = setInterval(() => {
+    if (progress.value >= 100) {
+      clearInterval(timer!);
+      timer = null;
+      return;
     }
-    // 动态更新meter的value和文本
-    meter.value = progress;
-    percentText.textContent = `${progress}%`;
+    progress.value += 10;
+    // 确保不超过100
+    if (progress.value > 100) progress.value = 100;
   }, 500);
+}
+
+onMounted(() => {
+  // 只在客户端启动模拟进度
+  startProgressSimulation();
+});
+
+onUnmounted(() => {
+  // 清理定时器，防止内存泄漏
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+});
 </script>
 ```
+
+:::
 
 ## 六、总结：量化数据展示的“原生最优解” ##
 
