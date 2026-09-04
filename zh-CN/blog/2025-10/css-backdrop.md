@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: CSS3 实战：液态水与毛玻璃效果的 5 个实用案例
 description: CSS3 实战：液态水与毛玻璃效果的 5 个实用案例
-date: 2025-10-15 10:00:00 
+date: 2025-10-15 10:00:00
 pageClass: blog-page-class
 cover: /covers/css.svg
 ---
@@ -46,14 +46,23 @@ cover: /covers/css.svg
   </div>
 </template>
 <script lang="ts" setup>
-    // 监听滚动，添加/移除 scrolled 类
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        document.body.classList.add('scrolled');
-      } else {
-        document.body.classList.remove('scrolled');
-      }
-    });
+import { onMounted, onUnmounted } from 'vue';
+
+function handleScroll() {
+  if (window.scrollY > 50) {
+    document.body.classList.add('scrolled');
+  } else {
+    document.body.classList.remove('scrolled');
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 <style scoped>
     /* 定义 CSS 变量，方便统一修改 */
@@ -153,7 +162,7 @@ cover: /covers/css.svg
       --card-bg: rgba(255, 255, 255, 0.25);
       --card-border: rgba(255, 255, 255, 0.4);
       --card-shadow: 0 8px 32px rgba(31, 38, 135, 0.1); /* 阴影增强层次 */
-    
+
       width: 500px;
       min-height: 200px;
       display: flex;
