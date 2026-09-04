@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: CSS液态动画深度进阶
 description: 变量驱动与关键帧创意实践（10个实战案例）
-date: 2025-10-28 10:00:00 
+date: 2025-10-28 10:00:00
 pageClass: blog-page-class
 cover: /covers/css.svg
 ---
@@ -38,10 +38,10 @@ CSS变量（`--*`）不仅是“统一赋值”的工具，更是实现“动态
   --liquid-base-size: 100px;
   --liquid-color-primary: #4a90e2;
   --liquid-animation-duration: 2s;
-  
+
   /* 嵌套计算：波纹半径=基础尺寸的1.5倍 */
   --liquid-ripple-radius: calc(var(--liquid-base-size) * 1.5);
-  
+
   /* 动态参数（可被JS/伪类覆盖） */
   --liquid-opacity: 0.8;
   --liquid-blur: 8px;
@@ -537,55 +537,80 @@ onMounted(() => {
   <div class="bubble-container" ref="bubbleContainer"></div>
 </template>
 <script lang="ts" setup>
-import { onMounted, nextTick, useTemplateRef } from 'vue'
+import { onMounted, onUnmounted, useTemplateRef } from 'vue';
 
-const bubbleContainer = useTemplateRef<HTMLDivElement>('bubbleContainer')
-const bubbleCount = 15; // 气泡数量
+const bubbleContainer = useTemplateRef<HTMLDivElement>('bubbleContainer');
+const bubbleCount = 15;
 
-// 随机生成气泡
+let resizeHandler: (() => void) | null = null; // 保存清理函数
+
+// 生成气泡（需确保 container 已存在）
 function createBubbles() {
+  const container = bubbleContainer.value;
+  if (!container) return; // 防御性检查
+
+  // 清空旧气泡（可选）
+  container.innerHTML = '';
+
+  const styles = getComputedStyle(container);
+  const minSize = parseFloat(styles.getPropertyValue('--bubble-min-size')) || 20;
+  const maxSize = parseFloat(styles.getPropertyValue('--bubble-max-size')) || 60;
+  const minDuration = parseFloat(styles.getPropertyValue('--float-duration-min')) || 4;
+  const maxDuration = parseFloat(styles.getPropertyValue('--float-duration-max')) || 8;
+  const containerWidth = container.clientWidth;
+
   for (let i = 0; i < bubbleCount; i++) {
     const bubble = document.createElement('div');
     bubble.classList.add('liquid-bubble');
 
-    // 1. 随机尺寸（min ~ max）
-    const size = Math.random() * (parseFloat(getComputedStyle(bubbleContainer.value).getPropertyValue('--bubble-max-size')) - parseFloat(getComputedStyle(bubbleContainer.value).getPropertyValue('--bubble-min-size'))) + parseFloat(getComputedStyle(bubbleContainer.value).getPropertyValue('--bubble-min-size'));
+    // 尺寸
+    const size = Math.random() * (maxSize - minSize) + minSize;
     bubble.style.width = `${size}px`;
     bubble.style.height = `${size}px`;
 
-    // 2. 随机初始X位置（容器宽度内）
-    const startX = Math.random() * (bubbleContainer.value.clientWidth - size);
+    // 水平起始位置（确保不溢出）
+    const startX = Math.random() * (containerWidth - size);
     bubble.style.left = `${startX}px`;
 
-    // 3. 随机浮动时长（min ~ max）
-    const floatDuration = Math.random() * (parseFloat(getComputedStyle(bubbleContainer.value).getPropertyValue('--float-duration-max')) - parseFloat(getComputedStyle(bubbleContainer.value).getPropertyValue('--float-duration-min'))) + parseFloat(getComputedStyle(bubbleContainer.value).getPropertyValue('--float-duration-min'));
-    bubble.style.setProperty('--float-duration', `${floatDuration}s`);
+    // 浮动时长
+    const duration = Math.random() * (maxDuration - minDuration) + minDuration;
+    bubble.style.setProperty('--float-duration', `${duration}s`);
 
-    // 4. 随机左右偏移量（模拟无规则浮动）
-    const xOffset = Math.random() * 100 - 50; // -50px ~ 50px
+    // 随机横向偏移
+    const xOffset = Math.random() * 100 - 50;
     bubble.style.setProperty('--x-offset', `${xOffset}px`);
 
-    // 5. 随机动画延迟（避免气泡同步）
+    // 动画延迟
     bubble.style.animationDelay = `${Math.random() * 5}s`;
 
-    // 添加到容器
-    bubbleContainer.value.appendChild(bubble);
+    container.appendChild(bubble);
   }
 }
 
-// 窗口 resize 时重新生成气泡（避免适配问题）
-window.addEventListener('resize', () => {
-  bubbleContainer.value.innerHTML = '';
+// 处理窗口变化（防抖可选）
+function handleResize() {
   createBubbles();
-});
+}
 
 onMounted(() => {
-  nextTick(() => {
-    // 页面加载时生成气泡
-    createBubbles()
-  })
+  // 首次生成气泡
+  createBubbles();
 
-})
+  // 注册 resize 监听
+  window.addEventListener('resize', handleResize);
+  // 保存清理函数
+  resizeHandler = () => {
+    window.removeEventListener('resize', handleResize);
+  };
+});
+
+onUnmounted(() => {
+  // 移除事件监听，防止内存泄漏
+  if (resizeHandler) {
+    resizeHandler();
+    resizeHandler = null;
+  }
+});
 </script>
 <style>
 /* 气泡容器（全屏背景） */

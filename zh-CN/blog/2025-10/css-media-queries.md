@@ -4,7 +4,7 @@ commentabled: true
 recommended: true
 title: CSS3 媒体查询（Media Queries）深度解析
 description: 10 个实战适配案例
-date: 2025-10-23 09:35:00 
+date: 2025-10-23 09:35:00
 pageClass: blog-page-class
 cover: /covers/css.svg
 ---
@@ -659,9 +659,9 @@ onMounted(() => {
 <template>
 <!-- HTML：给视频外层加容器 -->
 <div class="video-container">
-  <iframe 
-    src="/videos/cover.mp4" 
-    frameborder="0" 
+  <iframe
+    src="/videos/cover.mp4"
+    frameborder="0"
     allowfullscreen
   ></iframe>
 </div>
@@ -716,34 +716,68 @@ onMounted(() => {
     </div>
 </template>
 <script lang="ts" setup>
-import { onMounted, useTemplateRef } from 'vue';
+import { ref, onMounted, onUnmounted, useTemplateRef } from 'vue';
 
-const themeToggle = useTemplateRef('themeToggle')
-const themeText = useTemplateRef('themeText')
-const themeContainer = useTemplateRef('themeContainer')
+// 模板引用
+const themeToggle = useTemplateRef<HTMLButtonElement>('themeToggle');
+const themeText = useTemplateRef<HTMLSpanElement>('themeText');
+const themeContainer = useTemplateRef<HTMLDivElement>('themeContainer');
+
+// 响应式状态：当前是否为深色模式
+const isDark = ref(false);
+
+// 更新主题样式和文本
+function updateTheme(dark: boolean) {
+  const container = themeContainer.value;
+  const text = themeText.value;
+  if (!container || !text) return;
+
+  const bgColor = dark ? '#1a1a1a' : 'white';
+  const textColor = dark ? 'white' : '#333';
+  const btnBg = dark ? '#0056b3' : '#007bff';
+  const modeText = dark ? '深色' : '浅色';
+  const source = '手动切换';
+
+  container.style.setProperty('--bg-color', bgColor);
+  container.style.setProperty('--text-color', textColor);
+  container.style.setProperty('--btn-bg', btnBg);
+  text.textContent = `${modeText}（${source}）`;
+}
+
+// 切换主题
+function toggleTheme() {
+  isDark.value = !isDark.value;
+  updateTheme(isDark.value);
+}
+
+// 点击事件处理器（用于移除监听）
+let clickHandler: (() => void) | null = null;
 
 onMounted(() => {
-    // 手动切换主题（覆盖系统偏好）
-    let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const toggle = themeToggle.value;
+  if (!toggle) return;
 
-    // 初始化主题文本
-    themeText.value.textContent = isDark ? '深色（系统偏好）' : '浅色（系统偏好）';
+  // 获取系统偏好
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  isDark.value = prefersDark;
 
-    themeToggle.value.addEventListener('click', () => {
-    isDark = !isDark;
-    if (isDark) {
-        themeContainer.value.style.setProperty('--bg-color', '#1a1a1a');
-        themeContainer.value.style.setProperty('--text-color', 'white');
-        themeContainer.value.style.setProperty('--btn-bg', '#0056b3');
-        themeText.value.textContent = '深色（手动切换）';
-    } else {
-        themeContainer.value.style.setProperty('--bg-color', 'white');
-        themeContainer.value.style.setProperty('--text-color', '#333');
-        themeContainer.value.style.setProperty('--btn-bg', '#007bff');
-        themeText.value.textContent = '浅色（手动切换）';
-    }
-    });
-})
+  // 初始化主题
+  updateTheme(prefersDark);
+
+  // 绑定点击事件并保存清理函数
+  toggle.addEventListener('click', toggleTheme);
+  clickHandler = () => {
+    toggle.removeEventListener('click', toggleTheme);
+  };
+});
+
+onUnmounted(() => {
+  // 清除事件监听，防止内存泄漏
+  if (clickHandler) {
+    clickHandler();
+    clickHandler = null;
+  }
+});
 </script>
 <style scoped>
 
