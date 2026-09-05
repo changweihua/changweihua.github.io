@@ -1016,11 +1016,6 @@ onMounted(() => {
 
 ```vue
 <template>
-<!-- 实时展示下载进度 -->
-下载进度：<meter id="downloadMeter" value="0" max="100"></meter>
-<span id="downloadPercent">0%</span>
-</template>
-<template>
   <div>
     <!-- 进度条 -->
     <meter
