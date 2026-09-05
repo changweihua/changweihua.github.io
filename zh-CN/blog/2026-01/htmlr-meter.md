@@ -849,19 +849,6 @@ cover: /covers/html5.svg
 
 ```vue
 <template>
-<!-- 降级方案：支持则显示meter，不支持则显示div -->
-<div class="meter-container">
-  磁盘使用率：
-  <meter id="diskMeter" value="65" min="0" max="100"></meter>
-  <div id="diskMeterFallback" style="display: none">
-    <div class="fallback-bar">
-      <div class="fallback-fill" style="width: 65%"></div>
-    </div>
-  </div>
-  <span>65%</span>
-</div>
-</template>
-<template>
   <div>
     <!-- 原生 meter，不支持时隐藏 -->
     <meter
