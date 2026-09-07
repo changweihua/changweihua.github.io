@@ -458,7 +458,6 @@ a.VPSkipLink::after {
   /* 首页导航 */
   .VPNavBar {
     backdrop-filter: saturate(0.3) contrast(3.5) blur(20px) saturate(1.2);
-    background-color: rgba(255, 255, 255, 0.3) !important;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: backdrop-filter 0.4s ease;
     will-change: backdrop-filter;
@@ -466,11 +465,15 @@ a.VPSkipLink::after {
 
   /* 文档页导航两侧 */
   .VPNavBar:not(.home) {
-    background-color: rgba(255, 255, 255, 0.3) !important;
     backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: backdrop-filter 0.4s ease;
     will-change: backdrop-filter;
+  }
+
+  .VPNav,
+  .VPNavBar {
+    background-color: rgba(var(--vp-c-bg), 0.96) !important;
   }
 
   @media (min-width: 960px) {
@@ -486,7 +489,6 @@ a.VPSkipLink::after {
 
     /* 首页下滑后导航两侧 */
     .VPNavBar:not(.has-sidebar):not(.home.top) {
-      background-color: rgba(255, 255, 255, 0.3) !important;
       backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       transition: backdrop-filter 0.4s ease;
@@ -520,7 +522,6 @@ a.VPSkipLink::after {
 
     /* 文档页分割线 */
     .VPNavBar:not(.home.top) .divider-line {
-      background-color: rgba(255, 255, 255, 0.3) !important;
       backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       transition: backdrop-filter 0.4s ease;
@@ -530,7 +531,6 @@ a.VPSkipLink::after {
 
     /* 首页分割线 */
     .VPNavBar:not(.has-sidebar):not(.home.top) .divider {
-      background-color: rgba(255, 255, 255, 0.3) !important;
       backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       transition: backdrop-filter 0.4s ease;
@@ -539,9 +539,22 @@ a.VPSkipLink::after {
     }
   }
 
+  @media (min-width: 60rem) {
+
+    /* outside home the title column matches the sidebar column, so search and
+       menu sit at the same spot on every doc page; on home the title keeps its
+       natural width and search sits right next to it */
+    .VPNavBar:not(.home) .title {
+      min-width: inherit;
+    }
+
+    .VPNavBar.has-sidebar .title {
+      max-width: inherit;
+    }
+  }
+
   /* 搜索框 VPNavBarSearchButton.vue */
   .DocSearch-Button {
-    background-color: rgba(255, 255, 255, 0.3) !important;
     backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: backdrop-filter 0.4s ease;
@@ -550,8 +563,6 @@ a.VPSkipLink::after {
 
   /* 移动端大纲栏 */
   .VPLocalNav {
-    background-color: rgba(255, 255, 255, 0) !important;
-    background-color: rgba(255, 255, 255, 0.3) !important;
     backdrop-filter: saturate(0.3) contrast(3.5) blur(20px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: backdrop-filter 0.4s ease;
@@ -666,29 +677,29 @@ a.VPSkipLink::after {
 
   .VPNavBar,
   .VPNavBar.screen-open {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: var(--vp-c-bg) !important;
   }
 
   /* 首页导航 */
   .VPNavBar {
-    background-color: rgba(0, 0, 0, 0.03) !important;
+    background-color: var(--vp-c-bg) !important;
   }
 
   /* 文档页导航两侧 */
   .VPNavBar:not(.home) {
-    background-color: rgba(0, 0, 0, 0.03) !important;
+    background-color: var(--vp-c-bg) !important;
   }
 
   @media (min-width: 960px) {
 
     /* 文档页导航两侧 */
     .VPNavBar:not(.home) {
-      background-color: rgba(0, 0, 0, 0.03) !important;
+      background-color: var(--vp-c-bg) !important;
     }
 
     /* 首页下滑后导航两侧 */
     .VPNavBar:not(.has-sidebar):not(.home.top) {
-      background-color: rgba(0, 0, 0, 0.03) !important;
+      background-color: var(--vp-c-bg) !important;
     }
   }
 
@@ -698,25 +709,25 @@ a.VPSkipLink::after {
 
     /* 文档页分割线 */
     .VPNavBar:not(.home.top) .divider-line {
-      background-color: rgba(0, 0, 0, 0.03) !important;
+      background-color: var(--vp-c-bg) !important;
       z-index: var(--vp-z-index-nav);
     }
 
     /* 首页分割线 */
     .VPNavBar:not(.has-sidebar):not(.home.top) .divider {
-      background-color: rgba(0, 0, 0, 0.03) !important;
+      background-color: var(--vp-c-bg) !important;
       z-index: var(--vp-z-index-nav);
     }
   }
 
   /* 搜索框 VPNavBarSearchButton.vue */
   .DocSearch-Button {
-    background-color: rgba(0, 0, 0, 0.03) !important;
+    background-color: var(--vp-c-bg) !important;
   }
 
   /* 移动端大纲栏 */
   .VPLocalNav {
-    background-color: rgba(0, 0, 0, 0.03) !important;
+    background-color: var(--vp-c-bg) !important;
   }
 }
 
@@ -1369,7 +1380,6 @@ table {
 .VPLink.link.VPNavBarMenuLink {
   position: relative;
   /* 伪元素依赖父元素定位 */
-  display: inline-block;
   // background: #007bff;
   text-decoration: none;
   transition: all 0.3s ease;
