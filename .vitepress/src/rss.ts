@@ -1,6 +1,6 @@
 import { RSSOptions } from 'vitepress-plugin-rss'
 
-const rssBaseUrl = import.meta.env.VITE_APP_RSS_BASE_URL
+const rssBaseUrl = process.env.VITE_APP_RSS_BASE_URL || 'https://changweihua.github.io'
 
 const RSS: RSSOptions = {
   // necessary（必选参数）
