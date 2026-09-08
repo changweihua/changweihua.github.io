@@ -39,7 +39,24 @@ const RSS: RSSOptions = {
   },
 
   // 关键：通过过滤器精确控制哪些内容需要被收录
-  filter: (post) => post.url.includes('/zh-CN/blog/')
+  filter: (post) => {
+    // 1. 从 URL 中提取 /zh-CN/blog/yyyy-MM/ 格式
+    const match = post.url.match(/\/zh-CN\/blog\/(\d{4})-(\d{2})\//)
+    if (!match) return false // 不匹配格式的直接过滤掉
+
+    const year = parseInt(match[1])
+    const month = parseInt(match[2]) - 1 // JavaScript 月份从 0 开始
+
+    // 2. 计算该月的第一天
+    const postDate = new Date(year, month, 1)
+
+    // 3. 计算 12 个月前的第一天（作为截止线）
+    const now = new Date()
+    const cutoffDate = new Date(now.getFullYear(), now.getMonth() - 12, 1)
+
+    // 4. 只保留 >= 截止日期的文章
+    return postDate >= cutoffDate
+  }
 }
 
 export { RSS }
