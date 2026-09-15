@@ -473,7 +473,7 @@ a.VPSkipLink::after {
 
   .VPNav,
   .VPNavBar {
-    background-color: rgba(var(--vp-c-bg), 0.96) !important;
+    background-color: color-mix(in srgb, var(--vp-c-bg) 96%, transparent) !important;
   }
 
   @media (min-width: 960px) {
