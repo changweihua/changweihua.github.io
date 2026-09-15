@@ -196,287 +196,299 @@ mask: linear-gradient(to top, #000 0 60%, transparent 100%);
 
 :::demo
 
-```html
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>渐变毛玻璃 Demo</title>
-    <style>
-      :root {
-        color: #f7f9ff;
-        background: #11182b;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
+```vue
+<script setup lang="ts">
+import type { CSSProperties } from 'vue'
 
-      * {
-        box-sizing: border-box;
-      }
+interface BlurLayer {
+  id: number
+  /** backdrop-filter 模糊半径（px） */
+  blur: number
+  /** 遮罩渐变，控制该层在底部区域的显示范围 */
+  mask: string
+}
 
-      html {
-        min-height: 100%;
-        background: #11182b;
-      }
+interface CardItem {
+  id: string
+  text: string
+}
 
-      body {
-        min-width: 320px;
-        min-height: 100vh;
-        margin: 0;
-      }
+/** 从下往上逐步增强的四层模糊，与 frosted-down 方向一致 */
+const blurLayers: BlurLayer[] = [
+  {
+    id: 1,
+    blur: 1,
+    mask: 'linear-gradient(to top, #000 0%, #000 85%, transparent 100%)',
+  },
+  {
+    id: 2,
+    blur: 3,
+    mask: 'linear-gradient(to top, #000 0%, #000 61%, transparent 81%)',
+  },
+  {
+    id: 3,
+    blur: 5,
+    mask: 'linear-gradient(to top, #000 0%, #000 36%, transparent 56%)',
+  },
+  {
+    id: 4,
+    blur: 7,
+    mask: 'linear-gradient(to top, #000 0%, #000 12%, transparent 32%)',
+  },
+]
 
-      .demo-page {
-        position: relative;
-        min-height: 1800px;
-        overflow: hidden;
-        padding: 72px clamp(24px, 7vw, 120px) 420px;
-        background:
-          linear-gradient(rgb(255 255 255 / 7%) 1px, transparent 1px),
-          linear-gradient(90deg, rgb(255 255 255 / 7%) 1px, transparent 1px),
-          radial-gradient(circle at 16% 12%, #fa558d 0 7%, transparent 23%),
-          radial-gradient(circle at 85% 33%, #407eff 0 8%, transparent 24%),
-          radial-gradient(circle at 42% 78%, #ffbd4a 0 7%, transparent 22%),
-          linear-gradient(135deg, #10162b, #273965 52%, #10182d);
-        background-size: 48px 48px, 48px 48px, auto, auto, auto, auto;
-      }
+const cards: CardItem[] = [
+  { id: '01', text: '高对比度文字与网格能够清楚显示 backdrop-filter 的模糊变化。' },
+  { id: '02', text: '每一层使用不同的 blur 半径，再由 mask 控制它的显示范围。' },
+  { id: '03', text: '相邻蒙版的透明过渡区域重叠，避免出现突兀的分界线。' },
+]
 
-      .demo-header {
-        position: relative;
-        z-index: 1;
-        max-width: 720px;
-      }
+/** 把 blur / mask 写成 CSS 变量，交给样式表统一消费 */
+function layerStyle(layer: BlurLayer): CSSProperties {
+  return {
+    '--blur': `${layer.blur}px`,
+    '--mask': layer.mask,
+  } as CSSProperties
+}
+</script>
 
-      .demo-kicker {
-        margin: 0 0 18px;
-        color: #96b9ff;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: .18em;
-      }
+<template>
+  <main class="demo-page">
+    <header class="demo-header">
+      <p class="demo-kicker">BACKDROP FILTER / MASK</p>
+      <h1>清晰的背景，逐渐变模糊。</h1>
+      <p>
+        向下滚动页面，观察底部固定区域：越靠近顶部，背后的网格、文字和卡片越清晰；
+        越靠近底部，模糊层越多，背景细节越柔和。
+      </p>
+    </header>
 
-      h1 {
-        max-width: 680px;
-        margin: 0;
-        font-size: clamp(48px, 9vw, 108px);
-        letter-spacing: -.06em;
-        line-height: .92;
-      }
+    <section class="background-content" aria-label="用于观察模糊效果的背景内容">
+      <article
+        v-for="card in cards"
+        :key="card.id"
+        class="background-card"
+      >
+        <strong>{{ card.id }}</strong>
+        <span>{{ card.text }}</span>
+      </article>
+    </section>
 
-      .demo-header p {
-        max-width: 560px;
-        margin: 28px 0 0;
-        color: rgb(247 249 255 / 70%);
-        font-size: 18px;
-        line-height: 1.7;
-      }
+    <div class="background-line" aria-hidden="true" />
 
-      .background-content {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 180px;
-      }
+    <aside class="frosted-footer" aria-label="渐变毛玻璃示例">
+      <div
+        v-for="layer in blurLayers"
+        :key="layer.id"
+        class="frosted-layer"
+        :style="layerStyle(layer)"
+        aria-hidden="true"
+      />
 
-      .background-card {
-        min-height: 220px;
-        padding: 24px;
-        border: 1px solid rgb(255 255 255 / 18%);
-        border-radius: 20px;
-        background: rgb(255 255 255 / 10%);
-      }
-
-      .background-card strong {
-        display: block;
-        margin-bottom: 54px;
-        color: rgb(255 255 255 / 88%);
-        font-size: 42px;
-        line-height: 1;
-      }
-
-      .background-card span {
-        color: rgb(255 255 255 / 64%);
-        font-size: 14px;
-        line-height: 1.5;
-      }
-
-      .background-line {
-        position: absolute;
-        top: 620px;
-        right: 8%;
-        left: 8%;
-        height: 1px;
-        background: rgb(255 255 255 / 54%);
-        transform: rotate(-8deg);
-      }
-
-      .frosted-footer {
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 10;
-        height: 280px;
-        overflow: hidden;
-        border-top: 1px solid rgb(255 255 255 / 58%);
-        background: rgb(255 255 255 / 5%);
-        isolation: isolate;
-        pointer-events: none;
-      }
-
-      .frosted-layer {
-        position: absolute;
-        inset: 0;
-        background: rgb(255 255 255 / 5%);
-        pointer-events: none;
-        -webkit-backdrop-filter: blur(var(--blur));
-        backdrop-filter: blur(var(--blur));
-        -webkit-mask: var(--mask);
-        mask: var(--mask);
-      }
-
-      /* 与 FrostedSurface 的 frosted-down 方向一致：越靠近底部越模糊。 */
-      .frosted-layer-1 {
-        --blur: 1px;
-        --mask: linear-gradient(to top, #000 0%, #000 85%, transparent 100%);
-      }
-
-      .frosted-layer-2 {
-        --blur: 3px;
-        --mask: linear-gradient(to top, #000 0%, #000 61%, transparent 81%);
-      }
-
-      .frosted-layer-3 {
-        --blur: 5px;
-        --mask: linear-gradient(to top, #000 0%, #000 36%, transparent 56%);
-      }
-
-      .frosted-layer-4 {
-        --blur: 7px;
-        --mask: linear-gradient(to top, #000 0%, #000 12%, transparent 32%);
-      }
-
-      .footer-content {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        height: 100%;
-        padding: 32px clamp(24px, 7vw, 120px);
-      }
-
-      .footer-content h2 {
-        margin: 0 0 8px;
-        font-size: clamp(24px, 4vw, 44px);
-        letter-spacing: -.04em;
-      }
-
-      .footer-content p {
-        max-width: 440px;
-        margin: 0;
-        color: rgb(247 249 255 / 68%);
-        line-height: 1.6;
-      }
-
-      .gradient-guide {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: rgb(247 249 255 / 68%);
-        font-size: 12px;
-        white-space: nowrap;
-      }
-
-      .gradient-guide::before {
-        display: block;
-        width: 110px;
-        height: 8px;
-        border-radius: 999px;
-        background: linear-gradient(to right, rgb(255 255 255 / 12%), rgb(255 255 255 / 88%));
-        content: "";
-      }
-
-      @media (max-width: 720px) {
-        .demo-page {
-          min-height: 1500px;
-          padding-top: 48px;
-        }
-
-        .background-content {
-          grid-template-columns: 1fr;
-          margin-top: 100px;
-        }
-
-        .background-card {
-          min-height: 150px;
-        }
-
-        .background-card strong {
-          margin-bottom: 24px;
-        }
-
-        .frosted-footer {
-          height: 240px;
-        }
-
-        .footer-content {
-          display: block;
-          padding-top: 96px;
-        }
-
-        .gradient-guide {
-          margin-top: 22px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="demo-page">
-      <header class="demo-header">
-        <p class="demo-kicker">BACKDROP FILTER / MASK</p>
-        <h1>清晰的背景，逐渐变模糊。</h1>
-        <p>
-          向下滚动页面，观察底部固定区域：越靠近顶部，背后的网格、文字和卡片越清晰；
-          越靠近底部，模糊层越多，背景细节越柔和。
-        </p>
-      </header>
-
-      <section class="background-content" aria-label="用于观察模糊效果的背景内容">
-        <article class="background-card">
-          <strong>01</strong>
-          <span>高对比度文字与网格能够清楚显示 backdrop-filter 的模糊变化。</span>
-        </article>
-        <article class="background-card">
-          <strong>02</strong>
-          <span>每一层使用不同的 blur 半径，再由 mask 控制它的显示范围。</span>
-        </article>
-        <article class="background-card">
-          <strong>03</strong>
-          <span>相邻蒙版的透明过渡区域重叠，避免出现突兀的分界线。</span>
-        </article>
-      </section>
-
-      <div class="background-line" aria-hidden="true"></div>
-
-      <aside class="frosted-footer" aria-label="渐变毛玻璃示例">
-        <div class="frosted-layer frosted-layer-1" aria-hidden="true"></div>
-        <div class="frosted-layer frosted-layer-2" aria-hidden="true"></div>
-        <div class="frosted-layer frosted-layer-3" aria-hidden="true"></div>
-        <div class="frosted-layer frosted-layer-4" aria-hidden="true"></div>
-
-        <div class="footer-content">
-          <div>
-            <h2>渐变毛玻璃</h2>
-            <p>1px / 3px / 5px / 7px 四层模糊，沿底部方向逐步增强。</p>
-          </div>
-          <div class="gradient-guide">清晰 → 模糊</div>
+      <div class="footer-content">
+        <div>
+          <h2>渐变毛玻璃</h2>
+          <p>1px / 3px / 5px / 7px 四层模糊，沿底部方向逐步增强。</p>
         </div>
-      </aside>
-    </main>
-  </body>
-</html>
+        <div class="gradient-guide">清晰 → 模糊</div>
+      </div>
+    </aside>
+  </main>
+</template>
+
+<style scoped>
+.demo-page {
+  position: relative;
+  min-height: 1800px;
+  overflow: hidden;
+  padding: 72px clamp(24px, 7vw, 120px) 420px;
+  color: #f7f9ff;
+  background:
+    linear-gradient(rgb(255 255 255 / 7%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 7%) 1px, transparent 1px),
+    radial-gradient(circle at 16% 12%, #fa558d 0 7%, transparent 23%),
+    radial-gradient(circle at 85% 33%, #407eff 0 8%, transparent 24%),
+    radial-gradient(circle at 42% 78%, #ffbd4a 0 7%, transparent 22%),
+    linear-gradient(135deg, #10162b, #273965 52%, #10182d);
+  background-size: 48px 48px, 48px 48px, auto, auto, auto, auto;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.demo-header {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.demo-kicker {
+  margin: 0 0 18px;
+  color: #96b9ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+h1 {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(48px, 9vw, 108px);
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.demo-header p {
+  max-width: 560px;
+  margin: 28px 0 0;
+  color: rgb(247 249 255 / 70%);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.background-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 180px;
+}
+
+.background-card {
+  min-height: 220px;
+  padding: 24px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 20px;
+  background: rgb(255 255 255 / 10%);
+}
+
+.background-card strong {
+  display: block;
+  margin-bottom: 54px;
+  color: rgb(255 255 255 / 88%);
+  font-size: 42px;
+  line-height: 1;
+}
+
+.background-card span {
+  color: rgb(255 255 255 / 64%);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.background-line {
+  position: absolute;
+  top: 620px;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: rgb(255 255 255 / 54%);
+  transform: rotate(-8deg);
+}
+
+.frosted-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  height: 280px;
+  overflow: hidden;
+  border-top: 1px solid rgb(255 255 255 / 58%);
+  background: rgb(255 255 255 / 5%);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.frosted-layer {
+  position: absolute;
+  inset: 0;
+  background: rgb(255 255 255 / 5%);
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+.footer-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100%;
+  padding: 32px clamp(24px, 7vw, 120px);
+}
+
+.footer-content h2 {
+  margin: 0 0 8px;
+  font-size: clamp(24px, 4vw, 44px);
+  letter-spacing: -0.04em;
+}
+
+.footer-content p {
+  max-width: 440px;
+  margin: 0;
+  color: rgb(247 249 255 / 68%);
+  line-height: 1.6;
+}
+
+.gradient-guide {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgb(247 249 255 / 68%);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.gradient-guide::before {
+  display: block;
+  width: 110px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    rgb(255 255 255 / 12%),
+    rgb(255 255 255 / 88%)
+  );
+  content: '';
+}
+
+@media (max-width: 720px) {
+  .demo-page {
+    min-height: 1500px;
+    padding-top: 48px;
+  }
+
+  .background-content {
+    grid-template-columns: 1fr;
+    margin-top: 100px;
+  }
+
+  .background-card {
+    min-height: 150px;
+  }
+
+  .background-card strong {
+    margin-bottom: 24px;
+  }
+
+  .frosted-footer {
+    height: 240px;
+  }
+
+  .footer-content {
+    display: block;
+    padding-top: 96px;
+  }
+
+  .gradient-guide {
+    margin-top: 22px;
+  }
+}
+</style>
 ```
 
 :::

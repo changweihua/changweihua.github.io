@@ -2011,7 +2011,7 @@ Config.getAppName();  // NoSuchMethodError！
 
 ### 正确写法 ###
 
-```proguard
+```java
 # proguard-rules.pro
 
 # 保留所有注解（必须！）

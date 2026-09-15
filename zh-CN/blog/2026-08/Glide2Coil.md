@@ -68,7 +68,7 @@ Glide 也有 Compose 库，但体验上总是差点意思。
 
 先把依赖加上
 
-```gradle
+```groovy
 // build.gradle.kts
 dependencies {
     // 核心库

@@ -1,13 +1,14 @@
-import { DefaultTheme } from "vitepress";
-import { version } from "../../../package.json" with { type: 'json' };
+import { DefaultTheme } from 'vitepress'
+import pkg from '../../../package.json'
+const { version } = pkg
 // , activeMatch: "^/$|^/index/"
 export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
   return [
     // { text: "首页", link: "/zh-CN/" },
     {
-      text: "博客",
-      link: "/zh-CN/blog/index.md",
-      activeMatch: "/blog/",
+      text: '博客',
+      link: '/zh-CN/blog/index.md',
+      activeMatch: '/blog/'
     },
     // {
     //   text: "关于",
@@ -16,50 +17,50 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     //   target: "blank",
     // },
     {
-      text: "归档",
-      link: "/zh-CN/archives.md",
+      text: '归档',
+      link: '/zh-CN/archives.md'
     },
     {
-      text: "万花筒",
-      link: "/zh-CN/cases.md",
+      text: '万花筒',
+      link: '/zh-CN/cases.md'
     },
     {
-      text: "手册",
-      link: "/zh-CN/manual/index.md",
-      activeMatch: "/zh-CN/manual/",
+      text: '手册',
+      link: '/zh-CN/manual/index.md',
+      activeMatch: '/zh-CN/manual/'
     },
     {
-      text: "那些年",
+      text: '那些年',
       items: [
-        { text: "2026", link: "/zh-CN/me.2026.md" },
-        { text: "2025", link: "/zh-CN/me.2025.md" },
-        { text: "2024", link: "/zh-CN/me.2024.md" },
-        { text: "2023", link: "/zh-CN/me.2023.md" },
-        { text: "2022", link: "/zh-CN/me.2022.md" },
-        { text: "2021", link: "/zh-CN/me.2021.md" },
-        { text: "2020", link: "/zh-CN/me.2020.md" },
-        { text: "2019", link: "/zh-CN/me.2019.md" },
-      ],
+        { text: '2026', link: '/zh-CN/me.2026.md' },
+        { text: '2025', link: '/zh-CN/me.2025.md' },
+        { text: '2024', link: '/zh-CN/me.2024.md' },
+        { text: '2023', link: '/zh-CN/me.2023.md' },
+        { text: '2022', link: '/zh-CN/me.2022.md' },
+        { text: '2021', link: '/zh-CN/me.2021.md' },
+        { text: '2020', link: '/zh-CN/me.2020.md' },
+        { text: '2019', link: '/zh-CN/me.2019.md' }
+      ]
     },
     {
       text: `v${version}`,
       items: [
         {
-          text: "发布日志",
-          link: "https://github.com/changweihua/changweihua.github.io/releases",
+          text: '发布日志',
+          link: 'https://github.com/changweihua/changweihua.github.io/releases'
         },
         {
-          text: "提交 Issue",
-          link: "https://github.com/changweihua/changweihua.github.io/issues",
+          text: '提交 Issue',
+          link: 'https://github.com/changweihua/changweihua.github.io/issues'
         },
         {
-          component: "RainbowAnimationSwitcher",
+          component: 'RainbowAnimationSwitcher',
           props: {
-            text: "彩虹动画",
-          },
-        },
-      ],
-    },
+            text: '彩虹动画'
+          }
+        }
+      ]
+    }
     // {
     //   text: "分类",
     //   link: "/tags.md",
@@ -94,5 +95,5 @@ export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
     //     },
     //   ],
     // },
-  ];
-};
+  ]
+}

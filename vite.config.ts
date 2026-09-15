@@ -113,6 +113,8 @@ export default defineConfig(({ mode }) => {
       hmrPartialAccept: true
     },
 
+    configLoader: 'runner',
+
     html: {
       additionalAssetSources: {
         'html-import': {

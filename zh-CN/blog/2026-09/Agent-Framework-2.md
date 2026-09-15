@@ -15,7 +15,7 @@ cover: /covers/dotnet.svg
 
 一次智能体调用不是“把一句话丢给模型”。调用方始终只看见三样东西：
 
-```dotnet
+```C#
 AIAgent agent = ...;
 AgentSession session = await agent.CreateSessionAsync();
 AgentResponse response = await agent.RunAsync("帮我订下周二去悉尼的机票", session);
