@@ -32,7 +32,7 @@
 <script setup lang="ts">
   import { toRaw, onMounted } from 'vue'
   import { useData } from 'vitepress'
-  import pkg from '../../../package.json'
+  import pkg from '../../package.json'
   const { version } = pkg
 
   const copyright = `版权所有 © 2009- ${new Date().getFullYear()} CMONO.NET`
