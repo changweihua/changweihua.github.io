@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Highlights API - 语法高亮演示</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .info {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .info h2 {
+        color: #667eea;
+        margin-bottom: 0.5rem;
+      }
+
+      .info p {
+        color: #4a5568;
+        line-height: 1.6;
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .demo-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .demo-section {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .demo-header {
+        background: #2d3748;
+        color: white;
+        padding: 1rem;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .demo-header .badge {
+        background: #48bb78;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.875rem;
+      }
+
+      .demo-header .badge-warning {
+        background: #f59e0b;
+      }
+
+      .code-container {
+        background: #1e1e1e;
+        padding: 1.5rem;
+        overflow-x: auto;
+        min-height: 400px;
+      }
+
+      .code-block {
+        font-family: "Consolas", "Monaco", "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #d4d4d4;
+        white-space: pre;
+      }
+
+      /* CSS Highlights API Styles */
+      ::highlight(keyword) {
+        color: #569cd6;
+        font-weight: bold;
+      }
+
+      ::highlight(string) {
+        color: #ce9178;
+      }
+
+      ::highlight(comment) {
+        color: #6a9955;
+        font-style: italic;
+      }
+
+      ::highlight(function) {
+        color: #dcdcaa;
+      }
+
+      ::highlight(number) {
+        color: #b5cea8;
+      }
+
+      ::highlight(operator) {
+        color: #d4d4d4;
+      }
+
+      ::highlight(punctuation) {
+        color: #d4d4d4;
+      }
+
+      ::highlight(identifier) {
+        color: #9cdcfe;
+      }
+
+      /* Traditional span-based highlighting */
+      .token-keyword {
+        color: #569cd6;
+        font-weight: bold;
+      }
+
+      .token-string {
+        color: #ce9178;
+      }
+
+      .token-comment {
+        color: #6a9955;
+        font-style: italic;
+      }
+
+      .token-function {
+        color: #dcdcaa;
+      }
+
+      .token-number {
+        color: #b5cea8;
+      }
+
+      .token-operator {
+        color: #d4d4d4;
+      }
+
+      .token-punctuation {
+        color: #d4d4d4;
+      }
+
+      .token-identifier {
+        color: #9cdcfe;
+      }
+
+      .stats {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .stats h3 {
+        color: #667eea;
+        margin-bottom: 1rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .stat-item {
+        background: #f7fafc;
+        padding: 1rem;
+        border-radius: 6px;
+        border-left: 4px solid #667eea;
+      }
+
+      .stat-label {
+        color: #718096;
+        font-size: 0.875rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-value {
+        color: #2d3748;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .warning {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-top: 1rem;
+      }
+
+      .warning p {
+        color: #92400e;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .controls {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      button {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 0 0.5rem;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background: #5568d3;
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎨 CSS Highlights API 演示</h1>
+
+      <div class="info">
+        <h2>关于此演示</h2>
+        <p>
+          此演示对比了两种语法高亮方法：现代的
+          <strong>CSS Highlights API</strong>（左侧）与传统的
+          <strong>基于 DOM 的高亮</strong>（右侧）。CSS Highlights API
+          提供高性能的语法高亮， 无需操作
+          DOM，将文本保持在单个文本节点中，以获得最佳渲染性能。
+        </p>
+      </div>
+
+      <div class="controls">
+        <button type="button" onclick="remeasure()">🔄 重新测量性能</button>
+        <button type="button" onclick="changeCode()">🎲 切换代码示例</button>
+      </div>
+
+      <div class="demo-grid">
+        <div class="demo-section">
+          <div class="demo-header">
+            <span>CSS Highlights API</span>
+            <span class="badge">现代方案</span>
+          </div>
+          <div class="code-container">
+            <pre class="code-block" id="highlights-demo"></pre>
+          </div>
+        </div>
+
+        <div class="demo-section">
+          <div class="demo-header">
+            <span>传统 DOM Span 方案</span>
+            <span class="badge badge-warning">传统方案</span>
+          </div>
+          <div class="code-container">
+            <pre class="code-block" id="traditional-demo"></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <h3>📊 性能对比</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-label">CSS Highlights - DOM 节点数</div>
+            <div class="stat-value" id="highlights-nodes">-</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">传统方案 - DOM 节点数</div>
+            <div class="stat-value" id="traditional-nodes">-</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">CSS Highlights - 渲染时间</div>
+            <div class="stat-value" id="highlights-time">-</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">传统方案 - 渲染时间</div>
+            <div class="stat-value" id="traditional-time">-</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">性能提升</div>
+            <div class="stat-value" id="improvement">-</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">内存节省</div>
+            <div class="stat-value" id="memory-saved">-</div>
+          </div>
+        </div>
+        <div class="warning hidden" id="browser-warning">
+          <p>
+            <strong>⚠️ 浏览器兼容性：</strong>您的浏览器不支持 CSS Highlights
+            API。只有传统的高亮方法能正常工作。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 代码示例
+      const codeSamples = [
+        `// JavaScript 示例
+function fibonacci(n) {
+    // 计算斐波那契数
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+const result = fibonacci(10);
+console.log("结果:", result);
+
+// 数组操作
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(x => x * 2);`,
+
+        `// React 组件
+function UserProfile({ name, age }) {
+    const [isActive, setActive] = useState(false);
+
+    // 处理点击事件
+    const handleClick = () => {
+        setActive(!isActive);
+        console.log("状态已改变");
+    };
+
+    return (
+        <div className="profile">
+            <h1>{name}</h1>
+            <p>年龄: {age}</p>
+        </div>
+    );
+}`,
+
+        `// TypeScript 接口
+interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+
+function getUserData(userId: number): Promise<User> {
+    // 获取用户数据
+    return fetch(\`/api/users/\${userId}\`)
+        .then(response => response.json())
+        .catch(error => {
+            console.error("错误:", error);
+            throw error;
+        });
+}`,
+      ];
+
+      let currentCodeIndex = 0;
+
+      /**
+       * 词法分析器 - 将代码文本解析成 token 列表
+       * @param {string} code - 要分析的源代码
+       * @returns {Array} - token 数组，每个 token 包含 type, start, end, value
+       */
+      function tokenize(code) {
+        const tokens = [];
+
+        // 定义匹配规则，顺序很重要：
+        // 1. comment 和 string 放在最前面，确保它们内部的内容不会被其他规则匹配
+        // 2. 后续规则按照优先级排列
+        const patterns = [
+          { type: "comment", regex: /\/\/[^\n]*/g }, // 单行注释
+          { type: "string", regex: /(["'`])(?:(?=(\\?))\2.)*?\1/g }, // 字符串（支持单引号、双引号、模板字符串）
+          {
+            type: "keyword",
+            regex:
+              /\b(function|const|let|var|if|else|return|class|interface|async|await|import|export|from|new|typeof|instanceof)\b/g,
+          }, // JavaScript 关键字
+          { type: "number", regex: /\b\d+\.?\d*\b/g }, // 数字（整数和小数）
+          { type: "function", regex: /\b[a-zA-Z_$][a-zA-Z0-9_$]*(?=\()/g }, // 函数名（后面跟着左括号）
+          { type: "operator", regex: /[+\-*/%=<>!&|^~?:]/g }, // 运算符
+          { type: "punctuation", regex: /[{}[\]();,\.]/g }, // 标点符号
+        ];
+
+        // 遍历所有规则，收集匹配的 token
+        for (const { type, regex } of patterns) {
+          let match;
+          while ((match = regex.exec(code)) !== null) {
+            tokens.push({
+              type,
+              start: match.index,
+              end: match.index + match[0].length,
+              value: match[0],
+            });
+          }
+        }
+
+        // 按起始位置排序
+        tokens.sort((a, b) => a.start - b.start);
+
+        // 去除重叠的 token（保留先匹配到的）
+        // 例如：注释中的冒号不应该被 operator 规则再次匹配
+        const filteredTokens = [];
+        let lastEnd = 0;
+
+        for (const token of tokens) {
+          if (token.start >= lastEnd) {
+            filteredTokens.push(token);
+            lastEnd = token.end;
+          }
+        }
+
+        return filteredTokens;
+      }
+
+      /**
+       * 应用 CSS Highlights API 进行语法高亮
+       * 核心思想：不创建额外的 DOM 节点，通过 Range 对象标记文本位置
+       * @param {HTMLElement} element - 目标元素
+       * @param {string} code - 源代码
+       * @returns {Object} - 包含性能数据和清理函数
+       */
+      function applyHighlights(element, code) {
+        // 检查浏览器是否支持 CSS Highlights API
+        if (!CSS.highlights) {
+          document.getElementById("browser-warning").classList.remove("hidden");
+          return { time: 0, nodes: 0, cleanup: () => {} };
+        }
+
+        const startTime = performance.now();
+
+        // 清除之前的所有高亮
+        CSS.highlights.clear();
+
+        // 将代码设置为纯文本内容（只有一个 text node）
+        element.textContent = code;
+
+        const textNode = element.firstChild;
+        if (!textNode) return { time: 0, nodes: 0, cleanup: () => {} };
+
+        // 获取所有 token
+        const tokens = tokenize(code);
+
+        // 按 token 类型分组，每种类型对应一个 Highlight 对象
+        const tokensByType = new Map();
+        for (const token of tokens) {
+          if (!tokensByType.has(token.type)) {
+            tokensByType.set(token.type, []);
+          }
+
+          // 创建 Range 对象标记 token 在文本中的位置
+          // 关键：Range 只是标记位置，不修改 DOM 结构
+          const range = new Range();
+          range.setStart(textNode, token.start);
+          range.setEnd(textNode, token.end);
+          tokensByType.get(token.type).push(range);
+        }
+
+        // 为每种 token 类型注册 Highlight
+        // CSS 中的 ::highlight(keyword)、::highlight(string) 等会匹配这里注册的名称
+        for (const [type, ranges] of tokensByType) {
+          const highlight = new Highlight(...ranges);
+          CSS.highlights.set(type, highlight);
+        }
+
+        const endTime = performance.now();
+
+        return {
+          time: (endTime - startTime).toFixed(2),
+          nodes: countNodes(element),
+          cleanup: () => CSS.highlights.clear(),
+        };
+      }
+
+      /**
+       * 应用传统的基于 DOM 的语法高亮
+       * 传统方法：为每个 token 创建一个 <span> 元素
+       * @param {HTMLElement} element - 目标元素
+       * @param {string} code - 源代码
+       * @returns {Object} - 包含性能数据
+       */
+      function applyTraditional(element, code) {
+        const startTime = performance.now();
+
+        const tokens = tokenize(code);
+        let html = "";
+        let lastIndex = 0;
+
+        // 遍历所有 token，构建 HTML 字符串
+        for (const token of tokens) {
+          // 添加 token 之前的普通文本
+          html += escapeHtml(code.substring(lastIndex, token.start));
+
+          // 为 token 包裹 span 标签，添加对应的 class
+          // 缺点：每个 token 都创建一个 DOM 节点，大量代码会产生数百个节点
+          html += `<span class="token-${token.type}">${escapeHtml(
+            token.value
+          )}</span>`;
+          lastIndex = token.end;
+        }
+
+        // 添加最后的剩余文本
+        html += escapeHtml(code.substring(lastIndex));
+
+        // 将 HTML 字符串插入 DOM（触发浏览器解析和渲染）
+        element.innerHTML = html;
+
+        const endTime = performance.now();
+
+        return {
+          time: (endTime - startTime).toFixed(2),
+          nodes: countNodes(element),
+        };
+      }
+
+      /**
+       * HTML 转义函数 - 防止 XSS 攻击
+       */
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      /**
+       * 统计 DOM 节点数量
+       * 用于对比两种方法的内存占用差异
+       */
+      function countNodes(element) {
+        let count = 0;
+        const walker = document.createTreeWalker(element, NodeFilter.SHOW_ALL);
+        while (walker.nextNode()) count++;
+        return count;
+      }
+
+      /**
+       * 更新性能统计数据显示
+       */
+      function updateStats(highlightsResult, traditionalResult) {
+        document.getElementById("highlights-nodes").textContent =
+          highlightsResult.nodes;
+        document.getElementById("traditional-nodes").textContent =
+          traditionalResult.nodes;
+        document.getElementById("highlights-time").textContent =
+          highlightsResult.time + " ms";
+        document.getElementById("traditional-time").textContent =
+          traditionalResult.time + " ms";
+
+        // 计算性能提升百分比
+        const improvement = (
+          ((traditionalResult.time - highlightsResult.time) /
+            traditionalResult.time) *
+          100
+        ).toFixed(1);
+        document.getElementById("improvement").textContent = improvement + "%";
+
+        // 计算内存节省百分比
+        const memorySaved = (
+          ((traditionalResult.nodes - highlightsResult.nodes) /
+            traditionalResult.nodes) *
+          100
+        ).toFixed(1);
+        document.getElementById("memory-saved").textContent = memorySaved + "%";
+      }
+
+      /**
+       * 渲染代码并应用两种高亮方法
+       */
+      function renderCode() {
+        const code = codeSamples[currentCodeIndex];
+        const highlightsElement = document.getElementById("highlights-demo");
+        const traditionalElement = document.getElementById("traditional-demo");
+
+        // 分别应用两种方法，对比性能差异
+        const highlightsResult = applyHighlights(highlightsElement, code);
+        const traditionalResult = applyTraditional(traditionalElement, code);
+
+        updateStats(highlightsResult, traditionalResult);
+      }
+
+      /**
+       * 切换代码示例
+       */
+      function changeCode() {
+        currentCodeIndex = (currentCodeIndex + 1) % codeSamples.length;
+        renderCode();
+      }
+
+      /**
+       * 重新测量性能
+       */
+      function remeasure() {
+        renderCode();
+      }
+
+      // 页面加载完成后初始化
+      window.addEventListener("DOMContentLoaded", renderCode);
+    </script>
+  </body>
+</html>

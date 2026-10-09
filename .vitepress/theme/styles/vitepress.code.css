@@ -1,0 +1,59 @@
+.vp-code-group {
+  margin: 0;
+}
+
+/* 代码块tab */
+.vp-code-group .tabs {
+  margin: 0;
+  padding-top: 30px;
+  border-radius: 8px 8px 0 0;
+}
+
+.vp-code-group .blocks {
+  margin: 0;
+  border-radius: 8px;
+}
+
+.vp-doc div[class*='language-'], .vp-block {
+  margin: 0;
+}
+
+html[lang="foo"] button.copied::before {
+  content: "bar" !important;
+  left: -5ch !important;
+  width: calc(5ch - 1px) !important;
+}
+
+/* 代码块tab-顶部小圆点 */
+.vp-code-group .tabs::before {
+  background: #fc625d;
+  border-radius: 50%;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  content: " ";
+  height: 12px;
+  width: 12px;
+  left: 12px;
+  margin-top: -20px;
+  position: absolute;
+}
+
+/* 代码组 */
+.vp-code-group {
+  color: var(--vp-c-black-soft);
+  border-radius: 8px;
+  box-shadow: 0 1px 10px 0 rgb(0 0 0 / 40%);
+}
+
+.example-actions-playground::after {
+  display: none !important;
+}
+
+.named-fence-filename{
+  left:32px !important;
+  font-weight: normal !important;
+}
+
+.vp-doc div[class*="language-"],
+.vp-block {
+  border-radius: 8px;
+}

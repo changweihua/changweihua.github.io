@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(400px, 0) rotate(360deg);
+            }
+        }
+
+        #paper-plane {
+            animation: fly 4s linear infinite;
+            transform-origin: center; /* 设置旋转中心 */
+        }
+    </style>
+    <title>纸飞机动画</title>
+</head>
+<body>
+    <svg width="500" height="500">
+        <path id="flight-path" d="M 50 400 C 150 100, 350 100, 450 400" fill="transparent" stroke="lightgray" />
+        <polygon id="paper-plane" points="10,90 50,10 90,90 50,70" fill="lightblue" stroke="blue" stroke-width="2"/>
+    </svg>
+</body>
+</html>

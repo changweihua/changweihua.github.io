@@ -1,0 +1,23 @@
+<!-- border.svg -->
+<svg xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes border-animate {
+      to {
+        stroke-dashoffset: calc(var(--stroke) * 2.75);
+      }
+    }
+  </style>
+  <linearGradient id="gradient" gradientTransform="rotate(45)">
+    <stop stop-color="#fcb045"></stop>
+    <stop stop-color="#fd1d1d" offset="0.5"></stop>
+    <stop stop-color="#833ab4" offset="1"></stop>
+  </linearGradient>
+  <rect width="100%" height="100%" style="
+            --stroke: 35px;
+            stroke: url(#gradient);
+            stroke-width: var(--stroke);
+            fill: none;
+            stroke-dasharray: calc(var(--stroke) * 2) calc(var(--stroke) * 0.75);
+            animation: border-animate 1s infinite linear;
+        " />
+</svg>
