@@ -1,0 +1,70 @@
+{
+  "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
+  "backgroundJobs": {
+    "continueOnIdle": false,
+    "wallClockTimeoutMs": 900000,
+    "abortGraceMs": 10000
+  },
+
+  "agents": {
+    // ---------- 核心规划与推理：MiMo 2.6 Flash Free ----------
+    "orchestrator": {
+      "model": "opencode/mimo-v2.6-flash-free",
+      "temperature": 0.25,
+      "variant": "default",
+      "skills": [],
+      "mcps": ["*", "!context7"]
+    },
+    "oracle": {
+      "model": "opencode/mimo-v2.6-flash-free",
+      "temperature": 0.25,
+      "variant": "default",
+      "skills": ["simplify"],
+      "mcps": []
+    },
+
+    // ---------- 探索与检索：LongCat 2.5 Preview（1M 上下文）----------
+    "explorer": {
+      "model": "opencode/longcat-2.5-preview-free",
+      "temperature": 0.3,
+      "variant": "default",
+      "skills": [],
+      "mcps": ["context7", "gh_grep"]
+    },
+    "librarian": {
+      "model": "opencode/longcat-2.5-preview-free",
+      "temperature": 0.3,
+      "variant": "default",
+      "skills": [],
+      "mcps": ["context7", "gh_grep"]
+    },
+
+    // ---------- 代码生成与设计：MiMo 2.6 Flash Free ----------
+    "fixer": {
+      "model": "opencode/mimo-v2.6-flash-free",
+      "temperature": 0.2,
+      "variant": "default",
+      "skills": [],
+      "mcps": []
+    },
+    "designer": {
+      "model": "opencode/mimo-v2.6-flash-free",
+      "temperature": 0.35,
+      "variant": "default",
+      "skills": [],
+      "mcps": []
+    },
+
+    // ---------- 视觉分析：MiMo 2.6 Flash Free（原生多模态）----------
+    "observer": {
+      "model": "opencode/mimo-v2.6-flash-free",
+      "temperature": 0.35,
+      "variant": "default",
+      "skills": [],
+      "mcps": []
+    }
+  },
+
+  "disabled_agents": [],
+  "enable_companion": true
+}

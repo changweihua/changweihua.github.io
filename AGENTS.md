@@ -41,6 +41,7 @@ npm run check         # 检查 npm 包更新
 
 - **markdown fence 处理必须走集中式 dispatcher**：`.vitepress/src/markdown.ts` 中的 `md.renderer.rules.fence` 统一分发（markmap / echarts / codeBar / languageLabel）。禁止在 `plugins/markdown/` 的新插件里直接覆写 `fence`（会破坏链式调用）。
 - **博客 frontmatter 必须有 `date`**（东八区），格式支持 `YYYY-MM-DD HH:mm:ss`、`YYYY-MM-DD`、`YYYY-MM`（小时可补零也可不补）。日期解析在 `post.data.ts` / `blog.data.ts` 的 `parseEast8Date`，两处需同步修改。
+- **行内代码里的双花括号插值会炸构建**：markdown 编译为 Vue 模板后，围栏代码块有 v-pre 保护（安全），**行内反引号代码没有**——如 GitHub Actions 的 `&#36;&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125;` 写在行内会触发 SSR 预渲染报错 `Cannot read properties of undefined (reading 'xxx')`（dev 不报、build 才挂）。行内必须用 `<code v-pre>` 包裹该插值，或改放进围栏代码块。
 - **表格单元格内反引号必须成对**：vitepress 2.0.0-alpha.19 的表格 transform 会因奇数反引号崩溃（`Cannot read properties of undefined (reading '0')`），写作时注意 `` `AbortController` `` 之类不要错位。
 - vitepress 2.0.0-alpha.19 markdown 配置项名：`image.lazyLoad`、`codeCopyButton.tooltipText`（旧名 `lazyLoading`/`codeCopyButtonTitle` 已移除）；主题用 `lastUpdated.text`（旧 `lastUpdatedText` 已移除）。
 - **不要安装与 vitepress 内置能力重复的 markdown-it 插件**（footnote、tasklist 等已内置）；安装 markdown-it 生态包时注意 peer 依赖需兼容 `markdown-it@15`（`markdown-it-image-size` 等要求 `<15` 的包会引发 npm eresolve 冲突）。
