@@ -96,9 +96,7 @@ export default withMermaid({
     layout: 'elk',
     ...lightMermaidConfig,
     securityLevel: 'loose',
-    flowchart: { curve: 'basis', defaultRenderer: 'elk' },
-    class: { defaultRenderer: 'elk' },
-    state: { defaultRenderer: 'elk' },
+    flowchart: { curve: 'basis' },
     logLevel: 'error',
     suppressErrorRendering: true
   },
@@ -107,6 +105,15 @@ export default withMermaid({
   },
   // ============== 原 vite.config.ts 中的构建配置移回此处 ==============
   vite: {
+    optimizeDeps: {
+      exclude: ['vitest']
+    },
+    // 忽略测试文件
+    server: {
+      watch: {
+        ignored: ['**/__test__/**']
+      }
+    },
     // 原有 VitePress 专属插件（保持不变）
     plugins: [
       aliasLangPlugin({

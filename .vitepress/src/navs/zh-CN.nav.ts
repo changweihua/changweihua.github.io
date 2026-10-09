@@ -1,5 +1,5 @@
 import { DefaultTheme } from 'vitepress'
-import pkg from '../../../package.json'
+import pkg from '../../../package.json' with { type: 'json' }
 const { version } = pkg
 // , activeMatch: "^/$|^/index/"
 export const getZhCNNav: () => DefaultTheme.NavItem[] = () => {
