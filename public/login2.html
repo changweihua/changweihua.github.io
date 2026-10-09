@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      *::after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      *::before {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      :root {
+        /* --title-animation-color: #37ff8b; */
+        /* --button-animation-color: #7d2ae8; */
+        /* --input-bottom-animation-color: #7d2ae8; */
+        /* --text-border-color: rgba(255, 255, 255, 0.6); */
+        --text-border-color: #7d2ae8;
+        --title-animation-color: #6d1ed3;
+        --button-animation-color: #7d2ae8;
+        --input-bottom-animation-color: #7d2ae8;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg clip-path='url(%26quot%3b%23SvgjsClipPath1041%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='%2332325d'%3e%3c/rect%3e%3ccircle r='35.605' cx='185.1' cy='286.35' fill='url(%26quot%3b%23SvgjsLinearGradient1042%26quot%3b)'%3e%3c/circle%3e%3ccircle r='17.8' cx='57.44' cy='151.68' fill='%2343468b'%3e%3c/circle%3e%3ccircle r='27.595' cx='843.22' cy='195.61' fill='url(%26quot%3b%23SvgjsLinearGradient1043%26quot%3b)'%3e%3c/circle%3e%3ccircle r='55.4' cx='79.95' cy='304.45' fill='url(%26quot%3b%23SvgjsLinearGradient1044%26quot%3b)'%3e%3c/circle%3e%3ccircle r='17.2' cx='419.65' cy='331.62' fill='url(%26quot%3b%23SvgjsLinearGradient1045%26quot%3b)'%3e%3c/circle%3e%3ccircle r='33.66' cx='1110.51' cy='176.8' fill='url(%26quot%3b%23SvgjsLinearGradient1046%26quot%3b)'%3e%3c/circle%3e%3ccircle r='24.325' cx='51.8' cy='349.83' fill='url(%26quot%3b%23SvgjsLinearGradient1047%26quot%3b)'%3e%3c/circle%3e%3ccircle r='43.22' cx='693.82' cy='50.84' fill='%2343468b'%3e%3c/circle%3e%3c/g%3e%3cdefs%3e%3cclipPath id='SvgjsClipPath1041'%3e%3crect width='1440' height='560' x='0' y='0'%3e%3c/rect%3e%3c/clipPath%3e%3clinearGradient x1='113.89' y1='286.35' x2='256.31' y2='286.35' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1042'%3e%3cstop stop-color='%23ab3c51' offset='0.1'%3e%3c/stop%3e%3cstop stop-color='%234f4484' offset='0.9'%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient x1='788.03' y1='195.61' x2='898.41' y2='195.61' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1043'%3e%3cstop stop-color='%2384b6e0' offset='0.1'%3e%3c/stop%3e%3cstop stop-color='%23464a8f' offset='0.9'%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient x1='-30.849999999999994' y1='304.45' x2='190.75' y2='304.45' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1044'%3e%3cstop stop-color='%23f29b7c' offset='0.1'%3e%3c/stop%3e%3cstop stop-color='%237e6286' offset='0.9'%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient x1='385.25' y1='331.62' x2='454.05' y2='331.62' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1045'%3e%3cstop stop-color='%23e298de' offset='0.1'%3e%3c/stop%3e%3cstop stop-color='%23484687' offset='0.9'%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient x1='1043.19' y1='176.8' x2='1177.83' y2='176.8' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1046'%3e%3cstop stop-color='%23ab3c51' offset='0.1'%3e%3c/stop%3e%3cstop stop-color='%234f4484' offset='0.9'%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient x1='3.1499999999999986' y1='349.83' x2='100.44999999999999' y2='349.83' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1047'%3e%3cstop stop-color='%23f29b7c' offset='0.1'%3e%3c/stop%3e%3cstop stop-color='%237e6286' offset='0.9'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+      }
+
+      .title {
+        -webkit-text-stroke: 1px #fff;
+        -webkit-text-fill-color: #32325d;
+        text-align: center;
+      }
+
+      .login {
+        margin: 200px auto;
+        width: 500px;
+        padding: 60px 80px;
+        border-radius: 3px;
+        box-shadow: 0 0 5px 0 #23234a;
+        background: #32325d;
+      }
+
+      .active-border {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        height: 1px;
+        width: 100%;
+        transform: scaleX(0);
+        background-color: var(--input-bottom-animation-color);
+        transition: all 0.5s;
+        transform-origin: center;
+      }
+
+      .field:focus ~ .active-border {
+        transform: scaleX(1);
+      }
+
+      .field-box {
+        border-bottom: 1px solid #b2b2b2;
+        position: relative;
+        font-size: 18px;
+        margin-top: 40px;
+      }
+
+      .field {
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 34px;
+        background: none;
+        transition: all 0.5s;
+        caret-color: #fff;
+        color: #cfc4c4;
+        font-size: 16px;
+      }
+
+      .holder {
+        color: #999;
+        position: absolute;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        z-index: 1;
+        transition: all 0.5s;
+      }
+
+      .field:focus ~ .holder,
+      .field:valid ~ .holder {
+        top: -30px;
+        color: #fff;
+        font-size: 22px;
+      }
+
+      .submit {
+        position: relative;
+        display: block;
+        top: 15px;
+        width: 100px;
+        margin: 20px auto 0;
+        padding: 10px 22px;
+        border-radius: 6px;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        background-color: var(--button-animation-color);
+        transition: all 0.2s ease;
+        z-index: 2;
+      }
+
+      .submit:active {
+        transform: scale(0.96);
+      }
+
+      .submit:before,
+      .submit:after {
+        position: absolute;
+        z-index: 2;
+        content: "";
+        width: 150%;
+        left: 50%;
+        height: 100%;
+        transform: translateX(-50%);
+        z-index: -1000;
+        background-repeat: no-repeat;
+      }
+
+      .submit:hover:before {
+        top: -70%;
+        background-image: radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            transparent 20%,
+            var(--button-animation-color) 20%,
+            transparent 30%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            transparent 10%,
+            var(--button-animation-color) 15%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          );
+        background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%,
+          15% 15%, 10% 10%, 18% 18%;
+        background-position: 50% 120%;
+        animation: greentopBubbles 0.6s ease;
+      }
+
+      @keyframes greentopBubbles {
+        0% {
+          background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%,
+            25% 90%, 40% 90%, 55% 90%, 70% 90%;
+        }
+
+        50% {
+          background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+            50% 50%, 65% 20%, 90% 30%;
+        }
+
+        100% {
+          background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%,
+            22% 40%, 50% 40%, 65% 10%, 90% 20%;
+          background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        }
+      }
+
+      .submit:hover::after {
+        bottom: -70%;
+        background-image: radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            transparent 10%,
+            var(--button-animation-color) 15%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle,
+            var(--button-animation-color) 20%,
+            transparent 20%
+          );
+        background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%,
+          18% 18%;
+        background-position: 50% 0%;
+        animation: greenbottomBubbles 0.6s ease;
+      }
+
+      @keyframes greenbottomBubbles {
+        0% {
+          background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+            70% -10%, 70% 0%;
+        }
+
+        50% {
+          background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%,
+            95% 60%, 105% 0%;
+        }
+
+        100% {
+          background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%,
+            95% 70%, 110% 10%;
+          background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        }
+      }
+
+      /* === removing default title style ===*/
+      .title {
+        margin: 0 0 15px 0;
+        height: auto;
+        background: transparent;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      /* title styling */
+      .title {
+        letter-spacing: 3px;
+        text-decoration: none;
+        font-size: 2em;
+        font-family: "Arial";
+        position: relative;
+        text-transform: uppercase;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--text-border-color);
+      }
+      /* this is the text, when you hover on title */
+      .hover-text {
+        position: absolute;
+        box-sizing: border-box;
+        content: attr(data-text);
+        color: var(--title-animation-color);
+        width: 0%;
+        inset: 0;
+        border-right: 6px solid var(--title-animation-color);
+        overflow: hidden;
+        transition: 0.5s;
+        -webkit-text-stroke: 1px var(--title-animation-color);
+      }
+      /* hover */
+      .title:hover .hover-text {
+        width: 100%;
+        filter: drop-shadow(0 0 23px var(--title-animation-color));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login">
+      <button class="title" data-text="Awesome">
+        <span class="actual-text">&nbsp;LOGIN&nbsp;FORM&nbsp;</span>
+        <span aria-hidden="true" class="hover-text">
+          &nbsp;LOGIN&nbsp;FORM&nbsp;
+        </span>
+      </button>
+      <div class="field-box">
+        <input class="account field" type="text" required="required" />
+        <span class="holder">account</span>
+        <span class="active-border"></span>
+      </div>
+      <div class="field-box">
+        <input class="account field" type="password" required="required" />
+        <span class="holder">password</span>
+        <span class="active-border"></span>
+      </div>
+      <button class="submit">登录</button>
+    </div>
+  </body>
+</html>

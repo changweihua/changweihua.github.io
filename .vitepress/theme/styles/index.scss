@@ -1,0 +1,201 @@
+// 字体应用混合器（Mixin）
+@mixin apply-vp-fonts {
+  body {
+    font-family: var(--vp-font-family-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--vp-font-family-mono);
+  }
+
+  // VitePress特定元素
+  .vp-doc {
+    font-family: var(--vp-font-family-base);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--vp-font-family-base);
+      font-weight: 600;
+    }
+
+    // 代码块特殊处理
+    div[class*="language-"] pre {
+      font-family: var(--vp-font-family-mono);
+    }
+  }
+}
+
+// 紧急覆盖层（高优先级）
+@mixin force-font-override {
+
+  body,
+  .vp-doc,
+  .vp-doc *:not(code):not(pre):not([class*="language-"]) {
+    font-family: var(--vp-font-family-base) !important;
+  }
+}
+
+// 应用字体混合器
+@include apply-vp-fonts;
+
+// 如果仍有覆盖问题，使用紧急覆盖
+// @include fonts.force-font-override;
+
+/* 滚动条里面轨道，能向上向下移动 */
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  display: none;
+  background: #e2e6f1;
+}
+
+/* 滚动条里面的小方块，能向上向下移动 */
+*:hover::-webkit-scrollbar-thumb {
+  display: flex;
+  background: #e2e6f1;
+}
+
+/* 关键重置 */
+html {
+  background-color: var(--vp-c-bg);
+  height: 100%;
+  min-height: 100dvh;
+  // scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable both-edges;
+  // text-wrap: balance;
+}
+
+body {
+  background-color: var(--vp-c-bg);
+  min-height: 100vh;
+  margin: 0;
+  /* 安全区域适配 */
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+  font-synthesis: initial;
+}
+
+/* 覆盖弹性滚动背景 */
+body::after {
+  content: "";
+  position: fixed;
+  top: -5000px;
+  left: 0;
+  right: 0;
+  bottom: -5000px;
+  background-color: var(--vp-c-bg);
+  z-index: -1;
+}
+
+/* 一级路由高亮 */
+.active-parent {
+  color: #42b983; /* 主题色 */
+  font-weight: bold;
+  border-bottom: 2px solid #42b983;
+}
+
+/* 精确匹配的二级路由（可选） */
+.active-exact {
+  opacity: 0.8;
+}
+
+:root {
+  // --base-blue: oklch(var(--base-blue-l) var(--base-blue-c) var(--base-blue-h));
+  --base-blue: oklch(0.836 0.112 252.0);
+  --base-blue-text-contrast: oklch(calc(var(--base-blue-l) > 50% ? 10% : 90%) 0 0);
+  /* 文本颜色根据背景明度动态调整 */
+  --base-blue-hover: oklch(calc(var(--base-blue-l) + 5%) var(--base-blue-c) var(--base-blue-h));
+  /* 悬停效果 */
+  --base-blue-desaturated: oklch(var(--base-blue-l) calc(var(--base-blue-c) * 0.5) var(--base-blue-h));
+  /* 去饱和度 */
+}
+
+/* 在深色模式下，只需降低 L 值即可生成深色变体，色相和色度保持一致 */
+body.dark-mode {
+  --brand-primary-darker: oklch(calc(var(--brand-primary-l) - 20%) var(--brand-primary-c) var(--brand-primary-h));
+  color: var(--brand-primary-darker);
+  background-color: oklch(10% 0.05 280);
+  /* 匹配的深色背景 */
+}
+
+/* 动态生成更亮的变体 */
+.button-light {
+  background-color: oklch(calc(var(--brand-primary-l) + 15%) var(--brand-primary-c) var(--brand-primary-h));
+}
+
+// h1 {
+//   font-size: clamp(1.1rem, 2vw, 1.3rem);
+// }
+
+
+// p {
+//   font-size: clamp(0.875rem, 1.8vw, 1.125rem);
+// }
+
+/* 标题：在 400px~1200px 之间平滑缩放 */
+// h2 {
+//   font-size: clamp(1.25rem, 1rem + 2vw, 2.5rem);
+//   line-height: 1.2;
+//   margin: 0.5em 0;
+// }
+
+/* 正文：在 400px~1200px 之间平滑缩放 */
+// p {
+//   font-size: clamp(0.875rem, 0.55rem + 1vw, 1.125rem);
+//   line-height: 1.6;
+//   max-width: 65ch;
+//   margin: 0 auto;
+// }
+
+img {
+  transition: .25s allow-discrete;
+  opacity: 1;
+}
+
+@starting-style {
+  img {
+    opacity: 0;
+  }
+}
+
+h1 {
+  text-box: trim-both cap alphabetic;
+}
+
+
+.masonry-container {
+  display: grid-lanes;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  // grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr) minmax(16rem, 2fr)) minmax(8rem, 1fr);
+  gap: 16px;
+}
+
+#AliPay {
+  background-image: url(/Alipay.svg) !important;
+}
+
+#WeChat {
+  background-image: url(/wechat-pay.svg) !important;
+}
+
+#github {
+  display: none !important;
+}

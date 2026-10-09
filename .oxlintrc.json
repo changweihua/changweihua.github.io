@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["vue", "typescript", "unicorn"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "ignorePatterns": [
+    "dist/",
+    "node_modules/",
+    "public/",
+    "*.config.js",
+    "*.config.ts"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "rules": {
+    "vue/no-mutating-props": "error",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}

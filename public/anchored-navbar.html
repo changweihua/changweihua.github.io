@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Document</title>
+    <style>
+        :root {
+            --spring-easing: linear(0, 0.0018, 0.0069 1.15%, 0.026 2.3%, 0.0637, 0.1135 5.18%, 0.2229 7.78%, 0.5977 15.84%, 0.7014, 0.7904, 0.8641, 0.9228, 0.9676 28.8%, 1.0032 31.68%, 1.0225, 1.0352 36.29%, 1.0431 38.88%, 1.046 42.05%, 1.0448 44.35%, 1.0407 47.23%, 1.0118 61.63%, 1.0025 69.41%, 0.9981 80.35%, 0.9992 99.94%);
+        }
+
+        .anchored-pointer {
+            position: absolute;
+            position-anchor: --selected;
+            top: anchor(top);
+            left: anchor(left);
+            width: 3rem;
+            height: 5rem;
+            margin-top: calc(anchor-size(height) * -0.5);
+            display: block;
+            background: none;
+            border: 1px solid white;
+            border-radius: 2rem;
+            transition: all 1s var(--spring-easing);
+            filter: drop-shadow(0 3px 6px gray);
+            pointer-events: none;
+            overflow: hidden;
+            backdrop-filter: url(#filter);
+        }
+
+        .anchored-pointer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(1rem 3rem ellipse at 50% 85% in oklch, oklch(100% 0 0 / 0%) 10% 50%, 150%, oklch(100% 0 0 / 100%) 175% 165%), radial-gradient(2rem 3.5rem ellipse at 45% 35% in oklch, oklch(0% 0 0 / 0%) 80%, gray 150%);
+        }
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .action-bar {
+            display: flex;
+            align-items: center;
+            background-color: #fcfcfc;
+            border: 1px solid lightgray;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            position: relative;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: none;
+            border-radius: 50px;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .material-symbols-outlined {
+            background: none;
+            transition: filter 0.1s ease;
+        }
+
+        button:hover,
+        button:focus {
+            background-color: #f5f5f5;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .selected {
+            background-color: #fcebeb;
+            color: red;
+        }
+
+        .selected:hover,
+        .selected:focus {
+            background-color: #fcebeb;
+        }
+
+        .selected .material-symbols-outlined {
+            filter: drop-shadow(0 0 4px tomato);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            inset: -0.4rem;
+        }
+
+        .material-symbols-outlined {
+            font-size: 24px;
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .selected .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="action-bar">
+        <button>
+            <span class="material-symbols-outlined">person</span>
+        </button>
+        <button>
+            <span class="material-symbols-outlined">push_pin</span>
+        </button>
+        <button class="selected">
+            <span class="material-symbols-outlined">alternate_email</span>
+        </button>
+        <button>
+            <span class="material-symbols-outlined">mail</span>
+        </button>
+        <button>
+            <span class="material-symbols-outlined">edit</span>
+        </button>
+        <button>
+            <span class="material-symbols-outlined">cases</span>
+        </button>
+    </div>
+    <div class="anchored-pointer">
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('button');
+        let selectedButton = document.querySelector('.selected');
+        const setAnchorOnSelected = () => {
+            if (selectedButton) {
+                selectedButton.style.anchorName = '--selected';
+            }
+        };
+        setAnchorOnSelected();
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (selectedButton) {
+                    selectedButton.classList.remove('selected');
+                    selectedButton.style.anchorName = '';
+                }
+                selectedButton = button;
+                selectedButton.classList.add('selected');
+                setAnchorOnSelected();
+            });
+            const handleInteractionStart = () => {
+                if (button !== selectedButton) {
+                    if (selectedButton) {
+                        selectedButton.style.anchorName = '';
+                    }
+                    button.style.anchorName = '--selected';
+                }
+            };
+            button.addEventListener('mouseenter', handleInteractionStart);
+            button.addEventListener('focus', handleInteractionStart);
+
+            const handleInteractionEnd = () => {
+                if (button !== selectedButton) {
+                    button.style.anchorName = '';
+                    setAnchorOnSelected();
+                }
+            };
+            button.addEventListener('mouseleave', handleInteractionEnd);
+            button.addEventListener('blur', handleInteractionEnd);
+        });
+    </script>
+</body>
+
+</html>
+
