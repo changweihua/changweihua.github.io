@@ -28,7 +28,7 @@ jobs:
   # 构建作业
   build:
     name: Build Documentation
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     permissions:
       pages: write
@@ -91,7 +91,7 @@ jobs:
             exit $EXIT_CODE
           fi
         env:
-          NODE_OPTIONS: '--max-old-space-size=10240 --no-experimental-async-hooks'
+          NODE_OPTIONS: '--max-old-space-size=10240'
           NODE_ENV: production
 
       # 7. 生成部署信息文件（可选，无需可删除整个步骤）
