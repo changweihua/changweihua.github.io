@@ -136,7 +136,7 @@ jobs:
       # ----------------------------------------
       - name: "[5/6] 推送源码到版本分支"
         id: push
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: /tmp/release-src

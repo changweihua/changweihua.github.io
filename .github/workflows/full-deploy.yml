@@ -114,10 +114,10 @@ jobs:
             exit 1
           fi
 
-      # 9. 上传构建产物 (v5)
+      # 9. 上传构建产物 (v7)
       # 修正：upload-artifact@v4/v5 的参数名是 name，不是 artifact-name
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: documentation
           path: .vitepress/dist
@@ -138,6 +138,10 @@ jobs:
       id-token: write
       contents: write
 
+    # ✅ 补充 outputs：通知作业中的 needs.deploy.outputs.PAGE_URL 依赖此声明
+    outputs:
+      PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Check workspace
         run: |
@@ -146,13 +150,13 @@ jobs:
 
       # 修正：download-artifact@v4/v5 的参数名同样是 name
       - name: Download artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: documentation
           path: ./_site
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Validate deployment files
         run: |
@@ -173,13 +177,14 @@ jobs:
           echo "✅ 找到 index.html，准备部署"
 
       - name: Upload to Pages
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
+
         with:
           path: ./_site
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       - name: Prepare deployment output
         if: success()
