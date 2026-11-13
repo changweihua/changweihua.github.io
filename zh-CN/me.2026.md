@@ -1,10 +1,6 @@
 ---
 layout: doc
 pageClass: gallery-page-class
-encrypt: true
-encrypt-input: true
-encrypt-pageType: default
-encrypt-storage: true
 ---
 
 > [!IMPORTANT] 年度关键词

@@ -3,10 +3,10 @@ layout: doc
 pageClass: gallery-page-class
 ---
 
-<HoverableText title="2024" />
+<HoverableText title="2024"></HoverableText>
 
 > 开花不一定结果，努力一定不会辜负青春。
-> 
+>
 > 2024 浊酒 2025 对饮
 
 ### 无锡硕放机场行李智能测量项目 ###
