@@ -27,7 +27,9 @@ import LiquidMetaCard from '@vp/components/LiquidMetaCard.vue'
 
 - 目前累积一套包含微信小程序、PC 端、移动端的跨平台开箱即用平台。核心架构包含`DOTNET`服务端跨平台，`Flutter`移动端跨平台，`Ant Design`和`Tencent Design`网页端和小程序端融合统一。拥有多年`WPF`项目开发经验，可胜任`B/S`和`C/S`多端全栈开发。
 
-- 业务时间积极参与开源。
+- 熟悉基于AI大模型的项目管理和开发实战经验
+  - 基于 SpringtBoot 和 React 的答题系统 QUIZ
+  - 基于 C# 的 TUI 版本的航班助手
 
 </LiquidMetaCard>
 
@@ -42,7 +44,7 @@ import LiquidMetaCard from '@vp/components/LiquidMetaCard.vue'
 ::: info 📌 🎯 目前状态
 
 - MAUI Electron React-Native 等跨平台开发技术。
-- 研究机器视觉，自学 Yolo 目标检测算法，基于 Yolo8、Yolo10 训练行李识别模型。
+- 研究机器视觉，自学 Yolo 目标检测算法，基于 Anything Label 配合 Yolo8、Yolo10、Yolo26 训练行李识别模型。
 - AI 大模型方向，MCP ONNX Ollama Dify 等。
 - 学习 Java Spring 框架，向大全栈出发。
 - 参与 RFID Android 项目

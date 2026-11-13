@@ -81,7 +81,18 @@ const markdown: MarkdownOptions | undefined = {
   //   }
   // },
   codeTransformers: [],
-  languages: ['js', 'jsx', 'ts', 'tsx'],
+  // languages: ['js', 'jsx', 'ts', 'tsx'],
+  // 显式声明你需要高亮的语言
+  languages: [
+    'js',
+    'jsx',
+    'ts',
+    'tsx',
+    'bash',
+    'html',
+    'yaml'
+    // 可根据需要追加其他语言，如 'js', 'ts', 'vue', 'json' 等
+  ],
   config: (md) => {
     // ========== 1. 基础插件（无冲突） ==========
     md.use(MarkdownItMathJaX3PRO)
