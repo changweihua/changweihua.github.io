@@ -134,6 +134,7 @@ export default defineConfig({
     },
     fontFamily: {
       sans: [
+        'MiSans',
         'JetBrains Maple Mono',
         'Maple Mono NF CN',
         'Source Han Serif SC',

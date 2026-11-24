@@ -91,6 +91,11 @@ body {
   padding-right: constant(safe-area-inset-right);
   padding-right: env(safe-area-inset-right);
   font-synthesis: initial;
+  -webkit-font-smoothing: antialiased;
+  /* 在 macOS 上可让笔画变细、边缘更柔和，Windows 无效 */
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* 优先保证可读性，可能启用更精细的字形调整 */
 }
 
 /* 覆盖弹性滚动背景 */
@@ -107,7 +112,8 @@ body::after {
 
 /* 一级路由高亮 */
 .active-parent {
-  color: #42b983; /* 主题色 */
+  color: #42b983;
+  /* 主题色 */
   font-weight: bold;
   border-bottom: 2px solid #42b983;
 }

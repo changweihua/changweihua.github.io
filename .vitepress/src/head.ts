@@ -5,8 +5,8 @@ export const head: HeadConfig[] = [
     'meta',
     {
       name: 'viewport',
-      content: 'width=device-width, initial-scale=1.0, viewport-fit=cover',
-    },
+      content: 'width=device-width, initial-scale=1.0, viewport-fit=cover'
+    }
   ],
   ['meta', { name: 'mobile-web-app-capable', content: 'yes' }],
   ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
@@ -18,9 +18,16 @@ export const head: HeadConfig[] = [
     'link',
     {
       rel: 'stylesheet',
-      href: '/Mermaid.css',
-    },
+      href: '/Mermaid.css'
+    }
   ],
+  // [
+  //   'link',
+  //   {
+  //     rel: 'stylesheet',
+  //     href: 'https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css'
+  //   }
+  // ],
   // MathJax 配置应该在 <script> 标签中，不是在插件里
   // [
   //   'script',
@@ -78,61 +85,61 @@ export const head: HeadConfig[] = [
           max-width: 100%;
         }
       }
-    `,
+    `
   ],
   ['meta', { name: 'referrer', content: 'no-referrer' }],
   [
     'meta',
     {
       name: 'keywords',
-      content: 'CMONO.NET,changweihua,常伟华,Lance,changweihua.github.io,Vite,VitePress,AntDesign',
-    },
+      content: 'CMONO.NET,changweihua,常伟华,Lance,changweihua.github.io,Vite,VitePress,AntDesign'
+    }
   ],
   [
     'meta',
     {
       name: 'description',
-      content: 'CMONO.NET 官方站点，主要记录平时工作总结及项目经历',
-    },
+      content: 'CMONO.NET 官方站点，主要记录平时工作总结及项目经历'
+    }
   ],
   [
     'meta',
     {
       name: 'color-scheme',
-      content: 'light dark',
-    },
+      content: 'light dark'
+    }
   ],
   [
     'meta',
     {
       name: 'theme-color',
       content: '#ffffff',
-      media: '(prefers-color-scheme: light)',
-    },
+      media: '(prefers-color-scheme: light)'
+    }
   ],
   [
     'meta',
     {
       name: 'theme-color',
       content: '#1e1e1e',
-      media: '(prefers-color-scheme: dark)',
-    },
+      media: '(prefers-color-scheme: dark)'
+    }
   ],
   [
     'meta',
     {
       name: 'apple-mobile-web-app-status-bar-style',
       content: 'default',
-      media: '(prefers-color-scheme: light)',
-    },
+      media: '(prefers-color-scheme: light)'
+    }
   ],
   [
     'meta',
     {
       name: 'apple-mobile-web-app-status-bar-style',
       content: 'black-translucent',
-      media: '(prefers-color-scheme: dark)',
-    },
+      media: '(prefers-color-scheme: dark)'
+    }
   ],
   // [
   //   "script",
@@ -165,8 +172,8 @@ export const head: HeadConfig[] = [
       src: 'https://hm.baidu.com/hm.js?9bdcf6f2112634d13223ef73de6fe9fa',
       'data-site': 'https://changweihua.github.io',
       'data-spa': 'auto',
-      defer: 'true',
-    },
+      defer: 'true'
+    }
   ],
   // [
   //   'script',
@@ -190,16 +197,15 @@ export const head: HeadConfig[] = [
     'meta',
     {
       name: 'keywords',
-      content: 'changweihua 常伟华 vitepress cmono.net changweihua.github.io 个人网站',
-    },
+      content: 'changweihua 常伟华 vitepress cmono.net changweihua.github.io 个人网站'
+    }
   ],
   [
     'meta',
     {
       name: 'description',
       content:
-        '此系统基于vitepress二次开发，前端框架使用vuejs，UI框架使用ant-design，全局数据状态管理使用paina，ajax使用库为fetch。用于快速搭建个人网站和内容管理平台。',
-    },
-  ],
+        '此系统基于vitepress二次开发，前端框架使用vuejs，UI框架使用ant-design，全局数据状态管理使用paina，ajax使用库为fetch。用于快速搭建个人网站和内容管理平台。'
+    }
+  ]
 ]
-

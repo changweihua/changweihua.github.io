@@ -50,6 +50,7 @@ import 'animate.css'
 import './styles/vitepress-variables.scss'
 
 import './styles/maple-mono.scss'
+import './styles/mi-sans.scss'
 
 import './styles/animations1.css'
 

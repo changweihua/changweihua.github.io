@@ -1,5 +1,5 @@
 @use "sass:map";
-$font-path: "../../assets/MapleMono/";
+$font-path: "../../assets/MapleMono";
 $primary-font: "MapleMono";
 
 @mixin font-face($name, $filename, $weight: normal, $style: normal) {

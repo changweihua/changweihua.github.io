@@ -1,0 +1,69 @@
+@use "sass:map";
+$font-path: "../../assets/MiSans";
+$primary-font: "MiSans";
+
+@mixin font-face($name, $filename, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $name;
+    src: url("#{$font-path}/woff2/MiSans-#{$filename}.woff2") format("woff2"),
+    url("#{$font-path}/woff/MiSans-#{$filename}.woff") format("woff"),
+    url("#{$font-path}/ttf/MiSans-#{$filename}.ttf") format("truetype");
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+  }
+}
+
+// 建立完整字体族体系
+$font-stack: (
+  "MiSans": ((weight: 100,
+      style: normal,
+      file: "Thin",
+    ),
+    (weight: 200,
+      style: normal,
+      file: "ExtraLight",
+    ),
+    (weight: 300,
+      style: normal,
+      file: "Light",
+    ),
+    (weight: 350,
+      style: normal,
+      file: "Normal",
+    ),
+    (weight: 400,
+      style: normal,
+      file: "Regular",
+    ),
+    (weight: 500,
+      style: normal,
+      file: "Medium",
+    ),
+    (weight: 600,
+      style: normal,
+      file: "SemiBold",
+    ),
+    (weight: 700,
+      style: normal,
+      file: "Bold",
+    ),
+    (weight: 800,
+      style: normal,
+      file: "Demibold",
+    ),
+    (weight: 900,
+      style: normal,
+      file: "Heavy",
+    )),
+);
+
+@each $family, $variants in $font-stack {
+  @each $v in $variants {
+    // 使用map-get函数访问map中的值
+    @include font-face($family,
+      map.get($v, file),
+      map.get($v, weight),
+      map.get($v, style));
+  }
+}
