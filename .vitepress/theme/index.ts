@@ -75,7 +75,7 @@ import '@vitepress-demo-preview/component/dist/style.css'
 
 import '@catppuccin/vitepress/theme/frappe/lavender.css'
 
-import '@miletorix/vitepress-back-to-top-button/style.css'
+import '@belikellwyd/vitepress-back-to-top-button/style.css'
 import 'vitepress-markdown-timeline/dist/theme/index.css'
 
 import '@vitepress-code-preview/container/dist/style.css'
