@@ -2,6 +2,8 @@
 name: Deploy VitePress & Notify
 
 # 触发条件：推送至 master/main 分支或手动触发
+# 补充：原配置保留 pull_request 触发。注意 fork PR 通常没有 pages: write 权限，容易部署失败；
+# 如需保留 PR 校验，建议把 deploy 作业加 if: github.event_name != 'pull_request'。
 on:
   push:
     branches: ['master', 'main']
@@ -40,25 +42,35 @@ jobs:
     steps:
       # 1. 检出代码
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       # 2. 设置 Node.js
       # 注意：macos-latest 为 ARM64 (M1)，已移除 architecture 强制 x64，
       # 避免 Rosetta 模拟导致的 native 模块兼容性问题
+      # 补充：当前 runs-on 是 ubuntu-latest，此处原说明保留；setup-node 已升级到 v7。
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version-file: '.node-version'
           cache: 'npm'
           registry-url: https://registry.npmjs.org
 
+      # 补充：确保 npm 12 生效，否则 allowScripts 不会被强制，下面的版本断言也会失败。
+      - name: Enforce npm 12
+        run: npm install -g npm@12.2.3
+
       # 3. 安装依赖
+      # 补充：CI 用 npm ci 按 lockfile 可复现安装；如需保留原行为改回 npm install。
+      # 补充：npm 12 默认拦截依赖安装脚本（含 ttf2woff2 的 node-gyp rebuild）。
+      # 本地用 npm install-scripts approve ttf2woff2 写入 package.json 的 allowScripts 并提交；
+      # 不要在 CI 里用 --allow-scripts，项目内使用会报 EALLOWSCRIPTS。
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci --legacy-peer-deps
 
       # 4. 验证依赖安装
+      # 补充：npm 12 才会强制 allowScripts，低于 12 会让放行名单失效，直接失败。
       - name: Verify installation
         run: |
           npm list --depth=0
@@ -67,6 +79,12 @@ jobs:
           echo "Node arch: $(node -p 'process.arch')"
           echo "Runner arch: $(uname -m)"
 
+          NPM_MAJOR=$(npm --version | cut -d. -f1)
+          if [ "$NPM_MAJOR" -lt 12 ]; then
+            echo "❌ 需要 npm 12+，当前为 $(npm --version)"
+            exit 1
+          fi
+
       # 5. 清理构建缓存
       - name: Clean previous build artifacts
         run: rm -rf .vitepress/.temp .vitepress/dist node_modules/.vite
@@ -74,8 +92,17 @@ jobs:
       # 6. 构建文档
       # 关键：加入 --no-experimental-async-hooks 规避 Node 24 + Rolldown 的 async_hooks 崩溃
       # 并加入退出码容错：只要 dist 中有 index.html，即使进程退出码异常也视为成功
+      # 补充：原 env 里只写了 max-old-space-size，没写注释里的 flag。
+      # 补充：该 flag 在部分 Node 版本上不被支持，改为运行时探测后再追加，避免直接把构建搞挂。
       - name: Build docs
         run: |
+          if node --no-experimental-async-hooks -e '' >/dev/null 2>&1; then
+            echo "✅ 当前 Node 支持 --no-experimental-async-hooks，已追加"
+            export NODE_OPTIONS="$NODE_OPTIONS --no-experimental-async-hooks"
+          else
+            echo "ℹ️ 当前 Node 不支持 --no-experimental-async-hooks，跳过"
+          fi
+
           set +e
           npm run docs:build
           EXIT_CODE=$?
@@ -116,6 +143,7 @@ jobs:
 
       # 9. 上传构建产物 (v7)
       # 修正：upload-artifact@v4/v5 的参数名是 name，不是 artifact-name
+      # 补充：v7 同样使用 name，已升级到 actions/upload-artifact@v7。
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
@@ -149,6 +177,7 @@ jobs:
           ls -la
 
       # 修正：download-artifact@v4/v5 的参数名同样是 name
+      # 补充：v8 同样使用 name，已升级到 actions/download-artifact@v8。
       - name: Download artifact
         uses: actions/download-artifact@v8
         with:
@@ -176,15 +205,23 @@ jobs:
 
           echo "✅ 找到 index.html，准备部署"
 
+      # 补充：deploy-pages 默认查找名为 github-pages 的 artifact。
+      # 重跑会在同一次 workflow run 中留下多个同名 artifact，导致
+      # "Multiple artifacts named github-pages were unexpectedly found"。
+      # 修复：上传与部署统一用 run_id + run_attempt 生成唯一名字。
+      # 补充：upload-pages-artifact@v5 默认排除隐藏文件，加 include-hidden-files 保留 .nojekyll / .well-known 等。
       - name: Upload to Pages
         uses: actions/upload-pages-artifact@v5
-
         with:
+          name: pages-${{ github.run_id }}-${{ github.run_attempt }}
           path: ./_site
+          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          artifact_name: pages-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Prepare deployment output
         if: success()
@@ -208,13 +245,15 @@ jobs:
     steps:
       - name: Prepare notification data
         id: prepare-notification
+        env:
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
-          DEPLOY_RESULT="${{ needs.deploy.result }}"
-          COMMIT_SHA_SHORT="${{ github.sha }}" && COMMIT_SHA_SHORT=${COMMIT_SHA_SHORT:0:7}
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          COMMIT_SHA_SHORT="${{ github.sha }}"
+          COMMIT_SHA_SHORT=${COMMIT_SHA_SHORT:0:7}
           SINGLE_LINE_MSG=$(echo "$COMMIT_MSG" | head -n1 | sed 's/"/\\"/g')
 
-          case $DEPLOY_RESULT in
+          case "$DEPLOY_RESULT" in
             success)
               EMOJI="✅"
               STATUS_COLOR="#36a64f"
@@ -245,137 +284,159 @@ jobs:
           echo "deploy_result=$DEPLOY_RESULT" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Summary
+        env:
+          EMOJI: ${{ steps.prepare-notification.outputs.emoji }}
+          STATUS_TEXT: ${{ steps.prepare-notification.outputs.status_text }}
+          DEPLOY_RESULT: ${{ steps.prepare-notification.outputs.deploy_result }}
+          COMMIT_SHA_SHORT: ${{ steps.prepare-notification.outputs.commit_sha_short }}
+          COMMIT_MSG: ${{ steps.prepare-notification.outputs.commit_msg }}
+          PAGE_URL: ${{ needs.deploy.outputs.PAGE_URL }}
         run: |
-          echo "## ${{ steps.prepare-notification.outputs.emoji }} 部署通知" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**状态**: **${{ steps.prepare-notification.outputs.status_text }}**" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📋 详细信息" >> $GITHUB_STEP_SUMMARY
-          echo "- **仓库**: \`${{ github.repository }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **分支**: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **提交**: \`${{ steps.prepare-notification.outputs.commit_sha_short }}\` - ${{ steps.prepare-notification.outputs.commit_msg }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **触发者**: ${{ github.triggering_actor || github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **工作流**: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "## $EMOJI 部署通知"
+            echo ""
+            echo "**状态**: **$STATUS_TEXT**"
+            echo ""
+            echo "### 📋 详细信息"
+            echo "- **仓库**: \`$GITHUB_REPOSITORY\`"
+            echo "- **分支**: \`$GITHUB_REF_NAME\`"
+            echo "- **提交**: \`$COMMIT_SHA_SHORT\` - $COMMIT_MSG"
+            echo "- **触发者**: ${{ github.triggering_actor || github.actor }}"
+            echo "- **工作流**: [$GITHUB_WORKFLOW]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)"
+            echo ""
+          } >> $GITHUB_STEP_SUMMARY
 
-          if [[ "${{ steps.prepare-notification.outputs.deploy_result }}" == "success" ]]; then
-            echo "### 🌐 访问地址" >> $GITHUB_STEP_SUMMARY
-            echo "网站已发布至：[**${{ needs.deploy.outputs.PAGE_URL }}**](${{ needs.deploy.outputs.PAGE_URL }})" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "🚀 部署完成！" >> $GITHUB_STEP_SUMMARY
+          if [ "$DEPLOY_RESULT" = "success" ]; then
+            {
+              echo "### 🌐 访问地址"
+              echo "网站已发布至：[**$PAGE_URL**]($PAGE_URL)"
+              echo ""
+              echo "🚀 部署完成！"
+            } >> $GITHUB_STEP_SUMMARY
           else
-            echo "### ❗ 后续操作" >> $GITHUB_STEP_SUMMARY
-            echo "请检查 **deploy** 作业的日志以排查错误。" >> $GITHUB_STEP_SUMMARY
+            {
+              echo "### ❗ 后续操作"
+              echo "请检查 **deploy** 作业的日志以排查错误。"
+            } >> $GITHUB_STEP_SUMMARY
           fi
 
+      # 补充：原写法把 ${{ }} 直接拼进 shell 单引号，提交信息里的引号/反引号/$() 会破坏 JSON。
+      # 改用 jq 从环境变量构造 payload，内容与原版一致。
       - name: Send Slack Notification
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          STATUS_COLOR: ${{ steps.prepare-notification.outputs.status_color }}
+          EMOJI: ${{ steps.prepare-notification.outputs.emoji }}
+          STATUS_TEXT: ${{ steps.prepare-notification.outputs.status_text }}
+          SHA_SHORT: ${{ steps.prepare-notification.outputs.commit_sha_short }}
+          PAGE_URL: ${{ needs.deploy.outputs.PAGE_URL }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
         run: |
           if [ -z "$SLACK_WEBHOOK_URL" ]; then
             echo "SLACK_WEBHOOK_URL 未设置，跳过通知"
             exit 0
           fi
-          curl -X POST -H 'Content-type: application/json' --data '{
-            "attachments": [
-              {
-                "color": "${{ steps.prepare-notification.outputs.status_color }}",
-                "blocks": [
-                  {
-                    "type": "header",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "${{ steps.prepare-notification.outputs.emoji }} VitePress 部署 ${{ steps.prepare-notification.outputs.status_text }}"
-                    }
-                  },
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "mrkdwn",
-                        "text": "*仓库*\n`${{ github.repository }}`"
-                      },
-                      {
-                        "type": "mrkdwn",
-                        "text": "*分支*\n`${{ github.ref_name }}`"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "mrkdwn",
-                        "text": "*提交*\n`${{ steps.prepare-notification.outputs.commit_sha_short }}`"
-                      },
-                      {
-                        "type": "mrkdwn",
-                        "text": "*状态*\n${{ steps.prepare-notification.outputs.status_text }}"
-                      }
-                    ]
-                  }
-                  ${{ needs.deploy.result == 'success' && format(', {0} {1}', '{ "type": "section", "text": { "type": "mrkdwn", "text": "*🌐 访问地址*\\n<{0}|{0}>" } }', needs.deploy.outputs.PAGE_URL) || '' }}
-                ]
-              }
-            ]
-          }' $SLACK_WEBHOOK_URL
+          PAYLOAD=$(jq -n \
+            --arg color "$STATUS_COLOR" \
+            --arg emoji "$EMOJI" \
+            --arg status "$STATUS_TEXT" \
+            --arg repo "$GITHUB_REPOSITORY" \
+            --arg branch "$GITHUB_REF_NAME" \
+            --arg sha "$SHA_SHORT" \
+            --arg url "$PAGE_URL" \
+            --arg result "$DEPLOY_RESULT" '{
+              attachments: [{
+                color: $color,
+                blocks: ([
+                  {type: "header", text: {type: "plain_text", text: ($emoji + " VitePress 部署 " + $status)}},
+                  {type: "section", fields: [
+                    {type: "mrkdwn", text: ("*仓库*\n`" + $repo + "`")},
+                    {type: "mrkdwn", text: ("*分支*\n`" + $branch + "`")}
+                  ]},
+                  {type: "section", fields: [
+                    {type: "mrkdwn", text: ("*提交*\n`" + $sha + "`")},
+                    {type: "mrkdwn", text: ("*状态*\n" + $status)}
+                  ]}
+                ] + (if $result == "success" then [{
+                  type: "section",
+                  text: {type: "mrkdwn", text: ("*🌐 访问地址*\n<" + $url + "|" + $url + ">")}
+                }] else [] end))
+              }]
+            }')
+          curl -fsS -X POST -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK_URL"
 
       - name: Send Discord Notification
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          STATUS_COLOR: ${{ steps.prepare-notification.outputs.status_color }}
+          EMOJI: ${{ steps.prepare-notification.outputs.emoji }}
+          STATUS_TEXT: ${{ steps.prepare-notification.outputs.status_text }}
+          COMMIT_MSG: ${{ steps.prepare-notification.outputs.commit_msg }}
+          SHA_SHORT: ${{ steps.prepare-notification.outputs.commit_sha_short }}
+          PAGE_URL: ${{ needs.deploy.outputs.PAGE_URL }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
         run: |
           if [ -z "$DISCORD_WEBHOOK_URL" ]; then
             echo "DISCORD_WEBHOOK_URL 未设置，跳过通知"
             exit 0
           fi
-          COLOR_NUM=$(echo "${{ steps.prepare-notification.outputs.status_color }}" | sed 's/#//g')
+          COLOR_NUM=$(echo "$STATUS_COLOR" | sed 's/#//g')
           COLOR_DEC=$((16#$COLOR_NUM))
+          PAYLOAD=$(jq -n \
+            --argjson color "$COLOR_DEC" \
+            --arg status "$STATUS_TEXT" \
+            --arg repo "$GITHUB_REPOSITORY" \
+            --arg branch "$GITHUB_REF_NAME" \
+            --arg sha "$SHA_SHORT" \
+            --arg msg "$COMMIT_MSG" \
+            --arg emoji "$EMOJI" \
+            --arg actor "${{ github.triggering_actor || github.actor }}" \
+            --arg url "$PAGE_URL" \
+            --arg result "$DEPLOY_RESULT" \
+            --arg workflow "$GITHUB_WORKFLOW" \
+            --arg now "$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")" '{
+              embeds: [{
+                title: ("🚀 VitePress 部署 " + $status),
+                description: ("**仓库**: " + $repo + "\n**分支**: `" + $branch + "`"),
+                color: $color,
+                fields: ([
+                  {name: "提交", value: ("`" + $sha + "` - " + $msg), inline: false},
+                  {name: "状态", value: ($emoji + " " + $status), inline: true},
+                  {name: "触发者", value: $actor, inline: true}
+                ] + (if $result == "success" then [{
+                  name: "访问地址", value: ("[点击访问](" + $url + ")"), inline: false
+                }] else [] end)),
+                footer: {text: ("GitHub Actions • " + $workflow)},
+                timestamp: $now
+              }]
+            }')
+          curl -fsS -H 'Content-Type: application/json' -X POST --data "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
 
-          curl -H "Content-Type: application/json" -X POST -d '{
-            "embeds": [{
-              "title": "🚀 VitePress 部署 ${{ steps.prepare-notification.outputs.status_text }}",
-              "description": "**仓库**: ${{ github.repository }}\\n**分支**: `${{ github.ref_name }}`",
-              "color": '$COLOR_DEC',
-              "fields": [
-                {
-                  "name": "提交",
-                  "value": "`${{ steps.prepare-notification.outputs.commit_sha_short }}` - ${{ steps.prepare-notification.outputs.commit_msg }}",
-                  "inline": false
-                },
-                {
-                  "name": "状态",
-                  "value": "${{ steps.prepare-notification.outputs.emoji }} ${{ steps.prepare-notification.outputs.status_text }}",
-                  "inline": true
-                },
-                {
-                  "name": "触发者",
-                  "value": "${{ github.triggering_actor || github.actor }}",
-                  "inline": true
-                }
-                ${{ needs.deploy.result == 'success' && format(', {0} {1}', '{ "name": "访问地址", "value": "[点击访问]({0})", "inline": false }', needs.deploy.outputs.PAGE_URL) || '' }}
-              ],
-              "footer": {
-                "text": "GitHub Actions • ${{ github.workflow }}"
-              },
-              "timestamp": "'$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")'"
-            }]
-          }' $DISCORD_WEBHOOK_URL
-
+      # 补充：原 if: failure() 在 notify 作业中永远为 false（notify 自身是成功的），
+      # 改用 needs 判断才能真正在部署失败时发邮件。
       - name: Send Email on Failure
-        if: failure()
+        if: needs.deploy.result == 'failure'
         env:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMOJI: ${{ steps.prepare-notification.outputs.emoji }}
+          SHA_SHORT: ${{ steps.prepare-notification.outputs.commit_sha_short }}
         run: |
           if [ -z "$EMAIL_TO" ]; then
             echo "EMAIL_TO 未设置，跳过邮件通知"
             exit 0
           fi
-          echo -e "主题：${{ steps.prepare-notification.outputs.emoji }} VitePress 部署失败 - ${{ github.repository }}\n\n部署工作流失败。\n\n仓库：${{ github.repository }}\n分支：${{ github.ref_name }}\n提交：${{ steps.prepare-notification.outputs.commit_sha_short }}\n触发者：${{ github.actor }}\n工作流链接：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" | mail -s "${{ steps.prepare-notification.outputs.emoji }} VitePress 部署失败 - ${{ github.repository }}" $EMAIL_TO
+          SUBJECT="$EMOJI VitePress 部署失败 - $GITHUB_REPOSITORY"
+          printf '主题：%s\n\n部署工作流失败。\n\n仓库：%s\n分支：%s\n提交：%s\n触发者：%s\n工作流链接：%s/%s/actions/runs/%s\n' \
+            "$SUBJECT" "$GITHUB_REPOSITORY" "$GITHUB_REF_NAME" "$SHA_SHORT" \
+            "${{ github.triggering_actor || github.actor }}" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" \
+            | mail -s "$SUBJECT" "$EMAIL_TO"
 
       - name: Final notification status
+        env:
+          DEPLOY_RESULT: ${{ steps.prepare-notification.outputs.deploy_result }}
         run: |
           echo "========================================"
           echo "通知作业完成"
-          echo "部署结果: ${{ steps.prepare-notification.outputs.deploy_result }}"
+          echo "部署结果: $DEPLOY_RESULT"
           echo "摘要已生成至 GitHub Actions 界面"
           echo "========================================"
