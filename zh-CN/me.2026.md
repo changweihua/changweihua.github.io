@@ -39,6 +39,9 @@ pageClass: gallery-page-class
   - 首都机场手持端可视化装机模块上线
 - 2026 年 11 月
   - 完成地服二期开发和上线工作
+  - 对接和跟进SAAS国产化
+- 2026 年 12 月
+  - 跟进SAAS国产化
 
 
 ### 无锡硕放机场安检答题系统 ###
@@ -128,6 +131,8 @@ pageClass: gallery-page-class
   - 部署系统至生产环境，待测试通过后上线
 - 2026 年 5 月
   - 与携程对接，实现数据互通
+- 2026 年 11 月
+  - 对接，引入 RSA 的 HS256 的签名认证
 
 <div class="grid md:grid-cols-2 lg:grid-cols-4 masonry-container">
 
@@ -145,6 +150,7 @@ pageClass: gallery-page-class
 
 - 基于开源项目，二次开发
 - 深入二次开发
+- 依托AI大模型，持续迭代
 
 ### 无锡硕放机场携带工具审批系统
 
@@ -178,4 +184,5 @@ pageClass: gallery-page-class
 - 航易行：上海机场、首都机场、三亚机场
 ## Q4
 - 航易行：上海机场、首都机场、三亚机场
+- SAAS：国产化
 ```
